@@ -22,9 +22,9 @@
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="resources/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="resources/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="resources/css/demo.css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/demo.css" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,10 +41,10 @@
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/JSbtstr/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
