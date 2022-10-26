@@ -86,6 +86,7 @@
 	
 	
 	<context:component-scan base-package="kr.or.senior" />
+	<context:component-scan base-package="kr.or.product" />
 	
 	
 	

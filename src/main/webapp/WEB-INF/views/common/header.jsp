@@ -58,7 +58,7 @@
                 <a href="javascript:void(0)" class="nav-item nav-link">동호회</a>
                 <a href="javascript:void(0)" class="nav-item nav-link">커뮤니티</a>
                 <a href="javascript:void(0)" class="nav-item nav-link">액티비티</a>
-                <a href="javascript:void(0)" class="nav-item nav-link active">마켓</a>
+                <a href="/productList.do" class="nav-item nav-link active">마켓</a>
                 
                 <a href="javascript:void(0)" class="nav-item nav-link">공지사항</a>
             </div>

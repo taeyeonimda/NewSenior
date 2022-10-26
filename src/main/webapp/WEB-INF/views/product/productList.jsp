@@ -7,6 +7,62 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	    <div style="padding-top: 90px;">
+        <div class="marketTitle">
+            Market
+        </div>
+        <div class="productList">
+            <div>
+                <a href="javascript:void(0)">
+                    <div class="productImg"><img src="/resources/img/국수키트.jpg" alt=""></div>
+                    <div class="productName">상품명</div>
+                    <div class="productSubName">ㅇㅇㅇ키트</div>
+                    <div class="productPrice">금액</div>
+                </a>
+            </div>
+            <div>
+              <a href="javascript:void(0)">
+                  <div class="productImg"><img src="/resources/img/국수키트.jpg" alt=""></div>
+                  <div class="productName">상품명</div>
+                  <div class="productSubName">ㅇㅇㅇ키트</div>
+                  <div class="productPrice">금액</div>
+              </a>
+            </div>
+            <div>
+              <a href="javascript:void(0)">
+                  <div class="productImg"><img src="/resources/img/국수키트.jpg" alt=""></div>
+                  <div class="productName">상품명</div>
+                  <div class="productSubName">ㅇㅇㅇ키트</div>
+                  <div class="productPrice">금액</div>
+              </a>
+            </div>
+            <div>
+              <a href="javascript:void(0)">
+                  <div class="productImg"><img src="/resources/img/국수키트.jpg" alt=""></div>
+                  <div class="productName">상품명</div>
+                  <div class="productSubName">ㅇㅇㅇ키트</div>
+                  <div class="productPrice">금액</div>
+              </a>
+            </div>
+            <div>
+              <a href="javascript:void(0)">
+                  <div class="productImg"><img src="/resources/img/국수키트.jpg" alt=""></div>
+                  <div class="productName">상품명</div>
+                  <div class="productSubName">ㅇㅇㅇ키트</div>
+                  <div class="productPrice">금액</div>
+              </a>
+            </div>
+            <div>
+              <a href="javascript:void(0)">
+                  <div class="productImg"><img src="/resources/img/국수키트.jpg" alt=""></div>
+                  <div class="productName">상품명</div>
+                  <div class="productSubName">ㅇㅇㅇ키트</div>
+                  <div class="productPrice">금액</div>
+              </a>
+            </div>
+        </div>
+      </div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
