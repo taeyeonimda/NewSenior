@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	
+	<a href="mypage.jsp">마이페이지이동</a>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
