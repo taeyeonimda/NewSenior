@@ -48,6 +48,7 @@
 <body>
 	
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+
   <body>
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
