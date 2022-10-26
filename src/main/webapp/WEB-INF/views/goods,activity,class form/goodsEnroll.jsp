@@ -186,28 +186,43 @@
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
                       <div class="btn-group" style="width: 150px;">
+                      	<select id="cateSelect" name="cateSelect">
+                      		<option>카테고리 선택</option>
+                      		<option value="dg">디지털</option>
+                      		<option value="fu">주식/재테크</option>
+                      		<option value="cr">공예</option>
+                      		<option value="de">디자인</option>
+                      		<option value="ex">운동/건강</option>
+                      		<option value="fs">패션</option>
+                      		<option value="me">미디어</option>
+                      		<option value="so">악기/노래</option>
+                      		<option value="fo">외국어</option>
+                      		<option value="co">요리/제과제빵</option>
+                      	</select>
+                      	<!-- 
                         <button
                           type="button"
                           class="btn btn-outline-primary dropdown-toggle"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          카테고리선택
+                          aria-expanded="false">
+                          	카테고리선택
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="javascript:void(0);">디지털</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">주식/재테크</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">공예</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">디자인</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">운동/건강</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">패션</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">미디어</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">악기/노래</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">외국어</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">요리/제과제빵</a></li>
+                          <li><a class="dropdown-item">디지털</a></li>
+                          <li><a class="dropdown-item">주식/재테크</a></li>
+                          <li><a class="dropdown-item">공예</a></li>
+                          <li><a class="dropdown-item">디자인</a></li>
+                          <li><a class="dropdown-item">운동/건강</a></li>
+                          <li><a class="dropdown-item">패션</a></li>
+                          <li><a class="dropdown-item">미디어</a></li>
+                          <li><a class="dropdown-item">악기/노래</a></li>
+                          <li><a class="dropdown-item">외국어</a></li>
+                          <li><a class="dropdown-item">요리/제과제빵</a></li>
                         </ul>
+                       -->
                       </div>
                   </div>
+                  
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">마켓 상세</label>
                     <div class="col-md-10">
@@ -245,6 +260,10 @@
 	<script>
 		$("#fileUpload").on("click",function(){
 			$(".upFile").click();
+		});
+		
+		$("#cateSelect").change(function(){
+			  console.log($(this).val())
 		});
 	</script>
 
