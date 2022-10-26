@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
         <!-- Favicon -->
-        <link href="/resources/img/favicon.ico" rel="icon">
+        <link href="/resources/TGbtstr/img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
         <link href="/resources/TGbtstr/css/bootstrap.min.css" rel="stylesheet">
     	<link href="/resources/TGbtstr/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
-        <link href="/resources/css/styleTG.css" rel="stylesheet">
+        <link href="/resources/TGbtstr/css/styleTG.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>

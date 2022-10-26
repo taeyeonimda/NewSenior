@@ -184,12 +184,6 @@
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-url-input" class="col-md-2 col-form-label">마켓 상세</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" />
-                    </div>
-                  </div>
-                  <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
                       <div class="btn-group" style="width: 150px;">
                         <button
@@ -214,6 +208,13 @@
                         </ul>
                       </div>
                   </div>
+                  <div class="mb-3 row">
+                    <label for="html5-url-input" class="col-md-2 col-form-label">마켓 상세</label>
+                    <div class="col-md-10">
+                      <input class="form-control" type="url" id="html5-url-input" />
+                    </div>
+                  </div>
+                  
                   
                   <a href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
                 </div>

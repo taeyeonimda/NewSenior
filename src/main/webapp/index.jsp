@@ -51,7 +51,6 @@
 	
 </body>
 </html>
-<%@include file="/WEB-INF/views/common/header.jsp" %>
 
   <body>
     <!-- Layout wrapper -->
