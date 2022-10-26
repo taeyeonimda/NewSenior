@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="product">
+  <select id="allProduct" resultType="p">
+  	select 
+  		product_no as productNo,
+  		class_no as classNo,
+  		product_name as productName,
+  		product_price as productPrice,
+  		to_char(product_price, '999,999,999') as wonprice,
+  		product_status as productStatus,
+  		product_category as productCategory,
+  		product_subname as productSubName,
+  		product_qty as productQty,
+  		product_imgname as productImgName,
+  		product_imgpath as productImgPath
+  	from products
+  </select>
   
 </mapper>

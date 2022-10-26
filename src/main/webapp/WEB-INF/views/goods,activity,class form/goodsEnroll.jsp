@@ -152,16 +152,23 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <!-- HTML5 Inputs -->
-            <form action="#">
+            <form action="/productInsert.do">
               <div class="card mb-4" style="width: 60%; float: left;">
                 <h5 class="card-header" style="text-align: center;">상품 등록하기</h5>
                 <div class="card-body">
-                  <div class="mb-3 row">
+                  <div class="mb-3 row" style="margin-top: 10px;">
                     <label for="html5-text-input" class="col-md-2 col-form-label">상품명</label>
                     <div class="col-md-10">
                       <input class="form-control" type="text" id="html5-text-input" />
                     </div>
                   </div>
+                  <div class="mb-3 row" style="margin-top: 10px;">
+                    <label for="html5-text-input" class="col-md-2 col-form-label">키트명</label>
+                    <div class="col-md-10">
+                      <input class="form-control" type="text" id="html5-text-input" />
+                    </div>
+                  </div>
+                  
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">가격</label>
                     <div class="col-md-10">
