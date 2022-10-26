@@ -138,7 +138,7 @@
 
 
             <br><br><br>
-            <div style="font-size: 25px;">ì£¼ë¬¸ë´ì­</div>
+            <div style="font-size: 25px;">주문내역</div>
             <div class="card">
 
               <div class="table-responsive text-nowrap">
@@ -146,46 +146,46 @@
                 <table class="table table-borderless">
                   <thead>
                     <tr>
-                      <th>ì£¼ë¬¸ì¼ì</th>
+                      <th>주문일자</th>
                       <th>
                         <select style="width: 100px; height: 25px; ">
-                          <option value="" selected disabled hidden>ì¢ë¥ì í</option>
-                          <option value="package">í¨í¤ì§</option>
-                          <option value="class">í´ëì¤</option>
-                          <option value="kit">í¤í¸</option>
+                          <option value="" selected disabled hidden>종류선택</option>
+                          <option value="package">패키지</option>
+                          <option value="class">클래스</option>
+                          <option value="kit">키트</option>
 
                         </select>
                       </th>
-                      <th>ì íì ë³´</th>
-                      <th>ìë</th>
-                      <th>ê¸ì¡</th>
-                      <th>ì´ ì£¼ë¬¸ê¸ì¡</th>
+                      <th>제품정보</th>
+                      <th>수량</th>
+                      <th>금액</th>
+                      <th>총 주문금액</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>2022-10-24</td>
-                      <td>í¨í¤ì§</td>
-                      <td>ë±ì°í¨í¤ì§</td>
+                      <td>패키지</td>
+                      <td>등산패키지</td>
                       <td>2</td>
-                      <td>50,000ì</td>
-                      <td>100,000ì</td>
+                      <td>50,000원</td>
+                      <td>100,000원</td>
                     </tr>
                     <tr>
                       <td>2022-10-24</td>
-                      <td>í¨í¤ì§</td>
-                      <td>ë±ì°í¨í¤ì§</td>
+                      <td>패키지</td>
+                      <td>등산패키지</td>
                       <td>2</td>
-                      <td>50,000ì</td>
-                      <td>100,000ì</td>
+                      <td>50,000원</td>
+                      <td>100,000원</td>
                     </tr>
                     <tr>
                       <td>2022-10-24</td>
-                      <td>í¨í¤ì§</td>
-                      <td>ë±ì°í¨í¤ì§</td>
+                      <td>패키지</td>
+                      <td>등산패키지</td>
                       <td>2</td>
-                      <td>50,000ì</td>
-                      <td>100,000ì</td>
+                      <td>50,000원</td>
+                      <td>100,000원</td>
                     </tr>
 
                   </tbody>
