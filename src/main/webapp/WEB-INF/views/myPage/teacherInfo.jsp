@@ -57,69 +57,69 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
          style="top: 30px; display: inline-block; width: 300px; height: 400px;">
           
-         <ul class="menu-inner py-1">
+                  <ul class="menu-inner py-1">
 
-          <!-- íìê´ë¦¬ -->
+          <!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">íì ê´ë¦¬</div>
+              <div data-i18n="Basic Inputs">회원 관리</div>
             </a>
           </li>
           
-          <!-- ë§ì´íì´ì§ -->
+          <!-- 마이페이지 -->
           <li class="menu-item  ">
             <a href="mypage.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë§ì´íì´ì§</div>
+              <div data-i18n="Basic Inputs">마이페이지</div>
             </a>
           </li>
 
-          <!-- ì£¼ë¬¸ë´ì­ -->
+          <!-- 주문내역 -->
           <li class="menu-item ">
             <a href="orderHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì£¼ë¬¸ë´ì­</div>
+              <div data-i18n="Basic Inputs">주문내역</div>
             </a>
           </li>
 
-          <!-- ì°íìí -->
+<!-- 찜한상품 
           <li class="menu-item ">
             <a href="jjimGoods.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì°íìí</div>
+              <div data-i18n="Basic Inputs">찜한상품</div>
             </a>
           </li>
-          
-          <!-- ìê°íí© -->
+ -->         
+          <!-- 수강현황 -->
           <li class="menu-item  ">
             <a href="classHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ìê°íí©</div>
+              <div data-i18n="Basic Inputs">수강현황</div>
             </a>
           </li>
 
-          <!-- ë´ëí¸í -->
+          <!-- 내동호회 -->
           <li class="menu-item  ">
             <a href="myClub.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë´ëí¸í</div>
+              <div data-i18n="Basic Inputs">내동호회</div>
             </a>
           </li>
 
-          <!-- ëìíê¸° -->
+          <!-- 나의후기 -->
           <li class="menu-item  ">
             <a href="myComment.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ëìíê¸°</div>
+              <div data-i18n="Basic Inputs">나의후기</div>
             </a>
           </li>
 
-          <!-- ê°ì¬ì ë³´ -->
+          <!-- 강사정보 -->
           <li class="menu-item  active">
             <a href="teacherInfo.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ê°ì¬ì ë³´</div>
+              <div data-i18n="Basic Inputs">강사정보</div>
             </a>
           </li>
 
@@ -135,11 +135,11 @@
           
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+             <div class="container-xxl flex-grow-1 container-p-y">
 
 
               <br><br><br>
-              <div style="font-size: 25px;">ê°ì¬ ì ë³´</div>
+              <div style="font-size: 25px;">강사 정보</div>
               <div class="card">
 
                 <div class="table-responsive text-nowrap">
@@ -147,24 +147,24 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th>í´ëì¤ëª</th>
-                        <th>ê°ì¬ìê°</th>
-                        <th>ìê°ê¸°ê°</th>
-                        <th>ëª¨ì§ì ì</th>
-                        <th>ìê°ì ì</th>
-                        <th>ìì¸ë³´ê¸°</th>
+                        <th>클래스명</th>
+                        <th>강사소개</th>
+                        <th>수강기간</th>
+                        <th>모집정원</th>
+                        <th>수강생 수</th>
+                        <th>상세보기</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Spring Class</td>
-                        <td>ì¸ê³ ì ì¼ ë¯¸ë¨ ì´ì¤ììëë¤.</td>
+                        <td>세계 제일 미남 이윤수입니다.</td>
                         <td>2022-08-19 ~ 2022-09-27</td>
-                        <td>30ëª</td>
-                        <td>20ëª</td>
+                        <td>30명</td>
+                        <td>20명</td>
                         <td>
                           <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">ìì¸ë³´ê¸°</a></button>
+                            <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">상세보기</a></button>
                           </div>
                         </td>
                       </tr>

@@ -59,7 +59,7 @@
           
          <ul class="menu-inner py-1">
 
-          <!-- íìê´ë¦¬ -->
+          <!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -67,7 +67,7 @@
             </a>
           </li>
           
-          <!-- ë§ì´íì´ì§ -->
+          <!-- 마이페이지 -->
           <li class="menu-item  ">
             <a href="mypage.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -75,7 +75,7 @@
             </a>
           </li>
 
-          <!-- ì£¼ë¬¸ë´ì­ -->
+          <!-- 주문내역 -->
           <li class="menu-item ">
             <a href="orderHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -83,7 +83,7 @@
             </a>
           </li>
 
-          <!-- ì°íìí -->
+          <!-- 찜한상품 -->
           <li class="menu-item ">
             <a href="jjimGoods.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -91,7 +91,7 @@
             </a>
           </li>
           
-          <!-- ìê°íí© -->
+          <!-- 수강현황 -->
           <li class="menu-item  active">
             <a href="classHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -99,15 +99,15 @@
             </a>
           </li>
 
-          <!-- ë´ëí¸í -->
+<!-- 내동호회 
           <li class="menu-item  ">
             <a href="myClub.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">ë´ëí¸í</div>
             </a>
           </li>
-
-          <!-- ëìíê¸° -->
+-->
+          <!-- 나의후기 -->
           <li class="menu-item  ">
             <a href="myComment.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -115,7 +115,7 @@
             </a>
           </li>
 
-          <!-- ê°ì¬ì ë³´ -->
+          <!-- 강사정보´ -->
           <li class="menu-item  ">
             <a href="teacherInfo.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -139,7 +139,7 @@
 
 
               <br><br><br>
-              <div style="font-size: 25px;">ì§íì¤ì¸ í´ëì¤</div>
+              <div style="font-size: 25px;">진행중인 클래스</div>
               <div class="card">
 
                 <div class="table-responsive text-nowrap">
@@ -147,24 +147,24 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th>í´ëì¤ëª</th>
-                        <th>ê°ì¬</th>
-                        <th>ìê° ê¸°ê°</th>
-                        <th>ë¨ì ìê° ê¸°ê°</th>
+                        <th>클래스명</th>
+                        <th>강사</th>
+                        <th>수강기간</th>
+                        <th>남은 수강 기간</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Spring Class</td>
-                        <td>ì´ì¤ì</td>
+                        <td>이윤수</td>
                         <td>2022-06-20 ~ 2022-11-18</td>
-                        <td>30ì¼</td>
+                        <td>30일</td>
                       </tr>
                       <tr>
                         <td>JAVA Class</td>
-                        <td>ë°íì£¼</td>
+                        <td>박현주</td>
                         <td>2022-06-20 ~ 2022-11-18</td>
-                        <td>30ì¼</td>
+                        <td>20일</td>
                       </tr>
                     </tbody>
                   </table>
@@ -173,7 +173,7 @@
   
             <!-- / Content -->
             <br><br><br><br>
-            <div style="font-size: 25px;">ì¢ë£ë í´ëì¤</div>
+            <div style="font-size: 25px;">종료된 클래스</div>
               <div class="card">
 
                 <div class="table-responsive text-nowrap">
@@ -181,17 +181,17 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th>í´ëì¤ëª</th>
-                        <th>ê°ì¬</th>
-                        <th>ìê° ê¸°ê°</th>
-                        <th>íê¸°</th>
+                        <th>클래스명</th>
+                        <th>강사</th>
+                        <th>수강기간</th>
+                        <th>후기</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Spring Class</td>
-                        <td>ì´ì¤ì</td>
-                        <td>2020-06-20 ~ 2020-11-18</td>
+                        <td>이윤수</td>
+                        <td>2022-06-20 ~ 2022-11-18</td>
                         <td>
                           <div class="col-md-10">
                             <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">íê¸°ì°ê¸°</a></button>
@@ -199,9 +199,9 @@
                         </td>
                       </tr>
                       <tr>
-                        <td>JAVA Class</td>
-                        <td>ë°íì£¼</td>
-                        <td>2020-06-20 ~ 2020-11-18</td>
+                        <td>Spring Class</td>
+                        <td>이윤수</td>
+                        <td>2022-06-20 ~ 2022-11-18</td>
                         <td>
                           <div class="col-md-10">
                             <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">íê¸°ì°ê¸°</a></button>
