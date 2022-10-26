@@ -59,67 +59,69 @@
           
          <ul class="menu-inner py-1">
 
-          <!-- íìê´ë¦¬ -->
+<ul class="menu-inner py-1">
+
+          <!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">íì ê´ë¦¬</div>
+              <div data-i18n="Basic Inputs">회원 관리</div>
             </a>
           </li>
           
-          <!-- ë§ì´íì´ì§ -->
+          <!-- 마이페이지 -->
           <li class="menu-item  ">
             <a href="mypage.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë§ì´íì´ì§</div>
+              <div data-i18n="Basic Inputs">마이페이지</div>
             </a>
           </li>
 
-          <!-- ì£¼ë¬¸ë´ì­ -->
+          <!-- 주문내역 -->
           <li class="menu-item ">
             <a href="orderHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì£¼ë¬¸ë´ì­</div>
+              <div data-i18n="Basic Inputs">주문내역</div>
             </a>
           </li>
 
-          <!-- ì°íìí -->
+<!-- 찜한상품 
           <li class="menu-item ">
             <a href="jjimGoods.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì°íìí</div>
+              <div data-i18n="Basic Inputs">찜한상품</div>
             </a>
           </li>
-          
-          <!-- ìê°íí© -->
+ -->         
+          <!-- 수강현황 -->
           <li class="menu-item  ">
             <a href="classHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ìê°íí©</div>
+              <div data-i18n="Basic Inputs">수강현황</div>
             </a>
           </li>
 
-          <!-- ë´ëí¸í -->
-          <li class="menu-item  ">
+          <!-- 내동호회 -->
+          <li class="menu-item ">
             <a href="myClub.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë´ëí¸í</div>
+              <div data-i18n="Basic Inputs">내동호회</div>
             </a>
           </li>
 
-          <!-- ëìíê¸° -->
+          <!-- 나의후기 -->
           <li class="menu-item active ">
             <a href="myComment.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ëìíê¸°</div>
+              <div data-i18n="Basic Inputs">나의후기</div>
             </a>
           </li>
 
-          <!-- ê°ì¬ì ë³´ -->
+          <!-- 강사정보 -->
           <li class="menu-item  ">
             <a href="teacherInfo.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ê°ì¬ì ë³´</div>
+              <div data-i18n="Basic Inputs">강사정보</div>
             </a>
           </li>
 
@@ -136,7 +138,7 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div style="font-size: 25px;">ë´ê° ì´ íê¸°</div>
+              <div style="font-size: 25px;">내가 쓴 후기</div>
               <div class="card">
 
                 <div class="table-responsive text-nowrap">
@@ -144,37 +146,39 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th>í´ëì¤ëª</th>
-                        <th>íê¸°</th>
-                        <th>íì </th>
-                        <th>ìì±ì¼</th>
-                        <th>ìì </th>
+                        <th>클래스명</th>
+                        <th>후기</th>
+                        <th>평점</th>
+                        <th>작성일</th>
+                        <th>수정</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Spring Class</td>
-                        <td>ì¤ìì¤ ììê²¼ì´ì</td>
-                        <td><span style="color: #ffab00;">â</span> +4.5</td>
+                        <td>윤수쌤 잘생겼어요</td>
+                        <td><span style="color: #ffab00;">★</span> +4.5</td>
                         <td>2022-10-24</td>
                         <td>
                           <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">ìì íê¸°</a></button>
+                            <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">수정하기</a></button>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>JAVA Class</td>
-                        <td>ì¤ìì¤ ëë¬´ìë»ì</td>
-                        <td><span style="color: #ffab00;">â</span> +5.0</td>
+                        <td>윤수쌤 너무예뻐요</td>
+                        <td><span style="color: #ffab00;">★</span> +5.0</td>
                         <td>2022-10-18</td>
                         <td>
                           <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">ìì íê¸°</a></button>
+                            <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">수정하기</a></button>
                           </div>
                         </td>
                       </tr>
                     </tbody>
+                    
+                    
                   </table>
                 </div>
               </div>

@@ -57,69 +57,69 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
          style="top: 30px; display: inline-block; width: 300px; height: 400px;">
           
-         <ul class="menu-inner py-1">
+                  <ul class="menu-inner py-1">
 
-          <!-- íìê´ë¦¬ -->
+          <!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">íì ê´ë¦¬</div>
+              <div data-i18n="Basic Inputs">회원 관리</div>
             </a>
           </li>
           
-          <!-- ë§ì´íì´ì§ -->
+          <!-- 마이페이지 -->
           <li class="menu-item  ">
             <a href="mypage.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë§ì´íì´ì§</div>
+              <div data-i18n="Basic Inputs">마이페이지</div>
             </a>
           </li>
 
-          <!-- ì£¼ë¬¸ë´ì­ -->
+          <!-- 주문내역 -->
           <li class="menu-item ">
             <a href="orderHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì£¼ë¬¸ë´ì­</div>
+              <div data-i18n="Basic Inputs">주문내역</div>
             </a>
           </li>
 
-          <!-- ì°íìí -->
+<!-- 찜한상품 
           <li class="menu-item ">
             <a href="jjimGoods.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì°íìí</div>
+              <div data-i18n="Basic Inputs">찜한상품</div>
             </a>
           </li>
-          
-          <!-- ìê°íí© -->
+-->
+          <!-- 수강현황 -->
           <li class="menu-item  ">
             <a href="classHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ìê°íí©</div>
+              <div data-i18n="Basic Inputs">수강현황</div>
             </a>
           </li>
 
-          <!-- ë´ëí¸í -->
+          <!-- 내동호회 -->
           <li class="menu-item  active">
             <a href="myClub.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë´ëí¸í</div>
+              <div data-i18n="Basic Inputs">내동호회</div>
             </a>
           </li>
 
-          <!-- ëìíê¸° -->
+          <!-- 나의후기 -->
           <li class="menu-item  ">
             <a href="myComment.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ëìíê¸°</div>
+              <div data-i18n="Basic Inputs">나의후기</div>
             </a>
           </li>
 
-          <!-- ê°ì¬ì ë³´ -->
+          <!-- 강사정보 -->
           <li class="menu-item  ">
             <a href="teacherInfo.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ê°ì¬ì ë³´</div>
+              <div data-i18n="Basic Inputs">강사정보</div>
             </a>
           </li>
 
@@ -139,53 +139,63 @@
               
 
               <!-- Examples -->
-              ì§íì¤ì¸ í´ëì¤ âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ<br><br>
+              <div>진행중인 클래스</div><br><br>
               <div class="row mb-5">
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
                     <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
                     <div class="card-body">
-                      <h5 class="card-title">ë´ ëí¸í 1</h5>
-                      <p class="card-text">ë±ì°ëí¸í</p>
-                      <p class="card-text">ë©¤ë²Nëª</p>
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">ìì¸ë³´ê¸°</a>
+                      <h5 class="card-title">내 동호회 1</h5>
+                      <p class="card-text">등산동호회</p>
+                      <p class="card-text">멤버 N명</p>
+                      <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/ë¤ì´ë²ë¡ê³ .png"  alt="Card image cap" />
+                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
                     <div class="card-body">
-                      <h5 class="card-title">ë´ ëí¸í 2</h5>
-                      <p class="card-text">ë°ëëí¸í</p>
-                      <p class="card-text">ë©¤ë²Nëª</p>
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">ìì¸ë³´ê¸°</a>
+                      <h5 class="card-title">내 동호회 1</h5>
+                      <p class="card-text">등산동호회</p>
+                      <p class="card-text">멤버 N명</p>
+                      <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/ì¹´ì¹´ì¤ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
                     <div class="card-body">
-                      <h5 class="card-title">ë´ ëí¸í 3</h5>
-                      <p class="card-text">ë§ì§ëí¸í</p>
-                      <p class="card-text">ë©¤ë²Nëª</p>
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">ìì¸ë³´ê¸°</a>
+                      <h5 class="card-title">내 동호회 1</h5>
+                      <p class="card-text">등산동호회</p>
+                      <p class="card-text">멤버 N명</p>
+                      <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/íì´ì¤ë¶ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
                     <div class="card-body">
-                      <h5 class="card-title">ë´ ëí¸í 4</h5>
-                      <p class="card-text">ìë°ëí¸í</p>
-                      <p class="card-text">ë©¤ë²Nëª</p>
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">ìì¸ë³´ê¸°</a>
+                      <h5 class="card-title">내 동호회 1</h5>
+                      <p class="card-text">등산동호회</p>
+                      <p class="card-text">멤버 N명</p>
+                      <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
                     </div>
                   </div>
                 </div>
-                
+                <div class="col-md-6 col-lg-4 mb-3">
+                  <div class="card h-100">
+                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <div class="card-body">
+                      <h5 class="card-title">내 동호회 1</h5>
+                      <p class="card-text">등산동호회</p>
+                      <p class="card-text">멤버 N명</p>
+                      <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- Examples -->
 

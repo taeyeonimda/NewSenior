@@ -57,69 +57,69 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
          style="top: 30px; display: inline-block; width: 300px; height: 400px;">
           
-         <ul class="menu-inner py-1">
+ <ul class="menu-inner py-1">
 
-          <!-- íìê´ë¦¬ -->
+          <!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">íì ê´ë¦¬</div>
+              <div data-i18n="Basic Inputs">회원 관리</div>
             </a>
           </li>
           
-          <!-- ë§ì´íì´ì§ -->
+          <!-- 마이페이지 -->
           <li class="menu-item active ">
             <a href="mypage.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë§ì´íì´ì§</div>
+              <div data-i18n="Basic Inputs">마이페이지</div>
             </a>
           </li>
 
-          <!-- ì£¼ë¬¸ë´ì­ -->
+          <!-- 주문내역 -->
           <li class="menu-item ">
             <a href="orderHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì£¼ë¬¸ë´ì­</div>
+              <div data-i18n="Basic Inputs">주문내역</div>
             </a>
           </li>
 
-          <!-- ì°íìí -->
+<!-- 찜한상품 
           <li class="menu-item ">
             <a href="jjimGoods.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì°íìí</div>
+              <div data-i18n="Basic Inputs">찜한상품</div>
             </a>
           </li>
-          
-          <!-- ìê°íí© -->
+-->
+          <!-- 수강현황 -->
           <li class="menu-item  ">
             <a href="classHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ìê°íí©</div>
+              <div data-i18n="Basic Inputs">수강현황</div>
             </a>
           </li>
 
-          <!-- ë´ëí¸í -->
+          <!-- 내동호회 -->
           <li class="menu-item  ">
             <a href="myClub.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë´ëí¸í</div>
+              <div data-i18n="Basic Inputs">내동호회</div>
             </a>
           </li>
 
-          <!-- ëìíê¸° -->
+          <!-- 나의후기 -->
           <li class="menu-item  ">
             <a href="myComment.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ëìíê¸°</div>
+              <div data-i18n="Basic Inputs">나의후기</div>
             </a>
           </li>
 
-          <!-- ê°ì¬ì ë³´ -->
+          <!-- 강사정보 -->
           <li class="menu-item  ">
             <a href="teacherInfo.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ê°ì¬ì ë³´</div>
+              <div data-i18n="Basic Inputs">강사정보</div>
             </a>
           </li>
 
@@ -139,46 +139,46 @@
               <!-- HTML5 Inputs -->
             <form action="#">
               <div class="card mb-4" style="width: 60%; float: left;" >
-                <h5 class="card-header">ë´ì ë³´</h5>
+                <h5 class="card-header">내정보</h5>
                 <div class="card-body">
                   <div class="mb-3 row">
-                    <label for="html5-text-input" class="col-md-2 col-form-label">ì´ë¦</label>
+                    <label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
                     <div class="col-md-10">
                       <input class="form-control" type="text" id="html5-text-input" />
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-text-input" class="col-md-2 col-form-label">ìì´ë</label>
+                    <label for="html5-text-input" class="col-md-2 col-form-label">아이디</label>
                     <div class="col-md-10">
                       <input class="form-control" type="text" id="html5-text-input" />
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-email-input" class="col-md-2 col-form-label">ì´ë©ì¼</label>
+                    <label for="html5-email-input" class="col-md-2 col-form-label">이메일</label>
                     <div class="col-md-10">
                       <input class="form-control" type="email"  id="html5-email-input" />
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-url-input" class="col-md-2 col-form-label">ë¹ë°ë²í¸</label>
+                    <label for="html5-url-input" class="col-md-2 col-form-label">비밀번호</label>
                     <div class="col-md-10">
-                      <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">ë¹ë°ë²í¸ ë³ê²½íê¸°</a></button>
+                      <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">비밀번호 변경하기</a></button>
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-url-input" class="col-md-2 col-form-label">ìëìì¼</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" />
-                    </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label for="html5-url-input" class="col-md-2 col-form-label">ì íë²í¸</label>
+                    <label for="html5-url-input" class="col-md-2 col-form-label">생년월일</label>
                     <div class="col-md-10">
                       <input class="form-control" type="url" id="html5-url-input" />
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">ê´ì¬ë¶ì¼</label>
+                    <label for="html5-url-input" class="col-md-2 col-form-label">전화번호</label>
+                    <div class="col-md-10">
+                      <input class="form-control" type="url" id="html5-url-input" />
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="html5-tel-input" class="col-md-2 col-form-label">관심분야</label>
                     <div class="btn-group" style="width: 150px;">
                       <button
                         type="button"
@@ -186,24 +186,24 @@
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                        ê´ì¬ë¶ì¼ì í
+                        관심분야선택
                       </button>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="javascript:void(0);">ëì§í¸</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ì£¼ì/ì¬íí¬</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ê³µì</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ëìì¸</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ì´ë/ê±´ê°</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">í¨ì</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ë¯¸ëì´</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ìê¸°/ë¸ë</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ì¸êµ­ì´</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">ìë¦¬/ì ê³¼ì ë¹µ</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">디지털</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">주식/재테크</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">공예</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">디자인</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">운동/건강</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">패션</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">미디어</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">악기/노래</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">외국어</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">요리/제과제빵</a></li>
                         </ul>
                       </div>
                   </div>
 
-                  <button type="button" class="btn btn-outline-warning" style="float: right;"><a href="#" style="color: #FFAB00;">ë¹ë°ë²í¸ ë³ê²½íê¸°</a></button>
+                  <button type="button" class="btn btn-outline-warning" style="float: right;"><a href="#" style="color: #FFAB00;">비밀번호 변경하기</a></button>
                 </div>
               </div>
             </form>
