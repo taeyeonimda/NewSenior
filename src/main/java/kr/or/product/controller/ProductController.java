@@ -15,4 +15,10 @@ public class ProductController {
 	public String productList() {
 		return "product/productList";
 	}
+	
+	@RequestMapping(value="/insertProductFrm.do")
+	public String insertProductFrm() {
+		return "product/productFrm";
+	}
+	
 }
