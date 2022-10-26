@@ -29,6 +29,7 @@
     	<link href="/resources/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
         <link href="/resources/css/styleTG.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">

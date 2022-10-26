@@ -8,7 +8,6 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	ㅎㅇ
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

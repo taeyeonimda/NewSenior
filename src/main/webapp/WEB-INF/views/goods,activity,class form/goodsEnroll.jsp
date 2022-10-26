@@ -163,9 +163,18 @@
                     </div>
                   </div>
                   <div class="mb-3 row">
+                    <label for="html5-tel-input" class="col-md-2 col-form-label">가격</label>
+                    <div class="col-md-10">
+                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;"/>
+                      <label for="html5-tel-input" class="col-md-2 col-form-label" style="text-align: right; padding-right: 10px; width:187px;">판매 수량</label>
+                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 220px; display: inline-block;"/>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">첨부파일넣기</a>
+                      <a href="javascript:void(0)" class="btn btn-outline-primary" id="fileUpload">첨부파일넣기</a>
+                      <input type="file" name="upFile" id="upFile" class="upFile" style="display:none;">
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -205,14 +214,7 @@
                         </ul>
                       </div>
                   </div>
-                  <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">가격</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;"/>
-                      <label for="html5-tel-input" class="col-md-2 col-form-label" style="text-align: right; padding-right: 10px;">판매 수량</label>
-                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 220px; display: inline-block;"/>
-                    </div>
-                  </div>
+                  
                   <a href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
                 </div>
               </div>
@@ -239,7 +241,11 @@
 <!-- Footer Start -->
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 <!-- Footer End -->
-
+	<script>
+		$("#fileUpload").on("click",function(){
+			$(".upFile").click();
+		});
+	</script>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
