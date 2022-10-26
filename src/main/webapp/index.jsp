@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html
-  lang="ko"
+  lang="en"
   class="light-style layout-menu-fixed"
   dir="ltr"
   data-theme="theme-default"
@@ -22,9 +22,9 @@
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/resources/JSbtstr/css/demo.css" />
+    <link rel="stylesheet" href="resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="resources/JSbtstr/css/demo.css" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,10 +47,6 @@
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
 </head>
 <body>
-	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	
-</body>
-</html>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 
   <body>
@@ -61,69 +57,68 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
          style="top: 30px; display: inline-block; width: 300px; height: 400px;">
           
-         <ul class="menu-inner py-1">
-
-          <!-- íìê´ë¦¬ -->
+<!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">íì ê´ë¦¬</div>
+              <div data-i18n="Basic Inputs">회원 관리</div>
             </a>
           </li>
           
-          <!-- ë§ì´íì´ì§ -->
+          <!-- 마이페이지 -->
           <li class="menu-item  ">
             <a href="mypage.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë§ì´íì´ì§</div>
+              <div data-i18n="Basic Inputs">마이페이지</div>
             </a>
           </li>
 
-          <!-- ì£¼ë¬¸ë´ì­ -->
-          <li class="menu-item ">
+          <!-- 주문내역 -->
+          <li class="menu-item active">
             <a href="orderHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì£¼ë¬¸ë´ì­</div>
+              <div data-i18n="Basic Inputs">주문내역</div>
             </a>
           </li>
 
-          <!-- ì°íìí -->
+<!-- 찜한상품 
           <li class="menu-item ">
             <a href="jjimGoods.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ì°íìí</div>
+              <div data-i18n="Basic Inputs">찜한상품</div>
             </a>
           </li>
+-->
           
-          <!-- ìê°íí© -->
-          <li class="menu-item  active">
+          <!-- 수강현황 -->
+          <li class="menu-item  ">
             <a href="classHistory.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ìê°íí©</div>
+              <div data-i18n="Basic Inputs">수강현황</div>
             </a>
           </li>
 
-          <!-- ë´ëí¸í -->
+          <!-- 내동호회 -->
           <li class="menu-item  ">
             <a href="myClub.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ë´ëí¸í</div>
+              <div data-i18n="Basic Inputs">내동호회</div>
             </a>
           </li>
 
-          <!-- ëìíê¸° -->
+          <!-- 나의후기 -->
           <li class="menu-item  ">
             <a href="myComment.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ëìíê¸°</div>
+              <div data-i18n="Basic Inputs">나의후기</div>
             </a>
           </li>
 
-          <!-- ê°ì¬ì ë³´ -->
+          <!-- 강사정보 -->
           <li class="menu-item  ">
             <a href="teacherInfo.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">ê°ì¬ì ë³´</div>
+              <div data-i18n="Basic Inputs">강사정보</div>
             </a>
           </li>
 
@@ -142,80 +137,67 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
 
-              <br><br><br>
-              <div style="font-size: 25px;">ㅇㅇㅇ</div>
-              <div class="card">
+            <br><br><br>
+            <div style="font-size: 25px;">주문내역</div>
+            <div class="card">
 
-                <div class="table-responsive text-nowrap">
-                  
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th>í´ëì¤ëª</th>
-                        <th>ê°ì¬</th>
-                        <th>ìê° ê¸°ê°</th>
-                        <th>ë¨ì ìê° ê¸°ê°</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Spring Class</td>
-                        <td>ì´ì¤ì</td>
-                        <td>2022-06-20 ~ 2022-11-18</td>
-                        <td>30ì¼</td>
-                      </tr>
-                      <tr>
-                        <td>JAVA Class</td>
-                        <td>ë°íì£¼</td>
-                        <td>2022-06-20 ~ 2022-11-18</td>
-                        <td>30ì¼</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-  
-            <!-- / Content -->
-            <br><br><br><br>
-            <div style="font-size: 25px;">ì¢ë£ë í´ëì¤</div>
-              <div class="card">
+              <div class="table-responsive text-nowrap">
+                
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th>주문일자</th>
+                      <th>
+                        <select style="width: 100px; height: 25px; ">
+                          <option value="" selected disabled hidden>종류선택</option>
+                          <option value="package">패키지</option>
+                          <option value="class">클래스</option>
+                          <option value="kit">키트</option>
 
-                <div class="table-responsive text-nowrap">
-                  
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th>í´ëì¤ëª</th>
-                        <th>ê°ì¬</th>
-                        <th>ìê° ê¸°ê°</th>
-                        <th>íê¸°</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Spring Class</td>
-                        <td>ì´ì¤ì</td>
-                        <td>2020-06-20 ~ 2020-11-18</td>
-                        <td>
-                          <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">íê¸°ì°ê¸°</a></button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>JAVA Class</td>
-                        <td>ë°íì£¼</td>
-                        <td>2020-06-20 ~ 2020-11-18</td>
-                        <td>
-                          <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">íê¸°ì°ê¸°</a></button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                        </select>
+                      </th>
+                      <th>제품정보</th>
+                      <th>수량</th>
+                      <th>금액</th>
+                      <th>총 주문금액</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2022-10-24</td>
+                      <td>패키지</td>
+                      <td>등산패키지</td>
+                      <td>2</td>
+                      <td>50,000원</td>
+                      <td>100,000원</td>
+                    </tr>
+                    <tr>
+                      <td>2022-10-24</td>
+                      <td>패키지</td>
+                      <td>등산패키지</td>
+                      <td>2</td>
+                      <td>50,000원</td>
+                      <td>100,000원</td>
+                    </tr>
+                    <tr>
+                      <td>2022-10-24</td>
+                      <td>패키지</td>
+                      <td>등산패키지</td>
+                      <td>2</td>
+                      <td>50,000원</td>
+                      <td>100,000원</td>
+                    </tr>
+
+                  </tbody>
+                </table>
               </div>
+            </div>
+
+
+          
+
+
+          <!-- / Content -->
 
 
 
@@ -231,7 +213,6 @@
     </div>
     <!-- / Layout wrapper -->
 
-
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 
     <!-- Core JS -->
@@ -245,6 +226,7 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="../assets/vendor/libs/masonry/masonry.js"></script>
 
     <!-- Main JS -->
     <script src="../assets/js/main.js"></script>
