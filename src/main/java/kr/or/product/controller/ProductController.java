@@ -18,7 +18,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/insertProductFrm.do")
 	public String insertProductFrm() {
-		return "product/productFrm";
+		return "goods,activity,class form/goodsEnroll";
 	}
 	
 }
