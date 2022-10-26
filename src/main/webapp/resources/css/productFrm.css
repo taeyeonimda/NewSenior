@@ -1,0 +1,41 @@
+
+.productFrmContent{
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.productFrmTable{
+    margin: 0 auto;
+    width: 1000px;
+}
+.productFrmTable>tr>th{
+    width: 30%;
+}
+.productFrmTable>tr>td{
+    width: 70%;
+    
+}
+.productFrmTable tr td input{
+    width: 100%;
+    height: 45px;
+}
+.productFrmTable tr th{
+    border: 1px solid black;
+    height: 50px;
+}
+.productFrmTable tr td{
+    border: 1px solid black;
+}
+.productFrmTable tr td textarea{
+    width: 100%;
+    height: 100%;
+    height: 500px;
+    resize: none;
+}
+#productFirstImg{
+    line-height: 40px;
+}
+#insertBtn{
+    width: 50%;
+}

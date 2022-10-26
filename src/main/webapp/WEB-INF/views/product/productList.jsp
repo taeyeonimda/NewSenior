@@ -12,6 +12,9 @@
         <div class="marketTitle">
             Market
         </div>
+        <div class="marketTitle">
+        	<a href="/insertProductFrm.do">상품등록</a>
+        </div>
         <div class="productList">
             <div>
                 <a href="javascript:void(0)">
