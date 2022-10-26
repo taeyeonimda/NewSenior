@@ -28,7 +28,7 @@
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     	<link href="/resources/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
-        <link href="/resources/css/style.css" rel="stylesheet">
+        <link href="/resources/css/styleTG.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
@@ -82,6 +82,6 @@
     <script src="/resources/lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="/resources/js/main.js"></script>
+    <script src="/resources/js/mainTG.js"></script>
 </body>
 </html>
