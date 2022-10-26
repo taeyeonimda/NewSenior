@@ -26,13 +26,13 @@
     
         <!-- Customized Bootstrap Stylesheet -->
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-    
+    	<link href="/resources/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
         <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="javascript:void(0)" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <h1 class="m-0">뉴시니어스</h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

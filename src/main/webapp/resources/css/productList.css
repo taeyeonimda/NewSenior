@@ -1,0 +1,290 @@
+@charset "UTF-8";
+.login{
+    position: relative; 
+    left: 50px;
+  }
+  .login a{
+    font-size: 16px;
+  }
+  
+  .productList{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  .productList>div{
+    width: 380px;
+    text-align: center;
+    margin: 80px 10px 10px 10px;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+  }
+  .productList>div>a{
+    color: black;
+  }
+  .productImg>img{
+    width: 360px;
+    height: 300px;
+  }
+  .marketTitle{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .productContent{
+    padding-top: 150px;
+  }
+  .productWrap{
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    line-height: 56px;
+  }
+  .productWrap>div{
+    float: left;
+    text-align: center;
+  }
+  .productWrap>div:nth-child(2){
+    margin-left: 150px;
+  }
+  .productImage{
+    width: 500px;
+    height: 500px;
+    margin-left: 50px;
+  }
+  .prodContent>h3{
+    margin: 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+  }
+  .prodContent>h4{
+    font-weight: bold;
+    text-align: left;
+    padding-top: 15px;
+    font-size: 30px;
+  }
+  .prodContent>h4>span{
+    font-size: 14px;
+  }
+  .prodContent>p{
+    text-align: left;
+    line-height: 30px;
+  }
+  .prodContent>h6{
+    text-align: left;
+    line-height: 40px;
+  }
+  .prodContent>div>p{
+    line-height: 10px;
+    text-align: left;
+  }
+  .classMove{
+    text-align: right;
+  }
+  .prodContent>div>a{
+    color: black;
+    padding-right: 30px;
+  }
+  .productName{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .productQty{
+    overflow: hidden;
+    background-color: seashell;
+    height: 54px;
+  }
+  .productQty>div{
+    float: left;
+  }
+  .productQty>div>span{
+    font-size: 20px;
+    margin: 0 10px;
+  }
+  #minus{
+    cursor: pointer;
+  }
+  #plus{
+    cursor: pointer;
+  }
+  .productQty>div>span:nth-child(2){
+    position: relative;
+      bottom: 3px;
+  }
+  .subTitle>div{
+    font-size: 20px;
+    cursor: pointer;
+    float: left;
+    width: 300px;
+    border-bottom: 1px solid gray;
+  }
+  .subTitle>div:hover{
+    font-weight: bold;
+    color: #000;
+    border-bottom: 1px solid black;
+  }
+  .subTitle>div>a{
+    color: black;
+    
+  }
+  .detailContent{
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    display: block;
+    width: 1200px;
+    text-align: center;
+  }
+  .detailContentBox{
+    max-width: 800px;
+    background-color: #f8f8f8;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  .detailContentBox>div{
+    display: flex;
+    line-height: 22px;
+    font-size: 14px;
+    text-align: left;
+    padding: 0px 20px;
+  }
+  .detailContentBox>div:first-child{
+    padding-top: 10px;
+  }
+  .detailContentBox>div:last-child{
+    padding-bottom: 10px;
+  }
+  .BoxSub{
+    width: 140px;
+  }
+  .prodContent>div:last-child>button{
+    margin-top: 10px;
+    height: 50px;
+    line-height: 25px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  .prodContent>div:last-child>button:hover{
+    background-color: black;
+    color: white;
+  }
+  .prodContent>div:last-child>button:first-child{
+    width: 180px;
+    margin-right: 15px;
+  }
+  .prodContent>div:last-child>button:last-child{
+    width: 300px;
+  }
+  #customerReview{
+    height: 100px;
+  }
+  .reviewContent{
+    width: 1200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .reviewContent>div{
+    float: left;
+  }
+  
+  .reviewContent>div:first-child{
+    width: 200px;
+    padding-right: 10px;
+  }
+  .reviewContent>div:first-child>h6{
+    height: 50px;
+    border-right: 1px solid black;
+    line-height: 50px;
+  }
+  #customerReview{
+    width: 700px;
+    resize: none;
+    height: 100px;
+  }
+  .reviewContent>div:nth-child(3)>button{
+    height: 50px;
+    border: none;
+    border-left: 1px solid black;
+    line-height: 50px;
+    background-color: white;
+  }
+  .reviewContent>div:nth-child(3){
+    width: 105px;
+    padding-right: 10px;
+  }
+  .productReviewHight{
+    position: relative;
+    top: 25px;
+  }
+  .reviewContentWrap{
+    width: 1198px;
+    margin-top: 15px;
+  }
+  .reviewContent>div:nth-child(3)>button:hover{
+    background-color: #037ef3;
+    color: white;
+    border-radius: 5px;
+  }
+  .BoxSubContent{
+    background-color: white;
+  }
+  .refundTable{
+    width: 800px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  .refundContent{
+    text-align: left;
+    padding-left: 10px;
+    line-height: 22px;
+  }
+  .refundTitle{
+    width: 20%;
+    background-color: #f8f8f8;
+  }
+  .refundContent>p{
+    margin: 0;
+    font-size: 14px;
+  }
+  .refundContent p{
+    margin-top: 8px;
+  }
+  .refundTable tr:first-child{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .star-wrap{
+    overflow: hidden;
+  }
+  .star-wrap>span{
+    float: left;
+    font-size: 30px;
+    color: lightgray;
+  }
+  .star-content{
+    position: relative;
+    top: 15px;
+    line-height: 10px;
+  }
+  .input-score{
+    clear:left;
+  }
+  .input-score>span{
+    display: none;
+  }
+  .selectColor{
+    font-weight: bold;
+    color: black;
+  }
+  
+  .productList>div:hover{
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
