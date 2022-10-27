@@ -184,11 +184,7 @@
                       <input type="file" name="upFile" id="upFile" class="upFile" style="display:none;">
                     </div>
                   </div>
-                  <div class="mb-3 row">
-                    <label for="html5-email-input" class="col-md-2 col-form-label">상품소개</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="email"  id="html5-email-input" />
-                    </div>
+                  
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
@@ -229,7 +225,11 @@
                        -->
                       </div>
                   </div>
-                  
+                  <div class="mb-3 row">
+                    <label for="html5-email-input" class="col-md-2 col-form-label">상품소개</label>
+                    <div class="col-md-10">
+                      <input class="form-control" type="email"  id="html5-email-input" />
+                    </div>
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">마켓 상세</label>
                     <div class="col-md-10">
