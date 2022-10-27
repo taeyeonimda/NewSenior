@@ -22,9 +22,9 @@
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="resources/JSbtstr/css/demo.css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/demo.css" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,8 +56,8 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
          style="top: 30px; display: inline-block; width: 300px; height: 400px;">
-          
-<!-- 회원관리 -->
+          <ul class="menu-inner py-1">
+		  <!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
