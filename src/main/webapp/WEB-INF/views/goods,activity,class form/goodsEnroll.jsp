@@ -185,7 +185,6 @@
                     </div>
                   </div>
                   
-                  </div>
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
                       <div class="btn-group" style="width: 150px;">
@@ -202,6 +201,18 @@
                       		<option value="fo">외국어</option>
                       		<option value="co">요리/제과제빵</option>
                       	</select>
+                      </div>
+                  </div>
+                  
+                  <div class="mb-3 row">
+                    <label for="html5-tel-input" class="col-md-2 col-form-label">판매상태</label>
+                      <div class="btn-group" style="width: 150px;">
+                      	<select id="saleStatus" name="saleStatus">
+                      		<option value="0">판매</option>
+                      		<option value="1">품절</option>
+                      	</select>
+                      </div>
+                  </div>
                       	<!-- 
                         <button
                           type="button"
@@ -223,13 +234,14 @@
                           <li><a class="dropdown-item">요리/제과제빵</a></li>
                         </ul>
                        -->
-                      </div>
-                  </div>
+                  
                   <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">상품소개</label>
                     <div class="col-md-10">
                       <input class="form-control" type="email"  id="html5-email-input" />
                     </div>
+                  </div>
+                  
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">마켓 상세</label>
                     <div class="col-md-10">
@@ -270,6 +282,9 @@
 		});
 		
 		$("#cateSelect").change(function(){
+			  console.log($(this).val())
+		});
+		$("#saleStatus").change(function(){
 			  console.log($(this).val())
 		});
 	</script>

@@ -69,6 +69,9 @@
               </a>
             </div>
         </div>
+        <div style="text-align: center;">
+        	${pageNavi }
+        </div>
       </div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

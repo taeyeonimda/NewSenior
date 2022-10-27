@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
+import kr.or.product.model.vo.ProductPageData;
 
 @Controller
 public class ProductController {
@@ -16,10 +17,11 @@ public class ProductController {
 	private ProductService service;
 	
 	@RequestMapping(value="/productList.do")
-	public String productList(Model model) {
-		ArrayList<Product> list = service.allProduct();
-		System.out.println(list);
-		model.addAttribute("list",list);
+	public String productList(Model model,int reqPage) {
+		ProductPageData	ppd = service.allProduct(reqPage);
+
+		model.addAttribute("list",ppd.getList());
+		model.addAttribute("pageNavi",ppd.getPageNavi());
 		return "product/productList";
 	}
 	
