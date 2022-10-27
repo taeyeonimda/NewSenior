@@ -142,7 +142,7 @@
               <div class="row mb-5">
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-1.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-2.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-3.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -175,7 +175,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-4.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-5.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>

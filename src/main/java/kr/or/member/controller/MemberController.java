@@ -16,7 +16,6 @@ public class MemberController {
 	public String memberMgrAdmin() {
 		return "myPage/memberMgrAdmin";
 	}
-
 	@RequestMapping(value="/mypage.do")
 	public String insertProductFrm() {
 		return "myPage/mypage";
@@ -40,6 +39,30 @@ public class MemberController {
 	@RequestMapping(value="/teacherInfo.do")
 	public String teacherInfo() {
 		return "myPage/teacherInfo";
+	}
+	@RequestMapping(value="/activityEnroll.do")
+	public String activityEnroll() {
+		return "myPage/activityEnroll";
+	}
+	@RequestMapping(value="/activityMgrAdmin.do")
+	public String activityMgrAdmin() {
+		return "myPage/activityMgrAdmin";
+	}
+	@RequestMapping(value="/cart.do")
+	public String cart() {
+		return "myPage/cart";
+	}
+	@RequestMapping(value="/classEnroll.do")
+	public String classEnroll() {
+		return "myPage/classEnroll";
+	}
+	@RequestMapping(value="/classMgrAdmin.do")
+	public String classMgrAdmin() {
+		return "myPage/classMgrAdmin";
+	}
+	@RequestMapping(value="/classMgrTeacher.do")
+	public String classMgrTeacher() {
+		return "myPage/classMgrTeacher";
 	}
 	
 

@@ -44,6 +44,7 @@
 
 
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	<a href="/mypage.do" style="font-size:30px;">마이페이지</a>
 
 
 
@@ -300,9 +301,9 @@
                                 <img class="img-fluid" src="/resources/MAINbtstr/img/icon/icon-3.png" alt="Icon">
                             </div>
                             <h4 class="mb-3">문화·강연</h4>
+                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a><hr>
                             <h5 class="mb-3" style="font-weight:900; color:white;">지금은 뉴 시니어 세대!</h4>
-                            <p class="mb-4">유명 시니어들에게 직접 듣는 인생 2막을 맞이한 그들의 이야기</p>
-                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a>
+                            <p class="mb-4" style="font-weight:900; color:white;">유명 시니어들에게 직접 듣는 인생 2막을 맞이한 그들의 이야기</p>
                         </div>
                     </div>
                 </div>
@@ -316,9 +317,9 @@
                                 <img class="img-fluid" src="/resources/MAINbtstr/img/icon/icon-3.png" alt="Icon">
                             </div>
                             <h4 class="mb-3">취미·교육</h4>
+                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a><hr>
                             <h5 class="mb-3" style="font-weight:900; color:white;">청바지! 청춘은! 바로! 지금!</h4>
-                            <p class="mb-4">나의 시간을 더 사랑하게 만드는 취미 클래스</p>
-                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a>
+                            <p class="mb-4" style="font-weight:900; color:white;">나의 시간을 더 사랑하게 만드는 취미 클래스</p>
                         </div>
                     </div>
                 </div>
@@ -332,9 +333,9 @@
                                 <img class="img-fluid" src="/resources/MAINbtstr/img/icon/icon-3.png" alt="Icon">
                             </div>
                             <h4 class="mb-3">커뮤니티</h4>
+                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a><hr>
                             <h5 class="mb-3" style="font-weight:900; color:white;">비슷한 성향을 가진 친구들</h4>
-                            <p class="mb-4">비슷한 관심사를 가진 사람들과 교류하는 온라인 동호회</p>
-                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a>
+                            <p class="mb-4" style="font-weight:900; color:white;">비슷한 관심사를 가진 사람들과 교류하는 온라인 동호회</p>
                         </div>
                     </div>
                 </div>
@@ -686,6 +687,7 @@
 
 
     <!-- Back to Top -->
+    
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 

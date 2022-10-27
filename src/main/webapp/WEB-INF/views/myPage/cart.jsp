@@ -59,7 +59,7 @@
           <ul class="menu-inner py-1">
 
             <!-- 회원관리 -->
-            <li class="menu-item active">
+            <li class="menu-item ">
               <a href="memberMgrAdmin.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">회원 관리</div>
@@ -122,7 +122,7 @@
             </li>
 
             <!-- 장바구니 -->
-            <li class="menu-item ">
+            <li class="menu-item active">
               <a href="cart.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">장바구니</div>
@@ -150,181 +150,100 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
 
-
-              <div style="font-size: 25px;">회원 관리</div>
-              <div class="card" >
+              <br><br><br>
+              <div>
+                <div style="font-size: 40px; font-weight: 900; display: inline-block;">장바구니</div>
+                <div style="display: inline-block; float: right;"><a href="javascript:void(0)" style=" width:100px; height: 30px; margin-top: 35px; line-height: 15px;" class="btn btn-outline-primary">삭제</a></div>
+              </div>
+              <div class="card">
 
                 <div class="table-responsive text-nowrap">
                   
                   <table class="table table-borderless">
                     <thead>
-                      <tr>
-                        <th style="width: 20px;">
+                      <tr style="text-align: center;">
+                        <th style=" width: 10%;">
                           <label>전체선택 <input type="checkbox" style="width: 15px; height: 15px; "></label>
                         </th>
-                        <th style="width: 20px;">회원번호</th>
-                        <th style="padding-left: 35px;">아이디</th>
-                        <th>전화번호</th>
-                        <th>이메일</th>
-                        <th>생년월일</th>
-                        <th>등급</th>
+                        <th style=" width: 40%;">상품명</th>
+                        <th style=" padding-left: 35px; width: 15%;">금액</th>
+                        <th style=" width: 50px; width: 15%;">수량</th>
+                        <th style=" width: 10%;">배송비</th>
+                        <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr style="text-align: center;">
                         <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>songsong</td>
-                        <td>010-2580-7696</td>
-                        <td>sjs@naver.com</td>
-                        <td>19960226</td>
-                        <td>
-                          <div class="btn-group">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              회원등급선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">회원</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">강사</a></li>
-                            </ul>
+                        <td style="text-align: center;">짜짜로니</td>
+                        <td style="text-align: center;">500원</td>
+                        <td style="text-align: center;">
+                          <div class="col-md-10">
+                            <input class="form-control" type="text" id="html5-text-input" />
                           </div>
                         </td>
+                        <td style="text-align: center;">무료배송</td>
+                        <td>가격 x 수량</td>
                       </tr>
-                      <tr>
+                      <tr style="text-align: center;">
                         <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>songsong</td>
-                        <td>010-2580-7696</td>
-                        <td>sjs@naver.com</td>
-                        <td>19960226</td>
+                        <td style="text-align: center;">초코파이</td>
+                        <td>10000원</td>
                         <td>
-                          <div class="btn-group">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              회원등급선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">회원</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">강사</a></li>
-                            </ul>
+                          <div class="col-md-10">
+                            <input class="form-control" type="text" id="html5-text-input" />
                           </div>
                         </td>
+                        <td>무료배송</td>
+                        <td>가격 x 수량</td>
                       </tr>
-                      <tr>
+                      <tr style="text-align: center;">
                         <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>songsong</td>
-                        <td>010-2580-7696</td>
-                        <td>sjs@naver.com</td>
-                        <td>19960226</td>
+                        <td style="text-align: center;">달고나</td>
+                        <td>3000원</td>
                         <td>
-                          <div class="btn-group">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              회원등급선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">회원</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">강사</a></li>
-                            </ul>
+                          <div class="col-md-10">
+                            <input class="form-control" type="text" id="html5-text-input" />
                           </div>
                         </td>
+                        <td>무료배송</td>
+                        <td>가격 x 수량</td>
                       </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>songsong</td>
-                        <td>010-2580-7696</td>
-                        <td>sjs@naver.com</td>
-                        <td>19960226</td>
-                        <td>
-                          <div class="btn-group">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              회원등급선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">회원</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">강사</a></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>songsong</td>
-                        <td>010-2580-7696</td>
-                        <td>sjs@naver.com</td>
-                        <td>19960226</td>
-                        <td>
-                          <div class="btn-group">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              회원등급선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">회원</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">강사</a></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">6</td>
-                        <td>songsong</td>
-                        <td>010-2580-7696</td>
-                        <td>sjs@naver.com</td>
-                        <td>19960226</td>
-                        <td>
-                          <div class="btn-group">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              회원등급선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">회원</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">강사</a></li>
-                            </ul>
-                          </div>
+                      <tr style="border-top: 1px solid #ddd;">
+                        <td colspan="4"></td>
+                        <td colspan="2">
+                          <div style="font-weight: 700; font-size: 20px; color: black;">총 상품금액 <span style="color: blue;">AA</span> + 배송비  <span style="color: blue;">BB</span></div>
+                          <div style="font-weight: 900; font-size: 30px; color: black;">총 결제금액  <span style="color: red;">AA+BB</span> </div>
                         </td>
                       </tr>
                     </tbody>
                   </table>
+                  <div style="margin: 10px; border-top: 1px solid #ddd;">
+                    <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">결제하기</a>
+                    <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
+                  </div>
                 </div>
               </div>
 
 
-</div></div>
              
+</div></div>
+  
+            <!-- / Content -->
 
 
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s" style="width: 100%;">
   <div class="container py-5">
@@ -370,6 +289,25 @@
 </div>
 <!-- Footer End -->
 
-</body>
 
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
 </html>

@@ -193,7 +193,7 @@
                         <td>2022-06-20 ~ 2022-11-18</td>
                         <td>
                           <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">íê¸°ì°ê¸°</a></button>
+                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">후기작성</a></button>
                           </div>
                         </td>
                       </tr>
@@ -203,7 +203,7 @@
                         <td>2022-06-20 ~ 2022-11-18</td>
                         <td>
                           <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">íê¸°ì°ê¸°</a></button>
+                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">후기작성</a></button>
                           </div>
                         </td>
                       </tr>
