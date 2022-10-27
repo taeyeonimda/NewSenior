@@ -22,9 +22,9 @@
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="resources/JSbtstr/css/demo.css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/resources/JSbtstr/css/demo.css" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,17 +47,16 @@
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
 </head>
 <body>
-
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 
-
+  <body>
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
         <!-- Menu -->
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
          style="top: 30px; display: inline-block; width: 300px; height: 400px;">
-          
+          <ul class="menu-inner py-1">
 <!-- 회원관리 -->
           <li class="menu-item ">
             <a href="memberMgrAdmin.html" class="menu-link">
