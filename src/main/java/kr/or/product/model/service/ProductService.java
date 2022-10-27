@@ -58,4 +58,8 @@ public class ProductService {
 		ProductPageData ppd = new ProductPageData(list,pageNavi);
 		return ppd;
 	}
+
+	public int insertProduct(Product p) {
+		return dao.insertProduct(p);
+	}
 }

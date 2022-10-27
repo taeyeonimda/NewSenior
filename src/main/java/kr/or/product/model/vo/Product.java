@@ -19,4 +19,5 @@ public class Product {
 	private int productQty;
 	private String productImgName;
 	private String productImgPath;
+	private String productContent;
 }

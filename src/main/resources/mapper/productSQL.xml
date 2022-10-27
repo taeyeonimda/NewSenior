@@ -15,11 +15,16 @@
   		product_subname as productSubName,
   		product_qty as productQty,
   		product_imgname as productImgName,
-  		product_imgpath as productImgPath
+  		product_imgpath as productImgPath,
+  		product_content as productContent
   	from products order by 1 desc)p)
   	where rnum between #{start} and #{end}
   </select>
   <select id="selectCount" resultType="int">
   	select count(*) from products
   </select>
+  <insert id="insertProduct" parameterType="p">
+  	insert into products values(products_seq.nextval,1,#{productName},#{productPrice},#{productStatus},#{productCategory},
+  	#{productSubName},#{productQty},#{productImgName},#{productImgPath},#{productContent})
+  </insert>
 </mapper>

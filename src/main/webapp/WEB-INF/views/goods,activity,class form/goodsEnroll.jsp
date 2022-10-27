@@ -44,6 +44,10 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
+    
+    <script src="/summernote/summernote-lite.js"></script>
+	<script src="/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/summernote/summernote-lite.css">
 </head>
 <body>
 	
@@ -152,43 +156,43 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <!-- HTML5 Inputs -->
-            <form action="/productInsert.do">
+            <form action="/insertProduct.do" method="post" enctype="multipart/form-data">
               <div class="card mb-4" style="width: 60%; float: left;">
                 <h5 class="card-header" style="text-align: center;">상품 등록하기</h5>
                 <div class="card-body">
                   <div class="mb-3 row" style="margin-top: 10px;">
                     <label for="html5-text-input" class="col-md-2 col-form-label">상품명</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input" />
+                      <input class="form-control" type="text" id="html5-text-input" name="productName"/>
                     </div>
                   </div>
                   <div class="mb-3 row" style="margin-top: 10px;">
                     <label for="html5-text-input" class="col-md-2 col-form-label">키트명</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input" />
+                      <input class="form-control" type="text" id="html5-text-input" name="productSubName"/>
                     </div>
                   </div>
                   
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">가격</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;"/>
+                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" name="productPrice"/>
                       <label for="html5-tel-input" class="col-md-2 col-form-label" style="text-align: right; padding-right: 10px; width:187px;">판매 수량</label>
-                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 220px; display: inline-block;"/>
+                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 220px; display: inline-block;" name="productQty"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
                       <a href="javascript:void(0)" class="btn btn-outline-primary" id="fileUpload">첨부파일넣기</a>
-                      <input type="file" name="upFile" id="upFile" class="upFile" style="display:none;">
+                      <input type="file" name="productFile" id="productFile" class="productFile" style="display:none;">
                     </div>
                   </div>
                   
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
                       <div class="btn-group" style="width: 150px;">
-                      	<select id="cateSelect" name="cateSelect">
+                      	<select id="productCategory" name="productCategory">
                       		<option>카테고리 선택</option>
                       		<option value="dg">디지털</option>
                       		<option value="fu">주식/재테크</option>
@@ -207,7 +211,7 @@
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">판매상태</label>
                       <div class="btn-group" style="width: 150px;">
-                      	<select id="saleStatus" name="saleStatus">
+                      	<select id="productStatus" name="productStatus">
                       		<option value="0">판매</option>
                       		<option value="1">품절</option>
                       	</select>
@@ -238,19 +242,20 @@
                   <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">상품소개</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="email"  id="html5-email-input" />
+                      <textarea class="form-control" name="productContent" id="productContent"></textarea>
+                      <!-- <input class="form-control" type="email"  id="html5-email-input" /> -->
                     </div>
                   </div>
-                  
+                  <!-- 
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">마켓 상세</label>
                     <div class="col-md-10">
                       <input class="form-control" type="url" id="html5-url-input" />
                     </div>
                   </div>
+                   -->
+                  <input type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" value="등록하기">
                   
-                  
-                  <a href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
                 </div>
               </div>
             </form>
@@ -278,13 +283,13 @@
 <!-- Footer End -->
 	<script>
 		$("#fileUpload").on("click",function(){
-			$(".upFile").click();
+			$(".productFile").click();
 		});
 		
-		$("#cateSelect").change(function(){
+		$("#productCategory").change(function(){
 			  console.log($(this).val())
 		});
-		$("#saleStatus").change(function(){
+		$("#productStatus").change(function(){
 			  console.log($(this).val())
 		});
 	</script>

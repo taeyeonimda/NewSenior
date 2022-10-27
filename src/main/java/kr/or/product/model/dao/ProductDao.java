@@ -23,4 +23,9 @@ public class ProductDao {
 	public int selectProductCount() {
 		return sqlSession.selectOne("product.selectCount");
 	}
+
+	public int insertProduct(Product p) {
+		int result = sqlSession.insert("product.insertProduct",p);
+		return result;
+	}
 }
