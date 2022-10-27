@@ -27,5 +27,5 @@ public class ProductController {
 	public String insertProductFrm() {
 		return "goods,activity,class form/goodsEnroll";
 	}
-	
+
 }
