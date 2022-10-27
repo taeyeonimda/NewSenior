@@ -25,7 +25,6 @@
                     <div class="productName">${p.productName }</div>
                     <div class="productSubName">${p.productSubName }</div>
                     <div class="productPrice">${p.wonPrice }</div>
-                    <div>zz</div>
                 </a>
             </div>
         </c:forEach>
