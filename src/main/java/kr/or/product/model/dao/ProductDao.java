@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.product.model.vo.Product;
+import kr.or.product.model.vo.ProductFileVO;
 
 @Repository
 public class ProductDao {
@@ -28,4 +29,15 @@ public class ProductDao {
 		int result = sqlSession.insert("product.insertProduct",p);
 		return result;
 	}
+
+	public int insertProductFile(ProductFileVO pf) {
+		int result = sqlSession.insert("product.insertProductFile",pf);
+		return result;
+	}
+
+	public ArrayList<ProductFileVO> allProductFile(int productNo) {
+		List list = sqlSession.selectList("product.allProductFile",productNo);
+		return (ArrayList<ProductFileVO>)list;
+	}
+
 }
