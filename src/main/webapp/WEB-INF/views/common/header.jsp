@@ -44,7 +44,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
-                        <a href="javascript:void(0)" class="dropdown-item">디지털</a>
+                        <a href="/classList.do" class="dropdown-item">디지털</a>
                         <a href="javascript:void(0)" class="dropdown-item">주식 / 재태크</a>
                         <a href="javascript:void(0)" class="dropdown-item">공예</a>
                         <a href="javascript:void(0)" class="dropdown-item">디자인</a>
