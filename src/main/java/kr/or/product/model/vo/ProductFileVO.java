@@ -8,5 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductFileVO {
-	private String filename;
+	private int fileNo;
+	private int productNo;
+	private String fileName;
+	private String filePath;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
+import kr.or.product.model.vo.ProductFileVO;
 import kr.or.product.model.vo.ProductPageData;
 
 @Service
@@ -25,6 +26,13 @@ public class ProductService {
 		map.put("end",end);
 		
 		ArrayList<Product> list = dao.allProduct(map);
+		
+		for(Product p : list) {
+			ArrayList<ProductFileVO> flist = dao.allProductFile(p.getProductNo());
+			p.setProductFileVO(flist);
+		}
+		
+		
 		int totalCount = dao.selectProductCount();
 		int totalPage = 0;
 		if(totalCount%numPerPage == 0) {
@@ -60,6 +68,14 @@ public class ProductService {
 	}
 
 	public int insertProduct(Product p) {
-		return dao.insertProduct(p);
+		int result = dao.insertProduct(p);
+		System.out.println(p.getProductNo());
+		if(result > 0) {
+			for(ProductFileVO pfv : p.getProductFileVO()) {
+				pfv.setProductNo(p.getProductNo());
+				result += dao.insertProductFile(pfv);
+			}
+		}
+		return result;
 	}
 }

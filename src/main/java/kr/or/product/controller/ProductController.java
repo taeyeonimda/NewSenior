@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.ProductFileRename;
 import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
+import kr.or.product.model.vo.ProductFileVO;
 import kr.or.product.model.vo.ProductPageData;
 
 @Controller
@@ -30,7 +31,7 @@ public class ProductController {
 	@RequestMapping(value="/productList.do")
 	public String productList(Model model,int reqPage) {
 		ProductPageData	ppd = service.allProduct(reqPage);
-
+		
 		model.addAttribute("list",ppd.getList());
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		return "product/productList";
@@ -43,16 +44,17 @@ public class ProductController {
 	
 	@RequestMapping(value="/insertProduct.do")
 	public String insertProduct(Product p, MultipartFile[] productFile, HttpServletRequest request) {
-		
+		ArrayList<ProductFileVO> fileList = new ArrayList<ProductFileVO>();
 		if(!productFile[0].isEmpty()) {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
 			for(MultipartFile file : productFile) {
 				String filename = file.getOriginalFilename();
-				String filepath = fileRename.productFileRename(savePath, filename);
+				String filepath = fileRename.productFileRename(savePath, filename);    
 				try {
-					FileOutputStream fos = new FileOutputStream(new File(savePath));
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					byte[] bytes = savePath.getBytes();
+					
+					byte[] bytes = file.getBytes();
 					bos.write(bytes);
 					bos.close();
 					
@@ -63,11 +65,13 @@ public class ProductController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				p.setProductImgName(filename);
-				p.setProductImgPath(filepath);
+				ProductFileVO pFile = new ProductFileVO();
+				pFile.setFileName(filename);
+				pFile.setFilePath(filepath);
+				fileList.add(pFile);
 			}
 		}
-		
+		p.setProductFileVO(fileList);
 		int result = service.insertProduct(p);
 		if(result > 0) {
 			return "redirect:/productList.do?reqPage=1";

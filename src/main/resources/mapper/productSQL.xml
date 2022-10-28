@@ -6,7 +6,6 @@
   	(select rownum as rnum, p.* from
   	(select 
   		product_no as productNo,
-  		class_no as classNo,
   		product_name as productName,
   		product_price as productPrice,
   		to_char(product_price, '999,999,999') as wonprice,
@@ -14,8 +13,6 @@
   		product_category as productCategory,
   		product_subname as productSubName,
   		product_qty as productQty,
-  		product_imgname as productImgName,
-  		product_imgpath as productImgPath,
   		product_content as productContent
   	from products order by 1 desc)p)
   	where rnum between #{start} and #{end}
@@ -24,7 +21,23 @@
   	select count(*) from products
   </select>
   <insert id="insertProduct" parameterType="p">
-  	insert into products values(products_seq.nextval,1,#{productName},#{productPrice},#{productStatus},#{productCategory},
-  	#{productSubName},#{productQty},#{productImgName},#{productImgPath},#{productContent})
+  	insert into products values(products_seq.nextval,#{productName},#{productPrice},#{productStatus},#{productCategory},#{productSubName},#{productQty},#{productContent})
+  	<selectKey resultType="int" order="AFTER" keyProperty="productNo">
+  		select max(product_no) from products
+  	</selectKey>
   </insert>
+  <insert id="insertProductFile" parameterType="pf">
+  	insert into product_file values(product_fileseq.nextval,#{productNo},#{fileName},#{filePath})
+  </insert>
+  <select id="allProductFile" parameterType="_int" resultType="pf">
+  	select 
+  		product_fileno as fileNo,
+  		product_no as productNo,
+  		product_filename as fileName,
+  		product_filepath as filePath
+  	from
+  		product_file
+  	where 
+  		product_no = #{_parameter}
+  </select>
 </mapper>
