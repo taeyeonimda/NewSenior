@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-    <link href="/resources/css/class/class-detail.css" rel="stylesheet">
+<title>동호회 상세</title>
+    <link href="/resources/css/club/club-detail.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
