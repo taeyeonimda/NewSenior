@@ -1,0 +1,143 @@
+
+.center-div{
+    width: 55%;
+    margin: 0 auto;
+}
+
+
+
+/* The sidebar menu */
+.sidenav-right {
+    width: 18%;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+    border-radius: 5px;
+    text-align: center;
+    visibility: visible !important;
+}
+.side-info-box>ul{
+    list-style-type: none;
+	margin: 0 auto;
+    text-align: center;
+    text-decoration: none;
+}
+.sidenav-left {
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+    visibility: visible !important;
+}
+.side-box{
+    margin: 0 auto;
+}
+
+
+
+/* 클럽 이미지 div안에 맞춰 넣는 css*/
+.club-title{
+    text-align:center;
+    display:table;
+    border:1px solid #cecece;
+    width: 230px;
+    height: 120px;
+}
+.club-img-div{
+    display:table-cell;
+    vertical-align:middle;
+}
+.club-img{
+    max-width: 230px;
+    max-height: 120px;
+}
+
+
+
+/*리뷰모달*/
+
+.rmodal-wrap{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.21);
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    z-index: 10;
+    align-items: center;
+}
+
+.modal-review{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    width: 500px;
+    height: 480px;
+    align-items: center;
+    text-align: center;
+    border-radius: 25px;
+}
+.modal-top h1{
+    text-align: center;
+    margin: 30px auto;
+    font-size: 24px;
+    line-height: 24px;
+}
+#star-box{
+    margin: 0 auto;
+    width: 250px;
+    overflow: hidden;
+}
+#star-box>span{
+    float: left;
+    font-size: 50px;
+    color: lightgray;
+}
+.comment-box>div{
+    margin-top: 10px;
+}
+.comment-box>div:first-child{
+    visibility: hidden;
+}
+#review-textarea {
+    width: 80%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    font-size: 16px;
+    resize: none;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.modal-btn-box{
+    width: 280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/* 고정 class */
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+}

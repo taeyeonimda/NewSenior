@@ -1,0 +1,235 @@
+.class-img{
+    min-height: 407.99px;
+    min-width: 100%;
+}
+.class-container{
+    min-height: 552px;
+}
+.page-content{
+    position: relative;
+    overflow: hidden;
+}
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.class-row{
+	display: flex;
+	flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) / -2);
+    margin-left: calc(var(--bs-gutter-x) / -2);
+    padding: 30px;
+}
+
+
+/* 이미지 div안에 맞춰 넣는 css*/
+.product-title{
+    text-align:center;
+    display:table;
+    border:1px solid #cecece;
+    width: 860px;
+    height: 1200px;
+}
+.product-img-div{
+    display:table-cell;
+    vertical-align:middle;
+}
+.product-img{
+    max-width: 850px;
+    max-height: 1200px;
+}
+
+
+
+
+/* 프로필 이미지 div안에 맞춰 넣는 css*/
+.profil-title{
+    text-align:center;
+    display:flex;
+    justify-content: flex-start;
+    border:1px solid #cecece;
+}
+.profil-img-div{
+    display:table-cell;
+    vertical-align:middle;
+}
+.profil-img{
+    border-radius: 50px;
+    max-width: 100px;
+    max-height: 100px;
+}
+.profil-info-div{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+/*스크롤 박스*/
+.scroll-select-box{
+	width: 880px;
+    height: 60px;
+    line-height: 60px;
+	display: flex;
+	justify-content: space-between;
+    background-color: #fff;
+    z-index: 50;
+}
+.scroll-select-box>span{
+	display: inline-block;
+	width: 100px;
+    text-align: center;
+}
+
+.scroll-select-box-fixed{
+    position: fixed;
+    top: 80px;
+}
+
+
+/* team */
+.class-item{
+    height: 482.16px;
+    width: 407.99px;
+}
+.class-item>img{
+    object-fit: cover;
+}
+
+
+/* The sidebar menu */
+.sidenav {
+    display: none;
+    width: 400px;
+    height: 510px;
+    position: fixed;
+    z-index: 1;
+    top: 155px;
+    right: 110px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    visibility: visible !important;
+}
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+}
+.sidenav a:hover {
+    color: #064579;
+}
+.main {
+    margin-left: 140px; /* Same width as the sidebar + left position in px */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.side-info-box>ul{
+    list-style-type: none;
+	width: 240px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+.class-info-box>ul>li{
+	text-align: left;
+}
+.class-select-box{
+	height: 180px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.side-title-box{
+    color: #0f4229;
+}
+
+
+
+
+
+#total-star{
+    font-size: 20px;
+    line-height: 58px;
+}
+
+/*리뷰모달*/
+
+.rmodal-wrap{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.21);
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    z-index: 10;
+    align-items: center;
+}
+
+.modal-review{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    width: 500px;
+    height: 480px;
+    align-items: center;
+    text-align: center;
+    border-radius: 25px;
+}
+.modal-top h1{
+    text-align: center;
+    margin: 30px auto;
+    font-size: 24px;
+    line-height: 24px;
+}
+#star-box{
+    margin: 0 auto;
+    width: 250px;
+    overflow: hidden;
+}
+#star-box>span{
+    float: left;
+    font-size: 50px;
+    color: lightgray;
+}
+.comment-box>div{
+    margin-top: 10px;
+}
+.comment-box>div:first-child{
+    visibility: hidden;
+}
+#review-textarea {
+    width: 80%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    font-size: 16px;
+    resize: none;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.modal-btn-box{
+    width: 280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}

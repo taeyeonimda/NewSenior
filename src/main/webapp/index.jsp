@@ -58,7 +58,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">젊게 사는 것이 아니라, 나답게 사는 것!</h1>
+                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Not living young<br> but living as I am</h1>
                                     <a href="" class="btn btn-primary py-sm-3 px-sm-4">Explore More</a>
                                 </div>
                             </div>
@@ -413,11 +413,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="row g-4 portfolio-container">
-                <div class="col-lg-4 col-md-6 portfolio-item NSactivity wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-1.jpg" alt="" style="width:400px; height:400px">
-                        <div class="portfolio-text">
+            <div class="row g-4 portfolio-container" >
+                <div class="col-lg-4 col-md-6 portfolio-item NSactivity wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
+                    <div class="portfolio-inner rounded" >
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-1.jpg" alt="" style="width:410px; height:400px">
+                        <div class="portfolio-text" style="width:400px;">
                             <h4 class="text-white mb-4">액티비티1</h4>
                             <div class="d-flex">
                                 <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-1.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
@@ -426,9 +426,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass1.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass1.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">클래스1</h4>
                             <div class="d-flex">
@@ -438,9 +438,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-3.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-3.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">동호회1</h4>
                             <div class="d-flex">
@@ -450,9 +450,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass2.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass2.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">클래스2</h4>
                             <div class="d-flex">
@@ -462,9 +462,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSactivity wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSactivity wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-5.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-5.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">액티비티2</h4>
                             <div class="d-flex">
@@ -474,9 +474,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass3.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass3.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">클래스3</h4>
                             <div class="d-flex">
@@ -486,9 +486,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">클래스4</h4>
                             <div class="d-flex">
@@ -498,9 +498,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">동호회2</h4>
                             <div class="d-flex">
@@ -510,9 +510,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:400px; height:400px">
+                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">동호회3</h4>
                             <div class="d-flex">

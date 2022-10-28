@@ -8,8 +8,12 @@
 	<typeAliases>
 		<!-- 
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
-		 -->
+		-->
 		 <typeAlias type="kr.or.product.model.vo.Product" alias="p"/>
 		 <typeAlias type="kr.or.product.model.vo.ProductFileVO" alias="pf"/>
+		 <typeAlias type="kr.or.club.model.vo.Club" alias="c"/>
+		<!-- 
+		<typeAlias type="kr.or.nsClass.model.vo.NsClub" alias="nc"/> 
+		-->
 	</typeAliases>
 </configuration>

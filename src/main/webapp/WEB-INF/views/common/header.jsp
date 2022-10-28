@@ -44,7 +44,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
-                        <a href="javascript:void(0)" class="dropdown-item">디지털</a>
+                        <a href="/classList.do" class="dropdown-item">디지털</a>
                         <a href="javascript:void(0)" class="dropdown-item">주식 / 재태크</a>
                         <a href="javascript:void(0)" class="dropdown-item">공예</a>
                         <a href="javascript:void(0)" class="dropdown-item">디자인</a>
@@ -56,10 +56,10 @@
                         <a href="javascript:void(0)" class="dropdown-item">요리 / 제과제빵</a>
                     </div>
                 </div>
-                <a href="javascript:void(0)" class="nav-item nav-link">동호회</a>
+                <a href="/clubList.do" class="nav-item nav-link">동호회</a>
                 <a href="javascript:void(0)" class="nav-item nav-link">커뮤니티</a>
                 <a href="javascript:void(0)" class="nav-item nav-link">액티비티</a>
-                <a href="/productList.do?reqPage=1" class="nav-item nav-link active">마켓</a>
+                <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
                 
                 <a href="javascript:void(0)" class="nav-item nav-link">공지사항</a>
             </div>
