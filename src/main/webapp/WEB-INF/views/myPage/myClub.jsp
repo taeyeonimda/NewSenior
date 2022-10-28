@@ -57,19 +57,18 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
          style="top: 30px; display: inline-block; width: 300px; height: 400px;">
           
-                  <ul class="menu-inner py-1">
+<ul class="menu-inner py-1">
 
           <!-- 회원관리 -->
           <li class="menu-item ">
-            <a href="memberMgrAdmin.html" class="menu-link">
+            <a href="memberMgrAdmin.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">회원 관리</div>
             </a>
           </li>
-          
           <!-- 마이페이지 -->
           <li class="menu-item  ">
-            <a href="mypage.html" class="menu-link">
+            <a href="mypage.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">마이페이지</div>
             </a>
@@ -77,7 +76,7 @@
 
           <!-- 주문내역 -->
           <li class="menu-item ">
-            <a href="orderHistory.html" class="menu-link">
+            <a href="orderHistory.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">주문내역</div>
             </a>
@@ -85,7 +84,7 @@
 
 <!-- 찜한상품 
           <li class="menu-item ">
-            <a href="jjimGoods.html" class="menu-link">
+            <a href="jjimGoods.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">찜한상품</div>
             </a>
@@ -93,15 +92,15 @@
 -->
           <!-- 수강현황 -->
           <li class="menu-item  ">
-            <a href="classHistory.html" class="menu-link">
+            <a href="classHistory.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">수강현황</div>
             </a>
           </li>
 
           <!-- 내동호회 -->
-          <li class="menu-item  active">
-            <a href="myClub.html" class="menu-link">
+          <li class="menu-item active ">
+            <a href="myClub.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">내동호회</div>
             </a>
@@ -109,7 +108,7 @@
 
           <!-- 나의후기 -->
           <li class="menu-item  ">
-            <a href="myComment.html" class="menu-link">
+            <a href="myComment.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">나의후기</div>
             </a>
@@ -117,7 +116,7 @@
 
           <!-- 강사정보 -->
           <li class="menu-item  ">
-            <a href="teacherInfo.html" class="menu-link">
+            <a href="teacherInfo.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">강사정보</div>
             </a>
@@ -143,7 +142,7 @@
               <div class="row mb-5">
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-1.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -154,7 +153,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-2.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -165,7 +164,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-3.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -176,7 +175,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-4.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
@@ -187,7 +186,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/img/êµ¬ê¸ë¡ê³ .png" alt="Card image cap" />
+                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-5.jpg" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">내 동호회 1</h5>
                       <p class="card-text">등산동호회</p>
