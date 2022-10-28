@@ -169,154 +169,36 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${list }" var="NsClass">
                       <tr>
-                        <td>1</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>준석이 클래스</strong></td>
-                        <td>준석</td>
-                        <td>3주</td>
-                        <td>10000원</td>
-                        <td><span class="badge bg-label-primary me-1">Active</span></td>
+                        <td>${NsClass.classNo }</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${NsClass.className }</strong></td>
+                        <td>${NsClass.teacherName }</td>
+                        <td>${NsClass.endDate }-${NsClass.startDate  }</td>
+                        <td>${NsClass.classPrice }</td>
+                        <td><span class="badge bg-label-primary me-1">${NsClass.classStatus }</span></td>
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
+                              <a class="dropdown-item" href="javascript:void(0);">
+                              <i class="bx bx-edit-alt me-1"></i> Edit</a>
                               <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
+                                ><i class="bx bx-trash me-1"></i> Delete</a>
                             </div>
                           </div>
                         </td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>태연이 클래스</strong></td>
-                        <td>태연</td>
-                        <td>3주</td>
-                        <td>50000원</td>
-                        <td><span class="badge bg-label-success me-1">Completed</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>은비 클래스</strong></td>
-                        <td>은비</td>
-                        <td>3주</td>
-                        <td>1000원</td>
-                        <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>
-                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>혜진이 클래스</strong>
-                        </td>
-                        <td>혜진</td>
-                        <td>3주</td>
-                        <td>30000원</td>
-                        <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>
-                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>태곤이 클래스</strong>
-                        </td>
-                        <td>태곤</td>
-                        <td>3주</td>
-                        <td>5000원</td>
-                        <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>
-                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>현주 클래스</strong>
-                        </td>
-                        <td>현주</td>
-                        <td>3주</td>
-                        <td>20000원</td>
-                        <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
+                  <!-- 클래스관리 페이지네비 -->
+                  
                 </div>
               </div>
+              <div id="pageNavi">${pageNavi }</div>
               <!--/ Borderless Table -->
               <br><br><br>
               <div style="font-size: 25px;">클래스 신청현황</div>

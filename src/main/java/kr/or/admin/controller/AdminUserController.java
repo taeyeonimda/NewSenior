@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import kr.or.nsClass.model.service.NsClassService;
 
 
 @Controller
-public class AdminController {
+public class AdminUserController {
 	
 	@Autowired
 	private MemberService service;
