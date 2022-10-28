@@ -138,6 +138,7 @@
 
             <br><br><br>
             <div style="font-size: 25px;">주문내역</div>
+            <div style="font-size: 15px;">클래스, 액티비티, 키트</div>
             <div class="card">
 
               <div class="table-responsive text-nowrap">
@@ -192,7 +193,50 @@
               </div>
             </div>
 
+			<br><br><br>
+          <div style="font-size: 25px;">주문내역</div>
+          <div style="font-size: 17px;">상품</div>
+            <div class="card">
 
+              <div class="table-responsive text-nowrap">
+                
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th>주문일자</th>
+                      <th>상품이름</th>
+                      <th>수량</th>
+                      <th>금액</th>
+                      <th>총 주문금액</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2022-10-27</td>
+                      <td>카스타드</td>
+                      <td>1</td>
+                      <td>300원</td>
+                      <td>300원</td>
+                    </tr>
+                    <tr>
+                      <td>2022-10-27</td>
+                      <td>촠촠한촠코칩</td>
+                      <td>4</td>
+                      <td>500원</td>
+                      <td>2000원</td>
+                    </tr>
+                    <tr>
+                      <td>2022-10-27</td>
+                      <td>아메리카노</td>
+                      <td>2</td>
+                      <td>5,000원</td>
+                      <td>10,000원</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
           
 
 
