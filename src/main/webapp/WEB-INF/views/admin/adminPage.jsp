@@ -165,28 +165,63 @@
                         <th style="width: 20px;">회원번호</th>
                         <th style="padding-left: 35px;">아이디</th>
                         <th>전화번호</th>
-                        <th>이메일</th>
-                        <th>생년월일</th>
-                        <th>등급</th>
+						<th>이메일</th>
+						<th>생년월일</th>
+						<th>등급</th>
+						<th>등급변경</th>
                       </tr>
                     </thead>
                     <tbody>
+                    
+                    <c:forEach items="${list }" var="mem">
                       <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>songsong</td>
-                        <td>010-2580-7696</td>
-                        <td>sjs@naver.com</td>
-                        <td>19960226</td>
-                        <td>
+                        <td style="text-align: center;"><input class="chk" type="checkbox"></td>
+                        <td style="text-align: center;">${mem.memberNo }</td>
+                        <td>${mem.memberId }</td>
+                        <td>${mem.memberPhone }</td>
+                        <td>${mem.memberEmail }</td>
+                        <td>${mem.memberBirth }</td>
+                    	<td>
+						<c:if test="${mem.memberGrade eq 1}">
+						<select>
+						<option value="1" selected>회원</option>
+						<option value="2" >강사</option>
+						<option value="3" >관리자</option>
+						</select>
+						</c:if>
+						<c:if test="${mem.memberGrade eq 2}">
+						<select>
+						<option value="1" >회원</option>
+						<option value="2" selected>강사</option>
+						<option value="3" >관리자</option>
+						</select>
+						</c:if>
+						<c:if test="${mem.memberGrade eq 3}">
+						<select>
+						<option value="1" >회원</option>
+						<option value="2" >강사</option>
+						<option value="3" selected>관리자</option>
+						</select>
+						</c:if>
+						</td>
+						<td>
+							<button class="btn bc5 changeLevel">등급 변경</button>
+						</td>
+                      </tr>
+                     </c:forEach>
+                     <tr>
+				<th colspan="8">
+				<button class="btn bc44 bs4 checkedChangeLevel">선택회원 등급 변경</button>
+			</tr>
+                      <!--  
+                          <td>
                           <div class="btn-group">
                             <button
                               type="button"
                               class="btn btn-outline-primary dropdown-toggle"
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
-                            >
-                              회원등급선택
+                            >  회원등급선택
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="javascript:void(0);">회원</a></li>
@@ -194,7 +229,9 @@
                             </ul>
                           </div>
                         </td>
-                      </tr>
+                      -->
+                      
+                      <!-- 
                       <tr>
                         <td style="text-align: center;"><input type="checkbox"></td>
                         <td style="text-align: center;">1</td>
@@ -315,8 +352,10 @@
                           </div>
                         </td>
                       </tr>
+                       -->
                     </tbody>
                   </table>
+                  <div id="pageNavi">${pageNavi }</div>
                 </div>
               </div>
 
@@ -369,7 +408,30 @@
   </div>
 </div>
 <!-- Footer End -->
-
+<script>
+	$(".changeLevel").on("click",function(){
+		const memberNo = $(this).parent().parent().children().eq(1).text();
+		//클릭한 버튼 기준으로 선택한 등급
+		const memberGrade = $(this).parent().prev().children().val();
+		location.href = "/changeLevel.do?memberNo="+memberNo+"&memberGrade="+memberGrade;
+	});
+	
+	$(".checkedChangeLevel").on("click",function(){
+		const check = $(".chk:checked");
+		if(check.length == 0){
+			alert("선택된 회원이 없습니다");
+			return;
+		}
+		const num = new Array();
+		const level = new Array();
+		check.each(function(index,item){
+			const memberNo = $(item).parent().next().text();
+			num.push(memberNo);
+			const memberGrade = $(item).parent().parent().find("select").val();
+			level.push(memberGrade);
+		});
+		location.href="/checkedChangeLevel.do?num="+num.join("/")+"&level="+level.join("/");
+	});
+</script>
 </body>
-
 </html>

@@ -61,7 +61,7 @@
 
           <!-- 회원관리 -->
           <li class="menu-item ">
-            <a href="memberMgrAdmin.do" class="menu-link">
+            <a href="/adminPage.do?reqPage=1" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">회원 관리</div>
             </a>
