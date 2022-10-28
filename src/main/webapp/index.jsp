@@ -58,7 +58,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">젊게 사는 것이 아니라, 나답게 사는 것!</h1>
+                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Not living young<br> but living as I am</h1>
                                     <a href="" class="btn btn-primary py-sm-3 px-sm-4">Explore More</a>
                                 </div>
                             </div>
