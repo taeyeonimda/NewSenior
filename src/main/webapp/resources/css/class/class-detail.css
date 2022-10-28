@@ -15,6 +15,17 @@
     justify-content: space-between;
 }
 
+
+.class-row{
+	display: flex;
+	flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) / -2);
+    margin-left: calc(var(--bs-gutter-x) / -2);
+    padding: 30px;
+}
+
+
 /* 이미지 div안에 맞춰 넣는 css*/
 .product-title{
     text-align:center;
@@ -62,13 +73,11 @@
 
 /*스크롤 박스*/
 .scroll-select-box{
-	width: 843px;
+	width: 880px;
     height: 60px;
     line-height: 60px;
 	display: flex;
 	justify-content: space-between;
-	margin-left: 11px;
-	margin-top: 20px;
     background-color: #fff;
     z-index: 50;
 }
@@ -80,7 +89,7 @@
 
 .scroll-select-box-fixed{
     position: fixed;
-    top: 60px;
+    top: 80px;
 }
 
 

@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
     <title>클래스 상세</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -60,9 +59,9 @@
 
 
         <!-- class main -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5 mt-5">
             <div class="container">
-                <div class="row g-4">
+                <div class="class-row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item rounded class-item">
                             <img class="img-fluid" src="/resources/MAINbtstr/img/모델클래스 (2).jpg" alt="">
@@ -73,9 +72,9 @@
                             <img class="img-fluid" src="/resources/MAINbtstr/img/모델클래스 (3).jpg" alt="">
                         </div>
                     </div>
-                    <div class="scroll-select-box" id="scroll-select">
-                        <span>강사소개</span><span>강의소개</span><span>준비물</span><span>환불규정</span><span>후기</span>
-                    </div>
+                </div>
+                <div class="scroll-select-box" id="scroll-select">
+                	<span>강사소개</span><span>강의소개</span><span>준비물</span><span>환불규정</span><span>후기</span>
                 </div>
             </div>
         </div>
@@ -84,16 +83,16 @@
 
 
         <!-- 강의소개 -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5 mt-5">
             <div class="container">
-                <div class="row g-5 align-items-center">
+                <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <p class="fs-5 fw-bold text-primary">스타강사 송준식과 함께하는 모델 클래스</p>
                         <h1 class="display-5 mb-4">걷기 걷기 걷기!</h1>
                         <p class="mb-4">클래스에 대한 설명이 들어감 클래스에 대한 설명이 들어감 클래스에 대한 설명이 들어감 클래스에 대한 설명이 들어감</p>
                         <a class="btn btn-primary py-3 px-4" href="">Explore More</a>
                     </div>
-                    <div class="product-title">
+                    <div class="product-title mt-5">
                         <div class="product-img-div">
                             <img class="product-img" src="/resources/MAINbtstr/img/모델클래스 (2).jpg">
                         </div>
@@ -104,12 +103,12 @@
         <!-- Features End -->
 
         <!-- 강사 소개 -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5 mt-5">
             <div class="container class-container">
-                <div class="row g-5 align-items-end">
+                <div class="class-row g-5 align-items-end">
                     <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
                         <p class="fs-5 fw-bold text-primary">강사소개</p>
-                        <img class="img-fluid rounded" data-wow-delay="0.1s" src="img/모델클래스 (1).jpg">
+                        <img class="img-fluid rounded" data-wow-delay="0.1s" src="/resources/MAINbtstr/img/모델클래스 (1).jpg">
                     </div>
                     <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
                         <h4 class="display-3 text-primary mb-0">송 준식</h4>
@@ -126,9 +125,9 @@
         
         
         <!-- 클래스 준비물 -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5 mt-5">
             <div class="container">
-                <div class="row g-5 align-items-end">
+                <div class="class-row g-5 align-items-end">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                         <p class="fs-5 fw-bold text-primary">클래스 준비물</p>
                         <h1 class="display-5 mb-5"><span>1</span> 건 있어요</h1>
@@ -138,7 +137,7 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item rounded class-item">
-                            <img class="img-fluid class-img" src="img/person_1.jpg" alt="">
+                            <img class="img-fluid class-img" src="/resources/MAINbtstr/img/person_1.jpg" alt="">
                             <div class="team-text">
                                 <h4 class="mb-0">왕 밝은 미소</h4>
                                 <p class="text-primary">20000</p>
@@ -155,9 +154,9 @@
         <!-- Team End -->
 
         <!-- 환불규정 -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5 mt-5">
             <div class="container">
-                <div class="row g-5 align-items-center">
+                <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <p class="fs-5 fw-bold text-primary">환불규정</p>
                         <h6 class="display-5 mb-4">시작 8일 전까지 100% 환불</h6>
@@ -171,7 +170,7 @@
         <!-- Features End -->
         <hr>
         <!-- 후기 -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5 mt-5">
             <div class="container">
                 <div class="row g-5">
                     <div class="flex-space-between">
