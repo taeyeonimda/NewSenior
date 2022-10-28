@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nsClass">
+	<select id ="getAllClass" parameterType="map" resultType="cla">
+		select * from
+			(select rownum as rnum,c.* from
+			(select  
+				class_no as classNo,
+				class_name as className,
+				class_teacher as classTeacher,
+				class_price as classPrice,
+				class_limit as classLimit,
+				class_status as classStatus,
+				class_category as classCategory,
+				products,
+				start_date as startDate,
+				end_date as endDate,
+				filepath,
+				m.member_name as teacherName
+		from CLASSES c
+		join members m 
+		on c.class_teacher = m.member_no
+		order by 1 desc)c)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	
+	<!--  모든 칼럼 셀렉트
+	<select id="getAllMembers" resultType="m">
+	select
+	member_no as memberNo,
+	member_id as memberId,	   
+	member_pw as memberPW,
+    member_name as memberName,
+	member_phone as memberPhone,
+	member_email as memberEmail,
+	member_addr	as memberAddr,    
+	member_grade as memberGrade,
+	member_birth as memberBirth,
+	enroll_date	as enrollDate,
+	nickname as nickName,
+	member_state as memberState,	
+    member_img as memberImg
+    from members
+	</select>
+	 -->
+	 
+	 
+	<select id="totalCount" resultType="int">
+		select count(*) from classes
+	</select>
+</mapper>
