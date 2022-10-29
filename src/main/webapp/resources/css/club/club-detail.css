@@ -1,4 +1,3 @@
-
 .center-div{
     width: 55%;
     margin: 0 auto;
@@ -9,7 +8,7 @@
 /* The sidebar menu */
 .sidenav-right {
     width: 18%;
-    height: 100vh;
+    height: 560px;
     position: fixed;
     z-index: 1;
     top: 0px;
@@ -29,7 +28,7 @@
 }
 .sidenav-left {
     width: 20%;
-    height: 100vh;
+    height: 60vh;
     position: fixed;
     z-index: 1;
     top: 0px;
@@ -69,8 +68,8 @@
 
 
 
-/*리뷰모달*/
 
+/*리뷰모달*/
 .rmodal-wrap{
     width: 100vw;
     height: 100vh;
@@ -135,9 +134,16 @@
 
 
 
-/* 고정 class */
 
+/* 고정하는 class */
 .flex-space-between{
     display: flex;
     justify-content: space-between;
+}
+
+/* absolute */
+.box-absolute {
+  right: 0px; top: 700px;
+  position: absolute;
+  background-color: orange;
 }

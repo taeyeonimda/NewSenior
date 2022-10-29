@@ -14,10 +14,9 @@
         <!-- sideBar-right 회원 목록 /  채팅하기 버튼 -->
         <div class="sidenav-right bg-white rounded p-sm-5 wow fadeIn">
             <div class="side-box rounded mt-2">
-                <p class="fs-5 fw-bold text-primary mt-5">내 동아리 정보</p>
+                <p class="fs-5 fw-bold text-primary mt-5">내 동호회</p>
                 <div class="side-info-box text-center">
                     <div class="side-info-box text-center">
-                        <div><span>동아리이름</span><span>(이동)</span></div>
                         <div><span>동아리이름</span><span>(이동)</span></div>
                         <div><span>동아리이름</span><span>(이동)</span></div>
                         <div><span>동아리이름</span><span>(이동)</span></div>
@@ -32,7 +31,7 @@
                 </div>
             </div>
             <div class="side-box rounded mt-5">
-                <p class="fs-5 fw-bold text-primary">강사소개</p>
+                <p class="fs-5 fw-bold text-primary">${c.clubName } </p>
                 <div class="side-info-box text-center">
                     <div><span>회원이름</span><span>(간단정보)</span></div>
                     <div><span>회원이름</span><span>(간단정보)</span></div>
@@ -40,11 +39,6 @@
                     <div><span>회원이름</span><span>(간단정보)</span></div>
                 </div>
                 <div>
-                    <div class="btn-group mt-2" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-primary">Left</button>
-                        <button type="button" class="btn btn-outline-primary">Left</button>
-                        <button type="button" class="btn btn-outline-primary">Right</button>
-                    </div>
                     <button class="btn btn-primary py-2 px-4 mt-2" id="club-boardFrm-btn">채팅방 참여</button>
                 </div>
             </div>
@@ -92,22 +86,60 @@
             <!-- About End -->
 
             <!-- 회원 게시글 -->
-            <div class="container-xxl py-5">
+            <div class="container-xxl py-5" style="border: 1px solid #eee">
                 <div class="container class-container">
                     <div class="row g-5 align-items-end">
                         <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-primary mb-4">Year of Experience</p>
-                            <h4 class="display-6 mb-4">"당당하게 걸어요"</h4>
-                            <p class="mb-4">연세대 당당걷기과</p>
-                            <p class="mb-4">새바람 걷기대회 우승</p>
-                            <p class="mb-4">무신사 시니어 모델로 활동 중</p>
+                            <p class="text-primary">닉네임</p>
+                            <p class="mb-4">2000-00-00</p>
+                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
                         </div>
                     </div>
                 </div>
             </div>
+            
         <!-- About End -->
 
-        <!-- 후기 -->
+
+		            <!-- 회원 게시글 -->
+            <div class="container-xxl py-5" style="border: 1px solid #eee">
+                <div class="container class-container">
+                    <div class="row g-5 align-items-end">
+                        <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
+                            <p class="text-primary">닉네임</p>
+                            <p class="mb-4">2000-00-00</p>
+                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- 회원 게시글 -->
+            <div class="container-xxl py-5" style="border: 1px solid #eee">
+                <div class="container class-container">
+                    <div class="row g-5 align-items-end">
+                        <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
+                            <p class="text-primary">닉네임</p>
+                            <p class="mb-4">2000-00-00</p>
+                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- 회원 게시글 -->
+            <div class="container-xxl py-5" style="border: 1px solid #eee">
+                <div class="container class-container">
+                    <div class="row g-5 align-items-end">
+                        <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
+                            <p class="text-primary">닉네임</p>
+                            <p class="mb-4">2000-00-00</p>
+                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- 댓글 -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5">
@@ -143,6 +175,33 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-	
+	<script>
+    function stopSide(){
+        const position  = $(window).scrollTop();
+        console.log(position);
+        let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
+        let windowHeight = window.innerHeight; // 스크린 창
+        let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
+        if(position > fullHeight){
+            console.log(fullHeight);
+            $(".sidenav-left").addClass("box-absolute");
+            $(".sidenav-right").addClass("box-absolute");
+        }else{
+        	$(".sidenav-left").removeClass("box-absolute");
+        	$(".sidenav-right").removeClass("box-absolute");
+        }
+    }
+    
+    $(window).on("scroll",function(){
+        stopSide();
+        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
+    });
+
+    $(function(){
+    	stopSide();
+    });
+
+
+	</script>
 </body>
 </html>
