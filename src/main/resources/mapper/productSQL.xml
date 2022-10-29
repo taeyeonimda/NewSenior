@@ -40,4 +40,18 @@
   	where 
   		product_no = #{_parameter}
   </select>
+  <select id="productView" parameterType="_int" resultType="p">
+  	select
+  		product_no as productNo,
+  		product_name as productName,
+  		product_price as productPrice,
+  		to_char(product_price, '999,999,999') as wonprice,
+  		product_status as productStatus,
+  		product_category as productCategory,
+  		product_subname as productSubName,
+  		product_qty as productQty,
+  		product_content as productContent
+  	from products
+  	where product_no = #{_parameter}
+  </select>
 </mapper>
