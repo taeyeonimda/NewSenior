@@ -66,18 +66,16 @@
 	<!-- @Transactional 어노테이션사용을 위한 설정 -->
 	<tx:annotation-driven/>
 	
-	<!-- 웹소켓 처리할 객체 생성 
-	<beans:bean id="allMemberChat" class="kr.or.common.AllMemberChat"/>
-	-->
+	<beans:bean id="clubMemberChat" class="kr.or.club.controller.ClubMemberChat"/>
 	<!-- 쪽지 소켓 처리할 객체 생성 
 	<beans:bean id="dmHandler" class="kr.or.dm.model.service.DirectMessageHandler"/>
 	-->
-	<!-- 웹소켓 매핑 
+	
+	<!-- <websocket:mapping handler="dmHandler" path="/dm.do"/> -->	
 	<websocket:handlers>
-		<websocket:mapping handler="allMemberChat" path="/chat.do"/>
-		<websocket:mapping handler="dmHandler" path="/dm.do"/>
+		<websocket:mapping handler="clubMemberChat" path="/chat.do"/>
 	</websocket:handlers>
-	-->
+	
 	<!-- AOP 어노테이션 활성화 -->
 	<aop:aspectj-autoproxy/>
 	

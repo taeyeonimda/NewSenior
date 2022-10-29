@@ -75,5 +75,4 @@ public class ClubController {
 		model.addAttribute("c", c);
 		return "club/clubDetail";
 	}
-
 }

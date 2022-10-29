@@ -39,7 +39,7 @@
                     <div><span>회원이름</span><span>(간단정보)</span></div>
                 </div>
                 <div>
-                    <button class="btn btn-primary py-2 px-4 mt-2" id="club-boardFrm-btn">채팅방 참여</button>
+                    <button class="btn btn-primary py-2 px-4 mt-2" onclick="openModal();">채팅방 참여</button>
                 </div>
             </div>
         </div>
@@ -171,6 +171,34 @@
         </div>
         </div> <!-- 넓이제한-->
     </div><!--page-content End-->
+<div class="chat-wrap">
+    <div class="modal-chat">
+        <div class="modal-top">
+            <h1>동호회 채팅</h1>
+        </div>
+        <div class="modal-content">
+            <div id="member-box">
+                <div>member</div>
+                <div>member</div>
+                <div>member</div>
+                <div>member</div>
+                <div>member</div>
+                <input type="text" value="${c.clubNo }" id="clubNo"><button onclick="initChat('${sessionScope.m.memberId}');">채팅시작하기</button>
+            </div>
+			<div class="chatting">
+				<div class="messageArea bg-light"></div>
+				<div class="sendBox">
+					<input type="text" id="sendMsg">
+					<button id="sendBtn" onclick="sendMsg();">전송</button>
+					<input type ="file" name ="chatFile" id="chatFile" multiple="multiple">
+					<button type="button"  onclick="fileSend();" id="sendFileBtn">보내기</button>
+					<div id="fileMsgBox"></div>
+				</div>
+			</div>
+			<button onclick="closeModal();">닫기</button>
+        </div>
+    </div>
+</div>
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
@@ -191,16 +219,114 @@
         	$(".sidenav-right").removeClass("box-absolute");
         }
     }
-    
     $(window).on("scroll",function(){
         stopSide();
         // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
     });
-
     $(function(){
     	stopSide();
     });
+    
+    
+    
+    // 채팅모달
+    function openModal() {
+    	$("#member-box").show();
+    	$(".chat-wrap").css("display", "flex");
+	}
+    function closeModal() {
+    	endChat();
+    	$(".chatting").hide();
+    	$(".chat-wrap").css("display", "none");
+	}
+    
+	// 웹소켓 객체를 저장할 변수
+	let ws;
+	// 회원 아이디 저장용 변수
+	let memberId;
+	const clubNo = $("#clubNo").val();
+	
+	function initChat(param) {
+		memberId = param;
+		// 웹소켓 연결 시도
+		ws = new WebSocket("ws://192.168.123.103/chat.do");
+		// 웹소켓 연결 성공 시 실행할 함수 지정
+		ws.onopen = startChat;
+		// 서버에서 데이터 받으면 처리할 함수
+		ws.onmessage = receiveMsg;
+		// 웹소켓 연결이 종료되면 실행할 함수
+		ws.onclose = endChat;
+		$("#member-box").hide();
+		$(".chatting").slideDown();
+	}
+	function startChat() {
+		console.log("웹소켓 연결완료");
+		const data = {type:"enter", msg:memberId, club:clubNo};
+		ws.send(JSON.stringify(data));
+		appendChat("<p>채팅방에 입장했습니다</p>");
+	}
+	function receiveMsg(param) {	// 매개변수 : 서버에서 보낸 데이터
+		console.log(param);
+		appendChat(param.data);
+	}
+	function endChat() {
+		console.log("웹소켓 연결종료");
+	}
+	
+	function sendMsg() {
+		const msg = $("#sendMsg").val();
+		// val
+		if(msg != ''){ // 전송 눌렀을 때 메시지 박스에 val이 ''이 아니면
+			// 서버에 소켓으로 문자열을 전송
+			const data = {type:"chat", msg:msg, club:clubNo};	// 받앗서 구분하기 위해 key값이 있는 JSON 객체 타입으로 전송
+			ws.send(JSON.stringify(data));
+			appendChat("<div class='chat right'>"+msg+"</div>");
+			$("#sendMsg").val("");
+			// msg가 null이 아니고, file도 null이 아닐 때
+			// file만 있을 때
+		}
+	}
+	
+	
+	function fileSend() {
+		const formData = new FormData();
+		// 파일 input
+		const fileInputVal = $("input[name='chatFile']");
+		const files = fileInputVal[0].files;
+		console.log(files);
+		formData.append('chatFile', files[0]);
+		if(files != null){ // 전송 눌렀을 때 인풋이 null이 아니면,
+			$.ajax({
+	 			url : "/fileNames.do",
+				type: "post",
+				data: formData,
+				contentType: false,
+	            processData: false,
+	            enctype	: 'multipart/form-data',
+				success:function(path){
+					const filepath = path; // filepath만 전송받음
+					const data = {type:"file", msg:filepath, club:clubNo}; //type=file의 새로운 elseif문 작성
+					ws.send(JSON.stringify(data));
+					appendChat("<div class='chat right'><img width='150px' height='180px' src='/resources/upload/chat/"+filepath+"'></div>");
+					$("input[name='chatFile']").val("");
+					//const data = {type:"file", filepath, club:clubNo};	// 받앗서 구분하기 위해 key값이 있는 JSON 객체 타입으로 전송
+					//ws.send(JSON.stringify(data));
+				}
+	 		})//ajax로 보내야 함 왜냐면 나한테도 띄우고 가야 하는데 filepath를 정하지 않으면 띄울 수 없기 때문
+		}else{
+			$("#fileMsgBox").text("선택된 파일이 없습니다");
+		}
+	}
 
+	function appendChat(msg) {
+		$(".messageArea").append(msg);
+		$(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
+	}
+	$("#sendMsg").on("keyup", function(key) {
+		if(key.keyCode==13){
+			sendMsg();
+		}
+	})
 
 	</script>
 </body>
