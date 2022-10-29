@@ -14,7 +14,7 @@ public class Club {
 	private String clubName;	// 클럽명
 	private int clubLimit;		// 클럽 최대 인원
 	private int clubLeader; 	// 클럽장 닉네임
-	private String filepath;	// 클럽 메인 이미지
+	private String clubMainImg;	// 클럽 메인 이미지
 	private String clubIntro;	// 클럽소개
 	private String clubCategory; //
 	// private ArrayList<Member> memberList; // 클럽 멤버들의 멤버 객체 리스트

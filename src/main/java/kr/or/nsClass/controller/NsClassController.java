@@ -8,6 +8,7 @@ import kr.or.nsClass.model.service.NsClassService;
 
 @Controller
 public class NsClassController {
+	
 	@Autowired
 	private NsClassService service;
 	

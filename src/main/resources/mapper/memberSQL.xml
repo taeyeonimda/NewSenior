@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+	<select id ="allMembmerList" parameterType="map" resultType="m">
+			select * from
+		(select rownum as rnum,m.* from
+		(select  
+		member_no as memberNo,
+		member_id as memberId,	   
+		member_pw as memberPW,
+	    member_name as memberName,
+		member_phone as memberPhone,
+		member_email as memberEmail,
+		member_addr	as memberAddr,    
+		member_grade as memberGrade,
+		member_birth as memberBirth,
+		enroll_date	as enrollDate,
+		nickname as nickName,
+		member_state as memberState,	
+	    member_img as memberImg,
+	    favorite
+		from members order by 1 desc)m)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<update id="changeLevel" parameterType="m">
+		update members
+		set member_grade = #{memberGrade}
+		where member_no = #{memberNo}
+	</update>
+	<!--  모든 칼럼 셀렉트
+	<select id="getAllMembers" resultType="m">
+	select
+	member_no as memberNo,
+	member_id as memberId,	   
+	member_pw as memberPW,
+    member_name as memberName,
+	member_phone as memberPhone,
+	member_email as memberEmail,
+	member_addr	as memberAddr,    
+	member_grade as memberGrade,
+	member_birth as memberBirth,
+	enroll_date	as enrollDate,
+	nickname as nickName,
+	member_state as memberState,	
+    member_img as memberImg
+    from members
+	</select>
+	 -->
+	 
+	 
+	<select id="totalCount" resultType="int">
+		select count(*) from members
+	</select>
+</mapper>

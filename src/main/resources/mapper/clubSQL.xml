@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="club">
 	<insert id="insertClub" parameterType="c">
-		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, null)
+		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg })
 	</insert>
+	<select id="selectAllClub" resultType="c">
+		select
+			club_no as clubNo,
+			club_name as clubName,
+			club_category as clubCategory,
+			club_limit as clubLimit,
+			club_Leader as clubLeader,
+			filepath as clubMainImg
+		from clubs
+		<!-- 세션 들어오면 category로 if문 추가 예정 -->
+	</select>
+	<select id="selectOneClub" parameterType="int" resultType="c">
+		select
+			club_no as clubNo,
+			club_name as clubName,
+			club_category as clubCategory,
+			club_limit as clubLimit,
+			club_Leader as clubLeader,
+			filepath as clubMainImg
+		from clubs
+		where club_no = #{clubNo }
+	</select>
 </mapper>

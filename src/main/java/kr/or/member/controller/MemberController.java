@@ -8,6 +8,7 @@ import kr.or.member.model.service.MemberService;
 
 @Controller
 public class MemberController {
+	
 	@Autowired
 	private MemberService service;
 	
