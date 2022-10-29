@@ -17,6 +17,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import kr.or.member.model.service.MemberService;
+import kr.or.club.model.service.ClubService;
 import kr.or.club.model.vo.ChatRecord;
 import kr.or.club.model.vo.Club;
 
@@ -28,7 +29,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 	private String club = null;
 	String sessionId = null;
 	@Autowired
-	private MemberService service;
+	private ClubService service;
 	 
 	public ClubMemberChat() {
 		super();
@@ -89,6 +90,9 @@ public class ClubMemberChat extends TextWebSocketHandler{
 						session.sendMessage(tm);
 					}
 				}
+				String sendMsg = "<p>오늘</p>";
+				TextMessage today = new TextMessage(sendMsg);
+				session.sendMessage(today);
 			}
 			*/
 			
@@ -104,7 +108,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 			}
 		}else if(type.equals("chat")) { //  
 			System.out.println("chat으로 받았을 때 " +memberList.get(session));
-			//recordChat(memberList.get(session), msg); //대화내용을 저장하는 메서드
+			recordChat(memberList.get(session), msg); //대화내용을 저장하는 메서드
 			String sendMsg = "<div class='chat left'><span class='chatId'>"+memberList.get(session)+" : </span>"+msg+"</div>"; // session으로 고유 key값 넣어줬으니
 			TextMessage tm = new TextMessage(sendMsg); // 보내고 싶은 메시지를 매개변수로
 			for(WebSocketSession s : clubMemberMap.get(club)) {
@@ -115,6 +119,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 			}
 		}else if(type.equals("file")) {
 			System.out.println("file으로 받았을 때 " +msg);
+			recordFile(memberList.get(session), msg);
 			String sendMsg = "<div class='chat left'><span class='chatId'>"+memberList.get(session)+" : </span><img width='150px' height='180px' src='/resources/upload/chat/"+msg+"'></div>"; // session으로 고유 key값 넣어줬으니
 			TextMessage tm = new TextMessage(sendMsg); // 보내고 싶은 메시지를 매개변수로
 			for(WebSocketSession s : clubMemberMap.get(club)) {
@@ -140,7 +145,19 @@ public class ClubMemberChat extends TextWebSocketHandler{
 		cr.setChatMember(memberId);
 		cr.setChatContent(msg);
 		cr.setChatClub(club);
-		// int result = service.insertChat(cr);
+		int result = service.insertChat(cr);
 		// System.out.println(result);
+	}
+	
+	public void recordFile(String memberId, String msg) {
+		// 채팅 내용 insert > 저장하는 메서드
+		System.out.println("recordChat메서드실행"+memberId);
+		System.out.println(msg);
+		ChatRecord cr = new ChatRecord();
+		cr.setChatMember(memberId);
+		cr.setFilepath(msg);
+		cr.setChatClub(club);
+		int result = service.insertChat(cr);
+		System.out.println(result);
 	}
 }

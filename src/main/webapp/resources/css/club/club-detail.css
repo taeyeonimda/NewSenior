@@ -160,7 +160,7 @@
 	position: relative;
 	max-width: 300px;
 	align-self: flex-end;
-	background-color: #ffeb33;
+	background-color: #20c997;
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
 	border-radius:10px;
@@ -172,7 +172,7 @@
 	position: absolute;
 	border-style: solid;
 	border-width: 15px 0 15px 15px;
-	border-color: transparent #ffeb33;
+	border-color: transparent #20c997;
 	display: block;
 	width: 0;
 	z-index:1;

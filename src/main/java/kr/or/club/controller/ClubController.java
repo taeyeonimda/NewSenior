@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import common.FileRename;
 import kr.or.club.model.service.ClubService;
@@ -75,4 +78,34 @@ public class ClubController {
 		model.addAttribute("c", c);
 		return "club/clubDetail";
 	}
+
+	@ResponseBody
+	@RequestMapping(value="/UploadFile.do",produces = "application/json;charset=utf-8")
+	public String fileNames(MultipartFile[] chatFile, HttpServletRequest request) {
+		String filepath = null;
+		if(!chatFile[0].isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/chat/");
+			for(MultipartFile file: chatFile) {
+				String filename = file.getOriginalFilename();
+				filepath = fileRename.fileRename(savePath,filename);
+				FileOutputStream fos;
+				try {
+					fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println("filepath:"+filepath);
+			return new Gson().toJson(filepath);
+		}
+		return new Gson().toJson(filepath);
+	}
+	
+	
 }

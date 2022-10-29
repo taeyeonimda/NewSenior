@@ -261,7 +261,7 @@
 	}
 	function startChat() {
 		console.log("웹소켓 연결완료");
-		const data = {type:"enter", msg:memberId, club:clubNo};
+		const data = {type:"enter", msg:"onnbi", club:clubNo};
 		ws.send(JSON.stringify(data));
 		appendChat("<p>채팅방에 입장했습니다</p>");
 	}
@@ -297,7 +297,7 @@
 		formData.append('chatFile', files[0]);
 		if(files != null){ // 전송 눌렀을 때 인풋이 null이 아니면,
 			$.ajax({
-	 			url : "/fileNames.do",
+	 			url : "/UploadFile.do",
 				type: "post",
 				data: formData,
 				contentType: false,

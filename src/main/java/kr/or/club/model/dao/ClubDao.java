@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.club.model.vo.ChatRecord;
 import kr.or.club.model.vo.Club;
 
 @Repository
@@ -26,5 +27,10 @@ public class ClubDao {
 	public Club selectOneClub(int clubNo) {
 		Club c = sqlSession.selectOne("club.selectOneClub", clubNo);
 		return c;
+	}
+
+	public int insertChat(ChatRecord cr) {
+		int result = sqlSession.insert("club.insertChat", cr);
+		return result;
 	}
 }

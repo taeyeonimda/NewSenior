@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.club.model.dao.ClubDao;
+import kr.or.club.model.vo.ChatRecord;
 import kr.or.club.model.vo.Club;
 
 @Service
@@ -25,5 +26,11 @@ public class ClubService {
 	public Club selectOneClub(int clubNo) {
 		Club c = dao.selectOneClub(clubNo);
 		return c;
+	}
+
+	public int insertChat(ChatRecord cr) {
+		System.out.println(cr);
+		int result = dao.insertChat(cr);
+		return result;
 	}
 }

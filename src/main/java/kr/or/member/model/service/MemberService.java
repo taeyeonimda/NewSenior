@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.club.model.vo.ChatRecord;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
@@ -108,4 +109,5 @@ public class MemberService {
 		}
 		return result;
 	}
+
 }
