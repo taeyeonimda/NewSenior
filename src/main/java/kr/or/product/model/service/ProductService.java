@@ -78,4 +78,11 @@ public class ProductService {
 		}
 		return result;
 	}
+
+	public Product productView(int productNo) {
+		Product p = dao.productView(productNo);
+		ArrayList<ProductFileVO> pf = dao.allProductFile(productNo);
+		p.setProductFileVO(pf);
+		return p;
+	}
 }

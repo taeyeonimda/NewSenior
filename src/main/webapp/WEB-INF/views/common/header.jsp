@@ -85,5 +85,7 @@
 
     <!-- Template Javascript -->
     <script src="/resources/TGbtstr/js/mainTG.js"></script>
+    
+
 </body>
 </html>

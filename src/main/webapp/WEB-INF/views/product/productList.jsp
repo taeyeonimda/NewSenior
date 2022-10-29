@@ -25,7 +25,7 @@
                     <!-- <div class="productImg"><img src="/resources/TGbtstr/img/국수키트.jpg" alt=""></div> -->
                     <div class="productName">${p.productName }</div>
                     <div class="productSubName">${p.productSubName }</div>
-                    <div class="productPrice">${p.wonPrice }</div>
+                    <div class="productPrice">${p.wonPrice }<span>원</span></div>
                 </a>
             </div>
        	 </c:forEach>

@@ -45,9 +45,9 @@
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
     
-    <script src="/summernote/summernote-lite.js"></script>
-	<script src="/summernote/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/summernote/summernote-lite.css">
+    <script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 </head>
 <body>
 	
@@ -157,7 +157,7 @@
 
               <!-- HTML5 Inputs -->
             <form action="/insertProduct.do" method="post" enctype="multipart/form-data">
-              <div class="card mb-4" style="width: 60%; float: left;">
+              <div class="card mb-4" style="width: 80%; float: left;">
                 <h5 class="card-header" style="text-align: center;">상품 등록하기</h5>
                 <div class="card-body">
                   <div class="mb-3 row" style="margin-top: 10px;">
@@ -292,6 +292,39 @@
 		$("#productStatus").change(function(){
 			  console.log($(this).val())
 		});
+		
+		//summerNote
+		$("#productContent").summernote({
+			height:400,
+			lang : "ko-KR",
+			callbacks :{
+				onImageUpload : function(files){
+					uploadImage(files[0],this);
+				}
+			}
+		});
+		function uploadImage(file,editor){
+			//ajax통해서 서버에 이미지를 업로드
+			//업로드된 이미지의 경로를 받아오는 역할
+			//<form>태그와 동일한 효과를 발생시킬 수 있는 객체
+			const form = new FormData();
+			form.append("file",file);
+			$.ajax({
+				url : "/uploadImage.do",
+				type : "post",
+				data : form,
+				processData : false,
+				contentType : false,
+				success : function(data){
+					$(editor).summernote("insertImage",data);
+					console.log(data);
+				}
+			});
+			//processData : 전송하는 데이터를 문자열로 전송하게 기본값이 설정되어있음
+			//			-> 파일 전송을 위해 기본값 제거하는 작업
+			//contentType : enctype ="application/x-www-form-urlencoded;charset=UTF-8"
+			//			-> 설정되어있는 기본 enctype을 제거
+		}
 	</script>
 
     <!-- Core JS -->

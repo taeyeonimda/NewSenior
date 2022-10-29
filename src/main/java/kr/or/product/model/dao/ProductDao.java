@@ -40,4 +40,8 @@ public class ProductDao {
 		return (ArrayList<ProductFileVO>)list;
 	}
 
+	public Product productView(int productNo) {
+		return sqlSession.selectOne("product.productView",productNo);
+	}
+
 }
