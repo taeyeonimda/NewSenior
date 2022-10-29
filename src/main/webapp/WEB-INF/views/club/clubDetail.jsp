@@ -57,17 +57,17 @@
                     <ol class="breadcrumb justify-content-center mb-3">
                         <li class="breadcrumb-item"><a href="#">Club</a></li>
                         <li class="breadcrumb-item"><a href="/class-list.html">My Club</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">코딩동호회</li>
+                        <li class="breadcrumb-item active" aria-current="page">${c.clubName }</li>
                     </ol>
                 </nav>
                 <div class="club-title">
                     <div class="club-img-div">
-                        <img src="img/모델클래스 (1).jpg" class="club-img">
+                        <img src="/resources/upload/club/${c.clubMainImg }" class="club-img">
                     </div>
                 </div>
-                <p class="fs-5 fw-bold text-primary mt-2">안산시 코딩동호회</p>
+                <p class="fs-5 fw-bold text-primary mt-2">${c.clubName }</p>
                 <div class="side-info-box text-center">
-                    <p>우리동호회는요 매일 자바를 하고요 스퓨ㅡ링하고여</p>
+                    <p>클ㅂ소개</p>
                 </div>
                 <div>
                     <button>동호회 탈퇴하기</button>
@@ -95,10 +95,6 @@
             <div class="container-xxl py-5">
                 <div class="container class-container">
                     <div class="row g-5 align-items-end">
-                        <div class="col-lg-3 col-md-5 wow fadeInUp flex-space-between" data-wow-delay="0.1s">
-                            <p class="fs-5 fw-bold text-primary">동호회 게시판</p>
-                            <button class="btn btn-primary py-2 px-4" id="club-boardFrm-btn">글쓰기</button>
-                        </div>
                         <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
                             <p class="text-primary mb-4">Year of Experience</p>
                             <h4 class="display-6 mb-4">"당당하게 걸어요"</h4>

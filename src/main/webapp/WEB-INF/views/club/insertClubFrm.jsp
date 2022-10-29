@@ -9,7 +9,8 @@
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<form action="/insertClub.do" method="post">
+		<form action="/insertClub.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="clubLeader" value="4">
 			클럽이름 : <input type="text" name="clubName"><br>
 			클럽제한 : 
 				<select name="clubLimit" class="form-control bg-light border-0">
@@ -36,6 +37,7 @@
                     <option value="etc">기타</option>
                 </select><br>
 			클럽소개 : <input type="text" name="clubIntro"><br>
+			클럽 메인 이미지 : <input type="file" multiple name="files"><br>
 			<button class="btn btn-primary py-3 px-4" type="submit">Submit Now</button>
 		</form>
 	</div>
