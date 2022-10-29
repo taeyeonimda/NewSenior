@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
-                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded">
                         <img class="img-fluid class-img" src="/resources/MAINbtstr/img/클래스 (2).jpg" alt="">
                         <div class="portfolio-text">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item dg wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded">
                         <img class="img-fluid class-img" src="/resources/MAINbtstr/img/클래스 (2).jpg" alt="">
                         <div class="portfolio-text">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.5s">
+                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.5s">
                     <div class="portfolio-inner rounded">
                         <img class="img-fluid class-img" src="/resources/MAINbtstr/img/클래스 (3).jpg" alt="">
                         <div class="portfolio-text">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded">
                         <img class="img-fluid class-img" src="/resources/MAINbtstr/img/클래스 (5).jpg" alt="">
                         <div class="portfolio-text">

@@ -68,6 +68,18 @@
 
 
 
+/* 클럽 리스트 */
+#club-list{
+	width: 90%;
+	overflow: hidden;
+}
+#club-input{
+	border-radius: 15px;
+}
+#club-input:focus{
+	outline: none;
+}
+
 
 /*리뷰모달*/
 .chat-wrap{
@@ -102,6 +114,8 @@
     width: 250px;
     overflow: hidden;
 }
+
+
 
 
 
@@ -179,6 +193,9 @@
 	right:-15px;
 	top:12px;
 }
+
+
+
 
 
 
