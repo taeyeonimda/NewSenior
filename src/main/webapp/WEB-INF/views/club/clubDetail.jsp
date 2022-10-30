@@ -25,7 +25,7 @@
                 <div>
                     <div class="btn-group mt-2" role="group" aria-label="Basic outlined example">
                         <button type="button" class="btn btn-outline-primary">Left</button>
-                        <button type="button" class="btn btn-outline-primary">Left</button>
+                        <button type="button" class="btn btn-outline-primary"> </button>
                         <button type="button" class="btn btn-outline-primary">Right</button>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-3">
                         <li class="breadcrumb-item"><a href="#">Club</a></li>
-                        <li class="breadcrumb-item"><a href="/class-list.html">My Club</a></li>
+                        <li class="breadcrumb-item"><a href="/class-list.html">${c.clubCategory }</a></li>
                         <li class="breadcrumb-item active" aria-current="page">${c.clubName }</li>
                     </ol>
                 </nav>
@@ -61,7 +61,7 @@
                 </div>
                 <p class="fs-5 fw-bold text-primary mt-2">${c.clubName }</p>
                 <div class="side-info-box text-center">
-                    <p>클ㅂ소개</p>
+                    <p>${c.clubIntro } </p>
                 </div>
                 <div>
                     <button>동호회 탈퇴하기</button>
@@ -69,9 +69,8 @@
             </div>
         </div>
 
-        <!-- class main -->
+        <!-- 동호회 board -->
         <div class="center-div">
-
             <!-- 글쓰기 버튼 구역 -->
             <div class="container-xxl py-5">
                 <div class="container class-container">
@@ -83,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <!-- About End -->
+            <!-- 글쓰기 버튼 구역 End -->
 
             <!-- 회원 게시글 -->
             <div class="container-xxl py-5" style="border: 1px solid #eee">
@@ -97,8 +96,7 @@
                     </div>
                 </div>
             </div>
-            
-        <!-- About End -->
+	        <!-- 회원 게시글 End -->
 
 
 		            <!-- 회원 게시글 -->
@@ -230,7 +228,7 @@
     // 채팅모달
     function openModal() {
     	$("#member-box").show();
-    	$(".chat-wrap").css("display", "flex");
+    	$(".modal-wrap").css("display", "flex");
 	}
     function closeModal() {
     	endChat();
@@ -247,7 +245,7 @@
 	function initChat(param) {
 		memberId = param;
 		// 웹소켓 연결 시도
-		ws = new WebSocket("ws://172.30.1.65/chat.do");
+		ws = new WebSocket("ws://192.168.123.103/chat.do");
 		// 웹소켓 연결 성공 시 실행할 함수 지정
 		ws.onopen = startChat;
 		// 서버에서 데이터 받으면 처리할 함수

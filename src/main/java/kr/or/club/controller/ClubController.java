@@ -76,6 +76,7 @@ public class ClubController {
 	public String clubDetail(int clubNo, Model model){
 		Club c = service.selectOneClub(clubNo);
 		System.out.println(c);
+		// board리스트와 해당 클럽의 board에 대한 댓글리스트
 		model.addAttribute("c", c);
 		return "club/clubDetail";
 	}
