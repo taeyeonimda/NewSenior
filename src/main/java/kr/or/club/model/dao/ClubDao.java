@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.club.model.vo.ChatRecord;
 import kr.or.club.model.vo.Club;
+import kr.or.club.model.vo.ClubBoard;
 
 @Repository
 public class ClubDao {
@@ -32,5 +33,10 @@ public class ClubDao {
 	public int insertChat(ChatRecord cr) {
 		int result = sqlSession.insert("club.insertChat", cr);
 		return result;
+	}
+
+	public ArrayList<ClubBoard> selectAllClubBoard(Object clubNo) {
+		List list = sqlSession.selectList("club.selectAllClubBoard", clubNo);
+		return (ArrayList<ClubBoard>)list;
 	}
 }

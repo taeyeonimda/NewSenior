@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +23,7 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.or.club.model.service.ClubService;
 import kr.or.club.model.vo.Club;
+import kr.or.club.model.vo.ClubBoard;
 
 
 @Controller
@@ -74,10 +77,13 @@ public class ClubController {
 	
 	@RequestMapping(value = "/clubDetail.do")
 	public String clubDetail(int clubNo, Model model){
-		Club c = service.selectOneClub(clubNo);
-		System.out.println(c);
+		HashMap<String, List> map = service.selectOneClubMap(clubNo);
+		//Club c = service.selectOneClub(clubNo);
 		// board리스트와 해당 클럽의 board에 대한 댓글리스트
+		// model.addAttribute("c", c);
+		Club c = (Club)map.get("club").get(0);
 		model.addAttribute("c", c);
+		model.addAttribute("cbList", map.get("board"));
 		return "club/clubDetail";
 	}
 

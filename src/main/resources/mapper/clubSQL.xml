@@ -31,4 +31,15 @@
 	<insert id="insertChat" parameterType="cr">
 		insert into chat_record values (chat_record_seq.nextval, #{chatClub }, #{chatMember }, #{chatContent }, to_char(sysdate, 'yyyy-mm-dd'), #{filepath } )
 	</insert>
+	<select id="selectAllClubBoard" parameterType="int" resultType="cb">
+		select
+			club_board_no as clubBoardNo,
+			club_no as clubNo,
+			member_no as clubBoardWriter,
+			club_board_content as clubBoardContent,
+			club_board_date as clubBoardDate,
+			filepath as clubBoardFilepath
+		from club_boards
+		where club_no = #{clubNo }
+	</select>
 </mapper>

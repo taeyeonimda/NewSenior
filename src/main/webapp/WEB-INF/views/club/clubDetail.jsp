@@ -85,88 +85,51 @@
             <!-- 글쓰기 버튼 구역 End -->
 
             <!-- 회원 게시글 -->
-            <div class="container-xxl py-5" style="border: 1px solid #eee">
+		    <c:forEach items="${cbList }" var="cb">
+		    <div class="container-xxl py-5" style="border: 1px solid #eee">
                 <div class="container class-container">
                     <div class="row g-5 align-items-end">
                         <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-primary">닉네임</p>
-                            <p class="mb-4">2000-00-00</p>
-                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
+                            <p class="text-primary">${cb.clubBoardWriter }</p>
+                            <p class="mb-4">${cb.clubBoardDate }</p>
+                            <p class="mb-4">${cb.clubBoardContent }</p>
                         </div>
                     </div>
                 </div>
             </div>
-	        <!-- 회원 게시글 End -->
+		    </c:forEach>
+		    <!-- 회원 게시글 End -->
 
-
-		            <!-- 회원 게시글 -->
-            <div class="container-xxl py-5" style="border: 1px solid #eee">
-                <div class="container class-container">
-                    <div class="row g-5 align-items-end">
-                        <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-primary">닉네임</p>
-                            <p class="mb-4">2000-00-00</p>
-                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-                        <!-- 회원 게시글 -->
-            <div class="container-xxl py-5" style="border: 1px solid #eee">
-                <div class="container class-container">
-                    <div class="row g-5 align-items-end">
-                        <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-primary">닉네임</p>
-                            <p class="mb-4">2000-00-00</p>
-                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-                        <!-- 회원 게시글 -->
-            <div class="container-xxl py-5" style="border: 1px solid #eee">
-                <div class="container class-container">
-                    <div class="row g-5 align-items-end">
-                        <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-primary">닉네임</p>
-                            <p class="mb-4">2000-00-00</p>
-                            <p class="mb-4">오늘도 날씨가 좋네요ㅎㅎ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <!-- 댓글 -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5">
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="profil-title">
-                        <div class="profil-img-div">
-                            <img src="img/person_1.jpg" class="profil-img">
-                        </div>
-                        <div class="profil-info-div">
-                            <div>
-                                ★★★★★
-                            </div>
-                            <div>
-                                닉네임
-                            </div>
-                            <div>
-                                작성일
-                            </div>
-                        </div>
-                    </div>
-                    <div >
-                        <div>컨텡층ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-                        <div>수정 / 삭제</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	        <!-- 댓글 -->
+	        <div class="container-xxl py-5">
+	            <div class="container">
+	                <div class="row g-5">
+	                </div>
+	                <hr>
+	                <div class="row">
+	                    <div class="profil-title">
+	                        <div class="profil-img-div">
+	                            <img src="img/person_1.jpg" class="profil-img">
+	                        </div>
+	                        <div class="profil-info-div">
+	                            <div>
+	                                ★★★★★
+	                            </div>
+	                            <div>
+	                                닉네임
+	                            </div>
+	                            <div>
+	                                작성일
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div >
+	                        <div>컨텡층ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+	                        <div>수정 / 삭제</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
         </div> <!-- 넓이제한-->
     </div><!--page-content End-->
 <div class="modal-wrap">
