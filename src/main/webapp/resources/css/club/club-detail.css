@@ -1,10 +1,91 @@
-.center-div{
-    width: 55%;
-    margin: 0 auto;
+/* 고정하는 class */
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
 }
 
 
 
+
+
+/*----------------- club-list -----------------*/
+/* 클럽 리스트 */
+#club-list{
+	width: 90%;
+	overflow: hidden;
+}
+#club-input{
+	border-radius: 15px;
+}
+#club-input:focus{
+	outline: none;
+}
+.clubs{
+	width: 400px; text-align: center; margin-bottom: 20px; border: 1px solid #eee; float: left;
+}
+
+/* 클럽리스트 동호회 모달 */
+
+.club-info-modal{
+    background-color: #859398;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    width: 50%;
+    height: 77%;
+    align-items: center;
+    text-align: center;
+}
+.modal-top h1{
+    text-align: center;
+    margin: 30px auto;
+    font-size: 24px;
+    line-height: 24px;
+}
+#member-box{
+    margin: 0 auto;
+    width: 250px;
+    overflow: hidden;
+}
+.modal-title{
+    text-align:center;
+    display:table;
+    border:1px solid #cecece;
+    width: 76%;
+    height: 15%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+}
+.modal-img{
+    max-width: 66%;
+    max-height: 20%;
+}
+.modal-img-div{
+    display:table-cell;
+    vertical-align:middle;
+}
+.club-info{
+	width: 100%;
+	margin-top: 20px;
+}
+.club-info-box{
+	width: 73%;
+	text-align: left;
+	margin: 0 auto;
+}
+.modal-btn-box{
+	width: 80%;
+	text-align: right;
+	margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+/*----------------- club-detail -----------------*/
 /* The sidebar menu */
 .sidenav-right {
     width: 18%;
@@ -46,6 +127,26 @@
 .side-box{
     margin: 0 auto;
 }
+.center-div{
+    width: 55%;
+    margin: 0 auto;
+}
+
+/* absolute */
+.right-absolute{
+  right: 0px;
+  top: 700px;
+  position: absolute;
+  background-color: orange;
+}
+
+/* absolute */
+.left-absolute{
+  left: 0px;
+  top: 700px;
+  position: absolute;
+  background-color: orange;
+}
 
 
 
@@ -68,21 +169,8 @@
 
 
 
-/* 클럽 리스트 */
-#club-list{
-	width: 90%;
-	overflow: hidden;
-}
-#club-input{
-	border-radius: 15px;
-}
-#club-input:focus{
-	outline: none;
-}
-
-
-/*리뷰모달*/
-.chat-wrap{
+/*채팅모달*/
+.modal-wrap{
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.21);
@@ -114,8 +202,6 @@
     width: 250px;
     overflow: hidden;
 }
-
-
 
 
 
@@ -196,21 +282,3 @@
 
 
 
-
-
-
-
-
-
-/* 고정하는 class */
-.flex-space-between{
-    display: flex;
-    justify-content: space-between;
-}
-
-/* absolute */
-.box-absolute {
-  right: 0px; top: 700px;
-  position: absolute;
-  background-color: orange;
-}

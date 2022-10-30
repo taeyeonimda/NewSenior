@@ -71,8 +71,9 @@ public class ClubController {
 		int result = service.insertClub(c);
 		return "redirect:/clubList.do";
 	}
+	
 	@RequestMapping(value = "/clubDetail.do")
-	public String classDetail(int clubNo, Model model){
+	public String clubDetail(int clubNo, Model model){
 		Club c = service.selectOneClub(clubNo);
 		System.out.println(c);
 		model.addAttribute("c", c);
@@ -107,5 +108,11 @@ public class ClubController {
 		return new Gson().toJson(filepath);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/selectOneClub.do", produces = "application/json;charset=utf-8")
+	public String selectOneClub(int clubNo){
+		Club c = service.selectOneClub(clubNo);
+		return new Gson().toJson(c);
+	}
 	
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="club">
 	<insert id="insertClub" parameterType="c">
-		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg })
+		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg }, #{clubIntro })
 	</insert>
 	<select id="selectAllClub" resultType="c">
 		select
@@ -11,7 +11,8 @@
 			club_category as clubCategory,
 			club_limit as clubLimit,
 			club_Leader as clubLeader,
-			filepath as clubMainImg
+			filepath as clubMainImg,
+			club_intro as clubIntro
 		from clubs
 		<!-- 세션 들어오면 category로 if문 추가 예정 -->
 	</select>
@@ -22,11 +23,12 @@
 			club_category as clubCategory,
 			club_limit as clubLimit,
 			club_Leader as clubLeader,
-			filepath as clubMainImg
+			filepath as clubMainImg,
+			club_intro as clubIntro
 		from clubs
 		where club_no = #{clubNo }
 	</select>
 	<insert id="insertChat" parameterType="cr">
-		insert into chat_record values (chat_record_seq.nextval, #{chatClub }, #{chatMember }, #{chatContent }, to_char(sysdate, 'yyyy-mm-dd'), #{filepath })
+		insert into chat_record values (chat_record_seq.nextval, #{chatClub }, #{chatMember }, #{chatContent }, to_char(sysdate, 'yyyy-mm-dd'), #{filepath } )
 	</insert>
 </mapper>

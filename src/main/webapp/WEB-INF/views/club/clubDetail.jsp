@@ -171,7 +171,7 @@
         </div>
         </div> <!-- 넓이제한-->
     </div><!--page-content End-->
-<div class="chat-wrap">
+<div class="modal-wrap">
     <div class="modal-chat">
         <div class="modal-top">
             <h1>동호회 채팅</h1>
@@ -206,17 +206,15 @@
 	<script>
     function stopSide(){
         const position  = $(window).scrollTop();
-        console.log(position);
-        let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
+        console.log("p:"+position);
         let windowHeight = window.innerHeight; // 스크린 창
-        let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
-        if(position > fullHeight){
-            console.log(fullHeight);
-            $(".sidenav-left").addClass("box-absolute");
-            $(".sidenav-right").addClass("box-absolute");
+        console.log("wH:"+windowHeight);
+        if(position > windowHeight){
+            $(".sidenav-left").addClass("left-absolute");
+            $(".sidenav-right").addClass("right-absolute");
         }else{
-        	$(".sidenav-left").removeClass("box-absolute");
-        	$(".sidenav-right").removeClass("box-absolute");
+        	$(".sidenav-left").removeClass("left-absolute");
+        	$(".sidenav-right").removeClass("right-absolute");
         }
     }
     $(window).on("scroll",function(){
@@ -237,7 +235,7 @@
     function closeModal() {
     	endChat();
     	$(".chatting").hide();
-    	$(".chat-wrap").css("display", "none");
+    	$(".modal-wrap").css("display", "none");
 	}
     
 	// 웹소켓 객체를 저장할 변수
@@ -249,7 +247,7 @@
 	function initChat(param) {
 		memberId = param;
 		// 웹소켓 연결 시도
-		ws = new WebSocket("ws://192.168.123.103/chat.do");
+		ws = new WebSocket("ws://172.30.1.65/chat.do");
 		// 웹소켓 연결 성공 시 실행할 함수 지정
 		ws.onopen = startChat;
 		// 서버에서 데이터 받으면 처리할 함수

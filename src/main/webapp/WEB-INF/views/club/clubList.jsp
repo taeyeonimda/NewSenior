@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+    <link href="/resources/css/club/club-detail.css" rel="stylesheet">
 <title>동호회</title>
 </head>
 <body>
@@ -26,17 +27,56 @@
         </div>
 		<div id="club-list" style="width: 80%; margin: 0 auto; overflow: hidden;" class="mt-5">
 			<c:forEach items="${list }" var="c">
-				<div style="width: 400px; text-align: center; margin-bottom: 20px; border: 1px solid #eee; float: left;">
+				<div onclick="clubInfoModal(${c.clubNo });" style="width: 400px; text-align: center; margin-bottom: 20px; border: 1px solid #eee; float: left;">
 					<h4 class="mb-3">${c.clubName }</h4>
 					<p>참여인원수 : <span></span> / <span>${c.clubLimit }</span></p>
-					<a href="/clubDetail.do?clubNo=${c.clubNo}">동호회로 이동</a>
+					<a href="/clubDetail.do?clubNo=${c.clubNo}">들어가기</a>
 				</div>
 			</c:forEach>
 		</div>
-
 	</div> <!-- pageContent End -->
-<%@include file="/WEB-INF/views/common/footer.jsp" %>
+<div class="modal-wrap">
+    <div class="club-info-modal">
+    	<div class="modal-title">
+	        <div class="modal-img-div">
+	            <img src="/resources/upload/club/107900148.png" class="modal-img">
+	        </div>
+	    </div>
+        <div class="club-info">
+            <div class="club-info-box">
+            	<h3 class="mb-3"></h3>
+            	<p></p> 
+            </div>
+            <div class="modal-btn-box">
+            	<button onclick="closeModal();" class="btn btn-primary">닫기</button>
+            	<a href="/" class="btn btn-primary">입장하기</a>
+            </div>
+        </div>
+    </div>
+</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    
+    <script>
+    	function clubInfoModal(clubNo) {
+			console.log(clubNo);
+			$.ajax({
+				url:"/selectOneClub.do",
+				data:{clubNo:clubNo},
+				success:function(one){
+					const clubName = $(".club-info-box>h3");
+					const clubContent = $(".club-info-box>p");
+					clubName.text(one.clubName);
+					clubContent.text(one.clubIntro);
+				}
+			});
+			$(".modal-wrap").css("display", "flex");
+		}
+    	
+        function closeModal() {
+        	$(".modal-wrap").css("display", "none");
+    	}
+    </script>
 </body>
 </html>
