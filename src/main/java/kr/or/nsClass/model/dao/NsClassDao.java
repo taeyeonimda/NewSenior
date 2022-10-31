@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Member;
+import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Repository
@@ -24,5 +25,25 @@ public class NsClassDao {
 	public int selectClassCnt() {
 		int totalCount = sqlSession.selectOne("nsClass.totalCount");
 		return totalCount;
+	}
+
+	public int insertClass(NsClass nsCl) {
+		int result = sqlSession.insert("nsClass.insertClass",nsCl);
+		return result;
+	}
+
+	public int insertFile(FileVo fileVo) {
+		int result = sqlSession.insert("nsClass.insertFile",fileVo);
+		return result;
+	}
+
+	public int selectClassNo() {
+		int result = sqlSession.selectOne("nsClass.selectClassNo");
+		return result;
+	}
+
+	public ArrayList<String> getAllCategory() {
+		List list = sqlSession.selectList("nsClass.getAllCategory");
+		return (ArrayList<String>)list;
 	}
 }

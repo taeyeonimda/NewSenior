@@ -5,10 +5,10 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.member.model.vo.Member;
-import kr.or.member.model.vo.MemberPageData;
 import kr.or.nsClass.model.dao.NsClassDao;
+import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 import kr.or.nsClass.model.vo.NsClassPageData;
 
@@ -82,5 +82,29 @@ public class NsClassService {
 				NsClassPageData npd = new NsClassPageData(list, pageNavi, reqPage, numPerPage);
 				return npd;
 
+	}
+
+	@Transactional
+	public int insertClass(NsClass nsCl) {
+		int result = dao.insertClass(nsCl);
+	System.out.println("result결과값"+result);
+	System.out.println("nscl넘버값"+nsCl.getClassNo());
+	System.out.println(nsCl);
+		if(result>0) {
+			
+			if(!nsCl.getFileList().isEmpty()) {
+
+				for(FileVo fileVo:nsCl.getFileList()) {
+					System.out.println("클래스넘버:::"+nsCl.getClassNo());
+					fileVo.setClassNo(nsCl.getClassNo());
+					result += dao.insertFile(fileVo);
+				}
+			}
+		}
+		return result;
+	}
+
+	public ArrayList<String> getAllCategory() {
+		return dao.getAllCategory();
 	}
 }

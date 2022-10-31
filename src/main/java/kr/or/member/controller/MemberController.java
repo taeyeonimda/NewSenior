@@ -53,10 +53,7 @@ public class MemberController {
 	public String cart() {
 		return "myPage/cart";
 	}
-	@RequestMapping(value="/classEnroll.do")
-	public String classEnroll() {
-		return "myPage/classEnroll";
-	}
+	
 	@RequestMapping(value="/classMgrAdmin.do")
 	public String classMgrAdmin() {
 		return "myPage/classMgrAdmin";

@@ -49,4 +49,33 @@
 	<select id="totalCount" resultType="int">
 		select count(*) from classes
 	</select>
+	
+	<insert id="insertClass" parameterType="cla">
+		insert into
+		CLASSES
+		values(
+		class_seq.nextval,#{className},#{classTeacher},
+		'0',#{classLimit},3,#{classCategory},#{products},
+		#{startDate},#{endDate},#{filepath},#{teacherIntroduce},
+		#{curriculum})
+		<selectKey resultType="_int" order="AFTER" keyProperty="classNo">
+			select max(class_no) from classes
+		</selectKey>
+	</insert>
+	
+	<insert id="insertFile" parameterType="claF">
+		insert into 
+		class_file
+		values
+		(
+			CLASS_FILENO.nextval,
+			#{classNo},#{filename},#{filepath}
+		)
+	</insert>
+	
+	<select id ="getAllCategory" resultType="string">
+		select column_name 
+		from user_tab_columns 
+		where table_name = 'CATEGORY'
+	</select>
 </mapper>

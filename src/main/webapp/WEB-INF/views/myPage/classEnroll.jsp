@@ -47,96 +47,13 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
+ <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <body>
   <!-- Layout wrapper -->
   <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
       <!-- Menu -->
 
-      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
-       style="top: 30px; display: inline-block; width: 300px; height: 400px;">
-        
-        <ul class="menu-inner py-1">
-
-          <!-- 회원관리 -->
-          <li class="menu-item">
-            <a href="memberMgrAdmin.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">회원 관리</div>
-            </a>
-          </li>
-
-          <!-- 클래스관리 -->
-          <li class="menu-item ">
-            <a href="classMgrTeacher.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">클래스관리(강사페이지)</div>
-            </a>
-          </li>
-          <!-- 클래스등록 -->
-          <li class="menu-item active">
-            <a href="classEnroll.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">클래스 등록</div>
-            </a>
-          </li>
-
-          <!-- 액티비티등록 -->
-          <li class="menu-item ">
-            <a href="activityEnroll.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">액티비티 등록</div>
-            </a>
-          </li>
-
-          <!-- 액티비티관리 -->
-          <li class="menu-item ">
-            <a href="activityMgrAdmin.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">액티비티 관리</div>
-            </a>
-          </li>
-
-          <!-- 상품등록 -->
-          <li class="menu-item ">
-            <a href="goodsEnroll.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">상품 등록</div>
-            </a>
-          </li>
-
-          <!-- 상품관리 -->
-          <li class="menu-item">
-            <a href="goodsMgrAdmin.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">상품 관리</div>
-            </a>
-          </li>
-
-          <!-- Tables -->
-          <li class="menu-item">
-            <a href="classMgrAdmin.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-table"></i>
-              <div data-i18n="Tables">클래스관리(관리자페이지)</div>
-            </a>
-          </li>
-
-          <!-- 장바구니 -->
-          <li class="menu-item ">
-            <a href="cart.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-table"></i>
-              <div data-i18n="Tables">장바구니</div>
-            </a>
-          </li>
-
-          <!-- 마이페이지 -->
-          <li class="menu-item  ">
-            <a href="mypage.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">마이페이지</div>
-            </a>
-          </li>
-        </ul>
-      </aside>
+      <%@include file="/WEB-INF/views/common/aside.jsp" %>
       <!-- / Menu -->
 
         <!-- Layout container -->
@@ -159,113 +76,77 @@
                       <div class="mb-3 row">
                         <label for="html5-text-input" class="col-md-2 col-form-label">클래스명</label>
                         <div class="col-md-10">
-                          <input class="form-control" type="text" id="html5-text-input" />
+                          <input class="form-control" name='className' type="text" id="html5-text-input" />
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                         <div class="col-md-10">
-                          <a href="javascript:void(0)" class="btn btn-outline-primary">첨부파일넣기</a>
+                          <input type="file" name = 'files' class="btn btn-outline-primary">
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-email-input" class="col-md-2 col-form-label">강사명</label>
                         <div class="col-md-10">
-                          <input class="form-control" type="email"  id="html5-email-input" />
+                          <input class="form-control" name = 'teacherName' type="email"  id="html5-email-input" />
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-url-input" class="col-md-2 col-form-label">강사소개</label>
                         <div class="col-md-10">
-                          <input class="form-control" type="url" id="html5-url-input" />
+                          <input class="form-control" name = "teacherIntroduce" type="url" id="html5-url-input" />
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">커리큘럼</label>
                         <div class="col-md-10">
-                          <input class="form-control" type="tel" id="html5-tel-input" />
+                          <input class="form-control" name= "curriculum" type="tel" id="html5-tel-input" />
                         </div>
                       </div>
+                    
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">클래스 상세</label>
                         <div class="col-md-10">
-                          <input class="form-control" type="tel" id="html5-tel-input" />
+                          <input type="file" class="form-control" name="detailFiles" id="html5-tel-input" multiple/>
                         </div>
                       </div>
-
+				
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
-                          <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="시작일 ex) 20221024"/>
+                          <input class="form-control" name = "startDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="시작일 ex) 20221024"/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
-                          <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="종료일 ex) 20221024"/>
+                          <input class="form-control" name ="endDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="종료일 ex) 20221024"/>
                         </div>
                       </div>
 
                       <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리</label>
-                          <div class="btn-group" style="width: 150px;">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              카테고리선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">디지털</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">주식/재테크</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">공예</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">디자인</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">운동/건강</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">패션</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">미디어</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">악기/노래</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">외국어</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">요리/제과제빵</a></li>
-                            </ul>
-                          </div>
+                        <label for="html5-tel-input" class="col-md-2 col-form-label" for="category">카테고리</label>
+                        <select name="category">
+                         <c:forEach items="${category }" var="cate">
+                        	<option value="${cate }">${cate }</option>
+                        </c:forEach>
+                        </select>
+                      </div>
+                      
+                      <div class="mb-3 row">
+                        <label for="html5-tel-input" class="col-md-2 col-form-label" for="classLimit">모집정원</label>
+                        	<select name="classLimit">
+                        		
+                        	</select>
+                        	<script>
+                        	 
+                        	</script>
                       </div>
                       <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">모집정원</label>
-                          <div class="btn-group" style="width: 150px;">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              인원선택
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">1</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">2</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">3</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">4</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">5</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">6</a></li>
-                            </ul>
-                          </div>
+                        <label for="products" class="col-md-2 col-form-label">준비물유무</label>
+                        <select name = "products">
+                        	<option value="1">O</option>
+                        	<option value="0">X</option>
+                        </select>
+                      
                       </div>
-                      <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">준비물유무</label>
-                          <div class="btn-group" style="width: 150px;">
-                            <button
-                              type="button"
-                              class="btn btn-outline-primary dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              준비물유무
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="javascript:void(0);">O</a></li>
-                              <li><a class="dropdown-item" href="javascript:void(0);">X</a></li>
-                            </ul>
-                          </div>
-                      </div>
-                      <a href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
+                      <a id="subBtn" href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
                     </div>
                   </div>
                   
@@ -273,7 +154,129 @@
                   <!-- File input -->
                </div></div></div>
             <!-- / Content -->
+	<script>
+	//인원수 옵션값넣기
+	const limitSelect = $("select[name=classLimit]");
+ 	for(let i=1;i<=30;i++){
+ 		limitSelect.append(
+ 				$('<option>').prop({
+ 					innerHTML: i+'명',
+ 					value: i
+ 				})
+ 				)
+ 	}
+	
+		$("#subBtn").on("click",function(){
+			const className = $("input[name=className]").val();
+			const files = document.querySelector("input[name=files]").files[0];
+			const teacherName = $("input[name=teacherName]").val();
+			const teacherIntroduce = $("input[name=teacherIntroduce]").val();
+			const curriculum =$("input[name=curriculum]").val();
+			const startDate = $("input[name=startDate]").val();
+			const endDate = $("input[name=endDate]").val();
+			const category = $("select[name=category]").val();
+			const classLimit = $("select[name=classLimit]").val();
+			const products = $("select[name=products]").val();
+			
+			const files2 = document.querySelector("input[name=detailFiles]").files;
+		
+			
+			if(className==""){
+				alert("비어있음");
+				return false;
+			}
+			if(files==""){
+				alert("비어있음");
+				return false;
+			}
+			if(teacherName==""){
+				alert("비어있음");
+				return false;
+			}
+			if(teacherIntroduce==""){
+				alert("비어있음");
+				return false;
+			}
+			if(curriculum==""){
+				alert("비어있음");
+				return false;
+			}
+			if(startDate==""){
+				alert("비어있음");
+				return false;
+			}
+			if(endDate==""){
+				alert("비어있음");
+				return false;
+			}
+			
+			if(category==""){
+				alert("비어있음");
+				return false;
+			}
 
+			if(classLimit ==""){
+				alert("비어있음");
+				return false;
+			}
+			
+			if(products==""){
+				alert("비어있음");
+				return false;
+			}
+			
+			
+			console.log("files2::::"+files2)
+			console.log("files2길이::::"+files2.length)
+			
+			var formData = new FormData();
+			formData.append('className',className);
+			formData.append('files', files);
+			formData.append('teacherName',teacherName);
+			formData.append('teacherIntroduce',teacherIntroduce);
+			formData.append('curriculum',curriculum);
+			formData.append('startDate',startDate);
+			formData.append('endDate',endDate);
+			formData.append('classCategory',category);
+			formData.append('classLimit',classLimit);
+			formData.append('products',products);
+			for(let i=0;i<files2.length;i++){
+				formData.append('detailFiles',files2[i]);
+			}
+			
+
+			
+			
+		
+			
+			
+			
+			console.log(formData.get("className"));
+			console.log(formData.get("files"));
+			console.log(formData.get("teacherName"));
+			console.log(formData.get("teacerIntroduce"));
+			console.log(formData.get("curriculum"));
+			console.log(formData.get("startDate"));
+			console.log(formData.get("endDate"));
+			console.log(formData.get("category"));
+			console.log(formData.get("classLimit"));
+			console.log(formData.get("products"));
+			console.log(formData.get("detailFiles"));
+			
+			$.ajax({
+	 			url : "/insertClass.do",
+				type:"post",
+				data: formData,
+				contentType: false,
+	            processData: false,
+	            enctype	: 'multipart/form-data',
+				success:function(data){
+					
+				}
+	 		})//ajax
+			 
+		});
+	</script>
 
 
 
