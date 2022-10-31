@@ -110,4 +110,14 @@ public class MemberService {
 		return result;
 	}
 
+	public Member loginCheckMember(Member m) {
+		
+		return dao.loginCheck(m);
+	}
+
+	public Member selectOneMember(Member m1) {
+		// TODO Auto-generated method stub
+		return dao.selectOneMember(m1);
+	}
+
 }
