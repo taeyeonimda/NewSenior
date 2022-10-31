@@ -69,7 +69,7 @@
             <form action="#">
               <div class="card mb-4" style="width: 60%; float: left;" >
                 <h5 class="card-header">내정보</h5>
-                <div class="card-body">
+                <div class="card-body" style="padding-top: 20px;">
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
                     <div class="col-md-10">
@@ -83,15 +83,21 @@
                     </div>
                   </div>
                   <div class="mb-3 row">
+                    <label for="html5-text-input" class="col-md-2 col-form-label">닉네임</label>
+                    <div class="col-md-10">
+                      <input class="form-control" type="text" id="html5-text-input"value="${member.nickName }" />
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">이메일</label>
                     <div class="col-md-10">
                       <input class="form-control" type="email"  id="html5-email-input" value="${member.memberEmail }"/>
                     </div>
                   </div>
-                  <div class="mb-3 row">
+                  <div class="mb-3 row co_btn">
                     <label for="html5-url-input" class="col-md-2 col-form-label">비밀번호</label>
                     <div class="col-md-10">
-                      <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">비밀번호 변경하기</a></button>
+                      <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #000;" class="co_f1">비밀번호 변경하기</a></button>
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -106,40 +112,24 @@
                       <input class="form-control" type="url" id="html5-url-input" value="${member.memberPhone }"/>
                     </div>
                   </div>
-                <!-- 
-                  관심분야: <select name="favorite" >
-				<option value="n" <c:if test="${member.favorite =='n'}">selected</c:if>>선택안함</option>
-				<option value="dg" <c:if test="${member.favorite =='dg'}">selected</c:if>>디지털</option>
-				<option value="fu" <c:if test="${member.favorite=='fu'}">selected</c:if>>주식/재테크</option>
-				<option value="cr"<c:if test="${member.favorite =='cr'}">selected</c:if>>공예</option>
-				<option value="de" <c:if test="${member.favorite =='de'}">selected</c:if>>디자인</option>
-				<option value="ex" <c:if test="${member.favorite=='ex'}">selected</c:if>>운동/건강</option>
-				<option value="fs" <c:if test="${member.favorite =='fs'}">selected</c:if>>패션</option>
-				<option value="me" <c:if test="${member.favorite =='me'}">selected</c:if>>미디어</option>
-				<option value="so" <c:if test="${member.favorite =='so'}">selected</c:if>>악기/노래</option>
-				<option value="fo" <c:if test="${member.favorite =='fo'}">selected</c:if>>외국어</option>
-				<option value="co" <c:if test="${member.favorite =='co'}">selected</c:if>>요리/제과제빵</option>
-			</select>
-                
-                 -->  
                   
-                  
-                  
-                  
-                  
-                  
-                  
-                  <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">관심분야</label>
-                    <div class="btn-group" style="width: 150px;">
-                      <button
-                        type="button"
-                        class="btn btn-outline-warning dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        관심분야선택
-                      </button>
+                  <div class="mb-3 row" style="flex-wrap: nowrap">
+                    	 <span class="col-md-2 col-form-label" style="margin-right: 10px;">관심분야</span> 
+                    	 <select name="favorite" class="fv_btn" style=" width: 80%; border: 1px solid #ced4da;">
+						<option class="dropdown-item" value="n" <c:if test="${member.favorite =='n'}">selected</c:if>>선택안함</option>
+						<option class="dropdown-item" value="dg" <c:if test="${member.favorite =='dg'}">selected</c:if>>디지털</option>
+						<option class="dropdown-item" value="fu" <c:if test="${member.favorite=='fu'}">selected</c:if>>주식/재테크</option>
+						<option class="dropdown-item" value="cr"<c:if test="${member.favorite =='cr'}">selected</c:if>>공예</option>
+						<option class="dropdown-item" value="de" <c:if test="${member.favorite =='de'}">selected</c:if>>디자인</option>
+						<option class="dropdown-item" value="ex" <c:if test="${member.favorite=='ex'}">selected</c:if>>운동/건강</option>
+						<option class="dropdown-item" value="fs" <c:if test="${member.favorite =='fs'}">selected</c:if>>패션</option>
+						<option class="dropdown-item" value="me" <c:if test="${member.favorite =='me'}">selected</c:if>>미디어</option>
+						<option class="dropdown-item" value="so" <c:if test="${member.favorite =='so'}">selected</c:if>>악기/노래</option>
+						<option class="dropdown-item" value="fo" <c:if test="${member.favorite =='fo'}">selected</c:if>>외국어</option>
+						<option class="dropdown-item" value="co" <c:if test="${member.favorite =='co'}">selected</c:if>>요리/제과제빵</option>
+					 </select>
+                      
+                      <!-- 
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="javascript:void(0);">디지털</a></li>
                           <li><a class="dropdown-item" href="javascript:void(0);">주식/재테크</a></li>
@@ -152,16 +142,17 @@
                           <li><a class="dropdown-item" href="javascript:void(0);">외국어</a></li>
                           <li><a class="dropdown-item" href="javascript:void(0);">요리/제과제빵</a></li>
                         </ul>
+                       -->
                       </div>
                   </div>
 
-                  <button type="button" class="btn btn-outline-warning" style="float: right;"><a href="#" style="color: #FFAB00;">비밀번호 변경하기</a></button>
+                  <button type="button" class="btn btn-outline-warning" style="float: right;"><a href="#"  style="color: #000;"  class="co_f2">내정보 변경하기</a></button>
                 </div>
               </div>
             </form>
               <!-- File input -->
             </div>
-</div>
+		</div>
         <!-- / Content -->
 
 
@@ -177,6 +168,17 @@
     <!-- / Layout wrapper -->
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 
+	<!-- 마이페이지 js 
+	<script type="text/javascript">
+	$(".co_f1").on("mouseenter",function(){
+		$(".co_f1").css("color","#000");
+	});
+	
+	$(".co_f1").on("mouseout",function(){
+		$("co_f1").css("color","#FFAB00");
+	});
+	</script>
+	-->
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
