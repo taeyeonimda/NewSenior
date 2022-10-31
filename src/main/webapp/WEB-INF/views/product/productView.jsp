@@ -13,7 +13,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	    <div class="productContent">
 	    <div><a href="/deleteProduct.do?productNo=${p.productNo}">상품삭제</a></div>
-	    <div><a href="/#">상품수정</a></div>
+	    <div><a href="/updateProduct.do?productNo=${p.productNo }">상품수정</a></div>
         <div class="productWrap">
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
