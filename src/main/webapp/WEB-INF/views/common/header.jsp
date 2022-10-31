@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- Favicon -->
         <link href="/resources/TGbtstr/img/favicon.ico" rel="icon">
 
@@ -32,8 +33,8 @@
         <link href="/resources/TGbtstr/css/styleTG.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- 로그인 모달 css
-        <link href="/resources/css/login/login.css">
-         -->
+        <link href="/resources/css/login/login.css" rel="stylesheet">
+        -->
          <style type="text/css">
          @charset "UTF-8";
 			.detail {
@@ -160,6 +161,7 @@
 			  height: 17px;
 			}
 	</style>
+         
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
@@ -193,11 +195,19 @@
                 
                 <a href="javascript:void(0)" class="nav-item nav-link">공지사항</a>
             </div>
+            <c:choose>
+				<c:when test="${empty sessionScope.m }">
             <div>
                 <a href="javascript:void(0)" class="loginBtn">로그인</a><span> / </span>
-                <a href="javascript:void(0)">회원가입</a>
+                <a href="/joinFrm.do">회원가입</a>
             </div>
-        </div>
+			</c:when>
+			<c:otherwise>
+				<a href="/logout.do">로그아웃</a>/
+				<a href="/mypage.do">마이페이지</a>
+			</c:otherwise>
+			</c:choose>
+       	 </div>
     </nav>
 
 	<!-- 로그인 모달 -->
@@ -208,10 +218,10 @@
       <h1 id="login_header">로그인</h1>
       <hr>
       <div class="login_cont">
-        <form action="#" method="post">
+        <form action="/login.do" method="post" onsubmit="return loginchk();">
           <div>
-            <input type="text" placeholder="아이디를 입력해주세요." class="boxSize_2"><br>
-            <input type="password" placeholder="비밀번호를 입력해주세요." class="boxSize_2"><br>
+            <input type="text" placeholder="아이디를 입력해주세요." class="boxSize_2" name="memberId" style="font-size: 1.3em;"><br>
+            <input type="password" placeholder="비밀번호를 입력해주세요." class="boxSize_2" name="memberPw" style="font-size: 1.3em;"><br>
             <input type="submit" value="로그인" class="boxSize_2 color_g loginBtn_1" style="color:#fff; font-size: 1.3rem;">
           </div>
         </form>
@@ -220,12 +230,12 @@
             <input type="checkbox">로그인 유지
           </div>
           <div>
-            <a href="#" class="c_red txt_d1 fw_8">아이디/비밀번호 찾기</a>
+            <a href="/searchInfoFrm.do" class="c_red txt_d1 fw_8" >아이디/비밀번호 찾기</a>
           </div>
         </div>
         <h3 class="txt_3">SNS계정으로 간편하게 로그인하세요.</h3>
         <div><span>카카오로그인</span>/<span>네이버로그인</span></div>
-        <div><input type="button" value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1.3rem;"></div>
+        <div><a href="/joinFrm.do"><input type="button" value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1.3rem;"></a></div>
       </div>
     </div>
   </div>
@@ -261,6 +271,20 @@
       $(".popup_bg00").stop().fadeOut();
       $(".popup00.personal_pop00").stop().fadeOut();
       $("body").removeClass("bg_g");
+    }
+    
+    function loginchk(){
+    	const memberId = $("[name=memberId]").val();
+    	const memberPw = $("[name=memberPw]").val();
+    	
+    	if(memberId == "" || memberEmail == ""){
+    		alert("아이디와 비밀번호를 입력해주세요.");
+    		return false;
+    	}else{
+    		return true;
+    	}
+    	
+    	
     }
     </script>
     

@@ -31,6 +31,19 @@ public class MemberDao {
 		int result = sqlSession.update("member.changeLevel",m);
 		return result;
 	}
+	// 로그인
+	public Member loginCheck(Member m) {
+		Member member = sqlSession.selectOne("member.selectLogin",m);
+		return member;
+	}
+	
+	//마이페이지 가기
+	public Member selectOneMember(Member m1) {
+		System.out.println("m1:"+m1);
+		Member member = sqlSession.selectOne("member.selectOneMember",m1);
+		System.out.println("member:"+member);
+		return member;
+	}
 
 	
 }
