@@ -9,7 +9,7 @@ $("#minus").on("click",function(){
      	alert("돌아가");
     	return;
     }
-    const minusQty = Number(buyQty)-1;
+    const minusQty = Number(buyQty)-1; 
     Qty.text(minusQty);
     const amount = Qty.text(minusQty);
     sumPrice = price * minusQty;
