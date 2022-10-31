@@ -54,4 +54,7 @@
   	from products
   	where product_no = #{_parameter}
   </select>
+  <delete id="deleteProduct" parameterType="_int">
+  	delete from products where product_no = #{_parameter}
+  </delete>
 </mapper>

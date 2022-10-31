@@ -12,12 +12,12 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	    <div class="productContent">
+	    <div><a href="/deleteProduct.do?productNo=${p.productNo}">상품삭제</a></div>
+	    <div><a href="/#">상품수정</a></div>
         <div class="productWrap">
-        
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
             </div>
-            
             <div style="width: 500px;" class="prodContent">
                 <h3>${p.productName }</h3>
                 <h4>${p.wonPrice }<span>원</span></h4>
@@ -64,7 +64,11 @@
             <div>
             <div class="detailContentWrap prodContentMenu">
               <div class="detailContent">상품필수정보</div>
+              	<div>
+              		${p.productContent }
+              	</div>
               <div class="detailContentBox">
+              	
                 <div>
                   <div class="BoxSub">원산지</div>
                   <div>대한민국</div>

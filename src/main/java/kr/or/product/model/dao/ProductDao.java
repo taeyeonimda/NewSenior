@@ -44,4 +44,10 @@ public class ProductDao {
 		return sqlSession.selectOne("product.productView",productNo);
 	}
 
+	public int deleteProduct(int productNo) {
+		return sqlSession.delete("product.deleteProduct",productNo);
+	}
+
+	
+
 }
