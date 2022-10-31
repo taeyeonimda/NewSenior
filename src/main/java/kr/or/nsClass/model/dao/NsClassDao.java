@@ -20,9 +20,13 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.getAllClass",map);
 		return (ArrayList<NsClass>)list;
 	}
-	
 	public int selectClassCnt() {
 		int totalCount = sqlSession.selectOne("nsClass.totalCount");
 		return totalCount;
+	}
+	
+	public ArrayList<NsClass> selectAllClass() {
+		List list = sqlSession.selectList("nsClass.selectAllClass");
+		return (ArrayList<NsClass>)list;
 	}
 }

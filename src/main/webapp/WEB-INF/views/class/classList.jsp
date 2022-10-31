@@ -50,11 +50,12 @@
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
-                <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
+            <c:forEach items="${claList }" var="cla">
+            	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid class-img" src="/resources/MAINbtstr/img/클래스 (2).jpg" alt="">
+                        <img class="img-fluid class-img" src="/resources/MAINbtstr/img/${cla.filepath }" alt="">
                         <div class="portfolio-text">
-                            <h4 class="text-white mb-4">Pruning plants</h4>
+                            <h4 class="text-white mb-4">${cla.className }</h4>
                             <div class="d-flex">
                                 <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/MAINbtstr/img/클래스 (2).jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
@@ -62,6 +63,8 @@
                         </div>
                     </div>
                 </div>
+            </c:forEach>
+            
                 <div class="col-lg-4 col-md-6 portfolio-item dg wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded">
                         <img class="img-fluid class-img" src="/resources/MAINbtstr/img/클래스 (2).jpg" alt="">

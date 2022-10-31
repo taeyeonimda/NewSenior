@@ -49,4 +49,20 @@
 	<select id="totalCount" resultType="int">
 		select count(*) from classes
 	</select>
+	
+	<select id="selectAllClass" resultType="cla">
+		select  
+			class_no as classNo,
+			class_name as className,
+			class_teacher as classTeacher,
+			class_price as classPrice,
+			class_limit as classLimit,
+			class_status as classStatus,
+			class_category as classCategory,
+			products,
+			start_date as startDate,
+			end_date as endDate,
+			filepath
+		from classes
+	</select>
 </mapper>

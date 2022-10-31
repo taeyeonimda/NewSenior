@@ -83,4 +83,8 @@ public class NsClassService {
 				return npd;
 
 	}
+
+	public ArrayList<NsClass> selectAllClass() {
+		return dao.selectAllClass();
+	}
 }
