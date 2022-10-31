@@ -20,7 +20,7 @@
             <div style="width: 500px;" class="prodContent">
                 <h3>${p.productName }</h3>
                 <h4>${p.wonPrice }<span>원</span></h4>
-                <input type="hidden" class="hiddenPrice" value=${p.wonPrice }>
+                <input type="hidden" class="hiddenPrice" value=${p.productPrice }>
                 <p>배송비-무료</p>
                 
                 <h6>클래스 종합키트</h6>
@@ -41,7 +41,7 @@
                     </div>
                     <div style="width: 300px;">
                     	<input type="text" class="sumPrice" 
-                    	value="${p.wonPrice }" readonly
+                    	value="${p.productPrice }" readonly
                     	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center; background-color:beige;">
                     	<span style="font-size: 14px; margin: 0;">원</span>
                    	</div>
