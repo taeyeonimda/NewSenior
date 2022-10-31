@@ -10,7 +10,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
     <!-- page Content 시작-->
-    <div class="page-content rounded">
+    <div class="page-content">
         <!-- sideBar-right 회원 목록 /  채팅하기 버튼 -->
         <div class="sidenav-right bg-white rounded p-sm-5 wow fadeIn">
             <div class="side-box rounded mt-2">
@@ -77,7 +77,7 @@
                     <div class="row g-5 flex-space-between">
                         <div class="wow fadeInUp flex-space-between" data-wow-delay="0.1s">
                             <p class="fs-5 fw-bold text-primary">동호회 게시판</p>
-                            <button class="btn btn-primary py-2 px-4" id="club-boardFrm-btn">글쓰기</button>
+                            <button class="btn btn-primary py-2 px-4" onclick="boardModal();">글쓰기</button>
                         </div>
                     </div>
                 </div>
@@ -88,48 +88,64 @@
 		    <c:forEach items="${cbList }" var="cb">
 		    <div class="container-xxl py-5" style="border: 1px solid #eee">
                 <div class="container class-container">
-                    <div class="row g-5 align-items-end">
-                        <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="row align-items-end">
+                        <div class="col-md-7 wow fadeInUp" data-wow-delay="0.3s">
                             <p class="text-primary">${cb.clubBoardWriter }</p>
                             <p class="mb-4">${cb.clubBoardDate }</p>
                             <p class="mb-4">${cb.clubBoardContent }</p>
                         </div>
                     </div>
+                    <div class="inputCommentBox">
+                    	<form action="/insertClubComment.do" method="post">
+                    		<input type="hidden" name="clubNo">
+                    		<input type="hidden" name="clubBoardNo">
+                    		<input type="hidden" name="clubComWriter">
+                    		<textarea name="clubComContent" style="width:80%;"></textarea><button width="20%" class="btn btn-primary py-2 px-4">등록</button>
+                    	</form>
+                    </div>
+                    <div class="commentBox">
+                    	<ul class="posting-comment">
+							<li>
+								<span class="comment-profil">프로필</span>				
+							</li>
+							<li>
+								<p class="comment-info">
+									<span>댓글작성자</span>
+									<span>댓글작성일</span>
+								</p>
+								<p class="comment-content">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
+								<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+								<p class="comment-link">
+									<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
+									<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
+									<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
+									<a href="javascript:void(0)" class="recShow">답글달기</a>
+								</p>
+							</li>
+						</ul>
+						<div class="inputRecommentBox">
+							<form action="/insertComment.do">
+								<ul>
+									<li>
+										<span class="material-icons">ㅁ</span>
+									</li>
+									<li>
+										<input type="hidden" name="ncWriter" value="clubNo">
+										<input type="hidden" name="noticeRef" value="clubNo">
+										<input type="hidden" name="ncRef" value="clubNo">
+										<textarea class="input-form" name="bcContent"></textarea> 
+									</li>
+									<li>
+										<button type="submit" class="btn bc1 bs4">등록</button>
+									</li>
+								</ul>
+							</form>
+						</div>
+                    </div>
                 </div>
             </div>
 		    </c:forEach>
 		    <!-- 회원 게시글 End -->
-
-	        <!-- 댓글 -->
-	        <div class="container-xxl py-5">
-	            <div class="container">
-	                <div class="row g-5">
-	                </div>
-	                <hr>
-	                <div class="row">
-	                    <div class="profil-title">
-	                        <div class="profil-img-div">
-	                            <img src="img/person_1.jpg" class="profil-img">
-	                        </div>
-	                        <div class="profil-info-div">
-	                            <div>
-	                                ★★★★★
-	                            </div>
-	                            <div>
-	                                닉네임
-	                            </div>
-	                            <div>
-	                                작성일
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div >
-	                        <div>컨텡층ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-	                        <div>수정 / 삭제</div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
         </div> <!-- 넓이제한-->
     </div><!--page-content End-->
 <div class="modal-wrap">
@@ -160,11 +176,35 @@
         </div>
     </div>
 </div>
-	
+<div class="write-modal-wrap">
+    <div class="modal-write">
+        <div class="writeModalTop">
+            <h1>글쓰기</h1>
+            <div>작성자</div>
+        </div>
+        <div class="writeModalContent">
+        <form action="/clubBoardWrite.do" method="post" enctype="multipart/form-data">
+			<div class="writeModalInputBox">
+				<input type="hidden" name="clubNo" value="${c.clubNo }">
+				<input type="hidden" name="memberNo" value="4">
+				<textarea name="clubBoardContent"></textarea><br>
+				<input type="file" multiple name="files"><br>
+			</div>
+			<div class="writeModalButtonBox">
+				<button class="btn btn-primary py-2 px-4" type="submit">글쓰기</button><button type="button" class="btn btn-primary py-2 px-4" onclick="closeWriteModal();">닫기</button>
+			</div>
+		</form>
+        </div>
+    </div>
+</div>
+
+
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 	<script>
+	
+	// side bar 스크롤
     function stopSide(){
         const position  = $(window).scrollTop();
         console.log("p:"+position);
@@ -188,6 +228,15 @@
     
     
     
+    // 글쓰기 버튼
+    function boardModal() {
+    	$(".write-modal-wrap").css("display", "flex");
+	}
+    function closeWriteModal() {
+    	$(".write-modal-wrap").css("display", "none");
+	}
+    
+    
     // 채팅모달
     function openModal() {
     	$("#member-box").show();
@@ -208,7 +257,7 @@
 	function initChat(param) {
 		memberId = param;
 		// 웹소켓 연결 시도
-		ws = new WebSocket("ws://192.168.123.103/chat.do");
+		ws = new WebSocket("ws://192.168.10.55/chat.do");
 		// 웹소켓 연결 성공 시 실행할 함수 지정
 		ws.onopen = startChat;
 		// 서버에서 데이터 받으면 처리할 함수
