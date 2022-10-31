@@ -157,7 +157,7 @@
 
               <!-- HTML5 Inputs -->
             <form action="/insertProduct.do" method="post" enctype="multipart/form-data">
-              <div class="card mb-4" style="width: 80%; float: left;">
+              <div class="card mb-4" style="width: 60%; float: left;">
                 <h5 class="card-header" style="text-align: center;">상품 등록하기</h5>
                 <div class="card-body">
                   <div class="mb-3 row" style="margin-top: 10px;">
@@ -242,7 +242,7 @@
                   <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">상품소개</label>
                     <div class="col-md-10">
-                      <textarea class="form-control" name="productContent" id="productContent"></textarea>
+                      <textarea class="form-control" name="productContent" id="productContent" style="height: 300px;"></textarea>
                       <!-- <input class="form-control" type="email"  id="html5-email-input" /> -->
                     </div>
                   </div>
