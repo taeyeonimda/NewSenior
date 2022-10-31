@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>동호회 상세</title>
     <link href="/resources/css/club/club-detail.css" rel="stylesheet">
+    <!-- 구글 아이콘 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -85,67 +87,88 @@
             <!-- 글쓰기 버튼 구역 End -->
 
             <!-- 회원 게시글 -->
-		    <c:forEach items="${cbList }" var="cb">
-		    <div class="container-xxl py-5" style="border: 1px solid #eee">
-                <div class="container class-container">
-                    <div class="row align-items-end">
-                        <div class="col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-primary">${cb.clubBoardWriter }</p>
-                            <p class="mb-4">${cb.clubBoardDate }</p>
-                            <p class="mb-4">${cb.clubBoardContent }</p>
-                        </div>
-                    </div>
-                    <div class="inputCommentBox">
-                    	<form action="/insertClubComment.do" method="post">
-                    		<input type="hidden" name="clubNo">
-                    		<input type="hidden" name="clubBoardNo">
-                    		<input type="hidden" name="clubComWriter">
-                    		<textarea name="clubComContent" style="width:80%;"></textarea><button width="20%" class="btn btn-primary py-2 px-4">등록</button>
-                    	</form>
-                    </div>
-                    <div class="commentBox">
-                    	<ul class="posting-comment">
-							<li>
-								<span class="comment-profil">프로필</span>				
-							</li>
-							<li>
-								<p class="comment-info">
-									<span>댓글작성자</span>
-									<span>댓글작성일</span>
-								</p>
-								<p class="comment-content">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
-								<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
-								<p class="comment-link">
-									<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
-									<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
-									<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
-									<a href="javascript:void(0)" class="recShow">답글달기</a>
-								</p>
-							</li>
-						</ul>
-						<div class="inputRecommentBox">
-							<form action="/insertComment.do">
-								<ul>
-									<li>
-										<span class="material-icons">ㅁ</span>
-									</li>
-									<li>
-										<input type="hidden" name="ncWriter" value="clubNo">
-										<input type="hidden" name="noticeRef" value="clubNo">
-										<input type="hidden" name="ncRef" value="clubNo">
-										<textarea class="input-form" name="bcContent"></textarea> 
-									</li>
-									<li>
-										<button type="submit" class="btn bc1 bs4">등록</button>
-									</li>
-								</ul>
-							</form>
-						</div>
-                    </div>
-                </div>
-            </div>
-		    </c:forEach>
-		    <!-- 회원 게시글 End -->
+            <c:choose>
+            	<c:when test="${empty cbList }">
+	           		<div class="container-xxl py-5" style="border: 1px solid #eee">
+			        	<div class="container">
+			        	<h3>게시글이 없습니다</h3>
+			        	<p> 재미있는 게시글로 동호회 멤버들과 소통해 보세요 </p>
+			        	<a onclick="boardModal();" class="btn btn-primary py-2 px-4">지금바로 작성하기</a>
+			        	</div>
+			        </div>
+            	</c:when>
+            	<c:when test="${not empty cbList }">
+            		<c:forEach items="${cbList }" var="cb">
+					    <div class="container-xxl py-5 club-container">
+			                <div class="container wow fadeInUp" data-wow-delay="0.05s"">
+			                    <div class="row align-items-end club-board-div">
+			                        <div class="col-md-7 ml-20">
+			                            <p class="text-primary">${cb.clubBoardWriter }</p>
+			                            <p class="mb-4">${cb.clubBoardDate }</p>
+			                            <c:if test="${not empty cb.clubBoardFilepath }">
+			                        		<div class="clubBoardTitle">
+			                        			<div class="clubBoardImgBox">
+			                        				<img class="clubBoardImg" src="/resources/upload/club/${cb.clubBoardFilepath } ">
+			                        			</div>
+			                        		</div>
+			                        	</c:if>
+			                            <p class="mb-4">${cb.clubBoardContent }</p>
+			                        </div>
+			                    </div>
+			                    <div class="inputCommentBox">
+			                    	<form action="/insertClubComment.do" method="post">
+			                    		<input type="hidden" name="clubNo">
+			                    		<input type="hidden" name="clubBoardNo">
+			                    		<input type="hidden" name="clubComWriter">
+			                    		<textarea name="clubComContent" style="width:80%;"></textarea><button width="20%" class="btn btn-primary py-2 px-4">등록</button>
+			                    	</form>
+			                    </div>
+			                    <div class="commentBox">
+			                    	<ul class="posting-comment">
+										<li>
+											<span class="comment-profil">프로필</span>				
+										</li>
+										<li>
+											<p class="comment-info">
+												<span>댓글작성자</span>
+												<span>댓글작성일</span>
+											</p>
+											<p class="comment-content">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
+											<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+											<p class="comment-link">
+												<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
+												<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
+												<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
+												<a href="javascript:void(0)" class="recShow">답글달기</a>
+											</p>
+										</li>
+									</ul>
+									<div class="inputRecommentBox">
+										<form action="/insertClubRecomment.do" method="post">
+											<ul>
+												<li>
+													<span class="material-symbols-outlined">subdirectory_arrow_right</span>
+												</li>
+												<li>
+													<input type="hidden" name="ncWriter" value="clubNo">
+													<input type="hidden" name="noticeRef" value="clubNo">
+													<input type="hidden" name="ncRef" value="clubNo">
+													<textarea name="clubComContent"></textarea> 
+												</li>
+												<li>
+													<button type="submit" class="btn bc1 bs4">등록</button>
+												</li>
+											</ul>
+										</form>
+									</div>
+			                    </div>
+			                </div>
+			            </div>
+				    </c:forEach>
+	    			<!-- 회원 게시글 End -->
+            	</c:when>
+            </c:choose>
+
         </div> <!-- 넓이제한-->
     </div><!--page-content End-->
 <div class="modal-wrap">
