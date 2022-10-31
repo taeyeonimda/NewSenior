@@ -11,15 +11,17 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	
 	    <div class="productContent">
         <div class="productWrap">
+        
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
             </div>
+            
             <div style="width: 500px;" class="prodContent">
                 <h3>${p.productName }</h3>
                 <h4>${p.wonPrice }<span>원</span></h4>
+                <input type="hidden" class="hiddenPrice" value=${p.productPrice }>
                 <p>배송비-무료</p>
                 
                 <h6>클래스 종합키트</h6>
@@ -34,21 +36,25 @@
                 </div>
                 <div class="productQty">
                     <div style="width: 200px;">
-                        <span class="material-icons" id="minus">
-                            remove
-                        </span>
+                        <span class="material-icons" id="minus">remove</span>
                         <span class="productBuyQty">1</span>
-                        <span class="material-icons" id="plus">
-                            add
-                        </span>
+                        <span class="material-icons" id="plus">add</span>
                     </div>
-                    <div style="width: 300px;"><span style="font-weight: bold; margin: 0;">${p.wonPrice }</span><span style="font-size: 14px; margin: 0;">원</span></div>
+                    <div style="width: 300px;">
+                    	<input type="text" class="sumPrice" 
+                    	value="${p.productPrice }" readonly
+                    	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center; background-color:beige;">
+                    	<span style="font-size: 14px; margin: 0;">원</span>
+                   	</div>
                 </div>
+                <input type="hidden"  ${p.productName } ${p.wonPrice } ${p.productPrice } >
                 <div>
-                  <button>장바구니</button>
+                  <button type="button" onclick="insertCart();">장바구니</button>
                   <button>바로구매</button>
                 </div>
             </div>
+            
+            
             <div class="subTitle" style="width: 1200px;">
               <div>상세내용</div>
               <div>리뷰</div>
@@ -104,7 +110,7 @@
                         <span class="show-score">0</span>
                         <span>점</span>
                     </div>
-                    </p>
+                    
                   </div>
                 </div>
               </form>
@@ -169,5 +175,6 @@
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
+
 </body>
 </html>
