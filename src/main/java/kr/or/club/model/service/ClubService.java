@@ -46,4 +46,8 @@ public class ClubService {
 		map.put("board", blist);
 		return map;
 	}
+
+	public int insertClubBoard(ClubBoard cb) {
+		return dao.insertClubBoard(cb);
+	}
 }

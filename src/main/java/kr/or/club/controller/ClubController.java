@@ -89,7 +89,7 @@ public class ClubController {
 
 	@ResponseBody
 	@RequestMapping(value="/UploadFile.do",produces = "application/json;charset=utf-8")
-	public String fileNames(MultipartFile[] chatFile, HttpServletRequest request) {
+	public String uploadChatFile(MultipartFile[] chatFile, HttpServletRequest request) {
 		String filepath = null;
 		if(!chatFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/chat/");
@@ -121,5 +121,36 @@ public class ClubController {
 		Club c = service.selectOneClub(clubNo);
 		return new Gson().toJson(c);
 	}
+	@RequestMapping(value = "/clubBoardWrite.do")
+	public String clubBoardWrite(ClubBoard cb, MultipartFile[] files, HttpServletRequest request) {
+		System.out.println(files);
+		if(!files[0].isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/club/");
+			for(MultipartFile file : files) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					try {
+						byte[] bytes = file.getBytes();
+						bos.write(bytes);
+						bos.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				cb.setClubBoardFilepath(filepath);
+			}// for문 종료
+		}
+		int result = service.insertClubBoard(cb);
+		return "redirect:/clubDetail.do?clubNo="+cb.getClubNo();
+	}
+	
+	
 	
 }
