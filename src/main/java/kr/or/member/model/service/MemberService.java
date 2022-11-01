@@ -120,4 +120,9 @@ public class MemberService {
 		return dao.selectOneMember(m1);
 	}
 
+	public int updateMember(Member member) {
+		// TODO Auto-generated method stub
+		return  dao.updateMember(member);
+	}
+
 }

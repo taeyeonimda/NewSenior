@@ -74,7 +74,7 @@
 		 member_grade as memberGrade,
 		 member_birth as memberBirth,
 		 enroll_date as memberDate,
-		 nickName as memberNickname,
+		 nickName as nickname,
 		 member_state as memberState,
 		 member_img as memberImg,
 		 favorite
@@ -100,4 +100,12 @@
 	 </if>
 	</select>
 	
+	<update id="updateMember" parameterType="m">
+		update
+		members
+		set
+		member_email=#{memberEmail}, member_phone=#{memberPhone}, favorite=#{favorite}, nickName = #{nickName}
+		where
+		member_id=#{memberId}
+	</update>
 </mapper>

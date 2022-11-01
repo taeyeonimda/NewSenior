@@ -45,5 +45,10 @@ public class MemberDao {
 		return member;
 	}
 
+	public int updateMember(Member member) {
+		int result = sqlSession.update("member.updateMember",member);
+		return result;
+	}
+
 	
 }

@@ -104,5 +104,24 @@ public class MemberController {
 				return "redirect:/";
 			}
 		}
+		
+		
+		//마이페이지 내정보수정하기
+		@RequestMapping(value = "/mypageUpdate.do")
+		public String mypageUpdate(Member member, @SessionAttribute Member m) {
+			System.out.println("controller로 넘어온 member값: "+member);
+			int result = service.updateMember(member);
+			if (result > 0) {
+				m.setMemberPhone(member.getMemberPhone());
+				m.setMemberEmail(member.getMemberEmail());
+				m.setFavorite(member.getFavorite());
+				m.setMemberBirth(member.getMemberBirth());
+				m.setNickName(member.getNickName());
+				System.out.println("디비 거치고 온 member값: "+member);
+				return "redirect:/mypage.do";
+			} else {
+				return "redirect:/";
+			}
+		}
 
 }

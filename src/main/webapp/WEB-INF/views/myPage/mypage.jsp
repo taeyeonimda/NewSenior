@@ -66,32 +66,32 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <!-- HTML5 Inputs -->
-            <form action="#">
+            <form action="/mypageUpdate.do">
               <div class="card mb-4" style="width: 60%; float: left;" >
                 <h5 class="card-header">내정보</h5>
                 <div class="card-body" style="padding-top: 20px;">
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input" value="${member.memberName }" readonly/>
+                      <input class="form-control" type="text" id="html5-text-input" value="${member.memberName }" readonly name="memberName"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">아이디</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input"value="${member.memberId }" readonly/>
+                      <input class="form-control" type="text" id="html5-text-input"value="${member.memberId }" readonly name="memberId"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">닉네임</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input"value="${member.nickName }" />
+                      <input class="form-control" type="text" id="html5-text-input"value="${member.nickName }" name="nickName"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">이메일</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="email"  id="html5-email-input" value="${member.memberEmail }"/>
+                      <input class="form-control" type="email"  id="html5-email-input" value="${member.memberEmail }" name="memberEmail"/>
                     </div>
                   </div>
                   <div class="mb-3 row co_btn">
@@ -103,13 +103,13 @@
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">생년월일</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" value="${member.memberBirth }"/>
+                      <input class="form-control" type="text" id="html5-url-input" value="${member.memberBirth }" name="memberBirth"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">전화번호</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" value="${member.memberPhone }"/>
+                      <input class="form-control" type="tel" id="html5-url-input" value="${member.memberPhone }" name="memberPhone"/>
                     </div>
                   </div>
                   
@@ -145,8 +145,7 @@
                        -->
                       </div>
                   </div>
-
-                  <button type="button" class="btn btn-outline-warning" style="float: right;"><a href="#"  style="color: #000;"  class="co_f2">내정보 변경하기</a></button>
+                  <button type="submit" class="btn btn-outline-warning" style="float: right; color: #000;">내정보 변경하기</button>
                 </div>
               </div>
             </form>
