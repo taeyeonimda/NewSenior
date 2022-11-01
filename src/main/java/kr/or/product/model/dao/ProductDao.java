@@ -21,9 +21,6 @@ public class ProductDao {
 		return (ArrayList<Product>)list;
 	}
 	
-	
-	
-
 	public int selectProductCount() {
 		return sqlSession.selectOne("product.selectCount");
 	}
