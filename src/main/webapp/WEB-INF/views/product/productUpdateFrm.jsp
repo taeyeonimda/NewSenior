@@ -157,7 +157,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <!-- HTML5 Inputs -->
-            <form action="/insertProduct.do" method="post" enctype="multipart/form-data">
+            <form action="/productUpdate.do" method="post" enctype="multipart/form-data">
               <div class="card mb-4" style="width: 60%; float: left;">
                 <h5 class="card-header" style="text-align: center;">상품 정보수정</h5>
                 <div class="card-body">
@@ -165,6 +165,7 @@
                     <label for="html5-text-input" class="col-md-2 col-form-label">상품명</label>
                     <div class="col-md-10">
                       <input class="form-control" type="text" id="html5-text-input" name="productName" value="${p.productName }"/>
+                      <input type="hidden" name="productNo" value="${p.productNo }">
                     </div>
                   </div>
                   <div class="mb-3 row" style="margin-top: 10px;">
@@ -186,7 +187,7 @@
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
                       <a href="javascript:void(0)" class="btn btn-outline-primary" id="fileUpload">첨부파일넣기</a>
-                      <input type="file" name="productFile" id="productFile" class="productFile" style="display:none;"><span>${p.productFileVO[0].filePath }</span>
+                      <input type="file" name="productFile" id="productFile" class="productFile" style="display:none;"><span class="productFileName">${p.productFileVO[0].fileName }</span>
                     </div>
                   </div>
                   
@@ -243,7 +244,7 @@
                   <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">상품소개</label>
                     <div class="col-md-10">
-                      <textarea class="form-control" name="productContent" id="productContent" style="height: 300px;"></textarea>
+                      <textarea class="form-control" name="productContent" id="productContent" style="height: 300px;">${p.productContent }</textarea>
                       <!-- <input class="form-control" type="email"  id="html5-email-input" /> -->
                     </div>
                   </div>
@@ -282,7 +283,11 @@
 <!-- Footer Start -->
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 <!-- Footer End -->
-	
+	<script>
+	$("#fileUpload").on("click",function(){
+			$(".productFile").click();
+	});
+	</script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>

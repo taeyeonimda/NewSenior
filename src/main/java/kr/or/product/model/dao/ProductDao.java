@@ -52,6 +52,16 @@ public class ProductDao {
 		return sqlSession.selectOne("product.productView",productNo);
 	}
 
+	public int productUpdate(Product p) {
+		return sqlSession.update("product.productUpdate",p);
+	}
+
+	public int deleteProductFile(int productNo) {
+		
+		return sqlSession.delete("product.deleteProductFile",productNo);
+	}
+
+
 	
 
 }
