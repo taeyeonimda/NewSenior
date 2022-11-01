@@ -5,10 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
+import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.service.NsClassService;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
@@ -116,7 +117,14 @@ public class NsClassController {
 		}else {
 			return "admin/adminMgrClass";
 	
-		}
-		
+		}	
+	}
+	
+	@RequestMapping(value="/classMgrTeacher.do")
+	public String classMgrTeacher(HttpSession session,Model model) {
+		Member m = (Member)session.getAttribute("m");
+		ArrayList<NsClass> list = service.getMyClass(m.getMemberNo());
+		model.addAttribute("myClass",list);
+		return "myPage/classMgrTeacher";
 	}
 }

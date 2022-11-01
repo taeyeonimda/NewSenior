@@ -277,7 +277,7 @@
     	const memberId = $("[name=memberId]").val();
     	const memberPw = $("[name=memberPw]").val();
     	
-    	if(memberId == "" || memberEmail == ""){
+    	if(memberId == "" || memberPw == ""){
     		alert("아이디와 비밀번호를 입력해주세요.");
     		return false;
     	}else{

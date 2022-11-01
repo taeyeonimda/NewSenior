@@ -140,6 +140,19 @@
 		on c.class_teacher = m.member_no
 		where class_no= #{classNo}
 	</select>
+	
+	<select id="getMyClass" parameterType="_int" resultType="cla">
+		select  
+				class_no as classNo,
+				class_name as className,
+				class_teacher as classTeacher,
+				filepath
+		from CLASSES c
+		join members m 
+		on c.class_teacher = m.member_no
+		where c.class_teacher = #{memberNo}
+	</select>
+
 	 
 	<select id="getOneFiles" parameterType="_int" resultType="claF">
 		select  

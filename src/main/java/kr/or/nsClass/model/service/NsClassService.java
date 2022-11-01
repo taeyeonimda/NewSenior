@@ -142,4 +142,8 @@ public class NsClassService {
 	public int chnageStatus(NsClass nsCl) {
 		return dao.changeStatus(nsCl);
 	}
+
+	public ArrayList<NsClass> getMyClass(int memberNo) {
+		return dao.getMyClass(memberNo);
+	}
 }
