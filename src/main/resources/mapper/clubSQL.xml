@@ -46,4 +46,15 @@
 	<insert id="insertClubBoard" parameterType="cb">
 		insert into club_boards values (club_boards_seq.nextval, #{clubNo }, #{memberNo }, #{clubBoardContent }, to_char(sysdate, 'yyyy-mm-dd'), #{clubBoardFilepath })
 	</insert>
+	<select id="getClubChatRecord" parameterType="int" resultType="cr">
+	select
+	    chat_record_no as chatNo,
+	    chat_club as chatClub,
+	    chat_member as chatMember,
+	    chat_content as chatContent,
+	    chat_date as chatDate,
+	    filepath
+	from chat_record
+	where chat_club=#{param }
+	</select>
 </mapper>

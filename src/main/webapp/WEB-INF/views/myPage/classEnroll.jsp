@@ -254,11 +254,11 @@
 			console.log(formData.get("className"));
 			console.log(formData.get("files"));
 			console.log(formData.get("teacherName"));
-			console.log(formData.get("teacerIntroduce"));
+			console.log(formData.get("teacherIntroduce"));
 			console.log(formData.get("curriculum"));
 			console.log(formData.get("startDate"));
 			console.log(formData.get("endDate"));
-			console.log(formData.get("category"));
+			console.log(formData.get("classCategory"));
 			console.log(formData.get("classLimit"));
 			console.log(formData.get("products"));
 			console.log(formData.get("detailFiles"));
@@ -270,9 +270,13 @@
 				contentType: false,
 	            processData: false,
 	            enctype	: 'multipart/form-data',
-				success:function(data){
-					
+				success:function(){
+					location.href="adminMgrClass.do?reqPage=1";
+				},error:function(){
+					alert("error");
 				}
+				
+				
 	 		})//ajax
 			 
 		});

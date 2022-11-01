@@ -53,6 +53,7 @@
 	<!-- 로그인 -->
 	<select id="selectLogin" parameterType="m" resultType="m">
 	select
+			member_no as memberNo,
 			member_id as memberId,
 			member_pw as memberPw
 	from members

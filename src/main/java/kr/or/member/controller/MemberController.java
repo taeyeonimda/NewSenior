@@ -76,7 +76,7 @@ public class MemberController {
 	public String loginCheckMember(Member m, HttpSession session) {
 		Member member = service.loginCheckMember(m);
 		if(member!= null) {
-			session.setAttribute("m", m);
+			session.setAttribute("m", member);
 			return "redirect:/";
 		}else {
 			return "redirect:/";

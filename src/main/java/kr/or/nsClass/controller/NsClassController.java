@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
 import kr.or.nsClass.model.service.NsClassService;
-
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 
@@ -37,7 +37,10 @@ public class NsClassController {
 		return "class/classList";
 	}
 	@RequestMapping(value = "/classDetail.do")
-	public String classDetail(){
+	public String classDetail(NsClass nc, Model model){
+		NsClass cla = service.selectOneClass(nc);
+		model.addAttribute("cla", cla);
+		System.out.println(cla);
 		return "class/classDetail";
 	}
 	
@@ -110,10 +113,12 @@ public class NsClassController {
 		nsCl.setFileList(list);
 		int result = service.insertClass(nsCl);
 		System.out.println("아래서 확인:"+nsCl);
+	
 		if(result>0) {
-			return "redirect:/adminMgrClass.do?reqPage=1";
+			return "admin/adminMgrClass";
 		}else {
-			return "redirect:/adminMgrClass.do?reqPage=1";
+			return "admin/adminMgrClass";
+	
 		}
 		
 	}

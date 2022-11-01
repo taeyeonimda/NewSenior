@@ -8,20 +8,23 @@
 				class_no as classNo,
 				class_name as className,
 				class_teacher as classTeacher,
-				class_price as classPrice,
+				to_char(class_price,'999,999,999') as classPrice,
 				class_limit as classLimit,
 				class_status as classStatus,
 				class_category as classCategory,
 				products,
-				start_date as startDate,
-				end_date as endDate,
+				to_char(start_date,'yyyy-mm-dd') as startDate,
+				to_char(end_date,'yyyy-mm-dd')  as endDate,
 				filepath,
+				TO_DATE(end_date) - TO_DATE(start_date)+1 as dayDate,
 				m.member_name as teacherName
 		from CLASSES c
 		join members m 
 		on c.class_teacher = m.member_no
-		order by 1 desc)c)
+		where class_status in (0,1)
+		order by 1 desc)c)	
 		where rnum between #{start} and #{end}
+		
 	</select>
 	
 	
@@ -48,6 +51,7 @@
 	 
 	<select id="totalCount" resultType="int">
 		select count(*) from classes
+		where class_status in (0,1)
 	</select>
 
 	<insert id="insertClass" parameterType="cla">
@@ -79,7 +83,7 @@
 		where table_name = 'CATEGORY'
 	</select>
 	
-	<!-- 은비 class 리스트 가져오기 -->
+	<!-- 은비 class가져오기 -->
 	<select id="selectClassList" parameterType="cla" resultType="cla">
 		select  
 			class_no as classNo,
@@ -90,12 +94,85 @@
 			class_status as classStatus,
 			class_category as classCategory,
 			products,
-			start_date as startDate,
-			end_date as endDate,
+			to_char(start_date, 'yyyy/mm/dd') as startDate,
+			to_char(end_date, 'yyyy/mm/dd') as endDate,
 			filepath
 		from classes
 		<if test="classCategory != null">
 		where class_category = #{classCategory }
 		</if>
 	</select>
+<<<<<<< HEAD
+
+	<select id="selectOneClass" parameterType="cla" resultType="cla">
+		select class_no as classNo,class_name as className,
+		    (select member_name from members m where m.member_no=t.member_no) as teacherName,
+		    class_price as classPrice,
+		    class_limit as classLimit,
+		    class_status as classStatus,
+		    class_category as classCategory,
+		    products,
+		    to_char(start_date, 'mm/dd') as startDate,
+		    to_char(end_date, 'mm/dd') as endDate,
+		    filepath
+		from classes
+		left join teachers t on (class_no=teacher_class)
+		where class_no = #{classNo }
+	</select>
+	
+	<select id="holdClass" resultType="cla">
+		select  
+			class_no as classNo,
+			class_name as className,
+			class_teacher as classTeacher,
+			class_price as classPrice,
+			to_char(start_date,'yyyy-mm-dd') as startDate,
+			to_char(end_date,'yyyy-mm-dd') as endDate,
+			TO_DATE(end_date) - TO_DATE(start_date)+1 as dayDate,
+			m.member_name as teacherName
+		from CLASSES c
+		join members m 
+		on c.class_teacher = m.member_no
+		where class_status = 3
+	</select>
+	
+	<select id="getOneClass" parameterType="_int" resultType="cla">
+		select  
+				class_no as classNo,
+				class_name as className,
+				class_teacher as classTeacher,
+				class_price as classPrice,
+				class_limit as classLimit,
+				class_status as classStatus,
+				class_category as classCategory,
+				products,
+				to_char(start_date,'yyyy-mm-dd') as startDate,
+				to_char(end_date,'yyyy-mm-dd')  as endDate,
+				filepath,
+				teacher_introduce as teacherIntroduce,
+		 		curriculum,
+				m.member_name as teacherName
+		from CLASSES c
+		join members m 
+		on c.class_teacher = m.member_no
+		where class_no= #{classNo}
+	</select>
+	 
+	<select id="getOneFiles" parameterType="_int" resultType="claF">
+		select  
+			class_fileno as fileNo,
+			class_no as classNo,
+			class_filename as filename,
+			class_filepath as filepath
+		from class_file
+		where class_no = #{classNo}
+	</select>
+	 
+	<update id="changeStatus" parameterType="cla">
+		update classes
+		set class_status = 0,
+		 	class_price = #{classPrice}
+		where class_no = #{classNo}
+	</update>
+
 </mapper>

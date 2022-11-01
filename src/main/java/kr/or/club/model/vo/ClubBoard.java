@@ -1,5 +1,7 @@
 package kr.or.club.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,5 @@ public class ClubBoard {
 	private String clubBoardDate;
 	private String clubBoardFilepath;
 	private int memberNo;
+	private ArrayList<ClubBoardComment> commentList;
 }

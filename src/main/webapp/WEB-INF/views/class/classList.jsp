@@ -53,7 +53,7 @@
             <div class="row g-4 portfolio-container">
             <c:forEach items="${claList }" var="cla">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="portfolio-inner rounded">
+                    <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" src="/resources/MAINbtstr/img/${cla.filepath }" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">${cla.className }</h4>
@@ -85,5 +85,13 @@
         </nav>
 	</div> <!--page-content End-->
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+	
+	<script>
+
+		function classDetail(classNo) {
+			location.href = "classDetail.do?classNo="+classNo;
+		}
+		
+	</script>
 </body>
 </html>

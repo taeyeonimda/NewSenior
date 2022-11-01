@@ -83,7 +83,6 @@ public class NsClassService {
 				return npd;
 
 	}
-
 	@Transactional
 	public int insertClass(NsClass nsCl) {
 		int result = dao.insertClass(nsCl);
@@ -109,8 +108,43 @@ public class NsClassService {
 	}
 	
 	
+	
 	// 은비 클래스 리스트
 	public ArrayList<NsClass> selectClassList(NsClass nc) {
 		return dao.selectClassList(nc);
+	}
+
+	// 은비 클래스 detail
+	public NsClass selectOneClass(NsClass nc) {
+		return dao.selectOneClass(nc);
+	}
+	
+	//보류중인클래스
+	public ArrayList<NsClass> holdClass() {
+		ArrayList<NsClass> list = dao.holdClass();
+		for(int i=0;i<list.size();i++) {
+			System.out.println("시작날::::"+list.get(i).getStartDate());
+			System.out.println("끝난날::::"+list.get(i).getEndDate());
+			System.out.println("계산?::::"+list.get(i).getDayDate());
+		}
+		return list;
+	}
+
+	@Transactional
+	public int classUpdate(int classNo) {
+		return dao.classUpdate(classNo);
+	}
+
+	public NsClass getOneClass(int classNo) {
+		return dao.getOneClass(classNo);
+	}
+
+	public ArrayList<FileVo> getOneFile(int classNo) {
+		return dao.getOneFile(classNo);
+	}
+
+	@Transactional
+	public int chnageStatus(NsClass nsCl) {
+		return dao.changeStatus(nsCl);
 	}
 }
