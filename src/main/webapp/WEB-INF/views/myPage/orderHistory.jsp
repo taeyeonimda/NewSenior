@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html
   lang="en"
@@ -45,6 +45,62 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
+    <style>
+        #modal.modal-overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #modal .modal-window {
+            background: rgba( 0, 0, 0, 0.3 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            width: 600px;
+            height: 500px;
+            position: relative;
+            top: -100px;
+            padding: 10px;
+        }
+        #modal .title {
+            padding-left: 10px;
+            display: inline;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            
+        }
+        #modal .title h2 {
+            display: inline;
+        }
+        #modal .close-area {
+            display: inline;
+            float: right;
+            padding-right: 10px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        
+        #modal .content {
+            margin-top: 20px;
+            padding: 0px 10px;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -75,7 +131,7 @@
 
           <!-- 주문내역 -->
           <li class="menu-item active">
-            <a href="orderHistory.do" class="menu-link">
+            <a href="orderHistory.do?memberNo=${memberNo }" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">주문내역</div>
             </a>
@@ -147,15 +203,6 @@
                   <thead>
                     <tr>
                       <th>주문일자</th>
-                      <th>
-                        <select style="width: 100px; height: 25px; ">
-                          <option value="" selected disabled hidden>종류선택</option>
-                          <option value="package">패키지</option>
-                          <option value="class">클래스</option>
-                          <option value="kit">키트</option>
-
-                        </select>
-                      </th>
                       <th>제품정보</th>
                       <th>수량</th>
                       <th>금액</th>
@@ -163,36 +210,49 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>2022-10-24</td>
-                      <td>패키지</td>
-                      <td>등산패키지</td>
-                      <td>2</td>
-                      <td>50,000원</td>
-                      <td>100,000원</td>
-                    </tr>
-                    <tr>
-                      <td>2022-10-24</td>
-                      <td>패키지</td>
-                      <td>등산패키지</td>
-                      <td>2</td>
-                      <td>50,000원</td>
-                      <td>100,000원</td>
-                    </tr>
-                    <tr>
-                      <td>2022-10-24</td>
-                      <td>패키지</td>
-                      <td>등산패키지</td>
-                      <td>2</td>
-                      <td>50,000원</td>
-                      <td>100,000원</td>
+                    <tr>                     
+                      	<td>2022-10-24</td>
+                      	<td>등산패키지</td>
+                      	<td>2</td>
+                      	<td>50,000원</td>
+                      	<td>100,000원</td>
                     </tr>
 
+                    <c:forEach items="${list }" var="Or">
+		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});">
+			                <td>${Or.orderDate }</td>
+			                <td>${Or.productName }</td>
+			                <td>${Or.orderAmount }</td>
+			                <td>${Or.orderPrice }</td>
+			                <td>(${Or.orderAmoun*Or.orderPrice })원</td>
+		                </tr>
+             		</c:forEach>
+             		
+             		<c:if test="">
+		                <tr>
+		                	<td style="text-align:center;">주문 내역이 없습니다.</td>
+		                </tr>
+        			</c:if>
+        			
                   </tbody>
                 </table>
               </div>
             </div>
-
+        <button id="btn-modal">모달</button>
+        <!-- 주문 상세보기 모달 -->
+	    <div id="modal" class="modal-overlay">
+	        <div class="modal-window">
+	            <div class="title"><h2>주문 내역 상세 보기</h2></div>
+	            <div class="close-area" style="font-size : 40px;">X</div>
+	            <div class="content">
+	                <p>상품 이미지</p>
+	            	<p>주문번호</p>
+	                <p>갯수</p>
+	                <p>가격</p>
+	                <p>갯수x가격</p>
+	            </div>
+	        </div>
+	    </div>	
 			<br><br><br>
           <div style="font-size: 25px;">주문내역</div>
           <div style="font-size: 17px;">상품</div>
@@ -203,36 +263,21 @@
                 <table class="table table-borderless">
                   <thead>
                     <tr>
-                      <th>주문일자</th>
-                      <th>상품이름</th>
-                      <th>수량</th>
-                      <th>금액</th>
-                      <th>총 주문금액</th>
+                      	<th>주문일자</th>
+                      	<th>상품이름</th>
+                      	<th>수량</th>
+                      	<th>금액</th>
+                      	<th>총 주문금액</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>2022-10-27</td>
-                      <td>카스타드</td>
-                      <td>1</td>
-                      <td>300원</td>
-                      <td>300원</td>
+                      	<td>2022-10-27</td>
+                      	<td>카스타드</td>
+                      	<td>1</td>
+                      	<td>300원</td>
+                      	<td>300원</td>
                     </tr>
-                    <tr>
-                      <td>2022-10-27</td>
-                      <td>촠촠한촠코칩</td>
-                      <td>4</td>
-                      <td>500원</td>
-                      <td>2000원</td>
-                    </tr>
-                    <tr>
-                      <td>2022-10-27</td>
-                      <td>아메리카노</td>
-                      <td>2</td>
-                      <td>5,000원</td>
-                      <td>10,000원</td>
-                    </tr>
-
                   </tbody>
                 </table>
               </div>
@@ -278,5 +323,30 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+	    function goToOrderDetail(orderNo) {
+			location.href = "/orderDetail.do?orderNo="+orderNo;
+		};
+	    
+	    $(".showOrderDetail").click(function(){
+	    	
+	    });
+	    
+	    const modal = document.getElementById("modal")
+	    const btnModal = document.getElementById("btn-modal")
+	    btnModal.addEventListener("click", e => {modal.style.display = "flex"
+	    });
+	    
+	    modal.addEventListener("click", e => {
+	        const evTarget = e.target
+	        if(evTarget.classList.contains("modal-overlay")) {
+	            modal.style.display = "none"
+	        }
+	    });
+	    
+	    $(".close-area").click(function(){
+	        modal.style.display = "none"
+	    });
+    </script>
   </body>
 </html>
