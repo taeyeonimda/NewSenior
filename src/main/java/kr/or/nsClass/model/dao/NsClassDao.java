@@ -46,8 +46,9 @@ public class NsClassDao {
 	}
 	
 	// 은비 class 리스트
-	public ArrayList<NsClass> selectAllClass() {
-		List list = sqlSession.selectList("nsClass.selectAllClass");
+	public ArrayList<NsClass> selectClassList(NsClass nc) {
+		List list = sqlSession.selectList("nsClass.selectClassList", nc);
 		return (ArrayList<NsClass>)list;
 	}
+
 }
