@@ -1,0 +1,63 @@
+@charset "UTF-8";
+.productBuyQty{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    position: relative;
+    bottom: 3px;
+}
+
+
+.reviewsWrap{
+    width: 1200px;
+    margin: 10px 0px;
+}
+.reviewsContent{
+    overflow: hidden;
+    height: 100px;
+}
+.reviewsContent>div{
+    float: left;
+}
+
+.reviewsTextArea>textarea{
+    width: 700px;
+    height: 100px;
+    outline: none;
+    resize: none;
+}
+.reviewsBtnBox{
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.reviewsBtnBox>a{
+    height: 50px;
+    width: 80px;
+    line-height: 50px;
+    border-radius: 5px;
+    color: black;
+    margin-left: 10px;
+}
+.reviewsBtnBox>a:hover{
+    color: white;
+    background-color: #037ef3;
+}
+.reviewsId{
+    width: 200px;
+    position: relative;
+    top: 25px;
+    padding-right: 10px;
+}
+
+.reviewsId>h6{
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+    border-right: 1px solid black;
+}
+.reviewsScore{
+    position: relative;
+    left: 55px;
+    top: 25px;
+}
