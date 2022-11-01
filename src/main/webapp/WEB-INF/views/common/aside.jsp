@@ -84,5 +84,12 @@
                 <div data-i18n="Basic Inputs">마이페이지</div>
               </a>
             </li>
+                      <!-- 주문내역 -->
+          <li class="menu-item active">
+            <a href="orderHistory.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">주문내역</div>
+            </a>
+          </li>
           </ul>
         </aside>
