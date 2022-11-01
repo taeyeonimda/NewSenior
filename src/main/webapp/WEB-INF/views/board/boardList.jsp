@@ -9,6 +9,9 @@
 </head>
 <body>
 	<table border="1">
+	
+		<button><a href="/boardWriteFrm.do">글작성</a></button>
+	
 		<tr>
 			<th>번호</th><th>제목</th><th>조회수</th><th>작성일</th>
 		</tr>

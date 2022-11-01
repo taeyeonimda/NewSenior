@@ -108,12 +108,12 @@
 /* The sidebar menu */
 .sidenav {
     display: none;
-    width: 400px;
-    height: 510px;
+    width: 360px;
+    height: 540px;
     position: fixed;
     z-index: 1;
     top: 155px;
-    right: 110px;
+    right: 95px;
     background: #eee;
     overflow-x: hidden;
     padding: 8px 0;
@@ -143,18 +143,21 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-
 .side-info-box>ul{
     list-style-type: none;
-	width: 240px;
-	margin: 0 auto;
-	margin-bottom: 20px;
+	width: 80%;
+	margin: 10px auto;
+
+}
+.side-teacher-box{
+	width: 90%;
+	text-align: right;
 }
 .class-info-box>ul>li{
-	text-align: left;
+	text-align: center;
+	margin-bottom: 5px;
 }
-.class-select-box{
-	height: 180px;
+.side-select-box{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -162,15 +165,23 @@
 .side-title-box{
     color: #0f4229;
 }
-
-
-
+.amount-box{
+	display: flex;
+	justify-content: space-between;
+}
+.amount-box>span{
+	display: inline-block;
+	width: 50%;
+	height: 58px;
+	line-height: 58px;
+}
 
 
 #total-star{
     font-size: 20px;
     line-height: 58px;
 }
+
 
 /*리뷰모달*/
 

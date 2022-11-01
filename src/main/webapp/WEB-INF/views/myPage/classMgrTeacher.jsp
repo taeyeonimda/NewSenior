@@ -153,40 +153,22 @@
               <!-- Examples -->
               진행중인 클래스 ─────────────────────────────────────────────────────────────────────────────<br><br>
               <div class="row mb-5">
+              	<c:forEach items="${myClass }" var="cla">
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="/resources/MAINbtstr/img/service-1.jpg" alt="Card image cap" />
+                    <img class="card-img-top" src="resources/upload/class/${cla.filepath }" alt="Card image cap" />
                     <div class="card-body">
-                      <h5 class="card-title">준석이의 부트스트랩 클래스</h5>
+                      <h5 class="card-title">${cla.className }</h5>
                       <p class="card-text">
-                        부트스트랩 재미없어 집에보내줘
+                    		쓸게없음 ㅇㅅㅇ;
                       </p>
                       <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-title">검은귀 라떼</h5>
-                      <h6 class="card-subtitle text-muted">은비와 함께하는 라떼 산책시키기</h6> <br>
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
-                    </div>
-                    <img class="img-fluid" src="/resources/MAINbtstr/img/service-2.jpg" alt="Card image cap" /><br>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-title">현주의 오븐마스터 되는법</h5>
-                      <h6 class="card-subtitle text-muted">오븐이 세상에서 제일 쉬웠어요</h6> <br>
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
-                      <img class="img-fluid d-flex mx-auto my-4" src="/resources/MAINbtstr/img/service-3.jpg" alt="Card image cap"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                </c:forEach>
+                
+              
               <!-- Examples -->
 
               종료된 클래스 ─────────────────────────────────────────────────────────────────────────────<br><br>

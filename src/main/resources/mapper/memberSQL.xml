@@ -53,8 +53,10 @@
 	<!-- 로그인 -->
 	<select id="selectLogin" parameterType="m" resultType="m">
 	select
+			member_no as memberNo,
 			member_id as memberId,
 			member_pw as memberPw
+			nickname
 	from members
 	where member_id=#{memberId} 
 	<if test="memberPw != null">
@@ -74,7 +76,7 @@
 		 member_grade as memberGrade,
 		 member_birth as memberBirth,
 		 enroll_date as memberDate,
-		 nickName as memberNickname,
+		 nickName as nickname,
 		 member_state as memberState,
 		 member_img as memberImg,
 		 favorite
@@ -100,4 +102,36 @@
 	 </if>
 	</select>
 	
+	<update id="updateMember" parameterType="m">
+		update
+		members
+		set
+		member_email=#{memberEmail}, member_phone=#{memberPhone}, favorite=#{favorite}, nickName = #{nickName}
+		where
+		member_id=#{memberId}
+	</update>
+	
+	<insert id="insertMember" parameterType="m">
+	insert into members 
+	values(
+	    MEMBER_SEQ.nextval,
+	    #{memberId},
+	    #{memberPw},
+	    #{memberName},
+	    #{memberPhone},
+	    #{memberEmail},
+	    null,
+	    1,
+	    #{memberBirth},
+	    to_char(sysdate,'yyyy-mm-dd'),
+	    #{nickName},
+	    null,
+	    null,
+	    #{favorite}
+	    )
+	</insert>
+
+	<update id="changePw" parameterType="m">
+		update members set member_pw=#{memberPw}  where member_id = #{memberId}
+	</update>
 </mapper>
