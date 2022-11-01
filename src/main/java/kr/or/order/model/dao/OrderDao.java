@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
 
 @Repository
@@ -15,7 +16,7 @@ public class OrderDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Order> selectAllOrderHistory() {
+	public ArrayList<Order> selectAllOrderHistory(Member m) {
 		List list = sqlSession.selectList("order.selectAllOrderHistory"); 
 return (ArrayList<Order>) list;
 	}
