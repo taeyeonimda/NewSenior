@@ -98,19 +98,19 @@
                   <div class="mb-3 row co_btn">
                     <label for="html5-url-input" class="col-md-2 col-form-label">비밀번호</label>
                     <div class="col-md-10">
-                      <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #000;" class="co_f1">비밀번호 변경하기</a></button>
+                      <button type="button" class="btn btn-outline-warning"><a href="/pwChangeFrm.do" style="color: #000;" class="co_f1">비밀번호 변경하기</a></button>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">생년월일</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-url-input" value="${member.memberBirth }" name="memberBirth"/>
+                      <input class="form-control" type="text" id="html5-url-input" value="${member.memberBirth }" name="memberBirth" onkeyup="birth_keyup(this)"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">전화번호</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="tel" id="html5-url-input" value="${member.memberPhone }" name="memberPhone"/>
+                      <input class="form-control" type="tel" id="html5-url-input" value="${member.memberPhone }" name="memberPhone" onkeyup="phone_keyup(this)"/>
                     </div>
                   </div>
                   
@@ -168,18 +168,6 @@
     <!-- / Layout wrapper -->
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 
-	<!-- 마이페이지 js 
-	<script type="text/javascript">
-	$(".co_f1").on("mouseenter",function(){
-		$(".co_f1").css("color","#000");
-	});
-	
-	$(".co_f1").on("mouseout",function(){
-		$("co_f1").css("color","#FFAB00");
-	});
-	</script>
-	-->
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
@@ -200,5 +188,27 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+    <script type="text/javascript">
+  	//생년월일 자동 하이픈
+	function birth_keyup(obj){
+    let birth_len = obj.value.length;
+    if (event.keyCode==8){
+        obj.value = obj.value.slice(0,birth_len)
+        return 0;
+    }else if(birth_len==4 || birth_len==7){
+        obj.value += '-';
+    }}
+	function phone_keyup(obj){
+	    let phone_len=obj.value.length;
+	    console.log(phone_len)
+	    if(event.keyCode==8){
+	        obj.value=obj.value.slice(0,phone_len); 
+	        return 0; 
+	    }else if (phone_len==3 || phone_len==8){
+	        obj.value += '-';
+	    }
+	}
+    </script>
   </body>
 </html>
