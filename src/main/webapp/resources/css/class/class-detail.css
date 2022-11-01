@@ -73,7 +73,7 @@
 
 /*스크롤 박스*/
 .scroll-select-box{
-	width: 880px;
+	width: 870px;
     height: 60px;
     line-height: 60px;
 	display: flex;
@@ -83,10 +83,12 @@
 }
 .scroll-select-box>span{
 	display: inline-block;
-	width: 100px;
+	width: 95px;
     text-align: center;
 }
-
+.scroll-select-box>span:hover{
+	cursor: pointer;
+}
 .scroll-select-box-fixed{
     position: fixed;
     top: 80px;
@@ -233,3 +235,6 @@
     display: flex;
     justify-content: space-between;
 }
+
+
+

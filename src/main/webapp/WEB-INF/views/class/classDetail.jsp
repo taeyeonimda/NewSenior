@@ -9,7 +9,6 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" stydata-wow-delay="0.1s" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/img/다운로드\ \(2\).jpg) center center no-repeat; background-size: cover;">
             <div class="container text-center py-5">
@@ -74,7 +73,7 @@
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span>강사소개</span><span>강의소개</span><span>준비물</span><span>환불규정</span><span>후기</span>
+                	<span>강사소개</span><span><a href="#menu2">강의소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
                 </div>
             </div>
         </div>
@@ -83,7 +82,7 @@
 
 
         <!-- 강의소개 -->
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="#menu1">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -103,7 +102,7 @@
         <!-- Features End -->
 
         <!-- 강사 소개 -->
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="#menu2">
             <div class="container class-container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -125,7 +124,7 @@
         
         
         <!-- 클래스 준비물 -->
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="#menu3">
             <div class="container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
@@ -133,7 +132,6 @@
                         <h1 class="display-5 mb-5"><span>1</span> 건 있어요</h1>
                     </div>
                 </div>
-                
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item rounded class-item">
@@ -154,7 +152,7 @@
         <!-- Team End -->
 
         <!-- 환불규정 -->
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="#menu4">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -170,7 +168,7 @@
         <!-- Features End -->
         <hr>
         <!-- 후기 -->
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="#menu5">
             <div class="container">
                 <div class="row g-5">
                     <div class="flex-space-between">
@@ -187,18 +185,12 @@
                             <img src="img/person_1.jpg" class="profil-img">
                         </div>
                         <div class="profil-info-div">
-                            <div>
-                                ★★★★★
-                            </div>
-                            <div>
-                                닉네임
-                            </div>
-                            <div>
-                                작성일
-                            </div>
+                            <div>★★★★★</div>
+                            <div>닉네임</div>
+                            <div>작성일</div>
                         </div>
                     </div>
-                    <div >
+                    <div>
                         <div>컨텡층ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
                         <div>수정 / 삭제</div>
                     </div>
@@ -270,64 +262,62 @@
         $(window).on("scroll",function(){
             showSide();
 	        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
-
         });
 
         $(function(){
             showSide();
         });
 
-
-
+       
+        
         // 리뷰 script
-    $("#review-btn").on("click", function(){
-        $(".rmodal-wrap").css("display", "flex");
-    })
+	    $("#review-btn").on("click", function(){
+	        $(".rmodal-wrap").css("display", "flex");
+	    })
+		
+	    $("#modal-btn-box>button:first-child").on("click",function(){
+	        $(".rmodal-wrap").css("display", "none");
+	        $("#star-box").css("visibility", "hidden");
+	        $("#star-box").children().css("color", "lightgrey");
+	    })
+		
+	    const starBox = $(".comment-box>div:first-child");
+	    const stars = $("#star-box>span"); // star아이콘모음
+	    stars.on("mouseover", function(){
+	        const idx = stars.index(this);
+	        stars.each(function(index, item){
+	            if(idx>=index){ //마우스가 올라간 인덱스보다 작거나 같으면
+	                $(item).css("color", "rgb(255, 197, 0)");
+	            }else{
+	                $(item).css("color", "lightgrey");
+	            }
+	        })
+	    });
+		
+	    stars.on("mouseleave", function(){
+	        const realScore = Number($(".real-score").text());
+	        const starInput = $("#star");
+	        starInput.val(realScore);
+	        stars.each(function(index, item){
+	            if(realScore>index){
+	                $(item).css("color", "rgb(255, 197, 0)");
+	            }else{
+	                $(item).css("color", "lightgrey");
+	            }
+	        })
+	    })
 	
-    $("#modal-btn-box>button:first-child").on("click",function(){
-        $(".rmodal-wrap").css("display", "none");
-        $("#star-box").css("visibility", "hidden");
-        $("#star-box").children().css("color", "lightgrey");
-    })
-	
-    const starBox = $(".comment-box>div:first-child");
-    const stars = $("#star-box>span"); // star아이콘모음
-    stars.on("mouseover", function(){
-        const idx = stars.index(this);
-        stars.each(function(index, item){
-            if(idx>=index){ //마우스가 올라간 인덱스보다 작거나 같으면
-                $(item).css("color", "rgb(255, 197, 0)");
-            }else{
-                $(item).css("color", "lightgrey");
-            }
-        })
-    });
-	
-    stars.on("mouseleave", function(){
-        const realScore = Number($(".real-score").text());
-        const starInput = $("#star");
-        starInput.val(realScore);
-        stars.each(function(index, item){
-            if(realScore>index){
-                $(item).css("color", "rgb(255, 197, 0)");
-            }else{
-                $(item).css("color", "lightgrey");
-            }
-        })
-    })
-	
-    stars.on("click", function(){
-        const idx = stars.index(this);
-        $(".real-score").text(idx+1);
-        starBox.css("visibility", "visible");
-        const commentSpan = $(".comment-box>div:last-child>span");
-        if(idx>1){
-            commentSpan.text("어떤 점이 좋았나요?");
-        }else{
-            commentSpan.text("어떤 점이 아쉬웠나요?");
-        }
-    })
-
+	    stars.on("click", function(){
+	        const idx = stars.index(this);
+	        $(".real-score").text(idx+1);
+	        starBox.css("visibility", "visible");
+	        const commentSpan = $(".comment-box>div:last-child>span");
+	        if(idx>1){
+	            commentSpan.text("어떤 점이 좋았나요?");
+	        }else{
+	            commentSpan.text("어떤 점이 아쉬웠나요?");
+	        }
+	    })
 
     </script>
 

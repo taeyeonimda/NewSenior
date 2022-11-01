@@ -49,7 +49,7 @@
 	<select id="totalCount" resultType="int">
 		select count(*) from classes
 	</select>
-	
+
 	<insert id="insertClass" parameterType="cla">
 		insert into
 		CLASSES
@@ -77,5 +77,25 @@
 		select column_name 
 		from user_tab_columns 
 		where table_name = 'CATEGORY'
+	</select>
+	
+	<!-- 은비 class 리스트 가져오기 -->
+	<select id="selectClassList" parameterType="cla" resultType="cla">
+		select  
+			class_no as classNo,
+			class_name as className,
+			class_teacher as classTeacher,
+			class_price as classPrice,
+			class_limit as classLimit,
+			class_status as classStatus,
+			class_category as classCategory,
+			products,
+			start_date as startDate,
+			end_date as endDate,
+			filepath
+		from classes
+		<if test="classCategory != null">
+		where class_category = #{classCategory }
+		</if>
 	</select>
 </mapper>

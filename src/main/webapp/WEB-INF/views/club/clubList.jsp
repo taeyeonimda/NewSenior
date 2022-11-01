@@ -39,7 +39,7 @@
     <div class="club-info-modal">
     	<div class="modal-title">
 	        <div class="modal-img-div">
-	            <img src="/resources/upload/club/107900148.png" class="modal-img">
+	            <img class="modal-img">
 	        </div>
 	    </div>
         <div class="club-info">
@@ -67,8 +67,10 @@
 				success:function(one){
 					const clubName = $(".club-info-box>h3");
 					const clubContent = $(".club-info-box>p");
+					const clubImg = $(".modal-img-div>img");
 					clubName.text(one.clubName);
 					clubContent.text(one.clubIntro);
+					clubImg.attr("src", "/resources/upload/club/"+one.clubMainImg);
 				}
 			});
 			$(".modal-wrap").css("display", "flex");

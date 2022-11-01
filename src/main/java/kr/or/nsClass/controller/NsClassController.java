@@ -17,9 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
 import kr.or.nsClass.model.service.NsClassService;
+
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
-
 
 @Controller
 public class NsClassController {
@@ -30,10 +30,12 @@ public class NsClassController {
 	private FileRename fileRename;
 	
 	@RequestMapping(value = "/classList.do")
-	public String classList() {
+	public String classList(NsClass nc, Model model) {
+		// 만약 category가 null이면,
+		ArrayList<NsClass> claList = service.selectClassList(nc);
+		model.addAttribute("claList", claList);
 		return "class/classList";
 	}
-	
 	@RequestMapping(value = "/classDetail.do")
 	public String classDetail(){
 		return "class/classDetail";

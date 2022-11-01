@@ -107,4 +107,10 @@ public class NsClassService {
 	public ArrayList<String> getAllCategory() {
 		return dao.getAllCategory();
 	}
+	
+	
+	// 은비 클래스 리스트
+	public ArrayList<NsClass> selectClassList(NsClass nc) {
+		return dao.selectClassList(nc);
+	}
 }

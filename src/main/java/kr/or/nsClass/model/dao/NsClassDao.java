@@ -21,12 +21,10 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.getAllClass",map);
 		return (ArrayList<NsClass>)list;
 	}
-	
 	public int selectClassCnt() {
 		int totalCount = sqlSession.selectOne("nsClass.totalCount");
 		return totalCount;
 	}
-
 	public int insertClass(NsClass nsCl) {
 		int result = sqlSession.insert("nsClass.insertClass",nsCl);
 		return result;
@@ -46,4 +44,11 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.getAllCategory");
 		return (ArrayList<String>)list;
 	}
+	
+	// 은비 class 리스트
+	public ArrayList<NsClass> selectClassList(NsClass nc) {
+		List list = sqlSession.selectList("nsClass.selectClassList", nc);
+		return (ArrayList<NsClass>)list;
+	}
+
 }

@@ -57,4 +57,16 @@
   <delete id="deleteProduct" parameterType="_int">
   	delete from products where product_no = #{_parameter}
   </delete>
+  <update id="productUpdate" parameterType="p">
+  	update products 
+  	set product_name = #{productName}, product_subname = #{productSubName}, product_price = #{productPrice}, 
+  		product_qty = #{productQty}, product_category = #{productCategory}, product_status = #{productStatus}, product_content = #{productContent}
+  	where product_no = #{productNo}
+  </update>
+  <delete id="deleteproductFiles" parameterType="_int">
+  	delete from product_file where product_fileno=#{_parameter}
+  </delete>
+  <delete id="deleteProductFile" parameterType="_int">
+  	delete from product_file where product_no=#{_parameter}
+  </delete>
 </mapper>
