@@ -11,6 +11,7 @@ import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
 import kr.or.product.model.vo.ProductPageData;
+import kr.or.product.model.vo.ProductReview;
 
 @Service
 public class ProductService {
@@ -107,6 +108,11 @@ public class ProductService {
 			}
 		}
 		return result;
+	}
+
+	public int insertReview(ProductReview pr) {
+		
+		return dao.insertReview(pr);
 	}
 
 }

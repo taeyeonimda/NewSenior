@@ -21,6 +21,7 @@ import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
 import kr.or.product.model.vo.ProductPageData;
+import kr.or.product.model.vo.ProductReview;
 
 @Controller
 public class ProductController {
@@ -78,13 +79,6 @@ public class ProductController {
 			return "redirect:/productList.do?reqPage=1";
 		}
 		return"redirect:/";
-	}
-	//summerNote
-	@ResponseBody
-	@RequestMapping(value = "/uploadImage.do")
-	public String productUploadImage() {
-		
-		return "";
 	}
 	
 	@RequestMapping(value = "/productView.do")
@@ -155,6 +149,13 @@ public class ProductController {
 			}
 		}
 		return "redirect:/productList.do?reqPage=1";
+	}
+	
+	@RequestMapping(value = "/insertReview.do")
+	public String insertReview(ProductReview pr, Model model) {
+		System.out.println(pr);
+		int result = service.insertReview(pr);
+		return"";
 	}
 	
 }

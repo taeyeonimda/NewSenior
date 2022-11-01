@@ -92,7 +92,7 @@
                 <div class="reviewContent">
                   <div class="productReviewHight">
                     <h6>아이디</h6>
-                    <input type="hidden" name="memberId" value="${SessionScope.m.memberId }">
+                    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
                     <input type="hidden" name="productNo" value="${p.productNo }">
                   </div>
                   <div style="height: 100px;">
@@ -109,7 +109,6 @@
                       <span class="material-icons">star</span>
                       <span class="material-icons">star</span>
                     </div>
-                    <p>
                       <div class="input-score">
                       	<input type="hidden" name=reviewScore id="reviewScore">
                         <span class="real-score">0</span>
@@ -180,6 +179,6 @@
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
-
+	
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
+import kr.or.product.model.vo.ProductReview;
 
 @Repository
 public class ProductDao {
@@ -59,6 +60,11 @@ public class ProductDao {
 	public int deleteProductFile(int productNo) {
 		
 		return sqlSession.delete("product.deleteProductFile",productNo);
+	}
+
+	public int insertReview(ProductReview pr) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
