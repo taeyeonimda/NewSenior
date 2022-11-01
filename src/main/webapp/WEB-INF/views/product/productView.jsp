@@ -88,11 +88,12 @@
               </div>
             </div>
             <div class="reviewContentWrap prodContentMenu">
-              <form action="javascript:void(0)">
+              <form action="/insertReview.do" method="post">
                 <div class="reviewContent">
                   <div class="productReviewHight">
                     <h6>아이디</h6>
-                    <input type="hidden" name="memberId">
+                    <input type="hidden" name="memberId" value="${SessionScope.m.memberId }">
+                    <input type="hidden" name="productNo" value="${p.productNo }">
                   </div>
                   <div style="height: 100px;">
                     <textarea id="customerReview" style="outline: none;" name="reviewContent"></textarea>
@@ -110,11 +111,11 @@
                     </div>
                     <p>
                       <div class="input-score">
+                      	<input type="hidden" name=reviewScore id="reviewScore">
                         <span class="real-score">0</span>
                         <span class="show-score">0</span>
                         <span>점</span>
                     </div>
-                    
                   </div>
                 </div>
               </form>
