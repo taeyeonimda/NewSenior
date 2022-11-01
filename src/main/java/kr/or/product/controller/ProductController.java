@@ -106,4 +106,12 @@ public class ProductController {
 		}
 		return "redirect:/productList.do?reqPage=1";
 	}
+	
+	@RequestMapping(value = "/productUpdateFrm.do")
+	public String productUpdateFrm(int productNo, Model model) {
+		Product p = service.productView(productNo);
+		model.addAttribute("p",p);
+		return "product/productUpdateFrm";
+	}
+	
 }
