@@ -8,9 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
+import kr.or.nsClass.model.vo.NsClassPageData;
 
 @Repository
 public class NsClassDao {
@@ -46,8 +46,31 @@ public class NsClassDao {
 	}
 	
 	// 은비 class 리스트
-	public ArrayList<NsClass> selectAllClass() {
-		List list = sqlSession.selectList("nsClass.selectAllClass");
+	public ArrayList<NsClass> selectClassList(NsClass nc) {
+		List list = sqlSession.selectList("nsClass.selectClassList", nc);
 		return (ArrayList<NsClass>)list;
 	}
+
+	public ArrayList<NsClass> holdClass() {
+		List list = sqlSession.selectList("nsClass.holdClass");
+		return (ArrayList<NsClass>)list;
+	}
+	public int classUpdate(int classNo) {
+		int result = sqlSession.update("nsClass.classUpdate",classNo);
+		return result;
+	}
+	
+	public NsClass getOneClass(int classNo) {
+		NsClass nsCla = sqlSession.selectOne("nsClass.getOneClass",classNo);
+		return nsCla;
+	}
+	public ArrayList<FileVo> getOneFile(int classNo) {
+		List list = sqlSession.selectList("nsClass.getOneFiles",classNo);
+		return (ArrayList<FileVo>)list;
+	}
+	public int changeStatus(NsClass nsCl) {
+		int result = sqlSession.update("nsClass.changeStatus",nsCl);
+		return result;
+	}
+
 }

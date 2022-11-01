@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>뉴시니어스</title>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- Favicon -->
         <link href="/resources/TGbtstr/img/favicon.ico" rel="icon">
@@ -176,20 +176,21 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
-                        <a href="/classList.do" class="dropdown-item">디지털</a>
-                        <a href="javascript:void(0)" class="dropdown-item">주식 / 재태크</a>
-                        <a href="javascript:void(0)" class="dropdown-item">공예</a>
-                        <a href="javascript:void(0)" class="dropdown-item">디자인</a>
-                        <a href="javascript:void(0)" class="dropdown-item">운동 / 건강</a>
-                        <a href="javascript:void(0)" class="dropdown-item">패션</a>
-                        <a href="javascript:void(0)" class="dropdown-item">미디어</a>
-                        <a href="javascript:void(0)" class="dropdown-item">악기 / 노래</a>
-                        <a href="javascript:void(0)" class="dropdown-item">외국어</a>
-                        <a href="javascript:void(0)" class="dropdown-item">요리 / 제과제빵</a>
+                    	<a href="/classList.do?" class="dropdown-item">전체</a>
+                        <a href="/classList.do?classCategory=DG" class="dropdown-item">디지털</a>
+                        <a href="/classList.do?classCategory=FU" class="dropdown-item">주식 / 재태크</a>
+                        <a href="/classList.do?classCategory=CR" class="dropdown-item">공예</a>
+                        <a href="/classList.do?classCategory=DE" class="dropdown-item">디자인</a>
+                        <a href="/classList.do?classCategory=EX" class="dropdown-item">운동 / 건강</a>
+                        <a href="/classList.do?classCategory=FS" class="dropdown-item">패션</a>
+                        <a href="/classList.do?classCategory=ME" class="dropdown-item">미디어</a>
+                        <a href="/classList.do?classCategory=SO" class="dropdown-item">악기 / 노래</a>
+                        <a href="/classList.do?classCategory=FO" class="dropdown-item">외국어</a>
+                        <a href="/classList.do?classCategory=CO" class="dropdown-item">요리 / 제과제빵</a>
                     </div>
                 </div>
                 <a href="/clubList.do" class="nav-item nav-link">동호회</a>
-                <a href="javascript:void(0)" class="nav-item nav-link">커뮤니티</a>
+                <a href="/boardList.do?reqPage=1" class="nav-item nav-link">커뮤니티</a>
                 <a href="javascript:void(0)" class="nav-item nav-link">액티비티</a>
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
                 
@@ -257,7 +258,6 @@
     <script src="/resources/js/login.js"></script>
     -->
     <script type="text/javascript">
-  //개인정보수집이용동의
     $(".loginBtn").click(function(){
       $(".popup_bg00").stop().fadeIn();
       $(".popup00.personal_pop00").stop().fadeIn();

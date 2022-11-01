@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
 import kr.or.nsClass.model.service.NsClassService;
-
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
-
 
 @Controller
 public class NsClassController {
@@ -31,9 +30,9 @@ public class NsClassController {
 	private FileRename fileRename;
 	
 	@RequestMapping(value = "/classList.do")
-	public String classList(Model model) {
+	public String classList(NsClass nc, Model model) {
 		// 만약 category가 null이면,
-		ArrayList<NsClass> claList = service.selectAllClass();
+		ArrayList<NsClass> claList = service.selectClassList(nc);
 		model.addAttribute("claList", claList);
 		return "class/classList";
 	}
@@ -111,10 +110,12 @@ public class NsClassController {
 		nsCl.setFileList(list);
 		int result = service.insertClass(nsCl);
 		System.out.println("아래서 확인:"+nsCl);
+	
 		if(result>0) {
-			return "redirect:/adminMgrClass.do?reqPage=1";
+			return "admin/adminMgrClass";
 		}else {
-			return "redirect:/adminMgrClass.do?reqPage=1";
+			return "admin/adminMgrClass";
+	
 		}
 		
 	}
