@@ -43,4 +43,9 @@ public class ClubDao {
 	public int insertClubBoard(ClubBoard cb) {
 		return sqlSession.insert("club.insertClubBoard", cb);
 	}
+
+	public ArrayList<ChatRecord> getClubChatRecord(int clubNo) {
+		List list = sqlSession.selectList("club.getClubChatRecord", clubNo);
+		return (ArrayList<ChatRecord>)list;
+	}
 }

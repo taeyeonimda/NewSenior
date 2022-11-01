@@ -50,4 +50,8 @@ public class ClubService {
 	public int insertClubBoard(ClubBoard cb) {
 		return dao.insertClubBoard(cb);
 	}
+
+	public ArrayList<ChatRecord> getClubChatRecord(String clubNo) {
+		return dao.getClubChatRecord(Integer.parseInt(clubNo));
+	}
 }
