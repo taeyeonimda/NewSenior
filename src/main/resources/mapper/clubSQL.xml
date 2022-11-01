@@ -35,11 +35,15 @@
 		select
 			club_board_no as clubBoardNo,
 			club_no as clubNo,
-			member_no as clubBoardWriter,
+			(select nickname from members m where m.member_no = c.member_no) as clubBoardWriter,
 			club_board_content as clubBoardContent,
 			club_board_date as clubBoardDate,
 			filepath as clubBoardFilepath
-		from club_boards
+		from club_boards c
 		where club_no = #{clubNo }
+		order by club_board_date desc
 	</select>
+	<insert id="insertClubBoard" parameterType="cb">
+		insert into club_boards values (club_boards_seq.nextval, #{clubNo }, #{memberNo }, #{clubBoardContent }, to_char(sysdate, 'yyyy-mm-dd'), #{clubBoardFilepath })
+	</insert>
 </mapper>

@@ -14,4 +14,5 @@ public class ClubBoard {
 	private String clubBoardContent;
 	private String clubBoardDate;
 	private String clubBoardFilepath;
+	private int memberNo;
 }

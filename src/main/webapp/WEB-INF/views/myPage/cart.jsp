@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html>
 <html
   lang="en"
@@ -13,6 +15,7 @@
 <head>
     <meta charset="utf-8">
     <title>Gardener - Gardening Website Template</title>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -197,36 +200,41 @@
                         <td>무료배송</td>
                         <td>가격 x 수량</td>
                       </tr>
-                      <tr style="text-align: center;">
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">달고나</td>
-                        <td>3000원</td>
-                        <td>
-                          <div class="col-md-10">
-                            <input class="form-control" type="text" id="html5-text-input" />
-                          </div>
-                        </td>
-                        <td>무료배송</td>
-                        <td>가격 x 수량</td>
+                      <tr>
+                      	<td colspan="4"></td>
+                      	<td>결제할 총 금액</td>
+                      	<td><input type="text" style="border:none;" class="sumPrice" value="100" readonly></td>
                       </tr>
-                      <tr style="border-top: 1px solid #ddd;">
-                        <td colspan="4"></td>
-                        <td colspan="2">
-                          <div style="font-weight: 700; font-size: 20px; color: black;">총 상품금액 <span style="color: blue;">AA</span> + 배송비  <span style="color: blue;">BB</span></div>
-                          <div style="font-weight: 900; font-size: 30px; color: black;">총 결제금액  <span style="color: red;">AA+BB</span> </div>
-                        </td>
-                      </tr>
+					<c:forEach items="${list }" var="m">
+						<tr>
+							<td>
+								<input type="checkbox" id="check1" class="cart-check">
+							</td>
+							<td>
+								${m.productName }
+							</td>
+							<td>
+								${m.buyPrice }
+							</td>
+							<td>
+								${m.buyAmount }
+							</td>
+							<td>
+								무료배송
+							</td>
+							<td>
+								(${m.buyPrice } * ${m.buyAmount })
+							</td>
+						</tr>
+					</c:forEach>
                     </tbody>
                   </table>
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
-                    <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">결제하기</a>
+                    <button style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
                     <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
                   </div>
                 </div>
               </div>
-
-
-             
 </div></div>
   
             <!-- / Content -->
@@ -309,5 +317,32 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    	<script>
+		$("#payBtn").on("click",function(){
+			const price = $(".sumPrice").val();
+			const d = new Date();
+			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			
+			IMP.init("imp10385324");
+			IMP.request_pay({
+				pg: "html5_inicis",
+				merchat_uid : "상품코드_"+date, 		// 거래 ID
+				name : "결제 테스트",			  		// 결제 이름
+				amount : price,						// 결제 금액
+				buyer_email : "wnstjr5558@naver.com",	// 구매자 이메일
+				buyer_name : "구매자",				// 구매자
+				buyer_tel : "010-1234-1234",		// 구매자 전화번호
+				buyer_addr : "서울시 영등포구 당산동",	// 구매자 주소
+				buyer_postcode : "12345"			// 구매자 우편변호
+			
+			},function(rsp){
+				if(rsp.success){
+					alert("결제 성공");
+				}else{
+					alert("결제 실패");
+				}
+			});
+		});
+	</script>
   </body>
 </html>

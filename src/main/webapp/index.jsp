@@ -12,6 +12,9 @@
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
+    
+    <!-- googleIcon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,7 +105,7 @@
                     <div class="bg-white shadow d-flex align-items-center h-100 px-5" style="min-height: 160px;">
                         <div class="d-flex">
                             <div class="flex-shrink-0 btn-lg-square rounded-circle bg-light">
-                                <i class="fa fa-times text-primary"></i>
+                            	<i class="fa fa-users text-primary"></i>
                             </div>
                             <div class="ps-3">
                                 <h4>동호회</h4>
@@ -115,11 +118,11 @@
                     <div class="bg-white shadow d-flex align-items-center h-100 px-5" style="min-height: 160px;">
                         <div class="d-flex">
                             <div class="flex-shrink-0 btn-lg-square rounded-circle bg-light">
-                                <i class="fa fa-users text-primary"></i>
+                                <span class="material-symbols-outlined" style="font-weight : 900; color:#348e38;">directions_run</span>
                             </div>
                             <div class="ps-3">
                                 <h4>액티비티</h4>
-                                <span>지루한 모임은 그만!<br> 활발한 활동을 원한다면<br>지금 당장 여기로!</span>
+                                <span>지루한 모임은 그만!<br> 활발한 활동을 좋아한다면 여기로!</span>
                             </div>
                         </div>
                     </div>
@@ -128,7 +131,7 @@
                     <div class="bg-white shadow d-flex align-items-center h-100 px-5" style="min-height: 160px;">
                         <div class="d-flex">
                             <div class="flex-shrink-0 btn-lg-square rounded-circle bg-light">
-                                <i class="fa fa-phone text-primary"></i>
+                                <span class="material-symbols-outlined" style="font-weight : 900; color:#348e38;">school</span>
                             </div>
                             <div class="ps-3">
                                 <h4>클래스</h4>

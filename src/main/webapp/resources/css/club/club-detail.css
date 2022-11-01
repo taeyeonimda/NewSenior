@@ -27,7 +27,7 @@
 /* 클럽리스트 동호회 모달 */
 
 .club-info-modal{
-    background-color: #859398;
+    background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
     width: 50%;
     height: 77%;
@@ -51,13 +51,14 @@
     border:1px solid #cecece;
     width: 76%;
     height: 15%;
+    min-height: 70%;
     margin: 0 auto;
     margin-top: 20px;
     padding: 20px;
 }
 .modal-img{
-    max-width: 66%;
-    max-height: 20%;
+    max-width: 90%;
+    max-height: 90%;
 }
 .modal-img-div{
     display:table-cell;
@@ -86,6 +87,35 @@
 
 
 /*----------------- club-detail -----------------*/
+.club-container{
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+	margin-bottom: 20px;
+}
+.club-board-div{
+	margin-left: 120px;
+}
+/* 클럽 게시판 이미지 div안에 맞춰 넣는 css*/
+.ml-20{
+	margin-left: 30px;
+}
+.clubBoardTitle{
+    text-align:center;
+    display:table;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    width: 230px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+.clubBoardImgBox{
+    display:table-cell;
+    vertical-align:middle;
+}
+.clubBoardImg{
+    max-width: 230px;
+    max-height: 120px;
+}
+
+
 /* The sidebar menu */
 .sidenav-right {
     width: 18%;
@@ -97,7 +127,7 @@
     background: #eee;
     overflow-x: hidden;
     padding: 8px 0;
-    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     text-align: center;
     visibility: visible !important;
 }
@@ -117,7 +147,7 @@
     background: #eee;
     overflow-x: hidden;
     padding: 8px 0;
-    border-radius: 5px;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
     text-align: center;
     display: flex;
 	flex-direction: row-reverse;
@@ -128,8 +158,9 @@
     margin: 0 auto;
 }
 .center-div{
-    width: 55%;
+    width: 53%;
     margin: 0 auto;
+    min-height: 1200px;
 }
 
 /* absolute */
@@ -169,6 +200,51 @@
 
 
 
+
+
+/*글쓰기 모달*/
+.write-modal-wrap{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.21);
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    z-index: 10;
+    align-items: center;
+}
+.modal-write{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    width: 500px;
+    height: 550px;
+    align-items: center;
+    text-align: center;
+    border-radius: 25px;
+}
+.writeModalTop h1{
+    text-align: center;
+    margin: 30px auto;
+    font-size: 24px;
+    line-height: 24px;
+}
+.writeModalTop>div{
+	width: 80%;
+	text-align: right;
+}
+.writeModalContent{
+	height: 80%;
+}
+.writeModalInputBox{
+	height: 80%;
+}
+textarea[name=clubBoardContent]{
+	resize: none;
+	width: 80%;
+	height: 80%;
+}
 /*채팅모달*/
 .modal-wrap{
     width: 100vw;
@@ -282,3 +358,68 @@
 
 
 
+
+
+
+
+/* board-comment */
+.commentBox>ul{
+	list-style-type: none;
+	margin: 0;
+	display : flex;
+}
+.commentBox>ul>li:first-child{
+	width: 10%;
+	min-height: 100px;
+}
+.commentBox>ul>li:nth-child(2){
+	width:75%
+}
+.inputCommentBox>form>button{
+	margin-bottom: 34px;
+	margin-left: 20px;
+}
+textarea[name=clubComContent]{
+	resize: none;
+	height: 42px;
+	line-height: 25px;
+	overflow: inherit;
+}
+.comment-link{
+	text-align: right;
+}
+.comment-link>a{
+	margin-left: 10px;
+}
+.inputCommentBox{
+	margin-left: 20px;
+}
+.inputRecommentBox{
+	margin-top: 20px;
+	margin-left: 30px;
+	display: flex;
+}
+.inputRecommentBox>form>ul{
+	list-style-type:none;
+	display : flex;
+}
+.inputRecommentBox>form>ul>li:first-child{
+	width: 15%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.inputRecommentBox>form>ul>li:first-child>span{
+	font-size: 50px;
+	color : #ccc;
+}
+.inputRecommentBox>form>ul>li:nth-child(2){
+	width:75%
+}
+.inputRecommentBox>form>ul>li:nth-child(2)>textarea{
+	height: 96px;
+	min-height: 96px;
+}
+.inputRecommentBox>form>ul>li:last-child{
+	width:10%
+}

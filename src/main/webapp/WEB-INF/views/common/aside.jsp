@@ -7,9 +7,17 @@
 
             <!-- 회원관리 -->
             <li class="menu-item active">
-              <a href="memberMgrAdmin.do" class="menu-link">
+              <a href="/adminPage.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">회원 관리</div>
+              </a>
+            </li>
+            
+            <!-- Tables -->
+            <li class="menu-item">
+              <a href="/adminMgrClass.do?reqPage=1" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">클래스관리(관리자페이지)</div>
               </a>
             </li>
 
@@ -60,13 +68,6 @@
               </a>
             </li>
 
-            <!-- Tables -->
-            <li class="menu-item">
-              <a href="classMgrAdmin.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">클래스관리(관리자페이지)</div>
-              </a>
-            </li>
 
             <!-- 장바구니 -->
             <li class="menu-item ">
@@ -83,5 +84,12 @@
                 <div data-i18n="Basic Inputs">마이페이지</div>
               </a>
             </li>
+                      <!-- 주문내역 -->
+          <li class="menu-item active">
+            <a href="orderHistory.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">주문내역</div>
+            </a>
+          </li>
           </ul>
         </aside>

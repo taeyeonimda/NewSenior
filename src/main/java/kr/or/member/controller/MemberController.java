@@ -1,10 +1,15 @@
 package kr.or.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.member.model.service.MemberService;
+import kr.or.member.model.vo.Member;
 
 @Controller
 public class MemberController {
@@ -17,10 +22,12 @@ public class MemberController {
 	public String memberMgrAdmin() {
 		return "myPage/memberMgrAdmin";
 	}
+	/*
 	@RequestMapping(value="/mypage.do")
 	public String insertProductFrm() {
 		return "myPage/mypage";
 	}
+	 */
 	@RequestMapping(value="/orderHistory.do")
 	public String orderHistory() {
 		return "myPage/orderHistory";
@@ -53,10 +60,7 @@ public class MemberController {
 	public String cart() {
 		return "myPage/cart";
 	}
-	@RequestMapping(value="/classEnroll.do")
-	public String classEnroll() {
-		return "myPage/classEnroll";
-	}
+	
 	@RequestMapping(value="/classMgrAdmin.do")
 	public String classMgrAdmin() {
 		return "myPage/classMgrAdmin";
@@ -66,5 +70,39 @@ public class MemberController {
 		return "myPage/classMgrTeacher";
 	}
 	
+	//로그인
+	@RequestMapping(value="/login.do")
+	public String loginCheckMember(Member m, HttpSession session) {
+		Member member = service.loginCheckMember(m);
+		if(member!= null) {
+			session.setAttribute("m", m);
+			return "redirect:/";
+		}else {
+			return "redirect:/";
+		}
+	}
+	
+	//로그아웃
+		@RequestMapping(value = "/logout.do")
+		public String logout(HttpSession session) {
+			session.invalidate();
+			return "redirect:/";
+
+		}
+		
+		//마이페이지가기
+		@RequestMapping(value = "/mypage.do")
+		public String mypageFrm(Model model, @SessionAttribute Member m) {
+			Member m1 = new Member();
+			m1.setMemberId(m.getMemberId());
+			m1.setMemberPw(m.getMemberPw());
+			Member member = service.selectOneMember(m1);
+			if (member != null) {
+				model.addAttribute("member", member);
+				return "myPage/mypage";
+			} else {
+				return "redirect:/";
+			}
+		}
 
 }

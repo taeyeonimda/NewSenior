@@ -10,19 +10,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-	private int memberNo;
-	private String memberId;
+	private int memberNo; //PRIMARY KEY
+	private String memberId; //UNIQUE
 	private String memberPw;
 	private String memberName;
 	private String memberPhone;
 	private String memberEmail;
 	private String memberAddr;
-	private int memberGrade;	// 1회원 2강사 3관리자
+	private int memberGrade;	// 1회원 2강사 3관리자 NOT NULL
 	private String memberBirth;	// YYYY-MM-DD
 	private String enrollDate;	// YYYY-MM-DD
 	private String nickName;
-	private Date memberState;	// 회원탈퇴시 날짜넣고 몇일뒤 자동삭제
-	private String memberImg;
-	private char favorite;
+	private Date memberState;	// NOT NULL 회원탈퇴시 날짜넣고 몇일뒤 자동삭제
+	private String memberImg; //UNIQUE
+	private String favorite; //(N/dg/fu/cr/de/ex/fs/me/so/fo/co)
 	
 }

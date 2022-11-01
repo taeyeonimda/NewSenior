@@ -13,6 +13,7 @@ $("#minus").on("click",function(){
     Qty.text(minusQty);
     const amount = Qty.text(minusQty);
     sumPrice = price * minusQty;
+    console.log(price,minusQty);
 	$(".sumPrice").val(sumPrice);
     
 });
@@ -28,6 +29,7 @@ $("#plus").on("click",function(){
     Qty.text(plusQty);
     const amount = Qty.text(plusQty);
     sumPrice = price * plusQty;
+    console.log(price,plusQty);
 	$(".sumPrice").val(sumPrice);
     
 });

@@ -93,4 +93,25 @@ public class ProductController {
 		model.addAttribute("p",p);
 		return "product/productView";
 	}
+	
+	@RequestMapping(value = "/deleteProduct.do")
+	public String deleteProduct(int productNo, HttpServletRequest request) {
+		ArrayList<ProductFileVO> list = service.deleteProduct(productNo);
+		if(list != null) {
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+			for(ProductFileVO file : list) {
+				File delFile = new File(path+file.getFilePath());
+				delFile.delete();
+			}
+		}
+		return "redirect:/productList.do?reqPage=1";
+	}
+	
+	@RequestMapping(value = "/productUpdateFrm.do")
+	public String productUpdateFrm(int productNo, Model model) {
+		Product p = service.productView(productNo);
+		model.addAttribute("p",p);
+		return "product/productUpdateFrm";
+	}
+	
 }

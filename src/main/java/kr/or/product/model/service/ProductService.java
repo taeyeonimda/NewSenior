@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.board.model.vo.Board;
 import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
@@ -85,4 +86,16 @@ public class ProductService {
 		p.setProductFileVO(pf);
 		return p;
 	}
+
+	public ArrayList<ProductFileVO> deleteProduct(int productNo) {
+		ArrayList<ProductFileVO> fileList = dao.allProductFile(productNo);
+		
+		int result = dao.deleteProduct(productNo);
+		if(result>0) {
+			return fileList;
+		} else {
+			return null;
+		}
+	}
+
 }

@@ -53,7 +53,8 @@
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
         <!-- Menu -->
-<%@include file="/WEB-INF/views/common/aside.jsp" %>
+	<%@include file="/WEB-INF/views/common/aside.jsp" %>
+	
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -73,19 +74,19 @@
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input" />
+                      <input class="form-control" type="text" id="html5-text-input" value="${member.memberName }" readonly/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">아이디</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input" />
+                      <input class="form-control" type="text" id="html5-text-input"value="${member.memberId }" readonly/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">이메일</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="email"  id="html5-email-input" />
+                      <input class="form-control" type="email"  id="html5-email-input" value="${member.memberEmail }"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -97,15 +98,38 @@
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">생년월일</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" />
+                      <input class="form-control" type="url" id="html5-url-input" value="${member.memberBirth }"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-url-input" class="col-md-2 col-form-label">전화번호</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" />
+                      <input class="form-control" type="url" id="html5-url-input" value="${member.memberPhone }"/>
                     </div>
                   </div>
+                <!-- 
+                  관심분야: <select name="favorite" >
+				<option value="n" <c:if test="${member.favorite =='n'}">selected</c:if>>선택안함</option>
+				<option value="dg" <c:if test="${member.favorite =='dg'}">selected</c:if>>디지털</option>
+				<option value="fu" <c:if test="${member.favorite=='fu'}">selected</c:if>>주식/재테크</option>
+				<option value="cr"<c:if test="${member.favorite =='cr'}">selected</c:if>>공예</option>
+				<option value="de" <c:if test="${member.favorite =='de'}">selected</c:if>>디자인</option>
+				<option value="ex" <c:if test="${member.favorite=='ex'}">selected</c:if>>운동/건강</option>
+				<option value="fs" <c:if test="${member.favorite =='fs'}">selected</c:if>>패션</option>
+				<option value="me" <c:if test="${member.favorite =='me'}">selected</c:if>>미디어</option>
+				<option value="so" <c:if test="${member.favorite =='so'}">selected</c:if>>악기/노래</option>
+				<option value="fo" <c:if test="${member.favorite =='fo'}">selected</c:if>>외국어</option>
+				<option value="co" <c:if test="${member.favorite =='co'}">selected</c:if>>요리/제과제빵</option>
+			</select>
+                
+                 -->  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">관심분야</label>
                     <div class="btn-group" style="width: 150px;">

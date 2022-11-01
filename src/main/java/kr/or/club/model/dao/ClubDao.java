@@ -39,4 +39,8 @@ public class ClubDao {
 		List list = sqlSession.selectList("club.selectAllClubBoard", clubNo);
 		return (ArrayList<ClubBoard>)list;
 	}
+
+	public int insertClubBoard(ClubBoard cb) {
+		return sqlSession.insert("club.insertClubBoard", cb);
+	}
 }

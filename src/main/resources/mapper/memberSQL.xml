@@ -47,9 +47,57 @@
     from members
 	</select>
 	 -->
-	 
-	 
 	<select id="totalCount" resultType="int">
 		select count(*) from members
 	</select>
+	<!-- 로그인 -->
+	<select id="selectLogin" parameterType="m" resultType="m">
+	select
+			member_id as memberId,
+			member_pw as memberPw
+	from members
+	where member_id=#{memberId} 
+	<if test="memberPw != null">
+		and member_pw=#{memberPw}
+	</if>
+	</select>
+	
+	<select id="selectOneMember" parameterType="m" resultType="m">
+	select
+		 member_no as memberNo,
+		 member_id as memberId,
+		 member_pw as memberPw,
+		 member_name as memberName,
+		 member_phone as memberPhone,
+		 member_email as memberEmail,
+		 member_addr as memberAddr,
+		 member_grade as memberGrade,
+		 member_birth as memberBirth,
+		 enroll_date as memberDate,
+		 nickName as memberNickname,
+		 member_state as memberState,
+		 member_img as memberImg,
+		 favorite
+	 from members
+	 where 
+	 <if test="memberId != null">
+	 	member_id=#{memberId}
+	 </if>
+	 <if test="memberName != null">
+	 	member_name=#{memberName}
+	 </if>
+	 <if test="nickName != null">
+		nickname=#{nickName}
+	 </if>
+	 <if test="memberPw != null">
+	 	and member_pw=#{memberPw}
+	 </if>
+	 <if test="memberPhone != null">
+	 	and member_phone=#{memberPhone}
+	 </if>
+	 <if test="memberEmail != null">
+	 	and member_email=#{memberEmail}
+	 </if>
+	</select>
+	
 </mapper>
