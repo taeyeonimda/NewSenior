@@ -24,6 +24,7 @@ public class NsClass {
 	private String teacherName; // 조인써서 이름불러옴
 	private String teacherIntroduce;
 	private String curriculum;
+	private String dayDate;//start,end 일수로 변환
 	private ArrayList<FileVo> fileList;
 }
 	

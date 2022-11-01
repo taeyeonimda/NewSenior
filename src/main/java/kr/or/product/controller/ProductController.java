@@ -114,4 +114,47 @@ public class ProductController {
 		return "product/productUpdateFrm";
 	}
 	
+	@RequestMapping(value = "/productUpdate.do")
+	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList) {
+		
+		ArrayList<ProductFileVO> flist = new ArrayList<ProductFileVO>();
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+		if(!productFile[0].isEmpty()) {
+			for(MultipartFile file : productFile) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileRename.productFileRename(savePath, filename);
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ProductFileVO pfile = new ProductFileVO();
+				pfile.setFileName(filename);
+				pfile.setFilePath(filepath);
+				pfile.setProductNo(p.getProductNo());
+				flist.add(pfile);
+			}
+		}
+		p.setProductFileVO(flist);
+		int result = service.productUpdate(p,flist);
+		if(productpathList != null && result ==(flist.size()+1)) {
+			if(productpathList != null) {
+				for(String productpath : productpathList) {
+					File delFile = new File(savePath+productpath);
+					delFile.delete();
+				}
+			}
+		}
+		return "redirect:/productList.do?reqPage=1";
+	}
+	
 }

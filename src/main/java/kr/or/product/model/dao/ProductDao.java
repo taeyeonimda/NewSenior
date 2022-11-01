@@ -20,7 +20,7 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.allProduct",map);
 		return (ArrayList<Product>)list;
 	}
-
+	
 	public int selectProductCount() {
 		return sqlSession.selectOne("product.selectCount");
 	}
@@ -51,6 +51,16 @@ public class ProductDao {
 	public Product selectOneProduct(int productNo) {
 		return sqlSession.selectOne("product.productView",productNo);
 	}
+
+	public int productUpdate(Product p) {
+		return sqlSession.update("product.productUpdate",p);
+	}
+
+	public int deleteProductFile(int productNo) {
+		
+		return sqlSession.delete("product.deleteProductFile",productNo);
+	}
+
 
 	
 

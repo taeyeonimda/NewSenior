@@ -70,7 +70,6 @@ public class ProductService {
 
 	public int insertProduct(Product p) {
 		int result = dao.insertProduct(p);
-		System.out.println(p.getProductNo());
 		if(result > 0) {
 			for(ProductFileVO pfv : p.getProductFileVO()) {
 				pfv.setProductNo(p.getProductNo());
@@ -96,6 +95,18 @@ public class ProductService {
 		} else {
 			return null;
 		}
+	}
+
+	public int productUpdate(Product p, ArrayList<ProductFileVO> flist) {
+		int result = dao.productUpdate(p);
+		if(result > 0) {
+			for(ProductFileVO pfv : flist) {
+				pfv.setProductNo(p.getProductNo());
+				result += dao.deleteProductFile(p.getProductNo());
+				result += dao.insertProductFile(pfv);
+			}
+		}
+		return result;
 	}
 
 }

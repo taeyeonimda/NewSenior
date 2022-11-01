@@ -85,7 +85,7 @@
               </a>
             </li>
                       <!-- 주문내역 -->
-          <li class="menu-item active">
+          <li class="menu-item">
             <a href="orderHistory.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">주문내역</div>

@@ -91,7 +91,7 @@
                         <td>${NsClass.classNo }</td>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${NsClass.className }</strong></td>
                         <td>${NsClass.teacherName }</td>
-                        <td>${NsClass.endDate }-${NsClass.startDate  }</td>
+                        <td>${NsClass.dayDate}</td>
                         <td>${NsClass.classPrice }</td>
                         <td><span class="badge bg-label-primary me-1">${NsClass.classStatus }</span></td>
                         <td>
@@ -124,24 +124,30 @@
                 <div class="table-responsive text-nowrap">
                   
                   <table class="table table-borderless">
-                    <thead>
+                    <thead> 
                       <tr>
                         <th>번호</th>
                         <th style="padding-left: 35px;">클래스명</th>
                         <th>강사</th>
                         <th>기간</th>
-                        <th>가격</th>
                         <th>상태</th>
-                        <th>승인</th>
                       </tr>
                     </thead>
                     <tbody>
+                    
+                     <c:forEach items="${holdClass }" var="hCla">
                       <tr>
-                        <td>1</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>준석이 클래스</strong></td>
-                        <td>준석</td>
-                        <td>3주</td>
-                        <td>10000원</td>
+                        <td class="hClaNo">${hCla.classNo}</td>
+                      
+                        <td onclick="moveDetail(${hCla.classNo})"><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                         <strong>${hCla.className	}</strong></td>
+                        <script>
+                        function moveDetail(classNo){
+                        	location.href="/classUpdateFrm.do?classNo="+classNo;
+                        }
+                        </script>
+                        <td>${hCla.teacherName }</td>
+                        <td>${hCla.dayDate }일</td>
                         <td><span class="badge bg-label-primary me-1">보류</span></td>
                         <td>
                           <div class="dropdown">
@@ -162,142 +168,8 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>태연이 클래스</strong></td>
-                        <td>태연</td>
-                        <td>3주</td>
-                        <td>50000원</td>
-                        <td><span class="badge bg-label-success me-1">미확인</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                              ><i class="bx bx-edit-alt me-1"></i>보류</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>은비 클래스</strong></td>
-                        <td>은비</td>
-                        <td>3주</td>
-                        <td>1000원</td>
-                        <td><span class="badge bg-label-info me-1">미확인</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                              ><i class="bx bx-edit-alt me-1"></i>보류</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>
-                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>혜진이 클래스</strong>
-                        </td>
-                        <td>혜진</td>
-                        <td>3주</td>
-                        <td>30000원</td>
-                        <td><span class="badge bg-label-warning me-1">승인예정</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                              ><i class="bx bx-edit-alt me-1"></i>보류</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>
-                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>태곤이 클래스</strong>
-                        </td>
-                        <td>태곤</td>
-                        <td>3주</td>
-                        <td>5000원</td>
-                        <td><span class="badge bg-label-warning me-1">승인예정</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                              ><i class="bx bx-edit-alt me-1"></i>보류</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>
-                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>현주 클래스</strong>
-                        </td>
-                        <td>현주</td>
-                        <td>3주</td>
-                        <td>20000원</td>
-                        <td><span class="badge bg-label-warning me-1">승인예정</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                              ><i class="bx bx-edit-alt me-1"></i>보류</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
+                      </c:forEach>
+                      
                     </tbody>
                   </table>
                 </div>
