@@ -69,218 +69,122 @@
 
                 <div class="col-xl-6">
                   <!-- HTML5 Inputs -->
-                <form action="#">
+                <form action="#" style="width:1200px">
                   <div class="card mb-4">
                     <h5 class="card-header" style="text-align: center;">클래스 등록하기</h5>
                     <div class="card-body">
                       <div class="mb-3 row">
                         <label for="html5-text-input" class="col-md-2 col-form-label">클래스명</label>
                         <div class="col-md-10">
-                          <input class="form-control" name='className' type="text" id="html5-text-input" />
+                          <input class="form-control" name='className' type="text" id="html5-text-input" readonly value="${cla.className }" />
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                         <div class="col-md-10">
-                          <input type="file" name = 'files' class="btn btn-outline-primary">
+                          <input type="image" name = 'files' disabled src="resources/upload/class/${cla.filepath }" class="btn btn-outline-primary">
                         </div>
                       </div>
+                     	
                       <div class="mb-3 row">
                         <label for="html5-email-input" class="col-md-2 col-form-label">강사명</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = 'teacherName' type="email"  id="html5-email-input" />
+                          <input class="form-control" name = 'teacherName' type="email"  id="html5-email-input" value="${cla.teacherName }" readonly/>
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-url-input" class="col-md-2 col-form-label">강사소개</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = "teacherIntroduce" type="url" id="html5-url-input" />
+                          <input class="form-control" name = "teacherIntroduce" type="url" id="html5-url-input" value="${cla.teacherIntroduce }" readonly/>
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">커리큘럼</label>
                         <div class="col-md-10">
-                          <input class="form-control" name= "curriculum" type="tel" id="html5-tel-input" />
+                          <input class="form-control" name= "curriculum" type="tel" id="html5-tel-input" value="${cla.curriculum }"  readonly/>
                         </div>
                       </div>
                     
                       <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">클래스 상세</label>
+                        <label for="html5-detail-input" class="col-md-2 col-form-label">클래스 상세</label>
                         <div class="col-md-10">
-                          <input type="file" class="form-control" name="detailFiles" id="html5-tel-input" multiple/>
+                          <c:forEach items="${cla.fileList }" var="files">
+                      		<input type="image" name = 'files' id="html5-detail-input" disabled src="resources/upload/class/${files.filepath }" class="btn btn-outline-primary">
+                      	</c:forEach>
                         </div>
                       </div>
 				
                       <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">수강기간</label>
+                        <label for="html5-period-input" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = "startDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="시작일 ex) 20221024"/>
+                          <input class="form-control" name = "startDate" type="tel" id="html5-period-input" style="width: 200px; display: inline-block;" value="${cla.startDate }" readonly/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
-                          <input class="form-control" name ="endDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="종료일 ex) 20221024"/>
+                          <input class="form-control" name ="endDate" type="tel"  style="width: 200px; display: inline-block;" value="${cla.endDate }" readonly/>
                         </div>
                       </div>
 
-                      <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label" for="category">카테고리</label>
-                        <select name="category">
-                         <c:forEach items="${category }" var="cate">
-                        	<option value="${cate }">${cate }</option>
-                        </c:forEach>
-                        </select>
+                    <div class="mb-3 row">
+                        <label for="html5-category-input" class="col-md-2 col-form-label">카테고리</label>
+                        <div class="col-md-10">
+                          <input class="form-control"  id="html5-category-input" value="${cla.classCategory }" readonly/>
+                        </div>
+                      </div>
+                     
+                       <div class="mb-3 row">
+                        <label for="html5-total-input" class="col-md-2 col-form-label">모집인원</label>
+                        <div class="col-md-10">
+                          <input class="form-control" id="html5-total-input" value="${cla.classLimit } 명" readonly/>
+                        </div>
                       </div>
                       
-                      <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label" for="classLimit">모집정원</label>
-                        	<select name="classLimit">
-                        		
-                        	</select>
-                        	<script>
-                        	 
-                        	</script>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="products" class="col-md-2 col-form-label">준비물유무</label>
-                        <select name = "products">
-                        	<option value="1">O</option>
-                        	<option value="0">X</option>
-                        </select>
-                      
-                      </div>
-                      <a id="subBtn" href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
+                       <div class="mb-3 row">
+                        <label for="html5-products-input" class="col-md-2 col-form-label">준비물</label>
+	                        <div class="col-md-10">
+	                        <c:if test='${cla.products == 48}'>
+	 							<input class="form-control"  id="html5-products-input" value="준비물 필요없음" readonly/>	
+	              			</c:if>
+	              			<c:if test='${cla.products == 49}'>
+	 							<input class="form-control"  id="html5-products-input" value="준비물 필요" readonly/>	
+	              			</c:if>
+	              			 </div>
+              			</div>
+						<div class="mb-3 row">
+							<label for="html5-price-input" class="col-md-2 col-form-label">가격</label>
+							<div class="col-md-10">
+								<input type="number" class="form-control" id="html5-price-input" name = "price"/>
+							</div>
+						</div>
+
+	<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+	}
+</style>
+
+
+
+
+
+
+
+							<a id="subBtn" onclick="changeStatus(${cla.classNo },)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
                     </div>
                   </div>
-                  
+                  <script>
+					function changeStatus(classNo){
+						classPrice= $("#html5-price-input").val();
+						location.href="/chnageStatus.do?classNo="+classNo+"&classPrice="+classPrice;
+					}
+				</script>
                 </form>
                   <!-- File input -->
                </div></div></div>
             <!-- / Content -->
-	<script>
-	//인원수 옵션값넣기
-	const limitSelect = $("select[name=classLimit]");
- 	for(let i=1;i<=30;i++){
- 		limitSelect.append(
- 				$('<option>').prop({
- 					innerHTML: i+'명',
- 					value: i
- 				})
- 				)
- 	}
 	
-		$("#subBtn").on("click",function(){
-			const className = $("input[name=className]").val();
-			const files = document.querySelector("input[name=files]").files[0];
-			const teacherName = $("input[name=teacherName]").val();
-			const teacherIntroduce = $("input[name=teacherIntroduce]").val();
-			const curriculum =$("input[name=curriculum]").val();
-			const startDate = $("input[name=startDate]").val();
-			const endDate = $("input[name=endDate]").val();
-			const category = $("select[name=category]").val();
-			const classLimit = $("select[name=classLimit]").val();
-			const products = $("select[name=products]").val();
-			
-			const files2 = document.querySelector("input[name=detailFiles]").files;
-		
-			
-			if(className==""){
-				alert("비어있음");
-				return false;
-			}
-			if(files==""){
-				alert("비어있음");
-				return false;
-			}
-			if(teacherName==""){
-				alert("비어있음");
-				return false;
-			}
-			if(teacherIntroduce==""){
-				alert("비어있음");
-				return false;
-			}
-			if(curriculum==""){
-				alert("비어있음");
-				return false;
-			}
-			if(startDate==""){
-				alert("비어있음");
-				return false;
-			}
-			if(endDate==""){
-				alert("비어있음");
-				return false;
-			}
-			
-			if(category==""){
-				alert("비어있음");
-				return false;
-			}
-
-			if(classLimit ==""){
-				alert("비어있음");
-				return false;
-			}
-			
-			if(products==""){
-				alert("비어있음");
-				return false;
-			}
-			
-			
-			console.log("files2::::"+files2)
-			console.log("files2길이::::"+files2.length)
-			
-			var formData = new FormData();
-			formData.append('className',className);
-			formData.append('files', files);
-			formData.append('teacherName',teacherName);
-			formData.append('teacherIntroduce',teacherIntroduce);
-			formData.append('curriculum',curriculum);
-			formData.append('startDate',startDate);
-			formData.append('endDate',endDate);
-			formData.append('classCategory',category);
-			formData.append('classLimit',classLimit);
-			formData.append('products',products);
-			for(let i=0;i<files2.length;i++){
-				formData.append('detailFiles',files2[i]);
-			}
-			
-
-			
-			
-		
-			
-			
-			
-			console.log(formData.get("className"));
-			console.log(formData.get("files"));
-			console.log(formData.get("teacherName"));
-			console.log(formData.get("teacherIntroduce"));
-			console.log(formData.get("curriculum"));
-			console.log(formData.get("startDate"));
-			console.log(formData.get("endDate"));
-			console.log(formData.get("classCategory"));
-			console.log(formData.get("classLimit"));
-			console.log(formData.get("products"));
-			console.log(formData.get("detailFiles"));
-			
-			$.ajax({
-	 			url : "/insertClass.do",
-				type:"post",
-				data: formData,
-				contentType: false,
-	            processData: false,
-	            enctype	: 'multipart/form-data',
-				success:function(){
-					location.href="adminMgrClass.do?reqPage=1";
-				},error:function(){
-					alert("error");
-				}
-				
-				
-	 		})//ajax
-			 
-		});
-	</script>
+	
+	
 
 
 
