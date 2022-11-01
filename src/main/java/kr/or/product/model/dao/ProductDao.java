@@ -63,8 +63,13 @@ public class ProductDao {
 	}
 
 	public int insertReview(ProductReview pr) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sqlSession.insert("product.insertReview",pr);
+	}
+
+	public ArrayList<ProductReview> productReviewList(int productNo) {
+		List list = sqlSession.selectList("product.productReviewList",productNo);
+		return (ArrayList<ProductReview>)list;
 	}
 
 

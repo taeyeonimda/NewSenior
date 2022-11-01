@@ -17,18 +17,22 @@
   	from products order by 1 desc)p)
   	where rnum between #{start} and #{end}
   </select>
+  
   <select id="selectCount" resultType="int">
   	select count(*) from products
   </select>
+  
   <insert id="insertProduct" parameterType="p">
   	insert into products values(products_seq.nextval,#{productName},#{productPrice},#{productStatus},#{productCategory},#{productSubName},#{productQty},#{productContent})
   	<selectKey resultType="int" order="AFTER" keyProperty="productNo">
   		select max(product_no) from products
   	</selectKey>
   </insert>
+  
   <insert id="insertProductFile" parameterType="pf">
   	insert into product_file values(product_fileseq.nextval,#{productNo},#{fileName},#{filePath})
   </insert>
+  
   <select id="allProductFile" parameterType="_int" resultType="pf">
   	select 
   		product_fileno as fileNo,
@@ -40,6 +44,7 @@
   	where 
   		product_no = #{_parameter}
   </select>
+  
   <select id="productView" parameterType="_int" resultType="p">
   	select
   		product_no as productNo,
@@ -54,19 +59,39 @@
   	from products
   	where product_no = #{_parameter}
   </select>
+  
   <delete id="deleteProduct" parameterType="_int">
   	delete from products where product_no = #{_parameter}
   </delete>
+  
   <update id="productUpdate" parameterType="p">
   	update products 
   	set product_name = #{productName}, product_subname = #{productSubName}, product_price = #{productPrice}, 
   		product_qty = #{productQty}, product_category = #{productCategory}, product_status = #{productStatus}, product_content = #{productContent}
   	where product_no = #{productNo}
   </update>
+  
   <delete id="deleteproductFiles" parameterType="_int">
   	delete from product_file where product_fileno=#{_parameter}
   </delete>
+  
   <delete id="deleteProductFile" parameterType="_int">
   	delete from product_file where product_no=#{_parameter}
   </delete>
+  
+  <insert id="insertReview" parameterType="pr">
+  insert into product_reviews values(product_reviews_seq.nextval,#{reviewContent},to_char(sysdate,'yyyy-mm-dd'),#{reviewScore},#{memberId},#{productNo})
+  </insert>
+  
+  <select id="productReviewList" parameterType="_int" resultType="pr">
+  select 
+  	product_review_no as reviewNo,
+  	product_review_content as reviewContent,
+  	product_review_date as reviewDate,
+  	product_review_star as reviewScore,
+  	member_id as memberId,
+  	product_no as productNo
+  from product_reviews
+  where product_no = #{_parameter}
+  </select>
 </mapper>

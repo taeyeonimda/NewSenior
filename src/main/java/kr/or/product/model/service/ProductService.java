@@ -115,4 +115,9 @@ public class ProductService {
 		return dao.insertReview(pr);
 	}
 
+	public ArrayList<ProductReview> productReviewList(int productNo) {
+		ArrayList<ProductReview> prlist = dao.productReviewList(productNo);
+		return prlist;
+	}
+
 }

@@ -84,7 +84,9 @@ public class ProductController {
 	@RequestMapping(value = "/productView.do")
 	public String productView(int productNo, Model model) {
 		Product p = service.productView(productNo);
+		ArrayList<ProductReview> pr = service.productReviewList(productNo);
 		model.addAttribute("p",p);
+		model.addAttribute("prlist",pr);
 		return "product/productView";
 	}
 	
@@ -155,7 +157,13 @@ public class ProductController {
 	public String insertReview(ProductReview pr, Model model) {
 		System.out.println(pr);
 		int result = service.insertReview(pr);
-		return"";
+		return "redirect:/productView.do?productNo="+pr.getProductNo();
+	}
+	
+	@RequestMapping(value = "/productReviewList")
+	public String productReviewList(Model model, int productNo) {
+		
+		return "";
 	}
 	
 }
