@@ -83,7 +83,6 @@ public class NsClassService {
 				return npd;
 
 	}
-
 	@Transactional
 	public int insertClass(NsClass nsCl) {
 		int result = dao.insertClass(nsCl);
@@ -109,8 +108,13 @@ public class NsClassService {
 	}
 	
 	
+	
 	// 은비 클래스 리스트
 	public ArrayList<NsClass> selectClassList(NsClass nc) {
 		return dao.selectClassList(nc);
+	}
+	// 은비 클래스 detail
+	public NsClass selectOneClass(NsClass nc) {
+		return dao.selectOneClass(nc);
 	}
 }

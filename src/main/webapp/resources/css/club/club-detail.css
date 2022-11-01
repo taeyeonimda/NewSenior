@@ -91,9 +91,7 @@
 	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 	margin-bottom: 20px;
 }
-.club-board-div{
-	margin-left: 120px;
-}
+
 /* 클럽 게시판 이미지 div안에 맞춰 넣는 css*/
 .ml-20{
 	margin-left: 30px;
@@ -101,9 +99,9 @@
 .clubBoardTitle{
     text-align:center;
     display:table;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-    width: 230px;
-    height: 120px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    width: 400px;
+    height: 400px;
     margin-bottom: 20px;
 }
 .clubBoardImgBox{
@@ -111,8 +109,8 @@
     vertical-align:middle;
 }
 .clubBoardImg{
-    max-width: 230px;
-    max-height: 120px;
+    max-width: 400px;
+    max-height: 400px;
 }
 
 
@@ -245,6 +243,28 @@ textarea[name=clubBoardContent]{
 	width: 80%;
 	height: 80%;
 }
+
+
+
+
+
+/*댓글 프로필 이미지*/
+.profile-box {
+    width: 50px;
+    height: 50px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+
 /*채팅모달*/
 .modal-wrap{
     width: 100vw;
@@ -381,9 +401,8 @@ textarea[name=clubBoardContent]{
 }
 textarea[name=clubComContent]{
 	resize: none;
-	height: 42px;
-	line-height: 25px;
-	overflow: inherit;
+	height: 60px;
+	line-height: 30px;
 }
 .comment-link{
 	text-align: right;
@@ -417,9 +436,12 @@ textarea[name=clubComContent]{
 	width:75%
 }
 .inputRecommentBox>form>ul>li:nth-child(2)>textarea{
-	height: 96px;
-	min-height: 96px;
+	resize: none;
+	height: 60px;
+	line-height: 30px;
+	width: 500px;
 }
 .inputRecommentBox>form>ul>li:last-child{
-	width:10%
+	width:10%;
+	margin-left: 30px;
 }

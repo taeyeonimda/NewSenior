@@ -102,8 +102,17 @@
 					    <div class="container-xxl py-5 club-container">
 			                <div class="container wow fadeInUp" data-wow-delay="0.05s"">
 			                    <div class="row align-items-end club-board-div">
-			                        <div class="col-md-7 ml-20">
-			                            <p class="text-primary">${cb.clubBoardWriter }</p>
+			                        <div class="ml-20">
+				                        <div class="flex-space-between" style="width: 90%;">
+				                        	<div class="profile-box" style="background: #BDBDBD;">
+												<img class="profile" src="/resources/upload/club/person_1.jpg">
+												<p class="text-primary">${cb.clubBoardWriter }</p>
+											</div>
+											<div>
+												<a href="#" style="margin-right: 14px;">수정</a>
+												<a href="#">삭제</a>
+											</div>
+				                        </div>
 			                            <p class="mb-4">${cb.clubBoardDate }</p>
 			                            <c:if test="${not empty cb.clubBoardFilepath }">
 			                        		<div class="clubBoardTitle">
@@ -115,6 +124,7 @@
 			                            <p class="mb-4">${cb.clubBoardContent }</p>
 			                        </div>
 			                    </div>
+			                    <hr>
 			                    <div class="inputCommentBox">
 			                    	<form action="/insertClubComment.do" method="post">
 			                    		<input type="hidden" name="clubNo">
@@ -126,11 +136,13 @@
 			                    <div class="commentBox">
 			                    	<ul class="posting-comment">
 										<li>
-											<span class="comment-profil">프로필</span>				
+											<div class="profile-box" style="background: #BDBDBD;">
+											    <img class="profile" src="/resources/upload/club/person_1.jpg">
+											</div>
 										</li>
 										<li>
 											<p class="comment-info">
-												<span>댓글작성자</span>
+												<span class="text-primary">댓글작성자</span>
 												<span>댓글작성일</span>
 											</p>
 											<p class="comment-content">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
@@ -147,16 +159,16 @@
 										<form action="/insertClubRecomment.do" method="post">
 											<ul>
 												<li>
-													<span class="material-symbols-outlined">subdirectory_arrow_right</span>
+													<span class="material-symbols-outlined" style="font-size: 33px;">subdirectory_arrow_right</span>
 												</li>
 												<li>
 													<input type="hidden" name="ncWriter" value="clubNo">
 													<input type="hidden" name="noticeRef" value="clubNo">
 													<input type="hidden" name="ncRef" value="clubNo">
-													<textarea name="clubComContent"></textarea> 
+													<textarea name="clubComContent"></textarea>
 												</li>
 												<li>
-													<button type="submit" class="btn bc1 bs4">등록</button>
+													<button class="btn btn-primary py-2 px-4">등록</button>
 												</li>
 											</ul>
 										</form>

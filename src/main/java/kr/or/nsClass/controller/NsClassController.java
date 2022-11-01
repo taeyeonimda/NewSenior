@@ -37,7 +37,10 @@ public class NsClassController {
 		return "class/classList";
 	}
 	@RequestMapping(value = "/classDetail.do")
-	public String classDetail(){
+	public String classDetail(NsClass nc, Model model){
+		NsClass cla = service.selectOneClass(nc);
+		model.addAttribute("cla", cla);
+		System.out.println(cla);
 		return "class/classDetail";
 	}
 	

@@ -44,11 +44,17 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.getAllCategory");
 		return (ArrayList<String>)list;
 	}
+
+	
 	
 	// 은비 class 리스트
 	public ArrayList<NsClass> selectClassList(NsClass nc) {
 		List list = sqlSession.selectList("nsClass.selectClassList", nc);
 		return (ArrayList<NsClass>)list;
+	}
+	public NsClass selectOneClass(NsClass cla) {
+		NsClass nc = sqlSession.selectOne("nsClass.selectOneClass", cla);
+		return nc;
 	}
 
 }
