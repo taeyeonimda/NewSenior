@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>자유게시판 작성</h1>
-	<form action="/boardWrite.do" method="post" enctype="multipar/form-data">
+	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
 		<table border="1">
 			<tr>
 				<th>제목</th>
@@ -18,7 +18,7 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-				${m.nickName }
+				${sessionScope.m.nickname }
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				</td>	
 			</tr>
