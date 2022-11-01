@@ -52,8 +52,8 @@
 	text-align: center;
 	padding-top: 30px;
 	padding-bottom: 20px;
-	background-color: #ffc107;
-	color: #348E38;
+	background-color: #0F4229;
+	color: #fff;
 	font-size: 3em;
 }
 </style>

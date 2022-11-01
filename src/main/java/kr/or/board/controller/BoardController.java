@@ -36,6 +36,11 @@ public class BoardController {
 		return "board/boardView";
 	}
 	
+	@RequestMapping(value="/boardWriteFrm.do")
+	public String boardWriteFrm() {
+		return "board/boardWriteFrm";
+	}
+	
 	
 }
 

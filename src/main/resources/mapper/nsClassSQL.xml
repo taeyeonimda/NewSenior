@@ -83,7 +83,7 @@
 		where table_name = 'CATEGORY'
 	</select>
 	
-	<!-- 은비 class 리스트 가져오기 -->
+	<!-- 은비 class가져오기 -->
 	<select id="selectClassList" parameterType="cla" resultType="cla">
 		select  
 			class_no as classNo,
@@ -94,13 +94,29 @@
 			class_status as classStatus,
 			class_category as classCategory,
 			products,
-			start_date as startDate,
-			end_date as endDate,
+			to_char(start_date, 'yyyy/mm/dd') as startDate,
+			to_char(end_date, 'yyyy/mm/dd') as endDate,
 			filepath
 		from classes
 		<if test="classCategory != null">
 		where class_category = #{classCategory }
 		</if>
+	</select>
+
+	<select id="selectOneClass" parameterType="cla" resultType="cla">
+		select class_no as classNo,class_name as className,
+		    (select member_name from members m where m.member_no=t.member_no) as teacherName,
+		    class_price as classPrice,
+		    class_limit as classLimit,
+		    class_status as classStatus,
+		    class_category as classCategory,
+		    products,
+		    to_char(start_date, 'mm/dd') as startDate,
+		    to_char(end_date, 'mm/dd') as endDate,
+		    filepath
+		from classes
+		left join teachers t on (class_no=teacher_class)
+		where class_no = #{classNo }
 	</select>
 	
 	<select id="holdClass" resultType="cla">
@@ -170,4 +186,5 @@
 		 	class_price = #{classPrice}
 		where class_no = #{classNo}
 	</update>
+
 </mapper>
