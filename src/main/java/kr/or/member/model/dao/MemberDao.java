@@ -45,5 +45,17 @@ public class MemberDao {
 		return member;
 	}
 
+	public int updateMember(Member member) {
+		int result = sqlSession.update("member.updateMember",member);
+		return result;
+	}
+
+	public int insertMember(Member m) {
+		System.out.println("dao m:"+m);
+		int result = sqlSession.insert("member.insertMember",m);
+		System.out.println("dao result:"+result);
+		return result;
+	}
+
 	
 }

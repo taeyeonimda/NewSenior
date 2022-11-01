@@ -13,7 +13,9 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private int boardCount;
-	private String baordDate;
+	private String boardDate;
 	private String boardType;
 	private String boardCategory;
+	// 조인해서 가져온 컬럼
+	private String nickname; 
 }

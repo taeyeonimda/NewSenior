@@ -120,4 +120,14 @@ public class MemberService {
 		return dao.selectOneMember(m1);
 	}
 
+	public int updateMember(Member member) {
+		// TODO Auto-generated method stub
+		return  dao.updateMember(member);
+	}
+
+	public int insertMember(Member m) {
+		System.out.println("바뀐 비밀번호:"+m.getMemberPw());
+		return dao.insertMember(m);
+	}
+
 }
