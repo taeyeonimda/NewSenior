@@ -20,6 +20,9 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.allProduct",map);
 		return (ArrayList<Product>)list;
 	}
+	
+	
+	
 
 	public int selectProductCount() {
 		return sqlSession.selectOne("product.selectCount");
