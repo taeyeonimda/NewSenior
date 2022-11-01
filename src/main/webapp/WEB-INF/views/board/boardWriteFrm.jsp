@@ -18,7 +18,7 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-				${sessionScope.m.nickname }
+				${sessionScope.m.nickName }
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				</td>	
 			</tr>
