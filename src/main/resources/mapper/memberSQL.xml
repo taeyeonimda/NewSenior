@@ -108,4 +108,24 @@
 		where
 		member_id=#{memberId}
 	</update>
+	
+	<insert id="insertMember" parameterType="m">
+	insert into members 
+	values(
+	    MEMBER_SEQ.nextval,
+	    #{memberId},
+	    #{memberPw},
+	    #{memberName},
+	    #{memberPhone},
+	    #{memberEmail},
+	    null,
+	    1,
+	    #{memberBirth},
+	    to_char(sysdate,'yyyy-mm-dd'),
+	    #{nickName},
+	    null,
+	    null,
+	    #{favorite}
+	    )
+</insert>
 </mapper>

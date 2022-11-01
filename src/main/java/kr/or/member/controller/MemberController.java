@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.member.model.service.MemberService;
@@ -95,7 +96,6 @@ public class MemberController {
 		public String mypageFrm(Model model, @SessionAttribute Member m) {
 			Member m1 = new Member();
 			m1.setMemberId(m.getMemberId());
-			m1.setMemberPw(m.getMemberPw());
 			Member member = service.selectOneMember(m1);
 			if (member != null) {
 				model.addAttribute("member", member);
@@ -104,7 +104,6 @@ public class MemberController {
 				return "redirect:/";
 			}
 		}
-		
 		
 		//마이페이지 내정보수정하기
 		@RequestMapping(value = "/mypageUpdate.do")
@@ -124,4 +123,42 @@ public class MemberController {
 			}
 		}
 
+		//회원가입폼
+		@RequestMapping(value="/joinFrm.do")
+		public String joinFrm() {
+			return "member/joinFrm";
+		}
+		
+		//회원가입insert
+		@RequestMapping(value="/join.do")
+		public String join(Member m, String str_email01, String str_email02, String selectEmail, String memberPhone1, String memberPhone2, String memberPhone3) {
+			if(selectEmail== "1") {
+				m.setMemberEmail(str_email01+'@'+str_email02);
+			}else {
+				m.setMemberEmail(str_email01+'@'+selectEmail);
+			}
+			m.setMemberPhone(memberPhone1+"-"+memberPhone2+"-"+memberPhone3);
+			System.out.println("join.do contoroller: "+m);
+			int result = service.insertMember(m);
+			if(result>0) {
+				return "redirect:/";
+			}else { 
+				return "member/joinFrm";
+			}
+		}
+		
+		//회원가입_아이디체크
+		@ResponseBody //페이지 이동이 아니라 return으로 데이터를 넘겨주는 태그
+		@RequestMapping(value="/idCheck.do")
+		public String idCheck(Member m) {
+			Member member = service.selectOneMember(m);
+			if(member == null) {
+				//사용 가능
+				return "0";
+			}else {
+				//이미 사용 중
+				return "1";
+			}
+		}
+		
 }

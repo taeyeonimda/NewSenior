@@ -50,5 +50,12 @@ public class MemberDao {
 		return result;
 	}
 
+	public int insertMember(Member m) {
+		System.out.println("dao m:"+m);
+		int result = sqlSession.insert("member.insertMember",m);
+		System.out.println("dao result:"+result);
+		return result;
+	}
+
 	
 }

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>뉴시니어스</title>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- Favicon -->
         <link href="/resources/TGbtstr/img/favicon.ico" rel="icon">
@@ -257,7 +257,6 @@
     <script src="/resources/js/login.js"></script>
     -->
     <script type="text/javascript">
-  //개인정보수집이용동의
     $(".loginBtn").click(function(){
       $(".popup_bg00").stop().fadeIn();
       $(".popup00.personal_pop00").stop().fadeIn();
