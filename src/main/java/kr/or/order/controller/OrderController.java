@@ -17,8 +17,8 @@ public class OrderController {
 	private OrderService service;
 	
 	@RequestMapping(value="/orderHistory.do")
-	public String orderHistory(Model model ) {
-		ArrayList<Order> list = service.selectAllOrderHistory();
+	public String orderHistory(Model model, Member m ) {
+		ArrayList<Order> list = service.selectAllOrderHistory(m);
 		model.addAttribute("list",list);
 		return "myPage/orderHistory";
 	}

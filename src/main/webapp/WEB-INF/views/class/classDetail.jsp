@@ -12,7 +12,7 @@
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" stydata-wow-delay="0.1s" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/img/다운로드\ \(2\).jpg) center center no-repeat; background-size: cover;">
             <div class="container text-center py-5">
-                <h1 class="display-3 text-white mb-4 animated slideInDown">About Us</h1>
+                <h1 class="display-3 text-white mb-4 animated slideInDown">${cla.className }</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -27,28 +27,48 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-light rounded p-sm-5 wow fadeIn">
+        <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
             <div class="side-box rounded">
-                <div class="side-title-box display-5 text-center mb-3">
-                    title
+                <div class="side-title-box display-5 text-center mb-2">
+                    ${cla.className }
                 </div>
                 <div class="side-teacher-box">
-                    <span></span>강사
+                    <span>${cla.teacherName } </span> 강사
                 </div>
                 <div class="side-info-box">
                     <ul>
-                        <li><span>◆ </span><span> 초급자 대상</span></li>
-                        <li><span>◆ </span><span> 기간 주</span></li>
-                        <li><span>◆ </span><span> 준비물 포함</span></li>
+                        <li><span class="fs-5 text-primary">초급자 대상</span></li>
+                        <li><span class="fs-5 text-primary">${cla.startDate } ~ ${cla.startDate }</span></li>
+                        <c:choose>
+                        	<c:when test="${cla.products eq 0 }">
+                        		<li><span class="fs-5 text-primary">준비물 없음</span></li>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<li><span class="fs-5 text-primary">준비물 필요</span></li>
+                        	</c:otherwise>
+                        </c:choose>
+                        
                     </ul>
                 </div>
                 <div class="side-select-box form-floating mb-4">
                     <input type="date" id="Date" class="form-control bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;"><br>
                     <select name="times" class="form-control bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;">
-                        <option value='' selected>-- 선택 --</option>
+                        <option value='' selected>시간</option>
                         <option value="2">2시</option>
                         <option value="3">3시</option>
-                    </select>
+                    </select><br>
+                    <div class="amount-box">
+	                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;">
+	                        <option value='' selected>인원수</option>
+	                        <option value="1">1인</option>
+	                        <option value="2">2인</option>
+	                        <option value="3">3인</option>
+	                        <option value="4">4인</option>
+	                        <option value="5">5인</option>
+	                        <option value="6">6인</option>
+	                    </select>
+	                    <span>${cla.classPrice }원</span>
+                    </div>
                 </div>
                 <div>
                     <button class="btn btn-primary py-3 px-5">신청하기</button>
@@ -63,7 +83,7 @@
                 <div class="class-row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item rounded class-item">
-                            <img class="img-fluid" src="/resources/MAINbtstr/img/모델클래스 (2).jpg" alt="">
+                            <img class="img-fluid" src="/resources/MAINbtstr/img/${cla.filepath }" alt="">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -86,9 +106,9 @@
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <p class="fs-5 fw-bold text-primary">스타강사 송준식과 함께하는 모델 클래스</p>
-                        <h1 class="display-5 mb-4">걷기 걷기 걷기!</h1>
-                        <p class="mb-4">클래스에 대한 설명이 들어감 클래스에 대한 설명이 들어감 클래스에 대한 설명이 들어감 클래스에 대한 설명이 들어감</p>
+                        <p class="fs-5 fw-bold text-primary">${cla.teacherName } 강사와 함께하는 ${cla.className }</p>
+                        <h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
+                        <p class="mb-4">${cla.curriculum }</p>
                         <a class="btn btn-primary py-3 px-4" href="">Explore More</a>
                     </div>
                     <div class="product-title mt-5">
@@ -109,8 +129,8 @@
                         <p class="fs-5 fw-bold text-primary">강사소개</p>
                         <img class="img-fluid rounded" data-wow-delay="0.1s" src="/resources/MAINbtstr/img/모델클래스 (1).jpg">
                     </div>
-                    <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                        <h4 class="display-3 text-primary mb-0">송 준식</h4>
+                    <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
+                        <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
                         <p class="text-primary mb-4">Year of Experience</p>
                         <h4 class="display-6 mb-4">"당당하게 걸어요"</h4>
                         <p class="mb-4">연세대 당당걷기과</p>

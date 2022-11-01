@@ -131,7 +131,7 @@
 
           <!-- 주문내역 -->
           <li class="menu-item active">
-            <a href="orderHistory.do?memberNo=${memberNo }" class="menu-link">
+            <a href="/orderHistory.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">주문내역</div>
             </a>

@@ -76,7 +76,7 @@ public class MemberController {
 	public String loginCheckMember(Member m, HttpSession session) {
 		Member member = service.loginCheckMember(m);
 		if(member!= null) {
-			session.setAttribute("m", m);
+			session.setAttribute("m", member);
 			return "redirect:/";
 		}else {
 			return "redirect:/";
@@ -158,6 +158,35 @@ public class MemberController {
 			}else {
 				//이미 사용 중
 				return "1";
+			}
+		}
+		
+		//비밀번호 변경 페이지로 이동
+		@RequestMapping(value="/pwChangeFrm.do")
+		public String pwChangeFrm(){
+			return "member/currentPwCheckFrm";
+		}
+		
+		@RequestMapping(value="/currentPwCheck.do")
+		public String currentPwCheck(Member m, Model model, String memberPw) {
+			//데이터베이스에서 pw를 조회한 후
+			//입력한 비밀번호와 조회한 비밀번호가 같은지 체크/
+			Member member = service.selectOneMember(m);
+			if(member != null) {
+				model.addAttribute("mPw",memberPw);
+				return "member/pwChangFrm";
+			}else {
+				return "redirect:/pwChangeFrm.do";
+			}
+		}
+		@RequestMapping(value="/pwChange.do")
+		public String pwChange(Member m) {
+			int result = service.changePwMember(m);
+			if(result>0) {
+				//변경 성공 시 session 데이터 적용 안함 쓸일이 없음
+				return "redirect:/logout.do";
+			}else {
+				return "redirect:/mypageInfo.do";
 			}
 		}
 		

@@ -74,27 +74,38 @@ public class ClubMemberChat extends TextWebSocketHandler{
 				clubMemberMap.put(club, list);
 			}
 
-			/*
+
 			// 지난 대화 출력
-			ArrayList<ChatRecord> crList = service.getMyClubRecord(club); // 지난 대화를 객체로 불러옴
+			ArrayList<ChatRecord> crList = service.getClubChatRecord(club); // 지난 대화를 객체로 불러옴
 			System.out.println("crList size : "+crList.size());
 			if(crList.size()>0) {
 				for (ChatRecord cr : crList) {
-					if(cr.getChatMember().equals(sessionId)) {
-						String sendMsg = "<div class='chat right'>"+cr.getChatContent()+"</div>";
-						TextMessage tm = new TextMessage(sendMsg);
-						session.sendMessage(tm);
-					}else {
-						String sendMsg = "<div class='chat left'><span class='chatId'>"+cr.getChatMember()+" : </span>"+cr.getChatContent()+"</div>";
-						TextMessage tm = new TextMessage(sendMsg);
-						session.sendMessage(tm);
+					if(cr.getFilepath() == null) { // 파일이 없으면
+						if(cr.getChatMember().equals(sessionId)) {
+							String sendMsg = "<div class='chat right'>"+cr.getChatContent()+"</div>";
+							TextMessage tm = new TextMessage(sendMsg);
+							session.sendMessage(tm);
+						}else {
+							String sendMsg = "<div class='chat left'><span class='chatId'>"+cr.getChatMember()+" : </span>"+cr.getChatContent()+"</div>";
+							TextMessage tm = new TextMessage(sendMsg);
+							session.sendMessage(tm);
+						}
+					}else { // 파일이 있으면
+						if(cr.getChatMember().equals(sessionId)) {
+							String sendMsg = "<div class='chat right'><img width='150px' height='180px' src='/resources/upload/chat/"+cr.getFilepath()+"'></div>";
+							TextMessage tm = new TextMessage(sendMsg);
+							session.sendMessage(tm);
+						}else {
+							String sendMsg = "<div class='chat left'><span class='chatId'>"+cr.getChatMember()+" : </span><img width='150px' height='180px' src='/resources/upload/chat/"+cr.getFilepath()+"'></div>"; // session으로 고유 key값 넣어줬으니
+							TextMessage tm = new TextMessage(sendMsg); // 보내고 싶은 메시지를 매개변수로
+							session.sendMessage(tm);
+						}
 					}
 				}
-				String sendMsg = "<p>오늘</p>";
+				String sendMsg = "<p>여기까지 지난 대화입니다.</p>";
 				TextMessage today = new TextMessage(sendMsg);
 				session.sendMessage(today);
 			}
-			*/
 			
 			String sendMsg = "<p>"+msg+"님이 입장하셨습니다.</p>";
 			for(WebSocketSession s : clubMemberMap.get(club)) {
