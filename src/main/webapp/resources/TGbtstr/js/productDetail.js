@@ -98,6 +98,7 @@ stars.on("mouseleave",function(){
 stars.on("click",function(){
     const idx = stars.index(this);
     $(".real-score").text(idx+1);
+    $("#reviewScore").val(idx+1);
 });
 
 
