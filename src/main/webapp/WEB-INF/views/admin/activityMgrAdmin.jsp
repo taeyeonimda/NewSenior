@@ -171,13 +171,15 @@
                       </tr>
                     </thead>
                     <tbody>
+                    
+                    <c:forEach items="${list }" var="act">
                       <tr>
                         <td style="text-align: center;"><input type="checkbox"></td>
                         <td style="text-align: center;">1</td>
-                        <td>키트</td>
-                        <td>준석이밥</td>
-                        <td>500원</td>
-                        <td>밥,반찬,국</td>
+                        <td></td>
+                        <td></td>
+                        <td>${act }</td>
+                        <td></td>
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -194,123 +196,11 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>키트</td>
-                        <td>준석이밥</td>
-                        <td>500원</td>
-                        <td>밥,반찬,국</td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>키트</td>
-                        <td>준석이밥</td>
-                        <td>500원</td>
-                        <td>밥,반찬,국</td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>키트</td>
-                        <td>준석이밥</td>
-                        <td>500원</td>
-                        <td>밥,반찬,국</td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>키트</td>
-                        <td>준석이밥</td>
-                        <td>500원</td>
-                        <td>밥,반찬,국</td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td>키트</td>
-                        <td>준석이밥</td>
-                        <td>500원</td>
-                        <td>밥,반찬,국</td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i>승인</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i>취소</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
+                      </c:forEach>
+                      
                     </tbody>
                   </table>
+                   <div id="pageNavi">${pageNavi }</div>
                 </div>
               </div>
 </div></div>

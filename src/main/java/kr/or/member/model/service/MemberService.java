@@ -135,4 +135,9 @@ public class MemberService {
 		return  dao.changePw(m);
 	}
 
+	//관리자목록가져오기
+	public ArrayList<Member> getAllAdmin() {
+		return dao.getAllAdmin();
+	}
+
 }
