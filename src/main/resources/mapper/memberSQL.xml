@@ -55,7 +55,8 @@
 	select
 			member_no as memberNo,
 			member_id as memberId,
-			member_pw as memberPw
+			member_pw as memberPw,
+			nickName as nickname
 	from members
 	where member_id=#{memberId} 
 	<if test="memberPw != null">

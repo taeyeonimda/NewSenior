@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
+import kr.or.order.model.vo.OrderDetail;
 
 @Controller
 public class OrderController {
@@ -22,4 +23,11 @@ public class OrderController {
 		model.addAttribute("list",list);
 		return "myPage/orderHistory";
 	}
+	
+//	@RequestMapping(value="/orderDetail.do")
+//	public String orderDetail(Order o,Model model) {
+//		ArrayList<Order> list = service.selectOrderDetail(o);
+//		model.addAttribute("list",list);
+//		return "";
+//	}
 }

@@ -58,15 +58,11 @@
             justify-content: center;
             background: rgba(255, 255, 255, 0.25);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            backdrop-filter: blur(1.5px);
-            -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
         #modal .modal-window {
-            background: rgba( 0, 0, 0, 0.3 );
-            backdrop-filter: blur( 13.5px );
-            -webkit-backdrop-filter: blur( 13.5px );
+            background: rgba( 0, 0, 0, 0.6 );
             border-radius: 10px;
             border: 1px solid rgba( 255, 255, 255, 0.18 );
             width: 600px;
@@ -210,21 +206,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>                     
-                      	<td>2022-10-24</td>
-                      	<td>등산패키지</td>
-                      	<td>2</td>
-                      	<td>50,000원</td>
-                      	<td>100,000원</td>
-                    </tr>
-
                     <c:forEach items="${list }" var="Or">
-		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});">
+		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});" id="btn-modal">
 			                <td>${Or.orderDate }</td>
 			                <td>${Or.productName }</td>
 			                <td>${Or.orderAmount }</td>
 			                <td>${Or.orderPrice }</td>
-			                <td>(${Or.orderAmoun*Or.orderPrice })원</td>
+			                <td>${Or.orderAmount*Or.orderPrice }원</td>
 		                </tr>
              		</c:forEach>
              		
@@ -238,18 +226,24 @@
                 </table>
               </div>
             </div>
-        <button id="btn-modal">모달</button>
+        
         <!-- 주문 상세보기 모달 -->
 	    <div id="modal" class="modal-overlay">
 	        <div class="modal-window">
 	            <div class="title"><h2>주문 내역 상세 보기</h2></div>
 	            <div class="close-area" style="font-size : 40px;">X</div>
 	            <div class="content">
-	                <p>상품 이미지</p>
-	            	<p>주문번호</p>
-	                <p>갯수</p>
-	                <p>가격</p>
-	                <p>갯수x가격</p>
+	            	<table>
+	                <c:forEach items="${list }" var="Or">
+		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});" id="btn-modal">
+			                <td>${Or.orderDate }</td>
+			                <td>${Or.productName }</td>
+			                <td>${Or.orderAmount }</td>
+			                <td>${Or.orderPrice }</td>
+			                <td>${Or.orderAmount*Or.orderPrice }원</td>
+		                </tr>
+             		</c:forEach>
+             		</table>
 	            </div>
 	        </div>
 	    </div>	
@@ -324,13 +318,6 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
-	    function goToOrderDetail(orderNo) {
-			location.href = "/orderDetail.do?orderNo="+orderNo;
-		};
-	    
-	    $(".showOrderDetail").click(function(){
-	    	
-	    });
 	    
 	    const modal = document.getElementById("modal")
 	    const btnModal = document.getElementById("btn-modal")
@@ -347,6 +334,10 @@
 	    $(".close-area").click(function(){
 	        modal.style.display = "none"
 	    });
+	    
+	    function goToOrderDetail(orderNo) {
+			location.href = "/orderDetail.do?orderNo="+orderNo;
+		}
     </script>
   </body>
 </html>

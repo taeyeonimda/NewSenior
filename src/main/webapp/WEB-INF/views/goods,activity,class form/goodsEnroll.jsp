@@ -16,7 +16,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+	
+	<link rel="stylesheet" href="/resources/TGbtstr/css/productFrm.css" />
     <!-- Favicon -->
     <link href="/resources/JSbtstr/img/favicon.ico" rel="icon">
 
@@ -184,8 +185,7 @@
                   <div class="mb-3 row">
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
-                      <a href="javascript:void(0)" class="btn btn-outline-primary" id="fileUpload">첨부파일넣기</a>
-                      <input type="file" name="productFile" id="productFile" class="productFile" style="display:none;">
+                      <input type="file" name="productFile" id="productFile" class="productFile">
                     </div>
                   </div>
                   
@@ -254,7 +254,7 @@
                     </div>
                   </div>
                    -->
-                  <input type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" value="등록하기">
+                  <input id="insertBtn" type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" value="등록하기">
                   
                 </div>
               </div>
@@ -282,6 +282,10 @@
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 <!-- Footer End -->
 	<script>
+		$("#insertBtn").on("click",function(){
+			
+		});
+	
 		$("#fileUpload").on("click",function(){
 			$(".productFile").click();
 		});
@@ -292,6 +296,8 @@
 		$("#productStatus").change(function(){
 			  console.log($(this).val())
 		});
+		
+		
 		
 		//summerNote
 		$("#productContent").summernote({
