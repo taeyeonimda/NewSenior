@@ -13,7 +13,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	    <div class="productContent">
-	    <div><a href="/deleteProduct.do?productNo=${p.productNo}">상품삭제</a></div>
+	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</div>
 	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
         <div class="productWrap">
             <div style="width: 500px;">
@@ -88,14 +88,14 @@
                 </div>
               </div>
             </div>
+		            <div class="prodContentMenu">
             <c:choose>
             	<c:when test="${!empty sessionScope.m }">
-		            <div class="prodContentMenu">
 			            <div class="reviewContentWrap">
 			              <form action="/insertReview.do" method="post">
 			                <div class="reviewContent">
 			                  <div class="productReviewHight">
-			                    <h6>아이디</h6>
+			                    <h6>${sessionScope.m.memberId }</h6>
 			                    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 			                    <input type="hidden" name="productNo" value="${p.productNo }">
 			                  </div>
@@ -103,7 +103,7 @@
 			                    <textarea id="customerReview" style="outline: none;" name="reviewContent"></textarea>
 			                  </div>
 			                  <div class="productReviewHight">
-			                    <button type="submit">등록하기</button>
+			                    <button type="submit" id="productReviewInsertBtn">등록하기</button>
 			                  </div>
 			                  <div class="star-content">
 			                    <div class="star-wrap">
@@ -130,16 +130,17 @@
 	                <div class="reviewsContent">
 	                  <div class="reviewsId">
 	                    <h6>${pr.memberId }</h6>
+	                    <p>${pr.reviewDate }</p>
 	                  </div>
 	                  <div class="reviewsTextArea">
 	                    <textarea>${pr.reviewContent }</textarea>
 	                  </div>
 	                  <div class="reviewsBtnBox">
 	                    <a href="javascript:void(0)">수정</a>
-	                    <a href="javascript:void(0)">삭제</a>
+	                    <button>삭제</button>
 	                  </div>
 	                  <div class="reviewsScore">
-	                    <div class="star-wrap">
+	                    <div class="reviewStar-wrap">
 	                      <span class="material-icons">star</span>
 	                      <span class="material-icons">star</span>
 	                      <span class="material-icons">star</span>
@@ -147,8 +148,7 @@
 	                      <span class="material-icons">star</span>
 	                    </div>
 	                    <div>
-	                      <span class="real-score">${reviewScore }</span>
-	                      <span class="show-score">0</span>
+	                      <span class="reviewScore">${pr.reviewScore }</span>
 	                    </div>
 	                  </div>
 	                </div>
@@ -216,6 +216,24 @@
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
-	
+	<script>
+		function deleteProduct(productNo) {
+			if(confirm("상품을 삭제하시겠습니까?")){
+				location.href="/deleteProduct.do?productNo="+productNo;
+			}
+		}
+		
+		$(".reviewsScore").each(function(index,item){
+			const score = $(item).children().eq(1).children().text();
+			const span = $(item).children().eq(0).children();
+			console.log(score);
+			for(let i = 0; i<score; i++){
+				span.eq(i).css("color","gold");
+			}
+			/* for(let i=0; i<index; i++){
+				$(".reviewStar-wrap>span").eq(i).css("color","gold");
+			} */
+		});
+	</script>
 </body>
 </html>

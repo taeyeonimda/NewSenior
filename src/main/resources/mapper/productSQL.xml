@@ -93,5 +93,6 @@
   	product_no as productNo
   from product_reviews
   where product_no = #{_parameter}
+  order by 1 desc
   </select>
 </mapper>
