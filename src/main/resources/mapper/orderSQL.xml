@@ -31,7 +31,7 @@
 		pays.order_no as orderNo,
 		order_date as orderDate,
 		order_detail_amount as orderDetailAmount,
-		product_no as productNo,
+		(select product_name from products where products.product_no=pay_details.product_no) as productName,
 		receive_phone as receivePhone,
 		receive_addr as receiveAddr,
 		receive_name as receiveName
