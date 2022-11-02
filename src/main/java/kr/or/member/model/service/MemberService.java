@@ -135,4 +135,9 @@ public class MemberService {
 		return  dao.changePw(m);
 	}
 
+	public int updatePwMember(Member member) {
+		// TODO Auto-generated method stub
+		return dao.updatePw(member);
+	}
+
 }

@@ -133,4 +133,14 @@
 	<update id="changePw" parameterType="m">
 		update members set member_pw=#{memberPw}  where member_id = #{memberId}
 	</update>
+	
+	<update id="updatePw" parameterType="m">
+		update
+		members
+		set
+		member_pw=#{memberPw}
+		where
+		member_email=#{memberEmail}
+	</update>
+	
 </mapper>

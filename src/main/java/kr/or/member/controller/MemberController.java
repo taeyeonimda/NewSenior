@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -166,7 +167,7 @@ public class MemberController {
 		public String pwChangeFrm(){
 			return "member/currentPwCheckFrm";
 		}
-		
+		//비밀번호 변경클릭->현재 비밀번호 입력 -> 맞으면 새 비밀번호 입력
 		@RequestMapping(value="/currentPwCheck.do")
 		public String currentPwCheck(Member m, Model model, String memberPw) {
 			//데이터베이스에서 pw를 조회한 후
@@ -179,6 +180,7 @@ public class MemberController {
 				return "redirect:/pwChangeFrm.do";
 			}
 		}
+		//새 비밀번호 입력
 		@RequestMapping(value="/pwChange.do")
 		public String pwChange(Member m) {
 			int result = service.changePwMember(m);
@@ -190,4 +192,64 @@ public class MemberController {
 			}
 		}
 		
+		//아이디,비밀번호 찾기 폼으로 이동
+		@RequestMapping(value="/searchInfoFrm.do")
+		public String searchInfoFrm() {
+			return "member/searchInfoFrm";
+		}
+		
+		//아이디찾기
+		@RequestMapping(value="/searchId.do")
+		public String searchId(Model model,Member m, String memberPhone1, String memberPhone2, String memberPhone3) {
+		 m.setMemberPhone(memberPhone1+"-"+memberPhone2+"-"+memberPhone3);
+		 Member member = service.selectOneMember(m);
+		 if (member != null) {
+				model.addAttribute("member", member);
+				return "member/searchIdSuccess";
+			} else {
+				return "redirect:/";
+			}
+		}
+		
+		//비밀번호 찾기에서 회원 정보 있는지 체크
+		@ResponseBody
+		@RequestMapping(value="/pwCheck.do")
+		public String searchPw(Member m) {
+			Member member = service.selectOneMember(m);
+			if(member != null) {
+				//일치
+				return "0";
+			}else {
+				//불일치
+				return "1";
+			}
+		}
+		
+		//임시비밀번호 이메일 발송하고, db도 바꿔주기
+		@ResponseBody
+		@RequestMapping(value="/changePw.do")
+		public String changePw(Member m, HttpSession session) {
+			Member member = service.selectOneMember(m);
+			if(member != null) {
+				MailSender sender = new MailSender();
+				String memberPw = member.getMemberPw();
+				String randomCode = sender.sendMail2(member.getMemberEmail());
+				member.setMemberPw(randomCode);
+				int result = service.updatePwMember(member);
+				if(result>0) {
+					return "0";
+				}else {
+					return "1";
+				}
+			} else {
+				return "1";
+
+			}
+		}
+		
+		//비밀번호 찾기에서 이메일 전송
+		@RequestMapping(value="/searchPwSuccess.do")
+		public String searchPw() {
+			return "member/searchPwSuccess";
+		}
 }

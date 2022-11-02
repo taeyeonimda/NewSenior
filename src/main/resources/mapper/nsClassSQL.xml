@@ -102,7 +102,6 @@
 		where class_category = #{classCategory }
 		</if>
 	</select>
-<<<<<<< HEAD
 
 	<select id="selectOneClass" parameterType="cla" resultType="cla">
 		select class_no as classNo,class_name as className,
