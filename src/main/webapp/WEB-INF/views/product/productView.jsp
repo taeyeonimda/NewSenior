@@ -136,8 +136,8 @@
 	                    <textarea>${pr.reviewContent }</textarea>
 	                  </div>
 	                  <div class="reviewsBtnBox">
-	                    <a href="javascript:void(0)">수정</a>
-	                    <button>삭제</button>
+	                    <button id="reviewUpdateBtn"onclick="UpdateReview(${pr.reviewNo})">수정</button>
+	                    <button id="reviewDeleteBtn"onclick="deleteReview(${pr.reviewNo})">삭제</button>
 	                  </div>
 	                  <div class="reviewsScore">
 	                    <div class="reviewStar-wrap">
@@ -226,14 +226,34 @@
 		$(".reviewsScore").each(function(index,item){
 			const score = $(item).children().eq(1).children().text();
 			const span = $(item).children().eq(0).children();
-			console.log(score);
 			for(let i = 0; i<score; i++){
 				span.eq(i).css("color","gold");
 			}
-			/* for(let i=0; i<index; i++){
-				$(".reviewStar-wrap>span").eq(i).css("color","gold");
-			} */
 		});
-	</script>
+		
+		function deleteReview(reviewNo){
+			if(confirm("리뷰를 삭제하시겠습니까?")){
+				$.ajax({
+					url : "/deleteReview.do",
+					data : {
+						reviewNo:reviewNo					
+					},
+					success : function(data){
+						alert("삭제가 완료되었습니다.");
+						location.reload(true);
+					}
+				});
+			}
+		};
+		
+		$("#productReviewInsertBtn").on("click",function(){
+			
+		})
+		
+		
+		$("#reviewUpdateBtn").on("click",function(){
+			
+		});
+		</script>
 </body>
 </html>
