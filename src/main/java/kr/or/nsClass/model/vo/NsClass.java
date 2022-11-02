@@ -15,7 +15,7 @@ public class NsClass {
 	private int classTeacher;
 	private String classPrice;
 	private int classLimit; //모집정원
-	private int classStatus; //'0 : 모집중 / 1 : 모집종료 , 클래스 시작 / 2 : 클래스 종료 ' 3 승인대기or기타 ->누르면 0으로,
+	private int classStatus; // 0.신청&보류  1.승인  2.모집  3.모집끝  4.진행중  5.클래스 종료
 	private String classCategory;
 	private char products;
 	private String startDate;

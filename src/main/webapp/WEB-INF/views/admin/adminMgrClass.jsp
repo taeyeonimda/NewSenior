@@ -82,6 +82,7 @@
                         <th>기간</th>
                         <th>가격</th>
                         <th>활동상태</th>
+                        <th>활동변경</th>
                         <th>수정/삭제</th>
                       </tr>
                     </thead>
@@ -93,7 +94,84 @@
                         <td>${NsClass.teacherName }</td>
                         <td>${NsClass.dayDate}</td>
                         <td>${NsClass.classPrice }</td>
-                        <td><span class="badge bg-label-primary me-1">${NsClass.classStatus }</span></td>
+                        <td>
+                       
+                        <span class="badge bg-label-primary me-1">
+                        <c:choose>
+	                        <c:when test="${NsClass.classStatus == 1 }">
+	                       		 승인
+	                        </c:when>
+	                         <c:when test="${NsClass.classStatus == 2 }">
+	                       		 모집중
+	                        </c:when>
+	                         <c:when test="${NsClass.classStatus == 3 }">
+	                       		 모집완료
+	                        </c:when>
+	                        <c:when test="${NsClass.classStatus == 4 }">
+	                       		 진행중
+	                        </c:when>
+	                        <c:otherwise>
+	                        	클래스 종료
+	                        </c:otherwise>
+                        </c:choose>
+                       
+                        </span>
+                        
+                        </td>
+                        <td>
+                        
+                          <select class="changeLevel">
+                        <c:choose>
+                       
+	                        <c:when test="${NsClass.classStatus == 1 }">
+	                       
+	                       		<option value="1" selected>승인</option>
+		                        <option value="2">모집중</option>
+		                        <option value="3">모집 완료</option>
+		                        <option value="4">진행중</option>
+		                        <option value="5">클래스 종료</option>
+		                    
+	                        </c:when>
+	                         <c:when test="${NsClass.classStatus == 2 }">
+	                        
+	                       		<option value="1" >승인</option>
+		                        <option value="2" selected>모집중</option>
+		                        <option value="3">모집 완료</option>
+		                        <option value="4">진행중</option>
+		                        <option value="5">클래스 종료</option>
+		                        
+	                        </c:when>
+	                         <c:when test="${NsClass.classStatus == 3 }">
+	                         
+	                       		<option value="1" >승인</option>
+		                        <option value="2" >모집중</option>
+		                        <option value="3" selected>모집 완료</option>
+		                        <option value="4">진행중</option>
+		                        <option value="5">클래스 종료</option>
+		                    
+	                        </c:when>
+	                        <c:when test="${NsClass.classStatus == 4 }">
+	                        
+	                       		<option value="1" >승인</option>
+		                        <option value="2" >모집중</option>
+		                        <option value="3" >모집 완료</option>
+		                        <option value="4" >진행중</option>
+		                        <option value="5">클래스 종료</option>
+		                        
+	                        </c:when>
+	                        <c:otherwise>
+	                       
+	                        	<option value="1" >승인</option>
+		                        <option value="2" >모집중</option>
+		                        <option value="3" >모집 완료</option>
+		                        <option value="4" >진행중</option>
+		                        <option value="5" selected>클래스 종료</option>
+		                        
+	                        </c:otherwise>
+	                        
+                        </c:choose>
+                         </select>
+                        </td>
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -110,6 +188,14 @@
                       </tr>
                       </c:forEach>
                     </tbody>
+                    <tfoot>
+                 
+                    <style>
+                    	tfoot>tr>td{
+                    		text-align:center;
+                    	}
+                    </style>
+                    </tfoot>
                   </table>
                   <!-- 클래스관리 페이지네비 -->
                   
@@ -141,11 +227,7 @@
                       
                         <td onclick="moveDetail(${hCla.classNo})"><i class="fab fa-angular fa-lg text-danger me-3"></i>
                          <strong>${hCla.className	}</strong></td>
-                        <script>
-                        function moveDetail(classNo){
-                        	location.href="/classUpdateFrm.do?classNo="+classNo;
-                        }
-                        </script>
+                      
                         <td>${hCla.teacherName }</td>
                         <td>${hCla.dayDate }일</td>
                         <td><span class="badge bg-label-primary me-1">보류</span></td>
@@ -239,8 +321,22 @@
 </div>
 <!-- Footer End -->
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
+	<!-- Core JS -->
+	<script>
+		function moveDetail(classNo){
+			location.href="/classUpdateFrm.do?classNo="+classNo;
+		}
+		                                        
+ 		$(".changeLevel").on("change",function(){
+			const classNo = $(this).parent().parent().children().eq(0).text();
+			//클릭한 버튼 기준으로 선택한 등급
+			const classStatus = $(this).val();
+			location.href = "/changeStatus2.do?classNo="+classNo+"&classStatus="+classStatus;
+		});
+                        
+  	</script>
+
+	<!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
