@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/resources/TGbtstr/css/productView.css">
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -87,38 +88,74 @@
                 </div>
               </div>
             </div>
-            <div class="reviewContentWrap prodContentMenu">
-              <form action="javascript:void(0)">
-                <div class="reviewContent">
-                  <div class="productReviewHight">
-                    <h6>아이디</h6>
-                    <input type="hidden" name="memberId">
-                  </div>
-                  <div style="height: 100px;">
-                    <textarea id="customerReview" style="outline: none;" name="reviewContent"></textarea>
-                  </div>
-                  <div class="productReviewHight">
-                    <button type="submit">등록하기</button>
-                  </div>
-                  <div class="star-content">
-                    <div class="star-wrap">
-                      <span class="material-icons">star</span>
-                      <span class="material-icons">star</span>
-                      <span class="material-icons">star</span>
-                      <span class="material-icons">star</span>
-                      <span class="material-icons">star</span>
-                    </div>
-                    <p>
-                      <div class="input-score">
-                        <span class="real-score">0</span>
-                        <span class="show-score">0</span>
-                        <span>점</span>
-                    </div>
-                    
-                  </div>
-                </div>
-              </form>
+            <c:choose>
+            	<c:when test="${!empty sessionScope.m }">
+		            <div class="prodContentMenu">
+			            <div class="reviewContentWrap">
+			              <form action="/insertReview.do" method="post">
+			                <div class="reviewContent">
+			                  <div class="productReviewHight">
+			                    <h6>아이디</h6>
+			                    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+			                    <input type="hidden" name="productNo" value="${p.productNo }">
+			                  </div>
+			                  <div style="height: 100px;">
+			                    <textarea id="customerReview" style="outline: none;" name="reviewContent"></textarea>
+			                  </div>
+			                  <div class="productReviewHight">
+			                    <button type="submit">등록하기</button>
+			                  </div>
+			                  <div class="star-content">
+			                    <div class="star-wrap">
+			                      <span class="material-icons">star</span>
+			                      <span class="material-icons">star</span>
+			                      <span class="material-icons">star</span>
+			                      <span class="material-icons">star</span>
+			                      <span class="material-icons">star</span>
+			                    </div>
+			                      <div class="input-score">
+			                      	<input type="hidden" name=reviewScore id="reviewScore">
+			                        <span class="real-score">0</span>
+			                        <span class="show-score">0</span>
+			                    </div>
+			                  </div>
+			                </div>
+			              </form>
+			            </div>
+		            </c:when>
+	            </c:choose>
+	            
+	            <c:forEach items="${prlist }" var="pr">
+	            <div class="reviewsWrap reviewMenu">
+	                <div class="reviewsContent">
+	                  <div class="reviewsId">
+	                    <h6>${pr.memberId }</h6>
+	                  </div>
+	                  <div class="reviewsTextArea">
+	                    <textarea>${pr.reviewContent }</textarea>
+	                  </div>
+	                  <div class="reviewsBtnBox">
+	                    <a href="javascript:void(0)">수정</a>
+	                    <a href="javascript:void(0)">삭제</a>
+	                  </div>
+	                  <div class="reviewsScore">
+	                    <div class="star-wrap">
+	                      <span class="material-icons">star</span>
+	                      <span class="material-icons">star</span>
+	                      <span class="material-icons">star</span>
+	                      <span class="material-icons">star</span>
+	                      <span class="material-icons">star</span>
+	                    </div>
+	                    <div>
+	                      <span class="real-score">${reviewScore }</span>
+	                      <span class="show-score">0</span>
+	                    </div>
+	                  </div>
+	                </div>
+              </div>
+              </c:forEach>
             </div>
+            
             <div class="refundWrap prodContentMenu">
               <div>
                 <div class="detailContent">교환/환불 안내</div>
@@ -179,6 +216,6 @@
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
-
+	
 </body>
 </html>

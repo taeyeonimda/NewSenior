@@ -63,10 +63,7 @@ public class MemberController {
 	public String classMgrAdmin() {
 		return "myPage/classMgrAdmin";
 	}
-	@RequestMapping(value="/classMgrTeacher.do")
-	public String classMgrTeacher() {
-		return "myPage/classMgrTeacher";
-	}
+	
 	
 	//로그인
 	@RequestMapping(value="/login.do")
@@ -74,6 +71,7 @@ public class MemberController {
 		Member member = service.loginCheckMember(m);
 		if(member!= null) {
 			session.setAttribute("m", member);
+			System.out.println("login정보:"+member);
 			return "redirect:/";
 		}else {
 			return "redirect:/";

@@ -44,9 +44,9 @@ public class AdminClassController {
 	public String updateFrm(NsClass nscl) {
 		int result = service.chnageStatus(nscl);
 		if(result>0) {
-			return "admin/adminMgrClass";
+			return "redirect:adminMgrClass.do?reqPage=1";
 		}
-		return "admin/adminMgrClass";
+			return "redirect:classUpdateFrm.do?classNo"+nscl.getClassNo();
 	}
 	
 	//아직안씀
