@@ -85,6 +85,12 @@ public class NsClassService {
 	}
 	@Transactional
 	public int insertClass(NsClass nsCl) {
+		String teacherIntroduce = nsCl.getTeacherIntroduce();
+		teacherIntroduce.replace("\r\n","<br>");
+		String curriculum =nsCl.getCurriculum();
+		curriculum.replace("\r\n","<br>");
+		nsCl.setTeacherIntroduce(teacherIntroduce);
+		nsCl.setCurriculum(curriculum);
 		int result = dao.insertClass(nsCl);
 	System.out.println("result결과값"+result);
 	System.out.println("nscl넘버값"+nsCl.getClassNo());
@@ -150,5 +156,9 @@ public class NsClassService {
 
 	public ArrayList<NsClass> getMyClass(int memberNo) {
 		return dao.getMyClass(memberNo);
+	}
+	@Transactional
+	public int changeStatus2(NsClass nscl) {
+		return dao.changeStatus2(nscl);
 	}
 }
