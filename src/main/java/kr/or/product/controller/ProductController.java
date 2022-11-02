@@ -153,6 +153,7 @@ public class ProductController {
 		return "redirect:/productList.do?reqPage=1";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(ProductReview pr, Model model) {
 		System.out.println(pr);

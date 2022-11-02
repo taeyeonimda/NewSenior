@@ -88,11 +88,11 @@
                 </div>
               </div>
             </div>
-		            <div class="prodContentMenu">
+		    <div class="prodContentMenu productReviewDiv">
             <c:choose>
             	<c:when test="${!empty sessionScope.m }">
 			            <div class="reviewContentWrap">
-			              <form action="/insertReview.do" method="post">
+			              <!-- <form action="/insertReview.do" method="post"> -->
 			                <div class="reviewContent">
 			                  <div class="productReviewHight">
 			                    <h6>${sessionScope.m.memberId }</h6>
@@ -103,7 +103,7 @@
 			                    <textarea id="customerReview" style="outline: none;" name="reviewContent"></textarea>
 			                  </div>
 			                  <div class="productReviewHight">
-			                    <button type="submit" id="productReviewInsertBtn">등록하기</button>
+			                    <button type="button" id="productReviewInsertBtn">등록하기</button>
 			                  </div>
 			                  <div class="star-content">
 			                    <div class="star-wrap">
@@ -120,7 +120,7 @@
 			                    </div>
 			                  </div>
 			                </div>
-			              </form>
+			              <!-- </form>  -->
 			            </div>
 		            </c:when>
 	            </c:choose>
@@ -247,8 +247,93 @@
 		};
 		
 		$("#productReviewInsertBtn").on("click",function(){
-			
-		})
+			const memberId = $("[name=memberId]").val();
+			const productNo = $("[name=productNo]").val();
+			const reviewContent = $("[name=reviewContent]").val();
+			const reviewScore = $("[name=reviewScore]").val();
+			$.ajax({
+				url : "/insertReview.do",
+				type : "post",
+				data : {
+					memberId : memberId,
+					productNo : productNo,
+					reviewContent : reviewContent,
+					reviewScore : reviewScore
+				},
+				success : function(data){
+					const oneDiv = $("<div>");
+					oneDiv.addClass("reviewsWrap reviewMenu");
+					//
+					oneDiv.append(twoDiv);
+					
+					const twoDiv = $("<div>");
+					towDiv.addClass("reviewsContent");
+					//
+					twoDiv.append(three1Div);
+					twoDiv.append(three2DIv);
+					twoDiv.append(three3Div);
+					twoDiv.append(three4Div);
+					twoDiv.append(three5Div);
+					
+					const three1Div = $("<div>");
+					three1Div.addClass("reviewsId");
+					const three1H6 = $("<h6>");
+					const three1P = $("<p>");
+					//
+					three1Div.append(three1H6);
+					three1Div.append(three1P);
+					
+					
+					const three2DIv = $("<div>");
+					three2Div.addClass("reviewsTextArea");
+					const three2Textarea = $("<textarea>");
+					//
+					three2DIv.append(three2Textarea);
+					
+					const three3Div = $("<div>");
+					three3Div.addClass("reviewsBtnBox");
+					const updateBtn = $("<button>");
+					updateBtn.attr("id","reviewUpdateBtn");
+					const deleteBtn = $("<button>");
+					deleteBtn.attr("id","deleteBtn");
+					//
+					three3Div.append(updateBtn);
+					three3Div.append(deleteBtn);
+					
+					
+					const three4Div = $("<div>");
+					three4Div.addClass("reviewsScore");
+					const fourNextDiv = $("<div>");
+					fourNextDiv.addClass("reviewStar-wrap");
+					const starSpan1 = $("<span>");
+					const starSpan2 = $("<span>");
+					const starSpan3 = $("<span>");
+					const starSpan4 = $("<span>");
+					const starSpan5 = $("<span>");
+					starSpan1.addClass("material-icons")
+					starSpan2.addClass("material-icons")
+					starSpan3.addClass("material-icons")
+					starSpan4.addClass("material-icons")
+					starSpan5.addClass("material-icons")
+					//
+					three4Div.append(fourNextDiv);
+					fourNextDiv.append(starSpan1);
+					fourNextDiv.append(starSpan2);
+					fourNextDiv.append(starSpan3);
+					fourNextDiv.append(starSpan4);
+					fourNextDiv.append(starSpan5);
+					
+					
+					const three5Div = $("<div>");
+					const fiveSpan = $("<span>");
+					fiveSpan.addClass("reviewScore");
+					//
+					three5Div.append(fiveSpan);
+					
+					$(".productReviewDiv").append(oneDiv);
+				}
+			});
+		});
 		
 		
 		$("#reviewUpdateBtn").on("click",function(){
