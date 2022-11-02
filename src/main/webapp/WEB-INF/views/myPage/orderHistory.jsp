@@ -198,21 +198,26 @@
                 <table class="table table-borderless">
                   <thead>
                     <tr>
+                      <th>주문번호</th>
                       <th>주문일자</th>
-                      <th>제품정보</th>
-                      <th>수량</th>
-                      <th>금액</th>
+                      <th>상품이름</th>
+                      <th>수령인</th>
+                      <th>주소</th>
                       <th>총 주문금액</th>
+                      <!-- 주문번호 1개당 1tr -->
+                      <!-- 상세주문 끝나면 여기서는 주문번호, 일자, 총주문금액만 보여주고 -->
+                      <!-- 상세주문에서 제품정보, 각각의 수량과 금액, 설명 보여주기 -->
                     </tr>
                   </thead>
                   <tbody>
                     <c:forEach items="${list }" var="Or">
-		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});" id="btn-modal">
-			                <td>${Or.orderDate }</td>
-			                <td>${Or.productName }</td>
-			                <td>${Or.orderAmount }</td>
-			                <td>${Or.orderPrice }</td>
-			                <td>${Or.orderAmount*Or.orderPrice }원</td>
+		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});">
+		            		<td>${Or.orderNo }</td>
+							<td>${Or.orderDate }</td>
+							<td>${Or.productName }</td>
+							<td>${Or.receiveName }</td>
+							<td>${Or.receiveAddr }</td>
+							<td>${Or.orderAmount*Or.orderPrice }원</td>
 		                </tr>
              		</c:forEach>
              		
@@ -226,27 +231,7 @@
                 </table>
               </div>
             </div>
-        
-        <!-- 주문 상세보기 모달 -->
-	    <div id="modal" class="modal-overlay">
-	        <div class="modal-window">
-	            <div class="title"><h2>주문 내역 상세 보기</h2></div>
-	            <div class="close-area" style="font-size : 40px;">X</div>
-	            <div class="content">
-	            	<table>
-	                <c:forEach items="${list }" var="Or">
-		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});" id="btn-modal">
-			                <td>${Or.orderDate }</td>
-			                <td>${Or.productName }</td>
-			                <td>${Or.orderAmount }</td>
-			                <td>${Or.orderPrice }</td>
-			                <td>${Or.orderAmount*Or.orderPrice }원</td>
-		                </tr>
-             		</c:forEach>
-             		</table>
-	            </div>
-	        </div>
-	    </div>	
+       
 			<br><br><br>
           <div style="font-size: 25px;">주문내역</div>
           <div style="font-size: 17px;">상품</div>
@@ -318,23 +303,6 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
-	    
-	    const modal = document.getElementById("modal")
-	    const btnModal = document.getElementById("btn-modal")
-	    btnModal.addEventListener("click", e => {modal.style.display = "flex"
-	    });
-	    
-	    modal.addEventListener("click", e => {
-	        const evTarget = e.target
-	        if(evTarget.classList.contains("modal-overlay")) {
-	            modal.style.display = "none"
-	        }
-	    });
-	    
-	    $(".close-area").click(function(){
-	        modal.style.display = "none"
-	    });
-	    
 	    function goToOrderDetail(orderNo) {
 			location.href = "/orderDetail.do?orderNo="+orderNo;
 		}

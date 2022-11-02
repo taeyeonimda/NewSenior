@@ -2,15 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="order">
 
-<select id="selectAllOrderHistory" resultType="Or" parameterType="m">
+<!-- 
+<select id="a" resultType="Or" parameterType="m" resultMap="getBoard">
 	select
-		order_no as orderNo,
-		order_date as orderDate,
-		product_name as productName,
-		order_amount as orderAmount,
-		order_price as orderPrice,
-		member_no as memberNo
-	from PAY_HISTORY, PRODUCTS
+	    *
+    from pays
 	where member_no=#{memberNo}
 </select>
+ -->
+
+<select id="selectAllOrderHistory" parameterType="_int" resultType="Or">
+	select
+	    order_no as orderNo,
+	    order_date as orderDate,
+	    receive_name as receiveName,
+	    receive_addr as receiveAddr,
+	    receive_phone as receivePhone,
+	    order_amount as orderAmount,
+	    order_price as orderPrice,
+	    member_no as memberNo
+    from pays
+	where member_no=#{memberNo}
+</select>
+
+
+<select id="selectOrderDetail" resultType="Or" parameterType="_int">
+	select
+		pays.order_no as orderNo,
+		order_date as orderDate,
+		order_detail_amount as orderDetailAmount,
+		product_no as productNo,
+		receive_phone as receivePhone,
+		receive_addr as receiveAddr,
+		receive_name as receiveName
+	from pays, pay_details
+	where pays.order_no=#{orderNo}
+</select>
+
+<!-- 
+<resultMap type="Or" id="getProduct">
+		<result column="product_no" property="productNo"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="order_amount" property="orderAmount"/>
+		<result column="order_price" property="orderPrice"/>
+		<result column="order_detail_amount" property="productContent"/>
+		<result column="receive_phone" property="receivePhone"/>
+		<collection property="orderList"
+					select="selectProductDetail"
+					column="product_no"
+					ofType="p"
+					javaType="java.util.ArrayList"
+		/>
+</resultMap>
+<select id="selectProductDetail" parameterType="_int" resultType="p">
+	select
+		product_name as productName,
+		product_content as productContent
+	from products
+</select>
+ --> 
+
+
+
+
+	
+
+
 </mapper>
