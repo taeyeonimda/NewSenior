@@ -12,4 +12,6 @@ public class OrderDetail {
 	private int orderDetailNo;
 	private int orderDetailAmount;
 	private int productNo;
+	private String productName;
+	private int memberNo;
 }

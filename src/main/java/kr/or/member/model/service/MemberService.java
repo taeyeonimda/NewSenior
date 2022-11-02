@@ -135,9 +135,10 @@ public class MemberService {
 		return  dao.changePw(m);
 	}
 
-	public int updatePwMember(Member member) {
-		// TODO Auto-generated method stub
-		return dao.updatePw(member);
+
+	//관리자목록가져오기
+	public ArrayList<Member> getAllAdmin() {
+		return dao.getAllAdmin();
 	}
 
 }

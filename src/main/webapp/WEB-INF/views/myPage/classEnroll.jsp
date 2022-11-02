@@ -85,22 +85,20 @@
                           <input type="file" name = 'files' class="btn btn-outline-primary">
                         </div>
                       </div>
-                      <div class="mb-3 row">
-                        <label for="html5-email-input" class="col-md-2 col-form-label">강사명</label>
-                        <div class="col-md-10">
-                          <input class="form-control" name = 'teacherName' type="email"  id="html5-email-input" />
-                        </div>
-                      </div>
+                      
+                          <input class="form-control" value="${m.memberNo }"name = 'teacherName' type="hidden"  id="html5-email-input" />
+                       
                       <div class="mb-3 row">
                         <label for="html5-url-input" class="col-md-2 col-form-label">강사소개</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = "teacherIntroduce" type="url" id="html5-url-input" />
+                          <textarea class="form-control" name = "teacherIntroduce"  id="html5-url-input" ></textarea>
+                          
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">커리큘럼</label>
                         <div class="col-md-10">
-                          <input class="form-control" name= "curriculum" type="tel" id="html5-tel-input" />
+                          <textarea class="form-control" name= "curriculum"  id="html5-tel-input" ></textarea>
                         </div>
                       </div>
                     
@@ -123,9 +121,17 @@
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label" for="category">카테고리</label>
                         <select name="category">
-                         <c:forEach items="${category }" var="cate">
-                        	<option value="${cate }">${cate }</option>
-                        </c:forEach>
+                        	<option value="DG">디지털</option>
+                        	<option value="FU">주식/재테크</option>
+                        	<option value="CR">공예</option>
+                        	<option value="DE">디자인</option>
+                        	<option value="EX">운동</option>
+                        	<option value="FS">패션</option>
+                        	<option value="ME">미디어</option>
+                        	<option value="SO">악기/음악</option>
+                        	<option value="FO">외국어</option>
+                        	<option value="CO">요리/음식</option>
+                        	<option value="ET">기타</option>
                         </select>
                       </div>
                       
@@ -134,9 +140,6 @@
                         	<select name="classLimit">
                         		
                         	</select>
-                        	<script>
-                        	 
-                        	</script>
                       </div>
                       <div class="mb-3 row">
                         <label for="products" class="col-md-2 col-form-label">준비물유무</label>
@@ -155,6 +158,7 @@
                </div></div></div>
             <!-- / Content -->
 	<script>
+	console.log($("input[name=teacherName]").val());
 	//인원수 옵션값넣기
 	const limitSelect = $("select[name=classLimit]");
  	for(let i=1;i<=30;i++){
@@ -170,8 +174,8 @@
 			const className = $("input[name=className]").val();
 			const files = document.querySelector("input[name=files]").files[0];
 			const teacherName = $("input[name=teacherName]").val();
-			const teacherIntroduce = $("input[name=teacherIntroduce]").val();
-			const curriculum =$("input[name=curriculum]").val();
+			const teacherIntroduce = $("textarea[name=teacherIntroduce]").val();
+			const curriculum =$("textarea[name=curriculum]").val();
 			const startDate = $("input[name=startDate]").val();
 			const endDate = $("input[name=endDate]").val();
 			const category = $("select[name=category]").val();
@@ -182,46 +186,43 @@
 		
 			
 			if(className==""){
-				alert("비어있음");
+				alert("클래스이름");
 				return false;
 			}
 			if(files==""){
-				alert("비어있음");
+				alert("파일즈");
 				return false;
 			}
-			if(teacherName==""){
-				alert("비어있음");
-				return false;
-			}
+			
 			if(teacherIntroduce==""){
-				alert("비어있음");
+				alert("teacherIntroduce");
 				return false;
 			}
 			if(curriculum==""){
-				alert("비어있음");
+				alert("curriculum");
 				return false;
 			}
 			if(startDate==""){
-				alert("비어있음");
+				alert("startDate");
 				return false;
 			}
 			if(endDate==""){
-				alert("비어있음");
+				alert("endDate");
 				return false;
 			}
 			
 			if(category==""){
-				alert("비어있음");
+				alert("category");
 				return false;
 			}
 
 			if(classLimit ==""){
-				alert("비어있음");
+				alert("classLimit");
 				return false;
 			}
 			
 			if(products==""){
-				alert("비어있음");
+				alert("products");
 				return false;
 			}
 			
@@ -232,7 +233,7 @@
 			var formData = new FormData();
 			formData.append('className',className);
 			formData.append('files', files);
-			formData.append('teacherName',teacherName);
+			formData.append('classTeacher',teacherName);
 			formData.append('teacherIntroduce',teacherIntroduce);
 			formData.append('curriculum',curriculum);
 			formData.append('startDate',startDate);

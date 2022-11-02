@@ -33,27 +33,6 @@ $("#plus").on("click",function(){
 	$(".sumPrice").val(sumPrice);
     
 });
-/*
-$(".subTitle").children().eq(0).on("click",function(){
-    $(".detailContentWrap").show();
-    $(".reviewContentWrap").hide();
-    $(".refundWrap").hide();
-    $(this).addClass("selectColor");
-});
-
-$(".subTitle").children().eq(1).on("click",function(){
-    $(".detailContentWrap").hide();
-    $(".reviewContentWrap").show();
-    $(".refundWrap").hide();
-    $(this).addClass("selectColor");
-});
-
-$(".subTitle").children().eq(2).on("click",function(){
-    $(".detailContentWrap").hide();
-    $(".reviewContentWrap").hide();
-    $(".refundWrap").show();
-});
-*/
 
 
 $(".subTitle>div").on("click",function(){

@@ -46,7 +46,7 @@
 
             <!-- 액티비티관리 -->
             <li class="menu-item ">
-              <a href="activityMgrAdmin.do" class="menu-link">
+              <a href="activityMgrAdmin.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">액티비티 관리</div>
               </a>

@@ -72,6 +72,10 @@ public class ProductDao {
 		return (ArrayList<ProductReview>)list;
 	}
 
+	public int deleteReview(int reviewNo) {
+		return sqlSession.delete("product.deleteReview",reviewNo);
+	}
+
 
 	
 
