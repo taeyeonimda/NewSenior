@@ -141,4 +141,8 @@ public class MemberService {
 		return dao.getAllAdmin();
 	}
 
+	public int updatePwMember(Member member) {
+		// TODO Auto-generated method stub
+		return dao.updatePw(member);
+	}
 }

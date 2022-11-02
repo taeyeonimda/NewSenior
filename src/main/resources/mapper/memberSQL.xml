@@ -142,4 +142,14 @@
 		from members
 		where member_grade = 3 
 	</select>
+	
+	<update id="updatePw" parameterType="m">
+		update
+		members
+		set
+		member_pw=#{memberPw}
+		where
+		member_email=#{memberEmail}
+	</update>
+	
 </mapper>
