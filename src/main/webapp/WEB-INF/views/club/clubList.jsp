@@ -17,14 +17,29 @@
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLUB</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <h4 class="mb-3 text-white">관심사를 검색하세요 ! </h4>
-                    <input type="text" class="mt-2" id="club-input">
+                    <input type="text" class="mt-2" id="club-input"><button>찾기</button>
                 </nav>
             </div>
         </div>
         <!-- Page Header End -->
+        
         <div style="width: 90%; display: flex; justify-content: flex-end;">
         	<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
         </div>
+        
+		<div class="row mb-5">
+			<div class="col-md-6 col-lg-4 mb-3">
+				<div class="card h-100">
+      				<img>
+      				<div class="card-body">
+		        		<h5 class="card-title">준석이의 부트스트랩 클래스</h5>
+		        		<p class="card-text">부트스트랩 재미없어 집에보내줘</p>
+		        		<a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
+	      			</div>
+    			</div>
+  			</div>
+		</div>
+		
 		<div id="club-list" style="width: 80%; margin: 0 auto; overflow: hidden;" class="mt-5">
 			<c:forEach items="${list }" var="c">
 				<div onclick="clubInfoModal(${c.clubNo });" style="width: 400px; text-align: center; margin-bottom: 20px; border: 1px solid #eee; float: left;">
@@ -36,7 +51,7 @@
 		</div>
 	</div> <!-- pageContent End -->
 <div class="modal-wrap">
-    <div class="club-info-modal">
+    <div class="club-info-modal bg-secondary">
     	<div class="modal-title">
 	        <div class="modal-img-div">
 	            <img class="modal-img">
@@ -44,8 +59,8 @@
 	    </div>
         <div class="club-info">
             <div class="club-info-box">
-            	<h3 class="mb-3"></h3>
-            	<p></p> 
+            	<h3 class="mb-3 text-light"></h3>
+            	<p class="text-light"></p> 
             </div>
             <div class="modal-btn-box">
             	<button onclick="closeModal();" class="btn btn-primary">닫기</button>

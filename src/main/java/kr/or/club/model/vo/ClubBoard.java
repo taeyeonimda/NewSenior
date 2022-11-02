@@ -2,6 +2,8 @@ package kr.or.club.model.vo;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +19,6 @@ public class ClubBoard {
 	private String clubBoardDate;
 	private String clubBoardFilepath;
 	private int memberNo;
+	@Autowired
 	private ArrayList<ClubBoardComment> commentList;
 }

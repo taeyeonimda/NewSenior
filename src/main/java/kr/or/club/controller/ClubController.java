@@ -24,6 +24,7 @@ import common.FileRename;
 import kr.or.club.model.service.ClubService;
 import kr.or.club.model.vo.Club;
 import kr.or.club.model.vo.ClubBoard;
+import kr.or.club.model.vo.ClubBoardComment;
 
 
 @Controller
@@ -77,12 +78,8 @@ public class ClubController {
 	
 	@RequestMapping(value = "/clubDetail.do")
 	public String clubDetail(int clubNo, Model model){
-		HashMap<String, List> map = service.selectOneClubMap(clubNo);
-		//Club c = service.selectOneClub(clubNo);
-		// board리스트와 해당 클럽의 board에 대한 댓글리스트
-		// model.addAttribute("c", c);
-		Club c = (Club)map.get("club").get(0);
-		model.addAttribute("c", c);
+		HashMap<String, Object> map = service.selectOneClubMap(clubNo);
+		model.addAttribute("c", map.get("club"));
 		model.addAttribute("cbList", map.get("board"));
 		return "club/clubDetail";
 	}
@@ -151,6 +148,10 @@ public class ClubController {
 		return "redirect:/clubDetail.do?clubNo="+cb.getClubNo();
 	}
 	
-	
+	@RequestMapping(value = "/insertClubComment.do")
+	public String  insertClubComment(ClubBoardComment cbc) {
+		int result = service.insertBoardCom(cbc);
+		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
+	}
 	
 }

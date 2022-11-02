@@ -143,9 +143,9 @@
     top: 0px;
     left: 0px;
     background: #eee;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     overflow-x: hidden;
     padding: 8px 0;
-    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
     text-align: center;
     display: flex;
 	flex-direction: row-reverse;
@@ -300,7 +300,6 @@ textarea[name=clubBoardContent]{
 }
 
 
-
 /* 채팅창 css */
 .chatting{
 	width: 500px;
@@ -382,8 +381,13 @@ textarea[name=clubBoardContent]{
 
 
 
+
 /* board-comment */
+.commentBox{
+	border: 1px solid #bbb;
+}
 .commentBox>ul{
+	padding-top: 15px;
 	list-style-type: none;
 	margin: 0;
 	display : flex;
@@ -393,12 +397,13 @@ textarea[name=clubBoardContent]{
 	min-height: 100px;
 }
 .commentBox>ul>li:nth-child(2){
-	width:75%
+	width: 80%
 }
 .inputCommentBox>form>button{
 	margin-bottom: 34px;
 	margin-left: 20px;
 }
+
 textarea[name=clubComContent]{
 	resize: none;
 	height: 60px;
@@ -428,11 +433,13 @@ textarea[name=clubComContent]{
 	justify-content: center;
 	align-items: center;
 }
-.inputRecommentBox>form>ul>li:first-child>span{
-	font-size: 50px;
+.arrow-span{
 	color : #ccc;
 }
-.inputRecommentBox>form>ul>li:nth-child(2){
+.comment-profil-li{
+	width: 15%
+}
+.comment-content-li{
 	width:75%
 }
 .inputRecommentBox>form>ul>li:nth-child(2)>textarea{
