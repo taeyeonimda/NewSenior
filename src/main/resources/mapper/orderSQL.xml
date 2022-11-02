@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="order">
+
+<select id="selectAllOrderHistory" resultType="Or" parameterType="m">
+	select
+		order_no as orderNo,
+		order_date as orderDate,
+		product_name as productName,
+		order_amount as orderAmount,
+		order_price as orderPrice,
+		member_no as memberNo
+	from PAY_HISTORY, PRODUCTS
+	where member_no=#{memberNo}
+</select>
+</mapper>

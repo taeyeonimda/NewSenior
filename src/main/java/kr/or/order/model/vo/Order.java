@@ -14,4 +14,5 @@ public class Order {
 	private String orderName;
 	private int orderAmount;
 	private int orderPrice;
+	private String productName;
 }

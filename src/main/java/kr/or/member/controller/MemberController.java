@@ -29,10 +29,7 @@ public class MemberController {
 		return "myPage/mypage";
 	}
 	 */
-	@RequestMapping(value="/orderHistory.do")
-	public String orderHistory() {
-		return "myPage/orderHistory";
-	}
+	
 	@RequestMapping(value="/classHistory.do")
 	public String classHistory() {
 		return "myPage/classHistory";

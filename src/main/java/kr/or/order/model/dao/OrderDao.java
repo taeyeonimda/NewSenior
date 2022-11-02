@@ -17,7 +17,7 @@ public class OrderDao {
 	private SqlSessionTemplate sqlSession;
 
 	public ArrayList<Order> selectAllOrderHistory(Member m) {
-		List list = sqlSession.selectList("order.selectAllOrderHistory"); 
-return (ArrayList<Order>) list;
+		List list = sqlSession.selectList("order.selectAllOrderHistory", m); 
+		return (ArrayList<Order>) list;
 	}
 }
