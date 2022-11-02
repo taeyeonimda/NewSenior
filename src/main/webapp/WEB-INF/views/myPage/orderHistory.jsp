@@ -133,14 +133,14 @@
             </a>
           </li>
 
-<!-- 찜한상품 
+		<!-- 찜한상품 
           <li class="menu-item ">
             <a href="jjimGoods.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">찜한상품</div>
             </a>
           </li>
--->
+		-->
           <!-- 수강현황 -->
           <li class="menu-item  ">
             <a href="classHistory.do" class="menu-link">
