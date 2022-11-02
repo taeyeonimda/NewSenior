@@ -95,13 +95,13 @@
                       <div class="mb-3 row">
                         <label for="html5-url-input" class="col-md-2 col-form-label">강사소개</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = "teacherIntroduce" type="url" id="html5-url-input" value="${cla.teacherIntroduce }" readonly/>
+                          <textarea class="form-control" name = "teacherIntroduce" type="url" id="html5-url-input"  readonly>${cla.teacherIntroduce }</textarea>
                         </div>
                       </div>
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">커리큘럼</label>
                         <div class="col-md-10">
-                          <input class="form-control" name= "curriculum" type="tel" id="html5-tel-input" value="${cla.curriculum }"  readonly/>
+                          <textarea class="form-control" name= "curriculum" type="tel" id="html5-tel-input" readonly>${cla.curriculum }</textarea>
                         </div>
                       </div>
                     
@@ -161,7 +161,11 @@
     -webkit-appearance: none;
     margin: 0;
 	}
-</style>
+	input[type="image"]{
+	width:400px;
+	height:350px;
+	}
+	</style>
 
 
 
@@ -175,7 +179,7 @@
                   <script>
 					function changeStatus(classNo){
 						classPrice= $("#html5-price-input").val();
-						location.href="/chnageStatus.do?classNo="+classNo+"&classPrice="+classPrice;
+						location.href="/changeStatus.do?classNo="+classNo+"&classPrice="+classPrice;
 					}
 				</script>
                 </form>

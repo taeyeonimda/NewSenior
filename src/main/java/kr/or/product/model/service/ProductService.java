@@ -120,4 +120,8 @@ public class ProductService {
 		return prlist;
 	}
 
+	public int deleteReview(int reviewNo) {
+		return dao.deleteReview(reviewNo);
+	}
+
 }

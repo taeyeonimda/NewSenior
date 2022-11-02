@@ -82,5 +82,9 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.getMyClass",memberNo);
 		return (ArrayList<NsClass>)list;
 	}
+	public int changeStatus2(NsClass nscl) {
+		int result = sqlSession.update("nsClass.changeStatus2",nscl);
+		return result;
+	}
 
 }
