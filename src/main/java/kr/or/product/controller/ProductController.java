@@ -153,6 +153,7 @@ public class ProductController {
 		return "redirect:/productList.do?reqPage=1";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(ProductReview pr, Model model) {
 		System.out.println(pr);
@@ -160,10 +161,16 @@ public class ProductController {
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
 	}
 	
-	@RequestMapping(value = "/productReviewList")
-	public String productReviewList(Model model, int productNo) {
-		
-		return "";
+	@ResponseBody
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo) {
+		System.out.println(reviewNo);
+		int result = service.deleteReview(reviewNo);
+		if(result > 0) {
+			return "1";
+		} else {
+			return "0";
+		}
 	}
 	
 }

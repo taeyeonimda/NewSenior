@@ -150,124 +150,217 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <!-- HTML5 Inputs -->
-            <form action="#">
+            <form  id="insertActFrm">
               <div class="card mb-4" style="width: 60%; float: left;">
                 <h5 class="card-header" style="text-align: center;">액티비티 등록하기</h5>
                 <div class="card-body">
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">액티비티명</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" id="html5-text-input" />
+                      <input class="form-control" type="text" name="activityName" id="html5-text-input" />
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
+                    <label for="html5-file-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
-                      <a href="javascript:void(0)" class="btn btn-outline-primary">첨부파일넣기</a>
+                      <input type="file" name="files" class="btn btn-outline-primary" id="html5-file-input">
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-email-input" class="col-md-2 col-form-label">담당자명</label>
+                    <label for="html5-select-input" class="col-md-2 col-form-label">담당자명</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="email"  id="html5-email-input" />
+                      <select name="activityManager" id="html5-select-input">
+                      	<c:forEach items="${list }" var="admin">
+                      		<option value="${admin.memberNo }">${admin.memberName }</option>
+                      	</c:forEach>
+                      </select>
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-url-input" class="col-md-2 col-form-label">액티비티소개</label>
+                    <label for="html5-introduce-input" class="col-md-2 col-form-label">액티비티소개</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" />
+                      <input class="form-control" name="activityIntroduce" id="html5-introduce-input" />
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">액티비티상세</label>
+                    <label for="html5-detail-input" class="col-md-2 col-form-label">액티비티상세</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="tel" id="html5-tel-input" />
+                      <textarea class="form-control" name="activityDetail" id="html5-detail-input" ></textarea>
                     </div>
                   </div>
+                  
                   <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리</label>
+                        <label for="html5-tel-input" class="col-md-2 col-form-label">수강기간</label>
+                        <div class="col-md-10">
+                          <input class="form-control" name = "startDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="시작일 ex) 20221024"/>
+                          <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
+                          <input class="form-control" name ="endDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="종료일 ex) 20221024"/>
+                        </div>
+                      </div>
+                  
+                  <div class="mb-3 row">
+                    <label for="html5-cate-input" class="col-md-2 col-form-label">카테고리</label>
+                      <div class="btn-group" style="width: 200px;">
+                         <select name="activityCategory" id="html5-cate-input">
+                        	<option value="DG">디지털</option>
+                        	<option value="FU">주식/재테크</option>
+                        	<option value="CR">공예</option>
+                        	<option value="DE">디자인</option>
+                        	<option value="EX">운동</option>
+                        	<option value="FS">패션</option>
+                        	<option value="ME">미디어</option>
+                        	<option value="SO">악기/음악</option>
+                        	<option value="FO">외국어</option>
+                        	<option value="CO">요리/음식</option>
+                        	<option value="ET">기타</option>
+     					</select>
+                      </div>
+                  </div>
+                 
+                  <div class="mb-3 row">
+                    <label for="html5-limit-input" class="col-md-2 col-form-label">모집정원</label>
                       <div class="btn-group" style="width: 150px;">
-                        <button
-                          type="button"
-                          class="btn btn-outline-primary dropdown-toggle"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          카테고리선택
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="javascript:void(0);">디지털</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">주식/재테크</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">공예</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">디자인</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">운동/건강</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">패션</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">미디어</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">악기/노래</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">외국어</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">요리/제과제빵</a></li>
-                        </ul>
+                      	<select id="html5-limit-input" name="activityLimit">
+                      		
+                      	</select>
                       </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
-                      <div class="btn-group" style="width: 150px;">
-                        <button
-                          type="button"
-                          class="btn btn-outline-primary dropdown-toggle"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          카테고리선택
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="javascript:void(0);">디지털</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">주식/재테크</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">공예</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">디자인</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">운동/건강</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">패션</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">미디어</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">악기/노래</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">외국어</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">요리/제과제빵</a></li>
-                        </ul>
-                      </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">모집정원</label>
-                      <div class="btn-group" style="width: 150px;">
-                        <button
-                          type="button"
-                          class="btn btn-outline-primary dropdown-toggle"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          인원선택
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="javascript:void(0);">1</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">2</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">3</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">4</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">5</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">6</a></li>
-                        </ul>
-                      </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">가격</label>
+                    <label for="html5-price-input" class="col-md-2 col-form-label">가격</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="tel" id="html5-tel-input" />
+                      <input class="form-control" name="activityPrice" id="html5-price-input" />
                     </div>
                   </div>
-                  <a href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
+                  <button type="button" class="btn btn-outline-primary" id="submitBtn" >등록하기</button>
                 </div>
               </div>
             </form>
               <!-- File input -->
             </div>
 </div>
+<script>
+//인원수 옵션값넣기
+const limitSelect = $("select[name=activityLimit]");
+	for(let i=1;i<=30;i++){
+		limitSelect.append(
+				$('<option>').prop({
+					innerHTML: i+'명',
+					value: i
+				})
+				)
+	}
+	
+	$("#submitBtn").on("click",function(){
+		const activityName = $("input[name=activityName]").val();
+		const files = document.querySelector("input[name=files]").files[0];
+		const activityManager = $("select[name=activityManager]").val();
+		const activityIntroduce = $("input[name=activityIntroduce]").val();
+		const activityDetail = $("textarea[name=activityDetail]").val();
+		const activityCategory = $("select[name=activityCategory]").val();
+		const activityLimit = $("select[name=activityLimit]").val();
+		const activityPrice = $("input[name=activityPrice]").val();
+		const startDate = $("input[name=startDate]").val();
+		const endDate = $("input[name=endDate]").val();
+	
+		console.log(activityName);
+		console.log(files);
+		console.log(activityManager);
+		console.log(activityIntroduce);
+		console.log(activityDetail);
+		console.log(activityLimit);
+		console.log(activityCategory);
+		console.log(activityPrice);
+		console.log(startDate);
+		console.log(endDate);
+		
+		var formData = new FormData();
+		formData.append('activityName',activityName);
+		formData.append('files',files);
+		formData.append('activityManager',activityManager);
+		formData.append('activityIntroduce',activityIntroduce);
+		formData.append('activityDetail',activityDetail);
+		formData.append('activityLimit',activityLimit);
+		formData.append('activityCategory',activityCategory);
+		formData.append('activityPrice',activityPrice);
+		formData.append('startDate',startDate);
+		formData.append('endDate',endDate);
+		
+		console.log(formData.get("activityName"));
+		console.log(formData.get("files"));
+		console.log(formData.get("activityManager"));
+		console.log(formData.get("activityIntroduce"));
+		console.log(formData.get("activityDetail"));
+		console.log(formData.get("activityLimit"));
+		console.log(formData.get("activityCategory"));
+		console.log(formData.get("activityPrice"));
+		console.log(formData.get("startDate"));
+		console.log(formData.get("endDate"));
+		
+		$.ajax({
+ 			url : "/insertActivity.do",
+			type:"post",
+			data: formData,
+			contentType: false,
+            processData: false,
+            enctype	: 'multipart/form-data',
+			success:function(){
+				location.href="adminMgrClass.do?reqPage=1";
+			},error:function(){
+				alert("error");
+			}
+			
+			
+ 		})//ajax
+	
+	});
+	
+		
+	/*	
+		if(activityName==""){
+			alert("activityName 비었음");
+			return null;
+		}
+		if(filepath==""){
+			alert("filepath 비었음");
+			return null;
+		}
+		if(activityManager==""){
+			alert("activityManager 비었음");
+			return null;
+		}
+		if(activityIntroduce==""){
+			alert("activityIntroduce 비었음");
+			return null;
+		}
+		if(activityDetail==""){
+			alert("activityDetail 비었음");
+			return null;
+		}
+		if(activityCategory==""){
+			alert("activityCategory 비었음");
+			return null;
+		}
+		if(activityLimit==""){
+			alert("activityLimit 비었음");
+			return null;
+		}
+		if(activityPrice==""){
+			alert("activityPrice 비었음");
+			return null;
+		}
+		if(startDate==""){
+			alert("startDate 비었음");
+			return null;
+		}
+		if(endDate==""){
+			alert("endDate 비었음");
+			return null;
+		}
+	*/	
+		
+	
+		
+</script>
 
         <!-- / Content -->
 <!-- Footer Start -->

@@ -13,7 +13,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	    <div class="productContent">
-	    <div><a href="/deleteProduct.do?productNo=${p.productNo}">상품삭제</a></div>
+	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</div>
 	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
         <div class="productWrap">
             <div style="width: 500px;">
@@ -88,14 +88,14 @@
                 </div>
               </div>
             </div>
+		    <div class="prodContentMenu productReviewDiv">
             <c:choose>
             	<c:when test="${!empty sessionScope.m }">
-		            <div class="prodContentMenu">
 			            <div class="reviewContentWrap">
-			              <form action="/insertReview.do" method="post">
+			              <!-- <form action="/insertReview.do" method="post"> -->
 			                <div class="reviewContent">
 			                  <div class="productReviewHight">
-			                    <h6>아이디</h6>
+			                    <h6>${sessionScope.m.memberId }</h6>
 			                    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 			                    <input type="hidden" name="productNo" value="${p.productNo }">
 			                  </div>
@@ -103,7 +103,7 @@
 			                    <textarea id="customerReview" style="outline: none;" name="reviewContent"></textarea>
 			                  </div>
 			                  <div class="productReviewHight">
-			                    <button type="submit">등록하기</button>
+			                    <button type="button" id="productReviewInsertBtn">등록하기</button>
 			                  </div>
 			                  <div class="star-content">
 			                    <div class="star-wrap">
@@ -120,7 +120,7 @@
 			                    </div>
 			                  </div>
 			                </div>
-			              </form>
+			              <!-- </form>  -->
 			            </div>
 		            </c:when>
 	            </c:choose>
@@ -130,16 +130,17 @@
 	                <div class="reviewsContent">
 	                  <div class="reviewsId">
 	                    <h6>${pr.memberId }</h6>
+	                    <p>${pr.reviewDate }</p>
 	                  </div>
 	                  <div class="reviewsTextArea">
 	                    <textarea>${pr.reviewContent }</textarea>
 	                  </div>
 	                  <div class="reviewsBtnBox">
-	                    <a href="javascript:void(0)">수정</a>
-	                    <a href="javascript:void(0)">삭제</a>
+	                    <button id="reviewUpdateBtn"onclick="UpdateReview(${pr.reviewNo})">수정</button>
+	                    <button id="reviewDeleteBtn"onclick="deleteReview(${pr.reviewNo})">삭제</button>
 	                  </div>
 	                  <div class="reviewsScore">
-	                    <div class="star-wrap">
+	                    <div class="reviewStar-wrap">
 	                      <span class="material-icons">star</span>
 	                      <span class="material-icons">star</span>
 	                      <span class="material-icons">star</span>
@@ -147,8 +148,7 @@
 	                      <span class="material-icons">star</span>
 	                    </div>
 	                    <div>
-	                      <span class="real-score">${reviewScore }</span>
-	                      <span class="show-score">0</span>
+	                      <span class="reviewScore">${pr.reviewScore }</span>
 	                    </div>
 	                  </div>
 	                </div>
@@ -216,6 +216,129 @@
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
-	
+	<script>
+		function deleteProduct(productNo) {
+			if(confirm("상품을 삭제하시겠습니까?")){
+				location.href="/deleteProduct.do?productNo="+productNo;
+			}
+		}
+		
+		$(".reviewsScore").each(function(index,item){
+			const score = $(item).children().eq(1).children().text();
+			const span = $(item).children().eq(0).children();
+			for(let i = 0; i<score; i++){
+				span.eq(i).css("color","gold");
+			}
+		});
+		
+		function deleteReview(reviewNo){
+			if(confirm("리뷰를 삭제하시겠습니까?")){
+				$.ajax({
+					url : "/deleteReview.do",
+					data : {
+						reviewNo:reviewNo					
+					},
+					success : function(data){
+						alert("삭제가 완료되었습니다.");
+						location.reload(true);
+					}
+				});
+			}
+		};
+		
+		$("#productReviewInsertBtn").on("click",function(){
+			const memberId = $("[name=memberId]").val();
+			const productNo = $("[name=productNo]").val();
+			const reviewContent = $("[name=reviewContent]").val();
+			const reviewScore = $("[name=reviewScore]").val();
+			$.ajax({
+				url : "/insertReview.do",
+				type : "post",
+				data : {
+					memberId : memberId,
+					productNo : productNo,
+					reviewContent : reviewContent,
+					reviewScore : reviewScore
+				},
+				success : function(data){
+					const oneDiv = $("<div>");
+					oneDiv.addClass("reviewsWrap reviewMenu");
+					//
+					oneDiv.append(twoDiv);
+					
+					const twoDiv = $("<div>");
+					towDiv.addClass("reviewsContent");
+					//
+					twoDiv.append(three1Div);
+					twoDiv.append(three2DIv);
+					twoDiv.append(three3Div);
+					twoDiv.append(three4Div);
+					twoDiv.append(three5Div);
+					
+					const three1Div = $("<div>");
+					three1Div.addClass("reviewsId");
+					const three1H6 = $("<h6>");
+					const three1P = $("<p>");
+					//
+					three1Div.append(three1H6);
+					three1Div.append(three1P);
+					
+					
+					const three2DIv = $("<div>");
+					three2Div.addClass("reviewsTextArea");
+					const three2Textarea = $("<textarea>");
+					//
+					three2DIv.append(three2Textarea);
+					
+					const three3Div = $("<div>");
+					three3Div.addClass("reviewsBtnBox");
+					const updateBtn = $("<button>");
+					updateBtn.attr("id","reviewUpdateBtn");
+					const deleteBtn = $("<button>");
+					deleteBtn.attr("id","deleteBtn");
+					//
+					three3Div.append(updateBtn);
+					three3Div.append(deleteBtn);
+					
+					
+					const three4Div = $("<div>");
+					three4Div.addClass("reviewsScore");
+					const fourNextDiv = $("<div>");
+					fourNextDiv.addClass("reviewStar-wrap");
+					const starSpan1 = $("<span>");
+					const starSpan2 = $("<span>");
+					const starSpan3 = $("<span>");
+					const starSpan4 = $("<span>");
+					const starSpan5 = $("<span>");
+					starSpan1.addClass("material-icons")
+					starSpan2.addClass("material-icons")
+					starSpan3.addClass("material-icons")
+					starSpan4.addClass("material-icons")
+					starSpan5.addClass("material-icons")
+					//
+					three4Div.append(fourNextDiv);
+					fourNextDiv.append(starSpan1);
+					fourNextDiv.append(starSpan2);
+					fourNextDiv.append(starSpan3);
+					fourNextDiv.append(starSpan4);
+					fourNextDiv.append(starSpan5);
+					
+					
+					const three5Div = $("<div>");
+					const fiveSpan = $("<span>");
+					fiveSpan.addClass("reviewScore");
+					//
+					three5Div.append(fiveSpan);
+					
+					$(".productReviewDiv").append(oneDiv);
+				}
+			});
+		});
+		
+		
+		$("#reviewUpdateBtn").on("click",function(){
+			
+		});
+		</script>
 </body>
 </html>

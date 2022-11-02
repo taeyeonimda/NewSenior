@@ -24,5 +24,5 @@ public class Member {
 	private Date memberState;	// NOT NULL 회원탈퇴시 날짜넣고 몇일뒤 자동삭제
 	private String memberImg;	 //UNIQUE
 	private String favorite; 	//(N(선택x)/dg/fu/cr/de/ex/fs/me/so/fo/co)
-	
+	private int orderNo;
 }

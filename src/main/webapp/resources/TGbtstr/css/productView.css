@@ -39,6 +39,20 @@
     color: black;
     margin-left: 10px;
 }
+.reviewsBtnBox>button{
+    height: 50px;
+    width: 80px;
+    line-height: 50px;
+    border-radius: 5px;
+    color: black;
+    margin-left: 10px;
+    border: none;
+    background-color: white;
+}
+.reviewsBtnBox>button:hover{
+    color: white;
+    background-color: #037ef3;
+}
 .reviewsBtnBox>a:hover{
     color: white;
     background-color: #037ef3;
@@ -60,4 +74,18 @@
     position: relative;
     left: 55px;
     top: 25px;
+}
+.reviewStar-wrap>span{
+	float:left;
+    font-size: 30px;
+    color: lightgray;
+}
+.input-score{
+	position: relative;
+    top: 20px;
+}
+.reviewsId>p{
+	position: relative;
+    bottom: 30px;
+    margin: 0;
 }

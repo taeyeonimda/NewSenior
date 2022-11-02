@@ -62,5 +62,10 @@ public class MemberDao {
 		return result;
 	}
 
+	public ArrayList<Member> getAllAdmin() {
+		List list = sqlSession.selectList("member.getAllAdmin");
+		return (ArrayList<Member>)list;
+	}
+
 	
 }

@@ -40,13 +40,24 @@ public class AdminClassController {
 		return "myPage/classUpdate";
 	}
 	
-	@RequestMapping(value="/chnageStatus.do")
+	@RequestMapping(value="/changeStatus.do")
 	public String updateFrm(NsClass nscl) {
 		int result = service.chnageStatus(nscl);
 		if(result>0) {
 			return "redirect:adminMgrClass.do?reqPage=1";
 		}
 			return "redirect:classUpdateFrm.do?classNo"+nscl.getClassNo();
+	}
+	
+	@RequestMapping(value="/changeStatus2.do")
+	public String updateStatus(NsClass nscl) {
+		int result = service.changeStatus2(nscl);
+		
+		if(result>0) {
+			return "redirect:adminMgrClass.do?reqPage=1";
+		}else {
+			return "redirect:adminMgrClass.do?reqPage=1";
+		}
 	}
 	
 	//아직안씀
