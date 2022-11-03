@@ -12,7 +12,7 @@ public class Activity {
 	private String activityName;
 	private String activityPrice;
 	private int activityManager;
-	private String activityManagerName;
+	private String activityManagerName;// 자바에서만쓰는거 조인해서 이름불러오기
 	private String activityIntroduce;
 	private String activityDetail;
 	private	int activityLimit;
