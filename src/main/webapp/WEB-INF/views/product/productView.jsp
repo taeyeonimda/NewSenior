@@ -96,7 +96,7 @@
 			                <div class="reviewContent">
 			                  <div class="productReviewHight">
 			                    <h6>${sessionScope.m.memberId }</h6>
-			                    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+			                    <input type="hidden" name="memberId1" value="${sessionScope.m.memberId }">
 			                    <input type="hidden" name="productNo" value="${p.productNo }">
 			                  </div>
 			                  <div style="height: 100px;">
@@ -126,7 +126,7 @@
 	            </c:choose>
 	            
 	            <c:forEach items="${prlist }" var="pr">
-	            <div class="reviewsWrap reviewMenu">
+	            <!-- <div class="reviewsWrap reviewMenu">
 	                <div class="reviewsContent">
 	                  <div class="reviewsId">
 	                    <h6>${pr.memberId }</h6>
@@ -153,6 +153,7 @@
 	                  </div>
 	                </div>
               </div>
+               -->
               </c:forEach>
             </div>
             
@@ -248,6 +249,7 @@
 		
 		$("#productReviewInsertBtn").on("click",function(){
 			const memberId = $("[name=memberId]").val();
+			console.log(memberId);
 			const productNo = $("[name=productNo]").val();
 			const reviewContent = $("[name=reviewContent]").val();
 			const reviewScore = $("[name=reviewScore]").val();
