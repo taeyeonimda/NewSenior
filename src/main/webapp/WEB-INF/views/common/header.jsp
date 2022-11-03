@@ -189,7 +189,14 @@
                         <a href="/classList.do?classCategory=CO" class="dropdown-item">요리 / 제과제빵</a>
                     </div>
                 </div>
-                <a href="/clubList.do" class="nav-item nav-link">동호회</a>
+                <c:choose>
+                	<c:when test="${not empty sessionScope.m }">
+                		<a href="/popularClubList.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">동호회</a>
+                	</c:when>
+                	<c:otherwise>
+                		<a href="/clubList.do" class="nav-item nav-link">동호회</a>
+                	</c:otherwise>
+                </c:choose>
                 <a href="/boardList.do?reqPage=1" class="nav-item nav-link">커뮤니티</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">액티비티</a>
@@ -208,7 +215,6 @@
                     </div>
                 </div>
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
-                
                 <a href="javascript:void(0)" class="nav-item nav-link">공지사항</a>
             </div>
             <c:choose>

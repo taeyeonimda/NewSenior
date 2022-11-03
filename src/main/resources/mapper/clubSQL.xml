@@ -4,7 +4,7 @@
 	<insert id="insertClub" parameterType="c">
 		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg }, #{clubIntro })
 	</insert>
-	<select id="selectAllClub" resultType="c">
+	<select id="selectAllClub" resultType="c" parameterType="string">
 		select
 			club_no as clubNo,
 			club_name as clubName,
@@ -15,6 +15,9 @@
 			club_intro as clubIntro
 		from clubs
 		<!-- 세션 들어오면 category로 if문 추가 예정 -->
+		<if test="value!=null and !value.equals('')">
+			where club_name like '%'||#{_parameter}||'%'
+		</if>
 	</select>
 	<select id="selectOneClub" parameterType="int" resultType="c">
 		select
@@ -31,18 +34,41 @@
 	<insert id="insertChat" parameterType="cr">
 		insert into chat_record values (chat_record_seq.nextval, #{chatClub }, #{chatMember }, #{chatContent }, to_char(sysdate, 'yyyy-mm-dd'), #{filepath } )
 	</insert>
-	<select id="selectAllClubBoard" parameterType="int" resultType="cb">
+
+	<select id="selectAllClubBoard" parameterType="int" resultType="cb" resultMap="getAllComment">
 		select
-			club_board_no as clubBoardNo,
-			club_no as clubNo,
-			(select nickname from members m where m.member_no = c.member_no) as clubBoardWriter,
-			club_board_content as clubBoardContent,
-			club_board_date as clubBoardDate,
-			filepath as clubBoardFilepath
-		from club_boards c
+			*
+		from club_boards
 		where club_no = #{clubNo }
-		order by club_board_date desc
+		order by club_board_no desc
 	</select>
+	<resultMap type="cb" id="getAllComment">
+		<result column="club_board_no" property="clubBoardNo"/>
+		<result column="club_no" property="clubNo"/>
+		<result column="member_no" property="clubBoardWriter"/>
+		<result column="club_board_date" property="clubBoardDate"/>
+		<result column="club_board_Content" property="clubBoardContent"/>
+		<result column="filepath" property="clubBoardFilepath"/>
+		<collection property="commentList"
+			select="selectCommentList"
+			column="club_no"
+			ofType="cbc" 
+			javaType="java.util.ArrayList"
+		/>
+	</resultMap>
+	<select id="selectCommentList" parameterType="_int" resultType="cbc">
+		select
+			club_com_no as clubComNo,
+			club_no as clubNo,
+			board_no as clubBoardNo,
+			member_no as clubComWriter,
+			club_com_content as clubComContent,
+			club_com_date as clubComDate,
+			club_com_ref as clubComRef
+		from club_board_coms
+		where club_no=#{_parameter}
+	</select>
+
 	<insert id="insertClubBoard" parameterType="cb">
 		insert into club_boards values (club_boards_seq.nextval, #{clubNo }, #{memberNo }, #{clubBoardContent }, to_char(sysdate, 'yyyy-mm-dd'), #{clubBoardFilepath })
 	</insert>
@@ -56,5 +82,24 @@
 	    filepath
 	from chat_record
 	where chat_club=#{param }
+	</select>
+	<insert id="inertClubBoardCom" parameterType="cbc">
+		insert into club_board_coms values (club_com_seq.nextval, #{clubNo }, #{clubBoardNo }, #{clubComWriter }, #{clubComContent }, #{clubComRef }, to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
+	
+	<select id="searchClubList" parameterType="m" resultType="c">
+		select
+			club_no as clubNo,
+			club_name as clubName,
+			club_category as clubCategory,
+			club_limit as clubLimit,
+			club_Leader as clubLeader,
+			filepath as clubMainImg,
+			club_intro as clubIntro
+		from clubs where club_category = (select favorite from members where member_no=#{memberNo })
+	</select>
+	
+	<select id="getTotalPage" resultType="int">
+		select count(*) from clubs
 	</select>
 </mapper>
