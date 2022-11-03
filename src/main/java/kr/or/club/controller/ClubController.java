@@ -36,28 +36,36 @@ public class ClubController {
 	@Autowired
 	private FileRename fileRename;
 	
-	@RequestMapping(value = "/clubList.do")
+	@RequestMapping(value = "/popularClubList.do")
 	public String classList(Model model, @SessionAttribute Member m) {
 		// 실제는 회원의 카테고리를 가져옴
 		if(!m.getFavorite().equals("n")) {
 			ArrayList<Club> popularList = service.searchClubList(m);
 			model.addAttribute("pList", popularList);
+			model.addAttribute("type", "y");
 		}
 		return "club/clubList";
 	}
 	
+	@RequestMapping(value = "/clubList.do")
+	public String classList(Model model) {
+		return "club/clubList";
+	}
+
+	// 모든 동호회 가져오는 ajax 페이징
 	@ResponseBody
-	@RequestMapping(value = "/searchClub.do", produces = "application/json;charset=utf-8")
-	public String getMyClubCategory(Model model) {
+	@RequestMapping(value = "/searchAllClub.do", produces = "application/json;charset=utf-8")
+	public String getMyClubCategory() {
 		ArrayList<Club> list = service.selectAllClub();
 		return new Gson().toJson(list);
 	}
-	
 	
 	@RequestMapping(value = "/insertClubFrm.do")
 	public String insertClubFrm() {
 		return "club/insertClubFrm";
 	}
+	
+	
 	@RequestMapping(value = "/insertClub.do")
 	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) {
 		System.out.println(files);

@@ -61,5 +61,8 @@ public class ClubService {
 	public ArrayList<Club> searchClubList(Member m) {
 		return dao.searchCLubList(m);
 	}
+	public int getTotalPage() {
+		return dao.getTotalPage();
+	}
 
 }

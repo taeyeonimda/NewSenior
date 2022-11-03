@@ -87,4 +87,8 @@
 	<select id="searchClubList" parameterType="m" resultType="c">
 		select * from clubs where club_category = (select favorite from members where member_no=#{memberNo })
 	</select>
+	
+	<select id="getTotalPage" resultType="int">
+		select count(*) from clubs
+	</select>
 </mapper>

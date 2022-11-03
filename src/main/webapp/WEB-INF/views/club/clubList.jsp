@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
     <link href="/resources/css/club/club-detail.css" rel="stylesheet">
+    <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script> <!-- math 사용 위한 라이브러리 -->
 <title>동호회</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLUB</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <h4 class="mb-3 text-white">관심사를 검색하세요 ! </h4>
-                    <input type="text" class="mt-2" id="club-input"><button>찾기</button>
+                    <input type="text" class="mt-2" id="serchInput"><button id="serchBtn">찾기</button>
                     <input type="hidden" name="clubCategory" value="${clubCategory }">
                 </nav>
             </div>
@@ -25,10 +26,13 @@
         <!-- Page Header End -->
         
         <div style="width: 90%; display: flex; justify-content: flex-end;">
+        	<div id="displayCount">
+        	</div>
         	<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
         </div>
         
-		<div class="row mb-5">
+        <c:if test="${type eq 'y'}">
+       	<div class="row mb-5">
 			<div class="col-md-6 col-lg-4 mb-3">
 				<div class="card h-100">
       				<img>
@@ -40,6 +44,8 @@
     			</div>
   			</div>
 		</div>
+        </c:if>
+
 		
 		<div id="club-list" style="width: 80%; margin: 0 auto; overflow: hidden;" class="mt-5">
 			<c:forEach items="${pList }" var="c">
@@ -50,7 +56,22 @@
 				</div>
 			</c:forEach>
 		</div>
+		
+		<table border="1">
+			<thead>
+				<tr><th>동호회</th></tr>
+			</thead>
+			<tbody id="dataTableBody">
+			</tbody>
+		</table>
+		
+		<ul id="pagingul">
+		</ul>
+		
+		
 	</div> <!-- pageContent End -->
+	
+	
 <div class="modal-wrap">
     <div class="club-info-modal bg-secondary">
     	<div class="modal-title">
@@ -70,11 +91,127 @@
         </div>
     </div>
 </div>
+
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-    
+
+
+
+
     <script>
+    var totalData; //총 데이터 수
+    var dataPerPage; //한 페이지에 나타낼 글 수
+    var pageCount = 5; //페이징에 나타낼 페이지 수
+    var currentPage = 1; //현재 페이지
+    var data; //controller에서 가져온 data 전역변수
+    
+    $(document).ready(function () {
+    	
+	     //dataPerPage 선택값 가져오기
+	     dataPerPage = 9;
+	     $.ajax({ // ajax로 데이터 가져오기
+	    	method: "post",
+	    	url: "/searchAllClub.do",
+	    	success: function (data) {
+	    	   //totalData 구하기
+	    	   totalData = data.length;
+	    	   console.log("totalData:"+totalData);
+	    	   displayData(1, dataPerPage); //글 목록 표시 호출 (테이블 생성)
+	    	   paging(totalData, dataPerPage, pageCount, 1); //페이징 표시 호출
+	    	}
+	     });
+
+    });
+    
+
+    function paging(totalData, dataPerPage, pageCount, currentPage) {
+    	  console.log("currentPage:" + currentPage);
+    	  
+    	  console.log(totalData);
+    	  var totalPage = Math.ceil(Number(totalData)/dataPerPage); //총 페이지 수
+    	  // console.log(totalPage);
+    	  
+    	  if(totalPage<Number(pageCount)){
+    		  pageCount=totalPage;
+    	  }
+    	  
+    	  var pageGroup = Math.ceil(Number(currentPage)/Number(pageCount)); // 페이지 그룹
+    	  var last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+    	  
+    	  if (last > totalPage) {
+    	    last = totalPage;
+    	  }
+
+    	  let first = last-(pageCount-1); //화면에 보여질 첫번째 페이지 번호
+    	  let next = last+1;
+    	  let prev = first-1;
+
+    	  let pageHtml = "";
+
+    	  if (prev > 0) {
+    		  pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+    	  }
+
+    	 //페이징 번호 표시 
+    	  for (var i = first; i <= last; i++) {
+    	    if (currentPage == i) {
+    	      pageHtml +=
+    	        "<li class='on'><a href='#' id='" + i + "'>" + i + "</a></li>";
+    	    } else {
+    	      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+    	    }
+    	  }
+    	  
+    	  if (last < totalPage) {
+    	    pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
+    	  }
+
+    	  $("#pagingul").html(pageHtml);
+    	  let displayCount = "";
+    	  displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
+    	  $("#displayCount").text(displayCount);
+
+
+    	  //페이징 번호 클릭 이벤트 
+    	    $("#pagingul li a").click(function () {
+    	        let $id = $(this).attr("id");
+    	        selectedPage = $(this).text();
+
+    	        if ($id == "next") selectedPage = next;
+    	        if ($id == "prev") selectedPage = prev;
+
+    	        //전역변수에 선택한 페이지 번호를 담는다...
+    	        globalCurrentPage = selectedPage;
+    	        //페이징 표시 재호출
+    	        paging(totalData, dataPerPage, pageCount, selectedPage);
+    	        //글 목록 표시 재호출
+    	        displayData(selectedPage, dataPerPage, data);
+    	    });
+    	}
+    
+	  //현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
+	    function displayData(currentPage, dataPerPage) {
+	      	currentPage = Number(currentPage);
+	      	dataPerPage = Number(dataPerPage);
+	      	$.ajax({ // ajax로 데이터 가져오기
+		    	method: "post",
+		    	url: "/searchAllClub.do",
+		    	success: function (data) {
+		    		console.log("currentPage"+currentPage);
+		    		console.log("dataPerPage"+dataPerPage);
+		    		console.log(data);
+		    		for (let i=(currentPage-1)*dataPerPage; i<(currentPage-1)*dataPerPage+dataPerPage; i++) {
+						const tr = $("<tr>");
+						tr.append("<td>"+data[i].clubName+"</td>");
+						tr.append("<td>"+data[i].clubNo+"</td>");
+						tr.append("<td>"+data[i].clubLimit+"</td>");
+						$("#dataTableBody").append(tr);
+					}
+		    	}
+		    });
+	      	
+	    }
 
     	function clubInfoModal(clubNo) {
 			console.log(clubNo);

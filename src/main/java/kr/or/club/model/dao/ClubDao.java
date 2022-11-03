@@ -59,4 +59,8 @@ public class ClubDao {
 		List list = sqlSession.selectList("club.searchClubList", m);
 		return (ArrayList<Club>)list;
 	}
+
+	public int getTotalPage() {
+		return sqlSession.selectOne("club.getTotalPage");
+	}
 }
