@@ -84,10 +84,14 @@
   }
   .classMove{
     text-align: right;
+    height: 22px;
   }
+
   .prodContent>div>a{
     color: black;
     padding-right: 30px;
+    position: relative;
+    bottom: 20px;
   }
   .productName{
     font-size: 20px;
@@ -126,6 +130,17 @@
     font-weight: bold;
     color: #000;
     border-bottom: 1px solid black;
+  }
+  .subTitle>div>button:hover{
+    font-weight: bold;
+    color: #000;
+  }
+  .subTitle>div>button{
+  	height: 57px;
+    border: none;
+    background-color: transparent;
+    width: 300px;
+    padding: 0;
   }
   .subTitle>div>a{
     color: black;
@@ -288,3 +303,4 @@
     border-right: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
+  

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import common.ProductFileRename;
 import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
@@ -90,6 +92,16 @@ public class ProductController {
 		return "product/productView";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/productReviewList.do",produces = "application/json;charset=utf-8")
+	public String productReviewList(int productNo) {
+		ArrayList<ProductReview> pr = service.productReviewList(productNo);
+		Gson gson = new Gson();
+		String result = gson.toJson(pr);
+		return result;
+	}
+	
+	
 	@RequestMapping(value = "/deleteProduct.do")
 	public String deleteProduct(int productNo, HttpServletRequest request) {
 		ArrayList<ProductFileVO> list = service.deleteProduct(productNo);
@@ -155,8 +167,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/insertReview.do")
-	public String insertReview(ProductReview pr, Model model) {
-		System.out.println(pr);
+	public String insertReview(ProductReview pr) {
 		int result = service.insertReview(pr);
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
 	}
@@ -164,7 +175,6 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value = "/deleteReview.do")
 	public String deleteReview(int reviewNo) {
-		System.out.println(reviewNo);
 		int result = service.deleteReview(reviewNo);
 		if(result > 0) {
 			return "1";
