@@ -4,7 +4,7 @@
 	<insert id="insertClub" parameterType="c">
 		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg }, #{clubIntro })
 	</insert>
-	<select id="selectAllClub" resultType="c">
+	<select id="selectAllClub" resultType="c" parameterType="string">
 		select
 			club_no as clubNo,
 			club_name as clubName,
@@ -15,6 +15,9 @@
 			club_intro as clubIntro
 		from clubs
 		<!-- 세션 들어오면 category로 if문 추가 예정 -->
+		<if test="value!=null and !value.equals('')">
+			where club_name like '%'||#{_parameter}||'%'
+		</if>
 	</select>
 	<select id="selectOneClub" parameterType="int" resultType="c">
 		select
@@ -85,7 +88,15 @@
 	</insert>
 	
 	<select id="searchClubList" parameterType="m" resultType="c">
-		select * from clubs where club_category = (select favorite from members where member_no=#{memberNo })
+		select
+			club_no as clubNo,
+			club_name as clubName,
+			club_category as clubCategory,
+			club_limit as clubLimit,
+			club_Leader as clubLeader,
+			filepath as clubMainImg,
+			club_intro as clubIntro
+		from clubs where club_category = (select favorite from members where member_no=#{memberNo })
 	</select>
 	
 	<select id="getTotalPage" resultType="int">

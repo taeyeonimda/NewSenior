@@ -37,26 +37,27 @@ public class ClubController {
 	private FileRename fileRename;
 	
 	@RequestMapping(value = "/popularClubList.do")
-	public String classList(Model model, @SessionAttribute Member m) {
+	public String classList(Model model, Member m) {
 		// 실제는 회원의 카테고리를 가져옴
-		if(!m.getFavorite().equals("n")) {
-			ArrayList<Club> popularList = service.searchClubList(m);
-			model.addAttribute("pList", popularList);
-			model.addAttribute("type", "y");
-		}
+		ArrayList<Club> popularList = service.searchClubList(m);
+		model.addAttribute("pList", popularList);
+		System.out.println(popularList);
+		model.addAttribute("type", "y");
 		return "club/clubList";
 	}
 	
 	@RequestMapping(value = "/clubList.do")
 	public String classList(Model model) {
+		model.addAttribute("pList", null);
+		model.addAttribute("type", "n");
 		return "club/clubList";
 	}
 
 	// 모든 동호회 가져오는 ajax 페이징
 	@ResponseBody
 	@RequestMapping(value = "/searchAllClub.do", produces = "application/json;charset=utf-8")
-	public String getMyClubCategory() {
-		ArrayList<Club> list = service.selectAllClub();
+	public String getMyClubCategory(String keyword) {
+		ArrayList<Club> list = service.selectAllClub(keyword);
 		return new Gson().toJson(list);
 	}
 	

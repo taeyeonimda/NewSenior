@@ -65,6 +65,7 @@
 		from activity a
 		join members m 
 		on a.activity_manager = m.member_no
+		where a.activity_no = #{activityNo }
 	</select>
 	
 	<!-- 스킵 

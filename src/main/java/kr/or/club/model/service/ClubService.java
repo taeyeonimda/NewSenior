@@ -24,8 +24,8 @@ public class ClubService {
 	public int insertClub(Club c) {
 		return dao.insertClub(c);
 	}
-	public ArrayList<Club> selectAllClub() {
-		ArrayList<Club> list = dao.selectAllClub();
+	public ArrayList<Club> selectAllClub(String keyword) {
+		ArrayList<Club> list = dao.selectAllClub(keyword);
 		return list;
 	}
 	public Club selectOneClub(int clubNo) {

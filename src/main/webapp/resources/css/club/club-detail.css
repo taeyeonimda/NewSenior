@@ -10,9 +10,18 @@
 
 /*----------------- club-list -----------------*/
 /* 클럽 리스트 */
-#club-list{
-	width: 90%;
-	overflow: hidden;
+.club-list{
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+	
+}
+.lists{
+	border: 1px solid #eee;
+	
+	width: 33%;
 }
 #club-input{
 	border-radius: 15px;
@@ -27,19 +36,23 @@
 
 
 /* 페이징 */
-
-#pagingul{
+.pagingBox{
+	display: flex;
+	justify-content: center;
+}
+#pagingUl{
+	marging: 0 auto;
     text-align: center;
     display: inline-block;
     border: 1px solid #ccc;
     border-right: 0;
 }
-#pagingul li {
+#pagingUl li {
     text-align: center;
     float: left;
 }
 
-#pagingul li a {
+#pagingUl li a {
     display: block;
     font-size: 14px;
     padding: 9px 12px;
@@ -47,11 +60,11 @@
     box-sizing: border-box;
 }
 
-#pagingul li.on {
+#pagingUl li.on {
     background: #eda712;
 }
 
-#pagingul li.on a {
+#pagingUl li.on a {
     color: #fff;
 }
 

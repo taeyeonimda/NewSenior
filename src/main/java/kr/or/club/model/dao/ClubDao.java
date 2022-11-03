@@ -22,8 +22,8 @@ public class ClubDao {
 		return sqlSession.insert("club.insertClub", c);
 	}
 
-	public ArrayList<Club> selectAllClub() {
-		List list = sqlSession.selectList("club.selectAllClub");
+	public ArrayList<Club> selectAllClub(String keyword) {
+		List list = sqlSession.selectList("club.selectAllClub", keyword);
 		return (ArrayList<Club>)list;
 	}
 
