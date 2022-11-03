@@ -163,11 +163,11 @@
                           <label>전체선택 <input type="checkbox" style="width: 15px; height: 15px; "></label>
                         </th>
                         <th style="width: 20px;">번호</th>
-                        <th style="padding-left: 35px;">종류</th>
                         <th>상품명</th>
                         <th>가격</th>
                         <th>상품소개</th>
                         <th>수정</th>
+                        <th>삭제</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -175,10 +175,10 @@
                     <c:forEach items="${list }" var="act">
                       <tr>
                         <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">1</td>
-                        <td></td>
-                        <td></td>
-                        <td>${act }</td>
+                        <td style="text-align: center;">${act.activityNo }</td>
+                        <td>${act.activityName }</td>
+                        <td>${act.activityPrice }</td>
+                        <td>${act.activityIntroduce }</td>
                         <td></td>
                         <td>
                           <div class="dropdown">
