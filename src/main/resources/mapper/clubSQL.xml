@@ -65,9 +65,7 @@
 		from club_board_coms
 		where club_no=#{_parameter}
 	</select>
-	
-	
-	
+
 	<insert id="insertClubBoard" parameterType="cb">
 		insert into club_boards values (club_boards_seq.nextval, #{clubNo }, #{memberNo }, #{clubBoardContent }, to_char(sysdate, 'yyyy-mm-dd'), #{clubBoardFilepath })
 	</insert>
@@ -85,4 +83,8 @@
 	<insert id="inertClubBoardCom" parameterType="cbc">
 		insert into club_board_coms values (club_com_seq.nextval, #{clubNo }, #{clubBoardNo }, #{clubComWriter }, #{clubComContent }, #{clubComRef }, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
+	
+	<select id="searchClubList" parameterType="m" resultType="c">
+		select * from clubs where club_category = (select favorite from members where member_no=#{memberNo })
+	</select>
 </mapper>

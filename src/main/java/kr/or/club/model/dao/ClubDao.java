@@ -11,6 +11,7 @@ import kr.or.club.model.vo.ChatRecord;
 import kr.or.club.model.vo.Club;
 import kr.or.club.model.vo.ClubBoard;
 import kr.or.club.model.vo.ClubBoardComment;
+import kr.or.member.model.vo.Member;
 
 @Repository
 public class ClubDao {
@@ -52,5 +53,10 @@ public class ClubDao {
 
 	public int insertClubBoardCom(ClubBoardComment cbc) {
 		return sqlSession.insert("club.inertClubBoardCom", cbc);
+	}
+
+	public ArrayList<Club> searchCLubList(Member m) {
+		List list = sqlSession.selectList("club.searchClubList", m);
+		return (ArrayList<Club>)list;
 	}
 }

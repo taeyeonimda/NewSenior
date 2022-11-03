@@ -18,6 +18,7 @@
                 <nav aria-label="breadcrumb animated slideInDown">
                     <h4 class="mb-3 text-white">관심사를 검색하세요 ! </h4>
                     <input type="text" class="mt-2" id="club-input"><button>찾기</button>
+                    <input type="hidden" name="clubCategory" value="${clubCategory }">
                 </nav>
             </div>
         </div>
@@ -41,7 +42,7 @@
 		</div>
 		
 		<div id="club-list" style="width: 80%; margin: 0 auto; overflow: hidden;" class="mt-5">
-			<c:forEach items="${list }" var="c">
+			<c:forEach items="${pList }" var="c">
 				<div onclick="clubInfoModal(${c.clubNo });" style="width: 400px; text-align: center; margin-bottom: 20px; border: 1px solid #eee; float: left;">
 					<h4 class="mb-3">${c.clubName }</h4>
 					<p>참여인원수 : <span></span> / <span>${c.clubLimit }</span></p>
@@ -74,6 +75,7 @@
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
     
     <script>
+
     	function clubInfoModal(clubNo) {
 			console.log(clubNo);
 			$.ajax({

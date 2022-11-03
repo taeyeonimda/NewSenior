@@ -19,6 +19,5 @@ public class ClubBoard {
 	private String clubBoardDate;
 	private String clubBoardFilepath;
 	private int memberNo;
-	@Autowired
 	private ArrayList<ClubBoardComment> commentList;
 }
