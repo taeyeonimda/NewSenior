@@ -52,7 +52,6 @@
                 </div>
             </div>
             
-            
             <div class="subTitle" style="width: 1200px;">
               <div>상세내용</div>
               <div style="height: 57px"><button type="button" id="reviewListBtn">리뷰</button></div>
@@ -234,7 +233,6 @@
 		});
 		
 			function deleteReview(reviewNo){
-				console.log("아아");
 				if(confirm("리뷰를 삭제하시겠습니까?")){
 					$.ajax({
 						url : "/deleteReview.do",
@@ -255,6 +253,7 @@
 			const reviewContent = $("[name=reviewContent]").val();
 			const reviewScore = $("[name=reviewScore]").val();
 			const reviewDate = $("[name=reviewDate]").val();
+			const reviewNo = $("[name=reviewNo1]").val();
 			$.ajax({
 				url : "/insertReview.do",
 				type : "post",
@@ -349,7 +348,6 @@
 		
 		$("#reviewListBtn").on("click",function(){
 			const productNo = $("[name=productNo1]").val();
-			
 			$.ajax({
 				url : "/productReviewList.do",
 				data : {productNo:productNo},
@@ -387,7 +385,6 @@
 						const deleteBtn = $("<button>삭제</button>");
 						deleteBtn.addClass("reviewDeleteBtn");
 						deleteBtn.attr("onclick","deleteReview("+data[i].reviewNo+");");
-						console.log(data[i].reviewNo);
 						//
 						three3Div.append(updateBtn);
 						three3Div.append(deleteBtn);
@@ -439,7 +436,6 @@
 								span.eq(i).css("color","gold");
 							}
 						});
-						
 					}
 				}
 				
