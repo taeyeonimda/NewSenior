@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.club.model.vo.ChatRecord;
+import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
+import oracle.net.aso.d;
 
 @Repository
 public class MemberDao {
@@ -71,6 +73,24 @@ public class MemberDao {
 	public int updatePw(Member member) {
 		int result = sqlSession.update("member.updatePw",member);
 		return result;
+	}
+
+	public int insertAddr(Delivery delivery) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("delivery.insertAddr",delivery);
+		return result;
+	}
+
+	public int updateAddr(Delivery delivery) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("delivery.updateAddr",delivery);
+		return result;
+	}
+
+	public ArrayList<Delivery> selectAllDelivery(Member m) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("delivery.selectAllDelivery",m);
+		return (ArrayList<Delivery>)list;
 	}
 
 

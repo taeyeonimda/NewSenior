@@ -180,17 +180,17 @@
 				</table>
 				<span class="sp">관심사</span> <br> <select name="favorite"
 					style="width: 480px; font-size: 1.5em; height: 60px; margin-bottom: 30px; border-radius: 5px; border: 1.5px solid rgb(176, 174, 174); color: #525368;">
-					<option value="n">선택안함</option>
-					<option value="dg">디지털</option>
-					<option value="fu">주식/재테크</option>
-					<option value="cr">공예</option>
-					<option value="de">디자인</option>
-					<option value="ex">운동/건강</option>
-					<option value="fs">패션</option>
-					<option value="me">미디어</option>
-					<option value="so">악기/노래</option>
-					<option value="fo">외국어</option>
-					<option value="co">요리/제과제빵</option>
+					<option value="NO">선택안함</option>
+					<option value="DG">디지털</option>
+					<option value="FU">주식/재테크</option>
+					<option value="CR">공예</option>
+					<option value="DE">디자인</option>
+					<option value="EX">운동/건강</option>
+					<option value="FS">패션</option>
+					<option value="ME">미디어</option>
+					<option value="SO">악기/노래</option>
+					<option value="FO">외국어</option>
+					<option value="CO">요리/제과제빵</option>
 				</select> <br> <span class="sp">생년월일</span><span id="birthChk"></span><br>
 				<input type="text" placeholder="예) 1999-10-08" name="memberBirth"
 					onkeyup="birth_keyup(this)" class="inbtn"><br>
@@ -485,13 +485,13 @@
 		//생년월일 자동 하이픈
 		function birth_keyup(obj){
 	    let birth_len = obj.value.length;
-	    if (event.keyCode==8){
-	        obj.value = obj.value.slice(0,birth_len)
-	        return 0;
-	    }else if(birth_len==4 || birth_len==7){
-	        obj.value += '-';
-	    }
-}
+		    if (event.keyCode==8){
+		        obj.value = obj.value.slice(0,birth_len)
+		        return 0;
+		    }else if(birth_len==4 || birth_len==7){
+		        obj.value += '-';
+		    }
+		}
 	</script>
 </body>
 </html>

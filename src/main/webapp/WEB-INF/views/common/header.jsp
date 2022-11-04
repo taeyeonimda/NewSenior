@@ -283,8 +283,6 @@
     	}else{
     		return true;
     	}
-    	
-    	
     }
     </script>
     

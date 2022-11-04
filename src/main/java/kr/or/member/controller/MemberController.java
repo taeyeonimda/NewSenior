@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
+import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 
 @Controller
@@ -87,7 +90,9 @@ public class MemberController {
 			Member m1 = new Member();
 			m1.setMemberId(m.getMemberId());
 			Member member = service.selectOneMember(m1);
+			ArrayList<Delivery> list = service.selectAllDelivery(m);
 			if (member != null) {
+				model.addAttribute("list",list);
 				model.addAttribute("member", member);
 				return "myPage/mypage";
 			} else {
@@ -240,5 +245,42 @@ public class MemberController {
 		@RequestMapping(value="/searchPwSuccess.do")
 		public String searchPw() {
 			return "member/searchPwSuccess";
+		}
+		
+		//배송지 insert
+		
+		@RequestMapping(value="/insertAddr.do")
+		public String insertAddr(Delivery delivery, int memberNum, @SessionAttribute Member m, Model model) {
+			delivery.setMemberNo(memberNum);
+			System.out.println("controller:"+delivery);
+			ArrayList<Delivery> list = service.selectAllDelivery(m);
+			if(list.size()<5) {
+				if(delivery.getDefaultAddr().equals("y")) {
+					// 기본 배송지 값 'n'으로 다 바꾸기
+					int result = service.updateAddr(delivery);
+					if(result>0) {
+						//기본 배송지 'y'로 insert
+						int result2 = service.insertAddr(delivery);
+						if(result2>0) {
+							return "redirect:/mypage.do";
+						}else {
+							return "redirect:/";
+						}
+					}else {
+						return "redirect:/";
+					}
+				}
+				System.out.println(delivery);
+				int result = service.insertAddr(delivery);
+				if(result>0) {
+					return "redirect:/mypage.do";
+				}else {
+					return "redirect:/";
+				}
+			}else {
+				model.addAttribute("msg", "배송지등록은 최대 5개입니다.");
+				model.addAttribute("url","/mypage.do");
+				return "alert";
+			}
 		}
 }
