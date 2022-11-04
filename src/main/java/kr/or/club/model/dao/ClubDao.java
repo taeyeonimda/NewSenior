@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import kr.or.club.model.vo.ChatRecord;
 import kr.or.club.model.vo.Club;
 import kr.or.club.model.vo.ClubBoard;
+import kr.or.club.model.vo.ClubBoardComment;
+import kr.or.member.model.vo.Member;
 
 @Repository
 public class ClubDao {
@@ -20,8 +22,8 @@ public class ClubDao {
 		return sqlSession.insert("club.insertClub", c);
 	}
 
-	public ArrayList<Club> selectAllClub() {
-		List list = sqlSession.selectList("club.selectAllClub");
+	public ArrayList<Club> selectAllClub(String keyword) {
+		List list = sqlSession.selectList("club.selectAllClub", keyword);
 		return (ArrayList<Club>)list;
 	}
 
@@ -47,5 +49,18 @@ public class ClubDao {
 	public ArrayList<ChatRecord> getClubChatRecord(int clubNo) {
 		List list = sqlSession.selectList("club.getClubChatRecord", clubNo);
 		return (ArrayList<ChatRecord>)list;
+	}
+
+	public int insertClubBoardCom(ClubBoardComment cbc) {
+		return sqlSession.insert("club.inertClubBoardCom", cbc);
+	}
+
+	public ArrayList<Club> searchClubPopularList(Member m) {
+		List list = sqlSession.selectList("club.searchClubList", m);
+		return (ArrayList<Club>)list;
+	}
+
+	public int getTotalPage() {
+		return sqlSession.selectOne("club.getTotalPage");
 	}
 }

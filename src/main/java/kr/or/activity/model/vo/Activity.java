@@ -1,5 +1,8 @@
 package kr.or.activity.model.vo;
 
+import java.util.ArrayList;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,15 +15,19 @@ public class Activity {
 	private String activityName;
 	private String activityPrice;
 	private int activityManager;
-	private String activityManagerName;
+	private String activityManagerName;// 자바에서만쓰는거 조인해서 이름불러오기
 	private String activityIntroduce;
 	private String activityDetail;
 	private	int activityLimit;
 	private String activityCategory;
-	private int activityStatus; //'0 : 모집중 /1 : 모집종료 , 클래스 시작 /2 : 클래스 종료'
+	private int activityStatus; //'0 : 모집중 /1 : 모집종료 , 액티비티 시작 /2 : 액티비티 종료'
 	private String startDate;
 	private String endDate;
 	private String filepath;
+	private String etc; //추천이유및기타등등 Textarea로
+	private ArrayList<Activity> fileList;
+	
+	
 //	ACTIVITY_NO	        NUMBER	NOT NULL PRIMARY KEY,	-- '액티비티 고유식별번호',
 //    ACTIVITY_NAME VARCHAR2(200) NOT NULL, -- 액티비티 이름
 //	ACTIVITY_PRICE	    VARCHAR2(20) NOT NULL,

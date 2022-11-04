@@ -81,7 +81,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 			if(crList.size()>0) {
 				for (ChatRecord cr : crList) {
 					if(cr.getFilepath() == null) { // 파일이 없으면
-						if(cr.getChatMember().equals(sessionId)) {
+						if(cr.getChatMember().equals(memberList.get(session))) {
 							String sendMsg = "<div class='chat right'>"+cr.getChatContent()+"</div>";
 							TextMessage tm = new TextMessage(sendMsg);
 							session.sendMessage(tm);
@@ -91,7 +91,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 							session.sendMessage(tm);
 						}
 					}else { // 파일이 있으면
-						if(cr.getChatMember().equals(sessionId)) {
+						if(cr.getChatMember().equals(memberList.get(session))) {
 							String sendMsg = "<div class='chat right'><img width='150px' height='180px' src='/resources/upload/chat/"+cr.getFilepath()+"'></div>";
 							TextMessage tm = new TextMessage(sendMsg);
 							session.sendMessage(tm);
@@ -102,7 +102,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 						}
 					}
 				}
-				String sendMsg = "<p>여기까지 지난 대화입니다.</p>";
+				String sendMsg = "<p class='text-primary'>여기까지 지난 대화입니다</p>";
 				TextMessage today = new TextMessage(sendMsg);
 				session.sendMessage(today);
 			}
@@ -139,6 +139,13 @@ public class ClubMemberChat extends TextWebSocketHandler{
 					s.sendMessage(tm);
 				}
 			}
+		}else if(type.equals("member")) {
+			for (WebSocketSession key : memberList.keySet()) {
+				String memberId = memberList.get(key);
+				System.out.println(memberId);
+				TextMessage tm = new TextMessage(memberId); // 보내고 싶은 메시지를 매개변수로
+				session.sendMessage(tm);
+			}
 		}
 	}
 	// 클라이언트와 연결이 끊어졌을 때 자동으로 수행되는 메서드
@@ -146,6 +153,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 		System.out.println("클라이언트 접속 끗");
 		clubMemberMap.get(club).remove(session);
 		sessionList.remove(session);
+		memberList.remove(session);
 	}
 	
 	public void recordChat(String memberId, String msg) {

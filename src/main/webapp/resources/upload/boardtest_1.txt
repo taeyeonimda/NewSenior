@@ -1,0 +1,87 @@
+<h1>Web Project</h1>
+
+<hr>
+
+<select id="memberEmail">
+
+<option value="naver.com">naver.com</option>
+
+<option value="gmail.com">gmail.com</option>
+
+<option value="nate.com">nate.com</option>
+
+<option value="hanmail.net">hanmail.net</option>
+
+</select>
+
+<button id="btn">회원조회하기</button>
+
+<br><br>
+
+<div id="member-info"></div>
+
+ const memberEmail = $("#memberEmail").text();
+
+
+
+MemberDao
+
+List list = sqlSession.selectList("member.searchMemberEmail",m);
+
+return (ArrayList<Member>)list;
+
+memberSQL.xml
+<mapper namespace="member">
+
+<select id="searchMember" parameterType="m" resultType="m">
+
+select
+
+member_id as memberId,
+
+member_name as memberName,
+
+member_age as memberAge,
+
+member_email as memberEmail
+
+from member_tbl where member_email = #{memberEmail}
+
+</select>
+
+
+
+const memberEmail = $("#memberEmail").text();
+
+
+
+7) memberSQL.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="member">
+
+<select id="searchMember" parameterType="m" resultType="m">
+
+select
+
+member_id as memberId,
+
+member_name as memberName,
+
+member_age as memberAge,
+
+member_email as memberEmail
+<chosse>
+
+
+from member_tbl where member_email = #{memberEmail}
+
+</select>
+
+</mapper>​
+
+ DAO 와 mapper에 작성된 id  불일치
+

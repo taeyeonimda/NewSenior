@@ -49,10 +49,6 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="/cart.do")
-	public String cart() {
-		return "myPage/cart";
-	}
 	
 	@RequestMapping(value="/classMgrAdmin.do")
 	public String classMgrAdmin() {
