@@ -21,7 +21,7 @@
 		from CLASSES c
 		join members m 
 		on c.class_teacher = m.member_no
-		where class_status in (0,1)
+		where class_status in (1,2,3,4)
 		order by 1 desc)c)	
 		where rnum between #{start} and #{end}
 		
@@ -59,8 +59,9 @@
 		CLASSES
 		values(
 		class_seq.nextval,#{className},#{classTeacher},
-		'0',#{classLimit},3,#{classCategory},#{products},
-		#{startDate},#{endDate},#{filepath},#{teacherIntroduce},
+		'0',#{classLimit},0,#{classCategory},#{products},
+		to_date(#{startDate},'yyyy-mm-dd'),	to_date(#{endDate},'yyyy-mm-dd'),
+		#{filepath},#{teacherIntroduce},
 		#{curriculum})
 		<selectKey resultType="_int" order="AFTER" keyProperty="classNo">
 			select max(class_no) from classes
@@ -132,7 +133,7 @@
 		from CLASSES c
 		join members m 
 		on c.class_teacher = m.member_no
-		where class_status = 3
+		where class_status = 0
 	</select>
 	
 	<select id="getOneClass" parameterType="_int" resultType="cla">
@@ -180,10 +181,18 @@
 		where class_no = #{classNo}
 	</select>
 	 
+	<!-- 신청하고 승인해주는거 -->
 	<update id="changeStatus" parameterType="cla">
 		update classes
-		set class_status = 0,
+		set class_status = 1,
 		 	class_price = #{classPrice}
+		where class_no = #{classNo}
+	</update>
+	
+	<!-- 신청 모집 모집중등 변경-->
+	<update id="changeStatus2" parameterType="cla">
+		update classes
+		set class_status = #{classStatus}
 		where class_no = #{classNo}
 	</update>
 

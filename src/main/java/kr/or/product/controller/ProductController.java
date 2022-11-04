@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import common.ProductFileRename;
 import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
 import kr.or.product.model.vo.ProductPageData;
+import kr.or.product.model.vo.ProductReview;
 
 @Controller
 public class ProductController {
@@ -79,20 +82,25 @@ public class ProductController {
 		}
 		return"redirect:/";
 	}
-	//summerNote
-	@ResponseBody
-	@RequestMapping(value = "/uploadImage.do")
-	public String productUploadImage() {
-		
-		return "";
-	}
 	
 	@RequestMapping(value = "/productView.do")
 	public String productView(int productNo, Model model) {
 		Product p = service.productView(productNo);
+		ArrayList<ProductReview> pr = service.productReviewList(productNo);
 		model.addAttribute("p",p);
+		model.addAttribute("prlist",pr);
 		return "product/productView";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/productReviewList.do",produces = "application/json;charset=utf-8")
+	public String productReviewList(int productNo) {
+		ArrayList<ProductReview> pr = service.productReviewList(productNo);
+		Gson gson = new Gson();
+		String result = gson.toJson(pr);
+		return result;
+	}
+	
 	
 	@RequestMapping(value = "/deleteProduct.do")
 	public String deleteProduct(int productNo, HttpServletRequest request) {
@@ -155,6 +163,24 @@ public class ProductController {
 			}
 		}
 		return "redirect:/productList.do?reqPage=1";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/insertReview.do")
+	public String insertReview(ProductReview pr) {
+		int result = service.insertReview(pr);
+		return "redirect:/productView.do?productNo="+pr.getProductNo();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo) {
+		int result = service.deleteReview(reviewNo);
+		if(result > 0) {
+			return "1";
+		} else {
+			return "0";
+		}
 	}
 	
 }

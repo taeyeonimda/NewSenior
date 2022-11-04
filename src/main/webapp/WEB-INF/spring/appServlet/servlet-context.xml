@@ -95,6 +95,8 @@
 	<context:component-scan base-package="kr.or.board" />
 	<context:component-scan base-package="kr.or.common" />
 	<context:component-scan base-package="kr.or.boardComment" />
+	<context:component-scan base-package="kr.or.activity" />
+	<context:component-scan base-package="kr.or.order" />
 	
 	
 </beans:beans>

@@ -5,6 +5,8 @@
 <head>
     <meta charset="utf-8">
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
+    <!-- 구글아이콘 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>클래스 상세</title>
 </head>
 <body>
@@ -27,18 +29,18 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
+        <div class="sidenav bg-secondary rounded p-sm-3 wow fadeIn">
             <div class="side-box rounded">
-                <div class="side-title-box display-5 text-center mb-2">
+                <h6 class="side-title-box display-5 text-center text-light">
                     ${cla.className }
-                </div>
+                </h6>
                 <div class="side-teacher-box">
                     <span>${cla.teacherName } </span> 강사
                 </div>
                 <div class="side-info-box">
                     <ul>
-                        <li><span class="fs-5 text-primary">초급자 대상</span></li>
-                        <li><span class="fs-5 text-primary">${cla.startDate } ~ ${cla.startDate }</span></li>
+                        <li><span class="fs-5 text-light">초급자 대상</span></li>
+                        <li><span class="fs-5 text-light">${cla.startDate } ~ ${cla.startDate }</span></li>
                         <c:choose>
                         	<c:when test="${cla.products eq 0 }">
                         		<li><span class="fs-5 text-primary">준비물 없음</span></li>
@@ -220,20 +222,31 @@
     </div><!--page-content End-->
 <div class="rmodal-wrap">
     <div class="modal-review">
-        <div class="modal-top">
-            <h1>리뷰쓰기</h1>
-        </div>
-        <div class="modal-content">
+    	<div class="modal-review-info">
+    		<div>
+    			<h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
+    			<div class="review-title">
+    				<div class="review-img-div">
+    					<img src="/resources/upload/class/New_Year.png" class="review-img">
+    				</div>
+    			</div>
+    			<p class="fs-5 fw-bold text-primary mt-2">[ ${cla.className } ]를 수강하셨습니다</p>
+    		</div>
+    	</div>
+        <div class="review-content">
+	        <div class="modal-top">
+	            <h1>리뷰쓰기</h1>
+	        </div>
             <div id="star-box">
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
+                <span class="material-symbols-outlined">hotel_class</span>
+                <span class="material-symbols-outlined">hotel_class</span>
+                <span class="material-symbols-outlined">hotel_class</span>
+                <span class="material-symbols-outlined">hotel_class</span>
+                <span class="material-symbols-outlined">hotel_class</span>
             </div>
             <div class="comment-box">
                 <div><span class="real-score"></span>점 주셨네요</div>
-                <div>클래스는 <span>어땠나요?</span></div>
+                <div>클래스<span>는 어떠셨나요?</span></div>
             </div>
             <form action="/insertDoctorReview.do" method="post" autocomplete="off" id="review-form">
                 <input type="hidden" name="star" id="star">
@@ -264,12 +277,12 @@
 	        let windowHeight = window.innerHeight; // 스크린 창
             let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x, footer제외
             if(position > 3800){
-                $(".sidenav").fadeOut(1);
+                $(".sidenav").fadeOut(0);
             }else if(position > 250 ){ // 스크롤 위치 343보다 클 때만 보이겠다
                 $(".sidenav").fadeIn(300);
                 console.log(fullHeight);
             }else {
-                $(".sidenav").fadeOut(1);
+                $(".sidenav").fadeOut(0);
             }
 
             if(position > 4000 || 905 > position){
@@ -297,7 +310,7 @@
 		
 	    $("#modal-btn-box>button:first-child").on("click",function(){
 	        $(".rmodal-wrap").css("display", "none");
-	        $("#star-box").css("visibility", "hidden");
+	        $(".comment-box>div:last-child>span").css("visibility", "hidden");
 	        $("#star-box").children().css("color", "lightgrey");
 	    })
 		
@@ -333,9 +346,9 @@
 	        starBox.css("visibility", "visible");
 	        const commentSpan = $(".comment-box>div:last-child>span");
 	        if(idx>1){
-	            commentSpan.text("어떤 점이 좋았나요?");
+	            commentSpan.text("의 어떤 점이 좋았나요?");
 	        }else{
-	            commentSpan.text("어떤 점이 아쉬웠나요?");
+	            commentSpan.text("의 어떤 점이 아쉬웠나요?");
 	        }
 	    })
 

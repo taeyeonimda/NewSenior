@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="activity">
+	<insert id="insertActivity" parameterType="act">
+		insert into activity
+		values(
+		activity_no_seq.nextval,
+		#{activityName},
+		#{activityPrice},
+		#{activityManager},
+		#{activityIntroduce},
+		#{activityDetail},
+		#{activityLimit},
+		#{activityCategory},
+		#{activityStatus},
+		to_date(#{startDate},'yyyy-mm-dd'),
+		to_date(#{endDate},'yyyy-mm-dd'),
+		#{filepath}
+		)
+	</insert>
+
+	<select id ="getAllActivity" parameterType="map" resultType="act">
+		select * from
+			(select rownum as rnum,a.* from
+			(select  
+				activity_no as activityNo,
+				activity_name as activityName,
+				to_char(activity_price,'999,999,999')as activityPrice,
+				activity_manager as activityManager,
+				activity_introduce as activityIntroduce,
+				activity_detail as activityDetail,
+				activity_limit as activityLimit,
+				activity_category as activityCategory,
+				activity_status as activityStatus,
+				to_char(start_date,'yyyy-mm-dd') as startDate,
+				to_char(end_date,'yyyy-mm-dd')  as endDate,
+				filepath,
+				m.member_name as activityManagerName
+		from activity a
+		join members m 
+		on a.activity_manager = m.member_no
+		order by 1 desc)a)	
+		where rnum between #{start} and #{end}
+	</select>
+
+	<select id="totalCount" resultType="int">
+		select count(*) from activity
+	</select>
+	
+	<select id="getOneActivity" parameterType="act" resultType="act">
+		select  
+				activity_no as activityNo,
+				activity_name as activityName,
+				to_char(activity_price,'999,999,999')as activityPrice,
+				activity_manager as activityManager,
+				activity_introduce as activityIntroduce,
+				activity_detail as activityDetail,
+				activity_limit as activityLimit,
+				activity_category as activityCategory,
+				activity_status as activityStatus,
+				to_char(start_date,'yyyy-mm-dd') as startDate,
+				to_char(end_date,'yyyy-mm-dd')  as endDate,
+				filepath,
+				m.member_name as activityManagerName
+		from activity a
+		join members m 
+		on a.activity_manager = m.member_no
+		where a.activity_no = #{activityNo }
+	</select>
+	
+	<!-- 스킵 
+	<resultMap type="act" id="getActivity">
+		<result column="activity_no" property="activityNo" />
+		<result column="activityame" property="activityName" />
+		<result column="activityPrice" property="activityPrice" />
+		<result column="activityManager" property="activityManager" />
+		<result column="activityIntroduce" property="activityIntroduce" />
+		<result column="activityDetail" property="activityDetail" />
+		<result column="activityLimit" property="activityLimit" />
+		<result column="activityCategory" property="activityCategory" />
+		<result column="activityStatus" property="activityStatus" />
+		<result column="startDate" property="startDate" />
+		<result column="endDate" property="endDate" />
+		<result column="filepath" property="filepath" />
+		<result property="activityManagerName" />
+	</resultMap>
+	
+	
+	<resultMap type="act" id="getActivity">
+	<result column="activity_no" property="activityNo" />
+	<result column="activity_name" property="activityName" />
+	<result column="activity_price" property="activityPrice" />
+	<result column="activity_manager" property="activityManager" />
+	<result column="activity_introduce" property="activityIntroduce" />
+	<result column="activity_detail" property="activityDetail" />
+	<result column="activity_limit" property="activityLimit" />
+	<result column="activity_category" property="activityCategory" />
+	<result column="activity_status" property="activityStatus" />
+	<result column="start_Date" property="startDate" />
+	<result column="end_date" property="endDate" />
+	<result column="filepath" property="filepath" />
+	<result column="m.member_name" property="activityManagerName" />
+	</resultMap>
+	-->
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

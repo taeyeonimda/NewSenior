@@ -29,10 +29,7 @@ public class MemberController {
 		return "myPage/mypage";
 	}
 	 */
-	@RequestMapping(value="/orderHistory.do")
-	public String orderHistory() {
-		return "myPage/orderHistory";
-	}
+	
 	@RequestMapping(value="/classHistory.do")
 	public String classHistory() {
 		return "myPage/classHistory";
@@ -49,14 +46,8 @@ public class MemberController {
 	public String teacherInfo() {
 		return "myPage/teacherInfo";
 	}
-	@RequestMapping(value="/activityEnroll.do")
-	public String activityEnroll() {
-		return "myPage/activityEnroll";
-	}
-	@RequestMapping(value="/activityMgrAdmin.do")
-	public String activityMgrAdmin() {
-		return "myPage/activityMgrAdmin";
-	}
+	
+	
 	@RequestMapping(value="/cart.do")
 	public String cart() {
 		return "myPage/cart";

@@ -9,6 +9,7 @@
 		 <typeAlias type="kr.or.product.model.vo.Product" alias="p"/>
 		 <typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		 <typeAlias type="kr.or.product.model.vo.ProductFileVO" alias="pf"/>
+		 <typeAlias type="kr.or.product.model.vo.ProductReview" alias="pr"/>
 		 <typeAlias type="kr.or.club.model.vo.Club" alias="c"/>
 		 <typeAlias type="kr.or.club.model.vo.ChatRecord" alias="cr"/>
 		 <typeAlias type="kr.or.club.model.vo.ClubBoard" alias="cb"/>
@@ -23,5 +24,8 @@
 		 <typeAlias type="kr.or.nsClass.model.vo.NsClass" alias="cla"/>
 		 <typeAlias type="kr.or.nsClass.model.vo.FileVo" alias="claF"/>
 		 <typeAlias type="kr.or.nsClass.model.vo.ClassCategory" alias="claCate"/>
+		 
+		  <typeAlias type="kr.or.activity.model.vo.Activity" alias="act"/>
+		  <typeAlias type="kr.or.activity.model.vo.FileVo" alias="actF"/>
 	</typeAliases>
 </configuration>

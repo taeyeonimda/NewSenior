@@ -9,13 +9,10 @@
     position: relative;
     overflow: hidden;
 }
-
 .flex-space-between{
     display: flex;
     justify-content: space-between;
 }
-
-
 .class-row{
 	display: flex;
 	flex-wrap: wrap;
@@ -24,6 +21,11 @@
     margin-left: calc(var(--bs-gutter-x) / -2);
     padding: 30px;
 }
+
+
+
+/* class-list */
+
 
 
 /* 이미지 div안에 맞춰 넣는 css*/
@@ -194,18 +196,26 @@
     top: 0;
     left: 0;
     justify-content: center;
-    z-index: 10;
+    z-index: 99;
     align-items: center;
 }
-
 .modal-review{
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-    width: 500px;
+    width: 90vw;
     height: 480px;
     align-items: center;
     text-align: center;
-    border-radius: 25px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.modal-review>div{
+	width: 50%;
+}
+.modal-review-info{
+	width: 80%;
+	height: 90%;
 }
 .modal-top h1{
     text-align: center;
@@ -215,12 +225,12 @@
 }
 #star-box{
     margin: 0 auto;
-    width: 250px;
-    overflow: hidden;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
 }
 #star-box>span{
-    float: left;
-    font-size: 50px;
+    font-size: 60px;
     color: lightgray;
 }
 .comment-box>div{
@@ -248,4 +258,24 @@
 }
 
 
+
+/*리뷰 이미지*/
+.review-title{
+    text-align:center;
+    display:flex;
+    justify-content: flex-start;
+    border:1px solid #cecece;
+    width: 50%;
+    height: 60%;
+    margin: 0 auto;
+}
+.review-img-div{
+    display:table-cell;
+    vertical-align:middle;
+}
+.review-img{
+    border-radius: 50px;
+    max-width: 100%;
+    max-height: 100%;
+}
 

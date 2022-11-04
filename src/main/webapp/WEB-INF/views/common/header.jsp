@@ -166,7 +166,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
         <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h1 class="m-0">뉴시니어스</h1>
+            <img src="/resources/MAINbtstr/img/로고1.png" width="250px">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -189,11 +189,32 @@
                         <a href="/classList.do?classCategory=CO" class="dropdown-item">요리 / 제과제빵</a>
                     </div>
                 </div>
-                <a href="/clubList.do" class="nav-item nav-link">동호회</a>
-                <a href="/boardList.do?reqPage=1&boardType=F" class="nav-item nav-link">커뮤니티</a>
-                <a href="javascript:void(0)" class="nav-item nav-link">액티비티</a>
+                <c:choose>
+                	<c:when test="${not empty sessionScope.m }">
+                		<a href="/popularClubList.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">동호회</a>
+                	</c:when>
+                	<c:otherwise>
+                		<a href="/clubList.do" class="nav-item nav-link">동호회</a>
+                	</c:otherwise>
+                </c:choose>
+                <a href="/boardList.do?reqPage=1" class="nav-item nav-link">커뮤니티</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">액티비티</a>
+                    <div class="dropdown-menu bg-light m-0">
+                    	<a href="/activityList.do?reqPage=1" class="dropdown-item">전체</a>
+                        <a href="/activityList.do?activityCategory=DG" class="dropdown-item">디지털</a>
+                        <a href="/activityList.do?activityCategory=FU" class="dropdown-item">주식 / 재태크</a>
+                        <a href="/activityList.do?activityCategory=CR" class="dropdown-item">공예</a>
+                        <a href="/activityList.do?activityCategory=DE" class="dropdown-item">디자인</a>
+                        <a href="/activityList.do?activityCategory=EX" class="dropdown-item">운동 / 건강</a>
+                        <a href="/activityList.do?activityCategory=FS" class="dropdown-item">패션</a>
+                        <a href="/activityList.do?activityCategory=ME" class="dropdown-item">미디어</a>
+                        <a href="/activityList.do?activityCategory=SO" class="dropdown-item">악기 / 노래</a>
+                        <a href="/activityList.do?activityCategory=FO" class="dropdown-item">외국어</a>
+                        <a href="/activityList.do?activityCategory=CO" class="dropdown-item">요리 / 제과제빵</a>
+                    </div>
+                </div>
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
-                
                 <a href="javascript:void(0)" class="nav-item nav-link">공지사항</a>
             </div>
             <c:choose>
