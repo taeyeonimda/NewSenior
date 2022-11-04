@@ -33,4 +33,11 @@ public class ActivityController {
 		return "activity/activityDetail";
 	}
 	
+	@RequestMapping(value="/activity2.do")
+	public String activity2(Activity act,Model model) {
+
+		return "activity/activity2";
+	}
+	
+	
 }

@@ -183,12 +183,20 @@
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-detail-input" class="col-md-2 col-form-label">액티비티상세</label>
+                    <label for="html5-detail-input" class="col-md-2 col-form-label">상세소개</label>
                     <div class="col-md-10">
                       <textarea class="form-control" name="activityDetail" id="html5-detail-input" ></textarea>
                     </div>
                   </div>
                   
+                  <div class="mb-3 row">
+                      <label for="html5-tel-input" class="col-md-2 col-form-label">상세사진</label>
+                       <div class="col-md-10">
+                        <input type="file" class="form-control" name="detailFiles" id="html5-tel-input" multiple/>
+                     </div>
+                  </div>
+				
+				
                   <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
@@ -231,6 +239,14 @@
                       <input class="form-control" name="activityPrice" id="html5-price-input" />
                     </div>
                   </div>
+                  
+                   <div class="mb-3 row">
+                    <label for="html5-etc-input" class="col-md-2 col-form-label">기타사항</label>
+                    <div class="col-md-10">
+                      <textarea class="form-control" name="etc" id="html5-etc-input" ></textarea>
+                    </div>
+                  </div>
+                  
                   <button type="button" class="btn btn-outline-primary" id="submitBtn" >등록하기</button>
                 </div>
               </div>
@@ -261,7 +277,8 @@ const limitSelect = $("select[name=activityLimit]");
 		const activityPrice = $("input[name=activityPrice]").val();
 		const startDate = $("input[name=startDate]").val();
 		const endDate = $("input[name=endDate]").val();
-	
+		const files2 = document.querySelector("input[name=detailFiles]").files;
+		
 		console.log(activityName);
 		console.log(files);
 		console.log(activityManager);
@@ -295,6 +312,9 @@ const limitSelect = $("select[name=activityLimit]");
 		console.log(formData.get("activityPrice"));
 		console.log(formData.get("startDate"));
 		console.log(formData.get("endDate"));
+		for(let i=0;i<files2.length;i++){
+			formData.append('detailFiles',files2[i]);
+		}
 		
 		$.ajax({
  			url : "/insertActivity.do",
@@ -304,7 +324,7 @@ const limitSelect = $("select[name=activityLimit]");
             processData: false,
             enctype	: 'multipart/form-data',
 			success:function(){
-				location.href="adminMgrClass.do?reqPage=1";
+				location.href="activityMgrAdmin.do?reqPage=1";
 			},error:function(){
 				alert("error");
 			}

@@ -6,7 +6,7 @@
           <ul class="menu-inner py-1">
 
             <!-- 회원관리 -->
-            <li class="menu-item active">
+            <li class="menu-item adminMenuItem">
               <a href="/adminPage.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">회원 관리</div>
@@ -14,7 +14,7 @@
             </li>
             
             <!-- Tables -->
-            <li class="menu-item">
+            <li class="menu-item adminClassMenu">
               <a href="/adminMgrClass.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">클래스관리(관리자페이지)</div>
@@ -22,12 +22,13 @@
             </li>
 
             <!-- 클래스관리 -->
-            <li class="menu-item">
+            <li class="menu-item classMgrTeacher">
               <a href="classMgrTeacher.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">클래스관리(강사페이지)</div>
               </a>
             </li>
+
             <!-- 클래스등록 -->
             <li class="menu-item">
               <a href="classEnroll.do" class="menu-link">
@@ -93,3 +94,21 @@
           </li>
           </ul>
         </aside>
+        
+                    <script>
+            	const url = window.location.href;
+            	let chk = /adminPage.do/g;
+            	if(chk.test(url)){
+            		$(".adminMenuItem").addClass("active");
+            	}
+            	
+            	chk = /adminMgrClass.do/g;
+            	if(chk.test(url)){
+            		$(".adminClassMenu").addClass("active");
+            	}
+            	
+            	chk = /classMgrTeacher.do/g;
+            	if(chk.test(url)){
+            		$(".classMgrTeacher").addClass("active");
+            	}
+            </script>
