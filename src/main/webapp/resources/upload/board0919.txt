@@ -1,0 +1,24 @@
+reserve_pay,reserve_name,reserve_mail,reserve_phone,reserve_amount,time,thama_name
+
+
+1. 예약 내역에 날짜/시간/인원/결제->(계산) / 테마 코드
+ReserveService service = 
+reserve = select
+
+themacode = r.getThemacode
+ThemaService tservice
+thema = select Thema
+
+out.printf("<h2> %d %s %d = %d</h2>",su1,oper,su2,result);
+
+
+<!-- 
+<div>이름 : <%=reser.getReserveName() %></div>
+<div>메일 : <%=reser.getReserveMail() %></div>
+<div>전화번호 : <%=reser.getReservephone() %></div>
+<div>예약한 타임 : <%=reser.getTime() %></div>
+<div>예약일 : <%=reser.getPlayDate() %></div>
+<div>예약인원 : <%=reser.getReserveAmount() %></div>
+<div>결제금액 : <%=reser.getReservePay()*reser.getReserveAmount() %></div>
+<div>테마명 : <%=reser.getThemaName() %> </div>
+ -->

@@ -51,6 +51,7 @@
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
+            <a href="/activity2.do">이동~</a>
             <c:forEach items="${list }" var="act">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded" >

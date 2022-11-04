@@ -339,10 +339,23 @@
 					
 					
 					oneDiv.append(twoDiv);
-					$(".productReviewDiv").append(oneDiv);
+					
+					
+					
+					$(".reviewContentWrap").after(oneDiv);
+					$(".input-score").each(function(index,item){
+						const score = $(item).children().eq(1).text();
+						const span = $(".reviewStar-wrap").children();
+						console.log(span);
+						for(let i = 0; i<score; i++){
+							span.eq(i).css("color","gold");
+						}
+					});
+					$("#customerReview").val('');
+					$(".input-score>span").text('0');
+					$(".star-wrap").children().css("color","");
 				}
 			});
-			
 		});
 		
 		$("#reviewListBtn").on("click",function(){

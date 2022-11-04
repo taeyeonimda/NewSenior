@@ -15,14 +15,19 @@
 		 <typeAlias type="kr.or.club.model.vo.ClubBoard" alias="cb"/>
 		 <typeAlias type="kr.or.club.model.vo.ClubBoardComment" alias="cbc"/>
 		 <typeAlias type="kr.or.order.model.vo.Order" alias="Or"/>
+		 <typeAlias type="kr.or.order.model.vo.OrderDetail" alias="Ord"/>
+		 <typeAlias type="kr.or.cart.model.vo.Cart" alias="Ca"/>
 
 		 <typeAlias type="kr.or.board.model.vo.Board" alias="b"/>
 		 <typeAlias type="kr.or.board.model.vo.BoardComment" alias="bc"/>
+		 <typeAlias type="kr.or.board.model.vo.FileVO" alias="bf"/>
+		
 		 
 		 <typeAlias type="kr.or.nsClass.model.vo.NsClass" alias="cla"/>
 		 <typeAlias type="kr.or.nsClass.model.vo.FileVo" alias="claF"/>
 		 <typeAlias type="kr.or.nsClass.model.vo.ClassCategory" alias="claCate"/>
 		 
 		  <typeAlias type="kr.or.activity.model.vo.Activity" alias="act"/>
+		  <typeAlias type="kr.or.activity.model.vo.FileVo" alias="actF"/>
 	</typeAliases>
 </configuration>

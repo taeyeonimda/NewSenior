@@ -54,76 +54,7 @@
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
         <!-- Menu -->
-
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
-         style="top: 30px; display: inline-block; width: 300px; height: 400px;">
- <ul class="menu-inner py-1">
-
-          <!-- 회원관리 -->
-          <li class="menu-item ">
-            <a href="memberMgrAdmin.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">회원 관리</div>
-            </a>
-          </li>
-          <!-- 마이페이지 -->
-          <li class="menu-item  ">
-            <a href="mypage.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">마이페이지</div>
-            </a>
-          </li>
-
-          <!-- 주문내역 -->
-          <li class="menu-item active">
-            <a href="/orderHistory.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">주문내역</div>
-            </a>
-          </li>
-
-<!-- 찜한상품 
-          <li class="menu-item ">
-            <a href="jjimGoods.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">찜한상품</div>
-            </a>
-          </li>
--->
-          <!-- 수강현황 -->
-          <li class="menu-item  ">
-            <a href="classHistory.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">수강현황</div>
-            </a>
-          </li>
-
-          <!-- 내동호회 -->
-          <li class="menu-item  ">
-            <a href="myClub.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">내동호회</div>
-            </a>
-          </li>
-
-          <!-- 나의후기 -->
-          <li class="menu-item  ">
-            <a href="myComment.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">나의후기</div>
-            </a>
-          </li>
-
-          <!-- 강사정보 -->
-          <li class="menu-item  ">
-            <a href="teacherInfo.do" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic Inputs">강사정보</div>
-            </a>
-          </li>
-
-        </ul>
-        </aside>
+        <%@include file="/WEB-INF/views/common/aside.jsp" %>
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -149,7 +80,6 @@
                     <tr>
                       <th>주문번호</th>
                       <th>주문일자</th>
-                      <th>상품이름</th>
                       <th>수령인</th>
                       <th>주소</th>
                       <th>총 주문금액</th>
@@ -163,7 +93,6 @@
 		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});">
 		            		<td>${Or.orderNo }</td>
 							<td>${Or.orderDate }</td>
-							<td>${Or.productName }</td>
 							<td>${Or.receiveName }</td>
 							<td>${Or.receiveAddr }</td>
 							<td>${Or.orderAmount*Or.orderPrice }원</td>
