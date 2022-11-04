@@ -14,11 +14,8 @@
 			filepath as clubMainImg,
 			club_intro as clubIntro
 		from clubs
-		<!-- 세션 들어오면 category로 if문 추가 예정 -->
-		<if test="favorite!=null and !value.equals('')">
-			where club_name like '%'||#{_parameter}||'%'
-		</if>
 	</select>
+	
 	<select id="selectOneClub" parameterType="int" resultType="c">
 		select
 			club_no as clubNo,
@@ -31,6 +28,7 @@
 		from clubs
 		where club_no = #{clubNo }
 	</select>
+	
 	<insert id="insertChat" parameterType="cr">
 		insert into chat_record values (chat_record_seq.nextval, #{chatClub }, #{chatMember }, #{chatContent }, to_char(sysdate, 'yyyy-mm-dd'), #{filepath } )
 	</insert>
@@ -87,16 +85,11 @@
 		insert into club_board_coms values (club_com_seq.nextval, #{clubNo }, #{clubBoardNo }, #{clubComWriter }, #{clubComContent }, #{clubComRef }, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
 	
+	<!-- 인기동호회 검색 -->
 	<select id="searchClubList" parameterType="m" resultType="c">
-		select
-			club_no as clubNo,
-			club_name as clubName,
-			club_category as clubCategory,
-			club_limit as clubLimit,
-			club_Leader as clubLeader,
-			filepath as clubMainImg,
-			club_intro as clubIntro
-		from clubs where club_category = (select favorite from members where member_no=#{memberNo })
+		select * from (select rownum, c.*, (select count(*) from club_members m where m.club_no=c.club_no) as cnt
+		from clubs c where club_category=(select favorite from members where member_no=#{memberNo }))
+		where rownum between 1 and 3
 	</select>
 	
 	<select id="getTotalPage" resultType="int">
