@@ -17,5 +17,6 @@ public class Club {
 	private String clubMainImg;	// 클럽 메인 이미지
 	private String clubIntro;	// 클럽소개
 	private String clubCategory; //
+	private int clubMemberCnt;	// 현재 회원수
 	private ArrayList<Member> memberList; // 클럽 멤버들의 멤버 객체 리스트
 }
