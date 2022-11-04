@@ -15,6 +15,8 @@
 		 <typeAlias type="kr.or.club.model.vo.ClubBoard" alias="cb"/>
 		 <typeAlias type="kr.or.club.model.vo.ClubBoardComment" alias="cbc"/>
 		 <typeAlias type="kr.or.order.model.vo.Order" alias="Or"/>
+		 <typeAlias type="kr.or.order.model.vo.OrderDetail" alias="Ord"/>
+		 <typeAlias type="kr.or.cart.model.vo.Cart" alias="Ca"/>
 
 		 <typeAlias type="kr.or.board.model.vo.Board" alias="b"/>
 		 <typeAlias type="kr.or.board.model.vo.BoardComment" alias="bc"/>

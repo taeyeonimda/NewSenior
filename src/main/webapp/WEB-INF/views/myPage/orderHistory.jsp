@@ -149,7 +149,6 @@
                     <tr>
                       <th>주문번호</th>
                       <th>주문일자</th>
-                      <th>상품이름</th>
                       <th>수령인</th>
                       <th>주소</th>
                       <th>총 주문금액</th>
@@ -163,7 +162,6 @@
 		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});">
 		            		<td>${Or.orderNo }</td>
 							<td>${Or.orderDate }</td>
-							<td>${Or.productName }</td>
 							<td>${Or.receiveName }</td>
 							<td>${Or.receiveAddr }</td>
 							<td>${Or.orderAmount*Or.orderPrice }원</td>
