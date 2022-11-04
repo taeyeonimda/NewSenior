@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cart">
+
+<select id="selectAllCartList" parameterType="m" resultType="Ca">
+select
+    product_no as productNo,
+    buy_price as buyPrice,
+    (select product_name from products where products.product_no=carts.product_no) as productName,
+    buy_amount as buyAmount,
+    member_no as memberNo
+from carts
+where member_no=#{memberNo}
+</select>
+
+
+
+</mapper>

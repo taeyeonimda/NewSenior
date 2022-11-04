@@ -35,4 +35,10 @@ public class ActivityDao {
 		int totalCount = sqlSession.selectOne("activity.totalCount");
 		return totalCount;
 	}
+
+
+	public Activity getOneActivity(Activity act) {
+		Activity activity = sqlSession.selectOne("activity.getOneActivity",act);
+		return activity;
+	}
 }

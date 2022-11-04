@@ -87,6 +87,7 @@
             <!-- 글쓰기 버튼 구역 End -->
 
             <!-- 회원 게시글 -->
+            
             <c:choose>
             	<c:when test="${empty cbList }">
 	           		<div class="container-xxl py-5" style="border: 1px solid #eee">
@@ -98,9 +99,9 @@
 			        </div>
             	</c:when>
             	<c:when test="${not empty cbList }">
-            		<c:forEach items="${cbList }" var="cb">
+            		<c:forEach items="${cbList }" var="cb" varStatus="i">
 					    <div class="container-xxl py-5 club-container">
-			                <div class="container wow fadeInUp" data-wow-delay="0.05s"">
+			                <div class="container wow fadeInUp" data-wow-delay="0.05s">
 			                    <div class="row align-items-end club-board-div">
 			                        <div class="ml-20">
 				                        <div class="flex-space-between" style="width: 90%;">
@@ -125,59 +126,105 @@
 			                        </div>
 			                    </div>
 			                    <hr>
+			                    <!-- 댓글달기 -->
 			                    <div class="inputCommentBox">
 			                    	<form action="/insertClubComment.do" method="post">
-			                    		<input type="hidden" name="clubNo">
-			                    		<input type="hidden" name="clubBoardNo">
-			                    		<input type="hidden" name="clubComWriter">
-			                    		<textarea name="clubComContent" style="width:80%;"></textarea><button width="20%" class="btn btn-primary py-2 px-4">등록</button>
+			                    		<input type="hidden" name="clubNo" value="${c.clubNo }">
+			                    		<input type="hidden" name="clubComRef" value='0' >
+			                    		<input type="hidden" name="clubBoardNo" value="${cb.clubBoardNo }">
+			                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
+			                    		<textarea name="clubComContent" style="width:80%;"></textarea><button class="btn btn-primary py-2 px-4" id="comment-btn">등록</button>
 			                    	</form>
 			                    </div>
+			                    
+			                    <!-- 댓글출력 -->
 			                    <div class="commentBox">
-			                    	<ul class="posting-comment">
-										<li>
-											<div class="profile-box" style="background: #BDBDBD;">
-											    <img class="profile" src="/resources/upload/club/person_1.jpg">
+			                    	<c:if test="${not empty cb.commentList }">
+			                    	<c:forEach items="${cb.commentList }" var="cbc" > <!-- 댓글 출력 for문 -->
+			                    		<c:if test="${cb.clubBoardNo eq cbc.clubBoardNo }"> <!-- 글번호와 댓글의 참조 글번호가 같으면  -->
+			                    			<c:if test="${cbc.clubComRef eq 0 }">
+			                    				<ul class="posting-comment">
+													<li>
+														<div class="profile-box" style="background: #BDBDBD;">
+														    <img class="profile" src="/resources/upload/club/person_1.jpg">
+														</div>
+													</li>
+													<li class="comment-content-li">
+														<p class="comment-info">
+														
+															<span class="text-primary">${cbc.clubComWriter }</span>
+															<span>${cbc.clubComDate }</span>
+														</p>
+														<p class="comment-content">${cbc.clubComContent }</p>
+														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+														<p class="comment-link">
+															<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
+															<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
+															<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
+															<a href="javascript:void(0)" class="recShow">답글달기</a>
+														</p>
+													</li>
+												</ul>
+			                    			</c:if>
+			                    			
+											<!-- 대댓글 출력 -->
+											<c:forEach items="${cb.commentList }" var="cbrc" > <!-- 대댓글 출력 for문 -->
+			                    				<c:if test="${cbc.clubComNo eq cbrc.clubComRef }"> <!-- 댓글번호와 대댓글의 참조 글번호가 같으면  -->
+												<ul class="posting-comment reply">
+													<li>
+														<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
+													</li>
+													<li class="comment-profil-li"> 
+														<div class="profile-box" style="background: #BDBDBD;">
+															<img class="profile" src="/resources/upload/club/person_1.jpg">
+														</div>
+													</li>
+													<li>
+														<p class="comment-info">
+															<span class="text-primary">${cbrc.clubComWriter }</span>
+															<span>${cbrc.clubComDate }</span>
+														</p>
+														<p class="comment-content">${cbrc.clubComContent }</p>
+														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+														<p class="comment-link">
+															<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
+															<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
+															<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
+															<a href="javascript:void(0)" class="recShow">답글달기</a>
+														</p>
+													</li>
+												</ul>
+											</c:if>
+			                    			</c:forEach> <!-- 대댓글 for문 -->
+			                    			
+											<!-- 대댓글 달기 -->
+											<div class="inputRecommentBox">
+												<form action="/insertClubComment.do" method="post">
+													<ul>
+														<li>
+															<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
+														</li>
+														<li>
+															<input type="hidden" name="clubNo" value="${c.clubNo }">
+								                    		<input type="hidden" name="clubComRef" value="${cbc.clubComNo }">
+								                    		<input type="hidden" name="clubBoardNo" value="${cb.clubBoardNo }">
+								                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
+								                    		<textarea name="clubComContent"></textarea>
+														</li>
+														<li>
+															<button class="btn btn-primary py-2 px-4">등록</button>
+														</li>
+													</ul>
+												</form>
 											</div>
-										</li>
-										<li>
-											<p class="comment-info">
-												<span class="text-primary">댓글작성자</span>
-												<span>댓글작성일</span>
-											</p>
-											<p class="comment-content">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
-											<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
-											<p class="comment-link">
-												<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
-												<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
-												<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
-												<a href="javascript:void(0)" class="recShow">답글달기</a>
-											</p>
-										</li>
-									</ul>
-									<div class="inputRecommentBox">
-										<form action="/insertClubRecomment.do" method="post">
-											<ul>
-												<li>
-													<span class="material-symbols-outlined" style="font-size: 33px;">subdirectory_arrow_right</span>
-												</li>
-												<li>
-													<input type="hidden" name="ncWriter" value="clubNo">
-													<input type="hidden" name="noticeRef" value="clubNo">
-													<input type="hidden" name="ncRef" value="clubNo">
-													<textarea name="clubComContent"></textarea>
-												</li>
-												<li>
-													<button class="btn btn-primary py-2 px-4">등록</button>
-												</li>
-											</ul>
-										</form>
-									</div>
-			                    </div>
+											
+			                    		</c:if>
+			                    	</c:forEach> <!-- 댓글 for문 -->
+			                    	</c:if> <!-- 댓글이 null이 아니면 -->
+			                    </div> <!-- 댓글 출력 End -->
 			                </div>
 			            </div>
-				    </c:forEach>
-	    			<!-- 회원 게시글 End -->
+				    </c:forEach><!-- 회원 게시글 End -->
             	</c:when>
             </c:choose>
 
@@ -190,11 +237,6 @@
         </div>
         <div class="modal-content">
             <div id="member-box">
-                <div>member</div>
-                <div>member</div>
-                <div>member</div>
-                <div>member</div>
-                <div>member</div>
                 <input type="text" value="${c.clubNo }" id="clubNo"><button onclick="initChat('${sessionScope.m.memberId}');">채팅시작하기</button>
             </div>
 			<div class="chatting">
@@ -215,13 +257,13 @@
     <div class="modal-write">
         <div class="writeModalTop">
             <h1>글쓰기</h1>
-            <div>작성자</div>
+            <div>작성자 : ${sessionScope.m.nickName }</div>
         </div>
         <div class="writeModalContent">
         <form action="/clubBoardWrite.do" method="post" enctype="multipart/form-data">
 			<div class="writeModalInputBox">
 				<input type="hidden" name="clubNo" value="${c.clubNo }">
-				<input type="hidden" name="memberNo" value="4">
+				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				<textarea name="clubBoardContent"></textarea><br>
 				<input type="file" multiple name="files"><br>
 			</div>
@@ -238,6 +280,7 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 	<script>
+
 	
 	// side bar 스크롤
     function stopSide(){
@@ -260,8 +303,7 @@
     $(function(){
     	stopSide();
     });
-    
-    
+
     
     // 글쓰기 버튼
     function boardModal() {
@@ -280,6 +322,7 @@
     function closeModal() {
     	endChat();
     	$(".chatting").hide();
+    	$(".messageArea *").remove();
     	$(".modal-wrap").css("display", "none");
 	}
     
@@ -299,12 +342,11 @@
 		ws.onmessage = receiveMsg;
 		// 웹소켓 연결이 종료되면 실행할 함수
 		ws.onclose = endChat;
-		$("#member-box").hide();
 		$(".chatting").slideDown();
 	}
 	function startChat() {
 		console.log("웹소켓 연결완료");
-		const data = {type:"enter", msg:"onnbi", club:clubNo};
+		const data = {type:"enter", msg:memberId, club:clubNo};
 		ws.send(JSON.stringify(data));
 		appendChat("<p>채팅방에 입장했습니다</p>");
 	}
@@ -315,7 +357,11 @@
 	function endChat() {
 		console.log("웹소켓 연결종료");
 	}
-	
+	function getMember() {
+		const data = {type:"member", msg:"onnbi", club:clubNo};
+		ws.send(JSON.stringify(data));
+		$("#member-box").text(msg);
+	}
 	function sendMsg() {
 		const msg = $("#sendMsg").val();
 		// val
@@ -325,8 +371,6 @@
 			ws.send(JSON.stringify(data));
 			appendChat("<div class='chat right'>"+msg+"</div>");
 			$("#sendMsg").val("");
-			// msg가 null이 아니고, file도 null이 아닐 때
-			// file만 있을 때
 		}
 	}
 	
@@ -365,6 +409,11 @@
 		$(".messageArea").append(msg);
 		$(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
 	}
+	
+	function appendId(msg) {
+		$("#member-box").append(msg);
+	}
+	
 	$("#sendMsg").on("keyup", function(key) {
 		if(key.keyCode==13){
 			sendMsg();

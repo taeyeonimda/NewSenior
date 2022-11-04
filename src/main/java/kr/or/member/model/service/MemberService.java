@@ -20,7 +20,6 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDao dao;
-	
 	public MemberPageData getAllMembers(int reqPage) {
 		// 한페이지당 보여줄 게시물 수
 		int numPerPage = 5;
@@ -47,25 +46,24 @@ public class MemberService {
 			pageNo = reqPage - 2;
 		}
 
-		String pageNavi = "<ul class='pagination circle-style'>";
+		String pageNavi = "<nav aria-label=\"Page navigation example\">";
+		pageNavi += "<ul class='pagination justify-content-center'>";
 		if (pageNo != 1) {
-			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/adminPage.do?reqPage=" + (pageNo - 1) + "'>";
-			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "<li class='page-item disabled'>";
+			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/adminPage.do?reqPage=" + (pageNo - 1) + "'>";
+			pageNavi += "Previous";
 			pageNavi += "</a></li>";
 		}
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
-				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/adminPage.do?reqPage=" + pageNo + "'>";
+				pageNavi += "<li class='page-item' >";
+				pageNavi += "<a class='page-link active-page' href='/adminPage.do?reqPage=" + pageNo + "'>";
 				pageNavi += pageNo;
-				// pageNavi +="<span class='material-icons'>chevron_left</span>";
 				pageNavi += "</a></li>";
 			} else {
-				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/adminPage.do?reqPage=" + pageNo + "'>";
+				pageNavi += "<li class='page-item' >";
+				pageNavi += "<a class='page-link' href='/adminPage.do?reqPage=" + pageNo + "'>";
 				pageNavi += pageNo;
-				// pageNavi +="<span class='material-icons'>chevron_left</span>";
 				pageNavi += "</a></li>";
 			}
 			pageNo++;
@@ -73,18 +71,19 @@ public class MemberService {
 				break;
 			}
 		}
-		// 다음버튼
+		// 다음버튼 
 		if (pageNo <= totalPage) {
-			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/adminPage.do?reqPage=" + pageNo + "'>";
-			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "<li class='page-item disabled' >";
+			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/adminPage.do?reqPage=" + pageNo + "'>";
+			pageNavi += "Previous";
 			pageNavi += "</a></li>";
 		}
-		pageNavi += "</ul>";
+		pageNavi += "</ul></nav>";
 		MemberPageData mpd = new MemberPageData(list, pageNavi, reqPage, numPerPage);
 		return mpd;
 
 	}
+
 
 	@Transactional
 	public int chnageLevel(Member m) {

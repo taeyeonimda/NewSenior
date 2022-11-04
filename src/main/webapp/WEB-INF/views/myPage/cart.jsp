@@ -55,100 +55,10 @@
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
         <!-- Menu -->
-
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
-         style="top: 30px; display: inline-block; width: 300px; height: 400px;">
-          
-          <ul class="menu-inner py-1">
-
-            <!-- 회원관리 -->
-            <li class="menu-item ">
-              <a href="memberMgrAdmin.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">회원 관리</div>
-              </a>
-            </li>
-
-            <!-- 클래스관리 -->
-            <li class="menu-item">
-              <a href="classMgrTeacher.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">클래스관리(강사페이지)</div>
-              </a>
-            </li>
-            <!-- 클래스등록 -->
-            <li class="menu-item">
-              <a href="classEnroll.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">클래스 등록</div>
-              </a>
-            </li>
-
-            <!-- 액티비티등록 -->
-            <li class="menu-item ">
-              <a href="activityEnroll.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">액티비티 등록</div>
-              </a>
-            </li>
-
-            <!-- 액티비티관리 -->
-            <li class="menu-item ">
-              <a href="activityMgrAdmin.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">액티비티 관리</div>
-              </a>
-            </li>
-
-            <!-- 상품등록 -->
-            <li class="menu-item ">
-              <a href="goodsEnroll.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">상품 등록</div>
-              </a>
-            </li>
-
-            <!-- 상품관리 -->
-            <li class="menu-item">
-              <a href="goodsMgrAdmin.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">상품 관리</div>
-              </a>
-            </li>
-
-            <!-- Tables -->
-            <li class="menu-item">
-              <a href="classMgrAdmin.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">클래스관리(관리자페이지)</div>
-              </a>
-            </li>
-
-            <!-- 장바구니 -->
-            <li class="menu-item active">
-              <a href="cart.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">장바구니</div>
-              </a>
-            </li>
-
-            <!-- 마이페이지 -->
-            <li class="menu-item  ">
-              <a href="mypage.do" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">마이페이지</div>
-              </a>
-            </li>
-          </ul>
-        </aside>
+        <%@include file="/WEB-INF/views/common/aside.jsp" %>
         <!-- / Menu -->
-
         <!-- Layout container -->
-        
-
-
           <!-- Content wrapper -->
-          
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -165,68 +75,36 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr style="text-align: center;">
-                        <th style=" width: 10%;">
-                          <label>전체선택 <input type="checkbox" style="width: 15px; height: 15px; "></label>
-                        </th>
-                        <th style=" width: 40%;">상품명</th>
-                        <th style=" padding-left: 35px; width: 15%;">금액</th>
+                        <th style=" width: 10%;"><label>전체선택 <input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></label></th>
+                        <th style=" width: 10%;">상품명</th>
+                        <th style=" width: 30%;">상품명</th>
+                        <th style=" width: 15%;">금액</th>
                         <th style=" width: 50px; width: 15%;">수량</th>
                         <th style=" width: 10%;">배송비</th>
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr style="text-align: center;">
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">짜짜로니</td>
-                        <td style="text-align: center;">500원</td>
-                        <td style="text-align: center;">
-                          <div class="col-md-10">
-                            <input class="form-control" type="text" id="html5-text-input" />
-                          </div>
-                        </td>
-                        <td style="text-align: center;">무료배송</td>
-                        <td>가격 x 수량</td>
-                      </tr>
-                      <tr style="text-align: center;">
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;">초코파이</td>
-                        <td>10000원</td>
-                        <td>
-                          <div class="col-md-10">
-                            <input class="form-control" type="text" id="html5-text-input" />
-                          </div>
-                        </td>
-                        <td>무료배송</td>
-                        <td>가격 x 수량</td>
-                      </tr>
+                      
+                      <c:forEach items="${list }" var="Cart">
+		            	<tr class="showCartList">
+		            		<td style="text-align:center"><input type="checkbox" name="productCheck"></td>
+		            		<td style="text-align:center">${Cart.productNo }</td>
+		            		<td style="text-align:center">${Cart.productName }</td>
+							<td style="text-align:center">${Cart.buyPrice }</td>
+							<td style="text-align:center">${Cart.buyAmount }</td>
+							<td style="text-align:center">무료배송</td>
+							<td style="text-align:center">${Cart.buyAmount*Cart.buyPrice }원</td>
+		                </tr>
+             		</c:forEach>
                       <tr>
-                      	<td colspan="4"></td>
+                      	<td colspan="5"></td>
                       	<td>결제할 총 금액</td>
-                      	<td><input type="text" style="border:none;" class="sumPrice" value="100" readonly></td>
+                      	<td>
+                      		<input type="text" style="border:none;" class="sumPrice" value="100" readonly>
+                     	</td>
                       </tr>
-					<c:forEach items="${list }" var="m">
-						<tr>
-							<td>
-								<input type="checkbox" id="check1" class="cart-check">
-							</td>
-							<td>
-								${m.productName }
-							</td>
-							<td>
-								${m.buyPrice }
-							</td>
-							<td>
-								${m.buyAmount }
-							</td>
-							<td>
-								무료배송
-							</td>
-							<td>
-								(${m.buyPrice } * ${m.buyAmount })
-							</td>
-						</tr>
-					</c:forEach>
+					
                     </tbody>
                   </table>
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
@@ -252,50 +130,7 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s" style="width: 100%;">
-  <div class="container py-5">
-      <div class="row g-5">
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Our Office</h4>
-              <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-              <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-              <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-              <div class="d-flex pt-2">
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Services</h4>
-              <a class="btn btn-link" href="">Landscaping</a>
-              <a class="btn btn-link" href="">Pruning plants</a>
-              <a class="btn btn-link" href="">Urban Gardening</a>
-              <a class="btn btn-link" href="">Garden Maintenance</a>
-              <a class="btn btn-link" href="">Green Technology</a>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Quick Links</h4>
-              <a class="btn btn-link" href="">About Us</a>
-              <a class="btn btn-link" href="">Contact Us</a>
-              <a class="btn btn-link" href="">Our Services</a>
-              <a class="btn btn-link" href="">Terms & Condition</a>
-              <a class="btn btn-link" href="">Support</a>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Newsletter</h4>
-              <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-              <div class="position-relative w-100">
-                  <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                  <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-<!-- Footer End -->
+<%@include file="/WEB-INF/views/common/footer.jsp" %>
 
 
     <!-- Core JS -->
@@ -343,6 +178,18 @@
 				}
 			});
 		});
+		
+		
+		function selectAll(selectAll)  {
+			  const checkboxes 
+			       = document.getElementsByName("productCheck");
+			  
+			  checkboxes.forEach((checkbox) => {
+			    checkbox.checked = selectAll.checked;
+			  })
+			}
+		
+		
 	</script>
   </body>
 </html>

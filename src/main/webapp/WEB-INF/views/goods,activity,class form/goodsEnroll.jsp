@@ -59,91 +59,7 @@
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
         <!-- Menu -->
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
-         style="top: 30px; display: inline-block; width: 300px; height: 400px;">
-          
-          <ul class="menu-inner py-1">
-
-            <!-- 회원관리 -->
-            <li class="menu-item ">
-              <a href="memberMgrAdmin.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">회원 관리</div>
-              </a>
-            </li>
-
-            <!-- 클래스관리 -->
-            <li class="menu-item">
-              <a href="classMgrTeacher.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">클래스관리(강사페이지)</div>
-              </a>
-            </li>
-            <!-- 클래스등록 -->
-            <li class="menu-item">
-              <a href="classEnroll.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">클래스 등록</div>
-              </a>
-            </li>
-
-            <!-- 액티비티등록 -->
-            <li class="menu-item ">
-              <a href="activityEnroll.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">액티비티 등록</div>
-              </a>
-            </li>
-
-            <!-- 액티비티관리 -->
-            <li class="menu-item ">
-              <a href="activityMgrAdmin.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">액티비티 관리</div>
-              </a>
-            </li>
-
-            <!-- 상품등록 -->
-            <li class="menu-item active">
-              <a href="goodsEnroll.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">상품 등록</div>
-              </a>
-            </li>
-
-            <!-- 상품관리 -->
-            <li class="menu-item">
-              <a href="goodsMgrAdmin.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">상품 관리</div>
-              </a>
-            </li>
-
-            <!-- Tables -->
-            <li class="menu-item">
-              <a href="classMgrAdmin.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">클래스관리(관리자페이지)</div>
-              </a>
-            </li>
-
-            <!-- 장바구니 -->
-            <li class="menu-item ">
-              <a href="cart.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">장바구니</div>
-              </a>
-            </li>
-
-            <!-- 마이페이지 -->
-            <li class="menu-item  ">
-              <a href="mypage.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Basic Inputs">마이페이지</div>
-              </a>
-            </li>
-          </ul>
-        </aside>
+        <%@include file="/WEB-INF/views/common/aside.jsp" %>
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -297,41 +213,10 @@
 			  console.log($(this).val())
 		});
 		
+		$("[name=productFile]")
 		
 		
-		//summerNote
-		$("#productContent").summernote({
-			height:400,
-			lang : "ko-KR",
-			callbacks :{
-				onImageUpload : function(files){
-					uploadImage(files[0],this);
-				}
-			}
-		});
-		function uploadImage(file,editor){
-			//ajax통해서 서버에 이미지를 업로드
-			//업로드된 이미지의 경로를 받아오는 역할
-			//<form>태그와 동일한 효과를 발생시킬 수 있는 객체
-			const form = new FormData();
-			form.append("file",file);
-			$.ajax({
-				url : "/uploadImage.do",
-				type : "post",
-				data : form,
-				processData : false,
-				contentType : false,
-				success : function(data){
-					$(editor).summernote("insertImage",data);
-					console.log(data);
-				}
-			});
-			//processData : 전송하는 데이터를 문자열로 전송하게 기본값이 설정되어있음
-			//			-> 파일 전송을 위해 기본값 제거하는 작업
-			//contentType : enctype ="application/x-www-form-urlencoded;charset=UTF-8"
-			//			-> 설정되어있는 기본 enctype을 제거
-		}
-	</script>
+		</script>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

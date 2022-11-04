@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -24,6 +25,8 @@ import common.FileRename;
 import kr.or.club.model.service.ClubService;
 import kr.or.club.model.vo.Club;
 import kr.or.club.model.vo.ClubBoard;
+import kr.or.club.model.vo.ClubBoardComment;
+import kr.or.member.model.vo.Member;
 
 
 @Controller
@@ -33,17 +36,34 @@ public class ClubController {
 	@Autowired
 	private FileRename fileRename;
 	
-	@RequestMapping(value = "/clubList.do")
-	public String classList(Model model) {
+	@RequestMapping(value = "/popularClubList.do")
+	public String clubMemberList(Model model, Member m) {
 		// 실제는 회원의 카테고리를 가져옴
-		ArrayList<Club> list = service.selectAllClub();
-		model.addAttribute("list", list);
+		ArrayList<Club> popularList = service.searchClubPopularList(m);
+		System.out.println(popularList);
+		model.addAttribute("pList", popularList);
 		return "club/clubList";
-	}	
+	}
+	
+	@RequestMapping(value = "/clubList.do")
+	public String clubList() {
+		return "club/clubList";
+	}
+
+	// 모든 동호회 가져오는 ajax 페이징
+	@ResponseBody
+	@RequestMapping(value = "/searchAllClub.do", produces = "application/json;charset=utf-8")
+	public String getMyClubCategory(String keyword) {
+		ArrayList<Club> list = service.selectAllClub(keyword);
+		return new Gson().toJson(list);
+	}
+	
 	@RequestMapping(value = "/insertClubFrm.do")
 	public String insertClubFrm() {
 		return "club/insertClubFrm";
 	}
+	
+	
 	@RequestMapping(value = "/insertClub.do")
 	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) {
 		System.out.println(files);
@@ -77,18 +97,14 @@ public class ClubController {
 	
 	@RequestMapping(value = "/clubDetail.do")
 	public String clubDetail(int clubNo, Model model){
-		HashMap<String, List> map = service.selectOneClubMap(clubNo);
-		//Club c = service.selectOneClub(clubNo);
-		// board리스트와 해당 클럽의 board에 대한 댓글리스트
-		// model.addAttribute("c", c);
-		Club c = (Club)map.get("club").get(0);
-		model.addAttribute("c", c);
+		HashMap<String, Object> map = service.selectOneClubMap(clubNo);
+		model.addAttribute("c", map.get("club"));
 		model.addAttribute("cbList", map.get("board"));
 		return "club/clubDetail";
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/UploadFile.do",produces = "application/json;charset=utf-8")
+	@RequestMapping(value="/UploadFile.do", produces = "application/json;charset=utf-8")
 	public String uploadChatFile(MultipartFile[] chatFile, HttpServletRequest request) {
 		String filepath = null;
 		if(!chatFile[0].isEmpty()) {
@@ -151,6 +167,10 @@ public class ClubController {
 		return "redirect:/clubDetail.do?clubNo="+cb.getClubNo();
 	}
 	
-	
+	@RequestMapping(value = "/insertClubComment.do")
+	public String  insertClubComment(ClubBoardComment cbc) {
+		int result = service.insertBoardCom(cbc);
+		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
+	}
 	
 }
