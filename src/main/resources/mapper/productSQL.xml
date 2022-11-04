@@ -81,6 +81,9 @@
   
   <insert id="insertReview" parameterType="pr">
   insert into product_reviews values(product_reviews_seq.nextval,#{reviewContent},to_char(sysdate,'yyyy-mm-dd'),#{reviewScore},#{memberId},#{productNo})
+  <selectKey resultType="_int" order="AFTER" keyProperty="reviewNo">
+  	select max(product_review_no) from product_reviews
+  </selectKey>
   </insert>
   
   <select id="productReviewList" parameterType="_int" resultType="pr">
