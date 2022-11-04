@@ -27,88 +27,119 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
+        <div class="sidenav bg-primary rounded p-sm-3 wow fadeIn" style="width:360px; height:400px; opacity: 0.9">
             <div class="side-box rounded">
-                <div class="side-title-box display-5 text-center mb-2">
-                 
+                <h6 class="side-title-box display-5 text-center text-light">
+                 	${act.activityName}
+                </h6>
+                <div class="side-teacher-box" style="text-align: center; color:white; margin-bottom:70px;"> 
+                    <span>담당자 : ${act.activityManagerName}</span>
                 </div>
-                <div class="side-teacher-box">
-                    <span>${cla.teacherName } </span> 강사
-                </div>
-                <div class="side-info-box">
-                    <ul>
-                        <li><span class="fs-5 text-primary">초급자 대상</span></li>
-                        <li><span class="fs-5 text-primary">${cla.startDate } ~ ${cla.startDate }</span></li>
-                        <c:choose>
-                        	<c:when test="${cla.products eq 0 }">
-                        		<li><span class="fs-5 text-primary">준비물 없음</span></li>
-                        	</c:when>
-                        	<c:otherwise>
-                        		<li><span class="fs-5 text-primary">준비물 필요</span></li>
-                        	</c:otherwise>
-                        </c:choose>
-                        
-                    </ul>
-                </div>
-                <div class="side-select-box form-floating mb-4">
-                    <input type="date" id="Date" class="form-control bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;"><br>
-                    <select name="times" class="form-control bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;">
-                        <option value='' selected>시간</option>
-                        <option value="2">2시</option>
-                        <option value="3">3시</option>
-                    </select><br>
+          		
+                <div class="side-select-box form-floating mb-4"> 
                     <div class="amount-box">
-	                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;">
-	                        <option value='' selected>인원수</option>
-	                        <option value="1">1인</option>
+	                    <select name="amount" id="amountSelect" class="bg-white border-0" style="width:150px; padding: 0; padding-left: 30px; padding-right: 30px;">
+	                        <option value="1" selected>1인</option>
 	                        <option value="2">2인</option>
 	                        <option value="3">3인</option>
 	                        <option value="4">4인</option>
 	                        <option value="5">5인</option>
 	                        <option value="6">6인</option>
 	                    </select>
-	                    <span>${cla.classPrice }원</span>
+	                    <span id="amountPrice" style="width:150px; color: white;">${act.activityPrice }</span>
+	                    <script>
+	                    $(function(){
+	                    	const amount = $("[name=amount]").val()
+	                    	const amountPrice ='${act.activityPrice }';
+	                    	const amountPrice2 ='${act.activityPrice }';
+	                    	console.log("amountPrice2값:::::"+amountPrice2)
+	                    	const splits = amountPrice2.split(',');
+	                    	let realPrice ="";
+	                    	
+	                    	console.log(splits);
+	                    	for(let i=0;i<splits.length;i++){
+	                    		realPrice += splits[i];
+	                    	}
+	                    	
+	                  
+                    		
+                    		$("#realAmount").text(amount*realPrice);
+	                    });
+	                 
+	                    
+	                    
+	                    	$("#amountSelect").on("change",function(){
+	                    		const amount = $("[name=amount]").val()
+		                    	const amountPrice ='${act.activityPrice }';
+		                    	const amountPrice2 ='${act.activityPrice }';
+		                    	console.log("amountPrice2값:::::"+amountPrice2)
+		                    	const splits = amountPrice2.split(',');
+		                    	let realPrice ="";
+		                    	
+		                    	console.log(splits);
+		                    	for(let i=0;i<splits.length;i++){
+		                    		realPrice += splits[i];
+		                    	}
+		                    	
+		                  
+	                    		
+	                    		$("#realAmount").text(amount*realPrice);
+	                    	})
+	    					
+	                    </script>
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-primary py-3 px-5">신청하기</button>
+                <span style="display: flex; justify-content: center;">
+                	<div style="color:white; line-height:58px"><span>총합 : </span><span id="realAmount"></span><span> 원</span></div>
+                    <button class="btn btn-primary py-3 px-5" style="background-color:#9BA17B; margin-left:20px">신청하기</button>
+                    </span>
                 </div>
             </div>
         </div>
-
-
+        <!-- sideBar End-->
         <!-- class main -->
         <div class="container-xxl py-5 mt-5">
             <div class="container">
-                <div class="class-row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item rounded class-item">
-                            <img class="img-fluid" src="/resources/MAINbtstr/img/${cla.filepath }" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item rounded class-item">
-                            <img class="img-fluid" src="/resources/MAINbtstr/img/모델클래스 (3).jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-select-box" id="scroll-select">
+				<div class="class-row g-4">
+					<div class="col-xl-12 wow fadeInUp" data-wow-delay="0.1s" style= "display: flex">
+						<div class="col-xl-6 team-item rounded class-item"
+							style=" height: auto; margin: auto;">
+							<img style="width:580px; height:580px;"class="img-fluid" src="/resources/upload/activity/${act.filepath }" alt="">
+						</div >
+						
+						<div class="col-xl-6 team-item rounded class-item" >
+						<pre>
+						<h1>${act.activityName }</pre></h1>
+						<h3>${act.activityPrice }원</h3>
+						<br><br><br><br>
+						<p><strong>담당자</strong><h3>${act.activityManagerName }</h3></p>
+						</pre>
+						</div>
+					</div>
+				</div>
+				<!-- scroll bar start -->
+				<!-- 
+				<div class="scroll-select-box" id="scroll-select" style="border:1px dotted #6c757d; width: 1250px">
                 	<span>강사소개</span><span><a href="#menu2">강의소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
                 	  
-                </div>
+                </div> -->
+                <!-- scroll bar end -->
             </div>
+            <hr>
         </div>
         <!-- class-main End -->
 
 
 
         <!-- 강의소개 -->
+        
         <div class="container-xxl py-5 mt-5" id="#menu1">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <p class="fs-5 fw-bold text-primary">${cla.teacherName } 강사와 함께하는 ${cla.className }</p>
-                        <h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
+                        <p class="fs-5 fw-bold text-primary">담당자 : ${act.activityManagerName }와 함께하는</p>
+                        <h1 class="display-5 mb-4">액티비티 활동!</h1>
                         <p class="mb-4">${cla.curriculum }</p>
                         <a class="btn btn-primary py-3 px-4" href="">Explore More</a>
                     </div>
@@ -133,10 +164,11 @@
                     <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
                         <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
                         <p class="text-primary mb-4">Year of Experience</p>
-                        <h4 class="display-6 mb-4"> ${act }</h4>
+                        <h4 class="display-6 mb-4"></h4>
                         <p class="mb-4">연세대 당당걷기과</p>
                         <p class="mb-4">새바람 걷기대회 우승</p>
                         <p class="mb-4">무신사 시니어 모델로 활동 중</p>
+                        <pre>${act.activityDetail}</pre>
                     </div>
                 </div>
             </div>
