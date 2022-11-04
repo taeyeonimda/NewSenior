@@ -3,34 +3,112 @@
 <mapper namespace="board">
 	<select id="selectBoardList" parameterType="map" resultType="b">
 	select * from 
-		(select rownum as rnum, b.*from
+		(select row_number() over(partition by boardType order by boardNo desc) as rn, b.*from
 		(select
 			board_no as boardNo,
+			member_no as memberNo,
 			board_title as boardTitle,
+			board_content as boardContent,
 			board_count as boardCount,
 			board_date as boardDate,
 			board_type as boardType,
-			board_category as boardCategory
-		from board order by board_no desc)b)
-		where rnum between #{start} and #{end}
+			board_category as boardCategory,
+            nickname as nickName
+		from board join members using(member_no)order by board_no desc)b)
+        where rn between #{start} and #{end} and boardType='F'
     
 	</select>   
 	<select id="totalCount" resultType="int">
 		select count(*) from board
+		<choose>
+			<when test="board_type='F'">
+				where board_type='F'
+			</when>
+		</choose>
 	</select>    
+	
+		<select id="totalCount2" parameterType="String" resultType="int">
+		select count(*) from board where board_type=#{_parameter}
+		
+	</select>  
 	
 	<select id="selectOneBoard" parameterType="_int" resultType="b">
 		select
 			board_no as boardNo,
+			member_no as memberNo,
 			board_title as boardTitle,
 			board_count as boardCount,
 			board_date as boardDate,
 			board_type as boardType,
-			board_content as boarContent,
-			board_category as boardCategory
-		from board
+			board_content as boardContent,
+			board_category as boardCategory,
+			nickname as nickName
+		from board join members using(member_no)
 		where board_no = #{_parameter}
-	</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+	</select> 
+	
+	<select id="selectFileList" parameterType="_int" resultType="bf">
+		select 
+			file_no as fileNo,
+			board_no as boardNo,
+			filename,
+			filepath
+		from board_file
+		where board_no = #{_parameter}
+	</select>
+	
+	<select id="selectComment" parameterType="_int" resultType="bc">
+		select
+			board_comm_no as boardCommNo,
+			member_no as memberNo,
+			board_comm_content as boardCommContent,
+			board_comm_date as boardCommDate,
+			board_ref as boardRef,
+			board_comm_ref as boardCommRef,
+			nickname as nickName
+		from board_comment join members using(member_no)
+		where board_ref = #{_parameter} and board_comm_ref is null order by 1
+	</select>
+	
+	<select id="selectRecomment" parameterType="_int" resultType="bc">
+		select 
+			board_comm_no as boardCommNo,
+			member_no as memberNo,
+			board_comm_content as boardCommContent,
+			board_comm_date as boardCommDate,
+			board_ref as boardRef,
+			board_comm_ref as boardCommRef,
+			nickname as nickName
+		from board_comment join members using(member_no)
+		where board_ref = #{_parameter} and board_comm_ref is not null order by 1
+	</select>          
+	
+	<insert id="insertBoard" parameterType="b">
+		insert into board values(board_seq.nextval,#{memberNo},#{boardTitle},#{boardContent},0,to_char(sysdate,('YYYY-MM-DD')),#{boardType},#{boardCategory})
+	</insert>  
+	
+	<select id="selectBoardNo" resultType="_int">
+		select max(board_no) from board
+	</select>
+	
+	<insert id="insertFile" parameterType="bf">
+		insert into board_file values(board_file_seq.nextval,#{filepath},#{filename},#{boardNo})
+	</insert> 
+	
+	<insert id="insertComment" parameterType="bc">
+		<if test="boardCommRef==0">
+			insert into board_comment values(board_comm_seq.nextval,#{memberNo},#{boardCommContent},to_char(sysdate,('YYYY-MM-DD')),#{boardRef},null)
+		</if>
+		<if test="boardCommRef!=0">
+			insert into board_comment values(board_comm_seq.nextval,#{memberNo},#{boardCommContent},to_char(sysdate,('YYYY-MM-DD')),#{boardRef},#{boardCommRef})
+		</if>
+		
+	</insert> 
+	<update id="updateBoardComment" parameterType="bc">
+		update board_comment set board_comm_content = #{boardCommContent} where board_comm_no = #{boardCommNo}
+	</update>
+	
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 </mapper>
 
 

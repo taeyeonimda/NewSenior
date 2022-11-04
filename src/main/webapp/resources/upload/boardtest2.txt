@@ -1,0 +1,362 @@
+- 조건 -
+
+1. index.jsp에서 select를 이용하여 조회하고싶은 나이대를 선택한다.
+
+2. 선택한 나이의 값을 비동기요청(ajax)으로 전송하여 해당하는 회원목록을 결과로 받아서 출력한다.
+
+3. 문제에서 주어지는 파일 외 다른 파일 및 조건은 모두 정상적으로 작성되어있는 것으로 가정한다.
+
+- 데이터 베이스를 구축하고 데이터를 삽입한다.
+
+------------------------------------------------ 관리자 계정
+
+CREATE USER EXAM_DB IDENTIFIED BY 1234;
+
+GRANT CONNECT,RESOURCE TO EXAM_DB;
+
+------------------------------------------------ EXAM_DB 계정
+
+CREATE TABLE MEMBER_TBL(
+
+MEMBER_ID VARCHAR2(30) PRIMARY KEY,
+
+MEMBER_PW VARCHAR2(30) NOT NULL,
+
+MEMBER_NAME VARCHAR2(30) NOT NULL,
+
+MEMBER_AGE NUMBER NOT NULL,
+
+MEMBER_EMAIL VARCHAR2(50) NOT NULL
+
+);
+
+INSERT INTO MEMBER_TBL VALUES ('muhan','1234','유재석',50,'muhan@naver.com');
+
+INSERT INTO MEMBER_TBL VALUES ('bignose','1111','지석진',55,'nose@naver.com');
+
+INSERT INTO MEMBER_TBL VALUES ('tiger','6658','김종국',47,'tiger@gmail.com');
+
+INSERT INTO MEMBER_TBL VALUES ('haha','5356','하동훈',44,'hahaha@nate.com');
+
+INSERT INTO MEMBER_TBL VALUES ('ace','5555','송지효',40,'ace@hanmail.net');
+
+INSERT INTO MEMBER_TBL VALUES ('girrafe','1212','이광수',35,'girrafe@gamil.com');
+
+INSERT INTO MEMBER_TBL VALUES ('ssapssap','3333','양세찬',33,'ssapssap@hanmail.net');
+
+INSERT INTO MEMBER_TBL VALUES ('doli','2451','전소민',33,'doli@nate.com');
+
+COMMIT;
+
+작성파일
+
+1) index.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+
+</head>
+
+<body>
+
+<h1>Web Project</h1>
+
+<hr>
+
+<select id="memberAge">
+
+<option value="30">30대</option>
+
+<option value="40">40대</option>
+
+<option value="50">50대</option>
+
+</select>
+
+<button id="btn">회원조회하기</button>
+
+<br><br>
+
+<div id="member-info"></div>
+
+<script>
+
+$("#btn").on("click",function(){
+
+const memberAge = $("#memberAge").val();
+
+$.ajax({
+
+url : "/searchMemberAge.do",
+
+data : {memberAge : memberAge},
+
+success:function(list){
+
+$("#member-info").empty();
+
+const table = $("<table border='1'>");
+
+const titleTr = $("<tr>");
+
+titleTr.append("<th>아이디</th><th>이름</th><th>나이</th><th>email</th>");
+
+table.append(titleTr);
+
+for(let i=0;i<list.length;i++){
+
+const tr = $("<tr>");
+
+const idTd = $("<td>");
+
+idTd.append(list[i].memberId);
+
+const nameTd = $("<td>");
+
+nameTd.append(list[i].memberName);
+
+const ageTd = $("<td>");
+
+ageTd.append(list[i].memberAge);
+
+const emailTd = $("<td>");
+
+emailTd.append(list[i].memberEmail);
+
+tr.append(idTd).append(nameTd).append(ageTd).append(emailTd);
+
+table.append(tr);
+
+}
+
+$("#member-info").append(table);
+
+}
+
+});
+
+});
+
+</script>​
+
+</body>
+
+</html>
+
+2) MemberController.java
+
+package kr.or.member.controller;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.google.gson.Gson;
+
+import kr.or.member.model.service.MemberService;
+
+import kr.or.member.model.vo.Member;
+
+@Controller
+
+public class MemberController {
+
+@Autowired
+
+private MemberService service;
+
+@RequestMapping(value="/searchMember.do", produces = "application/json;charset=utf-8")
+
+public String allMember(Member m) {
+
+ArrayList<Member> list = service.searchMember(m);
+
+return new Gson().toJson(list);
+
+}
+
+}
+
+3) MemberService.java
+
+package kr.or.member.model.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.member.model.dao.MemberDao;
+
+import kr.or.member.model.vo.Member;
+
+@Service
+
+public class MemberService {
+
+@Autowired
+
+private MemberDao dao;
+
+public ArrayList<Member> searchMember(Member m) {
+
+// TODO Auto-generated method stub
+
+return dao.searchMember(m);
+
+}
+
+}
+
+4) MemberDao.java
+
+package kr.or.member.model.dao;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Repository;
+
+import kr.or.member.model.vo.Member;
+
+@Repository
+
+public class MemberDao {
+
+@Autowired
+
+private SqlSessionTemplate sqlSession;
+
+public ArrayList<Member> searchMember(Member m) {
+
+// TODO Auto-generated method stub
+
+List list = sqlSession.selectList("member.searchMemberAge",m);
+
+return (ArrayList<Member>)list;
+
+}
+
+}
+
+5) Member.java
+
+package kr.or.member.model.vo;
+
+import lombok.AllArgsConstructor;
+
+import lombok.Data;
+
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+
+@AllArgsConstructor
+
+@Data
+
+public class Member {
+
+private String memberId;
+
+private String memberPw;
+
+private String memberName;
+
+private int memberAge;
+
+private String memberEmail;
+
+}
+
+6) mybatis-config.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<configuration>
+
+<settings>
+
+<setting name="jdbcTypeForNull" value="NULL"/>
+
+</settings>
+
+<typeAliases>
+
+<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+
+</typeAliases>
+
+</configuration>
+
+7) memberSQL.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="member">
+
+<select id="searchMember" parameterType="m" resultType="m">
+
+select
+
+member_id as memberId,
+
+member_name as memberName,
+
+member_age as memberAge,
+
+member_email as memberEmail
+
+from member_tbl where
+
+<choose>
+
+<when test="memberAge == 30">
+
+member_age >= 30 and member_age < 40
+
+</when>
+
+<when test="memberAge == 40">
+
+member_age >= 40 and member_age < 50
+
+</when>
+
+<when test="memberAge == 50">
+
+member_age >= 50 and member_age < 60
+
+</when>
+
+</choose>
+
+</select>
+</mapper>​

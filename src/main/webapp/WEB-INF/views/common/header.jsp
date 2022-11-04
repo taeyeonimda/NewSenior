@@ -190,7 +190,7 @@
                     </div>
                 </div>
                 <a href="/clubList.do" class="nav-item nav-link">동호회</a>
-                <a href="/boardList.do?reqPage=1" class="nav-item nav-link">커뮤니티</a>
+                <a href="/boardList.do?reqPage=1&boardType=F" class="nav-item nav-link">커뮤니티</a>
                 <a href="javascript:void(0)" class="nav-item nav-link">액티비티</a>
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
                 

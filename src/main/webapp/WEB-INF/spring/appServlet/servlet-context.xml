@@ -17,6 +17,8 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	<resources location="/WEB-INF/views/summernote/" mapping="/summernote/**"></resources>
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 

@@ -9,9 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoardComment {
 	private int boardCommNo;
-	private String boardCommComment;
+	private String boardCommContent;
 	private String boardCommDate;
 	private int boardRef;
 	private int boardCommRef;
+	private int memberNo;
+	//조인해서 추가한 컬럼
+	private String nickName;
 	
 }
