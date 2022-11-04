@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileRename {
 
-	public String fileRename(String path, String filename) throws UnsupportedEncodingException {
+	public String fileRename(String path, String filename) {
 		// 파일 중복이름 체크 메서드
 		// 최종적으로 사용할 파일 path를 돌려주는 클래스
 		// 첫번재 매개변수 : upload다음에 올 파일명 받는다
