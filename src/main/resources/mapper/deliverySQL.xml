@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="delivery">
+<insert id="insertAddr" parameterType="d">
+insert into delivery_tbl 
+values(
+    delivery_seq.nextval,
+    #{deliveryName},
+    #{deliveryPhone},
+    #{zipcode},
+    #{deliveryAddr},
+    #{deliveryDetail},
+    #{receiverName},
+    #{defaultAddr},
+    #{memberNo}
+    )
+</insert>
+
+<update id="updateAddr" parameterType="d">
+update delivery_tbl 
+set default_addr = 'n' where member_no=#{memberNo}
+</update>
+
+<select id="selectAllDelivery" parameterType="m" resultType="d">
+  select
+  delivery_no as deliveryNo,
+  delivery_name as deliveryName,
+  delivery_phone as deliveryPhone,
+  zipcode,
+  delivery_addr as deliveryAddr,
+  delivery_detail as deliveryDetail,
+  receiver_name as receiverName,
+  default_addr as defaultAddr,
+  member_no as memberNo
+  from delivery_tbl where member_no=#{memberNo} ORDER BY CASE WHEN default_addr = 'Y' THEN 0 END, delivery_no DESC
+</select>
+</mapper>

@@ -55,7 +55,7 @@ public class ClubDao {
 		return sqlSession.insert("club.inertClubBoardCom", cbc);
 	}
 
-	public ArrayList<Club> searchCLubList(Member m) {
+	public ArrayList<Club> searchClubPopularList(Member m) {
 		List list = sqlSession.selectList("club.searchClubList", m);
 		return (ArrayList<Club>)list;
 	}

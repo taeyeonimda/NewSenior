@@ -25,32 +25,46 @@
         </div>
         <!-- Page Header End -->
         
-        <div style="width: 80%; display: flex; justify-content: space-between; margin: 0 auto;">
+        
+        
+        <div> <!-- 인기 리스트 div  -->
+        	<c:if test="${not empty sessionScope.m }">
+		        <c:choose>
+		        	<c:when test="${not empty pList }">
+		        		<p class="fs-5 fw-bold text-primary text-center">고객님의 관심사에 해당하는 동호회를 추천합니다</p>
+		        		
+				        <div class="row mb-5">
+				        	<c:forEach items="${pList }" var="pl">
+							<div class="col-md-6 col-lg-4 mb-3">
+								<div class="card h-100">
+				      				<img src="/resources/upload/club/${pl.clubMainImg }">
+				      				<div class="card-body">
+						        		<h5 class="card-title">${pl.clubName }</h5>
+						        		<p class="card-text">${pl.clubIntro }</p>
+						        		<a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
+					      			</div>
+				    			</div>
+				  			</div>
+				  			</c:forEach>
+						</div>
+		        	</c:when>
+		        	<c:otherwise>
+		        		<div class="fs-5 fw-bold text-primary text-center">선택된 관심사가 없습니다 마이페이지에서 등록하고 동호회를 추천 받으세요</div>
+		        	</c:otherwise>
+		        </c:choose>
+	        </c:if>
+        </div> <!-- 인기 리스트 div End  -->
+
+
+		<div style="width: 80%; display: flex; justify-content: space-between; margin: 0 auto;">
         	<div id="displayCount">
         	</div>
         	<div>
         		<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
         	</div>
         </div>
-        
-        <div> <!-- 인기 리스트 div  -->
-        <c:if test="${not empty pList }">
-	        <c:forEach items="${pList }" var="pl">
-	        <div class="row mb-5">
-				<div class="col-md-6 col-lg-4 mb-3">
-					<div class="card h-100">
-	      				<img>
-	      				<div class="card-body">
-			        		<h5 class="card-title">${pl.clubName }</h5>
-			        		<p class="card-text">${pl.clubIntro }</p>
-			        		<a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
-		      			</div>
-	    			</div>
-	  			</div>
-			</div>
-	        </c:forEach>
-	    </c:if>
-        </div> <!-- 인기 리스트 div End  -->
+        <hr>
+
 
 		<!-- ajax로 추가 -->
 		<div id="club-list" class="mt-5 club-list">
