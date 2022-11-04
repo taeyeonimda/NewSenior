@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
-         style="top: 30px; display: inline-block; width: 300px; height: 400px;">
+         style="top: 30px; display: inline-block; width: 300px; min-height: 7	00px;">
           
           <ul class="menu-inner py-1">
 
@@ -54,8 +54,8 @@
             </li>
 
             <!-- 상품등록 -->
-            <li class="menu-item goodsEnroll">
-              <a href="goodsEnroll.do" class="menu-link">
+            <li class="menu-item insertProductFrm">
+              <a href="insertProductFrm.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">상품 등록</div>
               </a>
@@ -72,7 +72,7 @@
 
             <!-- 장바구니 -->
             <li class="menu-item cart">
-              <a href="cart.do" class="menu-link">
+              <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">장바구니</div>
               </a>
@@ -87,7 +87,7 @@
             </li>
                       <!-- 주문내역 -->
           <li class="menu-item orderHistory">
-            <a href="orderHistory.do" class="menu-link">
+            <a href="orderHistory.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">주문내역</div>
             </a>
@@ -155,9 +155,9 @@
             	if(chk.test(url)){
             		$(".activityMgrAdmin").addClass("active");
             	}
-            	chk = /goodsEnroll.do/g;
+            	chk = /insertProductFrm.do/g;
             	if(chk.test(url)){
-            		$(".goodsEnroll").addClass("active");
+            		$(".insertProductFrm").addClass("active");
             	}
             	chk = /goodsMgrAdmin.do/g;
             	if(chk.test(url)){
@@ -192,5 +192,4 @@
             	if(chk.test(url)){
             		$(".teacherInfo").addClass("active");
             	}
-            	
          </script>

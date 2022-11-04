@@ -57,13 +57,8 @@
         <!-- Menu -->
         <%@include file="/WEB-INF/views/common/aside.jsp" %>
         <!-- / Menu -->
-
         <!-- Layout container -->
-        
-
-
           <!-- Content wrapper -->
-          
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -187,7 +182,7 @@
 		
 		function selectAll(selectAll)  {
 			  const checkboxes 
-			       = document.getElementsByName('animal');
+			       = document.getElementsByName("productCheck");
 			  
 			  checkboxes.forEach((checkbox) => {
 			    checkbox.checked = selectAll.checked;
