@@ -40,9 +40,8 @@ public class ClubController {
 	public String classList(Model model, Member m) {
 		// 실제는 회원의 카테고리를 가져옴
 		ArrayList<Club> popularList = service.searchClubList(m);
-		model.addAttribute("pList", popularList);
 		System.out.println(popularList);
-		model.addAttribute("type", "y");
+		model.addAttribute("pList", popularList);
 		return "club/clubList";
 	}
 	
