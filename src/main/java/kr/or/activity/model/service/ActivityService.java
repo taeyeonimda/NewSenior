@@ -12,6 +12,7 @@ import kr.or.activity.model.vo.Activity;
 import kr.or.activity.model.vo.ActivityPageData;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import kr.or.activity.model.vo.FileVo;
 
 @Service
 public class ActivityService {
@@ -24,7 +25,22 @@ public class ActivityService {
 		String detail = activity.getActivityDetail();
 		detail.replace("\r\n", "<br>");
 		activity.setActivityDetail(detail);
+		String etc = activity.getEtc();
+		etc.replace("\r\n", "<br>");
+		activity.setEtc(etc);
 		int result = dao.insertActivity(activity);
+		System.out.println("insertActivity service result값"+result);
+		
+		if(result>0) {
+			System.out.println("insertActivity service No 체크"+activity.getActivityNo());
+
+			if(!activity.getFileList().isEmpty()) {
+				for(FileVo fileVo:activity.getFileList()) {
+					fileVo.setActivityNo(activity.getActivityNo());
+					result += dao.insertFile(fileVo);
+				}
+			}
+		}
 		return result;
 	}
 
@@ -93,5 +109,9 @@ public class ActivityService {
 
 	public Activity getOneActivity(Activity act) {
 		return dao.getOneActivity(act);
+	}
+
+	public ArrayList<FileVo> getOneFile(int activityNo) {
+		return dao.getOneFile(activityNo);
 	}
 }

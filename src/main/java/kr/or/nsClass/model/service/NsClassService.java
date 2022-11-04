@@ -92,13 +92,10 @@ public class NsClassService {
 		nsCl.setTeacherIntroduce(teacherIntroduce);
 		nsCl.setCurriculum(curriculum);
 		int result = dao.insertClass(nsCl);
-	System.out.println("result결과값"+result);
-	System.out.println("nscl넘버값"+nsCl.getClassNo());
-	System.out.println(nsCl);
-		if(result>0) {
-			
-			if(!nsCl.getFileList().isEmpty()) {
+		
 
+		if(result>0) {
+			if(!nsCl.getFileList().isEmpty()) {
 				for(FileVo fileVo:nsCl.getFileList()) {
 					System.out.println("클래스넘버:::"+nsCl.getClassNo());
 					fileVo.setClassNo(nsCl.getClassNo());

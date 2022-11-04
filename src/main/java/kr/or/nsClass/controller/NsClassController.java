@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +55,7 @@ public class NsClassController {
 	
 	@RequestMapping(value = "/insertClass.do")
 	public String insertClass(NsClass nsCl, 
-			MultipartFile[] files, MultipartFile[] detailFiles, HttpServletRequest request){
+			MultipartFile[] files, MultipartFile[] detailFiles, HttpServletRequest request) throws UnsupportedEncodingException{
 		
 		System.out.println("위에서 확인:"+nsCl);
 		ArrayList<FileVo> list = new ArrayList<FileVo>();

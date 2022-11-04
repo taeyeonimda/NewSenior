@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +68,7 @@ public class ClubController {
 	
 	
 	@RequestMapping(value = "/insertClub.do")
-	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) {
+	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println(files);
 		if(!files[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/club/");
@@ -107,7 +108,7 @@ public class ClubController {
 
 	@ResponseBody
 	@RequestMapping(value="/UploadFile.do", produces = "application/json;charset=utf-8")
-	public String uploadChatFile(MultipartFile[] chatFile, HttpServletRequest request) {
+	public String uploadChatFile(MultipartFile[] chatFile, HttpServletRequest request) throws UnsupportedEncodingException {
 		String filepath = null;
 		if(!chatFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/chat/");
@@ -140,7 +141,7 @@ public class ClubController {
 		return new Gson().toJson(c);
 	}
 	@RequestMapping(value = "/clubBoardWrite.do")
-	public String clubBoardWrite(ClubBoard cb, MultipartFile[] files, HttpServletRequest request) {
+	public String clubBoardWrite(ClubBoard cb, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println(files);
 		if(!files[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/club/");

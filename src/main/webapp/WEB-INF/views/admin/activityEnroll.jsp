@@ -278,6 +278,7 @@ const limitSelect = $("select[name=activityLimit]");
 		const startDate = $("input[name=startDate]").val();
 		const endDate = $("input[name=endDate]").val();
 		const files2 = document.querySelector("input[name=detailFiles]").files;
+		const etc = $("input[name=etc]").val();
 		
 		console.log(activityName);
 		console.log(files);
@@ -301,6 +302,10 @@ const limitSelect = $("select[name=activityLimit]");
 		formData.append('activityPrice',activityPrice);
 		formData.append('startDate',startDate);
 		formData.append('endDate',endDate);
+		formData.append('etc',etc);
+		for(let i=0;i<files2.length;i++){
+			formData.append('detailFiles',files2[i]);
+		}
 		
 		console.log(formData.get("activityName"));
 		console.log(formData.get("files"));
@@ -312,9 +317,7 @@ const limitSelect = $("select[name=activityLimit]");
 		console.log(formData.get("activityPrice"));
 		console.log(formData.get("startDate"));
 		console.log(formData.get("endDate"));
-		for(let i=0;i<files2.length;i++){
-			formData.append('detailFiles',files2[i]);
-		}
+		
 		
 		$.ajax({
  			url : "/insertActivity.do",
