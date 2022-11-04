@@ -20,6 +20,8 @@
 
 		 <typeAlias type="kr.or.board.model.vo.Board" alias="b"/>
 		 <typeAlias type="kr.or.board.model.vo.BoardComment" alias="bc"/>
+		 <typeAlias type="kr.or.board.model.vo.FileVO" alias="bf"/>
+		
 		 
 		 <typeAlias type="kr.or.nsClass.model.vo.NsClass" alias="cla"/>
 		 <typeAlias type="kr.or.nsClass.model.vo.FileVo" alias="claF"/>

@@ -56,7 +56,7 @@
 			member_no as memberNo,
 			member_id as memberId,
 			member_pw as memberPw,
-			nickName as nickname
+			nickName as nickName
 	from members
 	where member_id=#{memberId} 
 	<if test="memberPw != null">
@@ -76,7 +76,7 @@
 		 member_grade as memberGrade,
 		 member_birth as memberBirth,
 		 enroll_date as memberDate,
-		 nickName as nickname,
+		 nickName as nickName,
 		 member_state as memberState,
 		 member_img as memberImg,
 		 favorite
