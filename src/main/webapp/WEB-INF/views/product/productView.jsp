@@ -232,7 +232,7 @@
 		$("#reviewDeleteBtn").on("click",function(){
 		});
 		
-			function deleteReview(reviewNo){
+			function deleteReview(reviewNo,obj){
 				if(confirm("리뷰를 삭제하시겠습니까?")){
 					$.ajax({
 						url : "/deleteReview.do",
@@ -241,6 +241,8 @@
 						},
 						success : function(data){
 							alert("삭제가 완료되었습니다.");
+							$(obj).parent().parent().parent().remove();
+							
 						}
 					});
 				}
@@ -251,7 +253,6 @@
 			const productNo = $("[name=productNo]").val();
 			const reviewContent = $("[name=reviewContent]").val();
 			const reviewScore = $("[name=reviewScore]").val();
-			const reviewDate = $("[name=reviewDate]").val();
 			const reviewNo = $("[name=reviewNo1]").val();
 			$.ajax({
 				url : "/insertReview.do",
@@ -261,9 +262,13 @@
 					productNo : productNo,
 					reviewContent : reviewContent,
 					reviewScore : reviewScore,
-					reviewDate : reviewDate
 				},
 				success : function(data){
+					var now = new Date();
+					var year = now.getFullYear();
+					var month = ('0'+(now.getMonth()+1)).slice(-2);
+					var day = ('0'+now.getDate()).slice(-2);
+					var viewDate = year+'-'+month+'-'+day;
 					
 					const oneDiv = $("<div>");
 					oneDiv.addClass("reviewsWrap reviewMenu");
@@ -276,7 +281,7 @@
 					const three1Div = $("<div>");
 					three1Div.addClass("reviewsId");
 					const three1H6 = $("<h6>"+memberId+"</h6>"); //id
-					const three1P = $("<p>"+reviewDate+"</p>"); //date
+					const three1P = $("<p>"+viewDate+"</p>"); //date
 					//
 					three1Div.append(three1H6);
 					three1Div.append(three1P);
@@ -295,7 +300,7 @@
 					updateBtn.addClass("reviewUpdateBtn");
 					const deleteBtn = $("<button>삭제</button>");
 					deleteBtn.addClass("reviewDeleteBtn");
-					deleteBtn.attr("onclick","deleteReview("+reviewNo+")");
+					deleteBtn.attr("onclick","deleteReview("+data+",this)");
 					//
 					three3Div.append(updateBtn);
 					three3Div.append(deleteBtn);
@@ -339,10 +344,22 @@
 					
 					
 					oneDiv.append(twoDiv);
-					$(".productReviewDiv").append(oneDiv);
+					
+					
+					
+					$(".reviewContentWrap").after(oneDiv);
+					$(".input-score").each(function(index,item){
+						const score = $(item).children().eq(1).text();
+						const span = $(".reviewStar-wrap").children();
+						for(let i = 0; i<score; i++){
+							span.eq(i).css("color","gold");
+						}
+					});
+					$("#customerReview").val('');
+					$(".input-score>span").text('0');
+					$(".star-wrap").children().css("color","");
 				}
 			});
-			
 		});
 		
 		$("#reviewListBtn").on("click",function(){
@@ -383,7 +400,7 @@
 						updateBtn.addClass("reviewUpdateBtn");
 						const deleteBtn = $("<button>삭제</button>");
 						deleteBtn.addClass("reviewDeleteBtn");
-						deleteBtn.attr("onclick","deleteReview("+data[i].reviewNo+");");
+						deleteBtn.attr("onclick","deleteReview("+data[i].reviewNo+",this);");
 						//
 						three3Div.append(updateBtn);
 						three3Div.append(deleteBtn);

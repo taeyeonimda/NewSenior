@@ -58,8 +58,8 @@ public class ClubService {
 	public int insertBoardCom(ClubBoardComment cbc) {
 		return dao.insertClubBoardCom(cbc);
 	}
-	public ArrayList<Club> searchClubList(Member m) {
-		return dao.searchCLubList(m);
+	public ArrayList<Club> searchClubPopularList(Member m) {
+		return dao.searchClubPopularList(m);
 	}
 	public int getTotalPage() {
 		return dao.getTotalPage();

@@ -169,7 +169,7 @@ public class ProductController {
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(ProductReview pr) {
 		int result = service.insertReview(pr);
-		return "redirect:/productView.do?productNo="+pr.getProductNo();
+		return String.valueOf(pr.getReviewNo());
 	}
 	
 	@ResponseBody

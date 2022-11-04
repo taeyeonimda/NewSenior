@@ -38,18 +38,16 @@ public class ClubController {
 	private FileRename fileRename;
 	
 	@RequestMapping(value = "/popularClubList.do")
-	public String classList(Model model, Member m) {
+	public String clubMemberList(Model model, Member m) {
 		// 실제는 회원의 카테고리를 가져옴
-		ArrayList<Club> popularList = service.searchClubList(m);
+		ArrayList<Club> popularList = service.searchClubPopularList(m);
 		System.out.println(popularList);
 		model.addAttribute("pList", popularList);
 		return "club/clubList";
 	}
 	
 	@RequestMapping(value = "/clubList.do")
-	public String classList(Model model) {
-		model.addAttribute("pList", null);
-		model.addAttribute("type", "n");
+	public String clubList() {
 		return "club/clubList";
 	}
 
