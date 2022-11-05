@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +24,7 @@ import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.service.NsClassService;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
+import kr.or.nsClass.model.vo.NsClassPageData;
 
 @Controller
 public class NsClassController {
@@ -32,12 +35,18 @@ public class NsClassController {
 	private FileRename fileRename;
 	
 	@RequestMapping(value = "/classList.do")
-	public String classList(NsClass nc, Model model) {
-		// 만약 category가 null이면,
-		ArrayList<NsClass> claList = service.selectClassList(nc);
-		model.addAttribute("claList", claList);
+	public String classList(String classCategory, int reqPage, Model model) {
+		NsClassPageData npd = service.selectClassList(classCategory, reqPage);
+		model.addAttribute("clist", npd.getList());
+		System.out.println(npd.getList());
+		System.out.println(npd.getPageNavi());
+		model.addAttribute("pageNavi", npd.getPageNavi());
+		model.addAttribute("reqPage", npd.getReqPage());
+		model.addAttribute("numPerPage", npd.getNumPerPage());
 		return "class/classList";
 	}
+	
+	
 	@RequestMapping(value = "/classDetail.do")
 	public String classDetail(NsClass nc, Model model){
 		NsClass cla = service.selectOneClass(nc);

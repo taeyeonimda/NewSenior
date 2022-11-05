@@ -27,17 +27,16 @@
         
         
         
-        <div> <!-- 인기 리스트 div  -->
+        <div class="popular-box"> <!-- 인기 리스트 div  -->
         	<c:if test="${not empty sessionScope.m }">
 		        <c:choose>
 		        	<c:when test="${not empty pList }">
-		        		<p class="fs-5 fw-bold text-primary text-center">고객님의 관심사에 해당하는 동호회를 추천합니다</p>
-		        		
+		        		<p class="fs-5 fw-bold text-primary text-center mb-5">${sessionScope.m.memberName }님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
 				        <div class="row mb-5">
 				        	<c:forEach items="${pList }" var="pl">
 							<div class="col-md-6 col-lg-4 mb-3">
 								<div class="card h-100">
-				      				<img src="/resources/upload/club/${pl.clubMainImg }">
+				      				<img src="/resources/upload/club/hero.png">
 				      				<div class="card-body">
 						        		<h5 class="card-title">${pl.clubName }</h5>
 						        		<p class="card-text">${pl.clubIntro }</p>
@@ -49,7 +48,7 @@
 						</div>
 		        	</c:when>
 		        	<c:otherwise>
-		        		<div class="fs-5 fw-bold text-primary text-center">선택된 관심사가 없습니다 마이페이지에서 등록하고 동호회를 추천 받으세요</div>
+		        		<div class="fs-5 fw-bold text-primary text-center">선택된 관심사가 없습니다 마이페이지에서 등록하고 동호회를 추천 받으세요 !</div>
 		        	</c:otherwise>
 		        </c:choose>
 	        </c:if>

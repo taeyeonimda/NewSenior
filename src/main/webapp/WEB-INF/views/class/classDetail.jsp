@@ -29,24 +29,24 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-secondary rounded p-sm-3 wow fadeIn">
+        <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
             <div class="side-box rounded">
-                <h6 class="side-title-box display-5 text-center text-light">
+                <h6 class="side-title-box display-5 text-center text-dark">
                     ${cla.className }
                 </h6>
                 <div class="side-teacher-box">
-                    <span>${cla.teacherName } </span> 강사
+                    <span class="text-secondary">${cla.teacherName } </span> 강사
                 </div>
                 <div class="side-info-box">
                     <ul>
-                        <li><span class="fs-5 text-light">초급자 대상</span></li>
-                        <li><span class="fs-5 text-light">${cla.startDate } ~ ${cla.startDate }</span></li>
+                        <li><span class="fs-5 text-secondary">초급자 대상</span></li>
+                        <li><span class="fs-5 text-secondary">${cla.startDate } ~ ${cla.startDate }</span></li>
                         <c:choose>
                         	<c:when test="${cla.products eq 0 }">
-                        		<li><span class="fs-5 text-primary">준비물 없음</span></li>
+                        		<li><span class="fs-5 text-secondary">준비물 없음</span></li>
                         	</c:when>
                         	<c:otherwise>
-                        		<li><span class="fs-5 text-primary">준비물 필요</span></li>
+                        		<li><span class="fs-5 text-secondary">준비물 필요</span></li>
                         	</c:otherwise>
                         </c:choose>
                         

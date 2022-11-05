@@ -112,15 +112,80 @@ public class NsClassService {
 	
 	
 	
-	// 은비 클래스 리스트
-	public ArrayList<NsClass> selectClassList(NsClass nc) {
-		return dao.selectClassList(nc);
-	}
+	// 은비 카테고리별 클래스 리스트
+	public NsClassPageData selectClassList(String classCategory, int reqPage) {
+		// 한페이지당 보여줄 게시물 수
+		int numPerPage = 6;
+		// reqPage에 게시물 번호 읽어오기
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("classCategory", classCategory);
+		ArrayList<NsClass> list = dao.selectClassList(map);
+		// pageNavi 시작
+		// 전체페이지 수 계산필요
+		HashMap<String, String> str = new HashMap<String, String>();
+		str.put("classCategory", classCategory);
+		int totalCount = dao.categoryClassCnt(str);
+		int totalPage = 0;
+		if (totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
 
+		int pageNaviSize = 5;
+		int pageNo = 1;
+		if (reqPage > 3) {
+			pageNo = reqPage-2;
+		}
+
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if (pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/classList.do?classCategory="+classCategory+"&reqPage="+(pageNo - 1)+"'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/classList.do?classCategory="+classCategory+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				// pageNavi +="<span class='material-icons'>chevron_left</span>";
+				pageNavi += "</a></li>";
+			} else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/classList.do?classCategory="+classCategory+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				// pageNavi +="<span class='material-icons'>chevron_left</span>";
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if (pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼
+		if (pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/classList.do?classCategory="+classCategory+"&reqPage="+pageNo+ "'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul>";
+		NsClassPageData npd = new NsClassPageData(list, pageNavi, reqPage, numPerPage);
+		
+		return npd;
+	}
+	
 	// 은비 클래스 detail
 	public NsClass selectOneClass(NsClass nc) {
 		return dao.selectOneClass(nc);
 	}
+	
 	
 	//보류중인클래스
 	public ArrayList<NsClass> holdClass() {
