@@ -218,7 +218,7 @@
 						div.attr("onclick", "clubInfoModal("+data[i].clubNo+", ${sessionScope.m.memberNo })");
 						div.append("<img src='/resources/MAINbtstr/img/로고2.png' width='65px'>")
 						div.append("<h4 class='mb-3'>"+data[i].clubName+"</h4");
-						div.append("<p>참여인원수 : <span></span> / <span>"+data[i].clubLimit+"</span></p>");
+						div.append("<p>참여인원수 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></p>");
 						div.append("<a href='/clubDetail.do?clubNo="+data[i].clubNo+"'>들어가기</a>");
 						$("#club-list").append(div);
 					}

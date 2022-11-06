@@ -72,7 +72,13 @@ public class ClubController {
 	}
 	
 	@RequestMapping(value = "/myClubList.do")
-	public String myClubList(Member m, Club c) {
+	public String myClubList(Member m, Club c, Model model) {
+		int result = service.insertClubMember(m, c);
+		if(result>0) {
+			ArrayList<Club> myList = service.searchMyClub(m);
+			model.addAttribute("myList", myList);
+			model.addAttribute("newClub", c.getClubNo());
+		}
 		return "club/myClubList";
 	}
 	

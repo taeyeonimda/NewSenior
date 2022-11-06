@@ -1,6 +1,7 @@
 package kr.or.club.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -67,5 +68,10 @@ public class ClubDao {
 	public ArrayList<Club> searchMyClub(Member m) {
 		List list = sqlSession.selectList("club.searchMyClubList", m);
 		return (ArrayList<Club>)list;
+	}
+
+	public int insertClubMember(HashMap<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("club.insertClubMember", map);
 	}
 }
