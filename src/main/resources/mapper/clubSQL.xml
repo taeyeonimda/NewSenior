@@ -18,8 +18,6 @@
 			club_intro as clubIntro
 		from clubs
 	</select>
-	
-	
 	<!-- 클럽 정보/ 클럽 가입자 정보 한 번에 조회 -->
 	<select id="selectOneClub" parameterType="c" resultType="c" resultMap="getClubMember">
 		select
@@ -135,5 +133,18 @@
 
 	<select id="getTotalPage" resultType="int">
 		select count(*) from clubs
+	</select>
+	
+	<!-- 내가 가입한 동호회 가져오기 -->
+	<select id="searchMyClubList" parameterType="m" resultType="c">
+		select
+			club_no as clubNo,
+			club_name as clubName,
+			club_category as clubCategory,
+			club_limit as clubLimit,
+			club_Leader as clubLeader,
+			filepath as clubMainImg,
+			club_intro as clubIntro
+		from clubs where club_no in (select club_no from club_members where member_no=#{memberNo })
 	</select>
 </mapper>

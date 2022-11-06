@@ -49,7 +49,15 @@ public class ClubController {
 	public String clubList() {
 		return "club/clubList";
 	}
-
+	
+	// 내가 가입한 동호회와 일치하는지 확인하는 ajax
+	@ResponseBody
+	@RequestMapping(value = "/searchMyClub.do", produces = "application/json;charset=utf-8")
+	public String searchMyClub(Member m) {
+		ArrayList<Club> myList = service.searchMyClub(m);
+		return new Gson().toJson(myList);
+	}
+	
 	// 모든 동호회 가져오는 ajax 페이징
 	@ResponseBody
 	@RequestMapping(value = "/searchAllClub.do", produces = "application/json;charset=utf-8")
@@ -63,6 +71,10 @@ public class ClubController {
 		return "club/insertClubFrm";
 	}
 	
+	@RequestMapping(value = "/myClubList.do")
+	public String myClubList(Member m, Club c) {
+		return "club/myClubList";
+	}
 	
 	@RequestMapping(value = "/insertClub.do")
 	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
@@ -92,7 +104,7 @@ public class ClubController {
 		}
 		// c.setFileList(list); 여러개 일 때 살리기
 		int result = service.insertClub(c);
-		return "redirect:/clubList.do";
+		return "redirect:/popularClubList.do";
 	}
 	
 	@RequestMapping(value = "/clubDetail.do")

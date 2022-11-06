@@ -57,11 +57,15 @@ public class ClubDao {
 
 	public ArrayList<Club> searchClubPopularList(Member m) {
 		List list = sqlSession.selectList("club.searchClubList", m);
-		System.out.println(list);
 		return (ArrayList<Club>)list;
 	}
 
 	public int getTotalPage() {
 		return sqlSession.selectOne("club.getTotalPage");
+	}
+
+	public ArrayList<Club> searchMyClub(Member m) {
+		List list = sqlSession.selectList("club.searchMyClubList", m);
+		return (ArrayList<Club>)list;
 	}
 }
