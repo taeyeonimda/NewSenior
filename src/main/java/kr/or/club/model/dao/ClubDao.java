@@ -27,9 +27,9 @@ public class ClubDao {
 		return (ArrayList<Club>)list;
 	}
 
-	public Club selectOneClub(int clubNo) {
-		Club c = sqlSession.selectOne("club.selectOneClub", clubNo);
-		return c;
+	public Club selectOneClub(Club c) {
+		Club club = sqlSession.selectOne("club.selectOneClub", c);
+		return club;
 	}
 
 	public int insertChat(ChatRecord cr) {
@@ -57,6 +57,7 @@ public class ClubDao {
 
 	public ArrayList<Club> searchClubPopularList(Member m) {
 		List list = sqlSession.selectList("club.searchClubList", m);
+		System.out.println(list);
 		return (ArrayList<Club>)list;
 	}
 

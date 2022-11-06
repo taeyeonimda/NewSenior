@@ -11,7 +11,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
         <!-- Page Header Start -->
-        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLASS</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
@@ -24,7 +24,6 @@
             </div>
         </div>
         <!-- Page Header End -->
-	<a href="/classDetail.do">디테일</a>
     <!-- Projects Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -37,7 +36,7 @@
                 <div class="col-12 text-center">
                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
                         <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first">디지털</li>
+                        <li class="mx-2" data-filter=".first"><a href="/classList.do?classCategory=DG">디지털</a></li>
                         <li class="mx-2" data-filter=".second">주식/재테크</li>
                         <li class="mx-2" data-filter=".second">공예</li>
                         <li class="mx-2" data-filter=".second">운동/건강</li>
@@ -51,14 +50,15 @@
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
-            <c:forEach items="${claList }" var="cla">
+            <c:forEach items="${clist }" var="cla" varStatus="i">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
+            		${(reqPage-1)*numPerPage + i.count }
                     <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
-                        <img class="img-fluid class-img" src="/resources/MAINbtstr/img/${cla.filepath }" alt="">
+                        <img class="img-fluid class-img" src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">${cla.className }</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/MAINbtstr/img/클래스 (2).jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/upload/class/${cla.filepath }" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
@@ -70,19 +70,13 @@
     </div>
     <!-- Projects End -->
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-        </nav>
+
+	<div>
+		${pageNavi }
+	</div>
+	
+	
+   
 	</div> <!--page-content End-->
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	

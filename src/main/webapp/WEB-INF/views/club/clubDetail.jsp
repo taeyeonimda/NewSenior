@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,10 +36,9 @@
             <div class="side-box rounded mt-5">
                 <p class="fs-5 fw-bold text-primary">${c.clubName } </p>
                 <div class="side-info-box text-center">
-                    <div><span>회원이름</span><span>(간단정보)</span></div>
-                    <div><span>회원이름</span><span>(간단정보)</span></div>
-                    <div><span>회원이름</span><span>(간단정보)</span></div>
-                    <div><span>회원이름</span><span>(간단정보)</span></div>
+                	<c:forEach items="${c.memberList }" var="cm">
+                		<div><span>${cm.nickName }</span><span>(${cm.memberId })</span></div>
+                	</c:forEach>
                 </div>
                 <div>
                     <button class="btn btn-primary py-2 px-4 mt-2" onclick="openModal();">채팅방 참여</button>
@@ -66,7 +66,7 @@
                     <p>${c.clubIntro } </p>
                 </div>
                 <div>
-                    <button>동호회 탈퇴하기</button>
+                    <button class="btn btn-primary py-2 px-4 mt-2" >동호회 탈퇴하기</button>
                 </div>
             </div>
         </div>
@@ -110,8 +110,10 @@
 												<p class="text-primary">${cb.clubBoardWriter }</p>
 											</div>
 											<div>
+											<c:if test="${sessionScope.m.memberNo eq cb.clubBoardWriter }">
 												<a href="#" style="margin-right: 14px;">수정</a>
-												<a href="#">삭제</a>
+												<a href="#" onclick="deleteBoard(${cb.clubBoardNo})">삭제</a>
+											</c:if>
 											</div>
 				                        </div>
 			                            <p class="mb-4">${cb.clubBoardDate }</p>
@@ -126,6 +128,7 @@
 			                        </div>
 			                    </div>
 			                    <hr>
+			                    
 			                    <!-- 댓글달기 -->
 			                    <div class="inputCommentBox">
 			                    	<form action="/insertClubComment.do" method="post">
@@ -133,7 +136,8 @@
 			                    		<input type="hidden" name="clubComRef" value='0' >
 			                    		<input type="hidden" name="clubBoardNo" value="${cb.clubBoardNo }">
 			                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
-			                    		<textarea name="clubComContent" style="width:80%;"></textarea><button class="btn btn-primary py-2 px-4" id="comment-btn">등록</button>
+			                    		<textarea name="clubComContent" style="width:80%;" maxlength="205"></textarea>
+			                    		<button class="btn btn-primary comment-btn" id="comment-btn">등록</button>
 			                    	</form>
 			                    </div>
 			                    
@@ -144,34 +148,55 @@
 			                    		<c:if test="${cb.clubBoardNo eq cbc.clubBoardNo }"> <!-- 글번호와 댓글의 참조 글번호가 같으면  -->
 			                    			<c:if test="${cbc.clubComRef eq 0 }">
 			                    				<ul class="posting-comment">
-													<li>
+													<li class="comment-profil-li">
 														<div class="profile-box" style="background: #BDBDBD;">
 														    <img class="profile" src="/resources/upload/club/person_1.jpg">
 														</div>
 													</li>
 													<li class="comment-content-li">
 														<p class="comment-info">
-														
 															<span class="text-primary">${cbc.clubComWriter }</span>
 															<span>${cbc.clubComDate }</span>
 														</p>
 														<p class="comment-content">${cbc.clubComContent }</p>
-														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;" class="comment-textarea">ncContent</textarea>
 														<p class="comment-link">
 															<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
-															<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
-															<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
+															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">수정</a>
+															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">삭제</a>
 															<a href="javascript:void(0)" class="recShow">답글달기</a>
 														</p>
 													</li>
 												</ul>
 			                    			</c:if>
 			                    			
+			                    			<!-- 대댓글 달기 -->
+											<div class="inputRecommentBox">
+												<form action="/insertClubComment.do" method="post">
+													<ul>
+														<li class="arrow-box">
+															<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
+														</li>
+														<li class="text-box">
+															<input type="hidden" name="clubNo" value="${c.clubNo }">
+								                    		<input type="hidden" name="clubComRef" value="${cbc.clubComNo }">
+								                    		<input type="hidden" name="clubBoardNo" value="${cb.clubBoardNo }">
+								                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
+								                    		<textarea name="clubComContent" class="comment-textarea" style="width: 100%;" maxlength="205"></textarea>
+														</li>
+														<li class="btn-box">
+															<button class="btn btn-primary">등록</button>
+														</li>
+													</ul>
+												</form>
+											</div>
+			                    		
+			                    		
 											<!-- 대댓글 출력 -->
 											<c:forEach items="${cb.commentList }" var="cbrc" > <!-- 대댓글 출력 for문 -->
 			                    				<c:if test="${cbc.clubComNo eq cbrc.clubComRef }"> <!-- 댓글번호와 대댓글의 참조 글번호가 같으면  -->
-												<ul class="posting-comment reply">
-													<li>
+												<ul class="reply-comment reply">
+													<li class="arrow-box">
 														<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
 													</li>
 													<li class="comment-profil-li"> 
@@ -179,7 +204,7 @@
 															<img class="profile" src="/resources/upload/club/person_1.jpg">
 														</div>
 													</li>
-													<li>
+													<li class="comment-content-li">
 														<p class="comment-info">
 															<span class="text-primary">${cbrc.clubComWriter }</span>
 															<span>${cbrc.clubComDate }</span>
@@ -188,35 +213,15 @@
 														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
 														<p class="comment-link">
 															<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
-															<a href="javascript:void(0)" onclick="modifyComment(this, 'comment넘버', 'boardNo');">수정</a>
-															<a href="javascript:void(0)" onclick="deleteComment(this, 'comment넘버', 'boardNo');">삭제</a>
-															<a href="javascript:void(0)" class="recShow">답글달기</a>
+															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">수정</a>
+															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">삭제</a>
 														</p>
 													</li>
 												</ul>
 											</c:if>
 			                    			</c:forEach> <!-- 대댓글 for문 -->
 			                    			
-											<!-- 대댓글 달기 -->
-											<div class="inputRecommentBox">
-												<form action="/insertClubComment.do" method="post">
-													<ul>
-														<li>
-															<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
-														</li>
-														<li>
-															<input type="hidden" name="clubNo" value="${c.clubNo }">
-								                    		<input type="hidden" name="clubComRef" value="${cbc.clubComNo }">
-								                    		<input type="hidden" name="clubBoardNo" value="${cb.clubBoardNo }">
-								                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
-								                    		<textarea name="clubComContent"></textarea>
-														</li>
-														<li>
-															<button class="btn btn-primary py-2 px-4">등록</button>
-														</li>
-													</ul>
-												</form>
-											</div>
+
 											
 			                    		</c:if>
 			                    	</c:forEach> <!-- 댓글 for문 -->
@@ -280,7 +285,86 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 	<script>
-
+	
+	function boardDelete(boardNo){
+		if(confirm("공지사항을 삭제하시겠습니까?")){
+			location.href="/deleteClubBoard.do?clubBoardNo="+noticeNo;
+		}
+	}
+	
+	$(".recShow").on("click", function(){
+		// 몇번째 recShow인지
+		const idx = $(".recShow").index(this);
+		if($(this).text()=="답글달기"){
+			$(this).text("취소");
+		}else{
+			$(this).text("답글달기");
+		}
+		$(".inputRecommentBox").eq(idx).toggle();
+		$(".inputRecommentBox").eq(idx).find("textarea").focus();
+	})
+	
+	function modifyComment(obj, cbcNo, cbNo){
+		$(obj).parent().prev().show(); //textarea 화면에show
+		$(obj).parent().prev().prev().hide();//
+		
+		// 수정> 수정완료
+		$(obj).text("수정완료");
+		$(obj).attr("onclick", "modifyComplete(this,"+cbcNo+","+cbNo+")");// 버튼 이름변경에 따른 함수 변경
+		// 삭제> 수정취소
+		$(obj).next().text("수정취소");
+		$(obj).next().attr("onclick", "modifyCancle(this,"+cbcNo+","+cbNo+")");// 버튼 이름변경에 따른 함수 변경
+		// 답글달기버튼 - 숨김
+		$(obj).next().next().hide();
+		$(obj).next()
+	}
+	
+	function modifyCancle(obj, cbcNo, noticeNo){
+		$(obj).parent().prev().hide();
+		$(obj).parent().prev().prev().show();
+		// 수정완료> 수정
+		$(obj).prev().text("수정");
+		$(obj).prev().attr("onclick", "modifyComment(this,"+cbcNo+","+noticeNo+")");
+		
+		// 수정취소 > 삭제
+		$(obj).text("삭제");
+		$(obj).attr("onclick", "deleteComment(this,"+cbcNo+","+noticeNo+")");
+		
+		// 답글 달기 보여줌
+		$(obj).next().show();
+	}
+	
+	function modifyComplete(obj, ncNo, noticeNo){
+		// form 태그를 생성하여 보내는 방식
+		// 숨겨놨다가 보내도 상관없음
+		// 자바 스크립트에서 a태그로 보내는 것도 가능
+		
+		const form = $("<form action='updateClubComment.do' method='post'></form>");
+		const ncInput = $("<input type='text' name='ncNo'>");
+		ncInput.val(ncNo);		// input의 값으로 매개변수로 받은 번호 
+		form.append(ncInput);	// 인풋 태그 form태그에 append
+		
+		const noticeInput = $("<input type='text' name='noticeNo'>");
+		noticeInput.val(noticeNo);
+		form.append(noticeInput);
+		
+		//4. textarea
+		const ncContent = $(obj).parent().prev();
+		form.append(ncContent);
+		
+		// body 태그에 생성한 폼 append
+		$("body").append(form);
+		
+		// form 전송
+		form.submit();
+	}
+	
+	function deleteComment(obj, ncNo, noticeNo){
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			location.href = "/deleteNoticeComment.do?ncNo="+ncNo+"&noticeNo="+noticeNo;
+		}
+	}
+	
 	
 	// side bar 스크롤
     function stopSide(){

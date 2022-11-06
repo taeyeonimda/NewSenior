@@ -84,25 +84,45 @@
 		where table_name = 'CATEGORY'
 	</select>
 	
-	<!-- 은비 class가져오기 -->
-	<select id="selectClassList" parameterType="cla" resultType="cla">
-		select  
-			class_no as classNo,
-			class_name as className,
-			class_teacher as classTeacher,
-			class_price as classPrice,
-			class_limit as classLimit,
-			class_status as classStatus,
-			class_category as classCategory,
-			products,
-			to_char(start_date, 'yyyy/mm/dd') as startDate,
-			to_char(end_date, 'yyyy/mm/dd') as endDate,
-			filepath
-		from classes
-		<if test="classCategory != null">
-		where class_category = #{classCategory }
+
+
+	<!-- 카테고리별 class가져오기 -->
+	<select id="selectClassList" parameterType="map" resultType="cla">
+		select * from
+		    (select rownum as rnum, c.* from
+		    (select  
+		        class_no as classNo,
+		        class_name as className,
+		        class_teacher as classTeacher,
+		        to_char(class_price,'999,999,999') as classPrice,
+		        class_limit as classLimit,
+		        class_status as classStatus,
+		        class_category as classCategory,
+		        products,
+		        to_char(start_date,'yyyy-mm-dd') as startDate,
+		        to_char(end_date,'yyyy-mm-dd')  as endDate,
+		        filepath,
+		        TO_DATE(end_date) - TO_DATE(start_date)+1 as dayDate,
+		        m.member_name as teacherName
+		from CLASSES c
+		left join members m 
+		on c.class_teacher = m.member_no
+		where class_status=2
+		<if test='!classCategory.equals("ALL")'>
+			and class_category= #{classCategory }
+		</if>
+		order by 1 desc)c)	
+		where rnum between #{start } and #{end }
+	</select>
+	
+	<select id="getClassTotal" parameterType="map" resultType="int">
+		select count(*) from classes
+		where class_status=2
+		<if test='!classCategory.equals("ALL")'>
+			and class_category= #{classCategory }
 		</if>
 	</select>
+	
 
 	<select id="selectOneClass" parameterType="cla" resultType="cla">
 		select class_no as classNo,class_name as className,

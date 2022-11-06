@@ -39,7 +39,6 @@ public class ClubController {
 	
 	@RequestMapping(value = "/popularClubList.do")
 	public String clubMemberList(Model model, Member m) {
-		// 실제는 회원의 카테고리를 가져옴
 		ArrayList<Club> popularList = service.searchClubPopularList(m);
 		System.out.println(popularList);
 		model.addAttribute("pList", popularList);
@@ -97,8 +96,8 @@ public class ClubController {
 	}
 	
 	@RequestMapping(value = "/clubDetail.do")
-	public String clubDetail(int clubNo, Model model){
-		HashMap<String, Object> map = service.selectOneClubMap(clubNo);
+	public String clubDetail(Club c, Model model){
+		HashMap<String, Object> map = service.selectOneClubMap(c);
 		model.addAttribute("c", map.get("club"));
 		model.addAttribute("cbList", map.get("board"));
 		return "club/clubDetail";
@@ -134,8 +133,8 @@ public class ClubController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/selectOneClub.do", produces = "application/json;charset=utf-8")
-	public String selectOneClub(int clubNo){
-		Club c = service.selectOneClub(clubNo);
+	public String selectOneClub(Club club){
+		Club c = service.selectOneClub(club);
 		return new Gson().toJson(c);
 	}
 	@RequestMapping(value = "/clubBoardWrite.do")

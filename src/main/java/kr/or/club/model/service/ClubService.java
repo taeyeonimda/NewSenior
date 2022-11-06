@@ -28,8 +28,8 @@ public class ClubService {
 		ArrayList<Club> list = dao.selectAllClub(keyword);
 		return list;
 	}
-	public Club selectOneClub(int clubNo) {
-		Club c = dao.selectOneClub(clubNo);
+	public Club selectOneClub(Club club) {
+		Club c = dao.selectOneClub(club);
 		return c;
 	}
 	@Transactional
@@ -38,11 +38,11 @@ public class ClubService {
 		return result;
 	}
 
-	public HashMap<String, Object> selectOneClubMap(int clubNo) {
+	public HashMap<String, Object> selectOneClubMap(Club c) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		Club c = dao.selectOneClub(clubNo);
-		map.put("club", c);
-		ArrayList<ClubBoard> blist = dao.selectAllClubBoard(clubNo);
+		Club club = dao.selectOneClub(c);
+		map.put("club", club);
+		ArrayList<ClubBoard> blist = dao.selectAllClubBoard(c);
 		map.put("board", blist);
 		return map;
 	}
