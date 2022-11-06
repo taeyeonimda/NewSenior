@@ -76,6 +76,10 @@ public class ProductDao {
 		return sqlSession.delete("product.deleteReview",reviewNo);
 	}
 
+	public int reviewTotalCount(int productNo) {
+		return sqlSession.selectOne("product.reviewTotalCount",productNo);
+	}
+
 
 	
 

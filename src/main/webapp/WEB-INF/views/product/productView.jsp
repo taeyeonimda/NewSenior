@@ -54,7 +54,7 @@
             
             <div class="subTitle" style="width: 1200px;">
               <div>상세내용</div>
-              <div style="height: 57px"><button type="button" id="reviewListBtn">리뷰</button></div>
+              <div style="height: 57px"><button type="button" id="reviewListBtn" value="1">리뷰</button></div>
               <div>교환/반품 안내</div>
               <div><a href="#">문의남기기</a></div>
             </div>
@@ -95,7 +95,6 @@
 			                    <h6>${sessionScope.m.memberId }</h6>
 			                    <input type="hidden" name="productMemberId" value="${sessionScope.m.memberId }">
 			                    <input type="hidden" name="productNo" value="${p.productNo }">
-			                    <input type="hidden" name="reviewDate" value="${pr.reviewDate }">
 			                  </div>
 			                  <div style="height: 100px;">
 			                    <textarea id="customerReview" style="outline: none;" name="reviewContent"></textarea>
@@ -153,6 +152,7 @@
               		</div>
               		 -->
               	</c:forEach>
+              	
             </div>
             
             <div class="refundWrap prodContentMenu">
@@ -366,9 +366,11 @@
 			const productNo = $("[name=productNo1]").val();
 			$.ajax({
 				url : "/productReviewList.do",
-				data : {productNo:productNo},
+				data : {
+					productNo:productNo
+					},
 				success : function(data){
-					
+					console.log(data.length);
 					for(let i =0; i < data.length; i++){
 						const oneDiv = $("<div>");
 						oneDiv.addClass("reviewsWrap reviewMenu");
@@ -453,6 +455,7 @@
 							}
 						});
 					}
+						$(".productReviewDiv").append("<div>페이징</div>");
 				}
 				
 			});
