@@ -35,26 +35,17 @@
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first"><a href="/classList.do?classCategory=DG">디지털</a></li>
-                        <li class="mx-2" data-filter=".second">주식/재테크</li>
-                        <li class="mx-2" data-filter=".second">공예</li>
-                        <li class="mx-2" data-filter=".second">운동/건강</li>
-                        <li class="mx-2" data-filter=".second">디자인</li>
-                        <li class="mx-2" data-filter=".second">패션</li>
-                        <li class="mx-2" data-filter=".second">미디어</li>
-                        <li class="mx-2" data-filter=".second">악기/노래</li>
-                        <li class="mx-2" data-filter=".second">외국어</li>
-                        <li class="mx-2" data-filter=".second">요리/제과제빵</li>
+                        <c:forEach items="${cateList}" var="cateList">
+                         <li class="mx-2" data-filter="*"><a href="/classList.do?classCategory=${cateList.categoryCode }&reqPage=1">${cateList.categoryName }</a></li>
+                        </c:forEach>   
                     </ul>
-                </div>
+        	   </div>
             </div>
             <div class="row g-4 portfolio-container">
             <c:forEach items="${clist }" var="cla" varStatus="i">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
-            		${(reqPage-1)*numPerPage + i.count }
                     <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
-                        <img class="img-fluid class-img" src="/resources/upload/class/${cla.filepath }" alt="">
+                        <img class="img-fluid class-img"style="width:408px;height:408px;"src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">${cla.className }</h4>
                             <div class="d-flex">
@@ -67,14 +58,16 @@
             </c:forEach>
             </div>
         </div>
+        
     </div>
+    
     <!-- Projects End -->
+	<div class="container-xxl">
+        <div class="container">
+        ${pageNavi }
+        </div>
+        </div>
 
-
-	<div>
-		${pageNavi }
-	</div>
-	
 	
    
 	</div> <!--page-content End-->

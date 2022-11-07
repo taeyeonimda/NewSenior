@@ -108,17 +108,13 @@
 							<img style="width:580px; height:580px;"class="img-fluid" src="/resources/upload/activity/${act.filepath }" alt="">
 						</div >
 						
-						<div class="col-xl-6 team-item rounded class-item" style="font-size:1.1em; ">
-						
-						<h1>${act.activityName }</h1>
+						<div class="col-xl-6 team-item rounded class-item" >
+						<pre>
+						<h1>${act.activityName }</pre></h1>
 						<h3>${act.activityPrice }원</h3>
-						<br><br><br><br><br>
-						<p><strong style="font-size:1.3em">담당자</strong><h3>${act.activityManagerName }	님</h3></p>
-						<p><span>시작일:  ${act.startDate }</span></p> 
-						<p><span>종료일: ${act.endDate }</span></p>
-						
-						
-						
+						<br><br><br><br>
+						<p><strong>담당자</strong><h3>${act.activityManagerName }</h3></p>
+						</pre>
 						</div>
 					</div>
 				</div>
@@ -130,49 +126,60 @@
                 </div> -->
                 <!-- scroll bar end -->
             </div>
-            
+            <hr>
         </div>
         <!-- class-main End -->
-		<hr>
+
 
 
         <!-- 강의소개 -->
-         
-        <div class="container-xxl py-5 mt-5" id="#menu1"  >
+        
+        <div class="container-xxl py-5 mt-5" id="#menu1">
             <div class="container">
-                <div class="class-row g-5 ">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" >
-                        <p class="fs-5 fw-bold text-primary">담당자 : ${act.activityManagerName }님과 함께하는</p>
+                <div class="class-row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <p class="fs-5 fw-bold text-primary">담당자 : ${act.activityManagerName }와 함께하는</p>
                         <h1 class="display-5 mb-4">액티비티 활동!</h1>
                         
                         <c:forEach items="${act.fileList }" var="details">
                         <p class="mb-4"><img src="resources/upload/activity/${details.filepath }"/></p>
-                        </c:forEach>    
+                        </c:forEach>
+                        <a class="btn btn-primary py-3 px-4" href="">Explore More</a>
                     </div>
-                   
+                    <div class="product-title mt-5">
+                        <div class="product-img-div">
+                            <img class="product-img" src="/resources/MAINbtstr/img/모델클래스 (2).jpg">
+                        </div>
+                    </div>
                 </div>
             </div>
-            
         </div>
-        <hr>
         <!-- Features End -->
 
         <!-- 강사 소개 -->
-        <div class="container-xxl py-1 mt-1" id="#menu2">
-       	<div class="class-row g-5">
-              
-                       
+        <div class="container-xxl py-5 mt-5" id="#menu2">
+            <div class="container class-container">
+                <div class="class-row g-5 align-items-end">
+                    <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
+                        <p class="fs-5 fw-bold text-primary">강사소개</p>
+                        <img class="img-fluid rounded" data-wow-delay="0.1s" src="/resources/MAINbtstr/img/모델클래스 (1).jpg">
+                    </div>
+                    <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
+                        <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
+                        <p class="text-primary mb-4">Year of Experience</p>
                         <h4 class="display-6 mb-4"></h4>
-                        <pre class="mb-4" style="font-size:1.2em; font-weight:bold;">${act.activityDetail}</pre>
-              </div>
-           
+                        <p class="mb-4">연세대 당당걷기과</p>
+                        <p class="mb-4">새바람 걷기대회 우승</p>
+                        <p class="mb-4">무신사 시니어 모델로 활동 중</p>
+                        <pre>${act.activityDetail}</pre>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- About End -->
         
         
         <!-- 클래스 준비물 -->
-        
-        <!-- 
         <div class="container-xxl py-5 mt-5" id="#menu3">
             <div class="container">
                 <div class="class-row g-5 align-items-end">
@@ -198,11 +205,22 @@
                 </div>
             </div>
         </div>
-         -->
         <!-- Team End -->
 
         <!-- 환불규정 -->
-        
+        <div class="container-xxl py-5 mt-5" id="#menu4">
+            <div class="container">
+                <div class="class-row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <p class="fs-5 fw-bold text-primary">환불규정</p>
+                        <h6 class="display-5 mb-4">시작 8일 전까지 100% 환불</h6>
+                        <p class="mb-4">
+                            ㆍ모임시작 7일 ~ 2일 전까지 : 취소수수료 20% 공제 후 환불 <br>
+                            ㆍ모임 시작일 1일 전 : 환불이 불가합니다. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Features End -->
         <hr>
         <!-- 후기 -->

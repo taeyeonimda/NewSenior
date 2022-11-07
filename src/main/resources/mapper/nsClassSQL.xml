@@ -78,6 +78,12 @@
 		)
 	</insert>
 	
+	<update id="updateMemberGrade" parameterType="int">
+		update members
+		set member_grade = 2
+		where member_no = #{classTeacher}
+	</update>
+	
 	<select id ="getAllCategory" resultType="string">
 		select column_name 
 		from user_tab_columns 
@@ -108,7 +114,7 @@
 		left join members m 
 		on c.class_teacher = m.member_no
 		where class_status=2
-		<if test='!classCategory.equals("ALL")'>
+		<if test='!classCategory.equals("AL")'>
 			and class_category= #{classCategory }
 		</if>
 		order by 1 desc)c)	
@@ -171,7 +177,8 @@
 				filepath,
 				teacher_introduce as teacherIntroduce,
 		 		curriculum,
-				m.member_name as teacherName
+				m.member_name as teacherName,
+				m.member_phone as teacherPhone
 		from CLASSES c
 		join members m 
 		on c.class_teacher = m.member_no
@@ -188,8 +195,21 @@
 		join members m 
 		on c.class_teacher = m.member_no
 		where c.class_teacher = #{memberNo}
+		and class_status in (0,1,2,3,4)
 	</select>
 
+	<select id="getMyEndClass" parameterType="_int" resultType="cla">
+		select  
+				class_no as classNo,
+				class_name as className,
+				class_teacher as classTeacher,
+				filepath
+		from CLASSES c
+		join members m 
+		on c.class_teacher = m.member_no
+		where c.class_teacher = #{memberNo}
+		and class_status = 5
+	</select>
 	 
 	<select id="getOneFiles" parameterType="_int" resultType="claF">
 		select  

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.category.model.service.CategoryService;
+import kr.or.category.model.vo.Category;
 import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
@@ -21,7 +23,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
-	
+	@Autowired
+	private CategoryService service2;
 	
 	@RequestMapping(value="/memberMgrAdmin.do")
 	public String memberMgrAdmin() {
@@ -116,7 +119,9 @@ public class MemberController {
 
 		//회원가입폼
 		@RequestMapping(value="/joinFrm.do")
-		public String joinFrm() {
+		public String joinFrm(Model model) {
+			ArrayList<Category> cateList = service2.withOutAll();
+	        model.addAttribute("cateList", cateList);     
 			return "member/joinFrm";
 		}
 		
