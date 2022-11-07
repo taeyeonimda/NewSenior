@@ -64,5 +64,14 @@ public class ClubService {
 	public int getTotalPage() {
 		return dao.getTotalPage();
 	}
+	public ArrayList<Club> searchMyClub(Member m) {
+		return dao.searchMyClub(m);
+	}
+	public int insertClubMember(Member m, Club c) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("memberNo", m.getMemberNo());
+		map.put("clubNo", c.getClubNo());
+		return dao.insertClubMember(map);
+	}
 
 }

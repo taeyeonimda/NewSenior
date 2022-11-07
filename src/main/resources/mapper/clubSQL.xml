@@ -19,7 +19,6 @@
 		from clubs
 	</select>
 	
-	
 	<!-- 클럽 정보/ 클럽 가입자 정보 한 번에 조회 -->
 	<select id="selectOneClub" parameterType="c" resultType="c" resultMap="getClubMember">
 		select
@@ -133,7 +132,29 @@
     	where rownum between 1 and 3
 	</select>
 
+
 	<select id="getTotalPage" resultType="int">
 		select count(*) from clubs
 	</select>
+	
+	<!-- 내가 가입한 동호회, 동호회 회원수, 회원수 많은 순으로 가져오기 -->
+	<select id="searchMyClubList" parameterType="m" resultType="c">
+	select
+		club_no as clubNo,
+		cnt as clubMemberCnt,
+		club_name as clubName,
+		club_category as clubCategory,
+		club_limit as clubLimit,
+		club_leader as clubLeader,
+		filepath as clubMainImg,
+		club_intro as clubIntro 
+	from (select club_no, count(*) as cnt from club_members group by club_no)
+	join clubs using (club_no)
+	where club_no in (select club_no from club_members where member_no=#{memberNo }) order by cnt desc
+	</select>
+	
+	<!-- 클럽에 가입 진행하기 -->
+	<insert id="insertClubMember" parameterType="map">
+		insert into club_members values (club_members_seq.nextval, #{clubNo}, #{memberNo})
+	</insert>
 </mapper>
