@@ -93,6 +93,24 @@ public class MemberDao {
 		return (ArrayList<Delivery>)list;
 	}
 
+	public int deleteAddr(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("delivery.deleteAddr",deliveryNo);
+		return result;
+	}
+
+	public Delivery selectOneDelivery(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		Delivery d = sqlSession.selectOne("delivery.selectOneDelivery",deliveryNo);
+		return d;
+	}
+
+	public int updateAddr(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("delivery.updateOneAddr",deliveryNo);
+		return result;
+	}
+
 
 	
 }

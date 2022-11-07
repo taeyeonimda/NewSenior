@@ -161,4 +161,21 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return dao.selectAllDelivery(m);
 	}
+
+
+	public int deleteAddr(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteAddr(deliveryNo);
+	}
+
+	public Delivery selectOneDelivery(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		return dao.selectOneDelivery(deliveryNo);
+	}
+
+
+	public int updateAddr(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		return dao.updateAddr(deliveryNo);
+	}
 }

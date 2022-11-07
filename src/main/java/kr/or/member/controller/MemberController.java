@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.google.gson.Gson;
+
 import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
@@ -244,11 +246,9 @@ public class MemberController {
 		}
 		
 		//배송지 insert
-		
 		@RequestMapping(value="/insertAddr.do")
 		public String insertAddr(Delivery delivery, int memberNum, @SessionAttribute Member m, Model model) {
 			delivery.setMemberNo(memberNum);
-			System.out.println("controller:"+delivery);
 			ArrayList<Delivery> list = service.selectAllDelivery(m);
 			if(list.size()<5) {
 				if(delivery.getDefaultAddr().equals("y")) {
@@ -279,4 +279,40 @@ public class MemberController {
 				return "alert";
 			}
 		}
+		//배송지 삭제
+		@RequestMapping(value="/deleteAddr.do")
+		public String deleteAddr(Integer deliveryNo, Model model) {
+			int result = service.deleteAddr(deliveryNo);
+			if(result>0) {
+				return "redirect:/mypage.do";
+			}else {
+				model.addAttribute("msg", "배송지 삭제에 실패했습니다.");
+				model.addAttribute("url","/mypage.do");
+				return "alert";
+			}
+		}
+		//배송지 정보 가져오기
+		@ResponseBody
+		@RequestMapping(value="/selectAddr.do",produces = "application/json;charset=utf-8")
+		public String selectAddr(Integer deliveryNo, Model model) {
+			Delivery d = service.selectOneDelivery(deliveryNo);
+			Gson gson = new Gson();
+			String result = gson.toJson(d);
+			if(d != null) {
+				return result;
+			}else {
+				return "1";
+			}
+		}
+		//배송지 정보 업데이트
+		@RequestMapping(value="/updateAddr.do")
+		public String updateAddr(Integer deliveryNo, Model model) {
+			int result = service.updateAddr(deliveryNo);
+			if(result>0) {
+				return "0";
+			}else {
+				return "1";
+			}
+		}
+		 
 }
