@@ -79,7 +79,7 @@
                         <th style=" width: 10%;">상품명</th>
                         <th style=" width: 30%;">상품명</th>
                         <th style=" width: 15%;">금액</th>
-                        <th style=" width: 50px; width: 15%;">수량</th>
+                        <th style=" width: 15%;">수량</th>
                         <th style=" width: 10%;">배송비</th>
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
@@ -94,14 +94,14 @@
 							<td style="text-align:center">${Cart.buyPrice }</td>
 							<td style="text-align:center">${Cart.buyAmount }</td>
 							<td style="text-align:center">무료배송</td>
-							<td style="text-align:center">${Cart.buyAmount*Cart.buyPrice }원</td>
+							<td style="text-align:center"><span class="sumPrice" >${Cart.buyAmount*Cart.buyPrice }</span>원</td>
 		                </tr>
              		</c:forEach>
                       <tr>
                       	<td colspan="5"></td>
                       	<td>결제할 총 금액</td>
                       	<td>
-                      		<input type="text" style="border:none;" class="sumPrice" value="100" readonly>
+                      		<input type="text" style="border:none;" class="payPrice" readonly>
                      	</td>
                       </tr>
 					
@@ -154,7 +154,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
 		$("#payBtn").on("click",function(){
-			const price = $(".sumPrice").val();
+			const price = $(".payPrice").val();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
@@ -173,6 +173,7 @@
 			},function(rsp){
 				if(rsp.success){
 					alert("결제 성공");
+					
 				}else{
 					alert("결제 실패");
 				}
@@ -190,6 +191,18 @@
 			}
 		
 		
+		function sum(){
+			const sumPrice = $(".sumPrice");
+			let result = 0;
+			for(let i=0; i<sumPrice.length; i++){
+				result += Number(sumPrice.eq(i).text());
+			}
+			$(".payPrice").val(result);
+		}
+		
+		window.onload=function(){
+			sum();
+		}
 	</script>
   </body>
 </html>

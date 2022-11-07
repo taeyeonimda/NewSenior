@@ -49,7 +49,7 @@ public class MemberService {
 		String pageNavi = "<nav aria-label=\"Page navigation example\">";
 		pageNavi += "<ul class='pagination justify-content-center'>";
 		if (pageNo != 1) {
-			pageNavi += "<li class='page-item disabled'>";
+			pageNavi += "<li class='page-item'>";
 			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/adminPage.do?reqPage=" + (pageNo - 1) + "'>";
 			pageNavi += "Previous";
 			pageNavi += "</a></li>";
@@ -73,9 +73,9 @@ public class MemberService {
 		}
 		// 다음버튼 
 		if (pageNo <= totalPage) {
-			pageNavi += "<li class='page-item disabled' >";
+			pageNavi += "<li class='page-item' >";
 			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/adminPage.do?reqPage=" + pageNo + "'>";
-			pageNavi += "Previous";
+			pageNavi += "Nextpage";
 			pageNavi += "</a></li>";
 		}
 		pageNavi += "</ul></nav>";

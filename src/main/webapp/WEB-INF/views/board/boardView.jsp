@@ -63,10 +63,7 @@
 		</tr>
 		<tr>
 			<td colspan="6">
-			<div>
-			${b.boardContent }
-			 <%--img for문 돌리기??? --%>
-			</div>
+				<div>${b.boardContent }</div>
 			</td>
 		</tr>
 	</table>

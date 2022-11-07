@@ -90,7 +90,7 @@
                     <c:forEach items="${list }" var="NsClass">
                       <tr>
                         <td>${NsClass.classNo }</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${NsClass.className }</strong></td>
+                        <td style="cursor:pointer;" onclick="move(${NsClass.classNo })"><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${NsClass.className }</strong></td>
                         <td>${NsClass.teacherName }</td>
                         <td>${NsClass.dayDate}</td>
                         <td>${NsClass.classPrice }</td>
@@ -333,7 +333,10 @@
 			const classStatus = $(this).val();
 			location.href = "/changeStatus2.do?classNo="+classNo+"&classStatus="+classStatus;
 		});
-                        
+                 
+ 		function move(number){
+ 			location.href= "/classDetail.do?classNo="+number;
+ 		}
   	</script>
 
 	<!-- build:js assets/vendor/js/core.js -->

@@ -15,8 +15,12 @@
 		#{activityStatus},
 		to_date(#{startDate},'yyyy-mm-dd'),
 		to_date(#{endDate},'yyyy-mm-dd'),
-		#{filepath}
+		#{filepath},
+		#{etc}
 		)
+		<selectKey resultType="_int" order="AFTER" keyProperty="activityNo">
+			select max(activity_no) from activity
+		</selectKey>
 	</insert>
 
 	<select id ="getAllActivity" parameterType="map" resultType="act">
@@ -35,6 +39,7 @@
 				to_char(start_date,'yyyy-mm-dd') as startDate,
 				to_char(end_date,'yyyy-mm-dd')  as endDate,
 				filepath,
+				etc,
 				m.member_name as activityManagerName
 		from activity a
 		join members m 
@@ -61,6 +66,7 @@
 				to_char(start_date,'yyyy-mm-dd') as startDate,
 				to_char(end_date,'yyyy-mm-dd')  as endDate,
 				filepath,
+				etc,
 				m.member_name as activityManagerName
 		from activity a
 		join members m 
@@ -103,6 +109,25 @@
 	</resultMap>
 	-->
 	
+	<insert id="insertFile" parameterType="actF">
+		insert into 
+		activity_file
+		values
+		(
+			ACTIVITY_FILENO_SEQ.nextval,
+			#{activityNo},#{filename},#{filepath}
+		)
+	</insert>
+	
+	<select id="getOneFiles" parameterType="_int" resultType="actF">
+		select  
+			activity_fileno as fileNo,
+			activity_no as classNo,
+			activity_filename as filename,
+			activity_filepath as filepath
+		from activity_file
+		where activity_no = #{activityNo}
+	</select>
 </mapper>
 
 

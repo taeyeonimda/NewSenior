@@ -26,6 +26,7 @@ public class NsClass {
 	private String curriculum;
 	private String dayDate;//start,end 일수로 변환
 	private ArrayList<FileVo> fileList;
+	private String teacherPhone;
 }
 	
 //	CLASS_NO	    NUMBER	NOT NULL PRIMARY KEY,

@@ -22,14 +22,21 @@ public class ClubService {
 	
 	@Transactional
 	public int insertClub(Club c) {
-		return dao.insertClub(c);
+		int result = dao.insertClub(c);
+		System.out.println(c.getClubNo());
+		if(result>0) {
+			result = dao.insertClubLeader(c);
+		}
+		return result;
 	}
 	public ArrayList<Club> selectAllClub(String keyword) {
-		ArrayList<Club> list = dao.selectAllClub(keyword);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		ArrayList<Club> list = dao.selectAllClub(map);
 		return list;
 	}
-	public Club selectOneClub(int clubNo) {
-		Club c = dao.selectOneClub(clubNo);
+	public Club selectOneClub(Club club) {
+		Club c = dao.selectOneClub(club);
 		return c;
 	}
 	@Transactional
@@ -38,11 +45,11 @@ public class ClubService {
 		return result;
 	}
 
-	public HashMap<String, Object> selectOneClubMap(int clubNo) {
+	public HashMap<String, Object> selectOneClubMap(Club c) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		Club c = dao.selectOneClub(clubNo);
-		map.put("club", c);
-		ArrayList<ClubBoard> blist = dao.selectAllClubBoard(clubNo);
+		Club club = dao.selectOneClub(c);
+		map.put("club", club);
+		ArrayList<ClubBoard> blist = dao.selectAllClubBoard(c);
 		map.put("board", blist);
 		return map;
 	}
@@ -63,6 +70,15 @@ public class ClubService {
 	}
 	public int getTotalPage() {
 		return dao.getTotalPage();
+	}
+	public ArrayList<Club> searchMyClub(Member m) {
+		return dao.searchMyClub(m);
+	}
+	public int insertClubMember(Member m, Club c) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("memberNo", m.getMemberNo());
+		map.put("clubNo", c.getClubNo());
+		return dao.insertClubMember(map);
 	}
 
 }

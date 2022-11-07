@@ -1,6 +1,7 @@
 package kr.or.club.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,14 +23,14 @@ public class ClubDao {
 		return sqlSession.insert("club.insertClub", c);
 	}
 
-	public ArrayList<Club> selectAllClub(String keyword) {
-		List list = sqlSession.selectList("club.selectAllClub", keyword);
+	public ArrayList<Club> selectAllClub(HashMap<String, String> map) {
+		List list = sqlSession.selectList("club.selectAllClub", map);
 		return (ArrayList<Club>)list;
 	}
 
-	public Club selectOneClub(int clubNo) {
-		Club c = sqlSession.selectOne("club.selectOneClub", clubNo);
-		return c;
+	public Club selectOneClub(Club c) {
+		Club club = sqlSession.selectOne("club.selectOneClub", c);
+		return club;
 	}
 
 	public int insertChat(ChatRecord cr) {
@@ -62,5 +63,25 @@ public class ClubDao {
 
 	public int getTotalPage() {
 		return sqlSession.selectOne("club.getTotalPage");
+	}
+
+	public ArrayList<Club> searchMyClub(Member m) {
+		List list = sqlSession.selectList("club.searchMyClubList", m);
+		return (ArrayList<Club>)list;
+	}
+
+	public int insertClubMember(HashMap<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("club.insertClubMember", map);
+	}
+
+	public int insertClubMember(Club c) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("club.insertClubMember", c);
+	}
+
+	public int insertClubLeader(Club c) {
+		// TODO Auto-generated method stub
+		return  sqlSession.insert("club.insertClubLeader", c);
 	}
 }

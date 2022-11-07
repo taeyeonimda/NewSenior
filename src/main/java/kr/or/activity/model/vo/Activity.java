@@ -25,7 +25,7 @@ public class Activity {
 	private String endDate;
 	private String filepath;
 	private String etc; //추천이유및기타등등 Textarea로
-	private ArrayList<Activity> fileList;
+	private ArrayList<FileVo> fileList;
 	
 	
 //	ACTIVITY_NO	        NUMBER	NOT NULL PRIMARY KEY,	-- '액티비티 고유식별번호',

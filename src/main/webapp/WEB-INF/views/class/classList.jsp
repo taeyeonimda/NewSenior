@@ -9,9 +9,10 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	
 	<div class="page-content">
         <!-- Page Header Start -->
-        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLASS</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
@@ -24,7 +25,6 @@
             </div>
         </div>
         <!-- Page Header End -->
-	<a href="/classDetail.do">디테일</a>
     <!-- Projects Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -36,29 +36,23 @@
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first">디지털</li>
-                        <li class="mx-2" data-filter=".second">주식/재테크</li>
-                        <li class="mx-2" data-filter=".second">공예</li>
-                        <li class="mx-2" data-filter=".second">운동/건강</li>
-                        <li class="mx-2" data-filter=".second">디자인</li>
-                        <li class="mx-2" data-filter=".second">패션</li>
-                        <li class="mx-2" data-filter=".second">미디어</li>
-                        <li class="mx-2" data-filter=".second">악기/노래</li>
-                        <li class="mx-2" data-filter=".second">외국어</li>
-                        <li class="mx-2" data-filter=".second">요리/제과제빵</li>
+                        <c:forEach items="${cateList}" var="cateList">
+                        	<li class="mx-2 ${cateList.categoryCode }" data-filter="*"><a href="/classList.do?classCategory=${cateList.categoryCode }&reqPage=1">${cateList.categoryName }</a></li>
+                        </c:forEach>   
                     </ul>
+        	   </div>
+                    <div style="display: none;" class="category">${classCategory }</div>
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
-            <c:forEach items="${claList }" var="cla">
+            <c:forEach items="${clist }" var="cla" varStatus="i">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
-                        <img class="img-fluid class-img" src="/resources/MAINbtstr/img/${cla.filepath }" alt="">
+                        <img class="img-fluid class-img"style="width:408px;height:408px;"src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">${cla.className }</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/MAINbtstr/img/클래스 (2).jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/upload/class/${cla.filepath }" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
@@ -67,30 +61,34 @@
             </c:forEach>
             </div>
         </div>
-    </div>
-    <!-- Projects End -->
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-        </nav>
+    <!-- Projects End -->
+	<div class="container-xxl">
+        <div class="container">
+        ${pageNavi }
+        </div>
+    </div>
+
+
 	</div> <!--page-content End-->
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script>
 
-		function classDetail(classNo) {
-			location.href = "classDetail.do?classNo="+classNo;
+	$(document).ready(function(){
+		const category = $(".category").text();
+		const ul = $("#portfolio-flters");
+		ul.children().removeClass("active");
+		if(category == "AL"){
+			ul.children().eq(0).addClass("active");
+		}else{
+			$("."+category).addClass("active");
 		}
+	});
+
+	function classDetail(classNo) {
+		location.href = "classDetail.do?classNo="+classNo;
+	}
 		
 	</script>
 </body>

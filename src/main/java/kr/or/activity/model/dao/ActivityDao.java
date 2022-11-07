@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.activity.model.vo.Activity;
+import kr.or.activity.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Repository
@@ -40,5 +41,17 @@ public class ActivityDao {
 	public Activity getOneActivity(Activity act) {
 		Activity activity = sqlSession.selectOne("activity.getOneActivity",act);
 		return activity;
+	}
+
+
+	public int insertFile(FileVo fileVo) {
+		int result = sqlSession.insert("activity.insertFile",fileVo);
+		return result;
+	}
+
+
+	public ArrayList<FileVo> getOneFile(int activityNo) {
+		List list = sqlSession.selectList("activity.getOneFiles",activityNo);
+		return (ArrayList<FileVo>)list;
 	}
 }
