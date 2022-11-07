@@ -1,6 +1,8 @@
 package common;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import org.springframework.stereotype.Component;
 

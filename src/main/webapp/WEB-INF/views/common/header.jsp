@@ -165,7 +165,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <a href="/" class="navbar-brand d-flex align-items-center px-2 px-lg-3">
             <img src="/resources/MAINbtstr/img/로고1.png" width="250px">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -176,17 +176,18 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
-                    	<a href="/classList.do?" class="dropdown-item">전체</a>
-                        <a href="/classList.do?classCategory=DG" class="dropdown-item">디지털</a>
-                        <a href="/classList.do?classCategory=FU" class="dropdown-item">주식 / 재태크</a>
-                        <a href="/classList.do?classCategory=CR" class="dropdown-item">공예</a>
-                        <a href="/classList.do?classCategory=DE" class="dropdown-item">디자인</a>
-                        <a href="/classList.do?classCategory=EX" class="dropdown-item">운동 / 건강</a>
-                        <a href="/classList.do?classCategory=FS" class="dropdown-item">패션</a>
-                        <a href="/classList.do?classCategory=ME" class="dropdown-item">미디어</a>
-                        <a href="/classList.do?classCategory=SO" class="dropdown-item">악기 / 노래</a>
-                        <a href="/classList.do?classCategory=FO" class="dropdown-item">외국어</a>
-                        <a href="/classList.do?classCategory=CO" class="dropdown-item">요리 / 제과제빵</a>
+                    	<a href="/classList.do?classCategory=AL&reqPage=1" class="dropdown-item">전체</a>
+                        <a href="/classList.do?classCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
+                        <a href="/classList.do?classCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
+                        <a href="/classList.do?classCategory=CR&reqPage=1" class="dropdown-item">공예</a>
+                        <a href="/classList.do?classCategory=DE&reqPage=1" class="dropdown-item">디자인</a>
+                        <a href="/classList.do?classCategory=EX&reqPage=1" class="dropdown-item">운동 / 건강</a>
+                        <a href="/classList.do?classCategory=FS&reqPage=1" class="dropdown-item">패션</a>
+                        <a href="/classList.do?classCategory=ME&reqPage=1" class="dropdown-item">미디어</a>
+                        <a href="/classList.do?classCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
+                        <a href="/classList.do?classCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
+                        <a href="/classList.do?classCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
+                        <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>
                     </div>
                 </div>
                 <c:choose>
@@ -304,11 +305,7 @@
     	}else{
     		return true;
     	}
-    	
-    	
     }
     </script>
-    
-
 </body>
 </html>

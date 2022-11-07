@@ -121,17 +121,9 @@
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label" for="category">카테고리</label>
                         <select name="category">
-                        	<option value="DG">디지털</option>
-                        	<option value="FU">주식/재테크</option>
-                        	<option value="CR">공예</option>
-                        	<option value="DE">디자인</option>
-                        	<option value="EX">운동</option>
-                        	<option value="FS">패션</option>
-                        	<option value="ME">미디어</option>
-                        	<option value="SO">악기/음악</option>
-                        	<option value="FO">외국어</option>
-                        	<option value="CO">요리/음식</option>
-                        	<option value="ET">기타</option>
+                        <c:forEach items="${cateList}" var="cateList">
+                         <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
+                        </c:forEach>   
                         </select>
                       </div>
                       

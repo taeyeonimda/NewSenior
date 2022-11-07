@@ -134,7 +134,7 @@
 	<update id="changePw" parameterType="m">
 		update members set member_pw=#{memberPw}  where member_id = #{memberId}
 	</update>
-	
+
 	<select id="getAllAdmin" resultType="m">
 		select 
 			member_no as memberNo,
@@ -142,4 +142,14 @@
 		from members
 		where member_grade = 3 
 	</select>
+	
+	<update id="updatePw" parameterType="m">
+		update
+		members
+		set
+		member_pw=#{memberPw}
+		where
+		member_email=#{memberEmail}
+	</update>
+	
 </mapper>

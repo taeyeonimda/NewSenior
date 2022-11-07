@@ -23,5 +23,4 @@ public class Board {
 	
 	private ArrayList<FileVO> fileList; // 추가함
 	
-	
 }

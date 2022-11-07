@@ -55,7 +55,7 @@
             <c:forEach items="${list }" var="act">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded" >
-                        <img class="img-fluid class-img" src="/resources/upload/activity/${act.filepath }" alt="">
+                        <img class="img-fluid class-img" src="resources/upload/activity/${act.filepath }" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">${act.activityName }</h4>
                             <div class="d-flex">

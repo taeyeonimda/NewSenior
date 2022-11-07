@@ -18,7 +18,7 @@ public class NsClassDao {
 	private SqlSessionTemplate sqlSession;
 
 	public ArrayList<NsClass> getAllClass(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("nsClass.getAllClass",map);
+		List list = sqlSession.selectList("nsClass.getAllClass", map);
 		return (ArrayList<NsClass>)list;
 	}
 	public int selectClassCnt() {
@@ -29,17 +29,14 @@ public class NsClassDao {
 		int result = sqlSession.insert("nsClass.insertClass",nsCl);
 		return result;
 	}
-
 	public int insertFile(FileVo fileVo) {
 		int result = sqlSession.insert("nsClass.insertFile",fileVo);
 		return result;
 	}
-
 	public int selectClassNo() {
 		int result = sqlSession.selectOne("nsClass.selectClassNo");
 		return result;
 	}
-
 	public ArrayList<String> getAllCategory() {
 		List list = sqlSession.selectList("nsClass.getAllCategory");
 		return (ArrayList<String>)list;
@@ -47,16 +44,24 @@ public class NsClassDao {
 
 	
 	
-	// 은비 class 리스트
-	public ArrayList<NsClass> selectClassList(NsClass nc) {
-		List list = sqlSession.selectList("nsClass.selectClassList", nc);
+	
+	// 은비 카테고리별 class 리스트
+	public ArrayList<NsClass> selectClassList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("nsClass.selectClassList", map);
 		return (ArrayList<NsClass>)list;
+	}
+	public int categoryClassCnt(HashMap<String, String> str) {
+		int cnt = sqlSession.selectOne("nsClass.getClassTotal", str);
+		return cnt;
 	}
 	public NsClass selectOneClass(NsClass cla) {
 		NsClass nc = sqlSession.selectOne("nsClass.selectOneClass", cla);
 		return nc;
 	}
 
+	
+	
+	
 	public ArrayList<NsClass> holdClass() {
 		List list = sqlSession.selectList("nsClass.holdClass");
 		return (ArrayList<NsClass>)list;
@@ -82,9 +87,21 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.getMyClass",memberNo);
 		return (ArrayList<NsClass>)list;
 	}
+	
+	public ArrayList<NsClass> getMyEndClass(int memberNo) {
+		List list = sqlSession.selectList("nsClass.getMyEndClass",memberNo);
+		return (ArrayList<NsClass>)list;
+	}
+	
 	public int changeStatus2(NsClass nscl) {
 		int result = sqlSession.update("nsClass.changeStatus2",nscl);
 		return result;
 	}
+	//클래스 등록 후 등록한 회원 GRADE변경
+	public int updateMemberGrade(int classTeacher) {
+		int result = sqlSession.update("nsClass.updateMemberGrade",classTeacher);
+		return 0;
+	}
+
 
 }

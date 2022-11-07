@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
-         style="top: 30px; display: inline-block; width: 300px; height: 400px;">
-          
+	<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="top: 30px; display: inline-block; width: 300px;  min-height: 700px;">
           <ul class="menu-inner py-1">
 
             <!-- 회원관리 -->
@@ -30,7 +28,7 @@
             </li>
 
             <!-- 클래스등록 -->
-            <li class="menu-item">
+            <li class="menu-item classEnroll">
               <a href="classEnroll.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">클래스 등록</div>
@@ -38,7 +36,7 @@
             </li>
 
             <!-- 액티비티등록 -->
-            <li class="menu-item ">
+            <li class="menu-item activityEnroll">
               <a href="activityEnroll.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">액티비티 등록</div>
@@ -46,7 +44,7 @@
             </li>
 
             <!-- 액티비티관리 -->
-            <li class="menu-item ">
+            <li class="menu-item activityMgrAdmin">
               <a href="activityMgrAdmin.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">액티비티 관리</div>
@@ -54,15 +52,15 @@
             </li>
 
             <!-- 상품등록 -->
-            <li class="menu-item ">
-              <a href="goodsEnroll.do" class="menu-link">
+            <li class="menu-item insertProductFrm">
+              <a href="insertProductFrm.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">상품 등록</div>
               </a>
             </li>
 
             <!-- 상품관리 -->
-            <li class="menu-item">
+            <li class="menu-item goodsMgrAdmin">
               <a href="goodsMgrAdmin.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">상품 관리</div>
@@ -71,31 +69,63 @@
 
 
             <!-- 장바구니 -->
-            <li class="menu-item ">
-              <a href="cart.do" class="menu-link">
+            <li class="menu-item cart">
+              <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">장바구니</div>
               </a>
             </li>
 
             <!-- 마이페이지 -->
-            <li class="menu-item  ">
+            <li class="menu-item  mypage">
               <a href="mypage.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">마이페이지</div>
               </a>
             </li>
                       <!-- 주문내역 -->
-          <li class="menu-item">
-            <a href="orderHistory.do" class="menu-link">
+          <li class="menu-item orderHistory">
+            <a href="orderHistory.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">주문내역</div>
             </a>
           </li>
+          
+          <!-- 내동호회 -->
+          <li class="menu-item myClub ">
+            <a href="myClub.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">내동호회</div>
+            </a>
+          </li>
+          
+          <!-- 수강현황 -->
+          <li class="menu-item  classHistory">
+            <a href="classHistory.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">수강현황</div>
+            </a>
+          </li>
+          <!-- 나의후기 -->
+          <li class="menu-item  myComment">
+            <a href="myComment.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">나의후기</div>
+            </a>
+          </li>
+          
+          <!-- 강사정보 -->
+          <li class="menu-item teacherInfo ">
+            <a href="teacherInfo.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">강사정보</div>
+            </a>
+          </li>
+          
           </ul>
         </aside>
         
-                    <script>
+        <script>
             	const url = window.location.href;
             	let chk = /adminPage.do/g;
             	if(chk.test(url)){
@@ -111,4 +141,53 @@
             	if(chk.test(url)){
             		$(".classMgrTeacher").addClass("active");
             	}
-            </script>
+            	chk = /classEnroll.do/g;
+            	if(chk.test(url)){
+            		$(".classEnroll").addClass("active");
+            	}
+            	chk = /activityEnroll.do/g;
+            	if(chk.test(url)){
+            		$(".activityEnroll").addClass("active");
+            	}
+            	chk = /activityMgrAdmin.do/g;
+            	if(chk.test(url)){
+            		$(".activityMgrAdmin").addClass("active");
+            	}
+            	chk = /insertProductFrm.do/g;
+            	if(chk.test(url)){
+            		$(".insertProductFrm").addClass("active");
+            	}
+            	chk = /goodsMgrAdmin.do/g;
+            	if(chk.test(url)){
+            		$(".goodsMgrAdmin").addClass("active");
+            	}
+            	chk = /cart.do/g;
+            	if(chk.test(url)){
+            		$(".cart").addClass("active");
+            	}
+            	chk = /mypage.do/g;
+            	if(chk.test(url)){
+            		$(".mypage").addClass("active");
+            	}
+            	chk = /orderHistory.do/g;
+            	if(chk.test(url)){
+            		$(".orderHistory").addClass("active");
+            	}
+            	chk = /myClub.do/g;
+            	if(chk.test(url)){
+            		$(".myClub").addClass("active");
+            	}
+            	chk = /classHistory.do/g;
+            	if(chk.test(url)){
+            		$(".classHistory").addClass("active");
+            	}
+            	chk = /myComment.do/g;
+            	if(chk.test(url)){
+            		$(".myComment").addClass("active");
+            	}
+            	
+            	chk = /teacherInfo.do/g;
+            	if(chk.test(url)){
+            		$(".teacherInfo").addClass("active");
+            	}
+         </script>
