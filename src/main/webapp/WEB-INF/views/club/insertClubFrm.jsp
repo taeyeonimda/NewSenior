@@ -25,17 +25,16 @@
 				클럽분류 :
 				<select name="clubCategory" class="form-control bg-light border-0">
 	                    <option value='' selected>카테고리</option>
-	                    <option value="dg">디지털</option>
-	                    <option value="fu">주식/재테크</option>
-	                    <option value="cr">공예</option>
-	                    <option value="de">디자인</option>
-	                    <option value="ex">운동</option>
-	                    <option value="fs">패션</option>
-	                    <option value="me">미디어</option>
-	                    <option value="so">악기/노래</option>
-	                    <option value="fo">외국어</option>
-	                    <option value="co">요리/미식</option>
-	                    <option value="etc">기타</option>
+	                    <option value="DG">디지털</option>
+	                    <option value="FU">주식/재테크</option>
+	                    <option value="CR">공예</option>
+	                    <option value="DE">디자인</option>
+	                    <option value="EX">운동</option>
+	                    <option value="FS">패션</option>
+	                    <option value="ME">미디어</option>
+	                    <option value="SO">악기/노래</option>
+	                    <option value="FO">외국어</option>
+	                    <option value="CO">요리/미식</option>
 	                </select><br>
 				클럽소개 : <input type="text" name="clubIntro"><br>
 				클럽 메인 이미지 : <input type="file" multiple name="files"><br>

@@ -35,24 +35,24 @@
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first"><a href="/classList.do?classCategory=DG">디지털</a></li>
-                        <li class="mx-2" data-filter=".second">주식/재테크</li>
-                        <li class="mx-2" data-filter=".second">공예</li>
-                        <li class="mx-2" data-filter=".second">운동/건강</li>
-                        <li class="mx-2" data-filter=".second">디자인</li>
-                        <li class="mx-2" data-filter=".second">패션</li>
-                        <li class="mx-2" data-filter=".second">미디어</li>
-                        <li class="mx-2" data-filter=".second">악기/노래</li>
-                        <li class="mx-2" data-filter=".second">외국어</li>
-                        <li class="mx-2" data-filter=".second">요리/제과제빵</li>
+                        <li class="mx-2" data-filter="*"><a href="/classList.do?classCategory=ALL&reqPage=1">ALL</a></li>
+                        <li class="mx-2 DG" data-filter=".first"><a href="/classList.do?classCategory=DG&reqPage=1">디지털</a></li>
+                        <li class="mx-2 FU" data-filter=".second"><a href="/classList.do?classCategory=FU&reqPage=1">주식/재테크</a></li>
+                        <li class="mx-2 CR" data-filter=".second"><a href="/classList.do?classCategory=CR&reqPage=1">공예</a></li>
+                        <li class="mx-2 DE" data-filter=".second"><a href="/classList.do?classCategory=DE&reqPage=1">디자인</a></li>
+                        <li class="mx-2 EX" data-filter=".second"><a href="/classList.do?classCategory=EX&reqPage=1">운동/건강</a></li>
+                        <li class="mx-2 FS" data-filter=".second"><a href="/classList.do?classCategory=FS&reqPage=1">패션</a></li>
+                        <li class="mx-2 ME" data-filter=".second"><a href="/classList.do?classCategory=ME&reqPage=1">미디어</a></li>
+                        <li class="mx-2 SO" data-filter=".second"><a href="/classList.do?classCategory=SO&reqPage=1">악기/노래</a></li>
+                        <li class="mx-2 FO" data-filter=".second"><a href="/classList.do?classCategory=FO&reqPage=1">외국어</a></li>
+                        <li class="mx-2 CO" data-filter=".second"><a href="/classList.do?classCategory=CO&reqPage=1">요리/제과제빵</a></li>
                     </ul>
+                    <div style="display: none;" class="category">${classCategory }</div>
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
             <c:forEach items="${clist }" var="cla" varStatus="i">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
-            		${(reqPage-1)*numPerPage + i.count }
                     <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
@@ -82,9 +82,20 @@
 	
 	<script>
 
-		function classDetail(classNo) {
-			location.href = "classDetail.do?classNo="+classNo;
+	$(document).ready(function(){
+		const category = $(".category").text();
+		const ul = $("#portfolio-flters");
+		ul.children().removeClass("active");
+		if(category == "ALL"){
+			ul.children().eq(0).addClass("active");
+		}else{
+			$("."+category).addClass("active");
 		}
+	});
+
+	function classDetail(classNo) {
+		location.href = "classDetail.do?classNo="+classNo;
+	}
 		
 	</script>
 </body>

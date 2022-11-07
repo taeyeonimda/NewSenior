@@ -124,21 +124,49 @@
 	</select>
 	
 
-	<select id="selectOneClass" parameterType="cla" resultType="cla">
-		select class_no as classNo,class_name as className,
-		    (select member_name from members m where m.member_no=t.member_no) as teacherName,
-		    class_price as classPrice,
-		    class_limit as classLimit,
-		    class_status as classStatus,
-		    class_category as classCategory,
-		    products,
-		    to_char(start_date, 'mm/dd') as startDate,
-		    to_char(end_date, 'mm/dd') as endDate,
-		    filepath
-		from classes
-		left join teachers t on (class_no=teacher_class)
+
+	
+	
+	<!-- 클래스  1개 정보와 클래스 파일 리스트 함께 조회 -->
+	<select id="selectOneClass" parameterType="cla" resultType="cla" resultMap="getClassInfo">
+		select
+			c.*, member_name
+		from classes c
+		left join members on(class_teacher = member_no)
 		where class_no = #{classNo }
 	</select>
+	<resultMap type="cla" id="getClassInfo">
+		<result column="class_no" property="classNo"/>
+		<result column="class_name" property="className"/>
+		<result column="class_category" property="classCategory"/>
+		<result column="class_price" property="classPrice"/>
+		<result column="class_limit" property="classLimit"/>
+		<result column="class_status" property="classStatus"/>
+		<result column="class_teacher" property="classTeacher"/>
+		<result column="filepath" property="filepath"/>
+		<result column="products" property="products"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="filepath" property="filepath"/>
+		<result column="member_name" property="teacherName"/>
+		<result column="curriculum" property="curriculum"/>
+		<collection property="fileList"
+			select="getClassfiles"
+			column="class_no"
+			ofType="claF" 
+			javaType="java.util.ArrayList"
+		/>
+	</resultMap>
+	<select id="getClassfiles" parameterType="_int" resultType="claF">
+		select  
+			class_fileno as fileNo,
+			class_no as classNo,
+			class_filename as filename,
+			class_filepath as filepath
+		from class_file
+		where class_no=#{_parameter}
+	</select>
+	
 	
 	<select id="holdClass" resultType="cla">
 		select  

@@ -37,16 +37,14 @@ public class NsClassController {
 	@RequestMapping(value = "/classList.do")
 	public String classList(String classCategory, int reqPage, Model model) {
 		NsClassPageData npd = service.selectClassList(classCategory, reqPage);
+		model.addAttribute("classCategory", classCategory);
 		model.addAttribute("clist", npd.getList());
-		System.out.println(npd.getList());
-		System.out.println(npd.getPageNavi());
 		model.addAttribute("pageNavi", npd.getPageNavi());
 		model.addAttribute("reqPage", npd.getReqPage());
 		model.addAttribute("numPerPage", npd.getNumPerPage());
 		return "class/classList";
 	}
-	
-	
+
 	@RequestMapping(value = "/classDetail.do")
 	public String classDetail(NsClass nc, Model model){
 		NsClass cla = service.selectOneClass(nc);

@@ -40,7 +40,6 @@ public class ClubController {
 	@RequestMapping(value = "/popularClubList.do")
 	public String clubMemberList(Model model, Member m) {
 		ArrayList<Club> popularList = service.searchClubPopularList(m);
-		System.out.println(popularList);
 		model.addAttribute("pList", popularList);
 		return "club/clubList";
 	}
@@ -63,6 +62,7 @@ public class ClubController {
 	@RequestMapping(value = "/searchAllClub.do", produces = "application/json;charset=utf-8")
 	public String getMyClubCategory(String keyword) {
 		ArrayList<Club> list = service.selectAllClub(keyword);
+		System.out.println(list.size());
 		return new Gson().toJson(list);
 	}
 	

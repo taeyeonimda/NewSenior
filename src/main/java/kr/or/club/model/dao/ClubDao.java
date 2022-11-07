@@ -23,8 +23,8 @@ public class ClubDao {
 		return sqlSession.insert("club.insertClub", c);
 	}
 
-	public ArrayList<Club> selectAllClub(String keyword) {
-		List list = sqlSession.selectList("club.selectAllClub", keyword);
+	public ArrayList<Club> selectAllClub(HashMap<String, String> map) {
+		List list = sqlSession.selectList("club.selectAllClub", map);
 		return (ArrayList<Club>)list;
 	}
 
@@ -73,5 +73,10 @@ public class ClubDao {
 	public int insertClubMember(HashMap<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("club.insertClubMember", map);
+	}
+
+	public int insertClubMember(Club c) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("club.insertClubLeader", c);
 	}
 }
