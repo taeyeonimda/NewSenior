@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
 	<select id="selectBoardList" parameterType="map" resultType="b">
-	select * from 
+		select * from 
 		(select row_number() over(partition by boardType order by boardNo desc) as rn, b.*from
 		(select
 			board_no as boardNo,
@@ -10,14 +10,74 @@
 			board_title as boardTitle,
 			board_content as boardContent,
 			board_count as boardCount,
-			board_date as boardDate,
+			to_char(board_date,('YYYY-MM-DD')) as boardDate,
 			board_type as boardType,
 			board_category as boardCategory,
             nickname as nickName
 		from board join members using(member_no)order by board_no desc)b)
-        where rn between #{start} and #{end} and boardType='F'
-    
+        where rn between #{start} and #{end} 
+        <choose>
+			<when test="boardType='F'">
+				and boardType='F'
+			</when>
+		</choose>
 	</select>   
+	
+	<!-- 검색기능 자유게시판 : boardType='F' -->
+	<!-- 아이디22로바꿈 -->
+	<select id="selectBoardList2" parameterType="map" resultType="b">
+	    select * from 
+            (select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
+            (select * from
+            (select *from
+            (select
+                board_no as boardNo,
+                member_no as memberNo,
+                board_title as boardTitle,
+                board_content as boardContent,
+                board_count as boardCount,
+                to_char(board_date,('YYYY-MM-DD')) as boardDate,
+                board_type as boardType,
+                board_category as boardCategory,
+                nickname as nickName
+            from board join members using(member_no)order by board_no desc)b)
+      
+
+	        <!-- input null & and 카테고리 : 정보 -->
+	  		<if test="searchTag.equals('') and categoryTag.equals('info')">
+	        where boardCategory='info')b)
+	        </if> 
+	        
+	        <!-- input null & and 카테고리 : 잡담 -->
+	        <if test="searchTag.equals('') and categoryTag.equals('etc')">
+	        where boardCategory='etc')b)
+	        </if>
+	        
+	        <!-- input 작성자 and 카테고리 : 정보 -->
+	        <if test="searchTag.equals('nickName') and categoryTag.equals('info')">
+	        where nickName like '%'||#{searchInput}||'%' and boardCategory='info')b)
+	        </if>
+	        <!-- input 작성자 and 카테고리 : 잠답 -->
+	        <if test="searchTag.equals('nickName') and categoryTag.equals('etc')">
+	        where nickName like '%'||#{searchInput}||'%' and boardCategory='etc')b)
+	        </if>
+	        
+	        <!-- input 제목 and 카테고리 : 정보 -->
+	        <if test="searchTag.equals('boardTitle') and categoryTag.equals('info')">
+	        where boardTitle like '%'||#{searchInput}||'%' and boardCategory='info')b)
+	        </if>
+	        <!-- input 제목 and 카테고리 : 잠답 -->
+	        <if test="searchTag.equals('boardTitle') and categoryTag.equals('etc')">
+	         where boardTitle like '%'||#{searchInput}||'%' and boardCategory='etc')b)
+	         </if>
+	     
+	      <!-- input null & 카테고리 전체 // 공통조건 -->
+	      	
+			where prn between #{start} and #{end} and boardType='F'
+
+        
+	</select>
+	
 	<select id="totalCount" resultType="int">
 		select count(*) from board
 		<choose>
@@ -38,7 +98,7 @@
 			member_no as memberNo,
 			board_title as boardTitle,
 			board_count as boardCount,
-			board_date as boardDate,
+			to_char(board_date,('YYYY-MM-DD HH24:MI:SS')) as boardDate,
 			board_type as boardType,
 			board_content as boardContent,
 			board_category as boardCategory,
@@ -62,7 +122,7 @@
 			board_comm_no as boardCommNo,
 			member_no as memberNo,
 			board_comm_content as boardCommContent,
-			board_comm_date as boardCommDate,
+			to_char(board_comm_date,('YYYY-MM-DD HH24:MI:SS')) as boardCommDate,
 			board_ref as boardRef,
 			board_comm_ref as boardCommRef,
 			nickname as nickName
@@ -75,7 +135,7 @@
 			board_comm_no as boardCommNo,
 			member_no as memberNo,
 			board_comm_content as boardCommContent,
-			board_comm_date as boardCommDate,
+			to_char(board_comm_date,('YYYY-MM-DD HH24:MI:SS')) as boardCommDate,
 			board_ref as boardRef,
 			board_comm_ref as boardCommRef,
 			nickname as nickName
@@ -84,7 +144,7 @@
 	</select>          
 	
 	<insert id="insertBoard" parameterType="b">
-		insert into board values(board_seq.nextval,#{memberNo},#{boardTitle},#{boardContent},0,to_char(sysdate,('YYYY-MM-DD')),#{boardType},#{boardCategory})
+		insert into board values(board_seq.nextval,#{memberNo},#{boardTitle},#{boardContent},0,sysdate,#{boardType},#{boardCategory})
 	</insert>  
 	
 	<select id="selectBoardNo" resultType="_int">
@@ -97,10 +157,10 @@
 	
 	<insert id="insertComment" parameterType="bc">
 		<if test="boardCommRef==0">
-			insert into board_comment values(board_comm_seq.nextval,#{memberNo},#{boardCommContent},to_char(sysdate,('YYYY-MM-DD')),#{boardRef},null)
+			insert into board_comment values(board_comm_seq.nextval,#{memberNo},#{boardCommContent},sysdate,#{boardRef},null)
 		</if>
 		<if test="boardCommRef!=0">
-			insert into board_comment values(board_comm_seq.nextval,#{memberNo},#{boardCommContent},to_char(sysdate,('YYYY-MM-DD')),#{boardRef},#{boardCommRef})
+			insert into board_comment values(board_comm_seq.nextval,#{memberNo},#{boardCommContent},sysdate,#{boardRef},#{boardCommRef})
 		</if>
 		
 	</insert> 
@@ -108,36 +168,22 @@
 		update board_comment set board_comm_content = #{boardCommContent} where board_comm_no = #{boardCommNo}
 	</update>
 	
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+	
+	<select id="selectBoardList22" parameterType="map" resultType="b">
+	select * from
+		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
+            (select
+                board_no as boardNo,
+                member_no as memberNo,
+                board_title as boardTitle,
+                board_content as boardContent,
+                board_count as boardCount,
+                to_char(board_date,('YYYY-MM-DD')) as boardDate,
+                board_type as boardType,
+                board_category as boardCategory,
+                nickname as nickName
+            from board join members using(member_no) 
+            where board_title like '%'||'제목'||'%'
+            order by board_no desc)b)
+	</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

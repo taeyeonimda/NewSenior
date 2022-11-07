@@ -71,6 +71,11 @@ public class BoardDao {
 		
 		return sqlSession.update("board.updateBoardComment",bc);
 	}
+	public ArrayList<Board> selectBoardList2(HashMap<String, Object> pageMap) {
+		List list = sqlSession.selectList("board.selectBoardList2",pageMap);
+		System.out.println(pageMap);
+		return (ArrayList<Board>) list;
+	}
 	
 	
 	
