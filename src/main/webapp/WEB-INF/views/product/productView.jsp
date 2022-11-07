@@ -450,20 +450,20 @@ ul li.on a {
 				//태그생성
 				let pageHtml = "";
 				if(prev > 0){
-					pageHtml = "<li><a href='#' id='prev'> 이전 </a></li>";
+					pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='prev'>이전</a></li>";
 				}
 				
 				//페이징 번호 처리
 				for(var i = first; i <= last; i++){
 					if(currentPage == i){
-						pageHtml += "<li class='on'><a href='#' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li class='page-item '><a class='page-link active-page' href='#' id='" + i + "'>" + i + "</a></li>";
 					}else {
-						pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li class='page-item'><a class='page-link' href='#' id='" + i + "'>" + i + "</a></li>";
 					}
 				}
 				
 				if(last < totalPage){
-					pageHtml += "<li><a href='javascript:void(0)' id='next'> 다음 </a></li>";
+					pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='next'> 다음 </a></li>";
 				}
 				
 				$("#pagingul").html(pageHtml);

@@ -101,7 +101,15 @@
                   <div class="mb-3 row">
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
-                      <input type="file" name="productFile" id="productFile" class="productFile">
+                      <input type="file" name="productFile1" id="productFile" class="productFile">
+                    </div>
+                    <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지1</label>
+                    <div class="col-md-10">
+                      <input type="file" name="productFile2" id="productFile" class="productFile">
+                    </div>
+                    <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지2</label>
+                    <div class="col-md-10">
+                      <input type="file" name="productFile3" id="productFile" class="productFile">
                     </div>
                   </div>
                   
