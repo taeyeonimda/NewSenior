@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
+import kr.or.category.model.service.CategoryService;
+import kr.or.category.model.vo.Category;
 import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.service.NsClassService;
 import kr.or.nsClass.model.vo.FileVo;
@@ -31,18 +33,20 @@ public class NsClassController {
 	
 	@Autowired
 	private NsClassService service;
+	@Autowired 
+	private CategoryService service2;
 	@Autowired
 	private FileRename fileRename;
 	
 	@RequestMapping(value = "/classList.do")
 	public String classList(String classCategory, int reqPage, Model model) {
 		NsClassPageData npd = service.selectClassList(classCategory, reqPage);
+		ArrayList<Category> cateList = service2.getAllCategory();
 		model.addAttribute("clist", npd.getList());
-		System.out.println(npd.getList());
-		System.out.println(npd.getPageNavi());
 		model.addAttribute("pageNavi", npd.getPageNavi());
 		model.addAttribute("reqPage", npd.getReqPage());
 		model.addAttribute("numPerPage", npd.getNumPerPage());
+		model.addAttribute("cateList", cateList);
 		return "class/classList";
 	}
 	
@@ -57,8 +61,10 @@ public class NsClassController {
 	
 	@RequestMapping(value="/classEnroll.do")
 	public String classEnroll(Model model) {
-		ArrayList<String> category = service.getAllCategory();
-		model.addAttribute("category",category);
+		
+		ArrayList<Category> cateList = service2.withOutAll();
+        model.addAttribute("cateList", cateList);     
+		
 		return "myPage/classEnroll";
 	}
 	
@@ -137,7 +143,9 @@ public class NsClassController {
 	public String classMgrTeacher(HttpSession session,Model model) {
 		Member m = (Member)session.getAttribute("m");
 		ArrayList<NsClass> list = service.getMyClass(m.getMemberNo());
+		ArrayList<NsClass> list2 = service.getMyEndClass(m.getMemberNo());
 		model.addAttribute("myClass",list);
+		model.addAttribute("endClass",list2);
 		return "myPage/classMgrTeacher";
 	}
 }

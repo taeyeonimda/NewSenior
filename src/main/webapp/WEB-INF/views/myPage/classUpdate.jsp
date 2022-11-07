@@ -98,6 +98,14 @@
                           <textarea class="form-control" name = "teacherIntroduce" type="url" id="html5-url-input"  readonly>${cla.teacherIntroduce }</textarea>
                         </div>
                       </div>
+                      
+                      <div class="mb-3 row">
+                        <label for="html5-phone-input" class="col-md-2 col-form-label">휴대전화</label>
+                        <div class="col-md-10">
+                          <textarea class="form-control" name = "teacherPhone" type="url" id="html5-url-input"  readonly>${cla.teacherPhone }</textarea>
+                        </div>
+                      </div>
+                      
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label">커리큘럼</label>
                         <div class="col-md-10">

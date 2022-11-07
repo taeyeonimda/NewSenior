@@ -176,7 +176,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
-                    	<a href="/classList.do?classCategory=ALL&reqPage=1" class="dropdown-item">전체</a>
+                    	<a href="/classList.do?classCategory=AL&reqPage=1" class="dropdown-item">전체</a>
                         <a href="/classList.do?classCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
                         <a href="/classList.do?classCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
                         <a href="/classList.do?classCategory=CR&reqPage=1" class="dropdown-item">공예</a>
@@ -187,6 +187,7 @@
                         <a href="/classList.do?classCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
                         <a href="/classList.do?classCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
                         <a href="/classList.do?classCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
+                        <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>
                     </div>
                 </div>
                 <c:choose>

@@ -87,9 +87,20 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.getMyClass",memberNo);
 		return (ArrayList<NsClass>)list;
 	}
+	
+	public ArrayList<NsClass> getMyEndClass(int memberNo) {
+		List list = sqlSession.selectList("nsClass.getMyEndClass",memberNo);
+		return (ArrayList<NsClass>)list;
+	}
+	
 	public int changeStatus2(NsClass nscl) {
 		int result = sqlSession.update("nsClass.changeStatus2",nscl);
 		return result;
+	}
+	//클래스 등록 후 등록한 회원 GRADE변경
+	public int updateMemberGrade(int classTeacher) {
+		int result = sqlSession.update("nsClass.updateMemberGrade",classTeacher);
+		return 0;
 	}
 
 

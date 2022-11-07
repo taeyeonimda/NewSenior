@@ -77,10 +77,10 @@
                     <thead>
                       <tr>
                         <th style="width: 20px;">
-                          <label>전체선택 <input type="checkbox" style="width: 15px; height: 15px; "></label>
+                          <input id="allChkBox" name="allChkBox" type="checkbox" style="width: 15px; height: 15px; ">
                         </th>
                         <th style="width: 20px;">회원번호</th>
-                        <th style="padding-left: 35px;">아이디</th>
+                        <th>아이디</th>
                         <th>전화번호</th>
 						<th>이메일</th>
 						<th>생년월일</th>
@@ -89,7 +89,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                    
+                  
                     <c:forEach items="${list }" var="mem">
                       <tr>
                         <td style="text-align: center;"><input class="chk" type="checkbox"></td>
@@ -349,6 +349,17 @@
 		});
 		location.href="/checkedChangeLevel.do?num="+num.join("/")+"&level="+level.join("/");
 	});
+	
+	 
+     $("#allChkBox").on("click",function(){
+  	   if( $("input[name=allChkBox]").is(":checked")){
+  		   $(".chk").prop("checked",true);
+  	   }else{
+  		   $(".chk").prop("checked",false);
+  	   }
+  	  
+     });
+     		 
 </script>
 </body>
 </html>
