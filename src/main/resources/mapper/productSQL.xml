@@ -106,4 +106,8 @@
   <delete id="deleteReview" parameterType="_int">
   	delete from PRODUCT_REVIEWS where product_review_no=#{_parameter}
   </delete>
+  
+  <select id="productReviewCount" parameterType="_int" resultType="_int">
+  	select count(*) from product_reviews where product_no=#{_parameter}
+  </select>
 </mapper>

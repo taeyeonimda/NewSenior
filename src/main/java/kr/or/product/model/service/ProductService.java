@@ -137,4 +137,8 @@ public class ProductService {
 		return dao.deleteReview(reviewNo);
 	}
 
+	public int productReviewCount(int productNo) {
+		return dao.productReviewCount(productNo);
+	}
+
 }

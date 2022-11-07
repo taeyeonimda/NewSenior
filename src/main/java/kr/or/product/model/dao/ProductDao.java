@@ -80,6 +80,10 @@ public class ProductDao {
 		return sqlSession.selectOne("product.reviewTotalCount",productNo);
 	}
 
+	public int productReviewCount(int productNo) {
+		return sqlSession.selectOne("product.productReviewCount",productNo);
+	}
+
 
 	
 

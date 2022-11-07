@@ -304,8 +304,6 @@
     	}else{
     		return true;
     	}
-    	
-    	
     }
     </script>
 </body>
