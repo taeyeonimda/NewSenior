@@ -160,9 +160,10 @@
 														<p class="comment-content">${cbc.clubComContent }</p>
 														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;" class="comment-textarea">ncContent</textarea>
 														<p class="comment-link">
-															<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
+															<c:if test="${cbc.clubComWriter eq sessionScope.m.memberNo}">
 															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">수정</a>
 															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">삭제</a>
+															</c:if>
 															<a href="javascript:void(0)" class="recShow">답글달기</a>
 														</p>
 													</li>
@@ -210,11 +211,12 @@
 														</p>
 														<p class="comment-content">${cbrc.clubComContent }</p>
 														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+														<c:if test="${cbrc.clubComWriter eq sessionScope.m.memberNo}">
 														<p class="comment-link">
-															<!--세션이 null이 아니고 세션값이 댓글 작성자와 동일하면,-->
-															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">수정</a>
-															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">삭제</a>
+															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">수정</a> 
+															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">삭제</a> 
 														</p>
+														</c:if>
 													</li>
 												</ul>
 											</c:if>
@@ -235,26 +237,24 @@
         </div> <!-- 넓이제한-->
     </div><!--page-content End-->
 <div class="modal-wrap">
-    <div class="modal-chat">
-        <div class="modal-top">
-            <h1>동호회 채팅</h1>
+    <div class="modal-chat bg-secondary">
+    	<button onclick="closeModal();">X</button>
+		<div id="member-box" class="bg-secondary mt-5 mb-5">
+			<div class="mt-5"></div>
+            <input type="hidden" value="${c.clubNo }" id="clubNo">
+            <img src="/resources/MAINbtstr/img/로고4.png" onclick="initChat('${sessionScope.m.memberId}');">
+            <p class="text-light mt-3">클릭하면 채팅방으로 이동합니다</p>
         </div>
-        <div class="modal-content">
-            <div id="member-box">
-                <input type="text" value="${c.clubNo }" id="clubNo"><button onclick="initChat('${sessionScope.m.memberId}');">채팅시작하기</button>
-            </div>
-			<div class="chatting">
-				<div class="messageArea bg-light"></div>
-				<div class="sendBox">
-					<input type="text" id="sendMsg">
-					<button id="sendBtn" onclick="sendMsg();">전송</button>
-					<input type ="file" name ="chatFile" id="chatFile" multiple="multiple">
-					<button type="button"  onclick="fileSend();" id="sendFileBtn">보내기</button>
-					<div id="fileMsgBox"></div>
-				</div>
+		<div class="chatting">
+			<div class="messageArea bg-secondary"></div>
+			<div class="sendBox">
+				<input type="text" id="sendMsg">
+				<button id="sendBtn" class="btn btn-outline-light" onclick="sendMsg();">전송</button>
+				<input type ="file" class="input-form text-light" name ="chatFile" id="chatFile" multiple="multiple">
+				<button type="button" class="btn btn-outline-light" onclick="fileSend();" id="sendFileBtn">보내기</button>
+				<div id="fileMsgBox"></div>
 			</div>
-			<button onclick="closeModal();">닫기</button>
-        </div>
+		</div>
     </div>
 </div>
 <div class="write-modal-wrap">
@@ -425,6 +425,7 @@
 		ws.onmessage = receiveMsg;
 		// 웹소켓 연결이 종료되면 실행할 함수
 		ws.onclose = endChat;
+		$("#member-box").hide();
 		$(".chatting").slideDown();
 	}
 	function startChat() {

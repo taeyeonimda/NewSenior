@@ -29,32 +29,32 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-secondary rounded p-sm-3 wow fadeIn">
+        <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
             <div class="side-box rounded">
                 <h1 class="side-title-box text-center text-dark">
                     ${cla.className }
                 </h1>
-                <div class="side-teacher-box text-secondary fs-5 fw-bold">
+                <div class="side-teacher-box text-secondary fs-5 fw-bold mb-4">
                     <span>${cla.teacherName }</span> 강사
                 </div>
                 <div class="side-info-box">
                     <ul>
-                        <li><span class="fs-5 text-secondary">초급자 대상</span></li>
-                        <li><span class="fs-5 text-secondary">${cla.startDate }</span></li>
-                        <li><span class="fs-5 text-light">${cla.endDate }</span></li>
+                        <li class="mb-2"><span class="fs-5 text-secondary">시작일 : ${cla.startDate }</span></li>
+                        <li class="mb-2"><span class="fs-5 text-secondary">종료일 : ${cla.endDate }</span></li>
+                        <li class="mb-2"><span class="fs-5 text-secondary">초급자 대상</span></li>
                         <c:choose>
                         	<c:when test="${cla.products eq 0 }">
-                        		<li><span class="fs-5 text-primary">준비물 없음</span></li>
+                        		<li class="mb-4"><span class="fs-5 text-primary">준비물 없음</span></li>
                         	</c:when>
                         	<c:otherwise>
-                        		<li><span class="fs-5 text-primary">준비물 필요</span></li>
+                        		<li class="mb-4"><span class="fs-5 text-primary">준비물 필요</span></li>
                         	</c:otherwise>
                         </c:choose>
                     </ul>
                 </div>
                 <div class="side-select-box form-floating mb-4">
                     <div class="amount-box">
-	                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;">
+	                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="changePrice();">
 	                        <option value='' selected>인원수</option>
 	                        <option value="1">1인</option>
 	                        <option value="2">2인</option>
@@ -63,7 +63,7 @@
 	                        <option value="5">5인</option>
 	                        <option value="6">6인</option>
 	                    </select>
-	                    <span>${cla.classPrice }원</span>
+	                    <span id="priceBox">${cla.classPrice }</span><span>원</span>
                     </div>
                 </div>
                 <div>
@@ -338,7 +338,25 @@
 	            commentSpan.text("의 어떤 점이 아쉬웠나요?");
 	        }
 	    })
-
+const showValue = (target) => {
+  // 선택한 option의 value 값
+  console.log(target.value);
+  
+  // option의 text 값
+  console.log(target.options[target.selectedIndex].text);
+}
+	    
+	    // select
+	    function changePrice(){
+	    	const selectVal = $("select[name=amount]").val();
+	    	let price = $("#priceBox").text();
+	    	// select element에서 선택된 option의 value가 저장된다.  
+	    	if(selectVal != ''){
+	    		price = selectVal*Number(price);
+	    		$("#priceBox").text(price);
+	    	}
+		};
+	    
     </script>
 
     <!-- JavaScript Libraries -->
