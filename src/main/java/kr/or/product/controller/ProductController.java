@@ -134,6 +134,10 @@ public class ProductController {
 			for(MultipartFile file : productFile) {
 				String filename = file.getOriginalFilename();
 				String filepath = fileRename.productFileRename(savePath, filename);
+				ProductFileVO pfv = new ProductFileVO();
+				pfv.setFileName(filename);
+				pfv.setFilePath(filepath);
+				flist.add(pfv);
 				try {
 					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -141,6 +145,9 @@ public class ProductController {
 					byte[] bytes = file.getBytes();
 					bos.write(bytes);
 					bos.close();
+					
+					
+					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
