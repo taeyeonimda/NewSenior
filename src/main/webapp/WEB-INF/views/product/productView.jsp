@@ -9,6 +9,36 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/resources/TGbtstr/css/productView.css">
+<style>
+ul {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+    list-style-type: none;
+}
+
+ul li {
+    text-align: center;
+    float: left;
+}
+
+ul li a {
+    display: block;
+    font-size: 14px;
+    padding: 9px 12px;
+    border-right: solid 1px #ccc;
+    box-sizing: border-box;
+}
+
+ul li.on {
+    background: #eda712;
+}
+
+ul li.on a {
+    color: #fff;
+}
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -120,10 +150,15 @@
 			              <!-- </form>  -->
 			            </div>
 		            </c:when>
-	            
 	            </c:choose>
+	            <div class="reviewsTotalDiv">
+	            	
+	            </div>
+	            <ul id="pagingul"></ul>
+	            <!--
 	            <c:forEach items="${prlist }" var="pr">
-	            	<div class="reviewsWrap reviewMenu">
+	            	<div>
+	            	  <div class="reviewsWrap reviewMenu">
 		                <div class="reviewsContent">
 		                  <div class="reviewsId">
 		                    <h6>${pr.memberId }</h6>
@@ -150,8 +185,9 @@
 		                  </div>
 		                </div>
               		</div>
+              	</div>
               	</c:forEach>
-				<ul id="pagingul"></ul>              	
+              	-->
             </div>
             
             <div class="refundWrap prodContentMenu">
@@ -364,14 +400,14 @@
 			let totalData; //총 데이터
 			let dataPerPage; //한 페이지에 나타낼 글의 수
 			let pageCount = 5; //페이징에 나타낼 페이지 수
-			let reviewCurrentCount=1; //현재 페이지
-			let data;
+			let reviewCurrentPage=1; //현재 페이지
+			
 			
 			$(document).ready(function(){
 				dataPerPage = $("#reviewListBtn").val(); 
-				console.log(dataPerPage);
+				console.log("dataPerPage : "+dataPerPage);
 				const productNo = $("[name=productNo1]").val();
-				console.log(productNo);
+				console.log("productNo : "+productNo);
 				$.ajax({
 					method : "POST",
 					url : "/productReviewList.do",
@@ -380,26 +416,33 @@
 					},
 					success : function(data){
 						totalData = data.length;
+						console.log("총 데이터 : "+totalData);
 					}
 				});
 				displayData(1, dataPerPage);
 				
-				reviewPaging(totalData, dataPerPage, pageCount, 1);
+				paging(totalData, dataPerPage, pageCount, 1);
 			});
-			function reviewPaging(totalData, dataPerPage, pageCount, currentPage){
+			
+			function paging(totalData, dataPerPage, pageCount, currentPage){
 				console.log("currentPage : "+currentPage);
-				totalPage = Math.ceil(totalData/dataPerPage);
+				console.log("데이터퍼페이지 : "+dataPerPage);
+				console.log("토탈데이터 : "+totalData);
+				var totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수
+				console.log("totalPage : "+totalPage);
 				
 				if(totalPage<pageCount){
 					pageCount = totalPage;
 				}
 				
 				let pageGroup = Math.ceil(currentPage/pageCount);
+				console.log("pageGroup : "+pageGroup);
 				let last = pageGroup * pageCount;
 				
 				if(last > totalPage){
 					last = totalPage;
 				}
+				
 				let first = last - (pageCount - 1);
 				let next = last + 1;
 				let prev = first - 1;
@@ -407,28 +450,30 @@
 				//태그생성
 				let pageHtml = "";
 				if(prev > 0){
-					pageHtml = "<li><a href='#' id='prev'>이전</a></li>";
+					pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='prev'>이전</a></li>";
 				}
 				
 				//페이징 번호 처리
 				for(var i = first; i <= last; i++){
 					if(currentPage == i){
-						pageHtml += "<li class='on'><a href='#' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li class='page-item '><a class='page-link active-page' href='#' id='" + i + "'>" + i + "</a></li>";
 					}else {
-						pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li class='page-item'><a class='page-link' href='#' id='" + i + "'>" + i + "</a></li>";
 					}
 				}
+				
 				if(last < totalPage){
-					pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
+					pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='next'> 다음 </a></li>";
 				}
 				
-				$("pagingul").html(pageHtml);
+				$("#pagingul").html(pageHtml);
 				let displayCount = "";
 				displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
 				$("#displayCount").text(displayCount);
 				
 				//페이징 번호 클릭 이벤트 
 				$("#pagingul li a").click(function () {
+				$(".reviewsWrap").remove();
 				let $id = $(this).attr("id");
 				selectedPage = $(this).text();
 
@@ -436,7 +481,7 @@
 				if ($id == "prev") selectedPage = prev;
 				    
 				//전역변수에 선택한 페이지 번호를 담는다...
-				reviewCurrentCount = selectedPage;
+				reviewCurrentPage = selectedPage;
 				//페이징 표시 재호출
 				paging(totalData, dataPerPage, pageCount, selectedPage);
 				//글 목록 표시 재호출
@@ -448,6 +493,7 @@
 			function displayData(currentPage, dataPerPage) {
 			  let chartHtml = "";
 			  const productNo = $("[name=productNo1]").val();
+			  console.log("productNo1 : "+productNo);
 			//Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
 			  currentPage = Number(currentPage);
 			  dataPerPage = Number(dataPerPage);
@@ -457,11 +503,115 @@
 				  url : "/productReviewList.do",
 				  success : function(data){
 					  for (var i = (currentPage - 1) * dataPerPage;i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
+						  /*
+						  const div = $("<div>");
+						  div.addClass("abc");
+						  div.append("<div>"+data[i].productNo+"</div>");
+						  $(".productReviewDiv").append(div);
+						  */
+						  
+						  
+						  const oneDiv = $("<div>");
+							oneDiv.addClass("reviewsWrap reviewMenu");
+							//
+							
+							const twoDiv = $("<div>");
+							twoDiv.addClass("reviewsContent");
+							//
+							
+							const three1Div = $("<div>");
+							three1Div.addClass("reviewsId");
+							const three1H6 = $("<h6>"+data[i].memberId+"</h6>"); //id
+							const three1P = $("<p>"+data[i].reviewDate+"</p>"); //date
+							//
+							three1Div.append(three1H6);
+							three1Div.append(three1P);
+							
+							
+							const three2Div = $("<div>");
+							three2Div.addClass("reviewsTextArea");
+							const three2Textarea = $("<textarea>"+data[i].reviewContent+"</textarea>");
+							three2Textarea.attr("readonly",true);
+							//
+							three2Div.append(three2Textarea);
+							
+							const three3Div = $("<div>");
+							three3Div.addClass("reviewsBtnBox");
+							const updateBtn = $("<button>수정</button>");
+							updateBtn.addClass("reviewUpdateBtn");
+							const deleteBtn = $("<button>삭제</button>");
+							deleteBtn.addClass("reviewDeleteBtn");
+							deleteBtn.attr("onclick","deleteReview("+data[i].reviewNo+",this);");
+							//
+							three3Div.append(updateBtn);
+							three3Div.append(deleteBtn);
+							
+							const three4Div = $("<div>");
+							three4Div.addClass("reviewsScore");
+							const fourNextDiv = $("<div>");
+							fourNextDiv.addClass("reviewStar-wrap");
+							const starSpan1 = $("<span>star</span>");
+							const starSpan2 = $("<span>star</span>");
+							const starSpan3 = $("<span>star</span>");
+							const starSpan4 = $("<span>star</span>");
+							const starSpan5 = $("<span>star</span>");
+							starSpan1.addClass("material-icons")
+							starSpan2.addClass("material-icons")
+							starSpan3.addClass("material-icons")
+							starSpan4.addClass("material-icons")
+							starSpan5.addClass("material-icons")
+							//
+							fourNextDiv.append(starSpan1);
+							fourNextDiv.append(starSpan2);
+							fourNextDiv.append(starSpan3);
+							fourNextDiv.append(starSpan4);
+							fourNextDiv.append(starSpan5);
+							three4Div.append(fourNextDiv);
+							
+							
+							const three5Div = $("<div>");
+							const fiveSpan = $("<span>"+data[i].reviewScore+"</span>");
+							fiveSpan.addClass("reviewScore");
+							//
+							three5Div.append(fiveSpan);
+							
+							three4Div.append(three5Div);
+							
+							
+							
+							twoDiv.append(three1Div);
+							twoDiv.append(three2Div);
+							twoDiv.append(three3Div);
+							twoDiv.append(three4Div);
+							
+							
+							oneDiv.append(twoDiv);
+							
+							$(".reviewsTotalDiv").append(oneDiv);
+							
+							$(".reviewsScore").each(function(index,item){
+								const score = $(item).children().eq(1).children().text();
+								const span = $(item).children().eq(0).children();
+								for(let i = 0; i<score; i++){
+									span.eq(i).css("color","gold");
+								}
+							});
 					  } //dataList는 임의의 데이터임.. 각 소스에 맞게 변수를 넣어주면 됨...
-					  $("#dataTableBody").html(chartHtml);
+					  
 				  }
 			  });
 			}
+			
+			$("#reviewListBtn").click(function () {
+				$(".reviewsWrap").remove();
+			    dataPerPage = $("#reviewListBtn").val();
+			    console.log("dataPerPage1 : "+dataPerPage);
+			    //전역 변수에 담긴 globalCurrent 값을 이용하여 페이지 이동없이 글 표시개수 변경 
+			    paging(totalData, dataPerPage, pageCount, reviewCurrentPage);
+			    displayData(reviewCurrentPage, dataPerPage);
+			 });
+			
+			
 		
 			/*
 			$("#reviewListBtn").on("click",function(){

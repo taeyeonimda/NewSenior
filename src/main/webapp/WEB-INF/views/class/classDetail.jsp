@@ -29,7 +29,7 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
+        <div class="sidenav bg-secondary rounded p-sm-3 wow fadeIn">
             <div class="side-box rounded">
                 <h1 class="side-title-box text-center text-dark">
                     ${cla.className }
@@ -40,16 +40,16 @@
                 <div class="side-info-box">
                     <ul>
                         <li><span class="fs-5 text-secondary">초급자 대상</span></li>
-                        <li><span class="fs-5 text-secondary">${cla.startDate } ~ ${cla.endDate }</span></li>
+                        <li><span class="fs-5 text-secondary">${cla.startDate }</span></li>
+                        <li><span class="fs-5 text-light">${cla.endDate }</span></li>
                         <c:choose>
                         	<c:when test="${cla.products eq 0 }">
-                        		<li><span class="fs-5 text-secondary">준비물 없음</span></li>
+                        		<li><span class="fs-5 text-primary">준비물 없음</span></li>
                         	</c:when>
                         	<c:otherwise>
-                        		<li><span class="fs-5 text-secondary">준비물 필요</span></li>
+                        		<li><span class="fs-5 text-primary">준비물 필요</span></li>
                         	</c:otherwise>
                         </c:choose>
-                        
                     </ul>
                 </div>
                 <div class="side-select-box form-floating mb-4">

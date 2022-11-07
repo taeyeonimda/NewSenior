@@ -22,9 +22,6 @@
             </div>
         </div>
         <!-- Page Header End -->
-        
-        
-        
         <div class="popular-box"> <!-- 인기 리스트 div  -->
         	<c:if test="${not empty sessionScope.m }">
 		        <c:choose>
@@ -60,13 +57,9 @@
             	<input type="text" class="form-control bg-light border-0" id="serchInput"><button id="serchBtn" class="btn btn btn-outline-primary" onclick="initClubList();">찾기</button>
         	</div>
         	<div>
-        	<c:if test="${not empty sessionScope.m }">
         		<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
-        	</c:if>
         	</div>
         </div>
-        <hr>
-
 
 		<!-- ajax로 추가 -->
 		<div id="club-list" class="mt-5 club-list">
@@ -96,12 +89,11 @@
             </div>
             <div class="modal-btn-box">
             	<button onclick="closeModal();" class="btn btn-primary">닫기</button>
-            	<a href="#" class="btn btn-primary" id="enterClub"></a>
+            	<a href="/" class="btn btn-primary">입장하기</a>
             </div>
         </div>
     </div>
 </div>
-
 
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
@@ -216,13 +208,16 @@
 		    	url: "/searchAllClub.do",
 		    	data: {keyword : keyword},
 		    	success: function (data) {
+		    		console.log("currentPage"+currentPage);
+		    		console.log("dataPerPage"+dataPerPage);
+		    		console.log(data);
 		    		for (let i=(currentPage-1)*dataPerPage; i<(currentPage-1)*dataPerPage+dataPerPage; i++) {
 						const div = $("<div>");
 						div.addClass("lists");
 						div.attr("onclick", "clubInfoModal("+data[i].clubNo+")");
 						div.append("<img src='/resources/MAINbtstr/img/로고2.png' width='65px'>")
 						div.append("<h4 class='mb-3'>"+data[i].clubName+"</h4");
-						div.append("<p>참여인원수 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></p>");
+						div.append("<p>참여인원수 : <span></span> / <span>"+data[i].clubLimit+"</span></p>");
 						div.append("<a href='/clubDetail.do?clubNo="+data[i].clubNo+"'>들어가기</a>");
 						$("#club-list").append(div);
 					}
@@ -237,9 +232,10 @@
     			alert("로그인 먼저 진행해 주세요");
     			return;
     		}
+			console.log(clubNo);
 			$.ajax({
 				url:"/selectOneClub.do",
-				data:{ clubNo:clubNo },
+				data:{clubNo:clubNo},
 				success:function(one){
 					const clubName = $(".club-info-box>h3");
 					const clubContent = $(".club-info-box>p");
@@ -247,12 +243,11 @@
 					clubName.text(one.clubName);
 					clubContent.text(one.clubIntro);
 					clubImg.attr("src", "/resources/upload/club/"+one.clubMainImg);
-					myClubCheck(memberNo, clubNo);
 				}
 			});
 			$(".modal-wrap").css("display", "flex");
 		}
-    	
+
     	
     	function myClubCheck(memberNo, clubNo) {
     		const btn = $("#enterClub");

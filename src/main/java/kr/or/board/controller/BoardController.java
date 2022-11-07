@@ -68,7 +68,7 @@ public class BoardController {
 		if(!boardFile[0].isEmpty()) {
 			//첨부파일이 있는 경우 파일업로드 수행
 			//1.파일 업로드 경로 설정(getRealPath()까지가 webapp폴더)
-			String savePath= request.getSession().getServletContext().getRealPath("/resources/upload/board");
+			String savePath= request.getSession().getServletContext().getRealPath("/resources/upload/board/");
 			
 			//2.반복문을 이용한 파일 업로드
 			for(MultipartFile file :  boardFile ) {
@@ -133,7 +133,7 @@ public class BoardController {
 		if(!file[0].isEmpty()) {
 			//첨부파일이 있는 경우 파일업로드 수행
 			//1.파일 업로드 경로 설정(getRealPath()까지가 webapp폴더)
-			String savePath= request.getSession().getServletContext().getRealPath("/resources/upload/board");
+			String savePath= request.getSession().getServletContext().getRealPath("/resources/upload/board/");
 			
 			//2.반복문을 이용한 파일 업로드
 			for(MultipartFile file1 :  file ) {
@@ -161,11 +161,27 @@ public class BoardController {
 				
 				//파일 업로드 끝(파일1개 업로드)
 				PrintWriter out = response.getWriter();
-				out.print("/upload/board/"+filepath);
+				out.print("/resources/upload/board/"+filepath);
 			} 
 		}
+	}
+	
+	// 카테고리별 검색기능 -- 게시판 별로 따로 제작???
+	@RequestMapping(value="/searchBoard.do")
+	public String searchCategory(int reqPage, String categoryTag, String searchTag, Model model) {
+		
+		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag);
+		
+		model.addAttribute("list",(ArrayList<Board>)categoryMap.get("list"));
+		model.addAttribute("pageNavi",(String)categoryMap.get("pageNavi"));
+		model.addAttribute("reqPage",(int)categoryMap.get("reqPage"));
+		model.addAttribute("numPerPage",(int)categoryMap.get("numPerPage"));
+		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
+		model.addAttribute("categoryTag",(String)categoryMap.get("categoryTag"));
+		model.addAttribute("searchTag",(String)categoryMap.get("searchTag"));
 		
 		
+		return "board/boardList";
 	}
 	
 	

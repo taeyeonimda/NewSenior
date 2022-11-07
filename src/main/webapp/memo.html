@@ -41,12 +41,8 @@
             </li>
         </ul>
         </nav>
-       		ArrayList<Category> cateList = service2.getAllCategory();
        
-                   model.addAttribute("cateList", cateList);     
-                   <c:forEach items="${cateList}" var="cateList">
-                         <li class="mx-2 active" data-filter="*"><a style ="text-decoration-line: none;" href="/classList.do?classCategory=${cateList.categoryCode }&reqPage=1">${cateList.categoryName }</a></li>
-                        </c:forEach>   
+                        
 	 -->
 </body>
 </html>
