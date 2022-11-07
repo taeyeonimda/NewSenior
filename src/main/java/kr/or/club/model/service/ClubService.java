@@ -22,10 +22,17 @@ public class ClubService {
 	
 	@Transactional
 	public int insertClub(Club c) {
-		return dao.insertClub(c);
+		int result = dao.insertClub(c);
+		System.out.println(c.getClubNo());
+		if(result>0) {
+			result = dao.insertClubLeader(c);
+		}
+		return result;
 	}
 	public ArrayList<Club> selectAllClub(String keyword) {
-		ArrayList<Club> list = dao.selectAllClub(keyword);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		ArrayList<Club> list = dao.selectAllClub(map);
 		return list;
 	}
 	public Club selectOneClub(Club club) {

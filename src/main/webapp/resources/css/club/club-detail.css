@@ -15,6 +15,20 @@
 	margin: 0 auto;
 }
 
+/* 클럽 검색 박스 */
+.club-input{
+	display: flex;
+	width: 50%;
+	height: 38px;
+	justify-content: space-between;
+}
+.club-input>input{
+	width: 80%;
+}
+.club-input>button{
+	width: 17%;
+}
+
 /* 클럽 리스트 */
 .club-list{
 	width: 80%;
@@ -22,7 +36,6 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
-	
 }
 .lists{
 	border: 1px solid #eee;

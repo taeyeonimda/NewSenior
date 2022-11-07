@@ -31,16 +31,16 @@
         <!-- sideBar-->
         <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
             <div class="side-box rounded">
-                <h6 class="side-title-box display-5 text-center text-dark">
+                <h1 class="side-title-box text-center text-dark">
                     ${cla.className }
-                </h6>
-                <div class="side-teacher-box">
-                    <span class="text-secondary">${cla.teacherName } </span> 강사
+                </h1>
+                <div class="side-teacher-box text-secondary fs-5 fw-bold">
+                    <span>${cla.teacherName }</span> 강사
                 </div>
                 <div class="side-info-box">
                     <ul>
                         <li><span class="fs-5 text-secondary">초급자 대상</span></li>
-                        <li><span class="fs-5 text-secondary">${cla.startDate } ~ ${cla.startDate }</span></li>
+                        <li><span class="fs-5 text-secondary">${cla.startDate } ~ ${cla.endDate }</span></li>
                         <c:choose>
                         	<c:when test="${cla.products eq 0 }">
                         		<li><span class="fs-5 text-secondary">준비물 없음</span></li>
@@ -53,12 +53,6 @@
                     </ul>
                 </div>
                 <div class="side-select-box form-floating mb-4">
-                    <input type="date" id="Date" class="form-control bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;"><br>
-                    <select name="times" class="form-control bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;">
-                        <option value='' selected>시간</option>
-                        <option value="2">2시</option>
-                        <option value="3">3시</option>
-                    </select><br>
                     <div class="amount-box">
 	                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;">
 	                        <option value='' selected>인원수</option>
@@ -83,19 +77,12 @@
         <div class="container-xxl py-5 mt-5">
             <div class="container">
                 <div class="class-row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item rounded class-item">
-                            <img class="img-fluid" src="/resources/MAINbtstr/img/${cla.filepath }" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item rounded class-item">
-                            <img class="img-fluid" src="/resources/MAINbtstr/img/모델클래스 (3).jpg" alt="">
-                        </div>
+                    <div class="col-md-8 wow fadeInUp" data-wow-delay="0.1s">
+                    	<img class="img-fluid" src="/resources/upload/class/${cla.filepath }" alt="">
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span>강사소개</span><span><a href="#menu2">강의소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
+                	<span>강의소개</span><span><a href="#menu2">강사소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
                 </div>
             </div>
         </div>
@@ -115,7 +102,9 @@
                     </div>
                     <div class="product-title mt-5">
                         <div class="product-img-div">
-                            <img class="product-img" src="/resources/MAINbtstr/img/모델클래스 (2).jpg">
+                        	<c:forEach items="${cla.fileList }" var="cf">
+                        		<img class="product-img" src="/resources/upload/class/${cf.filepath }">
+                        	</c:forEach>
                         </div>
                     </div>
                 </div>
@@ -135,9 +124,7 @@
                         <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
                         <p class="text-primary mb-4">Year of Experience</p>
                         <h4 class="display-6 mb-4">"당당하게 걸어요"</h4>
-                        <p class="mb-4">연세대 당당걷기과</p>
-                        <p class="mb-4">새바람 걷기대회 우승</p>
-                        <p class="mb-4">무신사 시니어 모델로 활동 중</p>
+                        <textarea>${cla.teacherIntroduce }</textarea>
                     </div>
                 </div>
             </div>
@@ -162,7 +149,7 @@
                                 <h4 class="mb-0">왕 밝은 미소</h4>
                                 <p class="text-primary">20000</p>
                                 <div class="team-social d-flex">
-                                    <span>바로 구매하러 가기 > </span>
+                                    <span>장바구니 담기 > </span>
                                     <a class="btn btn-square rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
                                 </div>
                             </div>
