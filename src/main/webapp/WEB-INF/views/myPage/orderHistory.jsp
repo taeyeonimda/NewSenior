@@ -54,7 +54,7 @@
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
         <!-- Menu -->
-        <%@include file="/WEB-INF/views/common/aside.jsp" %>
+   <%@include file="/WEB-INF/views/common/aside.jsp" %>
         <!-- / Menu -->
 
         <!-- Layout container -->

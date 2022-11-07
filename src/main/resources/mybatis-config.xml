@@ -8,6 +8,7 @@
 	<typeAliases>
 		 <typeAlias type="kr.or.product.model.vo.Product" alias="p"/>
 		 <typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		 <typeAlias type="kr.or.member.model.vo.Delivery" alias="d"/>
 		 <typeAlias type="kr.or.product.model.vo.ProductFileVO" alias="pf"/>
 		 <typeAlias type="kr.or.product.model.vo.ProductReview" alias="pr"/>
 		 <typeAlias type="kr.or.club.model.vo.Club" alias="c"/>

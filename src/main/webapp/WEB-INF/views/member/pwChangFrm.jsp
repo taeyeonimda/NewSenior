@@ -22,7 +22,7 @@
 	.txt2{
 	text-align: center;
 	font-size: 1.5em;
-	color: #dc3545;
+	color: #0d6efd;
 	}
 	.box1{
 	text-align: center;
@@ -43,20 +43,21 @@
 	.box3:hover{
 	background-color:#198754;
 	}
+	
 </style>
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header2.jsp"%>
 	<div class="wra">
 		<form action="/pwChange.do" method="post" onsubmit="return checkPw();">
-		<div class="txt1">비밀번호 변경</div><br>
-		<div class="txt2">새로운 비밀번호를 입력해주세요.</div>
-		<div class="box1">
-		<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-		<input type="password" name="memberPw" class="box2"><input type="hidden"><input type="submit" value="변경" id="pwBtn"  class="box3"><br>
-		<span id="pw1Chk"></span>
-		</div>
-	</form>
+			<div class="txt1">비밀번호 변경</div><br>
+			<div class="txt2">새로운 비밀번호를 입력해주세요.</div>
+			<div class="box1">
+			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+			<input type="password" name="memberPw" class="box2"><input type="hidden"><input type="submit" value="변경" id="pwBtn"  class="box3"><br>
+			<span id="pw1Chk"></span>
+			</div>
+		</form>
 	</div>
 	
 	<script type="text/javascript">
@@ -116,5 +117,6 @@
            return true;
        }
    }
+	</script>
 </body>
 </html>

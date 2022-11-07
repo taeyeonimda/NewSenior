@@ -1,5 +1,7 @@
 package kr.or.activity.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.activity.model.service.ActivityService;
 import kr.or.activity.model.vo.Activity;
 import kr.or.activity.model.vo.ActivityPageData;
+import kr.or.activity.model.vo.FileVo;
 
 @Controller
 public class ActivityController {
@@ -29,7 +32,10 @@ public class ActivityController {
 	@RequestMapping(value="/activityDetail.do")
 	public String activityDetail(Activity act,Model model) {
 		Activity activity = service.getOneActivity(act);
+		ArrayList<FileVo> list = service.getOneFile(act.getActivityNo());
+		activity.setFileList(list);
 		model.addAttribute("act",activity);
+		
 		return "activity/activityDetail";
 	}
 	

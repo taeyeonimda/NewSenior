@@ -4,6 +4,9 @@
 	<insert id="insertClub" parameterType="c">
 		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg }, #{clubIntro })
 	</insert>
+	<insert id="insertChat" parameterType="cr">
+		insert into chat_record values (chat_record_seq.nextval, #{chatClub }, #{chatMember }, #{chatContent }, to_char(sysdate, 'yyyy-mm-dd'), #{filepath } )
+	</insert>
 	<select id="selectAllClub" resultType="c" parameterType="m">
 		select
 			club_no as clubNo,
@@ -14,27 +17,52 @@
 			filepath as clubMainImg,
 			club_intro as clubIntro
 		from clubs
-		<!-- 세션 들어오면 category로 if문 추가 예정 -->
-		<if test="favorite!=null and !value.equals('')">
-			where club_name like '%'||#{_parameter}||'%'
-		</if>
 	</select>
-	<select id="selectOneClub" parameterType="int" resultType="c">
+	
+	<!-- 클럽 정보/ 클럽 가입자 정보 한 번에 조회 -->
+	<select id="selectOneClub" parameterType="c" resultType="c" resultMap="getClubMember">
 		select
-			club_no as clubNo,
-			club_name as clubName,
-			club_category as clubCategory,
-			club_limit as clubLimit,
-			club_Leader as clubLeader,
-			filepath as clubMainImg,
-			club_intro as clubIntro
+			*
 		from clubs
 		where club_no = #{clubNo }
 	</select>
-	<insert id="insertChat" parameterType="cr">
-		insert into chat_record values (chat_record_seq.nextval, #{chatClub }, #{chatMember }, #{chatContent }, to_char(sysdate, 'yyyy-mm-dd'), #{filepath } )
-	</insert>
+	<resultMap type="c" id="getClubMember">
+		<result column="club_no" property="clubNo"/>
+		<result column="club_name" property="clubName"/>
+		<result column="club_category" property="clubCategory"/>
+		<result column="club_limit" property="clubLimit"/>
+		<result column="club_Leader" property="clubLeader"/>
+		<result column="filepath" property="clubMainImg"/>
+		<result column="club_intro" property="clubIntro"/>
+		<collection property="memberList"
+			select="selectClubMemberList"
+			column="club_no"
+			ofType="m" 
+			javaType="java.util.ArrayList"
+		/>
+	</resultMap>
+	<select id="selectClubMemberList" parameterType="_int" resultType="m">
+		select
+			 member_no as memberNo,
+			 member_id as memberId,
+			 member_pw as memberPw,
+			 member_name as memberName,
+			 member_phone as memberPhone,
+			 member_email as memberEmail,
+			 member_addr as memberAddr,
+			 member_grade as memberGrade,
+			 member_birth as memberBirth,
+			 enroll_date as memberDate,
+			 nickName as nickName,
+			 member_state as memberState,
+			 member_img as memberImg,
+			 favorite
+		from members
+		where member_no in (select member_no from club_members where club_no=#{_parameter})
+	</select>
+	
 
+	<!-- 클럽 보드 정보 / 클럽 보드 댓글 한 번에 조회 -->
 	<select id="selectAllClubBoard" parameterType="int" resultType="cb" resultMap="getAllComment">
 		select
 			*
@@ -86,9 +114,11 @@
 	<insert id="inertClubBoardCom" parameterType="cbc">
 		insert into club_board_coms values (club_com_seq.nextval, #{clubNo }, #{clubBoardNo }, #{clubComWriter }, #{clubComContent }, #{clubComRef }, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
-	
+
+
+	<!-- 인기동호회 검색 -->
 	<select id="searchClubList" parameterType="m" resultType="c">
-		select
+		select 
 			club_no as clubNo,
 			club_name as clubName,
 			club_category as clubCategory,
@@ -96,10 +126,35 @@
 			club_Leader as clubLeader,
 			filepath as clubMainImg,
 			club_intro as clubIntro
-		from clubs where club_category = (select favorite from members where member_no=#{memberNo })
+		from
+    		(select rownum, c.*, (select count(*) from club_members m where m.club_no=c.club_no) as cnt
+    		from clubs c where club_category=(select favorite from members where member_no=#{memberNo }))
+    	where rownum between 1 and 3
 	</select>
-	
+
+
 	<select id="getTotalPage" resultType="int">
 		select count(*) from clubs
 	</select>
+	
+	<!-- 내가 가입한 동호회, 동호회 회원수, 회원수 많은 순으로 가져오기 -->
+	<select id="searchMyClubList" parameterType="m" resultType="c">
+	select
+		club_no as clubNo,
+		cnt as clubMemberCnt,
+		club_name as clubName,
+		club_category as clubCategory,
+		club_limit as clubLimit,
+		club_leader as clubLeader,
+		filepath as clubMainImg,
+		club_intro as clubIntro 
+	from (select club_no, count(*) as cnt from club_members group by club_no)
+	join clubs using (club_no)
+	where club_no in (select club_no from club_members where member_no=#{memberNo }) order by cnt desc
+	</select>
+	
+	<!-- 클럽에 가입 진행하기 -->
+	<insert id="insertClubMember" parameterType="map">
+		insert into club_members values (club_members_seq.nextval, #{clubNo}, #{memberNo})
+	</insert>
 </mapper>

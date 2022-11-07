@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,7 +140,10 @@
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <p class="fs-5 fw-bold text-primary">담당자 : ${act.activityManagerName }와 함께하는</p>
                         <h1 class="display-5 mb-4">액티비티 활동!</h1>
-                        <p class="mb-4">${cla.curriculum }</p>
+                        
+                        <c:forEach items="${act.fileList }" var="details">
+                        <p class="mb-4"><img src="resources/upload/activity/${details.filepath }"/></p>
+                        </c:forEach>
                         <a class="btn btn-primary py-3 px-4" href="">Explore More</a>
                     </div>
                     <div class="product-title mt-5">

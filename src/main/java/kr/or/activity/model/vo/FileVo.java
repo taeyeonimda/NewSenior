@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FileVo {
 	private int fileNo;
-	private int classNo;
+	private int activityNo;
 	private String filename;
 	private String filepath;
 }

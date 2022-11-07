@@ -47,15 +47,23 @@ public class ProductService {
 		if(reqPage > 3) {
 			pageNo = reqPage - 2;
 		}
-		String pageNavi = "";
+		String pageNavi = "<nav aria-label=\"Page navigation example\">";
+		pageNavi += "<ul class='pagination justify-content-center'>";
 		if(pageNo != 1) {
-			pageNavi += "<a href='/productList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
+			pageNavi += "<li class='page-item disabled'>";
+			pageNavi += "<a class='page-link' tabindex='-1' aria-disabled='true' href='/productList.do?reqPage="+(pageNo-1)+"'>Previous</a></li>";
 		}
 		for(int i = 0; i<pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<span>"+pageNo+"</span>";
+				pageNavi += "<li class='page-item' >";
+				pageNavi += "<a class='page-link active-page' href='/productList.do?reqPage=" + pageNo + "'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
 			}else {
-				pageNavi += "<a href='/productList.do?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi += "<li class='page-item' >";
+				pageNavi += "<a class='page-link' href='/productList.do?reqPage=" + pageNo + "'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
 			}
 			pageNo++;
 			if(pageNo>totalPage) {
@@ -63,8 +71,12 @@ public class ProductService {
 			}
 		}
 		if(pageNo<=totalPage) {
-			pageNavi += "<a href='/productList.do?reqPage="+pageNo+"'>[다음]</a>";
+			pageNavi += "<li class='page-item disabled' >";
+			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/productList.do?reqPage=" + pageNo + "'>";
+			pageNavi += "Previous";
+			pageNavi += "</a></li>";
 		}
+		pageNavi += "</ul></nav>";
 		ProductPageData ppd = new ProductPageData(list,pageNavi);
 		return ppd;
 	}
@@ -117,11 +129,16 @@ public class ProductService {
 
 	public ArrayList<ProductReview> productReviewList(int productNo) {
 		ArrayList<ProductReview> prlist = dao.productReviewList(productNo);
+		int reviewTotalCount = dao.reviewTotalCount(productNo);
 		return prlist;
 	}
 
 	public int deleteReview(int reviewNo) {
 		return dao.deleteReview(reviewNo);
+	}
+
+	public int productReviewCount(int productNo) {
+		return dao.productReviewCount(productNo);
 	}
 
 }

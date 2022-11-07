@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
-         style="top: 30px; display: inline-block; width: 300px; min-height: 7	00px;">
-          
+	<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="top: 30px; display: inline-block; width: 300px;  min-height: 700px;">
           <ul class="menu-inner py-1">
 
             <!-- 회원관리 -->

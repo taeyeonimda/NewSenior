@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.club.model.vo.ChatRecord;
 import kr.or.member.model.dao.MemberDao;
+import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import oracle.net.aso.d;
 
 @Service
 public class MemberService {
@@ -134,9 +136,29 @@ public class MemberService {
 		return  dao.changePw(m);
 	}
 
+
 	//관리자목록가져오기
 	public ArrayList<Member> getAllAdmin() {
 		return dao.getAllAdmin();
 	}
 
+	public int updatePwMember(Member member) {
+		// TODO Auto-generated method stub
+		return dao.updatePw(member);
+	}
+
+	public int insertAddr(Delivery delivery) {
+		// TODO Auto-generated method stub
+		return dao.insertAddr(delivery);
+	}
+
+	public int updateAddr(Delivery delivery) {
+		// TODO Auto-generated method stub
+		return dao.updateAddr(delivery);
+	}
+
+	public ArrayList<Delivery> selectAllDelivery(Member m) {
+		// TODO Auto-generated method stub
+		return dao.selectAllDelivery(m);
+	}
 }

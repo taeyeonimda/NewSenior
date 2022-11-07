@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,21 +38,26 @@ public class ClubController {
 	private FileRename fileRename;
 	
 	@RequestMapping(value = "/popularClubList.do")
-	public String classList(Model model, Member m) {
-		// 실제는 회원의 카테고리를 가져옴
-		ArrayList<Club> popularList = service.searchClubList(m);
+	public String clubMemberList(Model model, Member m) {
+		ArrayList<Club> popularList = service.searchClubPopularList(m);
 		System.out.println(popularList);
 		model.addAttribute("pList", popularList);
 		return "club/clubList";
 	}
 	
 	@RequestMapping(value = "/clubList.do")
-	public String classList(Model model) {
-		model.addAttribute("pList", null);
-		model.addAttribute("type", "n");
+	public String clubList() {
 		return "club/clubList";
 	}
-
+	
+	// 내가 가입한 동호회와 일치하는지 확인하는 ajax
+	@ResponseBody
+	@RequestMapping(value = "/searchMyClub.do", produces = "application/json;charset=utf-8")
+	public String searchMyClub(Member m) {
+		ArrayList<Club> myList = service.searchMyClub(m);
+		return new Gson().toJson(myList);
+	}
+	
 	// 모든 동호회 가져오는 ajax 페이징
 	@ResponseBody
 	@RequestMapping(value = "/searchAllClub.do", produces = "application/json;charset=utf-8")
@@ -65,9 +71,19 @@ public class ClubController {
 		return "club/insertClubFrm";
 	}
 	
+	@RequestMapping(value = "/myClubList.do")
+	public String myClubList(Member m, Club c, Model model) {
+		int result = service.insertClubMember(m, c);
+		if(result>0) {
+			ArrayList<Club> myList = service.searchMyClub(m);
+			model.addAttribute("myList", myList);
+			model.addAttribute("newClub", c.getClubNo());
+		}
+		return "club/myClubList";
+	}
 	
 	@RequestMapping(value = "/insertClub.do")
-	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) {
+	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println(files);
 		if(!files[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/club/");
@@ -94,12 +110,12 @@ public class ClubController {
 		}
 		// c.setFileList(list); 여러개 일 때 살리기
 		int result = service.insertClub(c);
-		return "redirect:/clubList.do";
+		return "redirect:/popularClubList.do";
 	}
 	
 	@RequestMapping(value = "/clubDetail.do")
-	public String clubDetail(int clubNo, Model model){
-		HashMap<String, Object> map = service.selectOneClubMap(clubNo);
+	public String clubDetail(Club c, Model model){
+		HashMap<String, Object> map = service.selectOneClubMap(c);
 		model.addAttribute("c", map.get("club"));
 		model.addAttribute("cbList", map.get("board"));
 		return "club/clubDetail";
@@ -107,7 +123,7 @@ public class ClubController {
 
 	@ResponseBody
 	@RequestMapping(value="/UploadFile.do", produces = "application/json;charset=utf-8")
-	public String uploadChatFile(MultipartFile[] chatFile, HttpServletRequest request) {
+	public String uploadChatFile(MultipartFile[] chatFile, HttpServletRequest request) throws UnsupportedEncodingException {
 		String filepath = null;
 		if(!chatFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/chat/");
@@ -135,12 +151,12 @@ public class ClubController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/selectOneClub.do", produces = "application/json;charset=utf-8")
-	public String selectOneClub(int clubNo){
-		Club c = service.selectOneClub(clubNo);
+	public String selectOneClub(Club club){
+		Club c = service.selectOneClub(club);
 		return new Gson().toJson(c);
 	}
 	@RequestMapping(value = "/clubBoardWrite.do")
-	public String clubBoardWrite(ClubBoard cb, MultipartFile[] files, HttpServletRequest request) {
+	public String clubBoardWrite(ClubBoard cb, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println(files);
 		if(!files[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/club/");

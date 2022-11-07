@@ -35,11 +35,11 @@ public class ProductController {
 	@RequestMapping(value="/productList.do")
 	public String productList(Model model,int reqPage) {
 		ProductPageData	ppd = service.allProduct(reqPage);
-		
 		model.addAttribute("list",ppd.getList());
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		return "product/productList";
 	}
+	
 	
 	@RequestMapping(value="/insertProductFrm.do")
 	public String insertProductFrm() {
@@ -87,10 +87,13 @@ public class ProductController {
 	public String productView(int productNo, Model model) {
 		Product p = service.productView(productNo);
 		ArrayList<ProductReview> pr = service.productReviewList(productNo);
+		int result = service.productReviewCount(productNo);
 		model.addAttribute("p",p);
 		model.addAttribute("prlist",pr);
 		return "product/productView";
 	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/productReviewList.do",produces = "application/json;charset=utf-8")
@@ -169,7 +172,7 @@ public class ProductController {
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(ProductReview pr) {
 		int result = service.insertReview(pr);
-		return "redirect:/productView.do?productNo="+pr.getProductNo();
+		return String.valueOf(pr.getReviewNo());
 	}
 	
 	@ResponseBody
