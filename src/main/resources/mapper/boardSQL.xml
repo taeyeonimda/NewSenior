@@ -24,12 +24,10 @@
 	</select>   
 	
 	<!-- 검색기능 자유게시판 : boardType='F' -->
-	<!-- 아이디22로바꿈 -->
 	<select id="selectBoardList2" parameterType="map" resultType="b">
 	    select * from 
-            (select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
-            (select * from
-            (select *from
+		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
+        (select b.*from
             (select
                 board_no as boardNo,
                 member_no as memberNo,
@@ -40,8 +38,7 @@
                 board_type as boardType,
                 board_category as boardCategory,
                 nickname as nickName
-            from board join members using(member_no)order by board_no desc)b)
-      
+            from board join members using(member_no)order by board_no desc)b
 
 	        <!-- input null & and 카테고리 : 정보 -->
 	  		<if test="searchTag.equals('') and categoryTag.equals('info')">
@@ -73,9 +70,8 @@
 	     
 	      <!-- input null & 카테고리 전체 // 공통조건 -->
 	      	
-			where prn between #{start} and #{end} and boardType='F'
+	      	where prn between #{start} and #{end} and boardType='F'
 
-        
 	</select>
 	
 	<select id="totalCount" resultType="int">
@@ -117,6 +113,19 @@
 		where board_no = #{_parameter}
 	</select>
 	
+	<update id="updateBoard" parameterType="b">
+		update board 
+			set
+			board_title = #{boardTitle},
+			board_content = #{boardContent},
+			board_category= #{boardCategory}
+		where board_no = #{boardNo}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="_int">
+		delete board where board_no=#{_parameter}
+	</delete>
+	
 	<select id="selectComment" parameterType="_int" resultType="bc">
 		select
 			board_comm_no as boardCommNo,
@@ -155,6 +164,10 @@
 		insert into board_file values(board_file_seq.nextval,#{filepath},#{filename},#{boardNo})
 	</insert> 
 	
+	<delete id="deleteFile" parameterType="_int">
+		delete from board_file where file_no = #{_parameter}
+	</delete>
+	
 	<insert id="insertComment" parameterType="bc">
 		<if test="boardCommRef==0">
 			insert into board_comment values(board_comm_seq.nextval,#{memberNo},#{boardCommContent},sysdate,#{boardRef},null)
@@ -167,6 +180,10 @@
 	<update id="updateBoardComment" parameterType="bc">
 		update board_comment set board_comm_content = #{boardCommContent} where board_comm_no = #{boardCommNo}
 	</update>
+	
+	<delete id="deleteBoardComment" parameterType="bc">
+		delete board_comment where board_comm_no = #{boardCommNo}
+	</delete>
 	
 	
 	<select id="selectBoardList22" parameterType="map" resultType="b">
