@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴시니어스</title>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
+ 	<link rel="stylesheet" href="/css/datepicker.css"><!--datepickercss-->    
         <!-- Favicon -->
         <link href="/resources/TGbtstr/img/favicon.ico" rel="icon">
 
@@ -32,6 +34,8 @@
         <!-- Template Stylesheet -->
         <link href="/resources/TGbtstr/css/styleTG.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->    
+        
         <!-- 로그인 모달 css
         <link href="/resources/css/login/login.css" rel="stylesheet">
         -->
