@@ -80,5 +80,9 @@ public class ClubService {
 		map.put("clubNo", c.getClubNo());
 		return dao.insertClubMember(map);
 	}
+	@Transactional
+	public int deleteClubComment(ClubBoardComment cbc) {
+		return dao.deleteClubComment(cbc);
+	}
 
 }

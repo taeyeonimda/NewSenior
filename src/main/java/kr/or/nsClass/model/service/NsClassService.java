@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.nsClass.model.dao.NsClassDao;
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 import kr.or.nsClass.model.vo.NsClassPageData;
@@ -231,5 +232,11 @@ public class NsClassService {
 	@Transactional
 	public int changeStatus2(NsClass nscl) {
 		return dao.changeStatus2(nscl);
+	}
+	public int insertClassReview(ClassReview cr) {
+		return dao.insertClassReview(cr);
+	}
+	public ArrayList<ClassReview> getTeacherReview(NsClass cla) {
+		return dao.getTeacherReview(cla);
 	}
 }
