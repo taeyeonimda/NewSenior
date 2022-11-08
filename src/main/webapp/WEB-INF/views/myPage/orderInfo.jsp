@@ -12,10 +12,20 @@
   data-template="vertical-menu-template-free"
 >
 
+<style>
+.forTr input,td{
+	text-align : center;
+}
+
+
+
+</style>
+
 <head>
     <meta charset="utf-8">
     <title>Gardener - Gardening Website Template</title>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -65,7 +75,7 @@
 
               <br><br><br>
               <div>
-                <div style="font-size: 40px; font-weight: 900; display: inline-block;">장바구니</div>
+                <div style="font-size: 40px; font-weight: 900; display: inline-block;">결제정보입력</div>
                 <div style="display: inline-block; float: right;"><button type="button" style=" width:100px; height: 30px; margin-top: 35px; line-height: 15px;" class="btn btn-outline-primary deleteCheck">삭제</button></div>
               </div>
               <div class="card">
@@ -75,9 +85,8 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr style="text-align: center;">
-                        <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
-                        <th style=" width: 10%;">상품번호</th>
-                        <th style=" width: 30%;">상품명</th>
+                        <th style=" width: 15%;">상품번호</th>
+                        <th style=" width: 35%;">상품명</th>
                         <th style=" width: 15%;">금액</th>
                         <th style=" width: 15%;">수량</th>
                         <th style=" width: 10%;">배송비</th>
@@ -85,22 +94,76 @@
                       </tr>
                     </thead>
 	             		<c:forEach items="${list }" var="Or">
-							<li>상품번호 : ${Or.productNo }</li>
-							<li>회원번호 : ${Or.memberNo }</li>
-							<li>상품이름 : ${Or.productName }</li>
-							<li class="sumPrice">결제할 총 가격 : ${Or.buyAmount*Or.buyPrice }원</li>
+	             		<tr class="forTr">
+							<td><input type="text" value="${Or.productNo }" style="border:none" readonly></td>
+							<td><input type="text" value="${Or.productName }" style="border:none" readonly>
+								<input type="hidden" value="${Or.memberNo }" style="border:none" readonly>
+							</td>
+							<td><input type="text" value="${Or.buyPrice }" style="border:none" readonly></td>
+							<td><input type="text" value="${Or.buyAmount }" style="border:none" readonly></td>
+							<td style="text-align: center;">무료배송</td>
+							<td><input type="text" value=" ${Or.buyAmount*Or.buyPrice }" style="border:none" class="sumPrice" readonly><span>원</span></td>
+						</tr>
 						</c:forEach>
 	                    	<tr>
-		                      	<td colspan="5"></td>
+		                      	<td colspan="4"></td>
 		                      	<td>결제할 총 금액</td>
 		                      	<td>
-		                      		<input type="text" style="border:none;" class="payPrice" readonly>
+		                      		<input type="text" style="border:none;" class="payPrice" readonly>원
 		                     	</td>
 	                      	</tr>
 	                    </tbody>
 	                  </table>
-              	<button type="submit" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="testPay" >결제정보입력</button>
+              	
 					</form>
+					<br><br><br><br>
+					<div style="text-align:center; font-size:30px;"><span>주문자 정보</span></div>
+					<div class="orderInfo" style="margin-left:15%;">
+						<div><span style="margin-right:10px;">주문자명</span><input type="text" value="${sessionScope.m.memberName }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
+						<div><span style="margin-right:10px;">전화번호</span><input type="text" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
+						<div><span style="margin-right:25px;">이메일</span><input type="text"  value="${sessionScope.m.memberEmail }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div>
+					</div>
+					<br><br><br>
+					<div id="same-check" style="float:right; margin-right:10%;">
+                        <input type="checkbox" id="order-same" class="order-agree" >
+                        <label for="order-same">주문자와 동일</label>
+                    </div>
+					<br><br>
+					<div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
+					<div class="order-info shipping" style="margin-left:15%;">
+	                    <div class="order-box">
+	                        <label for="shippingName" class="order-label" style="width:70px;">수령인명</label>
+	                        <input type="text" name="shippingName" id="shippingName" class="order-input medium view-order-info" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                        <input type="text" class="order-input medium hidden-order-info" value="${sessionScope.m.memberName }" style="width:250px; display:none;border:none; border-bottom : 2px solid rgb(120,181,143);">
+	                    </div>
+	                        <br>
+	                    <div class="order-box">
+	                        <label for="shippingPhone" class="order-label" style="width:70px;">전화번호</label>
+	                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
+	                        <input type="text" class="order-input medium hidden-order-info" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);display:none;">
+	                    </div>
+	                        <br>
+	                    <div class="order-box">
+	                        <label for="shippingPhone" class="order-label" style="width:70px;">이메일</label>
+	                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                        <input type="text" class="order-input medium hidden-order-info" value="${sessionScope.m.memberEmail }" style="width:250px; display:none;border:none; border-bottom : 2px solid rgb(120,181,143);">
+	                    </div>
+	                    <div class="order-box">
+	                        <label for="shippingAddr1" class="order-label" style="width:70px;">주소</label>
+	                        <input type="text" name="shippingAddr1" id="shippingAddr1" class="order-input long " style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
+	                        <button type="button" class="btn btn-outline-primary" style="width:120px;height:40px;margin-bottom:30px;margin-top:10px;" id="addr-btn" onclick="searchAddr();">주소찾기</button>
+	                    </div>
+	                    <div class="order-box">
+	                        <label for="shippingAddr2" class="order-label" id="detailAddress" style="width:70px;">상세 주소<span class="comment"></span></label>
+	                        <input type="text" name="shippingAddr2" id="shippingAddr2" class="order-input long " style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                    </div>
+                	</div>
+                	<br><br>
+                	<div class="agree" style="text-align:center;">
+		                    <input type="checkbox" id="infoAgree">
+	                        <label for="infoAgree">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
+                    </div>
+                    <br>                
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
                     <button style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
                     <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
@@ -114,11 +177,11 @@
 
 
             <div class="content-backdrop fade"></div>
-          </div>
+          
           <!-- Content wrapper -->
-        </div>
+        
         <!-- / Layout page -->
-      </div>
+      
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
@@ -185,21 +248,21 @@
 			  checkboxes.forEach((checkbox) => {
 			    checkbox.checked = selectAll.checked;
 			  })
-			}
+			};
 		
 		
 		function sum(){
 			const sumPrice = $(".sumPrice");
 			let result = 0;
 			for(let i=0; i<sumPrice.length; i++){
-				result += Number(sumPrice.eq(i).text());
+				result += Number(sumPrice.eq(i).val());
 			}
 			$(".payPrice").val(result);
-		}
+		};
 		
 		window.onload=function(){
 			sum();
-		}
+		};
 		
 		// 체크한것 삭제
 		$(".deleteCheck").on("click", function(){
@@ -218,6 +281,39 @@
 			location.href="/deleteCart.do?productNo="+productNoList.join("/");
 		});
 		
+		
+		$("#order-same").on("change", function(){
+		    if($(this).prop("checked")) {
+		        $(".view-order-info").hide();
+		        $(".view-order-info").attr("name", "");
+		        $(".hidden-order-info").show();
+		        $(".hidden-order-info").eq(0).attr("name", "shippingName");
+		        $(".hidden-order-info").eq(1).attr("name", "shippingPhone");
+		        $(".hidden-order-info").eq(2).attr("name", "shippingAddr1");
+		        $(".hidden-order-info").eq(3).attr("name", "shippingAddr2");
+		    } else {
+		        $(".hidden-order-info").hide();
+		        $(".hidden-order-info").attr("name", "");
+		        $(".view-order-info").show();
+		        $(".view-order-info").eq(0).attr("name", "shippingName");
+		        $(".view-order-info").eq(1).attr("name", "shippingPhone");
+		        $(".view-order-info").eq(2).attr("name", "shippingAddr1");
+		        $(".view-order-info").eq(3).attr("name", "shippingAddr2");
+		    }
+		});
+		
+		function searchAddr() {
+		    new daum.Postcode({
+		        oncomplete: function(data) {
+		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+		            console.log(data);
+		            $("#postcode").val(data.zonecode);
+		            $("#shippingAddr1").val(data.roadAddress);
+		            $("#detailAddress").focus();
+		        }
+		    }).open();
+		}
 		
 		
 	</script>
