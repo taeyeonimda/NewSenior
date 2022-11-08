@@ -110,10 +110,10 @@
 	                      	</tr>
 	                    </tbody>
 	                  </table>
-              	<button type="submit" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="testPay" >결제정보입력</button>
+              	<button type="submit" style="float: right; width:250px; margin: 10px; margin-top:20px;" class="btn btn-outline-primary" id="testPay" >주문하기</button>
 					</form>
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
-                    <button style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
+                    <!-- <button style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button> -->
                     <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
                   </div>
                 </div>

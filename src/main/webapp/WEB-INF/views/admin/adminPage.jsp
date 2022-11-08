@@ -325,7 +325,10 @@
   </div>
 </div>
 <!-- Footer End -->
-<script>
+<script> 
+let reqPage = ${reqPage};
+console.log(${reqPage});
+
 	$(".changeLevel").on("click",function(){
 		const memberNo = $(this).parent().parent().children().eq(1).text();
 		//클릭한 버튼 기준으로 선택한 등급
