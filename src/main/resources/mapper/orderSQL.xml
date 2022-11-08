@@ -40,13 +40,16 @@
 	where pay_details.order_no=#{orderNo} and member_no=#{memberNo}
 </select>
 
-<insert id="insertOrder" parameterType="Ca">
+<insert id="insertOrder" parameterType="Or">
 	insert into pays values(
 	pays_seq.nextval,
 	#{memberNo},
-	#{productName},
-	#{orderPrice},
-	#{orderAmount}
+	to_char(sysdate,'yyyy-mm-dd'),
+	#{buyAmount},
+	#{buyPrice},
+	#{receiveName},
+	#{receiveAddr},
+	#{receivePhone}
 	)
 </insert>
 
@@ -60,8 +63,8 @@
 <select id="goOrderHistory" resultType="Or" parameterType="_int">
 	select
 	    product_no as productNo,
-	    buy_price as buyPrice,
-	    (select product_name from products where products.product_no=carts.product_no) as productName,
+	    (select PRODUCT_PRICE from products where products.product_no=carts.product_no)as buyPrice,
+	    (select product_name from products where products.product_no=carts.product_no) as buyName,
 	    buy_amount as buyAmount,
 	    member_no as memberNo
 	from carts

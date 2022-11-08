@@ -31,8 +31,8 @@ public class OrderDao {
 	}
 
 
-	public int insertOrder(Cart c) {
-		int result = sqlSession.insert("order.insertOrder",c);
+	public int insertOrder(Order o) {
+		int result = sqlSession.insert("order.insertOrder",o);
 		return result;
 	}
 
