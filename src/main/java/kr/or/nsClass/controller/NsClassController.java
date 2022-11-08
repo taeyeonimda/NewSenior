@@ -73,8 +73,6 @@ public class NsClassController {
 	@RequestMapping(value = "/insertClass.do")
 	public String insertClass(NsClass nsCl, 
 			MultipartFile[] files, MultipartFile[] detailFiles, HttpServletRequest request) throws UnsupportedEncodingException{
-		
-		System.out.println("위에서 확인:"+nsCl);
 		ArrayList<FileVo> list = new ArrayList<FileVo>();
 		String filepaths ="";
 		if(!files[0].isEmpty()) {

@@ -21,6 +21,8 @@ import kr.or.activity.model.service.ActivityService;
 import kr.or.activity.model.vo.Activity;
 import kr.or.activity.model.vo.ActivityPageData;
 import kr.or.activity.model.vo.FileVo;
+import kr.or.category.model.service.CategoryService;
+import kr.or.category.model.vo.Category;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -31,12 +33,16 @@ public class AdminActivityController {
 	private ActivityService service;
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private CategoryService service2;
 	@Autowired 
 	private FileRename fileRename;
 	
 	@RequestMapping(value="/activityEnroll.do")
 	public String activityEnroll(Model model) {
 		ArrayList<Member> list = mService.getAllAdmin();
+		ArrayList<Category> cateList = service2.withOutAll();
+		model.addAttribute("cateList", cateList);
 		model.addAttribute("list",list);
 		return "admin/activityEnroll";
 	}
@@ -104,9 +110,9 @@ public class AdminActivityController {
 		System.out.println("액티비티 컨트롤러 체크" +activity);
 		int result = service.insertActivity(activity);
 		if(result>0) {
-			return "admin/adminMgrClass";
+			return "admin/activityMgrAdmin";
 		}else {
-			return "admin/adminMgrClass";
+			return "admin/activityMgrAdmin";
 	
 		}	
 	}

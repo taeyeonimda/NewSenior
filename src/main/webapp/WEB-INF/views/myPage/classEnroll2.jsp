@@ -16,6 +16,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
+ 	<link rel="stylesheet" href="/resources/css/datepicker.css"><!--datepickercss-->    
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -46,6 +48,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
 <body>
   <!-- Layout wrapper -->
@@ -107,6 +110,7 @@
                           <input type="file" class="form-control" name="detailFiles" id="html5-tel-input" multiple/>
                         </div>
                       </div>
+				
 				
                       <div class="mb-3 row">
                         <label for="classStartDate" class="col-md-2 col-form-label">수강기간</label>
@@ -201,7 +205,18 @@
 <!-- Footer End -->
 <script>
 	
+	/*
+	$(document).ready(function(){
+	$("input[name=startDate]").on("click", function() {
+		$("input[name=startDate]").datepicker();
+	})
+	$("input[name=endDate]").on("click", function() {
+		$("input[name=endDate]").datepicker();
+	})
+})
 
+	
+	*/
 
 	function f_datepicker(obj) {
 		 $( obj ).datepicker().datepicker("show");
