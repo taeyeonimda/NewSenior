@@ -84,6 +84,10 @@ public class ProductDao {
 		return sqlSession.selectOne("product.productReviewCount",productNo);
 	}
 
+	public int reviewUpdate(ProductReview pr) {
+		return sqlSession.update("product.reviewUpdate",pr);
+	}
+
 
 	
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductFileRename {
 	public String productFileRename(String path, String filename) {
+		System.out.println(filename);
 		String onlyFilename = filename.substring(0, filename.lastIndexOf("."));
 		String extention = filename.substring(filename.lastIndexOf("."));
 		
