@@ -21,6 +21,8 @@ import kr.or.activity.model.service.ActivityService;
 import kr.or.activity.model.vo.Activity;
 import kr.or.activity.model.vo.ActivityPageData;
 import kr.or.activity.model.vo.FileVo;
+import kr.or.category.model.service.CategoryService;
+import kr.or.category.model.vo.Category;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -31,12 +33,16 @@ public class AdminActivityController {
 	private ActivityService service;
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private CategoryService service2;
 	@Autowired 
 	private FileRename fileRename;
 	
 	@RequestMapping(value="/activityEnroll.do")
 	public String activityEnroll(Model model) {
 		ArrayList<Member> list = mService.getAllAdmin();
+		ArrayList<Category> cateList = service2.withOutAll();
+		model.addAttribute("cateList", cateList);
 		model.addAttribute("list",list);
 		return "admin/activityEnroll";
 	}
@@ -47,7 +53,9 @@ public class AdminActivityController {
 		ArrayList<FileVo> list = new ArrayList<FileVo>();
 		String filepaths = "";
 		
-		if(!files[0].isEmpty()) {
+		if(files.length == 0) {
+			activity.setFilepath(null);
+		}else if(!files[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/activity/");
 			for(MultipartFile file: files) {
 				String filename = file.getOriginalFilename();
@@ -66,12 +74,13 @@ public class AdminActivityController {
 					e.printStackTrace();
 				}
 				//파일업로드 끝(파일1개 업로드)
-				
-				
 			}
+			activity.setFilepath(filepaths);
 		}
 		
-		if(!detailFiles[0].isEmpty()) {
+		if(detailFiles.length == 0) {
+			activity.setFileList(null);
+		}else if(!detailFiles[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/activity/");
 			for(MultipartFile file: detailFiles) {
 				String filename = file.getOriginalFilename();
@@ -95,18 +104,17 @@ public class AdminActivityController {
 
 				list.add(fileVo);
 			}
+			activity.setFileList(list);
 		}
 		
 		
 		
-		activity.setFilepath(filepaths);
-		activity.setFileList(list);
 		System.out.println("액티비티 컨트롤러 체크" +activity);
 		int result = service.insertActivity(activity);
 		if(result>0) {
-			return "admin/adminMgrClass";
+			return "admin/activityMgrAdmin";
 		}else {
-			return "admin/adminMgrClass";
+			return "admin/activityMgrAdmin";
 	
 		}	
 	}

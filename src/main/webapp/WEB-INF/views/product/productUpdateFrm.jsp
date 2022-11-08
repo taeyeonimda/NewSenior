@@ -184,6 +184,12 @@
                       <input class="form-control" type="tel" id="html5-tel-input" style="width: 220px; display: inline-block;" name="productQty" value="${p.productQty }"/>
                     </div>
                   </div>
+            <div></div>
+	    		  <!-- 
+	    		  <input type="hidden" name="fileNoList" value="${p.productFileVO[0].fileNo }">
+	    		  <input type="hidden" name="fileNoList" value="${p.productFileVO[1].fileNo }">
+	    		  <input type="hidden" name="fileNoList" value="${p.productFileVO[2].fileNo }">
+	    		   -->
                   <div class="mb-3 row">
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">

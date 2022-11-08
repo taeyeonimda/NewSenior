@@ -204,17 +204,55 @@ public class BoardService {
 		}
 		return result;
 	}
+	
+	//게시물 삭제
+	public int deleteBoard(Board b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	//게시물 수정
+	public int boardUpdate(Board b, int[] fileNoList) {
+		//1.board테이블 수정(제목,내용)
+		int result = dao.updateboard(b);
+		
+		if(result>0) {
+			//2.새 첨부파일이 있으면 insert
+			for(FileVO fv : b.getFileList()) {
+				fv.setBoardNo(b.getBoardNo());
+				//ㄴ갖고 있는 board번호 setter로 넣어줌
+				result += dao.insertFile(fv);
+			}
+			
+			//3. 삭제한 파일이 있으면 delete
+			if(fileNoList !=null ) {
+				for(int fileNo : fileNoList) {
+					result += dao.deleteFile(fileNo);
+				}
+			}
+		}
+		return result;
+	}
+
 
 	public int insertComment(BoardComment bc) {
 		return dao.insertComment(bc);
 	}
+	
+	
+
 
 	public int updateBoardComment(BoardComment bc) {
 		return dao.updateBoardComment(bc);
 	}
+	
+	public int deleteBoardComment(BoardComment bc) {
+		return dao.deleteBoardComment(bc);
+	}
 
 
-	public HashMap<String, Object> selectBoardList(int reqPage, String categoryTag, String searchTag) {
+
+	public HashMap<String, Object> selectBoardList(int reqPage, String categoryTag, String searchTag, String searchInput) {
 		//한 페이지 당 보여줄 게시물 수
 				int numPerPage = 10;
 				
@@ -227,6 +265,7 @@ public class BoardService {
 				pageMap.put("end", end);
 				pageMap.put("categoryTag",categoryTag);
 				pageMap.put("searchTag",searchTag);
+				pageMap.put("searchInput",searchInput);
 				
 				//pageNavi 시작
 				//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
@@ -291,6 +330,28 @@ public class BoardService {
 				return pageMap;
 
 	}
+
+
+	public ArrayList<FileVO> boardDelete(int boardNo) {
+		//파일 목록  조회해서
+		ArrayList<FileVO> fileList = dao.selectFileList(boardNo);
+		//boardTBL에서 삭제
+		int result = dao.deleteBoard(boardNo);
+		if(result>0) {
+			return fileList;
+		}else {
+			return null;
+		}
+		
+	}
+
+
+
+
+	
+
+
+
 
 
 

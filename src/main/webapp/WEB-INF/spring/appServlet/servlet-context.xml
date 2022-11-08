@@ -84,6 +84,24 @@
 	<!-- 예약작업관련 어노테이션 활성화 -->
 	<task:annotation-driven/>
 	
+	<beans:bean id="loginInterceptor" class="kr.or.common.LoginInterceptor" />
+
+
+
+
+
+   <!--interceptor 프로그램 등록-->
+	<interceptors>
+		<interceptor>
+			 
+			<mapping path="/mypage.do" />
+			<exclude-mapping path="/login.do"/>
+			<exclude-mapping path="/joinFrm.do"/> 
+			<exclude-mapping path="/roomPage.do"/> 
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+	</interceptors> 
+	
 	
 	<context:component-scan base-package="kr.or.senior" />
 	<context:component-scan base-package="kr.or.product" />

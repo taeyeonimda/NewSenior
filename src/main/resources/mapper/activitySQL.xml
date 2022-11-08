@@ -52,6 +52,7 @@
 		select count(*) from activity
 	</select>
 	
+	<!--  
 	<select id="getOneActivity" parameterType="act" resultType="act">
 		select  
 				activity_no as activityNo,
@@ -72,7 +73,7 @@
 		join members m 
 		on a.activity_manager = m.member_no
 		where a.activity_no = #{activityNo }
-	</select>
+	</select>-->
 	
 	<!-- 스킵 
 	<resultMap type="act" id="getActivity">
@@ -90,9 +91,21 @@
 		<result column="filepath" property="filepath" />
 		<result property="activityManagerName" />
 	</resultMap>
+	-->
 	
-	
-	<resultMap type="act" id="getActivity">
+	<select id="getOneActivity" parameterType="act" resultType="act" resultMap="getActivityInfo">
+		select  
+				a.*,
+				to_char(a.start_date,'yyyy-mm-dd') as startDate,	
+				to_char(a.end_date,'yyyy-mm-dd') as endDate,	
+				m.member_name as activityManagerName
+		from activity a
+		join members m 
+		on a.activity_manager = m.member_no
+		where a.activity_no = #{activityNo }
+	</select>
+
+	<resultMap type="act" id="getActivityInfo">
 	<result column="activity_no" property="activityNo" />
 	<result column="activity_name" property="activityName" />
 	<result column="activity_price" property="activityPrice" />
@@ -102,12 +115,19 @@
 	<result column="activity_limit" property="activityLimit" />
 	<result column="activity_category" property="activityCategory" />
 	<result column="activity_status" property="activityStatus" />
-	<result column="start_Date" property="startDate" />
-	<result column="end_date" property="endDate" />
 	<result column="filepath" property="filepath" />
-	<result column="m.member_name" property="activityManagerName" />
+	<result column="etc" property="etc"/>
+	<collection 
+			property="fileList"
+			select="getOneFiles"
+			column="activity_no"
+			ofType="actF" 
+			javaType="java.util.ArrayList"
+	/>
+		
+
 	</resultMap>
-	-->
+	
 	
 	<insert id="insertFile" parameterType="actF">
 		insert into 

@@ -38,7 +38,7 @@
 	
 	<delete id="deleteAddr" parameterType="d" >
 	 delete from delivery_tbl where delivery_no = #{deliveryNo}
-	</delete>
+	</delete> 
 	
 	<select id="selectOneDelivery"  parameterType="int"  resultType="d">
 	select
@@ -54,9 +54,16 @@
 		from delivery_tbl where delivery_no=#{deliveryNo}
 	</select>
 
-	<update id="updateOneAddr" parameterType="int">
+	<update id="updateOneAddr" parameterType="d">
 		update delivery_tbl
-		set default_addr = 'n' where member_no=#{deliveryNo}
+		set 
+		delivery_name = #{deliveryName},
+		delivery_phone = #{deliveryPhone},
+		zipcode = #{zipcode},
+		delivery_addr = #{deliveryAddr},
+		delivery_detail = #{deliveryDetail},
+		receiver_name = #{receiverName},
+		default_addr = #{defaultAddr}
+		where delivery_no=#{deliveryNo}
 	</update>
-
 </mapper>

@@ -11,21 +11,12 @@
 	나중에할꺼 
 	클래스관리 활동상태 
 	기간보여주는거 주단위? 
-	
-	
-	 <select name="category">
-                        	<option value="DG">디지털</option>
-                        	<option value="FU">주식/재테크</option>
-                        	<option value="CR">공예</option>
-                        	<option value="DE">디자인</option>
-                        	<option value="EX">운동</option>
-                        	<option value="FS">패션</option>
-                        	<option value="ME">미디어</option>
-                        	<option value="SO">악기/음악</option>
-                        	<option value="FO">외국어</option>
-                        	<option value="CO">요리/음식</option>
-                        	<option value="ET">기타</option>
-     </select>
+	//AL빠진값
+	ArrayList<Category> cateList = service2.getAllCategory();
+	model.addAttribute("cateList", cateList);
+	<c:forEach items="${cateList}" var="cateList">
+       <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
+    </c:forEach>   
      
      //페이징 네비바 템플릿에있던거
        <nav aria-label="Page navigation example">

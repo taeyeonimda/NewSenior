@@ -16,7 +16,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+	
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -47,6 +47,8 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
+
   <body>
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
@@ -114,11 +116,13 @@
 				
 				
                   <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">수강기간</label>
+                        <label for="activityStartDate" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = "startDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="시작일 ex) 20221024"/>
+                          <input class="form-control" name = "startDate"  id="activityStartDate" style="width: 200px; display: inline-block;" 
+                          onclick="javascript:f_datepicker(this);" placeholder="시작일 ex) 20221024"/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
-                          <input class="form-control" name ="endDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="종료일 ex) 20221024"/>
+                          <input class="form-control" name ="endDate"  id="endDate" style="width: 200px; display: inline-block;" 
+                           onclick="javascript:f_datepicker(this);" placeholder="종료일 ex) 20221024"/>
                         </div>
                       </div>
                   
@@ -126,17 +130,9 @@
                     <label for="html5-cate-input" class="col-md-2 col-form-label">카테고리</label>
                       <div class="btn-group" style="width: 200px;">
                          <select name="activityCategory" id="html5-cate-input">
-                        	<option value="DG">디지털</option>
-                        	<option value="FU">주식/재테크</option>
-                        	<option value="CR">공예</option>
-                        	<option value="DE">디자인</option>
-                        	<option value="EX">운동</option>
-                        	<option value="FS">패션</option>
-                        	<option value="ME">미디어</option>
-                        	<option value="SO">악기/음악</option>
-                        	<option value="FO">외국어</option>
-                        	<option value="CO">요리/음식</option>
-                        	<option value="ET">기타</option>
+                         <c:forEach items="${cateList}" var="cateList">
+					       <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
+					     </c:forEach>   
      					</select>
                       </div>
                   </div>
@@ -171,6 +167,12 @@
             </div>
 </div>
 <script>
+
+function f_datepicker(obj) {
+	 $( obj ).datepicker().datepicker("show");
+	}
+	
+	
 //인원수 옵션값넣기
 const limitSelect = $("select[name=activityLimit]");
 	for(let i=1;i<=30;i++){
@@ -184,7 +186,7 @@ const limitSelect = $("select[name=activityLimit]");
 	
 	$("#submitBtn").on("click",function(){
 		const activityName = $("input[name=activityName]").val();
-		const files = document.querySelector("input[name=files]").files[0];
+		let files = document.querySelector("input[name=files]").files[0];
 		const activityManager = $("select[name=activityManager]").val();
 		const activityIntroduce = $("input[name=activityIntroduce]").val();
 		const activityDetail = $("textarea[name=activityDetail]").val();
@@ -194,22 +196,19 @@ const limitSelect = $("select[name=activityLimit]");
 		const startDate = $("input[name=startDate]").val();
 		const endDate = $("input[name=endDate]").val();
 		const files2 = document.querySelector("input[name=detailFiles]").files;
-		const etc = $("input[name=etc]").val();
+		const etc = $("textarea[name=etc]").val();
 		
-		console.log(activityName);
+		
 		console.log(files);
-		console.log(activityManager);
-		console.log(activityIntroduce);
-		console.log(activityDetail);
-		console.log(activityLimit);
-		console.log(activityCategory);
-		console.log(activityPrice);
-		console.log(startDate);
-		console.log(endDate);
-		
+		console.log(files2);
 		var formData = new FormData();
 		formData.append('activityName',activityName);
-		formData.append('files',files);
+		if(files!=null){
+			formData.append('files',files);
+		}else{
+			formData.append('files',null);
+		}
+		
 		formData.append('activityManager',activityManager);
 		formData.append('activityIntroduce',activityIntroduce);
 		formData.append('activityDetail',activityDetail);
@@ -219,20 +218,15 @@ const limitSelect = $("select[name=activityLimit]");
 		formData.append('startDate',startDate);
 		formData.append('endDate',endDate);
 		formData.append('etc',etc);
-		for(let i=0;i<files2.length;i++){
-			formData.append('detailFiles',files2[i]);
+		if(files2.length==0){
+			formData.append('detailFiles',null);
+		}else{
+			for(let i=0;i<files2.length;i++){
+				formData.append('detailFiles',files2[i]);
+			}
 		}
 		
-		console.log(formData.get("activityName"));
-		console.log(formData.get("files"));
-		console.log(formData.get("activityManager"));
-		console.log(formData.get("activityIntroduce"));
-		console.log(formData.get("activityDetail"));
-		console.log(formData.get("activityLimit"));
-		console.log(formData.get("activityCategory"));
-		console.log(formData.get("activityPrice"));
-		console.log(formData.get("startDate"));
-		console.log(formData.get("endDate"));
+	
 		
 		
 		$.ajax({
@@ -253,6 +247,21 @@ const limitSelect = $("select[name=activityLimit]");
 	
 	});
 	
+	
+	$.datepicker.setDefaults({
+		dateFormat: 'yy-mm-dd',
+		prevText: '이전 달',
+		nextText: '다음 달',
+		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		minDate: '-100y',
+		showMonthAfterYear: true,
+		changeYear: true,
+		yearSuffix: '년'
+	});
 		
 	/*	
 		if(activityName==""){

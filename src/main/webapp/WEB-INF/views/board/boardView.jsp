@@ -66,6 +66,16 @@
 				<div>${b.boardContent }</div>
 			</td>
 		</tr>
+		<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
+			<tr class="tr-1">
+				<th colspan="6">
+					<button><a class="btn bc44" href="/boardUpdateFrm.do?boardNo=${b.boardNo}">수정</a></button>
+					<!-- <button><a class="btn bc44" id="delBtn" href="/boardDelete.do?boardNo=${b.boardNo}">삭제</a></button> -->
+					<button class="btn bc44" onclick="boardDelete(${b.boardNo});">삭제</button>
+					
+				</th>
+			</tr>
+			</c:if>
 	</table>
 	
 		<%--댓글작성 form--%>
@@ -258,7 +268,7 @@
 				
 				//2.input태그 생성(bcNo)
 				const bcInput = $("<input type='text' name='boardCommNo'>");
-				//ncNo 값 세팅 : input태그안에 value="${ncNo}"로 세팅 ??
+				//ncNo 값 세팅 : input태그안에 value="${boardCommNo}"로 세팅 ??
 				bcInput.val(boardCommNo);
 				//ncInput을 form 태그에 추가
 				form.append(bcInput);
@@ -278,12 +288,17 @@
 				form.submit();
 			}
 			
-			
+			//게시글 삭제
+			function boardDelete(boardNo){
+				if(confirm("글을 삭제하시겠습니까?")){
+					location.href="/boardDelete.do?boardNo="+boardNo;	
+				}
+			}
 			//comment 삭제
-			function deleteComment(obj,ncNo,noticeNo){
+			function deleteComment(obj,boardCommNo,boardNo){
 			//obj는 사실 필요없는 매개변수(형식 맞춰주기 위해서 기입)
 			if(confirm("댓글을 삭제하시겠습니까?")) {
-				location.href="/deleteNoticeComment.do?ncNo="+ncNo+"&noticeNo="+noticeNo;
+				location.href="/deleteBoardComment.do?boardCommNo="+boardCommNo+"&boardNo="+boardNo;
 			}
 		}
 			

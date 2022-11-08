@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴시니어스</title>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
- 	<link rel="stylesheet" href="/css/datepicker.css"><!--datepickercss-->    
+ 	<link rel="stylesheet" href="/resources/css/datepicker.css"><!--datepickercss-->    
+    
         <!-- Favicon -->
         <link href="/resources/TGbtstr/img/favicon.ico" rel="icon">
 
@@ -33,8 +33,9 @@
     	<link href="/resources/TGbtstr/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
         <link href="/resources/TGbtstr/css/styleTG.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->    
+        
+		<script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
+  
         
         <!-- 로그인 모달 css
         <link href="/resources/css/login/login.css" rel="stylesheet">
@@ -191,7 +192,7 @@
                         <a href="/classList.do?classCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
                         <a href="/classList.do?classCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
                         <a href="/classList.do?classCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
-                        <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>
+                        <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>                      
                     </div>
                 </div>
                 <c:choose>
@@ -310,6 +311,9 @@
     		return true;
     	}
     }
+    
+   
+  
     </script>
 </body>
 </html>

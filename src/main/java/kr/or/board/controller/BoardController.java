@@ -1,6 +1,7 @@
 package kr.or.board.controller;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
@@ -106,25 +107,111 @@ public class BoardController {
 		//return "redirect:/boardList.do?reqPage=1&boardType=F";
 	}
 	
+	// 게시물 수정
+	@RequestMapping(value="/boardUpdateFrm.do")
+	public String boardUpdateFrm(int boardNo,Model model){
+		HashMap<String, Object> Map = service.selectOneBoard(boardNo);
+		model.addAttribute("b",(Board)Map.get("b"));
+		return "board/boardUpdateFrm";
+	}
+	
+	@RequestMapping(value="/boardUpdate.do")
+	public String boardUpdate(int[] fileNoList, String[] filepathList,Board b,MultipartFile[] boardFile, HttpServletRequest request) {
+								//ㄴ(jsp에서)데이터가 같은 name으로 여러개 넘어오면 배열로 받기
+								// 배열: 삭제할파일 no, 삭제할 파일 경로
+		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+		
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
+		
+		if(!boardFile[0].isEmpty()) {
+			for(MultipartFile file:boardFile) {
+				String filename = file.getOriginalFilename();
+				//ㄴ올린 원본파일명 가져오기
+				String filepath = fileRename.fileRename(savePath,filename);
+				//ㄴ중복체크
+				File upFile = new File(savePath+filepath);
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(upFile);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+					//ㄴ서버에 파일 업로드
+					
+					FileVO f = new FileVO();
+					f.setFilename(filename);
+					f.setFilepath(filepath);
+					fileList.add(f);
+					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}// if문 종료
+		b.setFileList(fileList);
+		int result = service.boardUpdate(b,fileNoList);
+		if(fileNoList != null && result == (fileList.size()+fileNoList.length+1)) {
+			if(filepathList != null) {
+				//새 첨부파일 갯수, 삭제한 파일 갯수
+				for(String filepath : filepathList) {
+					File delFile = new File(savePath+filepath);
+					delFile.delete();
+				}
+			}
+		}
+		
+		return "redirect:/boardView.do?boardNo="+b.getBoardNo();
+	}
+	
+	//게시물 삭제
+	@RequestMapping(value="/boardDelete.do")
+	public String boardDelete(int boardNo, HttpServletRequest request) {
+		//borad테이블 삭제
+		ArrayList<FileVO> list = service.boardDelete(boardNo);
+		
+		//실제 파일 삭제
+		if(list != null) {
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
+			for(FileVO file : list) {
+				File delFile = new File(path+file.getFilepath());
+				delFile.delete();
+			}
+		}
+		return "redirect:/boardList.do?reqPage=1";
+	}
+	
 	//댓글입력
 	
 	@RequestMapping(value="/insertComment.do")
-	public String insertComment(BoardComment bc, Model model) {
+	public String insertComment(BoardComment bc) {
 		int result = service.insertComment(bc);
 //		return "board/boardView.do?boardNo="+bc.getBoardRef();
 	
 		return "redirect:/boardView.do?boardNo="+bc.getBoardRef();
-		
+	
+	// 댓글 수정
 	}
 	@RequestMapping(value="/boardCommentUpdate.do")
-	public String boardCommUpdate(BoardComment bc,Model model) {
+	public String boardCommUpdate(BoardComment bc,int boardNo) {
 		int result = service.updateBoardComment(bc);
-
-		return "redirect:/boardList.do?reqPage=1";
+		return "redirect:/boardView.do?boardNo="+boardNo;
+	}
+	
+	//댓글삭제
+	@RequestMapping(value="/deleteBoardComment.do")
+	public String deleteBoardComment(BoardComment bc,int boardNo) {
+		int result = service.deleteBoardComment(bc);
+		return "redirect:/boardView.do?boardNo="+boardNo;
 	}
 	
 	
-	
+	// 에이터 사용 이미지 업로드
 	@RequestMapping(value="/uploadImages.do")
 	public void uploadImage(Board b,MultipartFile[] file,HttpServletRequest request,HttpServletResponse response) throws IOException {
 																//ㄴ파일업로드 경로 구하기 위해서
@@ -168,9 +255,9 @@ public class BoardController {
 	
 	// 카테고리별 검색기능 -- 게시판 별로 따로 제작???
 	@RequestMapping(value="/searchBoard.do")
-	public String searchCategory(int reqPage, String categoryTag, String searchTag, Model model) {
+	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model) {
 		
-		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag);
+		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag,searchInput);
 		
 		model.addAttribute("list",(ArrayList<Board>)categoryMap.get("list"));
 		model.addAttribute("pageNavi",(String)categoryMap.get("pageNavi"));
@@ -179,6 +266,7 @@ public class BoardController {
 		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
 		model.addAttribute("categoryTag",(String)categoryMap.get("categoryTag"));
 		model.addAttribute("searchTag",(String)categoryMap.get("searchTag"));
+		model.addAttribute("searchInput",(String)categoryMap.get("searchInput"));
 		
 		
 		return "board/boardList";

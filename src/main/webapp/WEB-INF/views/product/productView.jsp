@@ -45,6 +45,7 @@ ul li.on a {
 	    <div class="productContent">
 	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</div>
 	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
+
         <div class="productWrap">
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
@@ -294,7 +295,7 @@ ul li.on a {
 					
 					const three2Div = $("<div>");
 					three2Div.addClass("reviewsTextArea");
-					const three2Textarea = $("<textarea>"+reviewContent+"</textarea>");
+					const three2Textarea = $("<textarea name='reviewContent'>"+reviewContent+"</textarea>");
 					three2Textarea.attr("readonly",true);
 					//
 					three2Div.append(three2Textarea);
@@ -474,13 +475,6 @@ ul li.on a {
 				  url : "/productReviewList.do",
 				  success : function(data){
 					  for (var i = (currentPage - 1) * dataPerPage;i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
-						  /*
-						  const div = $("<div>");
-						  div.addClass("abc");
-						  div.append("<div>"+data[i].productNo+"</div>");
-						  $(".productReviewDiv").append(div);
-						  */
-						  
 						  
 						  const oneDiv = $("<div>");
 							oneDiv.addClass("reviewsWrap reviewMenu");
@@ -501,7 +495,7 @@ ul li.on a {
 							
 							const three2Div = $("<div>");
 							three2Div.addClass("reviewsTextArea");
-							const three2Textarea = $("<textarea>"+data[i].reviewContent+"</textarea>");
+							const three2Textarea = $("<textarea name='reviewContent'>"+data[i].reviewContent+"</textarea>");
 							three2Textarea.attr("readonly",true);
 							//
 							three2Div.append(three2Textarea);
@@ -540,7 +534,6 @@ ul li.on a {
 							fourNextDiv.append(starSpan5);
 							three4Div.append(fourNextDiv);
 							
-							
 							const three5Div = $("<div>");
 							const fiveSpan = $("<span>"+data[i].reviewScore+"</span>");
 							fiveSpan.addClass("reviewScore");
@@ -549,13 +542,10 @@ ul li.on a {
 							
 							three4Div.append(three5Div);
 							
-							
-							
 							twoDiv.append(three1Div);
 							twoDiv.append(three2Div);
 							twoDiv.append(three3Div);
 							twoDiv.append(three4Div);
-							
 							
 							oneDiv.append(twoDiv);
 							
@@ -583,109 +573,7 @@ ul li.on a {
 			    displayData(reviewCurrentPage, dataPerPage);
 			    
 			 });
-			
-			
 		
-			/*
-			$("#reviewListBtn").on("click",function(){
-			const productNo = $("[name=productNo1]").val();
-			$.ajax({
-				url : "/productReviewList.do",
-				data : {
-					productNo:productNo
-					},
-				success : function(data){
-					console.log(data.length);
-					for(let i =0; i < data.length; i++){
-						const oneDiv = $("<div>");
-						oneDiv.addClass("reviewsWrap reviewMenu");
-						//
-						
-						const twoDiv = $("<div>");
-						twoDiv.addClass("reviewsContent");
-						//
-						
-						const three1Div = $("<div>");
-						three1Div.addClass("reviewsId");
-						const three1H6 = $("<h6>"+data[i].memberId+"</h6>"); //id
-						const three1P = $("<p>"+data[i].reviewDate+"</p>"); //date
-						//
-						three1Div.append(three1H6);
-						three1Div.append(three1P);
-						
-						
-						const three2Div = $("<div>");
-						three2Div.addClass("reviewsTextArea");
-						const three2Textarea = $("<textarea>"+data[i].reviewContent+"</textarea>");
-						three2Textarea.attr("readonly",true);
-						//
-						three2Div.append(three2Textarea);
-						
-						const three3Div = $("<div>");
-						three3Div.addClass("reviewsBtnBox");
-						const updateBtn = $("<button>수정</button>");
-						updateBtn.addClass("reviewUpdateBtn");
-						const deleteBtn = $("<button>삭제</button>");
-						deleteBtn.addClass("reviewDeleteBtn");
-						deleteBtn.attr("onclick","deleteReview("+data[i].reviewNo+",this);");
-						//
-						three3Div.append(updateBtn);
-						three3Div.append(deleteBtn);
-						
-						const three4Div = $("<div>");
-						three4Div.addClass("reviewsScore");
-						const fourNextDiv = $("<div>");
-						fourNextDiv.addClass("reviewStar-wrap");
-						const starSpan1 = $("<span>star</span>");
-						const starSpan2 = $("<span>star</span>");
-						const starSpan3 = $("<span>star</span>");
-						const starSpan4 = $("<span>star</span>");
-						const starSpan5 = $("<span>star</span>");
-						starSpan1.addClass("material-icons")
-						starSpan2.addClass("material-icons")
-						starSpan3.addClass("material-icons")
-						starSpan4.addClass("material-icons")
-						starSpan5.addClass("material-icons")
-						//
-						fourNextDiv.append(starSpan1);
-						fourNextDiv.append(starSpan2);
-						fourNextDiv.append(starSpan3);
-						fourNextDiv.append(starSpan4);
-						fourNextDiv.append(starSpan5);
-						three4Div.append(fourNextDiv);
-						
-						
-						const three5Div = $("<div>");
-						const fiveSpan = $("<span>"+data[i].reviewScore+"</span>");
-						fiveSpan.addClass("reviewScore");
-						//
-						three5Div.append(fiveSpan);
-						
-						three4Div.append(three5Div);
-						
-						twoDiv.append(three1Div);
-						twoDiv.append(three2Div);
-						twoDiv.append(three3Div);
-						twoDiv.append(three4Div);
-						
-						
-						oneDiv.append(twoDiv);
-						$(".productReviewDiv").append(oneDiv);
-						
-						$(".reviewsScore").each(function(index,item){
-							const score = $(item).children().eq(1).children().text();
-							const span = $(item).children().eq(0).children();
-							for(let i = 0; i<score; i++){
-								span.eq(i).css("color","gold");
-							}
-						});
-					}
-						$(".productReviewDiv").append("<div>페이징</div>");
-				}
-				
-			});
-		});
-		*/
 		function modifyComment(obj,reviewNo,productNo){
 			$(obj).parent().prev().children().attr("readonly",false).css("background-color","#F0FFF0");
 			$(obj).text("수정완료");
@@ -710,14 +598,11 @@ ul li.on a {
 			const productNoInput = $("<input type='text' name='productNo'>");
 			productNoInput.val(productNo);
 			form.append(productNoInput);
-			
 			const productReviewContent = $(obj).parent().prev().children().clone();
 			form.append(productReviewContent);
 			$("body").append(form);
-			
 			form.submit();
 		};
-		
 		</script>
 </body>
 </html>

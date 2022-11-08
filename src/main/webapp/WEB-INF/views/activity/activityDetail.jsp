@@ -9,8 +9,9 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
         <!-- Page Header Start -->
-        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" stydata-wow-delay="0.1s" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/img/다운로드\ \(2\).jpg) center center no-repeat; background-size: cover;">
+        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/img/다운로드\ \(2\).jpg) center center no-repeat; background-size: cover;">
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">${cla.className }</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
@@ -47,46 +48,7 @@
 	                        <option value="6">6인</option>
 	                    </select>
 	                    <span id="amountPrice" style="width:150px; color: white;">${act.activityPrice }</span>
-	                    <script>
-	                    $(function(){
-	                    	const amount = $("[name=amount]").val()
-	                    	const amountPrice ='${act.activityPrice }';
-	                    	const amountPrice2 ='${act.activityPrice }';
-	                    	console.log("amountPrice2값:::::"+amountPrice2)
-	                    	const splits = amountPrice2.split(',');
-	                    	let realPrice ="";
-	                    	
-	                    	console.log(splits);
-	                    	for(let i=0;i<splits.length;i++){
-	                    		realPrice += splits[i];
-	                    	}
-	                    	
-	                  
-                    		
-                    		$("#realAmount").text(amount*realPrice);
-	                    });
-	                 
-	                    
-	                    
-	                    	$("#amountSelect").on("change",function(){
-	                    		const amount = $("[name=amount]").val()
-		                    	const amountPrice ='${act.activityPrice }';
-		                    	const amountPrice2 ='${act.activityPrice }';
-		                    	console.log("amountPrice2값:::::"+amountPrice2)
-		                    	const splits = amountPrice2.split(',');
-		                    	let realPrice ="";
-		                    	
-		                    	console.log(splits);
-		                    	for(let i=0;i<splits.length;i++){
-		                    		realPrice += splits[i];
-		                    	}
-		                    	
-		                  
-	                    		
-	                    		$("#realAmount").text(amount*realPrice);
-	                    	})
-	    					
-	                    </script>
+	                   
                     </div>
                 </div>
                 <div>
@@ -116,9 +78,7 @@
 						<p><strong style="font-size:1.3em">담당자</strong><h3>${act.activityManagerName }	님</h3></p>
 						<p><span>시작일:  ${act.startDate }</span></p> 
 						<p><span>종료일: ${act.endDate }</span></p>
-						
-						
-						
+					 
 						</div>
 					</div>
 				</div>
@@ -144,10 +104,12 @@
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" >
                         <p class="fs-5 fw-bold text-primary">담당자 : ${act.activityManagerName }님과 함께하는</p>
                         <h1 class="display-5 mb-4">액티비티 활동!</h1>
-                        
+                        <input class="form-control" name = "startDate"  id="activityStartDate" style="width: 200px; display: inline-block;" 
+                          onclick="javascript:f_datepicker(this);" placeholder="시작일 ex) 20221024"/>
+						
                         <c:forEach items="${act.fileList }" var="details">
                         <p class="mb-4"><img src="resources/upload/activity/${details.filepath }"/></p>
-                        </c:forEach>    
+                        </c:forEach> 
                     </div>
                    
                 </div>
@@ -158,47 +120,23 @@
         <!-- Features End -->
 
         <!-- 강사 소개 -->
+    	<div class="container-xxl py-1 mt-1" id="#menu2">
+       		<div class="class-row g-5">      
+		        <h4 class="display-6 mb-4">
+		        	<pre class="mb-4" style="font-size:1.2em; font-weight:bold;">${act.activityDetail}</pre>
+		        </h4>
+        	</div>    
+        </div>	
+        <hr>
         <div class="container-xxl py-1 mt-1" id="#menu2">
-       	<div class="class-row g-5">
-              
-                       
-                        <h4 class="display-6 mb-4"></h4>
-                        <pre class="mb-4" style="font-size:1.2em; font-weight:bold;">${act.activityDetail}</pre>
-              </div>
-           
-        </div>
+       		<div class="class-row g-5">      
+		        <h4 class="display-6 mb-4">
+		        	<pre class="mb-4" style="font-size:1.2em; font-weight:bold;">${act.etc}</pre>
+		        </h4>
+        	</div>    
+        </div>	
         <!-- About End -->
-        
-        
-        <!-- 클래스 준비물 -->
-        
-        <!-- 
-        <div class="container-xxl py-5 mt-5" id="#menu3">
-            <div class="container">
-                <div class="class-row g-5 align-items-end">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                        <p class="fs-5 fw-bold text-primary">클래스 준비물</p>
-                        <h1 class="display-5 mb-5"><span>1</span> 건 있어요</h1>
-                    </div>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item rounded class-item">
-                            <img class="img-fluid class-img" src="/resources/MAINbtstr/img/person_1.jpg" alt="">
-                            <div class="team-text">
-                                <h4 class="mb-0">왕 밝은 미소</h4>
-                                <p class="text-primary">20000</p>
-                                <div class="team-social d-flex">
-                                    <span>바로 구매하러 가기 > </span>
-                                    <a class="btn btn-square rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         -->
+     
         <!-- Team End -->
 
         <!-- 환불규정 -->
@@ -274,93 +212,160 @@
 
 
     <!-- side-bar script-->
-    <script>
-        function showSide(){
-            const position  = $(window).scrollTop();
-            console.log(position);
-            let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
-	        let windowHeight = window.innerHeight; // 스크린 창
-            let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x, footer제외
-            if(position > 3800){
-                $(".sidenav").fadeOut(1);
-            }else if(position > 250 ){ // 스크롤 위치 343보다 클 때만 보이겠다
-                $(".sidenav").fadeIn(300);
-                console.log(fullHeight);
-            }else {
-                $(".sidenav").fadeOut(1);
-            }
+	<script>
+	   const startDate = '${act.startDate}';
+       const endDate = '${act.endDate}';
+		function f_datepicker(obj) {
+			$(obj).datepicker().datepicker("show");
+					
+		}
 
-            if(position > 4000 || 905 > position){
-                $("#scroll-select").removeClass("scroll-select-box-fixed");
-            }else if(position > 905){
-                $("#scroll-select").addClass("scroll-select-box-fixed");
-            }
-        }
-        
-        $(window).on("scroll",function(){
-            showSide();
-	        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
-        });
-
-        $(function(){
-            showSide();
-        });
-
-       
-        
-        // 리뷰 script
-	    $("#review-btn").on("click", function(){
-	        $(".rmodal-wrap").css("display", "flex");
-	    })
+		$.datepicker.setDefaults({
+			dateFormat : 'yy-mm-dd',
+			prevText : '이전 달',
+			nextText : '다음 달',
+			monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+					'9월', '10월', '11월', '12월' ],
+			monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+					'9월', '10월', '11월', '12월' ],
+			dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+			dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+			//minDate : '-100y',
+			minDate: new Date(startDate),
+  			maxDate: new Date(endDate),
+			showMonthAfterYear : true,
+			changeYear : true,
+			yearSuffix : '년'
+		});
 		
-	    $("#modal-btn-box>button:first-child").on("click",function(){
-	        $(".rmodal-wrap").css("display", "none");
-	        $("#star-box").css("visibility", "hidden");
-	        $("#star-box").children().css("color", "lightgrey");
-	    })
-		
-	    const starBox = $(".comment-box>div:first-child");
-	    const stars = $("#star-box>span"); // star아이콘모음
-	    stars.on("mouseover", function(){
-	        const idx = stars.index(this);
-	        stars.each(function(index, item){
-	            if(idx>=index){ //마우스가 올라간 인덱스보다 작거나 같으면
-	                $(item).css("color", "rgb(255, 197, 0)");
-	            }else{
-	                $(item).css("color", "lightgrey");
-	            }
-	        })
+		$(function(){
+	    	const amount = $("[name=amount]").val()
+	    	const amountPrice ='${act.activityPrice }';
+	    	const amountPrice2 ='${act.activityPrice }';
+	    	console.log("amountPrice2값:::::"+amountPrice2)
+	    	const splits = amountPrice2.split(',');
+	    	let realPrice ="";
+	    	
+	    	console.log(splits);
+	    	for(let i=0;i<splits.length;i++){
+	    		realPrice += splits[i];
+	    	}
+	    	
+	  
+			
+			$("#realAmount").text(amount*realPrice);
 	    });
-		
-	    stars.on("mouseleave", function(){
-	        const realScore = Number($(".real-score").text());
-	        const starInput = $("#star");
-	        starInput.val(realScore);
-	        stars.each(function(index, item){
-	            if(realScore>index){
-	                $(item).css("color", "rgb(255, 197, 0)");
-	            }else{
-	                $(item).css("color", "lightgrey");
+	 
+	    
+	    
+	    	$("#amountSelect").on("change",function(){
+	    		const amount = $("[name=amount]").val()
+	        	const amountPrice ='${act.activityPrice }';
+	        	const amountPrice2 ='${act.activityPrice }';
+	        	console.log("amountPrice2값:::::"+amountPrice2)
+	        	const splits = amountPrice2.split(',');
+	        	let realPrice ="";
+	        	
+	        	console.log(splits);
+	        	for(let i=0;i<splits.length;i++){
+	        		realPrice += splits[i];
+	        	}
+	        	
+	      
+	    		
+	    		$("#realAmount").text(amount*realPrice);
+	    	})
+			
+	  
+	    
+	        function showSide(){
+	            const position  = $(window).scrollTop();
+	            console.log(position);
+	            let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
+		        let windowHeight = window.innerHeight; // 스크린 창
+	            let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x, footer제외
+	            if(position > 3800){
+	                $(".sidenav").fadeOut(1);
+	            }else if(position > 250 ){ // 스크롤 위치 343보다 클 때만 보이겠다
+	                $(".sidenav").fadeIn(300);
+	                console.log(fullHeight);
+	            }else {
+	                $(".sidenav").fadeOut(1);
 	            }
-	        })
-	    })
-	
-	    stars.on("click", function(){
-	        const idx = stars.index(this);
-	        $(".real-score").text(idx+1);
-	        starBox.css("visibility", "visible");
-	        const commentSpan = $(".comment-box>div:last-child>span");
-	        if(idx>1){
-	            commentSpan.text("어떤 점이 좋았나요?");
-	        }else{
-	            commentSpan.text("어떤 점이 아쉬웠나요?");
+
+	            if(position > 4000 || 905 > position){
+	                $("#scroll-select").removeClass("scroll-select-box-fixed");
+	            }else if(position > 905){
+	                $("#scroll-select").addClass("scroll-select-box-fixed");
+	            }
 	        }
-	    })
+	        
+	        $(window).on("scroll",function(){
+	            showSide();
+		        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
+	        });
 
-    </script>
+	        $(function(){
+	            showSide();
+	         
+	            console.log(startDate);
+	            console.log(typeof startDate);
+	        });
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	       
+	        
+	        // 리뷰 script
+		    $("#review-btn").on("click", function(){
+		        $(".rmodal-wrap").css("display", "flex");
+		    })
+			
+		    $("#modal-btn-box>button:first-child").on("click",function(){
+		        $(".rmodal-wrap").css("display", "none");
+		        $("#star-box").css("visibility", "hidden");
+		        $("#star-box").children().css("color", "lightgrey");
+		    })
+			
+		    const starBox = $(".comment-box>div:first-child");
+		    const stars = $("#star-box>span"); // star아이콘모음
+		    stars.on("mouseover", function(){
+		        const idx = stars.index(this);
+		        stars.each(function(index, item){
+		            if(idx>=index){ //마우스가 올라간 인덱스보다 작거나 같으면
+		                $(item).css("color", "rgb(255, 197, 0)");
+		            }else{
+		                $(item).css("color", "lightgrey");
+		            }
+		        })
+		    });
+			
+		    stars.on("mouseleave", function(){
+		        const realScore = Number($(".real-score").text());
+		        const starInput = $("#star");
+		        starInput.val(realScore);
+		        stars.each(function(index, item){
+		            if(realScore>index){
+		                $(item).css("color", "rgb(255, 197, 0)");
+		            }else{
+		                $(item).css("color", "lightgrey");
+		            }
+		        })
+		    })
+		
+		    stars.on("click", function(){
+		        const idx = stars.index(this);
+		        $(".real-score").text(idx+1);
+		        starBox.css("visibility", "visible");
+		        const commentSpan = $(".comment-box>div:last-child>span");
+		        if(idx>1){
+		            commentSpan.text("어떤 점이 좋았나요?");
+		        }else{
+		            commentSpan.text("어떤 점이 아쉬웠나요?");
+		        }
+		    })
+			
+	</script>
+	<!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>

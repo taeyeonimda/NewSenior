@@ -83,6 +83,7 @@
                         <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                         <div class="col-md-10">
                           <input type="image" name = 'files' disabled src="resources/upload/class/${cla.filepath }" class="btn btn-outline-primary">
+                          <input type="file" value="${cla.filepath }">
                         </div>
                       </div>
                      	

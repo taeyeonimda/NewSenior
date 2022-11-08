@@ -31,9 +31,10 @@ public class ActivityService {
 		int result = dao.insertActivity(activity);
 		System.out.println("insertActivity service result값"+result);
 		
-		if(result>0) {
+		if(result>0 && activity.getFileList() == null) {
+			return result;
+		}else if(result>0) {
 			System.out.println("insertActivity service No 체크"+activity.getActivityNo());
-
 			if(!activity.getFileList().isEmpty()) {
 				for(FileVo fileVo:activity.getFileList()) {
 					fileVo.setActivityNo(activity.getActivityNo());

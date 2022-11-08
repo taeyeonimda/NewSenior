@@ -102,9 +102,10 @@ public class MemberDao {
 		return d;
 	}
 
-	public int updateAddr(Integer deliveryNo) {
+
+	public int updateOneAddr(Delivery delivery) {
 		// TODO Auto-generated method stub
-		int result = sqlSession.update("delivery.updateOneAddr",deliveryNo);
+ 		int result = sqlSession.update("delivery.updateOneAddr",delivery);
 		return result;
 	}
 

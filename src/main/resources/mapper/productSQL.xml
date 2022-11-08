@@ -110,4 +110,8 @@
   <select id="productReviewCount" parameterType="_int" resultType="_int">
   	select count(*) from product_reviews where product_no=#{_parameter}
   </select>
+  
+  <update id="reviewUpdate" parameterType="pr">
+  	update product_reviews set product_review_content = #{reviewContent} where product_review_no = #{reviewNo}
+  </update>
 </mapper>

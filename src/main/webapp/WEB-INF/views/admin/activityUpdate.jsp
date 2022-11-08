@@ -16,7 +16,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+	
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -47,6 +47,8 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
+
   <body>
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
@@ -66,7 +68,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <!-- HTML5 Inputs -->
-            <form action="/insertActivity.do" method="post" encType="multipart/form-data" id="insertActFrm">
+            <form  id="insertActFrm">
               <div class="card mb-4" style="width: 60%; float: left;">
                 <h5 class="card-header" style="text-align: center;">액티비티 등록하기</h5>
                 <div class="card-body">
@@ -79,7 +81,7 @@
                   <div class="mb-3 row">
                     <label for="html5-file-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
-                      <input type="file" name="filepath" class="btn btn-outline-primary" id="html5-file-input">
+                      <input type="file" name="files" class="btn btn-outline-primary" id="html5-file-input">
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -99,18 +101,28 @@
                     </div>
                   </div>
                   <div class="mb-3 row">
-                    <label for="html5-detail-input" class="col-md-2 col-form-label">액티비티상세</label>
+                    <label for="html5-detail-input" class="col-md-2 col-form-label">상세소개</label>
                     <div class="col-md-10">
                       <textarea class="form-control" name="activityDetail" id="html5-detail-input" ></textarea>
                     </div>
                   </div>
                   
                   <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">수강기간</label>
+                      <label for="html5-tel-input" class="col-md-2 col-form-label">상세사진</label>
+                       <div class="col-md-10">
+                        <input type="file" class="form-control" name="detailFiles" id="html5-tel-input" multiple/>
+                     </div>
+                  </div>
+				
+				
+                  <div class="mb-3 row">
+                        <label for="activityStartDate" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = "startDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="시작일 ex) 20221024"/>
+                          <input class="form-control" name = "startDate"  id="activityStartDate" style="width: 200px; display: inline-block;" 
+                          onclick="javascript:f_datepicker(this);" placeholder="시작일 ex) 20221024"/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
-                          <input class="form-control" name ="endDate" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" placeholder="종료일 ex) 20221024"/>
+                          <input class="form-control" name ="endDate"  id="endDate" style="width: 200px; display: inline-block;" 
+                           onclick="javascript:f_datepicker(this);" placeholder="종료일 ex) 20221024"/>
                         </div>
                       </div>
                   
@@ -118,17 +130,9 @@
                     <label for="html5-cate-input" class="col-md-2 col-form-label">카테고리</label>
                       <div class="btn-group" style="width: 200px;">
                          <select name="activityCategory" id="html5-cate-input">
-                        	<option value="DG">디지털</option>
-                        	<option value="FU">주식/재테크</option>
-                        	<option value="CR">공예</option>
-                        	<option value="DE">디자인</option>
-                        	<option value="EX">운동</option>
-                        	<option value="FS">패션</option>
-                        	<option value="ME">미디어</option>
-                        	<option value="SO">악기/음악</option>
-                        	<option value="FO">외국어</option>
-                        	<option value="CO">요리/음식</option>
-                        	<option value="ET">기타</option>
+                         <c:forEach items="${cateList}" var="cateList">
+					       <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
+					     </c:forEach>   
      					</select>
                       </div>
                   </div>
@@ -147,7 +151,15 @@
                       <input class="form-control" name="activityPrice" id="html5-price-input" />
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-outline-primary" id="submitBtn" onclick="subBtn()" >등록하기</button>
+                  
+                   <div class="mb-3 row">
+                    <label for="html5-etc-input" class="col-md-2 col-form-label">기타사항</label>
+                    <div class="col-md-10">
+                      <textarea class="form-control" name="etc" id="html5-etc-input" ></textarea>
+                    </div>
+                  </div>
+                  
+                  <button type="button" class="btn btn-outline-primary" id="submitBtn" >등록하기</button>
                 </div>
               </div>
             </form>
@@ -155,6 +167,12 @@
             </div>
 </div>
 <script>
+
+function f_datepicker(obj) {
+	 $( obj ).datepicker().datepicker("show");
+	}
+	
+	
 //인원수 옵션값넣기
 const limitSelect = $("select[name=activityLimit]");
 	for(let i=1;i<=30;i++){
@@ -165,10 +183,10 @@ const limitSelect = $("select[name=activityLimit]");
 				})
 				)
 	}
-function subBtn(){
 	
+	$("#submitBtn").on("click",function(){
 		const activityName = $("input[name=activityName]").val();
-		const filepath = document.querySelector("input[name=filepath]").files[0];
+		const files = document.querySelector("input[name=files]").files[0];
 		const activityManager = $("select[name=activityManager]").val();
 		const activityIntroduce = $("input[name=activityIntroduce]").val();
 		const activityDetail = $("textarea[name=activityDetail]").val();
@@ -177,6 +195,82 @@ function subBtn(){
 		const activityPrice = $("input[name=activityPrice]").val();
 		const startDate = $("input[name=startDate]").val();
 		const endDate = $("input[name=endDate]").val();
+		const files2 = document.querySelector("input[name=detailFiles]").files;
+		const etc = $("textarea[name=etc]").val();
+		
+		console.log(activityName);
+		console.log(files);
+		console.log(activityManager);
+		console.log(activityIntroduce);
+		console.log(activityDetail);
+		console.log(activityLimit);
+		console.log(activityCategory);
+		console.log(activityPrice);
+		console.log(startDate);
+		console.log(endDate);
+		
+		var formData = new FormData();
+		formData.append('activityName',activityName);
+		formData.append('files',files);
+		formData.append('activityManager',activityManager);
+		formData.append('activityIntroduce',activityIntroduce);
+		formData.append('activityDetail',activityDetail);
+		formData.append('activityLimit',activityLimit);
+		formData.append('activityCategory',activityCategory);
+		formData.append('activityPrice',activityPrice);
+		formData.append('startDate',startDate);
+		formData.append('endDate',endDate);
+		formData.append('etc',etc);
+		for(let i=0;i<files2.length;i++){
+			formData.append('detailFiles',files2[i]);
+		}
+		
+		console.log(formData.get("activityName"));
+		console.log(formData.get("files"));
+		console.log(formData.get("activityManager"));
+		console.log(formData.get("activityIntroduce"));
+		console.log(formData.get("activityDetail"));
+		console.log(formData.get("activityLimit"));
+		console.log(formData.get("activityCategory"));
+		console.log(formData.get("activityPrice"));
+		console.log(formData.get("startDate"));
+		console.log(formData.get("endDate"));
+		
+		
+		$.ajax({
+ 			url : "/insertActivity.do",
+			type:"post",
+			data: formData,
+			contentType: false,
+            processData: false,
+            enctype	: 'multipart/form-data',
+			success:function(){
+				location.href="activityMgrAdmin.do?reqPage=1";
+			},error:function(){
+				alert("error");
+			}
+			
+			
+ 		})//ajax
+	
+	});
+	
+	
+	$.datepicker.setDefaults({
+		dateFormat: 'yy-mm-dd',
+		prevText: '이전 달',
+		nextText: '다음 달',
+		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		minDate: '-100y',
+		showMonthAfterYear: true,
+		changeYear: true,
+		yearSuffix: '년'
+	});
+		
 	/*	
 		if(activityName==""){
 			alert("activityName 비었음");
@@ -219,18 +313,9 @@ function subBtn(){
 			return null;
 		}
 	*/	
-		console.log(activityName);
-		console.log(filepath);
-		console.log(activityManager);
-		console.log(activityIntroduce);
-		console.log(activityDetail);
-		console.log(activityLimit);
-		console.log(activityCategory);
-		console.log(activityPrice);
-		console.log(startDate);
-		console.log(endDate);
+		
 	
-		}
+		
 </script>
 
         <!-- / Content -->
