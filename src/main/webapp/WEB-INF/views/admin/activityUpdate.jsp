@@ -186,7 +186,7 @@ const limitSelect = $("select[name=activityLimit]");
 	
 	$("#submitBtn").on("click",function(){
 		const activityName = $("input[name=activityName]").val();
-		let files = document.querySelector("input[name=files]").files[0];
+		const files = document.querySelector("input[name=files]").files[0];
 		const activityManager = $("select[name=activityManager]").val();
 		const activityIntroduce = $("input[name=activityIntroduce]").val();
 		const activityDetail = $("textarea[name=activityDetail]").val();
@@ -198,17 +198,20 @@ const limitSelect = $("select[name=activityLimit]");
 		const files2 = document.querySelector("input[name=detailFiles]").files;
 		const etc = $("textarea[name=etc]").val();
 		
-		
+		console.log(activityName);
 		console.log(files);
-		console.log(files2);
+		console.log(activityManager);
+		console.log(activityIntroduce);
+		console.log(activityDetail);
+		console.log(activityLimit);
+		console.log(activityCategory);
+		console.log(activityPrice);
+		console.log(startDate);
+		console.log(endDate);
+		
 		var formData = new FormData();
 		formData.append('activityName',activityName);
-		if(files!=null){
-			formData.append('files',files);
-		}else{
-			formData.append('files',null);
-		}
-		
+		formData.append('files',files);
 		formData.append('activityManager',activityManager);
 		formData.append('activityIntroduce',activityIntroduce);
 		formData.append('activityDetail',activityDetail);
@@ -218,15 +221,20 @@ const limitSelect = $("select[name=activityLimit]");
 		formData.append('startDate',startDate);
 		formData.append('endDate',endDate);
 		formData.append('etc',etc);
-		if(files2.length==0){
-			formData.append('detailFiles',null);
-		}else{
-			for(let i=0;i<files2.length;i++){
-				formData.append('detailFiles',files2[i]);
-			}
+		for(let i=0;i<files2.length;i++){
+			formData.append('detailFiles',files2[i]);
 		}
 		
-	
+		console.log(formData.get("activityName"));
+		console.log(formData.get("files"));
+		console.log(formData.get("activityManager"));
+		console.log(formData.get("activityIntroduce"));
+		console.log(formData.get("activityDetail"));
+		console.log(formData.get("activityLimit"));
+		console.log(formData.get("activityCategory"));
+		console.log(formData.get("activityPrice"));
+		console.log(formData.get("startDate"));
+		console.log(formData.get("endDate"));
 		
 		
 		$.ajax({
