@@ -17,45 +17,57 @@
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLUB</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
-                    <h4 class="mb-3 text-white">관심사를 검색하세요 ! </h4>
-                    <input type="text" class="mt-2" id="serchInput"><button id="serchBtn" onclick="">찾기</button>
-                    <input type="hidden" name="clubCategory" value="${clubCategory }">
+                    <h5 class="mb-3 text-white">공통의 관심사를 가진 시니어들과 온라인으로 소통할 수 있습니다</h5>
                 </nav>
             </div>
         </div>
         <!-- Page Header End -->
-        
-        <div style="width: 80%; display: flex; justify-content: space-between; margin: 0 auto;">
+        <div class="popular-box"> <!-- 인기 리스트 div  -->
+        	<c:if test="${not empty sessionScope.m }">
+		        <c:choose>
+		        	<c:when test="${not empty pList }">
+		        		<p class="fs-5 fw-bold text-primary text-center mb-5">${sessionScope.m.memberName }님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
+				        <div class="row mb-5">
+				        	<c:forEach items="${pList }" var="pl">
+							<div class="col-md-6 col-lg-4 mb-3">
+								<div class="card h-100">
+				      				<img src="/resources/upload/club/hero.png">
+				      				<div class="card-body">
+						        		<h5 class="card-title">${pl.clubName }</h5>
+						        		<p class="card-text">${pl.clubIntro }</p>
+						        		<a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
+					      			</div>
+				    			</div>
+				  			</div>
+				  			</c:forEach>
+						</div>
+		        	</c:when>
+		        	<c:otherwise>
+		        		<div class="fs-5 fw-bold text-primary text-center">선택된 관심사가 없습니다 마이페이지에서 등록하고 동호회를 추천 받으세요 !</div>
+		        	</c:otherwise>
+		        </c:choose>
+	        </c:if>
+        </div> <!-- 인기 리스트 div End  -->
+
+
+		<div style="width: 80%; display: flex; justify-content: space-between; margin: 0 auto;">
         	<div id="displayCount">
         	</div>
+        	<div class="club-input">
+            	<input type="text" class="form-control bg-light border-0" id="serchInput"><button id="serchBtn" class="btn btn btn-outline-primary" onclick="initClubList();">찾기</button>
+        	</div>
         	<div>
-        		<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
+        		<c:if test="${not empty sessionScope.m }">
+        			<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
+        		</c:if>
         	</div>
         </div>
-        
-        <div> <!-- 인기 리스트 div  -->
-        <c:if test="${not empty pList }">
-	        <c:forEach items="${pList }" var="pl">
-	        <div class="row mb-5">
-				<div class="col-md-6 col-lg-4 mb-3">
-					<div class="card h-100">
-	      				<img>
-	      				<div class="card-body">
-			        		<h5 class="card-title">${pl.clubName }</h5>
-			        		<p class="card-text">${pl.clubIntro }</p>
-			        		<a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a>
-		      			</div>
-	    			</div>
-	  			</div>
-			</div>
-	        </c:forEach>
-	    </c:if>
-        </div> <!-- 인기 리스트 div End  -->
+
 
 		<!-- ajax로 추가 -->
 		<div id="club-list" class="mt-5 club-list">
 		</div>
-		
+
 		
 		<div class="pagingBox mt-5">
 			<ul id="pagingUl" class="pagination justify-content-center">
@@ -64,6 +76,7 @@
 		
 	</div> <!-- pageContent End -->
 	
+	<div id="memberNo">${sessionScope.m.memberNo }</div>
 	
 <div class="modal-wrap">
     <div class="club-info-modal bg-secondary">
@@ -79,7 +92,7 @@
             </div>
             <div class="modal-btn-box">
             	<button onclick="closeModal();" class="btn btn-primary">닫기</button>
-            	<a href="/" class="btn btn-primary">입장하기</a>
+            	<a href="javascript:void(0);" class="btn btn-primary" id="enterBtn">입장하기</a>
             </div>
         </div>
     </div>
@@ -106,17 +119,18 @@
     
     function initClubList() {
    	 	//dataPerPage 선택값 가져오기
-	    dataPerPage = 3;
+   	 	$("#club-list div").remove();
+	    dataPerPage = 6;
  		const keyword = $("#serchInput").val();
 	    $.ajax({ // ajax로 데이터 가져오기
 	    	method: "post",
 	    	url: "/searchAllClub.do",
-	    	data: {keyword : keyword},
+	    	data: {keyword : keyword },
 	    	success: function (data) {
 	    	   //totalData 구하기
 	    	   totalData = data.length;
 	    	   console.log("totalData:"+totalData);
-	    	   displayData(1, dataPerPage); //글 목록 표시 호출 (테이블 생성)
+	    	   displayData(1, dataPerPage, keyword); //글 목록 표시 호출 (테이블 생성)
 	    	   paging(totalData, dataPerPage, pageCount, 1); //페이징 표시 호출
 	    	}
     	});
@@ -167,7 +181,7 @@
     	  $("#pagingUl").html(pageHtml);
     	  let displayCount = "";
     	  displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
-    	  $("#displayCount").text(displayCount);
+    	  $("#displayCount").text(displayCount).addClass("text-primary");
 
 
     	  //페이징 번호 클릭 이벤트 
@@ -189,12 +203,13 @@
     	}
     
 	  //현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
-	    function displayData(currentPage, dataPerPage) {
+	    function displayData(currentPage, dataPerPage, keyword) {
 	      	currentPage = Number(currentPage);
 	      	dataPerPage = Number(dataPerPage);
 	      	$.ajax({ // ajax로 데이터 가져오기
 		    	method: "post",
 		    	url: "/searchAllClub.do",
+		    	data: {keyword : keyword},
 		    	success: function (data) {
 		    		console.log("currentPage"+currentPage);
 		    		console.log("dataPerPage"+dataPerPage);
@@ -203,9 +218,9 @@
 						const div = $("<div>");
 						div.addClass("lists");
 						div.attr("onclick", "clubInfoModal("+data[i].clubNo+")");
+						div.append("<img src='/resources/MAINbtstr/img/로고2.png' width='65px'>")
 						div.append("<h4 class='mb-3'>"+data[i].clubName+"</h4");
-						div.append("<p>참여인원수 : <span></span> / <span>"+data[i].clubLimit+"</span></p>");
-						div.append("<a href='/clubDetail.do?clubNo="+data[i].clubNo+"'>들어가기</a>");
+						div.append("<p>참여인원수 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></p>");
 						$("#club-list").append(div);
 					}
 		    	}
@@ -214,20 +229,58 @@
 	    }
 
     	function clubInfoModal(clubNo) {
+    		const memberNo = $("#memberNo").text();
+    		if(memberNo==""){
+    			alert("로그인 먼저 진행해 주세요");
+    			return;
+    		}
 			console.log(clubNo);
 			$.ajax({
-				url:"/selectOneClub.do",
-				data:{clubNo:clubNo},
-				success:function(one){
+				url : "/selectOneClub.do",
+				data : {clubNo:clubNo },
+				success : function(one){
 					const clubName = $(".club-info-box>h3");
 					const clubContent = $(".club-info-box>p");
 					const clubImg = $(".modal-img-div>img");
 					clubName.text(one.clubName);
 					clubContent.text(one.clubIntro);
 					clubImg.attr("src", "/resources/upload/club/"+one.clubMainImg);
+					myClubCheck(memberNo, one.clubNo);
 				}
 			});
 			$(".modal-wrap").css("display", "flex");
+		}
+
+    	
+    	function myClubCheck(memberNo, clubNo) {
+    		const btn = $("#enterBtn");
+    		btn.text('가입하기');
+    		btn.attr('onclick', 'joinClub('+memberNo+', '+clubNo+');');
+    		$.ajax({
+    			url:"/searchMyClub.do",
+    			data:{memberNo: memberNo},
+    			success:function(myList){
+    				for(let i=0; i<myList.length; i++){
+    					console.log(myList);
+    					if(myList[i].clubNo==clubNo){
+    						btn.text('입장하기');
+    						btn.attr('onclick', 'enterClub('+myList[i].clubNo+');');
+    					}
+    				}
+    			}
+    		})
+		}
+    	
+    	function joinClub(memberNo, clubNo) {
+    		if(confirm('정말 가입하시겠습니까?')){
+    			location.href="/myClubList.do?memberNo="+memberNo+"&clubNo="+clubNo;
+    		}else{
+    			$(".modal-wrap").css("display", "none");
+    		}
+		}
+    	
+    	function enterClub(clubNo) {
+			location.href="/clubDetail.do?clubNo="+clubNo;
 		}
     	
         function closeModal() {
