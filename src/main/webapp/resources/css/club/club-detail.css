@@ -38,9 +38,15 @@
 	align-items: flex-start;
 }
 .lists{
-	border: 1px solid #eee;
-	
-	width: 33%;
+	border: 1px solid #bbb;
+	margin: 20px;
+	width: 30.5%;
+}
+.lists:nth-of-type(3n){
+	margin-left: 0;
+}
+.lists *{
+	text-align: center;
 }
 #club-input{
 	border-radius: 15px;

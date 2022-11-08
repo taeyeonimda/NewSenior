@@ -161,8 +161,8 @@
 														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;" class="comment-textarea">ncContent</textarea>
 														<p class="comment-link">
 															<c:if test="${cbc.clubComWriter eq sessionScope.m.memberNo}">
-															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">수정</a>
-															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">삭제</a>
+															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubNo});">수정</a>
+															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubNo});">삭제</a>
 															</c:if>
 															<a href="javascript:void(0)" class="recShow">답글달기</a>
 														</p>
@@ -213,17 +213,15 @@
 														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
 														<c:if test="${cbrc.clubComWriter eq sessionScope.m.memberNo}">
 														<p class="comment-link">
-															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">수정</a> 
-															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbc.clubComNo }, ${cb.clubBoardNo});">삭제</a> 
+															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbrc.clubComNo }, ${cb.clubNo});">수정</a> 
+															<a href="javascript:void(0)" onclick="deleteComment(this, ${cbrc.clubComNo }, ${cb.clubNo});">삭제</a> 
 														</p>
 														</c:if>
 													</li>
 												</ul>
 											</c:if>
 			                    			</c:forEach> <!-- 대댓글 for문 -->
-			                    			
 
-											
 			                    		</c:if>
 			                    	</c:forEach> <!-- 댓글 for문 -->
 			                    	</c:if> <!-- 댓글이 null이 아니면 -->
@@ -303,49 +301,49 @@
 		$(".inputRecommentBox").eq(idx).find("textarea").focus();
 	})
 	
-	function modifyComment(obj, cbcNo, cbNo){
+	function modifyComment(obj, cbcNo, clubNo){
 		$(obj).parent().prev().show(); //textarea 화면에show
 		$(obj).parent().prev().prev().hide();//
 		
 		// 수정> 수정완료
 		$(obj).text("수정완료");
-		$(obj).attr("onclick", "modifyComplete(this,"+cbcNo+","+cbNo+")");// 버튼 이름변경에 따른 함수 변경
+		$(obj).attr("onclick", "modifyComplete(this,"+cbcNo+","+clubNo+")");// 버튼 이름변경에 따른 함수 변경
 		// 삭제> 수정취소
 		$(obj).next().text("수정취소");
-		$(obj).next().attr("onclick", "modifyCancle(this,"+cbcNo+","+cbNo+")");// 버튼 이름변경에 따른 함수 변경
+		$(obj).next().attr("onclick", "modifyCancle(this,"+cbcNo+","+clubNo+")");// 버튼 이름변경에 따른 함수 변경
 		// 답글달기버튼 - 숨김
 		$(obj).next().next().hide();
 		$(obj).next()
 	}
 	
-	function modifyCancle(obj, cbcNo, noticeNo){
+	function modifyCancle(obj, cbcNo, clubNo){
 		$(obj).parent().prev().hide();
 		$(obj).parent().prev().prev().show();
 		// 수정완료> 수정
 		$(obj).prev().text("수정");
-		$(obj).prev().attr("onclick", "modifyComment(this,"+cbcNo+","+noticeNo+")");
+		$(obj).prev().attr("onclick", "modifyComment(this,"+cbcNo+","+clubNo+")");
 		
 		// 수정취소 > 삭제
 		$(obj).text("삭제");
-		$(obj).attr("onclick", "deleteComment(this,"+cbcNo+","+noticeNo+")");
+		$(obj).attr("onclick", "deleteComment(this,"+cbcNo+","+clubNo+")");
 		
 		// 답글 달기 보여줌
 		$(obj).next().show();
 	}
 	
-	function modifyComplete(obj, ncNo, noticeNo){
+	function modifyComplete(obj, cbcNo, clubNo){
 		// form 태그를 생성하여 보내는 방식
 		// 숨겨놨다가 보내도 상관없음
 		// 자바 스크립트에서 a태그로 보내는 것도 가능
 		
 		const form = $("<form action='updateClubComment.do' method='post'></form>");
-		const ncInput = $("<input type='text' name='ncNo'>");
-		ncInput.val(ncNo);		// input의 값으로 매개변수로 받은 번호 
-		form.append(ncInput);	// 인풋 태그 form태그에 append
+		const clubComNoInput = $("<input type='text' name='clubComNo'>");
+		clubComNoInput.val(cbcNo);		// input의 값으로 매개변수로 받은 번호 
+		form.append(clubComNoInput);	// 인풋 태그 form태그에 append
 		
-		const noticeInput = $("<input type='text' name='noticeNo'>");
-		noticeInput.val(noticeNo);
-		form.append(noticeInput);
+		const clubNoInput = $("<input type='text' name='clubNo'>");
+		clubNoInput.val(clubNo);
+		form.append(clubNoInput);
 		
 		//4. textarea
 		const ncContent = $(obj).parent().prev();
@@ -358,9 +356,10 @@
 		form.submit();
 	}
 	
-	function deleteComment(obj, ncNo, noticeNo){
+	function deleteComment(obj, cbcNo, clubNo){
 		if(confirm("댓글을 삭제하시겠습니까?")){
-			location.href = "/deleteNoticeComment.do?ncNo="+ncNo+"&noticeNo="+noticeNo;
+			console.log(clubNo);
+			location.href = "/deleteComment.do?clubComNo="+cbcNo+"&clubNo="+clubNo;
 		}
 	}
 	

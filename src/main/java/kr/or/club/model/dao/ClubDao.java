@@ -84,4 +84,8 @@ public class ClubDao {
 		// TODO Auto-generated method stub
 		return  sqlSession.insert("club.insertClubLeader", c);
 	}
+
+	public int deleteClubComment(ClubBoardComment cbc) {
+		return sqlSession.delete("club.deleteClubComment", cbc);
+	}
 }
