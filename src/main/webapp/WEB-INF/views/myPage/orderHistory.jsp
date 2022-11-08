@@ -74,7 +74,7 @@
             <div class="card">
 
               <div class="table-responsive text-nowrap">
-                
+                <input type="hidden" name="memNo" value="${sessionScope.m.memberNo }">
                 <table class="table table-borderless">
                   <thead>
                     <tr>
@@ -83,6 +83,7 @@
                       <th>수령인</th>
                       <th>주소</th>
                       <th>총 주문금액</th>
+                      <th>상세보기</th>
                       <!-- 주문번호 1개당 1tr -->
                       <!-- 상세주문 끝나면 여기서는 주문번호, 일자, 총주문금액만 보여주고 -->
                       <!-- 상세주문에서 제품정보, 각각의 수량과 금액, 설명 보여주기 -->
@@ -90,12 +91,13 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${list }" var="Or">
-		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo});">
+		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo });">
 		            		<td>${Or.orderNo }</td>
 							<td>${Or.orderDate }</td>
 							<td>${Or.receiveName }</td>
 							<td>${Or.receiveAddr }</td>
 							<td>${Or.orderAmount*Or.orderPrice }원</td>
+							<td class="btn">상세보기</td>
 		                </tr>
              		</c:forEach>
              		
@@ -181,8 +183,8 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
-	    function goToOrderDetail(orderNo) {
-			location.href = "/orderDetail.do?orderNo="+orderNo;
+	    function goToOrderDetail(orderNo,memberNo) {
+			location.href = "/orderDetail.do?orderNo="+orderNo+"&memberNo="+memberNo;
 		}
     </script>
   </body>

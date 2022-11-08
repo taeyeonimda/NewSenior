@@ -84,23 +84,12 @@
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
-                    
-	                    <tbody>
-	                    <c:forEach items="${list }" var="Cart">
-			            	<tr class="showCartList">
-					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
-					            <td style="text-align:center">${Cart.productNo }</td>
-					            <td style="text-align:center">${Cart.productName }</td>
-								<td style="text-align:center">${Cart.buyPrice }</td>
-								<td style="text-align:center">${Cart.buyAmount }</td>
-								<td style="text-align:center">무료배송</td>
-								<td style="text-align:center"><span class="sumPrice" >${Cart.buyAmount*Cart.buyPrice }</span>원</td>
-			            	</tr>
-			            	<input type="hidden" name="pNo" value="${Cart.productNo }">
-			            	<input type="hidden" name="pName" value="${Cart.productName }">
-			            	<input type="hidden" name="pPrice" value="${Cart.buyPrice }">
-			            	<input type="hidden" name="pAmount" value="${Cart.buyAmount }">
-	             		</c:forEach>
+	             		<c:forEach items="${list }" var="Or">
+							<li>상품번호 : ${Or.productNo }</li>
+							<li>회원번호 : ${Or.memberNo }</li>
+							<li>상품이름 : ${Or.productName }</li>
+							<li class="sumPrice">결제할 총 가격 : ${Or.buyAmount*Or.buyPrice }원</li>
+						</c:forEach>
 	                    	<tr>
 		                      	<td colspan="5"></td>
 		                      	<td>결제할 총 금액</td>

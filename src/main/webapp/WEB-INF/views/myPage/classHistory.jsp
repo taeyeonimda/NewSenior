@@ -58,16 +58,9 @@
         <!-- / Menu -->
 
         <!-- Layout container -->
-        
-
-
           <!-- Content wrapper -->
-          
             <!-- Content -->
-
             <div class="container-xxl flex-grow-1 container-p-y">
-
-
               <br><br><br>
               <div style="font-size: 25px;">진행중인 클래스</div>
               <div class="card">
