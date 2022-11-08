@@ -56,7 +56,10 @@
 			member_no as memberNo,
 			member_id as memberId,
 			member_pw as memberPw,
-			nickName as nickName
+			nickName as nickName,
+			member_name as memberName,
+			member_email as memberEmail,
+			member_phone as memberPhone
 	from members
 	where member_id=#{memberId} 
 	<if test="memberPw != null">
