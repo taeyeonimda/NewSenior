@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,24 +30,25 @@
 
         <!-- sideBar-->
         <div class="sidenav bg-light rounded p-sm-3 wow fadeIn">
-            <div class="side-box rounded">
-                <h1 class="side-title-box text-center text-dark">
+            <div class="side-box rounded mt-3">
+                <h3 class="side-title-box text-center text-dark">
                     ${cla.className }
-                </h1>
+                </h3>
                 <div class="side-teacher-box text-secondary fs-5 fw-bold mb-4">
                     <span>${cla.teacherName }</span> 강사
+                    <div style="display: none;" id="classTeacher">${cla.classTeacher }</div>
                 </div>
                 <div class="side-info-box">
                     <ul>
-                        <li class="mb-2"><span class="fs-5 text-secondary">시작일 : ${cla.startDate }</span></li>
-                        <li class="mb-2"><span class="fs-5 text-secondary">종료일 : ${cla.endDate }</span></li>
-                        <li class="mb-2"><span class="fs-5 text-secondary">초급자 대상</span></li>
+                        <li class="mb-2"><span class="text-secondary">시작일 : ${cla.startDate }</span></li>
+                        <li class="mb-2"><span class="text-secondary">종료일 : ${cla.endDate }</span></li>
+                        <li class="mb-2"><span class="text-secondary">초급자 대상</span></li>
                         <c:choose>
                         	<c:when test="${cla.products eq 0 }">
-                        		<li class="mb-4"><span class="fs-5 text-primary">준비물 없음</span></li>
+                        		<li class="mb-4"><span class="text-primary">준비물 없음</span></li>
                         	</c:when>
                         	<c:otherwise>
-                        		<li class="mb-4"><span class="fs-5 text-primary">준비물 필요</span></li>
+                        		<li class="mb-4"><span class="text-primary">준비물 필요</span></li>
                         	</c:otherwise>
                         </c:choose>
                     </ul>
@@ -63,10 +64,12 @@
 	                        <option value="5">5인</option>
 	                        <option value="6">6인</option>
 	                    </select>
-	                    <span id="priceBox">${cla.classPrice }</span><span>원</span>
+	                    <span id="priceBox">
+	                    <fmt:formatNumber value="${cla.classPrice }" pattern="#,###"/>
+	                    </span><span>원</span>
                     </div>
                 </div>
-                <div>
+                <div class="mb-2">
                     <button class="btn btn-primary py-3 px-5">신청하기</button>
                 </div>
             </div>
@@ -82,7 +85,7 @@
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span>강의소개</span><span><a href="#menu2">강사소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
+                	<span><a href="#menu1">강사소개</a></span><span><a href="#menu2">강사소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
                 </div>
             </div>
         </div>
@@ -97,7 +100,7 @@
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <p class="fs-5 fw-bold text-primary">${cla.teacherName } 강사와 함께하는 ${cla.className }</p>
                         <h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
-                        <p class="mb-4">${cla.curriculum }</p>
+                        <pre class="mb-4 font-set font-set fs-6">${cla.curriculum }</pre>
                         <a class="btn btn-primary py-3 px-4" href="">Explore More</a>
                     </div>
                     <div class="product-title mt-5">
@@ -105,6 +108,14 @@
                         	<c:forEach items="${cla.fileList }" var="cf">
                         		<img class="product-img" src="/resources/upload/class/${cf.filepath }">
                         	</c:forEach>
+                        	<pre style="text-align: left;" class="font-set fs-5">테스트 클래스 !
+투자 봇, 내 꿈을 이루기 위한 시작점
+회사에 있는 동안, 여행하는 동안, 데이트하는 동안.
+집에 홀로 있는 노트북이 나의 자산을 자동으로 늘려준다면 어떨까요?
+2년 전의 저는 코딩 프로젝트 경험도 없었고, 투자 경험은 더더욱 없는 평범한 직장인이었습니다.
+하지만, '내 손으로 무언가 만들어 단돈 10원이라도 벌어보자.'라는 생각에
+맨땅에 헤딩하는 심정으로 퇴근 후, 자투리 시간을 모아 투자 봇 개발을 시작했습니다.
+                        	</pre>
                         </div>
                     </div>
                 </div>
@@ -124,16 +135,22 @@
                         <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
                         <p class="text-primary mb-4">Year of Experience</p>
                         <h4 class="display-6 mb-4">"당당하게 걸어요"</h4>
-                        <textarea>${cla.teacherIntroduce }</textarea>
+                        <pre>${cla.teacherIntroduce }</pre>
                     </div>
                 </div>
             </div>
         </div>
         <!-- About End -->
-        
-        
+      
+      
+      	<!-- ajax로 가져옴 -->
+      	<div class="container class-container">
+      		<div class="row" id="reviewBox">
+        	</div>
+      	</div>
+
         <!-- 클래스 준비물 -->
-        <div class="container-xxl py-5 mt-5" id="#menu3">
+        <div class="container-xxl py-5" id="#menu3">
             <div class="container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
@@ -144,7 +161,7 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item rounded class-item">
-                            <img class="img-fluid class-img" src="/resources/MAINbtstr/img/person_1.jpg" alt="">
+                            <img class="img-fluid class-img" src="/resources/upload/productImg/키트1_1.jpg">
                             <div class="team-text">
                                 <h4 class="mb-0">왕 밝은 미소</h4>
                                 <p class="text-primary">20000</p>
@@ -176,37 +193,13 @@
         </div>
         <!-- Features End -->
         <hr>
+        
+        
         <!-- 후기 -->
-        <div class="container-xxl py-5 mt-5" id="#menu5">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="flex-space-between">
-                        <div id="total-star">총 별점 : <span>★★★★★</span></div>
-                        <div>
-                            <button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="profil-title">
-                        <div class="profil-img-div">
-                            <img src="img/person_1.jpg" class="profil-img">
-                        </div>
-                        <div class="profil-info-div">
-                            <div>★★★★★</div>
-                            <div>닉네임</div>
-                            <div>작성일</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div>컨텡층ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-                        <div>수정 / 삭제</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
     </div><!--page-content End-->
+    
+    
 <div class="rmodal-wrap">
     <div class="modal-review">
     	<div class="modal-review-info">
@@ -235,12 +228,12 @@
                 <div><span class="real-score"></span>점 주셨네요</div>
                 <div>클래스<span>는 어떠셨나요?</span></div>
             </div>
-            <form action="/insertDoctorReview.do" method="post" autocomplete="off" id="review-form">
-                <input type="hidden" name="star" id="star">
-                <input type="hidden" name="doctorId">
-                <input type="hidden" name="bookNo">
-                <input type="hidden" name="memberNo">
-                <textarea name="review" id="review-textarea"></textarea>
+            <form action="/insertClassReview.do" method="post" autocomplete="off" id="review-form">
+                <input type="hidden" name="reviewRate" id="star">
+                <input type="hidden" name="classTeacher" value="${cla.classTeacher }">
+                <input type="hidden" name="classNo" value="${cla.classNo }">
+                <input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
+                <textarea name="reviewContent" id="review-textarea"></textarea>
                 <div id="modal-btn-box">
                     <button type="button" id="review-cancel" class="btn bc5">취소</button>
                     <button type="submit" id="review-submit" class="btn bc5">등록</button>
@@ -286,12 +279,25 @@
 
         $(function(){
             showSide();
+            getReview();
         });
 
+        
+     	// side select 가격 바꾸기 css
+	    function changePrice(){
+	    	const selectVal = $("select[name=amount]").val();
+	    	let price = $("#priceBox").text();
+	    	// select element에서 선택된 option의 value가 저장된다.  
+	    	if(selectVal != ''){
+	    		price = selectVal*Number(price);
+	    		$("#priceBox").text(price);
+	    	}
+		};
        
         
         // 리뷰 script
 	    $("#review-btn").on("click", function(){
+	    	$(".comment-box>div:last-child>span").text("는 어떠셨나요?");
 	        $(".rmodal-wrap").css("display", "flex");
 	    })
 		
@@ -338,24 +344,44 @@
 	            commentSpan.text("의 어떤 점이 아쉬웠나요?");
 	        }
 	    })
-const showValue = (target) => {
-  // 선택한 option의 value 값
-  console.log(target.value);
-  
-  // option의 text 값
-  console.log(target.options[target.selectedIndex].text);
-}
+
 	    
-	    // select
-	    function changePrice(){
-	    	const selectVal = $("select[name=amount]").val();
-	    	let price = $("#priceBox").text();
-	    	// select element에서 선택된 option의 value가 저장된다.  
-	    	if(selectVal != ''){
-	    		price = selectVal*Number(price);
-	    		$("#priceBox").text(price);
-	    	}
-		};
+	    function getReview() {
+			const reviewBox = $("#reviewBox");
+			const classTeacher = $("#classTeacher").text();
+			$.ajax({
+				url : "/getTeacherReview.do",
+				data : { classTeacher : classTeacher },
+				success : function(list) {
+					console.log(list.length);
+					for(let i=0; i<list.length; i++){
+						const div = $("<div>");
+						div.addClass("shadow");
+						div.addClass("reviewDiv");
+						div.addClass("mb-4");
+						const star = Number(list[i].reviewRate);
+		                const profilDiv = $("<div>");
+		                profilDiv.addClass("profil-title");
+		                const profileImgDiv = $("<div>");
+		                profileImgDiv.addClass("profil-img-div");
+		                profileImgDiv.html("<img src='/resources/upload/"+list[i].memberImg+"' class='profil-img'>");
+		                const profilInfoDiv = $("<div>");
+		                profilInfoDiv.addClass("profil-info-div");
+		                profilInfoDiv.html("<div>"+star+"</div><div>"+list[i].reviewWriter+"</div><div>"+list[i].reviewDate+"</div>");
+		                profilDiv.append(profilDiv).append(profilInfoDiv);
+		                
+		                const contentDiv = $("<div>");
+		                contentDiv.html("<div>"+list[i].reviewContent+"</div><div><a href='/'>수정</a> / <a href='/'>삭제</a></div>");
+		                
+		                div.append(profilDiv);
+		                div.append(contentDiv);
+		                reviewBox.append(div);
+		            }
+				}
+			})
+		}
+	    
+	    
 	    
     </script>
 

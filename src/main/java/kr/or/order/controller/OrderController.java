@@ -57,7 +57,7 @@ public class OrderController {
 		ArrayList<Cart> list = service.goOrderHistory(c);
 		model.addAttribute("list", list);
 		System.out.println(list);
-		return "myPage/test";
+		return "myPage/orderInfo";
 	}
 	
 }

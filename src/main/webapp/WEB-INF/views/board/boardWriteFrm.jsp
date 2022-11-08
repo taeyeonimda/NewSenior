@@ -10,9 +10,9 @@
 	<script src="/resources/summernote/summernote-lite.js"></script>
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
-	
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<h1>자유게시판 작성</h1>
 	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
 		<table border="1">
@@ -97,7 +97,7 @@
 			
 		}
 	</script>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	
 </body>
 </html>
