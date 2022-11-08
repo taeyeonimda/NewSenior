@@ -17,6 +17,8 @@ public class Order {
 	private String orderName;
 	private String orderDetailAmount;
 	private int productNo;
+	private int buyAmount;
+	private int buyPrice;
 	private int orderAmount;
 	private int orderPrice;
 	private String productName;

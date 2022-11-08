@@ -8,10 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.club.model.vo.ChatRecord;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
-import oracle.net.aso.d;
 
 @Repository
 public class MemberDao {
@@ -64,12 +62,11 @@ public class MemberDao {
 		return result;
 	}
 
-
 	public ArrayList<Member> getAllAdmin() {
 		List list = sqlSession.selectList("member.getAllAdmin");
 		return (ArrayList<Member>)list;
 	}
-	
+
 	public int updatePw(Member member) {
 		int result = sqlSession.update("member.updatePw",member);
 		return result;
@@ -93,6 +90,22 @@ public class MemberDao {
 		return (ArrayList<Delivery>)list;
 	}
 
+	public int deleteAddr(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("delivery.deleteAddr",deliveryNo);
+		return result;
+	}
 
-	
+	public Delivery selectOneDelivery(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		Delivery d = sqlSession.selectOne("delivery.selectOneDelivery",deliveryNo);
+		return d;
+	}
+
+	public int updateAddr(Integer deliveryNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("delivery.updateOneAddr",deliveryNo);
+		return result;
+	}
+
 }

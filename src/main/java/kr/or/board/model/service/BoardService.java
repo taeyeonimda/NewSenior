@@ -17,6 +17,7 @@ public class BoardService {
 	@Autowired
 	private BoardDao dao;
 
+	// 페이징처리 , boardList
 	public HashMap<String, Object> selectBoardList(int reqPage, String boardType) {
 		
 		//한 페이지 당 보여줄 게시물 수
@@ -48,7 +49,9 @@ public class BoardService {
 		System.out.println("totalCount : "+totalCount);
 		System.out.println("boardType :" +boardType);
 		
-		//지정해줘야할 값 : 페이지 네비게이션 길이
+		
+		/*
+		 //지정해줘야할 값 : 페이지 네비게이션 길이
 		int pageNaviSize = 5;
 		
 		//페이지 네비게이션 시작번호 지정
@@ -102,7 +105,59 @@ public class BoardService {
 		
 		return pageMap;
 	}
-	
+		 */
+		int pageNaviSize = 5;
+		
+		//페이지 네비게이션 시작번호 지정
+		int pageNo = 1;
+		//ㄴ내가 요청한 페이지가 가운데에 오게
+		if(reqPage>3) {
+			pageNo = reqPage-2;
+		}
+		
+		String pageNavi = "<nav aria-label=\"Page navigation example\">";
+		pageNavi += "<ul class='pagination justify-content-center'>";
+		if (pageNo != 1) {
+			pageNavi += "<li class='page-item disabled'>";
+			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + (pageNo - 1) + "'>";
+			pageNavi += "Previous";
+			pageNavi += "</a></li>";
+		}
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (pageNo == reqPage) {
+				pageNavi += "<li class='page-item' >";
+				pageNavi += "<a class='page-link active-page' href='/boardList.do?reqPage=" + pageNo + "'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item' >";
+				pageNavi += "<a class='page-link' href='/boardList.do?reqPage=" + pageNo + "'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if (pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼 
+		if (pageNo <= totalPage) {
+			pageNavi += "<li class='page-item disabled' >";
+			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + pageNo + "'>";
+			pageNavi += "Previous";
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul></nav>";
+		
+		pageMap.put("pageNavi", pageNavi);
+		pageMap.put("numPerPage", numPerPage);
+		pageMap.put("reqPage", reqPage);
+		
+		
+		return pageMap;
+	}
+		
+
 	//게시글 상세조회
 	public HashMap<String, Object> selectOneBoard(int boardNo) {
 		//board 테이블 조회
@@ -151,13 +206,96 @@ public class BoardService {
 	}
 
 	public int insertComment(BoardComment bc) {
-		
 		return dao.insertComment(bc);
 	}
 
 	public int updateBoardComment(BoardComment bc) {
 		return dao.updateBoardComment(bc);
 	}
+
+
+	public HashMap<String, Object> selectBoardList(int reqPage, String categoryTag, String searchTag) {
+		//한 페이지 당 보여줄 게시물 수
+				int numPerPage = 10;
+				
+				//reqPage 1 -> 1~10, reqPage 2- > 11~20
+				int end = reqPage * numPerPage;
+				int start = end - numPerPage+1;
+				
+				HashMap<String, Object> pageMap = new HashMap<String, Object>();
+				pageMap.put("start", start);
+				pageMap.put("end", end);
+				pageMap.put("categoryTag",categoryTag);
+				pageMap.put("searchTag",searchTag);
+				
+				//pageNavi 시작
+				//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
+				int totalCount = dao.selectBoardCount();
+				//int totalCount = dao.selectBoardCount2(boardType);
+				int totalPage = 0;
+				if(totalCount%numPerPage==0) {
+					totalPage = totalCount/numPerPage;
+				}else {
+					totalPage = totalCount/numPerPage+1;
+				}
+				int pageNaviSize = 5;
+				
+				//페이지 네비게이션 시작번호 지정
+				int pageNo = 1;
+				//ㄴ내가 요청한 페이지가 가운데에 오게
+				if(reqPage>3) {
+					pageNo = reqPage-2;
+				}
+				
+				String pageNavi = "<nav aria-label=\"Page navigation example\">";
+				pageNavi += "<ul class='pagination justify-content-center'>";
+				if (pageNo != 1) {
+					pageNavi += "<li class='page-item disabled'>";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + (pageNo - 1) + "'>";
+					pageNavi += "Previous";
+					pageNavi += "</a></li>";
+				}
+				for (int i = 0; i < pageNaviSize; i++) {
+					if (pageNo == reqPage) {
+						pageNavi += "<li class='page-item' >";
+						pageNavi += "<a class='page-link active-page' href='/boardList.do?reqPage=" + pageNo + "'>";
+						pageNavi += pageNo;
+						pageNavi += "</a></li>";
+					} else {
+						pageNavi += "<li class='page-item' >";
+						pageNavi += "<a class='page-link' href='/boardList.do?reqPage=" + pageNo + "'>";
+						pageNavi += pageNo;
+						pageNavi += "</a></li>";
+					}
+					pageNo++;
+					if (pageNo > totalPage) {
+						break;
+					}
+				}
+				// 다음버튼 
+				if (pageNo <= totalPage) {
+					pageNavi += "<li class='page-item disabled' >";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + pageNo + "'>";
+					pageNavi += "Previous";
+					pageNavi += "</a></li>";
+				}
+				pageNavi += "</ul></nav>";
+				
+				pageMap.put("pageNavi", pageNavi);
+				pageMap.put("numPerPage", numPerPage);
+				pageMap.put("reqPage", reqPage);
+				
+				ArrayList<Board> list = dao.selectBoardList2(pageMap);
+				pageMap.put("list", list);
+				
+				return pageMap;
+
+	}
+
+
+
+	
+
 	
 	
 	

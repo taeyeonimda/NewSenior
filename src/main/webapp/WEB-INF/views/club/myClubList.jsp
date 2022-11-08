@@ -18,7 +18,6 @@
 	        <c:choose>
 	        	<c:when test="${not empty myList }">
 			        <div class="row mb-5">
-			        
 			        	<c:forEach items="${myList }" var="ml">
 			        	<c:if test="${ml.clubNo eq newClub }">
 						<div class="col-md-6 col-lg-4 mb-3">
@@ -34,7 +33,6 @@
 			    			</div>
 			  			</div>
 			  			</c:if>
-			  			
 			  			</c:forEach>
 			  			<c:forEach items="${myList }" var="ml">
 			        	<c:if test="${ml.clubNo ne newClub }">
@@ -42,7 +40,6 @@
 							<div class="card h-100">
 			      				<img src="/resources/upload/club/${ml.clubMainImg }">
 			      				<div class="card-body">
-			      					<p>new!</p>
 					        		<h5 class="card-title">${ml.clubName }</h5>
 					        		<p class="card-text">${ml.clubIntro }</p>
 					        		<p class="card-text">${ml.clubMemberCnt }/${ml.clubLimit }</p>

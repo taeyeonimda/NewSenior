@@ -54,9 +54,9 @@ public class NsClassDao {
 		int cnt = sqlSession.selectOne("nsClass.getClassTotal", str);
 		return cnt;
 	}
-	public NsClass selectOneClass(NsClass cla) {
-		NsClass nc = sqlSession.selectOne("nsClass.selectOneClass", cla);
-		return nc;
+	public NsClass selectOneClass(NsClass nc) {
+		NsClass cla = sqlSession.selectOne("nsClass.selectOneClass", nc);
+		return cla;
 	}
 
 	
