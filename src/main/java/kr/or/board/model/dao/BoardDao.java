@@ -63,19 +63,35 @@ public class BoardDao {
 	public int insertFile(FileVO fv) {
 		return sqlSession.insert("board.insertFile",fv);
 	}
+	
+	public int deleteFile(int fileNo) {
+		return sqlSession.delete("board.deleteFile",fileNo);
+	}
+
+	public int updateboard(Board b) {
+		return sqlSession.update("board.updateBoard",b);
+	}
+	
+	public int deleteBoard(int boardNo) {
+		return sqlSession.delete("board.deleteBoard",boardNo);
+	}
 	public int insertComment(BoardComment bc) {
-		
 		return sqlSession.insert("board.insertComment",bc);
 	}
 	public int updateBoardComment(BoardComment bc) {
-		
 		return sqlSession.update("board.updateBoardComment",bc);
 	}
+	
+	public int deleteBoardComment(BoardComment bc) {
+		return sqlSession.delete("board.deleteBoardComment",bc);
+	}
+	
 	public ArrayList<Board> selectBoardList2(HashMap<String, Object> pageMap) {
 		List list = sqlSession.selectList("board.selectBoardList2",pageMap);
 		System.out.println(pageMap);
 		return (ArrayList<Board>) list;
 	}
+	
 	
 	
 	
