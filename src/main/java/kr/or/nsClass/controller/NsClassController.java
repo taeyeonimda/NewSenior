@@ -17,13 +17,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import common.FileRename;
 import kr.or.category.model.service.CategoryService;
 import kr.or.category.model.vo.Category;
 import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.service.NsClassService;
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 import kr.or.nsClass.model.vo.NsClassPageData;
@@ -41,7 +45,10 @@ public class NsClassController {
 	@RequestMapping(value = "/classList.do")
 	public String classList(String classCategory, int reqPage, Model model) {
 		NsClassPageData npd = service.selectClassList(classCategory, reqPage);
+		
+
 		ArrayList<Category> cateList = service2.getAllCategory();
+		model.addAttribute("classCategory", classCategory);
 		model.addAttribute("clist", npd.getList());
 		model.addAttribute("pageNavi", npd.getPageNavi());
 		model.addAttribute("reqPage", npd.getReqPage());
@@ -49,8 +56,7 @@ public class NsClassController {
 		model.addAttribute("cateList", cateList);
 		return "class/classList";
 	}
-	
-	
+
 	@RequestMapping(value = "/classDetail.do")
 	public String classDetail(NsClass nc, Model model){
 		NsClass cla = service.selectOneClass(nc);
@@ -71,8 +77,6 @@ public class NsClassController {
 	@RequestMapping(value = "/insertClass.do")
 	public String insertClass(NsClass nsCl, 
 			MultipartFile[] files, MultipartFile[] detailFiles, HttpServletRequest request) throws UnsupportedEncodingException{
-		
-		System.out.println("위에서 확인:"+nsCl);
 		ArrayList<FileVo> list = new ArrayList<FileVo>();
 		String filepaths ="";
 		if(!files[0].isEmpty()) {
@@ -147,5 +151,19 @@ public class NsClassController {
 		model.addAttribute("myClass",list);
 		model.addAttribute("endClass",list2);
 		return "myPage/classMgrTeacher";
+	}
+	
+	
+	@RequestMapping(value = "/insertClassReview.do")
+	public String classReview(ClassReview cr) {
+		int result = service.insertClassReview(cr);
+		return "redirect:/classDetail.do?classNo="+cr.getClassNo();
+	}
+	
+	@RequestMapping(value = "/getTeacherReview.do", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String getTeacherReview(NsClass cla) {
+		ArrayList<ClassReview> crList = service.getTeacherReview(cla);
+		return new Gson().toJson(crList);
 	}
 }

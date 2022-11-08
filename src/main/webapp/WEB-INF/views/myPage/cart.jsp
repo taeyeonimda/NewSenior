@@ -66,17 +66,17 @@
               <br><br><br>
               <div>
                 <div style="font-size: 40px; font-weight: 900; display: inline-block;">장바구니</div>
-                <div style="display: inline-block; float: right;"><a href="javascript:void(0)" style=" width:100px; height: 30px; margin-top: 35px; line-height: 15px;" class="btn btn-outline-primary">삭제</a></div>
+                <div style="display: inline-block; float: right;"><button type="button" style=" width:100px; height: 30px; margin-top: 35px; line-height: 15px;" class="btn btn-outline-primary deleteCheck">삭제</button></div>
               </div>
               <div class="card">
 
                 <div class="table-responsive text-nowrap">
-                  
+                  <form id="order-form" action="/goOrderHistory.do?memberNo=${sessionScope.m.memberNo}" method="post" autocomplete="off">
                   <table class="table table-borderless">
                     <thead>
                       <tr style="text-align: center;">
-                        <th style=" width: 10%;"><label>전체선택 <input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></label></th>
-                        <th style=" width: 10%;">상품명</th>
+                        <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
+                        <th style=" width: 10%;">상품번호</th>
                         <th style=" width: 30%;">상품명</th>
                         <th style=" width: 15%;">금액</th>
                         <th style=" width: 15%;">수량</th>
@@ -84,31 +84,36 @@
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      
-                      <c:forEach items="${list }" var="Cart">
-		            	<tr class="showCartList">
-		            		<td style="text-align:center"><input type="checkbox" name="productCheck"></td>
-		            		<td style="text-align:center">${Cart.productNo }</td>
-		            		<td style="text-align:center">${Cart.productName }</td>
-							<td style="text-align:center">${Cart.buyPrice }</td>
-							<td style="text-align:center">${Cart.buyAmount }</td>
-							<td style="text-align:center">무료배송</td>
-							<td style="text-align:center"><span class="sumPrice" >${Cart.buyAmount*Cart.buyPrice }</span>원</td>
-		                </tr>
-             		</c:forEach>
-                      <tr>
-                      	<td colspan="5"></td>
-                      	<td>결제할 총 금액</td>
-                      	<td>
-                      		<input type="text" style="border:none;" class="payPrice" readonly>
-                     	</td>
-                      </tr>
-					
-                    </tbody>
-                  </table>
+                    
+	                    <tbody>
+	                    <c:forEach items="${list }" var="Cart">
+			            	<tr class="showCartList">
+					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
+					            <td style="text-align:center">${Cart.productNo }</td>
+					            <td style="text-align:center">${Cart.productName }</td>
+								<td style="text-align:center">${Cart.buyPrice }</td>
+								<td style="text-align:center">${Cart.buyAmount }</td>
+								<td style="text-align:center">무료배송</td>
+								<td style="text-align:center"><span class="sumPrice" >${Cart.buyAmount*Cart.buyPrice }</span>원</td>
+			            	</tr>
+			            	<input type="hidden" name="pNo" value="${Cart.productNo }">
+			            	<input type="hidden" name="pName" value="${Cart.productName }">
+			            	<input type="hidden" name="pPrice" value="${Cart.buyPrice }">
+			            	<input type="hidden" name="pAmount" value="${Cart.buyAmount }">
+	             		</c:forEach>
+	                    	<tr>
+		                      	<td colspan="5"></td>
+		                      	<td>결제할 총 금액</td>
+		                      	<td>
+		                      		<input type="text" style="border:none;" class="payPrice" readonly>
+		                     	</td>
+	                      	</tr>
+	                    </tbody>
+	                  </table>
+              	<button type="submit" style="float: right; width:250px; margin: 10px; margin-top:20px;" class="btn btn-outline-primary" id="testPay" >주문하기</button>
+					</form>
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
-                    <button style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
+                    <!-- <button style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button> -->
                     <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
                   </div>
                 </div>
@@ -161,25 +166,28 @@
 			IMP.init("imp10385324");
 			IMP.request_pay({
 				pg: "html5_inicis",
-				merchat_uid : "상품코드_"+date, 		// 거래 ID
-				name : "결제 테스트",			  		// 결제 이름
-				amount : price,						// 결제 금액
+				merchat_uid : "상품코드_"+date, 			// 거래 ID
+				name : "결제 테스트",			  			// 결제 이름
+				amount : price,							// 결제 금액
 				buyer_email : "wnstjr5558@naver.com",	// 구매자 이메일
-				buyer_name : "구매자",				// 구매자
-				buyer_tel : "010-1234-1234",		// 구매자 전화번호
-				buyer_addr : "서울시 영등포구 당산동",	// 구매자 주소
-				buyer_postcode : "12345"			// 구매자 우편변호
+				buyer_name : "구매자",					// 구매자
+				buyer_tel : "010-1234-1234",			// 구매자 전화번호
+				buyer_addr : "서울시 영등포구 당산동",			// 구매자 주소
+				buyer_postcode : "12345"				// 구매자 우편변호
 			
 			},function(rsp){
 				if(rsp.success){
 					alert("결제 성공");
-					
+					const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
+					$("#order-form").append(input);	
+		            $("#order-form").submit();
 				}else{
 					alert("결제 실패");
 				}
 			});
 		});
 		
+
 		
 		function selectAll(selectAll)  {
 			  const checkboxes 
@@ -203,6 +211,26 @@
 		window.onload=function(){
 			sum();
 		}
+		
+		// 체크한것 삭제
+		$(".deleteCheck").on("click", function(){
+		    const check = $(".deleteBtn:checked");
+		    if(check.length == 0) {
+		        alert("선택된 상품이 없습니다.")
+				return;
+		    }
+			const productNoList = new Array();
+		    const userNo = check.next().val();
+
+			for(let i=0; i<check.length; i++) {
+			    const productNo = check.eq(i).val();
+			    productNoList.push(productNo);
+			}
+			location.href="/deleteCart.do?productNo="+productNoList.join("/");
+		});
+		
+		
+		
 	</script>
   </body>
 </html>

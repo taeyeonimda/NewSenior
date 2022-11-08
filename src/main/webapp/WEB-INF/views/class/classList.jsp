@@ -9,6 +9,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	
 	<div class="page-content">
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
@@ -36,10 +37,12 @@
                 <div class="col-12 text-center">
                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
                         <c:forEach items="${cateList}" var="cateList">
-                         <li class="mx-2" data-filter="*"><a href="/classList.do?classCategory=${cateList.categoryCode }&reqPage=1">${cateList.categoryName }</a></li>
+                        	<li class="mx-2 ${cateList.categoryCode }" data-filter="*"><a href="/classList.do?classCategory=${cateList.categoryCode }&reqPage=1">${cateList.categoryName }</a></li>
                         </c:forEach>   
                     </ul>
         	   </div>
+                    <div style="display: none;" class="category">${classCategory }</div>
+                </div>
             </div>
             <div class="row g-4 portfolio-container">
             <c:forEach items="${clist }" var="cla" varStatus="i">
@@ -58,26 +61,34 @@
             </c:forEach>
             </div>
         </div>
-        
-    </div>
-    
+
     <!-- Projects End -->
 	<div class="container-xxl">
         <div class="container">
         ${pageNavi }
         </div>
-        </div>
+    </div>
 
-	
-   
+
 	</div> <!--page-content End-->
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script>
 
-		function classDetail(classNo) {
-			location.href = "classDetail.do?classNo="+classNo;
+	$(document).ready(function(){
+		const category = $(".category").text();
+		const ul = $("#portfolio-flters");
+		ul.children().removeClass("active");
+		if(category == "AL"){
+			ul.children().eq(0).addClass("active");
+		}else{
+			$("."+category).addClass("active");
 		}
+	});
+
+	function classDetail(classNo) {
+		location.href = "classDetail.do?classNo="+classNo;
+	}
 		
 	</script>
 </body>

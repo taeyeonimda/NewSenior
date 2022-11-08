@@ -40,7 +40,6 @@ public class ClubController {
 	@RequestMapping(value = "/popularClubList.do")
 	public String clubMemberList(Model model, Member m) {
 		ArrayList<Club> popularList = service.searchClubPopularList(m);
-		System.out.println(popularList);
 		model.addAttribute("pList", popularList);
 		return "club/clubList";
 	}
@@ -63,6 +62,7 @@ public class ClubController {
 	@RequestMapping(value = "/searchAllClub.do", produces = "application/json;charset=utf-8")
 	public String getMyClubCategory(String keyword) {
 		ArrayList<Club> list = service.selectAllClub(keyword);
+		System.out.println(list.size());
 		return new Gson().toJson(list);
 	}
 	
@@ -110,7 +110,7 @@ public class ClubController {
 		}
 		// c.setFileList(list); 여러개 일 때 살리기
 		int result = service.insertClub(c);
-		return "redirect:/popularClubList.do";
+		return "redirect:/popularClubList.do?memberNo="+c.getClubLeader();
 	}
 	
 	@RequestMapping(value = "/clubDetail.do")
@@ -190,5 +190,10 @@ public class ClubController {
 		int result = service.insertBoardCom(cbc);
 		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
 	}
-	
+
+	@RequestMapping(value = "/deleteClubComment.do")
+	public String deleteClubComment(ClubBoardComment cbc) {
+		int result = service.deleteClubComment(cbc);
+		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
+	}
 }

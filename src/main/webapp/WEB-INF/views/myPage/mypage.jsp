@@ -277,7 +277,8 @@ input[type=checkbox] {
 <!--  
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
@@ -287,14 +288,6 @@ input[type=checkbox] {
 	<div class="content-wrapper" style="left: 300px; flex-direction: row;">
 		<!-- Menu -->
 		<%@include file="/WEB-INF/views/common/aside.jsp"%>
-
-		<!-- / Menu -->
-
-		<!-- Layout container -->
-
-
-
-		<!-- Content wrapper -->
 
 		<!-- Content -->
 
@@ -415,37 +408,38 @@ input[type=checkbox] {
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${list }" var="d" end="0">
+							<c:forEach items="${list }" var="d" end="0">
 								<tr class="showDeliveryDetail"
 									onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
 									<td><strong>${d.deliveryName }</strong><br>
-										${d.receiverName }<br>
-										<span style="border:1px solid #6f42c1; background-color:#6f42c1; color:#fff">기본배송지</span>
+										${d.receiverName }<br> <span
+										style="border: 1px solid #6f42c1; background-color: #6f42c1; color: #fff">기본배송지</span>
 									</td>
-									<td>${d.zipcode}<br>
-										${d.deliveryAddr }<br>
+									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
 									<td>${d.deliveryPhone }</td>
-									<td><button>수정</button>
-										<button>삭제</button>
-									</td>
+									<td><button class="updateBtn"
+											onclick="updateBtn(${d.deliveryNo});">수정</button>
+										<button class="delBtn">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }">삭제</a>
+										</button></td>
 								</tr>
 							</c:forEach>
 							<c:forEach items="${list }" var="d" begin="1">
 								<tr class="showDeliveryDetail"
 									onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
 									<td><strong>${d.deliveryName }</strong><br>
-										${d.receiverName }<br>
-									</td>
-									<td>${d.zipcode}<br>
-										${d.deliveryAddr }<br>
+										${d.receiverName }<br></td>
+									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
 									<td>${d.deliveryPhone }</td>
-									<td><button>수정</button>
-										<button>삭제</button>
-									</td>
+									<td><button class="updateBtn"
+											onclick="updateBtn(${d.deliveryNo});">수정</button>
+										<button class="delBtn">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }">삭제</a>
+										</button></td>
 								</tr>
 							</c:forEach>
 
@@ -458,32 +452,6 @@ input[type=checkbox] {
 					</table>
 				</div>
 			</div>
-
-			<!-- 배송지 상세보기 모달 
-			<div id="modal" class="modal-overlay">
-				<div class="modal-window">
-					<div class="title">
-						<h2>배송지 목록 상세 보기</h2>
-					</div>
-					<div class="close-area" style="font-size: 40px;">X</div>
-					<div class="content">
-						<table>
-							<c:forEach items="${list }" var="d">
-								<tr class="showOrderDetail"
-									onclick="goToOrderDetail(${d.deliveryNo});" id="btn-modal">
-									<td>${d.deliveryName }<br>수령인${d.receiverName }</td>
-									<td>${d.zipcode}<br>${d.deliveryAddr }<br>${d.deliveryDetail }</td>
-									<td>${d.deliveryPhone }</td>
-									<td><button>수정</button>
-										<button>삭제</button></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
-			-->
-
 		</div>
 	</div>
 	<!-- / Content -->
@@ -494,6 +462,7 @@ input[type=checkbox] {
 	</div>
 
 	<!-- 배송지 등록 모달 -->
+
 	<div class="popup_bg00"></div>
 	<div class="popup00 personal_pop00 noto bg_s">
 		<div class="x_btn00">
@@ -505,7 +474,8 @@ input[type=checkbox] {
 			<div class="delivery_cont">
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<!-- HTML5 Inputs -->
-					<form action="/insertAddr.do" method="post" onsubmit="return deliverychk();">
+					<form action="/insertAddr.do" method="post"
+						onsubmit="return deliverychk();">
 						<div class="card mb-4" /*style="width: 60%;*/">
 							<h5 class="card-header">배송지등록/수정</h5>
 							<div class="card-body" style="padding-top: 20px;">
@@ -520,60 +490,70 @@ input[type=checkbox] {
 									<label for="html5-text-input" class="col-md-2 col-form-label">수령인</label>
 									<div class="col-md-10">
 										<input class="form-control" type="text" id="html5-text-input"
-											 name="receiverName" />
+											name="receiverName" />
 									</div>
 								</div>
 								<div class="mb-3 row">
 									<label for="html5-text-input" class="col-md-2 col-form-label">주소</label>
 									<div class="col-md-10">
-										<span><input class="form-control " type="text" id="html5-text-input"
-											 name="zipcode"  style="width: 30%; margin:0; display: inline-block; "/></span><button type="button" class="btn btn-outline-warning" onclick="searchAddr();">주소검색</button>
-											
+										<span><input class="form-control " type="text"
+											id="html5-text-input" name="zipcode"
+											style="width: 30%; margin: 0; display: inline-block;" /></span>
+										<button type="button" class="btn btn-outline-warning"
+											onclick="searchAddr();">주소검색</button>
+
 									</div>
 								</div>
 								<div class="mb-3 row">
 									<label for="html5-email-input" class="col-md-2 col-form-label"></label>
 									<div class="col-md-10">
 										<input class="form-control " type="text"
-											id="html5-email-input" 
-											name="deliveryAddr" />
+											id="html5-email-input" name="deliveryAddr" />
 									</div>
 								</div>
 								<div class="mb-3 row co_btn">
 									<label for="html5-url-input" class="col-md-2 col-form-label"></label>
 									<div class="col-md-10">
-									<input class="form-control " type="text" placeholder="상세주소"
-											id="html5-email-input" 
-											name="deliveryDetail" />
+										<input class="form-control " type="text" placeholder="상세주소"
+											id="html5-email-input" name="deliveryDetail" />
 									</div>
 								</div>
 								<div class="mb-3 row">
 									<label for="html5-url-input" class="col-md-2 col-form-label">연락처</label>
 									<div class="col-md-10">
-										<input class="form-control" type="text" id="html5-url-input" placeholder="010-1234-5678"
-											name="deliveryPhone"
+										<input class="form-control" type="text" id="html5-url-input"
+											placeholder="010-1234-5678" name="deliveryPhone"
 											onkeyup="phone_keyup(this)" />
 									</div>
 								</div>
 								<div class="mb-3 row">
 									<label for="html5-url-input" class="col-md-2 col-form-label">기본배송지</label>
 									<div class="col-md-10">
-										<input type="checkbox"class="checkBtn"/> 기본배송지로 설정 <input type="hidden" name="defaultAddr" value='n'>
+										<input type="checkbox" class="checkBtn" /> 기본배송지로 설정 <input
+											type="hidden" name="defaultAddr" value='n'>
 									</div>
 								</div>
 							</div>
 						</div>
 						<input type="hidden" value="${member.memberNo }" name="memberNum">
-					<div>
-					
-						<button type="button" class="btn btn-outline-warning closeBtn" style="width: 50%;">닫기</button><button class="btn btn-outline-warning saveBtn" style="width: 50%;" >저장</button>
-					</div>
+						<div>
+
+							<button type="button" class="btn btn-outline-warning closeBtn"
+								style="width: 50%;">닫기</button>
+							<button type="button" class="btn btn-outline-warning saveBtn"
+								style="width: 50%;">저장</button>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- 배송지 모달 끝 -->
+	<!-- 배송지 등록 모달 끝 -->
+
+
+
+
+
 
 	<!-- Overlay -->
 	<div class="layout-overlay layout-menu-toggle"></div>
@@ -642,13 +622,39 @@ input[type=checkbox] {
       $("body").removeClass("bg_g");
     }
     
+    //수정 버튼 클릭시
+    function updateBtn(deliveryNo){
+    	$(".popup_bg00").stop().fadeIn();
+        $(".popup00.personal_pop00").stop().fadeIn();
+        $("body").addClass("bg_g");
+        const deliveryName = $("input[name=deliveryName]");
+    	const receiverName = $("input[name=receiverName]");
+    	const zipcode = $("input[name=zipcode]");
+    	const deliveryAddr = $("input[name=deliveryAddr]");
+    	const deliveryDetail = $("input[name=deliveryDetail]");
+    	const deliveryPhone = $("input[name=deliveryPhone]");
+    	const defaultAddr = $("input[name=defaultAddr]");
+        
+    	$.ajax({
+ 			url:"/selectAddr.do",
+ 			type:"post",
+ 			data:{deliveryNo:deliveryNo},
+ 			success:function(data){
+ 				deliveryName.val(data.deliveryName);
+ 				receiverName.val(data.receiverName);
+ 				zipcode.val(data.zipcode);
+ 				deliveryAddr.val(data.deliveryAddr);
+ 				deliveryDetail.val(data.deliveryDetail);
+ 				deliveryPhone.val(data.deliveryPhone);
+ 				defaultAddr.val(data.defaultAddr);
+ 		});
     //배송지 등록 폼 검사
     function deliverychk(){
     	const deliveryName = $("input[name=deliveryName]").val();
     	const receiverName = $("input[name=receiverName]").val();
     	const zipcode = $("input[name=zipcode]").val();
     	const deliveryAddr = $("input[name=deliveryAddr]").val();
-    	const deliveryDtail = $("input[name=deliveryDtail]").val();
+    	const deliveryDetail = $("input[name=deliveryDetail]").val();
     	const deliveryPhone = $("input[name=deliveryPhone]").val();
     	const defaultAddr = $("input[name=defaultAddr]");
     	
@@ -681,11 +687,6 @@ input[type=checkbox] {
     	}
     	
     }
-    //배송지 최대 갯수 초과시 등록 막기
-    $.ajax({
-    	url:""
-    	
-    });
     
     
     //배송지 주소
@@ -739,6 +740,7 @@ input[type=checkbox] {
     	        }
     	    }).open();
     	}
+    	
     	
     </script>
 </body>

@@ -2,6 +2,8 @@ package kr.or.order.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kr.or.cart.model.vo.Cart;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderDetail;
+import kr.or.product.model.vo.Product;
 
 @Controller
 public class OrderController {
@@ -35,5 +39,25 @@ public class OrderController {
 	    return "myPage/orderDetailHistory";
 	 }
 	
+	@RequestMapping(value="/insertOrder.do")
+	public String insertOrder(Cart c) {
+		int result = service.insertOrder(c);
+		
+		return "myPage/orderHistory";
+	}
+	
+	@RequestMapping(value="/deleteCart.do")
+	public String deleteCart(Product p ) {
+		int result = service.deleteCart(p);
+		return "myPage/cart";
+	}
+	
+	@RequestMapping(value="/goOrderHistory.do")
+	public String goOrderHistory(Cart c, Model model) {
+		ArrayList<Cart> list = service.goOrderHistory(c);
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "myPage/orderInfo";
+	}
 	
 }

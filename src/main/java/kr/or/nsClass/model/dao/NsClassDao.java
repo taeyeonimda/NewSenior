@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 import kr.or.nsClass.model.vo.NsClassPageData;
@@ -54,9 +55,9 @@ public class NsClassDao {
 		int cnt = sqlSession.selectOne("nsClass.getClassTotal", str);
 		return cnt;
 	}
-	public NsClass selectOneClass(NsClass cla) {
-		NsClass nc = sqlSession.selectOne("nsClass.selectOneClass", cla);
-		return nc;
+	public NsClass selectOneClass(NsClass nc) {
+		NsClass cla = sqlSession.selectOne("nsClass.selectOneClass", nc);
+		return cla;
 	}
 
 	
@@ -103,5 +104,14 @@ public class NsClassDao {
 		return 0;
 	}
 
+	// 클래스 리뷰작성
+	public int insertClassReview(ClassReview cr) {
+		int result = sqlSession.insert("nsClass.insertClassReview", cr);
+		return result;
+	}
+	public ArrayList<ClassReview> getTeacherReview(NsClass cla) {
+		List list = sqlSession.selectList("nsClass.selectTeacherReview", cla);
+		return (ArrayList<ClassReview>)list;
+	}
 
 }

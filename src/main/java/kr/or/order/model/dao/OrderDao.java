@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.cart.model.vo.Cart;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderDetail;
@@ -28,4 +29,25 @@ public class OrderDao {
 		List list = sqlSession.selectList("order.selectOrderDetail",o);
 		return (ArrayList<OrderDetail>) list;
 	}
+
+
+	public int insertOrder(Cart c) {
+		int result = sqlSession.insert("order.insertOrder",c);
+		return result;
+	}
+
+
+	public int deleteCart(Product p) {
+		int result = sqlSession.delete("order.deleteCart", p);
+		return result;
+	}
+
+
+	public ArrayList<Cart> goOrderHistory(Cart c) {
+		List list = sqlSession.selectList("order.goOrderHistory",c);
+		return (ArrayList<Cart>) list;
+	}
+
+
+	
 }

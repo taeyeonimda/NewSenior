@@ -15,6 +15,20 @@
 	margin: 0 auto;
 }
 
+/* 클럽 검색 박스 */
+.club-input{
+	display: flex;
+	width: 50%;
+	height: 38px;
+	justify-content: space-between;
+}
+.club-input>input{
+	width: 80%;
+}
+.club-input>button{
+	width: 17%;
+}
+
 /* 클럽 리스트 */
 .club-list{
 	width: 80%;
@@ -22,12 +36,17 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
-	
 }
 .lists{
-	border: 1px solid #eee;
-	
-	width: 33%;
+	border: 1px solid #bbb;
+	margin: 20px;
+	width: 30.5%;
+}
+.lists:nth-of-type(3n){
+	margin-left: 0;
+}
+.lists *{
+	text-align: center;
 }
 #club-input{
 	border-radius: 15px;
@@ -286,6 +305,9 @@
 .writeModalContent{
 	height: 80%;
 }
+.writeModalContent>form{
+	height: 100%;
+}
 .writeModalInputBox{
 	height: 80%;
 }
@@ -294,7 +316,12 @@ textarea[name=clubBoardContent]{
 	width: 80%;
 	height: 80%;
 }
-
+.writeModalButtonBox{
+	margin: 0 auto;
+	width: 40%;
+	display: flex;
+	justify-content: space-between;
+}
 
 
 
@@ -338,12 +365,6 @@ textarea[name=clubBoardContent]{
     text-align: center;
     border-radius: 25px;
 }
-.modal-top h1{
-    text-align: center;
-    margin: 30px auto;
-    font-size: 24px;
-    line-height: 24px;
-}
 #member-box{
     margin: 0 auto;
     width: 250px;
@@ -360,7 +381,7 @@ textarea[name=clubBoardContent]{
 .messageArea{
 	overflow-y: auto;
 	border 1px sold block;
-	height:400px;
+	height: 440px;
 	display:flex;
 	flex-direction: column;
 }
@@ -426,6 +447,10 @@ textarea[name=clubBoardContent]{
 	top:12px;
 }
 
+input[name='chatFile']{
+	width: 50%;
+}
+
 
 
 
@@ -456,7 +481,6 @@ textarea:focus{
 	height: 90px;	
 }
 
-
 /* 댓글출력 */
 /* 코멘트 전체 박스 */
 .commentBox{
@@ -469,8 +493,6 @@ textarea:focus{
 	padding: 10px;
 	display : flex;
 }
-
-
 
 /* 댓글 출력 */
 .comment-profil-li{
@@ -486,7 +508,6 @@ textarea:focus{
 .comment-link>a{
 	margin-left: 10px;
 }
-
 
 
 /*대댓글달기*/

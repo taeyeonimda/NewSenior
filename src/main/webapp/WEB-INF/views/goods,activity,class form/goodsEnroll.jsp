@@ -103,6 +103,14 @@
                     <div class="col-md-10">
                       <input type="file" name="productFile" id="productFile" class="productFile">
                     </div>
+                    <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지1</label>
+                    <div class="col-md-10">
+                      <input type="file" name="productFile" id="productFile" class="productFile">
+                    </div>
+                    <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지2</label>
+                    <div class="col-md-10">
+                      <input type="file" name="productFile" id="productFile" class="productFile">
+                    </div>
                   </div>
                   
                   <div class="mb-3 row">

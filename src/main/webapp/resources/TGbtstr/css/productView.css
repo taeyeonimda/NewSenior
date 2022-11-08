@@ -89,3 +89,12 @@
     bottom: 30px;
     margin: 0;
 }
+
+#productContentArea{
+	    resize: none;
+    border: 1px solid rgba(1,1,1,0.1);
+    width: 800px;
+    line-height: 20px;
+    height: 300px;
+    outline: none;
+}
