@@ -17,7 +17,7 @@
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLUB</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
-                    <h4 class="mb-3 text-white">공통의 관심사를 가진 시니어들이 당신을 기다립니다</h4>
+                    <h5 class="mb-3 text-white">공통의 관심사를 가진 시니어들과 온라인으로 소통할 수 있습니다</h5>
                 </nav>
             </div>
         </div>
@@ -57,14 +57,17 @@
             	<input type="text" class="form-control bg-light border-0" id="serchInput"><button id="serchBtn" class="btn btn btn-outline-primary" onclick="initClubList();">찾기</button>
         	</div>
         	<div>
-        		<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
+        		<c:if test="${not empty sessionScope.m }">
+        			<a href="/insertClubFrm.do" class="btn btn-primary">동호회 생성</a><br>
+        		</c:if>
         	</div>
         </div>
+
 
 		<!-- ajax로 추가 -->
 		<div id="club-list" class="mt-5 club-list">
 		</div>
-		
+
 		
 		<div class="pagingBox mt-5">
 			<ul id="pagingUl" class="pagination justify-content-center">
@@ -89,7 +92,7 @@
             </div>
             <div class="modal-btn-box">
             	<button onclick="closeModal();" class="btn btn-primary">닫기</button>
-            	<a href="/" class="btn btn-primary">입장하기</a>
+            	<a href="javascript:void(0);" class="btn btn-primary" id="enterBtn">입장하기</a>
             </div>
         </div>
     </div>
@@ -117,7 +120,7 @@
     function initClubList() {
    	 	//dataPerPage 선택값 가져오기
    	 	$("#club-list div").remove();
-	    dataPerPage = 3;
+	    dataPerPage = 6;
  		const keyword = $("#serchInput").val();
 	    $.ajax({ // ajax로 데이터 가져오기
 	    	method: "post",
@@ -178,7 +181,7 @@
     	  $("#pagingUl").html(pageHtml);
     	  let displayCount = "";
     	  displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
-    	  $("#displayCount").text(displayCount);
+    	  $("#displayCount").text(displayCount).addClass("text-primary");
 
 
     	  //페이징 번호 클릭 이벤트 
@@ -217,8 +220,7 @@
 						div.attr("onclick", "clubInfoModal("+data[i].clubNo+")");
 						div.append("<img src='/resources/MAINbtstr/img/로고2.png' width='65px'>")
 						div.append("<h4 class='mb-3'>"+data[i].clubName+"</h4");
-						div.append("<p>참여인원수 : <span></span> / <span>"+data[i].clubLimit+"</span></p>");
-						div.append("<a href='/clubDetail.do?clubNo="+data[i].clubNo+"'>들어가기</a>");
+						div.append("<p>참여인원수 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></p>");
 						$("#club-list").append(div);
 					}
 		    	}
@@ -234,15 +236,16 @@
     		}
 			console.log(clubNo);
 			$.ajax({
-				url:"/selectOneClub.do",
-				data:{clubNo:clubNo},
-				success:function(one){
+				url : "/selectOneClub.do",
+				data : {clubNo:clubNo },
+				success : function(one){
 					const clubName = $(".club-info-box>h3");
 					const clubContent = $(".club-info-box>p");
 					const clubImg = $(".modal-img-div>img");
 					clubName.text(one.clubName);
 					clubContent.text(one.clubIntro);
 					clubImg.attr("src", "/resources/upload/club/"+one.clubMainImg);
+					myClubCheck(memberNo, one.clubNo);
 				}
 			});
 			$(".modal-wrap").css("display", "flex");
@@ -250,14 +253,13 @@
 
     	
     	function myClubCheck(memberNo, clubNo) {
-    		const btn = $("#enterClub");
+    		const btn = $("#enterBtn");
     		btn.text('가입하기');
     		btn.attr('onclick', 'joinClub('+memberNo+', '+clubNo+');');
     		$.ajax({
     			url:"/searchMyClub.do",
     			data:{memberNo: memberNo},
     			success:function(myList){
-    				console.log(myList);
     				for(let i=0; i<myList.length; i++){
     					console.log(myList);
     					if(myList[i].clubNo==clubNo){

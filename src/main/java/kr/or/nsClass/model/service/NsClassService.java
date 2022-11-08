@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.member.model.vo.MemberPageData;
 import kr.or.nsClass.model.dao.NsClassDao;
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
 import kr.or.nsClass.model.vo.NsClassPageData;
@@ -44,26 +46,24 @@ public class NsClassService {
 				if (reqPage > 3) {
 					pageNo = reqPage - 2;
 				}
-
-				String pageNavi = "<ul class='pagination circle-style'>";
+				String pageNavi = "<nav aria-label=\"Page navigation example\">";
+				pageNavi += "<ul class='pagination justify-content-center'>";
 				if (pageNo != 1) {
-					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/adminMgrClass.do?reqPage=" + (pageNo - 1) + "'>";
-					pageNavi += "<span class='material-icons'>chevron_left</span>";
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='adminMgrClass.do?reqPage=" + (pageNo - 1) + "'>";
+					pageNavi += "Previous";
 					pageNavi += "</a></li>";
 				}
 				for (int i = 0; i < pageNaviSize; i++) {
 					if (pageNo == reqPage) {
-						pageNavi += "<li>";
-						pageNavi += "<a class='page-item active-page' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
+						pageNavi += "<li class='page-item' >";
+						pageNavi += "<a class='page-link active-page' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
 						pageNavi += pageNo;
-						// pageNavi +="<span class='material-icons'>chevron_left</span>";
 						pageNavi += "</a></li>";
 					} else {
-						pageNavi += "<li>";
-						pageNavi += "<a class='page-item' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
+						pageNavi += "<li class='page-item' >";
+						pageNavi += "<a class='page-link' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
 						pageNavi += pageNo;
-						// pageNavi +="<span class='material-icons'>chevron_left</span>";
 						pageNavi += "</a></li>";
 					}
 					pageNo++;
@@ -71,16 +71,54 @@ public class NsClassService {
 						break;
 					}
 				}
-				// 다음버튼
+				// 다음버튼 
 				if (pageNo <= totalPage) {
-					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
-					pageNavi += "<span class='material-icons'>chevron_right</span>";
+					pageNavi += "<li class='page-item' >";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
+					pageNavi += "Nextpage";
 					pageNavi += "</a></li>";
 				}
-				pageNavi += "</ul>";
+				pageNavi += "</ul></nav>";
 				NsClassPageData npd = new NsClassPageData(list, pageNavi, reqPage, numPerPage);
 				return npd;
+				
+				
+//				String pageNavi = "<ul class='pagination circle-style'>";
+//				if (pageNo != 1) {
+//					pageNavi += "<li>";
+//					pageNavi += "<a class='page-item' href='/adminMgrClass.do?reqPage=" + (pageNo - 1) + "'>";
+//					pageNavi += "<span class='material-icons'>chevron_left</span>";
+//					pageNavi += "</a></li>";
+//				}
+//				for (int i = 0; i < pageNaviSize; i++) {
+//					if (pageNo == reqPage) {
+//						pageNavi += "<li>";
+//						pageNavi += "<a class='page-item active-page' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
+//						pageNavi += pageNo;
+//						// pageNavi +="<span class='material-icons'>chevron_left</span>";
+//						pageNavi += "</a></li>";
+//					} else {
+//						pageNavi += "<li>";
+//						pageNavi += "<a class='page-item' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
+//						pageNavi += pageNo;
+//						// pageNavi +="<span class='material-icons'>chevron_left</span>";
+//						pageNavi += "</a></li>";
+//					}
+//					pageNo++;
+//					if (pageNo > totalPage) {
+//						break;
+//					}
+//				}
+//				// 다음버튼
+//				if (pageNo <= totalPage) {
+//					pageNavi += "<li>";
+//					pageNavi += "<a class='page-item' href='/adminMgrClass.do?reqPage=" + pageNo + "'>";
+//					pageNavi += "<span class='material-icons'>chevron_right</span>";
+//					pageNavi += "</a></li>";
+//				}
+//				pageNavi += "</ul>";
+//				NsClassPageData npd = new NsClassPageData(list, pageNavi, reqPage, numPerPage);
+//				return npd;
 
 	}
 	@Transactional
@@ -231,5 +269,11 @@ public class NsClassService {
 	@Transactional
 	public int changeStatus2(NsClass nscl) {
 		return dao.changeStatus2(nscl);
+	}
+	public int insertClassReview(ClassReview cr) {
+		return dao.insertClassReview(cr);
+	}
+	public ArrayList<ClassReview> getTeacherReview(NsClass cla) {
+		return dao.getTeacherReview(cla);
 	}
 }

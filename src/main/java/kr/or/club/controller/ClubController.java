@@ -110,7 +110,7 @@ public class ClubController {
 		}
 		// c.setFileList(list); 여러개 일 때 살리기
 		int result = service.insertClub(c);
-		return "redirect:/popularClubList.do";
+		return "redirect:/popularClubList.do?memberNo="+c.getClubLeader();
 	}
 	
 	@RequestMapping(value = "/clubDetail.do")
@@ -190,5 +190,10 @@ public class ClubController {
 		int result = service.insertBoardCom(cbc);
 		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
 	}
-	
+
+	@RequestMapping(value = "/deleteClubComment.do")
+	public String deleteClubComment(ClubBoardComment cbc) {
+		int result = service.deleteClubComment(cbc);
+		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
+	}
 }

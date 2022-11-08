@@ -76,7 +76,7 @@
                     <thead>
                       <tr>
                         <th style="width: 20px;">
-                          <label>전체선택 <input type="checkbox" style="width: 15px; height: 15px; "></label>
+                          <input id="allChkBox" type="checkbox" style="width: 15px; height: 15px; ">
                         </th>
                         <th style="width: 20px;">번호</th>
                         <th>상품명</th>
@@ -90,9 +90,9 @@
                     
                     <c:forEach items="${list }" var="act">
                       <tr>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="text-align: center;"><input class="chk" type="checkbox"></td>
                         <td style="text-align: center;">${act.activityNo }</td>
-                        <td>${act.activityName }</td>
+                        <td style="cursor:pointer;" onclick="move(${act.activityNo });">${act.activityName }</td>
                         <td>${act.activityPrice }</td>
                         <td>${act.activityIntroduce }</td>
                         <td></td>
@@ -205,6 +205,19 @@
     <!-- Page JS -->
 
     <!-- Place this tag in your head or just before your close body tag. -->
+    <script>
+    $("#allChkBox").on("click", function() {
+		if ($("input[name=allChkBox]").is(":checked")) {
+			$(".chk").prop("checked", true);
+		} else {
+			$(".chk").prop("checked", false);
+		}
+	});
+    
+    function move(number){
+			location.href= "/activityDetail.do?activityNo="+number;
+		}
+    </script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>

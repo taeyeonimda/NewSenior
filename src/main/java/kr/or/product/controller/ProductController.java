@@ -49,9 +49,10 @@ public class ProductController {
 	@RequestMapping(value="/insertProduct.do")
 	public String insertProduct(Product p, MultipartFile[] productFile, HttpServletRequest request) {
 		ArrayList<ProductFileVO> fileList = new ArrayList<ProductFileVO>();
-		if(!productFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+			//input이 3개면 각각 조건을 비교해야함
 			for(MultipartFile file : productFile) {
+				if(!file.isEmpty()) {
 				String filename = file.getOriginalFilename();
 				String filepath = fileRename.productFileRename(savePath, filename);    
 				try {
@@ -73,8 +74,9 @@ public class ProductController {
 				pFile.setFileName(filename);
 				pFile.setFilePath(filepath);
 				fileList.add(pFile);
+				}
+				
 			}
-		}
 		p.setProductFileVO(fileList);
 		int result = service.insertProduct(p);
 		if(result > 0) {
@@ -86,10 +88,8 @@ public class ProductController {
 	@RequestMapping(value = "/productView.do")
 	public String productView(int productNo, Model model) {
 		Product p = service.productView(productNo);
-		ArrayList<ProductReview> pr = service.productReviewList(productNo);
 		int result = service.productReviewCount(productNo);
 		model.addAttribute("p",p);
-		model.addAttribute("prlist",pr);
 		return "product/productView";
 	}
 	
@@ -126,18 +126,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productUpdate.do")
-	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList) {
-		
+	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList,int[] fileNoList) {
 		ArrayList<ProductFileVO> flist = new ArrayList<ProductFileVO>();
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
-		if(!productFile[0].isEmpty()) {
 			for(MultipartFile file : productFile) {
+				if(!file.isEmpty()) {
 				String filename = file.getOriginalFilename();
 				String filepath = fileRename.productFileRename(savePath, filename);
-				ProductFileVO pfv = new ProductFileVO();
-				pfv.setFileName(filename);
-				pfv.setFilePath(filepath);
-				flist.add(pfv);
 				try {
 					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -145,9 +140,10 @@ public class ProductController {
 					byte[] bytes = file.getBytes();
 					bos.write(bytes);
 					bos.close();
-					
-					
-					
+					ProductFileVO pfv = new ProductFileVO();
+					pfv.setFileName(filename);
+					pfv.setFilePath(filepath);
+					flist.add(pfv);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -162,9 +158,9 @@ public class ProductController {
 				flist.add(pfile);
 			}
 		}
-		p.setProductFileVO(flist);
-		int result = service.productUpdate(p,flist);
-		if(productpathList != null && result ==(flist.size()+1)) {
+		//p.setProductFileVO(flist);
+		int result = service.productUpdate(p,flist, fileNoList);
+		if(productpathList != null && result ==(flist.size()+fileNoList.length+1)) {
 			if(productpathList != null) {
 				for(String productpath : productpathList) {
 					File delFile = new File(savePath+productpath);
@@ -193,4 +189,9 @@ public class ProductController {
 		}
 	}
 	
+	@RequestMapping(value = "/productReviewUpdate.do")
+	public String reviewUpdate(ProductReview pr) {
+		int result = service.reviewUpdate(pr);
+		return "redirect:/productView.do?productNo="+pr.getProductNo();
+	}
 }

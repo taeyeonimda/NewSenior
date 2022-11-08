@@ -23,17 +23,23 @@
 	
 	<table border="1">
 		<tr>
-			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th>
+			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th><th>보드타입</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
 		
 			<td>${(reqPage-1)*numPerPage+i.count }</td>
-			<td>${b.boardCategory }</td>
+			<c:if test ="${b.boardCategory eq 'info'}">
+				<td>정보</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'etc'}">
+				<td>기타</td>
+			</c:if>
 			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }</a></td>
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
 			<td>${b.boardDate }</td>
+			<td>${b.boardType }</td>
 		</tr>
 		</c:forEach>
 		<tr>
@@ -51,10 +57,9 @@
 					<option value="etc">기타</option>
 				</select>
 				<select name="searchTag">
-					<option value="nickName">작성자</option>
 					<option value="boardTitle">제목</option>
+					<option value="nickName">작성자</option>
 				</select>
-				
 				<input type="text" name="searchInput">
 				<button class="searchBtn">검색</button>
 			</form>

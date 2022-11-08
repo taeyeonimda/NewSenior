@@ -110,13 +110,17 @@ public class ProductService {
 		}
 	}
 
-	public int productUpdate(Product p, ArrayList<ProductFileVO> flist) {
+	public int productUpdate(Product p, ArrayList<ProductFileVO> flist, int[] fileNoList) {
 		int result = dao.productUpdate(p);
 		if(result > 0) {
 			for(ProductFileVO pfv : flist) {
 				pfv.setProductNo(p.getProductNo());
-				result += dao.deleteProductFile(p.getProductNo());
 				result += dao.insertProductFile(pfv);
+			}
+			if(fileNoList != null) {
+				for(int fileNo : fileNoList) {
+					result += dao.deleteProductFile(fileNo);
+				}
 			}
 		}
 		return result;
@@ -139,6 +143,10 @@ public class ProductService {
 
 	public int productReviewCount(int productNo) {
 		return dao.productReviewCount(productNo);
+	}
+
+	public int reviewUpdate(ProductReview pr) {
+		return dao.reviewUpdate(pr);
 	}
 
 }
