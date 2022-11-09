@@ -113,6 +113,8 @@ public class ProductService {
 
 	public int productUpdate(Product p, ArrayList<ProductFileVO> flist, int[] fileNoList) {
 		int result = dao.productUpdate(p);
+		System.out.println(flist);
+		System.out.println(fileNoList);
 		if(result > 0) {
 			for(ProductFileVO pfv : flist) {
 				pfv.setProductNo(p.getProductNo());
@@ -120,6 +122,7 @@ public class ProductService {
 			}
 			if(fileNoList != null) {
 				for(int fileNo : fileNoList) {
+					System.out.println("service : "+fileNo);
 					result += dao.deleteProductFile(fileNo);
 				}
 			}
