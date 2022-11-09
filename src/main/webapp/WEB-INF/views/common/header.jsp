@@ -362,8 +362,7 @@
 		          + data['nickname']);
 		      }
 		  });  
-    */
-		
+
 	//카카오로그인
 	Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
 	console.log(Kakao.isInitialized()); // sdk초기화여부판단

@@ -203,4 +203,13 @@
 	<insert id="insertBlockMember" parameterType="cb">
 		insert into block_members values (club_block_seq.nextval, #{clubNo }, #{memberNo })
 	</insert>
+	
+	<!-- 클럽 리더를 삭제 -->
+	<delete id="deleteClubLeader" parameterType="c">
+		delete from club_members where club_no=#{clubNo } and member_no=#{clubLeader }
+	</delete>
+	
+	<delete id="deleteClub" parameterType="c">
+		delete from clubs where club_no=#{clubNo }
+	</delete>
 </mapper>

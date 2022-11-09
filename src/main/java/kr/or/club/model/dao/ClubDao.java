@@ -104,4 +104,12 @@ public class ClubDao {
 	public int insertBlockMember(ClubBoard cb) {
 		return sqlSession.insert("club.insertBlockMember", cb);
 	}
+
+	public int deleteClubMember(Club c) {
+		return sqlSession.delete("club.deleteClubLeader", c);
+	}
+
+	public int deleteClub(Club c) {
+		return sqlSession.delete("club.deleteClub", c);
+	}
 }

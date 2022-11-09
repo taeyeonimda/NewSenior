@@ -112,5 +112,12 @@ public class ClubService {
 		}
 		return result;
 	}
+	public int deleteClub(Club c) {
+		int result = dao.deleteClubMember(c);
+		if(result>0) {
+			result = dao.deleteClub(c);
+		}
+		return result;
+	}
 
 }

@@ -103,8 +103,8 @@
 .club-info-modal{
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-    width: 50%;
-    height: 77%;
+    width: 40%;
+    height: 65%;
     align-items: center;
     text-align: center;
 }
@@ -119,25 +119,23 @@
     width: 250px;
     overflow: hidden;
 }
-.modal-title{
+
+.modal-img-div{
     text-align:center;
     display:table;
     border:1px solid #cecece;
-    width: 57%;
-    height: 15%;
-    min-height: 50%;
+    width: 90%;
+    height: 40%;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 50px;
     padding: 20px;
 }
 .modal-img{
-    max-width: 90%;
-    max-height: 90%;
+    width: 100%;
+  	height: 230px;
+  	object-fit: cover;
 }
-.modal-img-div{
-    display:table-cell;
-    vertical-align:middle;
-}
+
 .club-info{
 	width: 100%;
 	margin-top: 20px;
@@ -270,9 +268,6 @@
     max-width: 230px;
     max-height: 120px;
 }
-
-
-
 
 
 /*글쓰기 모달*/
@@ -561,7 +556,6 @@ textarea:focus{
 	width: 90%;
 	height: 100%;
 }
-
 
 
 /*대댓글 출력*/

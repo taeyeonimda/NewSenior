@@ -19,19 +19,13 @@
             <div class="side-box rounded mt-2">
                 <p class="fs-5 fw-bold text-primary mt-5">내 동호회</p>
                 <div class="side-info-box text-center">
-                    <div class="side-info-box text-center">
-                        <div><span>동아리이름</span><span>(이동)</span></div>
-                        <div><span>동아리이름</span><span>(이동)</span></div>
-                        <div><span>동아리이름</span><span>(이동)</span></div>
+                    <div class="side-info-box text-center" id="myClubList">
+						<!-- ajax로 가져오는 정보 -->
                     </div>
                 </div>
-                <div>
-                    <div class="btn-group mt-2" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-primary">Left</button>
-                        <button type="button" class="btn btn-outline-primary"> </button>
-                        <button type="button" class="btn btn-outline-primary">Right</button>
-                    </div>
-                </div>
+                <div class="pagination">
+					<!-- 페이징 구역 -->
+				</div>
             </div>
             <div class="side-box rounded mt-5">
                 <p class="fs-5 fw-bold text-primary">${c.clubName } </p>
@@ -180,11 +174,11 @@
 												<c:choose>
 													<c:when test="${not empty cb.clubBoardFilepath }">
 														<pre class="delFile">${cb.clubBoardFilepath }</pre><button class="delFile btn btn-secondary">삭제</button>
-														<input type="file" name ="upfile" class="upfile" multiple style="display:none;"><!--삭제하면 파일 선택 show-->
+														<input type="file" name ="upfile" class="upfile" multiple style="display:none;" accept=".gif, .jpg, .png"><!--삭제하면 파일 선택 show-->
 							                            <input type="hidden" name="oldFilepath" value="${cb.clubBoardFilepath }" class="oldFilepath">
 													</c:when>
 													<c:otherwise>
-														<input type="file" name ="upfile" class="upfile" multiple>
+														<input type="file" name ="upfile" class="upfile" multiple accept=".gif, .jpg, .png">
 													</c:otherwise>
 												</c:choose>
 											</div>
@@ -332,7 +326,7 @@
 				<input type="hidden" name="clubNo" value="${c.clubNo }">
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				<textarea name="clubBoardContent"></textarea><br>
-				<input type="file" multiple name="files"><br>
+				<input type="file" multiple name="files" accept=".gif, .jpg, .png"><br>
 			</div>
 			<div class="writeModalButtonBox">
 				<button class="btn btn-primary py-2 px-4" type="submit">글쓰기</button><button type="button" class="btn btn-primary py-2 px-4" onclick="closeWriteModal();">닫기</button>
@@ -396,14 +390,43 @@
     </div>
 </div>
 
-
+<div id="memberNo" style="display: none;">${sessionScope.m.memberNo }</div>
 
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 	<script>
 
-	
+	// side bar 스크롤
+    function stopSide(){
+        const position  = $(window).scrollTop();
+        let windowHeight = window.innerHeight; // 스크린 창
+        if(position > windowHeight){
+            $(".sidenav-left").addClass("left-absolute");
+            $(".sidenav-right").addClass("right-absolute");
+        }else{
+        	$(".sidenav-left").removeClass("left-absolute");
+        	$(".sidenav-right").removeClass("right-absolute");
+        }
+    }
+    $(window).on("scroll",function(){
+        stopSide();
+        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
+    });
+    $(function(){
+    	stopSide();
+    });
+
+    
+    // 글쓰기 버튼
+    function boardModal() {
+    	$(".write-modal-wrap").css("display", "flex");
+	}
+    function closeWriteModal() {
+    	$(".write-modal-wrap").css("display", "none");
+	}
+    
+    
 	// 리더의 모달
 	function clubMgrModal() {
 		$(".clubLeader-modal-wrap").css("display", "flex");
@@ -419,7 +442,7 @@
 		}
 	})
 	
-	// 나는 바보다 ... select 값 가져오는 방법
+	// 나는 바보다  select 값 가져오는 방법 (가져올 필요 없는데 가져옴)
 	function selectLeader() {
 		const leaderNo=$("#leaderNo option:selected").val();
 		alert("value="+leaderNo);
@@ -533,37 +556,14 @@
 		}
 	}
 	
-	
-	// side bar 스크롤
-    function stopSide(){
-        const position  = $(window).scrollTop();
-        let windowHeight = window.innerHeight; // 스크린 창
-        if(position > windowHeight){
-            $(".sidenav-left").addClass("left-absolute");
-            $(".sidenav-right").addClass("right-absolute");
-        }else{
-        	$(".sidenav-left").removeClass("left-absolute");
-        	$(".sidenav-right").removeClass("right-absolute");
-        }
-    }
-    $(window).on("scroll",function(){
-        stopSide();
-        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
-    });
-    $(function(){
-    	stopSide();
-    });
+	// 클럽 삭제
+	function deleteClub(clubNo) {
+		const memberNo = $("#memberNo").text();
+		location.href = "/deleteClub.do?clubNo="+clubNo+"&clubLeader="+memberNo;
+	}
 
-    
-    // 글쓰기 버튼
-    function boardModal() {
-    	$(".write-modal-wrap").css("display", "flex");
-	}
-    function closeWriteModal() {
-    	$(".write-modal-wrap").css("display", "none");
-	}
-    
-    
+	
+	
     // 채팅모달
     function openModal() {
     	$("#member-box").show();
@@ -585,7 +585,7 @@
 	function initChat(param) {
 		memberId = param;
 		// 웹소켓 연결 시도
-		ws = new WebSocket("ws://192.168.10.55/chat.do");
+		ws = new WebSocket("ws://172.30.1.57/chat.do");
 		// 웹소켓 연결 성공 시 실행할 함수 지정
 		ws.onopen = startChat;
 		// 서버에서 데이터 받으면 처리할 함수
@@ -740,6 +740,129 @@
  	});
 	
 	
+	
+	
+	
+	
+	
+	
+	
+ 	var totalData; //총 데이터 수
+    var dataPerPage; //한 페이지에 나타낼 글 수
+    var pageCount = 5; //페이징에 나타낼 페이지 수
+    var currentPage = 1; //현재 페이지
+    var data; //controller에서 가져온 data 전역변수
+    var keyword;
+    
+    $(document).ready(function () {
+    	initMyClubList();
+    });
+    
+    function initMyClubList() {
+   	 	//dataPerPage 선택값 가져오기
+   	 	$("#myClubList div").remove();
+	    dataPerPage = 3;
+ 		const keyword = $("#serchInput").val();
+	    $.ajax({ // ajax로 데이터 가져오기
+	    	method: "post",
+	    	url: "/getMyClubList.do",
+	    	data: {memberNo : $("#memberNo").text() },
+	    	success: function (data) {
+	    	   totalData = data.length;
+	    	   console.log("totalData:"+totalData);
+	    	   displayData(1, dataPerPage, keyword); //글 목록 표시 호출 (테이블 생성)
+	    	   paging(totalData, dataPerPage, pageCount, 1); //페이징 표시 호출
+	    	   $("myClubList");
+	    	}
+    	});
+	}
+
+    function paging(totalData, dataPerPage, pageCount, currentPage) {
+		  var num = Number(totalData)/dataPerPage;
+		  var totalPage = Math.ceil(num);
+	
+		  if(totalPage<Number(pageCount)){
+			  pageCount=totalPage;
+		  }
+		  
+		  var num2 = Number(currentPage)/Number(pageCount);
+		  var pageGroup = Math.ceil(num2);
+		  var last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+		  
+		  if (last > totalPage) {
+		    last = totalPage;
+		  }
+		
+		  let first = last-(pageCount-1); //화면에 보여질 첫번째 페이지 번호
+		  let next = last+1;
+		  let prev = first-1;
+		
+		  let pageHtml = "";
+		
+		  if (prev > 0) {
+    		  pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='prev'>이전</a></li>";
+    	  }
+
+    	 //페이징 번호 표시 
+    	  for (var i = first; i <= last; i++) {
+    	    if (currentPage == i) {
+    	      pageHtml +=
+    	        "<li class='page-item '><a class='page-link active-page' href='#' id='" + i + "'>" + i + "</a></li>";
+    	    } else {
+    	      pageHtml += "<li class='page-item'><a class='page-link' href='#' id='" + i + "'>" + i + "</a></li>";
+    	    }
+    	  }
+    	  
+    	  if (last < totalPage) {
+    	    pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='next'> 다음 </a></li>";
+    	  }
+		
+		  $(".pagination").html(pageHtml);
+		
+		  //페이징 번호 클릭 이벤트 
+		    $(".pagination span").click(function () {
+		    	console.log("시작");
+		    	$("#myClubList div").remove();
+		        let $id = $(this).attr("id");
+		        selectedPage = $(this).text();
+		
+		        if ($id == "next") selectedPage = next;
+		        if ($id == "prev") selectedPage = prev;
+		
+		        //전역변수에 선택한 페이지 번호를 담는다...
+		       	CurrentPage = selectedPage;
+		        //페이징 표시 재호출
+		        paging(totalData, dataPerPage, pageCount, selectedPage);
+		        //글 목록 표시 재호출
+		        displayData(selectedPage, dataPerPage);
+		    });
+	}
+  	
+	    function displayData(selectedPage, dataPerPage) {
+	      	$.ajax({ // ajax로 데이터 가져오기
+		    	method: "post",
+		    	url: "/getMyClubList.do",
+		    	data: {memberNo : $("#memberNo").text() },
+		    	success: function (list) {
+		    		currentPage = Number(selectedPage);
+			      	dataPerPage = Number(dataPerPage);
+		    		console.log(currentPage);
+		    		console.log(dataPerPage);
+		    		for (let i=(currentPage-1)*dataPerPage; i<(currentPage-1)*dataPerPage+dataPerPage; i++) {
+						const div = $("<div>");
+						div.append("<span onclick='locationClub("+list[i].clubNo+")'>"+list[i].clubName+"</span>");
+						$("#myClubList").append(div);
+					}
+		    	}
+		    });
+	    }
+    
+		function locationClub(clubNo) {
+			var result = confirm("이동하시겠습니까?");
+			if(result){
+				location.href = "/clubDetail.do?clubNo="+clubNo;
+			}
+		}
 	</script>
 </body>
 </html>

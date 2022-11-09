@@ -268,4 +268,17 @@ public class ClubController {
 		int result = service.blockClubMember(memberNo, clubNo);
 		return "redirect:/clubDetail.do?memberNo="+clubNo;
 	}
+	// 클럽 detail에서 보여줄 내 동호회 버튼
+	@ResponseBody
+	@RequestMapping(value="/getMyClubList.do", produces = "application/json;charset=utf-8")
+	public String myClubList(Member m) {
+		ArrayList<Club> myList = service.searchMyClub(m);
+		return new Gson().toJson(myList);
+	}
+	// 클럽을 없애는 delete
+	@RequestMapping(value="/deleteClub.do")
+	public String deleteClub(Club c) {
+		int result = service.deleteClub(c);
+		return "redirect:/popularClubList.do?memberNo="+c.getClubLeader();
+	}
 }
