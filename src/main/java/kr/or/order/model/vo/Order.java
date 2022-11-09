@@ -11,19 +11,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Order {
-	private int memberNo;
 	private int orderNo;
-	private String orderDate;
-	private String orderName;
-	private String orderDetailAmount;
+	private int memberNo;
+	private String memberName;
+	private String memberPhone;
+	private String memberEmail;
 	private int productNo;
-	private int buyAmount;
+	private String buyName;
 	private int buyPrice;
-	private int orderAmount;
-	private int orderPrice;
-	private String productName;
+	private int buyAmount;
 	private String receiveName;
 	private String receiveAddr;
 	private String receivePhone;
+	private String receiveEmail;
+	
+	private String orderDate;
+	private String orderName;
+	private String orderDetailAmount;
+	private int orderAmount;
+	private int orderPrice;
 	private ArrayList<Product> productList;
 }

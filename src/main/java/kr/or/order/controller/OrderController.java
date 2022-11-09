@@ -40,8 +40,8 @@ public class OrderController {
 	 }
 	
 	@RequestMapping(value="/insertOrder.do")
-	public String insertOrder(Cart c) {
-		int result = service.insertOrder(c);
+	public String insertOrder(Order o,Model model,HttpServletRequest request) {
+		int result = service.insertOrder(o);
 		
 		return "myPage/orderHistory";
 	}
@@ -56,8 +56,10 @@ public class OrderController {
 	public String goOrderHistory(Cart c, Model model) {
 		ArrayList<Cart> list = service.goOrderHistory(c);
 		model.addAttribute("list", list);
-		System.out.println(list);
 		return "myPage/orderInfo";
 	}
+	
+	
+	
 	
 }

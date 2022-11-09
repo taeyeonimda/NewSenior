@@ -70,6 +70,7 @@
 
             <br><br><br>
             <div style="font-size: 25px;">주문내역</div>
+            ${productNo}
             <div style="font-size: 15px;">클래스, 액티비티, 키트</div>
             <div class="card">
 

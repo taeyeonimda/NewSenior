@@ -116,7 +116,7 @@
 							<div class="col-md-10">
 								<input class="form-control" type="text" id="html5-url-input"
 									value="${member.memberBirth }" name="memberBirth"
-									onkeyup="birth_keyup(this)" />
+									onkeyup="birth_keyup(this)" maxlength="10"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
@@ -124,7 +124,7 @@
 							<div class="col-md-10">
 								<input class="form-control" type="tel" id="html5-url-input"
 									value="${member.memberPhone }" name="memberPhone"
-									onkeyup="phone_keyup(this)" />
+									onkeyup="phone_keyup(this)" maxlength="13" />
 							</div>
 						</div>
 
