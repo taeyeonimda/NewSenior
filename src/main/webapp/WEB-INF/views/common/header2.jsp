@@ -182,14 +182,17 @@
 			.div1>a{
 			display: none;
 			}
+			.d-flex{
+			    justify-content: space-evenly;
+			}
 	</style>
          
 </style>
 </head>
 <body>
-	<a href="/">
-		<h1 class="m-0">뉴시니어스</h1>
-	</a>
+		<a href="/" class="navbar-brand d-flex align-items-center px-2 px-lg-3 m-0">
+            <img src="/resources/MAINbtstr/img/로고1.png" width="250px;">
+        </a>
 	<div class="div1">
           <a href="javascript:void(0)" class="loginBtn">로그인</a>
    </div>

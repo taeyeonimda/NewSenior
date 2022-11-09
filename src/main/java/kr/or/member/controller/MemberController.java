@@ -1,17 +1,31 @@
 package kr.or.member.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import kr.or.category.model.service.CategoryService;
 import kr.or.category.model.vo.Category;
@@ -66,7 +80,7 @@ public class MemberController {
 	
 	//로그인
 	@RequestMapping(value="/login.do")
-	public String loginCheckMember(Member m, HttpSession session) {
+	public String loginCheckMember(Member m, HttpSession session,Model model) {
 		Member member = service.loginCheckMember(m);
 		if(member!= null) {
 			session.setAttribute("m", member);
@@ -76,6 +90,8 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
+	
+	
 	
 	//로그아웃
 		@RequestMapping(value = "/logout.do")
@@ -139,6 +155,20 @@ public class MemberController {
 			System.out.println("join.do contoroller: "+m);
 			int result = service.insertMember(m);
 			if(result>0) {
+				return "redirect:/";
+			}else { 
+				return "member/joinFrm";
+			}
+		}
+		
+		//카카오 회원가입&로그인
+		@RequestMapping(value="/kakaoLogin.do")
+		public String kakaoLogin(Member m, HttpSession session, Model model) {
+			int result = service.insertMember(m);
+			if(result>0) {
+				Member member = service.loginCheckMember(m);
+				session.setAttribute("m", member);
+				System.out.println("login정보:"+member);
 				return "redirect:/";
 			}else { 
 				return "member/joinFrm";
