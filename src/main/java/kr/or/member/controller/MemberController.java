@@ -314,12 +314,16 @@ public class MemberController {
 		}
 		//배송지 정보 업데이트
 		@RequestMapping(value="/updateAddr.do")
-		public String updateAddr(Integer deliveryNo, Model model) {
-			int result = service.updateAddr(deliveryNo);
+		public String updateAddr(Delivery delivery, Model model, int deliveryNum) {
+			System.out.println("delivery:"+delivery+deliveryNum);
+			delivery.setDeliveryNo(deliveryNum);
+			int result = service.updateOneAddr(delivery);
 			if(result>0) {
-				return "0";
+				return "redirect:/mypage.do";
 			}else {
-				return "1";
+				model.addAttribute("msg", "배송지 수정에 실패했습니다.");
+				model.addAttribute("url","/mypage.do");
+				return "alert";
 			}
 		}
 		

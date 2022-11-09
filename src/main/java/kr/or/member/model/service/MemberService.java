@@ -172,8 +172,8 @@ public class MemberService {
 	}
 
 
-	public int updateAddr(Integer deliveryNo) {
+	public int updateOneAddr(Delivery delivery) {
 		// TODO Auto-generated method stub
-		return dao.updateAddr(deliveryNo);
+		return dao.updateOneAddr(delivery);
 	}
 }
