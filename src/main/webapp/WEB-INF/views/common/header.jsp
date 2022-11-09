@@ -35,6 +35,13 @@
         <!-- 로그인 모달 css
         <link href="/resources/css/login/login.css" rel="stylesheet">
         -->
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
+ 		<link rel="stylesheet" href="/resources/css/datepicker.css"><!--datepickercss--> 
+ 		
+ 		<script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
+		<!-- 카카오 로그인 -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        
          <style type="text/css">
          @charset "UTF-8";
 			.detail {
@@ -324,6 +331,93 @@
     	}
     }
   
+    Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	  function kakaoLogin() {
+
+		    $.ajax({
+		        url: '/login/getKakaoAuthUrl',
+		        type: 'get',
+		        async: false,
+		        dataType: 'text',
+		        success: function (res) {
+		            location.href = res;
+		        }
+		    });
+
+		  }
+
+		  $(document).ready(function() {
+
+		      var kakaoInfo = '${kakaoInfo}';
+
+		      if(kakaoInfo != ""){
+		          var data = JSON.parse(kakaoInfo);
+
+		          alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
+		          alert(
+		          "user : \n" + "email : "
+		          + data['email']  
+		          + "\n nickname : " 
+		          + data['nickname']);
+		      }
+		  });  
+    */
+		
+	//카카오로그인
+	Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	function kakaoLogin() {
+	    Kakao.Auth.login({
+	      success: function (response) {
+	        Kakao.API.request({
+	          url: '/v2/user/me',
+	          success: function (response) {
+	        	  console.log(response.id)
+	        	  console.log(response.properties.nickname)
+	        	  console.log(response.kakao_account.email)
+	        	  //로그인 성공 후 insert 하기
+	        	  $.ajax({
+	        		  url: "/kakaoLogin.do",
+	        		  type:'post',
+	        		  data:{
+	        			  kakaoYN:'y',
+	        			  nickName:response.properties.nickname,
+	        			  memberId:response.kakao_account.email,
+	        			  memberEmail:response.properties.email
+	        			  },
+	        		 success:function(data){
+	        			 
+	        		 }
+	        	  });
+	        	  
+	          },
+	          fail: function (error) {
+	            console.log(error)
+	          },
+	        })
+	      },
+	      fail: function (error) {
+	        console.log(error)
+	      },
+	    })
+	  }
+	//카카오 로그아웃
+	function kakaoLogout() {
+	    if (Kakao.Auth.getAccessToken()) {
+	      Kakao.API.request({
+	        url: '/v1/user/unlink',
+	        success: function (response) {
+	        	console.log(response)
+	        },
+	        fail: function (error) {
+	          console.log(error)
+	        },
+	      })
+	      Kakao.Auth.setAccessToken(undefined)
+	    }
+	  }  
+
     </script>
 </body>
 </html>
