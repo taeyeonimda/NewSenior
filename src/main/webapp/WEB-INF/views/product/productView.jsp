@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,13 +44,14 @@ ul li.on a {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	    <div class="productContent">
-	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</div>
+	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</button>
 	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
 
         <div class="productWrap">
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
             </div>
+            
             <div style="width: 500px;" class="prodContent">
                 <h3>${p.productName }</h3>
                 <h4>${p.wonPrice }<span>원</span></h4>
@@ -63,6 +65,7 @@ ul li.on a {
                 <div class="classMove">
                     <a href="javascript:void(0)">관련클래스 바로가기 >>></a>
                 </div>
+                
                 <div class="productQty">
                     <div style="width: 200px;">
                         <span class="material-icons" id="minus">remove</span>
@@ -76,12 +79,22 @@ ul li.on a {
                     	<span style="font-size: 14px; margin: 0;">원</span>
                    	</div>
                 </div>
-                <input type="hidden"  ${p.productName } ${p.wonPrice } ${p.productPrice } >
-                <div>
-                  <button type="button" onclick="insertCart();">장바구니</button>
-                  <button>바로구매</button>
-                </div>
+	                <div>
+	                
+                <form id="insertCartForm" action="/insertCart.do" autocomplete="off" >
+                		<input type="hidden" value="${p.productNo }" name="productNo">
+	        	        <input type="hidden" value="${p.productName }" name="buyName">
+		                <input type="hidden" value="${p.productPrice }" name="buyPrice">
+		                <!-- <input type="hidden" value="${p.productFileVO[0].filePath }" name="productFileVO"> -->
+		                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
+						<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+	                	<button type="submit">장바구니</button>
+	                 	<button>바로구매</button>
+            	</form>
+	                </div>
+	                
             </div>
+            
             
             <div class="subTitle" style="width: 1200px;">
               <div>상세내용</div>
@@ -603,6 +616,9 @@ ul li.on a {
 			$("body").append(form);
 			form.submit();
 		};
+		
+		
+		
 		</script>
 </body>
 </html>

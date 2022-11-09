@@ -86,11 +86,25 @@ public class BoardDao {
 		return sqlSession.delete("board.deleteBoardComment",bc);
 	}
 	
+	//검색기능
 	public ArrayList<Board> selectBoardList2(HashMap<String, Object> pageMap) {
 		List list = sqlSession.selectList("board.selectBoardList2",pageMap);
 		System.out.println(pageMap);
 		return (ArrayList<Board>) list;
 	}
+	//검색된 게시물 개수
+	public int selectBoardCountF2(HashMap<String, Object> pageMap) {
+		int totalCount = sqlSession.selectOne("board.totalCountF2",pageMap);
+		return totalCount;
+	}
+	public int updateReadCount(int boardNo) {
+		int readCount = sqlSession.update("board.readCount",boardNo);
+		return readCount;
+	}
+	public int updateboard2(Board b) {
+		return sqlSession.update("board.updateBoard2",b);
+	}
+	
 	
 	
 	

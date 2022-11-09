@@ -25,4 +25,5 @@ public class Member {
 	private String memberImg;	 //UNIQUE
 	private String favorite; 	//(N(선택x)/dg/fu/cr/de/ex/fs/me/so/fo/co)
 	private int orderNo;
+	private char kakaoYN;
 }
