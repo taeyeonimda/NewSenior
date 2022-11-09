@@ -75,7 +75,7 @@
 .inbtn {
 	width: 480px;
 	height: 60px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	font-size: 1.2em;
 	border-radius: 5px;
 	border: 1.5px solid rgb(176, 174, 174);
@@ -93,33 +93,39 @@
 }
 
 .fs {
-	font-size: 1.4em;
+	font-size: 1.5em;
 }
 
 #memberJoin {
 	width: 480px;
 	height: 60px;
-	color: #E8F5E9;
-	background-color: #0F4229;
+	color: #000;
+	background-color: #ffedb5;
 	border: none;
+	margin-top: 20px;
 }
 
 #memberJoin:hover {
-	color: #E8F5E9;
-	background-color: #348E38;
+	color: #fff;
+	background-color: #ffc107;
 }
 
 .wra {
 	width: 800px;
 	padding: 10px;
-	margin: 0 auto;
+	margin: 50px auto;
 	background: #FFFFFF;
-	box-shadow: 0 0 45px rgb(0 0 0/ 10%);
+	border-radius: 50px;
+	box-shadow:0 0 50px #ffd65982 ;
+}
+/*rgb(0 0 0/ 10%)*/
+.wra0{
 }
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header2.jsp"%>
+	<div class="wra0">
 	<div class="wra">
 		<form action="/join.do" method="post" class="joinbox">
 			<fieldset>
@@ -195,7 +201,7 @@
 			value="회원가입" id="memberJoin" class="fs">
 		</fieldset>
 	</div>
-
+</div>
 	<!-- 개인정보수집이용 동의 -->
 	<div class="popup_bg"></div>
 	<div class="popup personal_pop noto">
