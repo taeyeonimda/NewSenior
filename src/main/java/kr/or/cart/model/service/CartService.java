@@ -17,8 +17,6 @@ public class CartService {
 
 	public ArrayList<Cart> selectAllCartList(Member m) {
 		ArrayList<Cart> list = dao.selectAllCartList(m);
-		System.out.println(list);
-		System.out.println(m);
 		return (ArrayList<Cart>) list;
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.cart.model.vo.Cart;
 import kr.or.member.model.vo.Member;
@@ -28,9 +29,11 @@ public class OrderService {
 		return (ArrayList<OrderDetail>) list;
 	}
 
-
-	public int insertOrder(Cart c) {
-		int result = dao.insertOrder(c);
+	@Transactional
+	public int insertOrder(Order o) {
+		int result = dao.insertOrder(o);
+		
+		
 		return result;
 	}
 

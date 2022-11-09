@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     
 <!DOCTYPE html>
 <html
@@ -90,16 +91,17 @@
 			            	<tr class="showCartList">
 					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
 					            <td style="text-align:center">${Cart.productNo }</td>
-					            <td style="text-align:center">${Cart.productName }</td>
-								<td style="text-align:center">${Cart.buyPrice }</td>
-								<td style="text-align:center">${Cart.buyAmount }</td>
+					            <td style="text-align:center">${Cart.buyName }</td>
+								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
+								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" pattern="#,###"/></td>
 								<td style="text-align:center">무료배송</td>
-								<td style="text-align:center"><span class="sumPrice" >${Cart.buyAmount*Cart.buyPrice }</span>원</td>
+								<td style="text-align:center">
+									<fmt:formatNumber value="${Cart.buyPrice*Cart.buyAmount }" pattern="#,###"/>
+									<input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }">
+								</td>
+								
 			            	</tr>
-			            	<input type="hidden" name="pNo" value="${Cart.productNo }">
-			            	<input type="hidden" name="pName" value="${Cart.productName }">
-			            	<input type="hidden" name="pPrice" value="${Cart.buyPrice }">
-			            	<input type="hidden" name="pAmount" value="${Cart.buyAmount }">
+			            	
 	             		</c:forEach>
 	                    	<tr>
 		                      	<td colspan="5"></td>
@@ -108,6 +110,7 @@
 		                      		<input type="text" style="border:none;" class="payPrice" readonly>
 		                     	</td>
 	                      	</tr>
+	                      	
 	                    </tbody>
 	                  </table>
               	<button type="submit" style="float: right; width:250px; margin: 10px; margin-top:20px;" class="btn btn-outline-primary" id="testPay" >주문하기</button>
@@ -203,9 +206,10 @@
 			const sumPrice = $(".sumPrice");
 			let result = 0;
 			for(let i=0; i<sumPrice.length; i++){
-				result += Number(sumPrice.eq(i).text());
+				result += Number(sumPrice.eq(i).val());
 			}
 			$(".payPrice").val(result);
+			
 		}
 		
 		window.onload=function(){
