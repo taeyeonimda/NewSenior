@@ -167,6 +167,7 @@ public class BoardService {
 		 ArrayList<FileVO> list = dao.selectFileList(boardNo);
 		 b.setFileList(list); //board(VO)에 생성자 추가함
 		 //fileList를 b에 추가
+		 System.out.println("list 조회:"+list);
 		 
 		 //게시판2 32분
 		 //board_comm_comment(댓글) 테이블 조회
@@ -175,15 +176,19 @@ public class BoardService {
 		 //대댓글 테이블 조회
 		 ArrayList<BoardComment> reCommentList = dao.selectBoardRecomment(boardNo);
 		 
+		 //조회수
+		 int readCount = dao.updateReadCount(boardNo);
+		 
 		 //조회된 결과 hashMap에 넣기 : board(file포함),
 		 HashMap<String, Object> pageViewMap = new HashMap<String, Object>();
 		 pageViewMap.put("b", b);
 		 pageViewMap.put("commentList", commentList);
 		 pageViewMap.put("reCommentList", reCommentList);
+		 pageViewMap.put("readCount", readCount);
 		 
 		return pageViewMap;
 	}
-
+	// 게시글 작성
 	public int insertBoard(Board b) {
 		int result = dao.insertBoard(b);
 		
@@ -206,9 +211,17 @@ public class BoardService {
 	}
 	
 	//게시물 삭제
-	public int deleteBoard(Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<FileVO> boardDelete(int boardNo) {
+		//파일 목록  조회해서
+		ArrayList<FileVO> fileList = dao.selectFileList(boardNo);
+		//boardTBL에서 삭제
+		int result = dao.deleteBoard(boardNo);
+		if(result>0) {
+			return fileList;
+		}else {
+			return null;
+		}
+		
 	}
 	
 	//게시물 수정
@@ -223,7 +236,7 @@ public class BoardService {
 				//ㄴ갖고 있는 board번호 setter로 넣어줌
 				result += dao.insertFile(fv);
 			}
-			
+
 			//3. 삭제한 파일이 있으면 delete
 			if(fileNoList !=null ) {
 				for(int fileNo : fileNoList) {
@@ -234,24 +247,22 @@ public class BoardService {
 		return result;
 	}
 
-
+	// 댓글 작성
 	public int insertComment(BoardComment bc) {
 		return dao.insertComment(bc);
 	}
 	
-	
-
-
+	//댓글 수정
 	public int updateBoardComment(BoardComment bc) {
 		return dao.updateBoardComment(bc);
 	}
-	
+	//댓글삭제
 	public int deleteBoardComment(BoardComment bc) {
 		return dao.deleteBoardComment(bc);
 	}
 
 
-
+	//검색 기능 - 페이징처리해주기
 	public HashMap<String, Object> selectBoardList(int reqPage, String categoryTag, String searchTag, String searchInput) {
 		//한 페이지 당 보여줄 게시물 수
 				int numPerPage = 10;
@@ -269,8 +280,9 @@ public class BoardService {
 				
 				//pageNavi 시작
 				//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
-				int totalCount = dao.selectBoardCount();
+				int totalCount = dao.selectBoardCountF2(pageMap); // 바꿔주기
 				//int totalCount = dao.selectBoardCount2(boardType);
+				System.out.println("검색 : "+totalCount);
 				int totalPage = 0;
 				if(totalCount%numPerPage==0) {
 					totalPage = totalCount/numPerPage;
@@ -290,19 +302,19 @@ public class BoardService {
 				pageNavi += "<ul class='pagination justify-content-center'>";
 				if (pageNo != 1) {
 					pageNavi += "<li class='page-item disabled'>";
-					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + (pageNo - 1) + "'>";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/searchBoard.do?reqPage=" + (pageNo - 1) +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
 					pageNavi += "Previous";
 					pageNavi += "</a></li>";
 				}
 				for (int i = 0; i < pageNaviSize; i++) {
 					if (pageNo == reqPage) {
 						pageNavi += "<li class='page-item' >";
-						pageNavi += "<a class='page-link active-page' href='/boardList.do?reqPage=" + pageNo + "'>";
+						pageNavi += "<a class='page-link active-page' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					} else {
 						pageNavi += "<li class='page-item' >";
-						pageNavi += "<a class='page-link' href='/boardList.do?reqPage=" + pageNo + "'>";
+						pageNavi += "<a class='page-link' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					}
@@ -314,7 +326,7 @@ public class BoardService {
 				// 다음버튼 
 				if (pageNo <= totalPage) {
 					pageNavi += "<li class='page-item disabled' >";
-					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + pageNo + "'>";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
 					pageNavi += "Previous";
 					pageNavi += "</a></li>";
 				}
@@ -324,7 +336,8 @@ public class BoardService {
 				pageMap.put("numPerPage", numPerPage);
 				pageMap.put("reqPage", reqPage);
 				
-				ArrayList<Board> list = dao.selectBoardList2(pageMap);
+				
+				ArrayList<Board> list = dao.selectBoardList2(pageMap); // 바꿔주기
 				pageMap.put("list", list);
 				
 				return pageMap;
@@ -332,18 +345,13 @@ public class BoardService {
 	}
 
 
-	public ArrayList<FileVO> boardDelete(int boardNo) {
-		//파일 목록  조회해서
-		ArrayList<FileVO> fileList = dao.selectFileList(boardNo);
-		//boardTBL에서 삭제
-		int result = dao.deleteBoard(boardNo);
-		if(result>0) {
-			return fileList;
-		}else {
-			return null;
-		}
-		
+	public int boardUpdate2(Board b) {
+		int result = dao.updateboard2(b);
+		return result;
 	}
+
+
+
 
 
 

@@ -10,14 +10,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<h1>자유게시판</h1>
-	
-	<div class="sortBoard">
-		<form action="/searchCategory.do?reqPage=1" method="post">
-			
-			<button class="categoryBtn">조회</button>
-		</form>
-		
-	</div>
+
 	
 	<button><a href="/boardWriteFrm.do">글작성</a></button>
 	
@@ -53,8 +46,8 @@
 			<form action="/searchBoard.do?reqPage=1" method="post">
 				<select name="categoryTag">
 					<option value="all">전체</option>
-					<option value="info">정보</option>
-					<option value="etc">기타</option>
+					<option value="info" <c:if test="${b.boardCategory eq 'info'}">selected</c:if>>정보</option>
+					<option value="etc" <c:if test="${b.boardCategory eq 'etc'}">selected</c:if>>기타</option>
 				</select>
 				<select name="searchTag">
 					<option value="boardTitle">제목</option>

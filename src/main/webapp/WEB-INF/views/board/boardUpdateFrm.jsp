@@ -7,12 +7,13 @@
 <meta charset="UTF-8">
 <title>자유 게시판 수정</title>
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-	<script src="/resources/summernote/summernote-lite.js"></script>
-	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	
 <h1>자유게시판 수정</h1>
 	<form action="/boardUpdate.do" method="post" enctype="multipart/form-data">
 		<table border="1">
@@ -25,16 +26,10 @@
 			</tr>
 			<tr>
 				<th>카테고리</th>
-				<c:if test ="${b.boardCategory eq 'info'}">
-				<td>정보</td>
-				</c:if>
-				<c:if test ="${b.boardCategory eq 'etc'}">
-				<td>기타</td>
-				</c:if>
 				<td>
 				<select name="boardCategory">
-					<option value="info">정보</option>
-					<option value="etc">기타</option>
+					<option value="info" <c:if test="${b.boardCategory eq 'info'}">selected</c:if>>정보</option>
+					<option value="etc" <c:if test="${b.boardCategory eq 'etc'}">selected</c:if>>기타</option>
 				</select>
 				</td>
 				
@@ -64,11 +59,13 @@
 				<td colspan="3">
 			<c:forEach items="${b.fileList }" var="bf">
 				<td>${bf.filename }
-				<button type="button" id="fileDeleteBtn">삭제</button>
-				</td>
-				<td><input type="hidden" name="fileNoList" value="${f.fileNo }"></td>
-				<td><input type="hidden" name="filepathList" value="${f.filepath }"></td>
+				<button type="button" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button></td>
 				
+				<td><input type="hidden" name="fileNoList" value="${bf.fileNo }"></td>
+				<td><input type="hidden" name="filepathList" value="${bf.filepath }"></td>
+				<td><input type="hidden" name="filename" value="${bf.filename }"></td>
+				<td>${bf.fileNo }</td>
+				<td>${bf.filepath }</td>
 			</c:forEach>
 		</tr>
 			<tr>
@@ -84,11 +81,11 @@
 		</table>
 	</form>
 	<script>
-		${"#fileDeleteBtn"}.on("click",function(){
-			(this).parent().remove();
-		});
+		function deleteFile(obj,fileNo,filepath){
+			$(obj).parent().remove();
+		}
 
 	</script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
 </body>
 </html>
