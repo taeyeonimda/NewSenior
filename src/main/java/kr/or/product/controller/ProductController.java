@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import common.ProductFileRename;
+import kr.or.cart.model.vo.Cart;
 import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
@@ -193,5 +194,11 @@ public class ProductController {
 	public String reviewUpdate(ProductReview pr) {
 		int result = service.reviewUpdate(pr);
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
+	}
+	
+	@RequestMapping(value="/insertCart.do")
+	public String insertCart(Cart c) {
+		int result = service.insertCart(c);
+		return "redirect:/cart.do?memberNo="+c.getMemberNo();
 	}
 }

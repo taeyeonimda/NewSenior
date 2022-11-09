@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.board.model.vo.Board;
+import kr.or.cart.model.vo.Cart;
 import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
@@ -147,6 +148,10 @@ public class ProductService {
 
 	public int reviewUpdate(ProductReview pr) {
 		return dao.reviewUpdate(pr);
+	}
+
+	public int insertCart(Cart c) {
+		return dao.insertCart(c);
 	}
 
 }

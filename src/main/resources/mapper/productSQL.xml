@@ -114,4 +114,15 @@
   <update id="reviewUpdate" parameterType="pr">
   	update product_reviews set product_review_content = #{reviewContent} where product_review_no = #{reviewNo}
   </update>
+  
+<insert id="insertCart" parameterType="Ca">
+insert into carts values(
+	cart_seq.nextval,
+	#{memberNo},
+	#{productNo},
+	null,null,
+	#{buyAmount}
+)
+</insert>
+  
 </mapper>

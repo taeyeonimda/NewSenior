@@ -16,4 +16,5 @@ public class Cart {
 	private int memberNo;
 	private String receiveName;
 	private String receiveAddr;
+	private String buyPhoto;
 }
