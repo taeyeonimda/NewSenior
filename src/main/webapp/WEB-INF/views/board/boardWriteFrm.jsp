@@ -7,20 +7,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-	<script src="/resources/summernote/summernote-lite.js"></script>
-	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+	
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	
 	<h1>자유게시판 작성</h1>
 	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
 		<table border="1">
 			<tr>
+				<th>카테고리</th>
+				<td>
 				<select name="boardCategory">
 					<option value="info">정보</option>
 					<option value="etc">기타</option>
 				</select>
+				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
@@ -63,9 +68,11 @@
 			height:400,
 			lang:"ko-KR",
 			callbacks : {
+
 				//onImageUpload : function(files){
-					//for(let i=0;i<files.length;i++){
-						//uploadImage(files[i],this);
+				//for(let i=0;i<files.length;i++){
+										//uploadImage(files[i],this);
+				
 						onImageUpload : function(files){
 						uploadImage(files[0],this);
 				}

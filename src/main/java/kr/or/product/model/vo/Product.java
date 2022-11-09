@@ -21,4 +21,5 @@ public class Product {
 	private int productQty;
 	private String productContent;
 	private ArrayList<ProductFileVO> productFileVO;
+	private int memberNo;
 }

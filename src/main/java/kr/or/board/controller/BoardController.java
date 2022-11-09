@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -112,6 +113,7 @@ public class BoardController {
 	public String boardUpdateFrm(int boardNo,Model model){
 		HashMap<String, Object> Map = service.selectOneBoard(boardNo);
 		model.addAttribute("b",(Board)Map.get("b"));
+		System.out.println("(Board)Map.get('b'):"+(Board)Map.get("b"));
 		return "board/boardUpdateFrm";
 	}
 	
@@ -121,7 +123,9 @@ public class BoardController {
 								// 배열: 삭제할파일 no, 삭제할 파일 경로
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 		
-		
+		System.out.println("fileNoList:"+fileNoList);
+		System.out.println("filepathList:"+filepathList);
+		System.out.println("boardFile:"+boardFile);
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
 		
 		if(!boardFile[0].isEmpty()) {
@@ -145,6 +149,8 @@ public class BoardController {
 					f.setFilepath(filepath);
 					fileList.add(f);
 					
+					System.out.println("f:"+f);
+					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -165,6 +171,7 @@ public class BoardController {
 				}
 			}
 		}
+		
 		
 		return "redirect:/boardView.do?boardNo="+b.getBoardNo();
 	}
@@ -211,7 +218,7 @@ public class BoardController {
 	}
 	
 	
-	// 에이터 사용 이미지 업로드
+	// 데이터 사용 이미지 업로드
 	@RequestMapping(value="/uploadImages.do")
 	public void uploadImage(Board b,MultipartFile[] file,HttpServletRequest request,HttpServletResponse response) throws IOException {
 																//ㄴ파일업로드 경로 구하기 위해서
@@ -255,7 +262,7 @@ public class BoardController {
 	
 	// 카테고리별 검색기능 -- 게시판 별로 따로 제작???
 	@RequestMapping(value="/searchBoard.do")
-	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model) {
+	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model,HttpSession session) {
 		
 		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag,searchInput);
 		
@@ -268,7 +275,10 @@ public class BoardController {
 		model.addAttribute("searchTag",(String)categoryMap.get("searchTag"));
 		model.addAttribute("searchInput",(String)categoryMap.get("searchInput"));
 		
-		
+		session.setAttribute("categoryTag",(String)categoryMap.get("categoryTag"));
+		session.setAttribute("searchTag",(String)categoryMap.get("searchTag"));
+		session.setAttribute("searchInput",(String)categoryMap.get("searchInput"));	
+		System.out.println("session :"+session);
 		return "board/boardList";
 	}
 	

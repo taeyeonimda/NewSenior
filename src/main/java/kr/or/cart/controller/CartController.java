@@ -21,8 +21,6 @@ public class CartController {
 	public String cart(Model model, Member m) {
 		ArrayList<Cart> list = service.selectAllCartList(m);
 		model.addAttribute("list",list);
-		System.out.println(m);
-		System.out.println(list);
 		return "myPage/cart";
 	}
 }
