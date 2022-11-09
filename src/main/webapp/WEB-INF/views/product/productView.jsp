@@ -85,7 +85,7 @@ ul li.on a {
                 		<input type="hidden" value="${p.productNo }" name="productNo">
 	        	        <input type="hidden" value="${p.productName }" name="buyName">
 		                <input type="hidden" value="${p.productPrice }" name="buyPrice">
-		                <!-- <input type="hidden" value="${p.productFileVO[0].filePath }" name="productFileVO"> -->
+		                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
 		                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
 						<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
 	                	<button type="submit">장바구니</button>
