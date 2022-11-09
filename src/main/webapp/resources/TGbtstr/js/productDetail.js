@@ -1,5 +1,6 @@
 
 const price = $(".hiddenPrice").val();
+let cpa = $(".changeProductAmount");
 let sumPrice = $(".sumPrice").val();
 
 $("#minus").on("click",function(){
@@ -9,7 +10,8 @@ $("#minus").on("click",function(){
      	alert("돌아가");
     	return;
     }
-    const minusQty = Number(buyQty)-1; 
+    const minusQty = Number(buyQty)-1;
+    cpa.val(minusQty);
     Qty.text(minusQty);
     const amount = Qty.text(minusQty);
     sumPrice = price * minusQty;
@@ -26,6 +28,7 @@ $("#plus").on("click",function(){
     	return;
     }
     const plusQty = Number(buyQty)+1;
+    cpa.val(plusQty);
     Qty.text(plusQty);
     const amount = Qty.text(plusQty);
     sumPrice = price * plusQty;

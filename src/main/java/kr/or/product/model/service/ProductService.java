@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.board.model.vo.Board;
+import kr.or.cart.model.vo.Cart;
 import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
@@ -110,13 +111,20 @@ public class ProductService {
 		}
 	}
 
-	public int productUpdate(Product p, ArrayList<ProductFileVO> flist) {
+	public int productUpdate(Product p, ArrayList<ProductFileVO> flist, int[] fileNoList) {
 		int result = dao.productUpdate(p);
+		System.out.println(flist);
+		System.out.println(fileNoList);
 		if(result > 0) {
 			for(ProductFileVO pfv : flist) {
 				pfv.setProductNo(p.getProductNo());
-				result += dao.deleteProductFile(p.getProductNo());
 				result += dao.insertProductFile(pfv);
+			}
+			if(fileNoList != null) {
+				for(int fileNo : fileNoList) {
+					System.out.println("service : "+fileNo);
+					result += dao.deleteProductFile(fileNo);
+				}
 			}
 		}
 		return result;
@@ -139,6 +147,14 @@ public class ProductService {
 
 	public int productReviewCount(int productNo) {
 		return dao.productReviewCount(productNo);
+	}
+
+	public int reviewUpdate(ProductReview pr) {
+		return dao.reviewUpdate(pr);
+	}
+
+	public int insertCart(Cart c) {
+		return dao.insertCart(c);
 	}
 
 }

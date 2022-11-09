@@ -158,7 +158,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <!-- HTML5 Inputs -->
-            <form action="/productUpdate.do" method="post" enctype="multipart/form-data">
+            <form action="/productUpdate.do" method="post" enctype="multipart/form-data" id="productUpdateFrm">
               <div class="card mb-4" style="width: 60%; float: left;">
                 <h5 class="card-header" style="text-align: center;">상품 정보수정</h5>
                 <div class="card-body">
@@ -184,19 +184,53 @@
                       <input class="form-control" type="tel" id="html5-tel-input" style="width: 220px; display: inline-block;" name="productQty" value="${p.productQty }"/>
                     </div>
                   </div>
+            <div></div>
+	    		  <!-- 
+	    		  <input type="hidden" name="fileNoList" value="${p.productFileVO[0].fileNo }">
+	    		  <input type="hidden" name="fileNoList" value="${p.productFileVO[1].fileNo }">
+	    		  <input type="hidden" name="fileNoList" value="${p.productFileVO[2].fileNo }">
+	    		   -->
                   <div class="mb-3 row">
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
-                      <input type="file" name="productFile" id="productFile" class="productFile">
+                    <c:choose>
+                    <c:when test="${!empty p.productFileVO[0].fileName}">
+                      <input type="file" name="productFile" id="producetFile1" class="productFile" style="display: none;">
+                      <span id="productImg1">${p.productFileVO[0].fileName }</span>
+                      <button class="productDelBtn1" type="button" onclick="deleteimgFile(this,${p.productFileVO[0].fileNo},'${p.productFileVO[0].filePath }')">삭제</button>
+                    </c:when>
+                    <c:otherwise>
+                      <input type="file" name="productFile" id="productFile2" class="productFile" style="display: block;">
+                    </c:otherwise>
+                      </c:choose>
                     </div>
                     <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지1</label>
                     <div class="col-md-10">
-                      <input type="file" name="productFile" id="productFile" class="productFile">
+                    <c:choose>
+                    <c:when test="${!empty p.productFileVO[1].fileName}">
+                      <input type="file" name="productFile" id="productFile2" class="productFile" style="display: none;">
+                      <span>${p.productFileVO[1].fileName }</span>
+                      <button class="productDelBtn1" type="button" onclick="deleteimgFile(this,${p.productFileVO[1].fileNo},'${p.productFileVO[1].filePath }')">삭제</button>
+                    </c:when>  
+                    <c:otherwise>
+                      <input type="file" name="productFile" id="productFile2" class="productFile" style="display: block;">
+                    </c:otherwise>
+                    </c:choose>
                     </div>
                     <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지2</label>
                     <div class="col-md-10">
-                      <input type="file" name="productFile" id="productFile" class="productFile">
+                    <c:choose>
+                    <c:when test="${!empty p.productFileVO[2].fileName}">
+                      <input type="file" name="productFile" id="productFile3" class="productFile" style="display: none;">
+                      <span>${p.productFileVO[2].fileName }</span>
+                      <button class="productDelBtn1" type="button" onclick="deleteimgFile(this,${p.productFileVO[2].fileNo},'${p.productFileVO[2].filePath }')">삭제</button>
+                      </c:when>
+                      <c:otherwise>
+                      <input type="file" name="productFile" id="productFile2" class="productFile" style="display: block;">
+                      </c:otherwise>
+                      </c:choose>
                     </div>
+                    
                   </div>
                   
                   <div class="mb-3 row">
@@ -295,6 +329,34 @@
 	$("#fileUpload").on("click",function(){
 			$(".productFile").click();
 	});
+	
+	$(".productFile").on("change",function(){
+		$(this).next().hide();
+		//$("#productImg1").hide();
+	});
+	
+	$(".productDelBtn1").on("click",function(){
+		//$("#productImg1").remove();
+		$(this).prev().remove();
+		//$("#producetFile1").show();
+		$(this).prev().show();
+		$(this).hide();
+	});
+	function deleteimgFile(obj,fileNo,filepath){
+		const fileNoInput = $("<input>");
+		fileNoInput.attr("name","fileNoList");
+		fileNoInput.val(fileNo);
+		console.log(fileNo);
+		fileNoInput.hide();
+		const filepathInput = $("<input>");
+		filepathInput.attr("name","productpathList");
+		filepathInput.val(filepath);
+		console.log(filepath)
+		filepathInput.hide();
+		
+		$("#productUpdateFrm").append(fileNoInput).append(filepathInput);
+	}
+	
 	</script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.cart.model.vo.Cart;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
 import kr.or.product.model.vo.ProductReview;
@@ -82,6 +83,14 @@ public class ProductDao {
 
 	public int productReviewCount(int productNo) {
 		return sqlSession.selectOne("product.productReviewCount",productNo);
+	}
+
+	public int reviewUpdate(ProductReview pr) {
+		return sqlSession.update("product.reviewUpdate",pr);
+	}
+
+	public int insertCart(Cart c) {
+		return sqlSession.insert("product.insertCart", c);
 	}
 
 

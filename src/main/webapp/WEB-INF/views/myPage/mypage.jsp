@@ -49,231 +49,8 @@
 
 <!-- Template Stylesheet -->
 <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
-<style>
-#modal.modal-overlay {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	display: none;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
-}
+<link href="/resources/css/mypage/mypage.css" rel="stylesheet">
 
-#modal .modal-window {
-	background: rgba(0, 0, 0, 0.6);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
-	width: 600px;
-	height: 500px;
-	position: relative;
-	top: -100px;
-	padding: 10px;
-}
-
-#modal .title {
-	padding-left: 10px;
-	display: inline;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
-}
-
-#modal .title h2 {
-	display: inline;
-}
-
-#modal .close-area {
-	display: inline;
-	float: right;
-	padding-right: 10px;
-	cursor: pointer;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
-}
-
-#modal .content {
-	margin-top: 20px;
-	padding: 0px 10px;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
-}
-
-.div1 {
-	text-align: right;
-}
-
-.div1>button {
-	border: none;
-	background-color: #6f42c1;
-	width: 100px;
-	height: 40px;
-	border-radius: 3px;
-}
-
-.div1>a {
-	color: #fff;
-}
-
-/* 배송지 모달 css*/
-.detail {
-	display: inline-block;
-	cursor: pointer;
-}
-
-.popup00 {
-	display: none;
-	width: 50%;
-	height: 80vh;
-	position: fixed;
-	top: 51%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: #fff;
-	box-shadow: 10px 10px 10px rgb(0 0 0/ 20%);
-	color: #000000;
-	padding: 2% 5%;
-	padding-bottom: 10%;
-	font-size: 12px;
-	line-height: 1.5rem;
-	border-radius: 15px;
-	z-index: 99999;
-	line-height: 1.5rem;
-	overflow: inherit;
-}
-
-.zwicon-close00 {
-	color: rgb(255, 255, 255);
-	font-size: 2em;
-	background-color: #0F4229;
-	padding-right: 10px;
-	padding-left: 10px;
-	border-radius: 70%;
-}
-
-.x_btn00 {
-	text-align: right;
-	margin: 15px;
-	cursor: pointer;
-}
-
-.zwicon-close00:hover {
-	background-color: #b91a1a;
-}
-
-.cont00 {
-	text-align: left;
-}
-
-.personal_pop00 {
-	z-index: 300;
-}
-
-#login_header {
-	text-align: center;
-	font-size: 1.7rem;
-}
-
-.login_cont {
-	text-align: center;
-}
-
-.txt_1_1 {
-	font-size: 1.1rem;
-}
-
-.txt_1 {
-	font-size: 1rem;
-}
-
-.txt_07 {
-	font-size: 0.7rem;
-}
-
-.txt_3 {
-	font-size: 1.4rem;
-}
-
-.flex00 {
-	display: flex;
-}
-
-.flex_01 {
-	width: 60%;
-	justify-content: space-between;
-	margin: 10px auto;
-	margin-bottom: 30px;
-}
-
-.boxSize_2 {
-	width: 40%;
-	height: 30px;
-	padding: 2.5% 1%;
-	margin-top: 3%;
-	border: 1.5px solid rgb(176, 174, 174);
-}
-
-.boxSize_2:hover {
-	border: 1.5px solid rgb(120, 120, 120);
-}
-
-.color_g {
-	border: none;
-	background-color: #348E38;
-}
-
-.color_g_b {
-	border: 1px solid #348E38;
-}
-
-.bg_g {
-	background-color: rgba(0, 0, 0, 0.238);
-}
-
-.loginBtn_1 {
-	cursor: pointer;
-}
-
-.loginBtn_1:hover {
-	border: none;
-	background-color: #217125;
-	color: #fff;
-}
-
-.c_red {
-	color: #b91a1a;
-}
-
-.f_c {
-	color: #000000;
-}
-
-.f_c:hover {
-	color: #fff;
-}
-
-.txt_d1 {
-	text-decoration: none;
-}
-
-.fw_8:hover {
-	font-weight: 800;
-}
-
-input[type=checkbox] {
-	width: 17px;
-	height: 17px;
-}
-
-.sp1 {
-	font-size: 1.2em;
-}
-</style>
 <!--  
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 -->
@@ -339,7 +116,7 @@ input[type=checkbox] {
 							<div class="col-md-10">
 								<input class="form-control" type="text" id="html5-url-input"
 									value="${member.memberBirth }" name="memberBirth"
-									onkeyup="birth_keyup(this)" />
+									onkeyup="birth_keyup(this)" maxlength="10"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
@@ -347,7 +124,7 @@ input[type=checkbox] {
 							<div class="col-md-10">
 								<input class="form-control" type="tel" id="html5-url-input"
 									value="${member.memberPhone }" name="memberPhone"
-									onkeyup="phone_keyup(this)" />
+									onkeyup="phone_keyup(this)" maxlength="13" />
 							</div>
 						</div>
 
@@ -418,31 +195,28 @@ input[type=checkbox] {
 									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
-									<td>${d.deliveryPhone }</td>
-									<td><button class="updateBtn"
-											onclick="updateBtn(${d.deliveryNo});">수정</button>
+									<td style="line-height: 50px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});">수정</button>
 										<button class="delBtn">
-											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }">삭제</a>
-										</button></td>
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}" >삭제</a>
+										</button>
+									</td>
 								</tr>
 							</c:forEach>
 							<c:forEach items="${list }" var="d" begin="1">
-								<tr class="showDeliveryDetail"
-									onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
+								<tr class="showDeliveryDetail" onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
 									<td><strong>${d.deliveryName }</strong><br>
 										${d.receiverName }<br></td>
 									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
-									<td>${d.deliveryPhone }</td>
-									<td><button class="updateBtn"
-											onclick="updateBtn(${d.deliveryNo});">수정</button>
+									<td style="line-height: 50px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});">수정</button>
 										<button class="delBtn">
 											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }">삭제</a>
 										</button></td>
 								</tr>
 							</c:forEach>
-
 							<c:if test="">
 								<tr>
 									<td style="text-align: center;">배송지 정보가 없습니다.</td>
@@ -468,15 +242,14 @@ input[type=checkbox] {
 		<div class="x_btn00">
 			<span class="zwicon-close00">X</span>
 		</div>
-		<div class="cont00">
+		<div class="cont00"> 
 			<h1 id="login_header">배송지 등록/수정하기</h1>
 			<hr>
 			<div class="delivery_cont">
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<!-- HTML5 Inputs -->
-					<form action="/insertAddr.do" method="post"
-						onsubmit="return deliverychk();">
-						<div class="card mb-4" /*style="width: 60%;*/">
+					<form action="/insertAddr.do" method="post" onsubmit="return deliverychk();" id="formId">
+						<div class="card mb-4" /* style="width: 60%;*/">
 							<h5 class="card-header">배송지등록/수정</h5>
 							<div class="card-body" style="padding-top: 20px;">
 								<div class="mb-3 row">
@@ -536,13 +309,11 @@ input[type=checkbox] {
 							</div>
 						</div>
 						<input type="hidden" value="${member.memberNo }" name="memberNum">
+						<input type="hidden" name="deliveryNum">
 						<div>
 
-							<button type="button" class="btn btn-outline-warning closeBtn"
-								style="width: 50%;">닫기</button>
-							<button type="button" class="btn btn-outline-warning saveBtn"
-								style="width: 50%;">저장</button>
-						</div>
+							<button type="button" class="btn btn-outline-warning closeBtn" style="width: 50%;">닫기</button><button class="btn btn-outline-warning saveBtn" style="width: 50%;">저장</button><button class="btn btn-outline-warning updateBtn1" style="width: 50%; display: none;">수정</button>
+						</div> 
 					</form>
 				</div>
 			</div>
@@ -610,6 +381,8 @@ input[type=checkbox] {
       $(".popup_bg00").stop().fadeIn();
       $(".popup00.personal_pop00").stop().fadeIn();
       $("body").addClass("bg_g");
+      $(".saveBtn").css("display","inline-block");
+  	$(".updateBtn1").css("display","none");
     });
 
       $(".popup_bg00").on("click", onPopClose);
@@ -627,6 +400,7 @@ input[type=checkbox] {
     	$(".popup_bg00").stop().fadeIn();
         $(".popup00.personal_pop00").stop().fadeIn();
         $("body").addClass("bg_g");
+        
         const deliveryName = $("input[name=deliveryName]");
     	const receiverName = $("input[name=receiverName]");
     	const zipcode = $("input[name=zipcode]");
@@ -634,7 +408,11 @@ input[type=checkbox] {
     	const deliveryDetail = $("input[name=deliveryDetail]");
     	const deliveryPhone = $("input[name=deliveryPhone]");
     	const defaultAddr = $("input[name=defaultAddr]");
+    	const deliveryNum = $("input[name=deliveryNum]");
+    	
         
+    	$(".saveBtn").css("display","none");
+    	$(".updateBtn1").css("display","inline-block");
     	$.ajax({
  			url:"/selectAddr.do",
  			type:"post",
@@ -647,7 +425,23 @@ input[type=checkbox] {
  				deliveryDetail.val(data.deliveryDetail);
  				deliveryPhone.val(data.deliveryPhone);
  				defaultAddr.val(data.defaultAddr);
+ 				deliveryNum.val(deliveryNo);
+ 				//수정버튼 클릭시
+ 				$(".updateBtn1").on("click",function(){
+ 					$("#formId").attr("action", "/updateAddr.do");
+ 					/*수정해주고 close
+ 					$.ajax({
+ 						url:"/updateAddr.do",
+ 						type:"post",
+ 			 			data:{deliveryNo:deliveryNo},
+ 			 			success:function(data){
+ 			 			}
+ 					});
+ 					*/
+ 				});
+ 			}
  		});
+    }
     //배송지 등록 폼 검사
     function deliverychk(){
     	const deliveryName = $("input[name=deliveryName]").val();
@@ -657,6 +451,7 @@ input[type=checkbox] {
     	const deliveryDetail = $("input[name=deliveryDetail]").val();
     	const deliveryPhone = $("input[name=deliveryPhone]").val();
     	const defaultAddr = $("input[name=defaultAddr]");
+    	
     	
     	if(deliveryName == "" || deliveryName == null){
     		alert("배송지명을 입력해주세요.");

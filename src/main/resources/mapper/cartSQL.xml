@@ -4,14 +4,19 @@
 
 <select id="selectAllCartList" parameterType="m" resultType="Ca">
 select
+    cart_no as cartNo,
     product_no as productNo,
-    buy_price as buyPrice,
-    (select product_name from products where products.product_no=carts.product_no) as productName,
+    (select product_name from products where products.product_no=carts.product_no) as buyName,
+    (select PRODUCT_PRICE from products where products.product_no=carts.product_no)as buyPrice,
     buy_amount as buyAmount,
-    member_no as memberNo
+    member_no as memberNo,
+    activity_no as activityNo,
+    class_no as classNo
 from carts
 where member_no=#{memberNo}
 </select>
+
+
 
 
 
