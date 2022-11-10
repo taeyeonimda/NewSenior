@@ -45,10 +45,8 @@ public class NsClassController {
 	@RequestMapping(value = "/classList.do")
 	public String classList(String classCategory, int reqPage, Model model) {
 		NsClassPageData npd = service.selectClassList(classCategory, reqPage);
-		
-
 		ArrayList<Category> cateList = service2.getAllCategory();
-		model.addAttribute("classCategory", classCategory);
+		model.addAttribute("classCategory",classCategory);
 		model.addAttribute("clist", npd.getList());
 		model.addAttribute("pageNavi", npd.getPageNavi());
 		model.addAttribute("reqPage", npd.getReqPage());

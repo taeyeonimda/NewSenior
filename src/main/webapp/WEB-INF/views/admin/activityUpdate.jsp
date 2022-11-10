@@ -12,7 +12,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gardener - Gardening Website Template</title>
+    <title>액티비티 수정</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -68,14 +68,14 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <!-- HTML5 Inputs -->
-            <form  id="insertActFrm">
-              <div class="card mb-4" style="width: 60%; float: left;">
-                <h5 class="card-header" style="text-align: center;">액티비티 등록하기</h5>
+            <form action ="activityUpdate.do" enctype="multipart/form-data" method="post">
+              <div class="card mb-4" >
+                <h5 class="card-header" style="text-align: center;">액티비티 수정하기</h5>
                 <div class="card-body">
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">액티비티명</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="text" name="activityName" id="html5-text-input" />
+                      <input class="form-control" type="text" name="activityName" id="html5-text-input" value="${act.activityName }"/>
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -88,22 +88,24 @@
                     <label for="html5-select-input" class="col-md-2 col-form-label">담당자명</label>
                     <div class="col-md-10">
                       <select name="activityManager" id="html5-select-input">
+                      	<option value="${act.activityManager }" selected>${act.activityManagerName }</option>
                       	<c:forEach items="${list }" var="admin">
                       		<option value="${admin.memberNo }">${admin.memberName }</option>
                       	</c:forEach>
+                      	
                       </select>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-introduce-input" class="col-md-2 col-form-label">액티비티소개</label>
                     <div class="col-md-10">
-                      <input class="form-control" name="activityIntroduce" id="html5-introduce-input" />
+                      <input class="form-control" name="activityIntroduce" id="html5-introduce-input" value="${act.activityIntroduce }" />
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-detail-input" class="col-md-2 col-form-label">상세소개</label>
                     <div class="col-md-10">
-                      <textarea class="form-control" name="activityDetail" id="html5-detail-input" ></textarea>
+                      <textarea class="form-control" name="activityDetail" id="html5-detail-input" >${act.activityDetail }</textarea>
                     </div>
                   </div>
                   
@@ -119,55 +121,127 @@
                         <label for="activityStartDate" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
                           <input class="form-control" name = "startDate"  id="activityStartDate" style="width: 200px; display: inline-block;" 
-                          onclick="javascript:f_datepicker(this);" placeholder="시작일 ex) 20221024"/>
+                          onclick="javascript:f_datepicker(this);" value="${act.startDate }"/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
                           <input class="form-control" name ="endDate"  id="endDate" style="width: 200px; display: inline-block;" 
-                           onclick="javascript:f_datepicker(this);" placeholder="종료일 ex) 20221024"/>
+                           onclick="javascript:f_datepicker(this);" value="${act.endDate }"/>
                         </div>
                       </div>
-                  
-                  <div class="mb-3 row">
-                    <label for="html5-cate-input" class="col-md-2 col-form-label">카테고리</label>
-                      <div class="btn-group" style="width: 200px;">
-                         <select name="activityCategory" id="html5-cate-input">
-                         <c:forEach items="${cateList}" var="cateList">
-					       <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
-					     </c:forEach>   
-     					</select>
-                      </div>
-                  </div>
-                 
-                  <div class="mb-3 row">
+
+						<div class="mb-3 row">
+							<label for="html5-cate-input" class="col-md-2 col-form-label">카테고리</label>
+							<div class="btn-group" style="width: 200px;">
+								<select name="activityCategory" id="html5-cate-input">
+
+									<c:choose>
+										<c:when test="${act.activityCategory eq 'DG'}">
+											<option value="${act.activityCategory}">디지털
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'FU'}">
+											<option value="${act.activityCategory}">주식/재테크
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'CR'}">
+											<option value="${act.activityCategory}">공예
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'DE'}">
+											<option value="${act.activityCategory}">디자인
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'EX'}">
+											<option value="${act.activityCategory}">운동
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'FS'}">
+											<option value="${act.activityCategory}">패션
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'ME'}">
+											<option value="${act.activityCategory}">미디어/유튜브
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'SO'}">
+											<option value="${act.activityCategory}">노래/악기
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'FO'}">
+											<option value="${act.activityCategory}">외국어
+											<option>
+										</c:when>
+										<c:when test="${act.activityCategory eq 'CO'}">
+											<option value="${act.activityCategory}">요리/제과제빵
+											<option>
+										</c:when>
+										<c:otherwise>기타</c:otherwise>
+									</c:choose>
+									<c:forEach items="${cateList}" var="cateList">
+										<option value="${cateList.categoryCode }">${cateList.categoryName }${cateList.categorySecondName }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+
+						<div class="mb-3 row">
                     <label for="html5-limit-input" class="col-md-2 col-form-label">모집정원</label>
                       <div class="btn-group" style="width: 150px;">
                       	<select id="html5-limit-input" name="activityLimit">
-                      		
+                      		<option value="${act.activityLimit }">${act.activityLimit }명</option>
                       	</select>
                       </div>
                   </div>
                   <div class="mb-3 row">
                     <label for="html5-price-input" class="col-md-2 col-form-label">가격</label>
                     <div class="col-md-10">
-                      <input class="form-control" name="activityPrice" id="html5-price-input" />
+                      <input class="form-control" name="activityPrice" id="html5-price-input" value="${act.activityPrice } "/>
                     </div>
                   </div>
                   
                    <div class="mb-3 row">
                     <label for="html5-etc-input" class="col-md-2 col-form-label">기타사항</label>
                     <div class="col-md-10">
-                      <textarea class="form-control" name="etc" id="html5-etc-input" ></textarea>
+                      <textarea class="form-control" name="etc" id="html5-etc-input" >${act.etc }</textarea>
                     </div>
                   </div>
-                  
-                  <button type="button" class="btn btn-outline-primary" id="submitBtn" >등록하기</button>
+                  <input type="hidden" value="${act.activityNo }" name="activityNo" >
+                  <button type="submit" class="btn btn-outline-primary" id="submitBtn" >수정하기</button>
                 </div>
               </div>
             </form>
-              <!-- File input -->
+            
+            <div class="card mb-4"  >
+            <div>메인이미지</div>
+            <hr>
+	            <div class="imageDiv">
+	            	<img style ="width:400px; height:400px;"src="/resources/upload/activity/${act.filepath }"/>
+	            </div>
+            <hr>
+            <div>상세이미지</div>
+            <hr>
+	            <div class="imageDiv">
+	            	<c:forEach items="${act.fileList }" var="details">
+	            	<div style="display: inline-block; border:1px dotted #6c757d; margin:5px"> 
+	            	<p  style="position:absolute; width:400px; font-size:20px; font-weight: 900; text-align:right; padding:3px 3px 0 0">
+						<img onclick="deleteDetImages(${details.fileNo});" src="/resources/upload/common/xBotton3.png" style="cursor:pointer; opacity:0.7"/>
+					</p>
+	            	<img style ="width:400px; height:400px; "src="/resources/upload/activity/${details.filepath }"/>
+	            	</div>
+	            	</c:forEach>
+	            	
+	            </div>
+	            
+            
+            
             </div>
+              <!-- File input --></div>
 </div>
+
 <script>
 
+function deleteDetImages(number){
+	location.href="/delActdFiles.do?fileNo="+number+"&activityNo="+${act.activityNo};
+}
 function f_datepicker(obj) {
 	 $( obj ).datepicker().datepicker("show");
 	}
@@ -184,78 +258,6 @@ const limitSelect = $("select[name=activityLimit]");
 				)
 	}
 	
-	$("#submitBtn").on("click",function(){
-		const activityName = $("input[name=activityName]").val();
-		const files = document.querySelector("input[name=files]").files[0];
-		const activityManager = $("select[name=activityManager]").val();
-		const activityIntroduce = $("input[name=activityIntroduce]").val();
-		const activityDetail = $("textarea[name=activityDetail]").val();
-		const activityCategory = $("select[name=activityCategory]").val();
-		const activityLimit = $("select[name=activityLimit]").val();
-		const activityPrice = $("input[name=activityPrice]").val();
-		const startDate = $("input[name=startDate]").val();
-		const endDate = $("input[name=endDate]").val();
-		const files2 = document.querySelector("input[name=detailFiles]").files;
-		const etc = $("textarea[name=etc]").val();
-		
-		console.log(activityName);
-		console.log(files);
-		console.log(activityManager);
-		console.log(activityIntroduce);
-		console.log(activityDetail);
-		console.log(activityLimit);
-		console.log(activityCategory);
-		console.log(activityPrice);
-		console.log(startDate);
-		console.log(endDate);
-		
-		var formData = new FormData();
-		formData.append('activityName',activityName);
-		formData.append('files',files);
-		formData.append('activityManager',activityManager);
-		formData.append('activityIntroduce',activityIntroduce);
-		formData.append('activityDetail',activityDetail);
-		formData.append('activityLimit',activityLimit);
-		formData.append('activityCategory',activityCategory);
-		formData.append('activityPrice',activityPrice);
-		formData.append('startDate',startDate);
-		formData.append('endDate',endDate);
-		formData.append('etc',etc);
-		for(let i=0;i<files2.length;i++){
-			formData.append('detailFiles',files2[i]);
-		}
-		
-		console.log(formData.get("activityName"));
-		console.log(formData.get("files"));
-		console.log(formData.get("activityManager"));
-		console.log(formData.get("activityIntroduce"));
-		console.log(formData.get("activityDetail"));
-		console.log(formData.get("activityLimit"));
-		console.log(formData.get("activityCategory"));
-		console.log(formData.get("activityPrice"));
-		console.log(formData.get("startDate"));
-		console.log(formData.get("endDate"));
-		
-		
-		$.ajax({
- 			url : "/insertActivity.do",
-			type:"post",
-			data: formData,
-			contentType: false,
-            processData: false,
-            enctype	: 'multipart/form-data',
-			success:function(){
-				location.href="activityMgrAdmin.do?reqPage=1";
-			},error:function(){
-				alert("error");
-			}
-			
-			
- 		})//ajax
-	
-	});
-	
-	
 	$.datepicker.setDefaults({
 		dateFormat: 'yy-mm-dd',
 		prevText: '이전 달',
@@ -271,48 +273,7 @@ const limitSelect = $("select[name=activityLimit]");
 		yearSuffix: '년'
 	});
 		
-	/*	
-		if(activityName==""){
-			alert("activityName 비었음");
-			return null;
-		}
-		if(filepath==""){
-			alert("filepath 비었음");
-			return null;
-		}
-		if(activityManager==""){
-			alert("activityManager 비었음");
-			return null;
-		}
-		if(activityIntroduce==""){
-			alert("activityIntroduce 비었음");
-			return null;
-		}
-		if(activityDetail==""){
-			alert("activityDetail 비었음");
-			return null;
-		}
-		if(activityCategory==""){
-			alert("activityCategory 비었음");
-			return null;
-		}
-		if(activityLimit==""){
-			alert("activityLimit 비었음");
-			return null;
-		}
-		if(activityPrice==""){
-			alert("activityPrice 비었음");
-			return null;
-		}
-		if(startDate==""){
-			alert("startDate 비었음");
-			return null;
-		}
-		if(endDate==""){
-			alert("endDate 비었음");
-			return null;
-		}
-	*/	
+	
 		
 	
 		
@@ -365,20 +326,7 @@ const limitSelect = $("select[name=activityLimit]");
 
 <!-- Footer End -->
 
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
-
-
+  
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
