@@ -128,4 +128,89 @@ public class AdminActivityController {
 		model.addAttribute("numPerPage",apd.getNumPerPage());
 		return "admin/activityMgrAdmin";
 	}
+	
+	@RequestMapping(value="/activityUpdateFrm.do")
+	public String activityUpdateFrm(Model model, Activity act) {
+		Activity activity = service.getOneActivity(act);
+		ArrayList<Member> list = mService.getAllAdmin();
+		ArrayList<Category> cateList = service2.withOutAll();
+		model.addAttribute("cateList", cateList);
+		model.addAttribute("act",activity);
+		model.addAttribute("list",list);
+		return "admin/activityUpdate";
+	}
+	
+	@RequestMapping(value="/activityUpdate.do")
+	public String activityUpdate(Activity activity,MultipartFile files, 
+			MultipartFile[] detailFiles,HttpServletRequest request) throws UnsupportedEncodingException {
+		
+		System.out.println("update::::"+activity);
+		System.out.println("updateFiles:::"+files.isEmpty());
+		
+		if(!files.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/activity/");
+			MultipartFile file = files;
+				String filename = file.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath,filename);
+				
+				FileOutputStream fos;
+				try {
+					fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				//파일업로드 끝(파일1개 업로드)
+				activity.setFilepath(filepath);
+			}
+		ArrayList<FileVo> list = new ArrayList<FileVo>();
+		if(!detailFiles[0].isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/activity/");
+			for(MultipartFile file: detailFiles) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath,filename);
+				
+				FileOutputStream fos;
+				try {
+					fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				FileVo fileVo = new FileVo();
+				fileVo.setFilename(filename);
+				fileVo.setFilepath(filepath);
+
+				list.add(fileVo);
+			}
+			activity.setFileList(list);
+		}
+			
+		
+		int result = service.activityUpdate(activity);
+		if(result>0) {
+			return "redirect:activityMgrAdmin.do?reqPage=1";
+		}else {
+			return "redirect:activityUpdateFrm.do?activityNo="+activity.getActivityNo();
+		}
+	}
+	
+	@RequestMapping(value="/delActdFiles.do")
+	public String delActdFiles(int fileNo,int activityNo) {
+		int result = service.delActdFiles(fileNo);
+		if(result>0) {
+			return "redirect:activityUpdateFrm.do?activityNo="+activityNo;
+		}
+		return "admin/activityMgrAdmin";
+	}
 }

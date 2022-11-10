@@ -28,6 +28,7 @@ public class Activity {
 	private ArrayList<FileVo> fileList;
 	
 	
+	
 //	ACTIVITY_NO	        NUMBER	NOT NULL PRIMARY KEY,	-- '액티비티 고유식별번호',
 //    ACTIVITY_NAME VARCHAR2(200) NOT NULL, -- 액티비티 이름
 //	ACTIVITY_PRICE	    VARCHAR2(20) NOT NULL,

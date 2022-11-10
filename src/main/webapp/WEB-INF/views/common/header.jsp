@@ -205,25 +205,42 @@
                 		<a href="/clubList.do" class="nav-item nav-link">동호회</a>
                 	</c:otherwise>
                 </c:choose>
-                <a href="/boardList.do?reqPage=1" class="nav-item nav-link">커뮤니티</a>
+                
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="/boardList.do?reqPage=1&boardType=F" class="dropdown-item">자유게시판</a>
+                        <a href="boardList.do?reqPage=1&boardType=P" class="dropdown-item">동호회모집</a>
+                        <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
+                    </div>
+                </div>
+
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">액티비티</a>
                     <div class="dropdown-menu bg-light m-0">
-                    	<a href="/activityList.do?reqPage=1" class="dropdown-item">전체</a>
-                        <a href="/activityList.do?activityCategory=DG" class="dropdown-item">디지털</a>
-                        <a href="/activityList.do?activityCategory=FU" class="dropdown-item">주식 / 재태크</a>
-                        <a href="/activityList.do?activityCategory=CR" class="dropdown-item">공예</a>
-                        <a href="/activityList.do?activityCategory=DE" class="dropdown-item">디자인</a>
-                        <a href="/activityList.do?activityCategory=EX" class="dropdown-item">운동 / 건강</a>
-                        <a href="/activityList.do?activityCategory=FS" class="dropdown-item">패션</a>
-                        <a href="/activityList.do?activityCategory=ME" class="dropdown-item">미디어</a>
-                        <a href="/activityList.do?activityCategory=SO" class="dropdown-item">악기 / 노래</a>
-                        <a href="/activityList.do?activityCategory=FO" class="dropdown-item">외국어</a>
-                        <a href="/activityList.do?activityCategory=CO" class="dropdown-item">요리 / 제과제빵</a>
+                    	<a href="/activityList.do?activityCategory=AL&reqPage=1" class="dropdown-item">전체</a>
+                        <a href="/activityList.do?activityCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
+                        <a href="/activityList.do?activityCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
+                        <a href="/activityList.do?activityCategory=CR&reqPage=1" class="dropdown-item">공예</a>
+                        <a href="/activityList.do?activityCategory=DE&reqPage=1" class="dropdown-item">디자인</a>
+                        <a href="/activityList.do?activityCategory=EX&reqPage=1" class="dropdown-item">운동 / 건강</a>
+                        <a href="/activityList.do?activityCategory=FS&reqPage=1" class="dropdown-item">패션</a>
+                        <a href="/activityList.do?activityCategory=ME&reqPage=1" class="dropdown-item">미디어</a>
+                        <a href="/activityList.do?activityCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
+                        <a href="/activityList.do?activityCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
+                        <a href="/activityList.do?activityCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
                     </div>
                 </div>
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
-                <a href="javascript:void(0)" class="nav-item nav-link">공지사항</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공지사항</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="/boardList.do?reqPage=1&boardType=N" class="dropdown-item">공지사항</a>
+                        <a href="boardList.do?reqPage=1&boardType=Q" class="dropdown-item">Q&A</a>
+                        <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">FAQ(없을수도)</a>
+                    </div>
+                </div>
+
             </div>
             <c:choose>
 				<c:when test="${empty sessionScope.m }">

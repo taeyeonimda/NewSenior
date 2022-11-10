@@ -15,12 +15,9 @@
 			board_category as boardCategory,
             nickname as nickName
 		from board join members using(member_no)order by board_no desc)b)
-        where rn between #{start} and #{end} 
-        <choose>
-			<when test="boardType='F'">
-				and boardType='F'
-			</when>
-		</choose>
+        where (boardType=#{boardType}) and rn between #{start} and #{end} 
+        <!-- where절 우선순위때문에 이렇게 만듦 -->
+				
 	</select>   
 	
 	<!-- 검색기능 자유게시판 : boardType='F' -->
@@ -79,6 +76,7 @@
 	           </if>
 
 	      	where prn between #{start} and #{end} and boardType='F'
+	      	<!--where (boardType=#{boardType}) and rn between #{start} and #{end}   -->
 	      	
 	      	 
 
@@ -93,10 +91,15 @@
 		</choose>
 	</select>    
 	
-		<select id="totalCount2" parameterType="String" resultType="int">
-		select count(*) from board where board_type=#{_parameter}
+	<select id="totalCount2" parameterType="String" resultType="int">
+		select count(*) from board where board_type=#{boardType}
 		
 	</select>  
+	
+	<select id="totalCount3" parameterType="map" resultType="int">
+		select count(*) from board where board_type=#{boardType}
+		
+	</select>
 	
 		<update id="readCount" parameterType="int">
 			update board set board_count = board_count+1 where board_no=#{_parameter}

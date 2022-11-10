@@ -37,8 +37,9 @@ public class BoardService {
 		
 		//pageNavi 시작
 		//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
-		int totalCount = dao.selectBoardCount();
-		//int totalCount = dao.selectBoardCount2(boardType);
+		//int totalCount = dao.selectBoardCount();
+		int totalCount = dao.selectBoardCount2(boardType);
+		//int totalCount = dao.selectBoardCount3(pageMap);
 		int totalPage = 0;
 		if(totalCount%numPerPage==0) {
 			totalPage = totalCount/numPerPage;
@@ -119,19 +120,19 @@ public class BoardService {
 		pageNavi += "<ul class='pagination justify-content-center'>";
 		if (pageNo != 1) {
 			pageNavi += "<li class='page-item disabled'>";
-			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + (pageNo - 1) + "'>";
+			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + (pageNo - 1) +"&boardType="+boardType+ "'>";
 			pageNavi += "Previous";
 			pageNavi += "</a></li>";
 		}
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<li class='page-item' >";
-				pageNavi += "<a class='page-link active-page' href='/boardList.do?reqPage=" + pageNo + "'>";
+				pageNavi += "<a class='page-link active-page' href='/boardList.do?reqPage=" + pageNo +"&boardType="+boardType+ "'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item' >";
-				pageNavi += "<a class='page-link' href='/boardList.do?reqPage=" + pageNo + "'>";
+				pageNavi += "<a class='page-link' href='/boardList.do?reqPage=" + pageNo +"&boardType="+boardType+ "'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -143,7 +144,7 @@ public class BoardService {
 		// 다음버튼 
 		if (pageNo <= totalPage) {
 			pageNavi += "<li class='page-item disabled' >";
-			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + pageNo + "'>";
+			pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/boardList.do?reqPage=" + pageNo +"&boardType="+boardType+ "'>";
 			pageNavi += "Previous";
 			pageNavi += "</a></li>";
 		}

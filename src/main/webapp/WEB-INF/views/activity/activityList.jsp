@@ -35,23 +35,15 @@
             
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
-                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first">디지털</li>
-                        <li class="mx-2" data-filter=".second">주식/재테크</li>
-                        <li class="mx-2" data-filter=".second">공예</li>
-                        <li class="mx-2" data-filter=".second">운동/건강</li>
-                        <li class="mx-2" data-filter=".second">디자인</li>
-                        <li class="mx-2" data-filter=".second">패션</li>
-                        <li class="mx-2" data-filter=".second">미디어</li>
-                        <li class="mx-2" data-filter=".second">악기/노래</li>
-                        <li class="mx-2" data-filter=".second">외국어</li>
-                        <li class="mx-2" data-filter=".second">요리/제과제빵</li>
+                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
+                        <c:forEach items="${cateList}" var="cateList">
+                        	<li class="mx-2 ${cateList.categoryCode } " data-filter="*"><a href="/activityList.do?activityCategory=${cateList.categoryCode }&reqPage=1" >${cateList.categoryName }</a></li>
+                        </c:forEach>   
                     </ul>
                 </div>
+                     <div style="display: none;" class="category">${activityCategory }</div>
             </div>
             <div class="row g-4 portfolio-container">
-            <a href="/activity2.do">이동~</a>
             <c:forEach items="${list }" var="act">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded" >
@@ -61,7 +53,7 @@
                             <div class="d-flex">
                                 <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/upload/activity/${act.filepath }" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-lg-square rounded-circle mx-2" onclick="activityDetail(${act.activityNo });"><i class="fa fa-link"></i></a>
-                            </div>
+     	                      </div>
                         </div>
                     </div>
                 </div>
@@ -77,7 +69,16 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script>
-
+	$(document).ready(function(){
+		const category = $(".category").text();
+		const ul = $("#portfolio-flters");
+		ul.children().removeClass("active");
+		if(category == "AL"){
+			ul.children().eq(0).addClass("active");
+		}else{
+			$("."+category).addClass("active");
+		}
+	});
 		function activityDetail(activityNo) {
 			location.href = "activityDetail.do?activityNo="+activityNo;
 		}
