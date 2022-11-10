@@ -249,6 +249,8 @@
                         <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">FAQ(없을수도)</a>
                     </div>
                 </div>
+                
+                <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">장바구니</a>
 
             </div>
             <c:choose>
