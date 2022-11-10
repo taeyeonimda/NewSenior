@@ -61,7 +61,7 @@
 
             <!-- 상품관리 -->
             <li class="menu-item goodsMgrAdmin">
-              <a href="goodsMgrAdmin.do" class="menu-link">
+              <a href="/adminProductList.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">상품 관리</div>
               </a>

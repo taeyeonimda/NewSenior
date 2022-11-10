@@ -41,6 +41,14 @@ public class ProductController {
 		return "product/productList";
 	}
 	
+	@RequestMapping(value = "/adminProductList.do")
+	public String adminProductList(Model model, int reqPage) {
+		ProductPageData	ppd = service.adminProduct(reqPage);
+		model.addAttribute("list",ppd.getList());
+		model.addAttribute("pageNavi",ppd.getPageNavi());
+		return "product/adminProductList";
+	}
+	
 	
 	@RequestMapping(value="/insertProductFrm.do")
 	public String insertProductFrm() {

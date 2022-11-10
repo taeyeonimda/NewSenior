@@ -257,11 +257,6 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
-		
-
-		function showPrice(){
-			
-		};
 	
 		function deleteProduct(productNo) {
 			if(confirm("상품을 삭제하시겠습니까?")){
