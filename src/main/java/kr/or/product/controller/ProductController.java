@@ -195,11 +195,5 @@ public class ProductController {
 		int result = service.reviewUpdate(pr);
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
 	}
-	
-	@RequestMapping(value="/insertCart.do")
-	public String insertCart(Cart c) {
-		int result = service.insertCart(c);
-		System.out.println(result);
-		return "redirect:/cart.do?memberNo="+c.getMemberNo();
-	}
+
 }

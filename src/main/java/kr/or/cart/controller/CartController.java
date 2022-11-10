@@ -30,5 +30,14 @@ public class CartController {
 		return "redirect:/cart.do?memberNo="+memberNo;
 				
 	}
+	
+	
+	@RequestMapping(value="/insertCart.do")
+	public String insertCart(Cart c,int productNo, int buyAmount) {
+		int result = service.insertCart(c,productNo, buyAmount);
+		return "redirect:/cart.do?memberNo="+c.getMemberNo();
+	}
+	
+	
 		
 }

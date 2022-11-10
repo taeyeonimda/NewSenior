@@ -153,8 +153,6 @@ public class ProductService {
 		return dao.reviewUpdate(pr);
 	}
 
-	public int insertCart(Cart c) {
-		return dao.insertCart(c);
-	}
+	
 
 }

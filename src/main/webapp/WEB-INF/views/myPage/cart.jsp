@@ -90,7 +90,10 @@
 	                    <tbody>
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
-					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
+					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn">
+					            <input type="hidden" value="${sessionScope.m.memberNo }">
+					            <input class="proNo" type="hidden" value="${Cart.productNo }">
+					            </td>
 					            
 					         	<td style="text-align:center">${Cart.cartNo }</td>
 					         
@@ -115,7 +118,7 @@
 
 					            <c:choose>
 						           	<c:when test="${Cart.buyPrice != 0}">
-						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/>카트댐?</td>
+						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
 						           	</c:when>	
 						           	<c:when test="${Cart.activityPrice != ''}">
 						           		<td class="buyPrice" style="text-align:center">${Cart.activityPrice }</td>
@@ -254,7 +257,6 @@
 			//console.log(showPrice);
 			
 			const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-			console.log(lastPrice);
 			$(".lastPrice").text(lastPrice);
 			
 			
@@ -273,15 +275,18 @@
 			        alert("선택된 상품이 없습니다.")
 					return;
 			    }
-				const memberNo = $(".deleteBtn").next().next().val();
+				//const memberNo = $(".deleteBtn").next().next().val();
+				const memberNo = ${sessionScope.m.memberNo};
 				
 				const productNoArr = new Array();
 				
 				check.each(function(index,item){
-					const proNo = $(this).next().val();
-					productNoArr.push(proNo);
-				});
+				const productNo = $(check).next().next().val();
+					
+					productNoArr.push(productNo);
 				
+				});
+				console.log(productNoArr);
 				console.log(memberNo);
 				location.href="/deleteCart.do?memberNo="+memberNo+"&productNoArr="+productNoArr.join("/");
 			});

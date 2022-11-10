@@ -32,6 +32,7 @@ public class CartService {
 			c.setProductNo(proNo);
 			c.setMemberNo(memberNo);
 			int changeResult = dao.deleteCart(c);
+			System.out.println(c);
 			if (changeResult == 0) {
 				result = false;
 				break;
@@ -41,7 +42,21 @@ public class CartService {
 	}
 
 	
-
+	public int insertCart(Cart c,int productNo,int buyAmount) {
+		c.setBuyAmount(buyAmount);
+		c.setProductNo(productNo);
+		boolean sameCheck = dao.searchSameBook(c);	// 같은책 있나없나 select로 검사부터 하고
+		System.out.println(sameCheck);
+		int result = 0;
+		if(!sameCheck) { // sameCheck이 false -> 카트에 있지않으니까 바로추가
+			result = dao.insertCart(c);			
+		} else { // sameCheck이 true -> 이미 카트에 있으니까 수량만 추가
+			result = dao.updateCartQuan(c);
+		}
+		
+		
+		return result;
+	}
 	
 	
 	

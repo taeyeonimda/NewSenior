@@ -100,11 +100,14 @@
 							<td><input type="text" value="${Or.buyName }" name="buyName" style="border:none" readonly>
 								<input type="hidden" value="${Or.memberNo }" name="memberNo" style="border:none" readonly>
 							</td>
-							<td><input type="text" value="${Or.buyPrice }" name="buyPrice" style="border:none" readonly></td>
-							<td><input type="text" value="${Or.buyAmount }" name="buyAmount" style="border:none" readonly></td>
+							<td><fmt:formatNumber value="${Or.buyPrice }" pattern="#,###"/></td>
+							<td><fmt:formatNumber value="${Or.buyAmount }" pattern="#,###"/></td>
 							
 							<td style="text-align: center;">무료배송</td>
-							<td><input type="text" value=" ${Or.buyAmount*Or.buyPrice }" style="border:none" class="sumPrice" readonly><span>원</span></td>
+							<td style="float:right; padding-right:30px;">
+								<fmt:formatNumber value="${Or.buyPrice*Or.buyAmount }" pattern="#,###"/>
+								<input type="hidden" value=" ${Or.buyAmount*Or.buyPrice }" style="border:none" class="sumPrice" readonly><span >원</span>
+							</td>
 						</tr>
 						</c:forEach>
 	                    	<tr>
@@ -112,7 +115,9 @@
 		                      	<td>결제할 총 금액</td>
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" readonly>
-		                      		<p class="lastPrice"></p>
+		                      		<p class="lastPrice" style="float: left;"></p>
+		                      		<p style="float:left; margin: 0 5px;">원</p>
+		                      		
 		                     	</td>
 	                      	</tr>
 	                    </tbody>

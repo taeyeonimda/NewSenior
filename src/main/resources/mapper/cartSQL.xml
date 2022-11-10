@@ -26,4 +26,15 @@ where member_no=#{memberNo}
 delete from carts
 	where product_no=#{productNo} and member_no=#{memberNo}
 </delete>
+
+<select id="sameCheck" parameterType="Ca" resultType="Ca">
+select product_no as productNo from carts where product_no=#{productNo} and member_no = #{memberNo}
+</select>
+
+<update id="updateAmount">
+update carts set 
+	buy_amount = buy_amount+#{buyAmount} 
+	where product_no=#{productNo}
+</update>
+
 </mapper>
