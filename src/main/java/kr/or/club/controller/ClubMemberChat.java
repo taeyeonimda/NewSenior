@@ -133,6 +133,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 			recordFile(memberList.get(session), msg);
 			String sendMsg = "<div class='chat left'><span class='chatId'>"+memberList.get(session)+" : </span><img width='150px' height='180px' src='/resources/upload/chat/"+msg+"'></div>"; // session으로 고유 key값 넣어줬으니
 			TextMessage tm = new TextMessage(sendMsg); // 보내고 싶은 메시지를 매개변수로
+			
 			for(WebSocketSession s : clubMemberMap.get(club)) {
 				if(!s.equals(session)) { // 매개변수로 받은 session과 같으면 나 자신이니까 나에게는 빼고 입정하셨슴다 보내주겠다
 					// 클라이언트에게 전송 
@@ -151,9 +152,14 @@ public class ClubMemberChat extends TextWebSocketHandler{
 	// 클라이언트와 연결이 끊어졌을 때 자동으로 수행되는 메서드
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("클라이언트 접속 끗");
-		clubMemberMap.get(club).remove(session);
+		//clubMemberMap.get(club).remove(session);
+		for(String cl : clubMemberMap.keySet()) {
+			clubMemberMap.get(cl).remove(session);
+			System.out.println("size : "+clubMemberMap.get(cl).size());
+		}
 		sessionList.remove(session);
 		memberList.remove(session);
+		
 	}
 	
 	public void recordChat(String memberId, String msg) {
