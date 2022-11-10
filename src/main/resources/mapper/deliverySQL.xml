@@ -32,8 +32,9 @@
 		receiver_name as receiverName,
 		default_addr as defaultAddr,
 		member_no as memberNo
-		from delivery_tbl where member_no=#{memberNo} ORDER BY CASE WHEN
-		default_addr = 'Y' THEN 0 END, delivery_no DESC
+		from delivery_tbl where 
+		<if test="memberNo != null">member_no=#{memberNo}</if> 
+		ORDER BY default_addr desc, delivery_no DESC
 	</select>
 	
 	<delete id="deleteAddr" parameterType="d" >
