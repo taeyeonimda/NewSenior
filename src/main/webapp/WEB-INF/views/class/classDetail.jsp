@@ -65,6 +65,7 @@
 	                        <option value="6">6인</option>
 	                    </select>
 	                    <span id="priceBox">
+	                    <span>${cla.classPrice }</span>
 	                    <fmt:formatNumber value="${cla.classPrice }" pattern="#,###"/>
 	                    </span><span>원</span>
                     </div>
@@ -74,10 +75,13 @@
                 </div>
             </div>
         </div>
-
+			
 
         <!-- class main -->
         <div class="container-xxl py-5 mt-5">
+        	<div class="bg-white">
+            	<button class="btn btn-secondary py-2 px-3">글씨크게</button><button class="btn btn-secondary py-2 px-3">글씨작게</button>
+            </div>
             <div class="container">
                 <div class="class-row g-4">
                     <div class="col-md-8 wow fadeInUp" data-wow-delay="0.1s">
@@ -108,14 +112,6 @@
                         	<c:forEach items="${cla.fileList }" var="cf">
                         		<img class="product-img" src="/resources/upload/class/${cf.filepath }">
                         	</c:forEach>
-                        	<pre style="text-align: left;" class="font-set fs-5">테스트 클래스 !
-투자 봇, 내 꿈을 이루기 위한 시작점
-회사에 있는 동안, 여행하는 동안, 데이트하는 동안.
-집에 홀로 있는 노트북이 나의 자산을 자동으로 늘려준다면 어떨까요?
-2년 전의 저는 코딩 프로젝트 경험도 없었고, 투자 경험은 더더욱 없는 평범한 직장인이었습니다.
-하지만, '내 손으로 무언가 만들어 단돈 10원이라도 벌어보자.'라는 생각에
-맨땅에 헤딩하는 심정으로 퇴근 후, 자투리 시간을 모아 투자 봇 개발을 시작했습니다.
-                        	</pre>
                         </div>
                     </div>
                 </div>
@@ -133,8 +129,6 @@
                     </div>
                     <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
                         <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
-                        <p class="text-primary mb-4">Year of Experience</p>
-                        <h4 class="display-6 mb-4">"당당하게 걸어요"</h4>
                         <pre>${cla.teacherIntroduce }</pre>
                     </div>
                 </div>
@@ -242,17 +236,17 @@
         </div>
     </div>
 </div>
+
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+	<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
     <!-- side-bar script-->
     <script>
         function showSide(){
             const position  = $(window).scrollTop();
-            console.log(position);
+
             let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
 	        let windowHeight = window.innerHeight; // 스크린 창
             let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x, footer제외
@@ -260,7 +254,6 @@
                 $(".sidenav").fadeOut(0);
             }else if(position > 250 ){ // 스크롤 위치 343보다 클 때만 보이겠다
                 $(".sidenav").fadeIn(300);
-                console.log(fullHeight);
             }else {
                 $(".sidenav").fadeOut(0);
             }

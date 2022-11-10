@@ -35,6 +35,12 @@ public class BoardDao {
 		return totalCount;	
 	}
 	
+	public int selectBoardCount3(HashMap<String, Object> pageMap) {
+		int totalCount = sqlSession.selectOne("board.totalCount3",pageMap);
+		return totalCount;	
+	}
+	
+	
 	public Board selectOneBoard(int boardNo) {
 		return sqlSession.selectOne("board.selectOneBoard",boardNo);
 	}
@@ -104,6 +110,7 @@ public class BoardDao {
 	public int updateboard2(Board b) {
 		return sqlSession.update("board.updateBoard2",b);
 	}
+	
 	
 	
 	

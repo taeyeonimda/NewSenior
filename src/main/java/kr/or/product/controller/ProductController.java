@@ -199,6 +199,7 @@ public class ProductController {
 	@RequestMapping(value="/insertCart.do")
 	public String insertCart(Cart c) {
 		int result = service.insertCart(c);
+		System.out.println(result);
 		return "redirect:/cart.do?memberNo="+c.getMemberNo();
 	}
 }
