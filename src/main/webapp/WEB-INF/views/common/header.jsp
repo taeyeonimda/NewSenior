@@ -199,7 +199,16 @@
                 		<a href="/clubList.do" class="nav-item nav-link">동호회</a>
                 	</c:otherwise>
                 </c:choose>
-                <a href="/boardList.do?reqPage=1" class="nav-item nav-link">커뮤니티</a>
+                
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="/boardList.do?reqPage=1&boardType=F" class="dropdown-item">자유게시판</a>
+                        <a href="boardList.do?reqPage=1&boardType=P" class="dropdown-item">동호회모집</a>
+                        <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
+                    </div>
+                </div>
+
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">액티비티</a>
                     <div class="dropdown-menu bg-light m-0">
@@ -217,7 +226,15 @@
                     </div>
                 </div>
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
-                <a href="javascript:void(0)" class="nav-item nav-link">공지사항</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공지사항</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="/boardList.do?reqPage=1&boardType=N" class="dropdown-item">공지사항</a>
+                        <a href="boardList.do?reqPage=1&boardType=Q" class="dropdown-item">Q&A</a>
+                        <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">FAQ(없을수도)</a>
+                    </div>
+                </div>
+
             </div>
             <c:choose>
 				<c:when test="${empty sessionScope.m }">

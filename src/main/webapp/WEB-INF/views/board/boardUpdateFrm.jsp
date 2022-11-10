@@ -15,7 +15,7 @@
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	
 <h1>자유게시판 수정</h1>
-	<form action="/boardUpdate.do" method="post" enctype="multipart/form-data">
+	<form action="/boardUpdate.do" id="boardUpdateForm" method="post" enctype="multipart/form-data">
 		<table border="1">
 			<tr>
 				
@@ -42,7 +42,7 @@
 				<th>작성자</th>
 				<td>
 				${sessionScope.m.nickName }
-				<input type="hidden" name="boardType" value="F">
+				<input type="hidden" name="boardType" value="${boardType}">
 													<%--게시판 바꾸면 이 값도 바꿔줌 --%>
 				</td>	
 			</tr>
@@ -60,10 +60,6 @@
 			<c:forEach items="${b.fileList }" var="bf">
 				<td>${bf.filename }
 				<button type="button" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button></td>
-				
-				<td><input type="hidden" name="fileNoList" value="${bf.fileNo }"></td>
-				<td><input type="hidden" name="filepathList" value="${bf.filepath }"></td>
-				<td><input type="hidden" name="filename" value="${bf.filename }"></td>
 				<td>${bf.fileNo }</td>
 				<td>${bf.filepath }</td>
 			</c:forEach>
@@ -74,7 +70,7 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<input type="submit" value="수정하기">
+					<input type="submit" id="boardUpdateBtn" value="수정하기">
 				</td>
 			</tr>
 			
@@ -82,10 +78,42 @@
 	</form>
 	<script>
 		function deleteFile(obj,fileNo,filepath){
-			$(obj).parent().remove();
+			//삭제 버튼 눌렀을때 데이터를 컨트롤러로 전송해줘야함 "/boardUpdate.do"로 전달
+			//ajax로??
+			const fileNoInput = $("<input>");
+			fileNoInput.attr("name","fileNoList");
+			fileNoInput.val(fileNo);
+			fileNoInput.hide();
+			//<input type="text" name="fileNolist" value="fileNo">
+			const filepathInput = $("<input>");
+			filepathInput.attr("name","filepathList");
+			filepathInput.val(filepath);
+			filepathInput.hide();
+			//<input type="text" name="filepathList" value="filepath">
+			$("#updateFrm").append(fileNoInput).append(filepathInput);
+			
+			$(obj).parent().remove(); // 파일네임 지워줌
+			
 		}
+		
+		$("#boardUpdateBtn").on("click",function(e){
+			const boardTitle = $("[name=boardTitle]")
+			const boardContent = $("#boardContent")
+			const boardUpdateForm =$("#boardUpdateForm")
+			if(boardTitle.val()==""){
+				alert('제목을 입력해주세요');
+				return false;
+			}
+			if(boardContent.val()==""){
+				alert('내용을 입력해주세요');
+				return false;
+			}
+		
+			boardUpdateForm.submit();
+		
+			});
 
 	</script>
-	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
