@@ -4,7 +4,7 @@
 
 	<!-- 클럽 만들기 -->
 	<insert id="insertClub" parameterType="c">
-		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg }, #{clubIntro })
+		insert into clubs values (clubs_seq.nextval, #{clubName }, #{clubCategory }, #{clubLimit }, #{clubLeader }, #{clubMainImg }, #{clubIntro }, null)
 		<selectKey resultType="_int" order="AFTER" keyProperty="clubNo">
 			select max(club_no) from clubs
 		</selectKey>
@@ -25,7 +25,8 @@
 		    club_limit as clubLimit,
 		    club_leader as clubLeader,
 		    filepath as clubMainImg,
-		    club_intro as clubIntro 
+		    club_intro as clubIntro,
+		    club_notice as clubNotice
 		from (select club_no, count(*) as cnt from club_members group by club_no)
 		right join clubs using (club_no)
 		<if test="keyword != null">
@@ -48,6 +49,7 @@
 		<result column="club_Leader" property="clubLeader"/>
 		<result column="filepath" property="clubMainImg"/>
 		<result column="club_intro" property="clubIntro"/>
+		<result column="club_notice" property="clubNotice"/>
 		<collection property="memberList"
 			select="selectClubMemberList"
 			column="club_no"
@@ -142,7 +144,7 @@
 			club_limit as clubLimit,
 			club_Leader as clubLeader,
 			filepath as clubMainImg,
-			club_intro as clubIntro
+			club_intro as clubIntr
 		from
     		(select rownum, c.*, (select count(*) from club_members m where m.club_no=c.club_no) as cnt
     		from clubs c where club_category=(select favorite from members where member_no=#{memberNo }))
@@ -212,4 +214,30 @@
 	<delete id="deleteClub" parameterType="c">
 		delete from clubs where club_no=#{clubNo }
 	</delete>
+	
+	<!-- 클럽 공지사항을 수정 -->
+	<update id="updateClubNotice" parameterType="c">
+		update clubs set club_notice=#{clubNotice } where club_no=#{clubNo }
+	</update>
+	
+	<!-- 클럽 게시글을 삭제 -->
+	<delete id="deleteClubBoard" parameterType="cb">
+		delete from club_boards where club_board_no=#{clubBoardNo }
+	</delete>
+	
+	<!-- 클럽에서 보는 나의 동호회 : 3 개씩 가져오기 -->
+	<select id="selectMyClubStartEnd" parameterType="map" resultType="c">
+		select * from (select rownum, r.* from (select
+		    club_no as clubNo,
+			cnt as clubMemberCnt,
+			club_name as clubName,
+			club_category as clubCategory,
+			club_limit as clubLimit,
+			club_leader as clubLeader,
+			filepath as clubMainImg,
+			club_intro as clubIntro 
+		from (select club_no, count(*) as cnt from club_members group by club_no)
+		right join clubs using (club_no)
+		where club_no in (select club_no from club_members where member_no=#{memberNo }) order by cnt desc)r) where rownum between #{startIndex } and #{endIndex }
+	</select>
 </mapper>

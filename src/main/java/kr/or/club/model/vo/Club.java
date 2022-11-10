@@ -19,4 +19,5 @@ public class Club {
 	private String clubCategory; //
 	private int clubMemberCnt;	// 현재 회원수
 	private ArrayList<Member> memberList; // 클럽 멤버들의 멤버 객체 리스트
+	private String clubNotice;
 }

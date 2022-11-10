@@ -109,4 +109,16 @@ public class MemberDao {
 		return result;
 	}
 
+	public Member loginCheckKakao(Member m) {
+		// TODO Auto-generated method stub
+		Member member = sqlSession.selectOne("member.selectKaKaoLogin",m);
+		return member;
+	}
+
+	public int insertKakaoMemeber(Member m) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("member.insertKakaoMember",m);
+		return result;
+	}
+
 }
