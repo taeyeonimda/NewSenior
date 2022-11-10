@@ -199,10 +199,10 @@
 									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
-									<td style="line-height: 50px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});">수정</button>
-										<button class="delBtn">
-											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}" >삭제</a>
+									<td style="line-height: 72px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
+										<button class="delBtn"  style="position: relative; top:20px;">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}">삭제</a>
 										</button>
 									</td>
 								</tr>
@@ -214,10 +214,10 @@
 									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
-									<td style="line-height: 50px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});">수정</button>
-										<button class="delBtn">
-											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }">삭제</a>
+									<td style="line-height: 72px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
+										<button class="delBtn" style="position: relative; top:20px;">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }" >삭제</a>
 										</button></td>
 								</tr>
 							</c:forEach>
