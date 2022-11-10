@@ -112,7 +112,7 @@
 		                      	<td>결제할 총 금액</td>
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" readonly>
-		                      		<input type="text" style="border:none;" class="payPrice" readonly>원
+		                      		<p class="lastPrice"></p>
 		                     	</td>
 	                      	</tr>
 	                    </tbody>
@@ -257,18 +257,26 @@
 			};
 		
 		
-		function sum(){
-			const sumPrice = $(".sumPrice");
-			let result = 0;
-			for(let i=0; i<sumPrice.length; i++){
-				result += Number(sumPrice.eq(i).val());
+			function sum(){
+				const sumPrice = $(".sumPrice");
+				let result = 0;
+				for(let i=0; i<sumPrice.length; i++){
+					result += Number(sumPrice.eq(i).val());
+				}
+				
+				//const showPrice = $(".payPrice").val(result);
+				//console.log(showPrice);
+				
+				const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				console.log(lastPrice);
+				$(".lastPrice").text(lastPrice);
+				
+				
 			}
-			$(".payPrice").val(result);
-		};
-		
-		window.onload=function(){
-			sum();
-		};
+			
+			window.onload=function(){
+				sum();
+			}
 		
 		// 체크한것 삭제
 		$(".deleteCheck").on("click", function(){

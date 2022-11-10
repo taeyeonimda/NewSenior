@@ -106,11 +106,12 @@
 			            	
 	             		</c:forEach>
 	                    	<tr>
-		                      	<td colspan="5"></td>
+		                      	<td colspan="4"></td>
 		                      	<td>결제할 총 금액</td>
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<input type="text" style="border:none;" class="payPrice" value="${Cart.buyPrice*Cart.buyAmount }" readonly>
+		                      		<p class="lastPrice"></p>
+		                      		
 		                     	</td>
 	                      	</tr>
 	                      	
@@ -211,7 +212,14 @@
 			for(let i=0; i<sumPrice.length; i++){
 				result += Number(sumPrice.eq(i).val());
 			}
-			$(".payPrice").val(result);
+			
+			//const showPrice = $(".payPrice").val(result);
+			//console.log(showPrice);
+			
+			const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			console.log(lastPrice);
+			$(".lastPrice").text(lastPrice);
+			
 			
 		}
 		
