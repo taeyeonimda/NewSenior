@@ -77,7 +77,7 @@
               <br><br><br>
               <div>
                 <div style="font-size: 40px; font-weight: 900; display: inline-block;">결제정보입력</div>
-                <div style="display: inline-block; float: right;"><button type="button" style=" width:100px; height: 30px; margin-top: 35px; line-height: 15px;" class="btn btn-outline-primary deleteCheck">삭제</button></div>
+                
               </div>
               <div class="card">
 
@@ -111,7 +111,8 @@
 		                      	<td colspan="4"></td>
 		                      	<td>결제할 총 금액</td>
 		                      	<td>
-		                      		<input type="text" style="border:none;" class="payPrice" readonly>원
+		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" readonly>
+		                      		<p class="lastPrice"></p>
 		                     	</td>
 	                      	</tr>
 	                    </tbody>
@@ -216,7 +217,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
 		$("#payBtn").on("click",function(){
-			const price = $(".payPrice").val();
+			const price = $(".hiddenPayPrice").val();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
@@ -256,18 +257,26 @@
 			};
 		
 		
-		function sum(){
-			const sumPrice = $(".sumPrice");
-			let result = 0;
-			for(let i=0; i<sumPrice.length; i++){
-				result += Number(sumPrice.eq(i).val());
+			function sum(){
+				const sumPrice = $(".sumPrice");
+				let result = 0;
+				for(let i=0; i<sumPrice.length; i++){
+					result += Number(sumPrice.eq(i).val());
+				}
+				
+				//const showPrice = $(".payPrice").val(result);
+				//console.log(showPrice);
+				
+				const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				console.log(lastPrice);
+				$(".lastPrice").text(lastPrice);
+				
+				
 			}
-			$(".payPrice").val(result);
-		};
-		
-		window.onload=function(){
-			sum();
-		};
+			
+			window.onload=function(){
+				sum();
+			}
 		
 		// 체크한것 삭제
 		$(".deleteCheck").on("click", function(){

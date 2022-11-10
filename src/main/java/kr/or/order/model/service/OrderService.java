@@ -38,10 +38,7 @@ public class OrderService {
 	}
 
 
-	public int deleteCart(Product p) {
-		int result = dao.deleteCart(p);
-		return result;
-	}
+	
 
 
 	public ArrayList<Cart> goOrderHistory(Cart c) {

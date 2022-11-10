@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.activity.model.vo.Activity;
 import kr.or.activity.model.vo.FileVo;
+import kr.or.cart.model.vo.Cart;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Repository
@@ -77,5 +78,11 @@ public class ActivityDao {
 	public int categoryActivityCnt(HashMap<String, String> str) {
 		int totalCount = sqlSession.selectOne("activity.categoryActivityCnt",str);
 		return totalCount;
+	}
+
+
+	public int actInsertCart(Cart cart) {
+		int result = sqlSession.insert("activity.actInsertCart",cart);
+		return result;
 	}
 }

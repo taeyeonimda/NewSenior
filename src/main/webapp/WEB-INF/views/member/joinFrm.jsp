@@ -17,13 +17,13 @@
 			<fieldset>
 				<span class="sp">이름<span class="red">*</span></span>
 				<span id="nameChk"></span><br> <input type="text"
-					placeholder="이름을 입력해주세요." name="memberName" class="inbtn"><br>
+					placeholder="이름을 입력해주세요." name="memberName" class="inbtn mn1"><br>
 				<span class="sp">아이디<span class="red">*</span></span><span
 					id="idChk"></span><br> <input type="text"
-					placeholder="아이디을 입력해주세요." name="memberId" class="inbtn"><br>
+					placeholder="아이디을 입력해주세요." name="memberId" class="inbtn mi1"><br>
 				<span class="sp">닉네임<span class="red">*</span></span><span
 					id="nicChk"></span><br> <input type="text"
-					placeholder="닉네임을 입력해주세요." name="nickName" class="inbtn"><br>
+					placeholder="닉네임을 입력해주세요." name="nickName" class="inbtn nn1"><br>
 				<span class="sp">이메일 <span class="red">*</span></span><br> <input
 					type="text" name="str_email01" id="str_email01 sz120"
 					style="width: 150px;" class="inbtn"> @ <input type="text"
@@ -45,14 +45,11 @@
 					<option value="gmail.com">gmail.com</option>
 					<option value="hanmir.com">hanmir.com</option>
 					<option value="paran.com">paran.com</option>
-				</select><span id="emailChk"></span><br> <span class="sp">비밀번호<span
-					class="red">*</span></span><span id="pw1Chk"></span><br> <input
-					type="password" placeholder="비밀번호를 입력해주세요." name="memberPw"
-					class="inbtn"><br> <span class="sp">비밀번호확인<span
-					class="red">*</span></span><span id="pw2Chk"></span><br> <input
-					type="password" placeholder="비밀번호를 입력해주세요." name="memberPw_re"
-					class="inbtn"><br> <span class="sp">전화번호<span
-					class="red">*</span></span><br>
+				</select><span id="emailChk"></span><br> <span class="sp">비밀번호<span class="red">*</span></span><span id="pw1Chk"></span><br> 
+				<input type="password" placeholder="비밀번호를 입력해주세요." name="memberPw" class="inbtn mp1"><br> <span class="sp">비밀번호확인<span
+					class="red">*</span></span><span id="pw2Chk"></span><br> 
+					<input type="password" placeholder="비밀번호를 입력해주세요." name="memberPw_re mp2" class="inbtn"><br> 
+					<span class="sp">전화번호<span class="red">*</span></span><br>
 				<table>
 					<tr>
 						<td colspan="3"><select name="memberPhone1" id="memberPhone1"
@@ -79,7 +76,7 @@
 					
 				</select> <br> <span class="sp">생년월일</span><span id="birthChk"></span><br>
 				<input type="text" placeholder="예) 1999-10-08" name="memberBirth"
-					onkeyup="birth_keyup(this)" class="inbtn"><br>
+					onkeyup="birth_keyup(this)" class="inbtn" maxlength="10"><br>
 		</form>
 		<input type="checkbox" class="checkBtn"><span class="fs">
 			개인정보 수집 및 이용 동의</span> <span style="color: red; text-decoration: underline"
@@ -191,7 +188,7 @@
 		  }
 		  
 		  //아이디 중복체크 && 유효성검사
-		  $("[name=memberId]").on("change",function(){
+		  $(".mi1").on("change",function(){
 			const memberId = $(this).val();
 			$.ajax({
 				url : "/idCheck.do",
@@ -217,7 +214,7 @@
 		  });
 		  
 		  //닉네임 중복체크
-		  $("[name=nickName]").on("change",function(){
+		  $("nn1").on("change",function(){
 			const nickName = $(this).val();
 			$.ajax({
 				url : "/idCheck.do",
@@ -252,12 +249,12 @@
 			}
 		});
 		//비밀번호 유효성검사
-		$("[name=memberPw]").on("change",function(){
+		$(".mp1").on("change",function(){
 			checkPw();
 		});
 		//비밀번호 유효성검사
 		 function checkPw() {
-	        let pw = $("[name=memberPw]").val();
+	        let pw = $(".mp1").val();
 	        let number = pw.search(/[0-9]/g);
 	        let english = pw.search(/[a-z]/ig);
 	        let spece = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
@@ -307,8 +304,8 @@
 	    }
 		//비밀번호 확인 유효성 검사
 		 function checkPw_re() {
-		        let pw = $("[name=memberPw]").val();
-		        let pw_re = $("[name=memberPw_re]").val();
+		        let pw = $(".mp1").val();
+		        let pw_re = $(".mp2").val();
 		        if(pw !=pw_re){
 		        	$("#pw2Chk").text("비밀번호가 일치하지 않습니다.");
 					$("#pw2Chk").css("color","red");
@@ -320,16 +317,16 @@
 		        }
 		 }
 		//비밀번호 확인 유효성 검사
-		$("[name=memberPw_re]").on("change",function(){
+		$(".mp2").on("change",function(){
 			checkPw_re();
 		});
 		
 		$("#memberJoin").on("click",function(){
-			if($("[name=memberName]").val() == ""){
+			if($(".mn1").val() == ""){
 				alert("이름을 입력해주세요.");
 				return false;
 			}
-			if($("[name=memberId]").val() == ""){
+			if($(".mi1").val() == ""){
 				alert("아이디을 입력해주세요.");
 				return false;
 			}
@@ -341,11 +338,11 @@
 				alert("이메일을 입력해주세요.");
 				return false;
 			}
-			if($("[name=memberPw]").val() == ""){
+			if($(".mp1").val() == ""){
 				alert("비밀번호를 입력해주세요.");
 				return false;
 			}
-			if($("[name=memberPw_re]").val() == ""){
+			if($(".mp2").val() == ""){
 				alert("비밀번호 확인을 해주세요.");
 				return false;
 			}

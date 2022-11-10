@@ -190,6 +190,7 @@ public class ClubController {
 	
 	@RequestMapping(value = "/insertClubComment.do")
 	public String  insertClubComment(ClubBoardComment cbc) {
+		System.out.println(cbc);
 		int result = service.insertBoardCom(cbc);
 		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
 	}
@@ -266,13 +267,20 @@ public class ClubController {
 	public String blockMember(int[] memberNo, int clubNo){
 		System.out.println(memberNo);
 		int result = service.blockClubMember(memberNo, clubNo);
-		return "redirect:/clubDetail.do?memberNo="+clubNo;
+		return "redirect:/clubDetail.do?clubNo="+clubNo;
 	}
-	// 클럽 detail에서 보여줄 내 동호회 버튼
+	// 클럽 detail에서 보여줄 내 동호회 버튼 구현 위한 total
 	@ResponseBody
-	@RequestMapping(value="/getMyClubList.do", produces = "application/json;charset=utf-8")
+	@RequestMapping(value="/getMyClubListTotal.do", produces = "application/json;charset=utf-8")
 	public String myClubList(Member m) {
 		ArrayList<Club> myList = service.searchMyClub(m);
+		return new Gson().toJson(myList);
+	}
+	// 클럽 detail에서 보여줄 내 동호회 리스트
+	@ResponseBody
+	@RequestMapping(value="/getMyClubList.do", produces = "application/json;charset=utf-8")
+	public String myClubList(Member m, int startIndex, int endIndex) {
+		ArrayList<Club> myList = service.searchMyClub(m, startIndex, endIndex);
 		return new Gson().toJson(myList);
 	}
 	// 클럽을 없애는 delete
@@ -280,5 +288,17 @@ public class ClubController {
 	public String deleteClub(Club c) {
 		int result = service.deleteClub(c);
 		return "redirect:/popularClubList.do?memberNo="+c.getClubLeader();
+	}
+	// 클럽 공지사항 수정
+	@RequestMapping(value = "/updateClubNotice.do")
+	public String updateClubNotice(Club c) {
+		int result = service.updateClubNotice(c);
+		return "redirect:/clubDetail.do?clubNo="+c.getClubNo();
+	}
+	// 클럽 게시글 삭제
+	@RequestMapping(value = "/deleteClubBoard.do")
+	public String deleteClubBoard(ClubBoard cb) {
+		int result = service.deleteClubBoard(cb);
+		return "redirect:/clubDetail.do?clubNo="+cb.getClubNo();
 	}
 }

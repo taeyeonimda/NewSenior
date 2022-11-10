@@ -37,10 +37,7 @@ public class OrderDao {
 	}
 
 
-	public int deleteCart(Product p) {
-		int result = sqlSession.delete("order.deleteCart", p);
-		return result;
-	}
+	
 
 
 	public ArrayList<Cart> goOrderHistory(Cart c) {
@@ -48,6 +45,8 @@ public class OrderDao {
 		return (ArrayList<Cart>) list;
 	}
 
+
+	
 
 	
 }

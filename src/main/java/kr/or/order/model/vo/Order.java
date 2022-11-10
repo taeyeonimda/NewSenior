@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+
 public class Order {
 	private int orderNo;
 	private int memberNo;

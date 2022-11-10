@@ -161,8 +161,12 @@
 					<button type="submit" class="btn btn-outline-warning"
 						style="float: right; color: #000;">내정보 변경하기</button>
 				</div>
-		</div>
 		</form>
+		<form action="/deleteMember.do" method="post">
+		<button type="submit" class="btn btn-outline-warning delbtn"
+						style="color: #000;">회원탈퇴</button>
+		</form>
+		</div>
 
 		<!-- File input -->
 		<div class="container-xxl flex-grow-1 container-p-y">
@@ -195,10 +199,10 @@
 									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
-									<td style="line-height: 50px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});">수정</button>
-										<button class="delBtn">
-											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}" >삭제</a>
+									<td style="line-height: 72px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
+										<button class="delBtn"  style="position: relative; top:20px;">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}">삭제</a>
 										</button>
 									</td>
 								</tr>
@@ -210,10 +214,10 @@
 									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
 										${d.deliveryDetail }
 									</td>
-									<td style="line-height: 50px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});">수정</button>
-										<button class="delBtn">
-											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }">삭제</a>
+									<td style="line-height: 72px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
+										<button class="delBtn" style="position: relative; top:20px;">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }" >삭제</a>
 										</button></td>
 								</tr>
 							</c:forEach>
