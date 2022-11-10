@@ -230,6 +230,19 @@
                       </c:otherwise>
                       </c:choose>
                     </div>
+                    <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지3</label>
+                    <div class="col-md-10">
+                    <c:choose>
+                    <c:when test="${!empty p.productFileVO[3].fileName}">
+                      <input type="file" name="productFile" id="productFile3" class="productFile" style="display: none;">
+                      <span>${p.productFileVO[3].fileName }</span>
+                      <button class="productDelBtn1" type="button" onclick="deleteimgFile(this,${p.productFileVO[3].fileNo},'${p.productFileVO[3].filePath }')">삭제</button>
+                      </c:when>
+                      <c:otherwise>
+                      <input type="file" name="productFile" id="productFile2" class="productFile" style="display: block;">
+                      </c:otherwise>
+                      </c:choose>
+                    </div>
                     
                   </div>
                   

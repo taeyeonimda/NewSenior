@@ -161,8 +161,12 @@
 					<button type="submit" class="btn btn-outline-warning"
 						style="float: right; color: #000;">내정보 변경하기</button>
 				</div>
-		</div>
 		</form>
+		<form action="/deleteMember.do" method="post">
+		<button type="submit" class="btn btn-outline-warning delbtn"
+						style="color: #000;">회원탈퇴</button>
+		</form>
+		</div>
 
 		<!-- File input -->
 		<div class="container-xxl flex-grow-1 container-p-y">

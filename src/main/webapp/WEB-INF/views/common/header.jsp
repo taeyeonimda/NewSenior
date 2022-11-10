@@ -50,8 +50,7 @@
 			}
 			.popup00{
 			  display: none;
-			  width: 50%;
-			  height: 80vh;
+			  width: 45%;
 			  position: fixed;
 			  top: 51%;
 			  left: 50%;
@@ -60,13 +59,13 @@
 			  box-shadow: 10px 10px 10px rgb(0 0 0 / 20%);
 			  color: #000000;
 			  padding: 2% 5%;
-			  padding-bottom: 10%;
+			  padding-bottom: 3%;
 			  font-size: 12px;
 			  line-height: 1.5rem;
 			  border-radius: 15px;
 			  z-index: 99999;
 			  line-height: 1.5rem;
-			  overflow-y: scroll;
+			  overflow: hidden auto;
 			  
 			}
 			.zwicon-close00{
@@ -108,7 +107,10 @@
 			  font-size: 0.7rem;
 			}
 			.txt_3{
-			  font-size: 1.4rem;
+			  font-size: 1rem;
+			}
+			.txt_4{
+			 font-size: 0.8rem;
 			}
 			.flex00{
 			  display: flex;
@@ -120,11 +122,11 @@
 			  margin-bottom: 30px;
 			}
 			.boxSize_2{
-			  width: 60%;
+			  width: 300px;
 			  padding: 2.5% 1%;
-			  margin-top: 3%;
+			  margin-top: 2%;
 			  border-radius: 5px;
-			  border: 1.5px solid rgb(176, 174, 174);
+			  border: 1px solid rgb(176, 174, 174);
 			}
 			.boxSize_2:hover{
 			  border: 1.5px solid rgb(120, 120, 120);
@@ -166,6 +168,10 @@
 			input[type=checkbox]{
 			  width: 17px;
 			  height: 17px;
+			}
+			input::placeholder {
+			font-weight:800;
+			color:#b8b8b8;
 			}
 	</style>
          
@@ -265,7 +271,7 @@
   <div class="popup00 personal_pop00 noto bg_s">
     <div class="x_btn00"><span class="zwicon-close00">X</span></div>
     <div class="cont00">
-      <h1 id="login_header">로그인</h1>
+      <h1 id="login_header" style="color:#000;">로그인</h1>
       <hr>
       <div class="login_cont">
         <form action="/login.do" method="post" onsubmit="return loginchk();">
@@ -283,21 +289,21 @@
             <a href="/searchInfoFrm.do" class="c_red txt_d1 fw_8" >아이디/비밀번호 찾기</a>
           </div>
         </div>
-        <h3 class="txt_3">SNS계정으로 간편하게 로그인하세요.</h3>
-        <div><span>카카오로그인</span>/<span>네이버로그인</span></div>
-        <div><a href="/joinFrm.do"><input value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1.3rem;"></a></div>
+        <h3 class="txt_4" style="color:#000;">SNS계정으로 간편하게 로그인하세요.</h3>
+        <div onclick="kakaoLogin();">
+        	<a  href="javascript:void(0)">
+        		 <span><img alt="카카오로그인" src="/resources/img/kakao_login.png" style="width: 50%;"></span>
+        	</a>
+        </div>
+        <hr>
+        <div><a href="/joinFrm.do"><input value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1rem; text-align: center; "></a></div>
         
         <!-- 카카오 로그인 -->
      
         <ul>
-			<li onclick="kakaoLogin();">
-		      <a href="javascript:void(0)">
-		          <span>카카오 로그인</span>
-		      </a>
-			</li>
 			<li onclick="kakaoLogout();">
 		      <a href="javascript:void(0)">
-		          <span>카카오 로그아웃</span>
+		          <span>카카오 회원 탈퇴</span>
 		      </a>
 			</li>
 		</ul>
@@ -322,6 +328,7 @@
     <!-- 로그인 js 
     <script src="/resources/js/login.js"></script>
     -->
+    
     <script type="text/javascript">
     
     $(".loginBtn").click(function(){
@@ -350,40 +357,9 @@
     		return true;
     	}
     }
-  
-    Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
-	console.log(Kakao.isInitialized()); // sdk초기화여부판단
-	  function kakaoLogin() {
-
-		    $.ajax({
-		        url: '/login/getKakaoAuthUrl',
-		        type: 'get',
-		        async: false,
-		        dataType: 'text',
-		        success: function (res) {
-		            location.href = res;
-		        }
-		    });
-
-		  }
-
-		  $(document).ready(function() {
-
-		      var kakaoInfo = '${kakaoInfo}';
-
-		      if(kakaoInfo != ""){
-		          var data = JSON.parse(kakaoInfo);
-
-		          alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
-		          alert(
-		          "user : \n" + "email : "
-		          + data['email']  
-		          + "\n nickname : " 
-		          + data['nickname']);
-		      }
-		  });  
-
-	//카카오로그인
+    
+    /*카카오 로그인 두번째 시도*/
+    //카카오로그인
 	Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
 	console.log(Kakao.isInitialized()); // sdk초기화여부판단
 	function kakaoLogin() {
@@ -392,6 +368,7 @@
 	        Kakao.API.request({
 	          url: '/v2/user/me',
 	          success: function (response) {
+	        	  console.log(response)
 	        	  console.log(response.id)
 	        	  console.log(response.properties.nickname)
 	        	  console.log(response.kakao_account.email)
@@ -400,13 +377,24 @@
 	        		  url: "/kakaoLogin.do",
 	        		  type:'post',
 	        		  data:{
-	        			  kakaoYN:'y',
+	        			  kakaoLogin:response.id,
 	        			  nickName:response.properties.nickname,
 	        			  memberId:response.kakao_account.email,
-	        			  memberEmail:response.properties.email
+	        			  memberEmail:response.kakao_account.email
 	        			  },
 	        		 success:function(data){
-	        			 
+	        			 //로그인 성공
+	        			 if(data == "0"){
+	        				 alert("로그인 성공");
+	        				 window.location.href = "/kakao.do";
+	        				 //회원가입 성공
+	        			 }else if(data == "1"){
+	        				 alert("카카오 회원가입 성공하셨습니다. 로그인 해주세요");
+	        				 window.location.href = "/kakao.do";
+	        				 //실패
+	        			 }else{
+	        				 alert("실패")
+	        			 }
 	        		 }
 	        	  });
 	        	  
@@ -428,6 +416,16 @@
 	        url: '/v1/user/unlink',
 	        success: function (response) {
 	        	console.log(response)
+	        	$.ajax({
+	        		url:"/kakaoLogout.do",
+	        		type:"post",
+	        		data: {kakaoLogin:response.id},
+	        		success:function(data){
+	        			alert("로그아웃 성공");
+	        		}
+	        		
+	        		
+	        	});
 	        },
 	        fail: function (error) {
 	          console.log(error)
@@ -437,6 +435,10 @@
 	    }
 	  }  
 
+    
     </script>
+    
+    
+  
 </body>
 </html>
