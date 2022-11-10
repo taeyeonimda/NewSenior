@@ -8,6 +8,7 @@ select
     product_no as productNo,
     (select product_name from products where products.product_no=carts.product_no) as buyName,
     (select PRODUCT_PRICE from products where products.product_no=carts.product_no)as buyPrice,
+    (select PRODUCT_FILEPATH from product_file where product_file.product_no = carts.product_no and rownum=1)as productPhoto,
     buy_amount as buyAmount,
     member_no as memberNo,
     activity_no as activityNo,
@@ -16,8 +17,8 @@ from carts
 where member_no=#{memberNo}
 </select>
 
-
-
-
-
+<delete id="deleteCart" parameterType="Ca">
+delete from carts
+	where product_no=#{productNo} and member_no=#{memberNo}
+</delete>
 </mapper>

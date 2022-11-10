@@ -124,7 +124,7 @@
 	<select id="getClassTotal" parameterType="map" resultType="int">
 		select count(*) from classes
 		where class_status=2
-		<if test='!classCategory.equals("ALL")'>
+		<if test='!classCategory.equals("AL")'>
 			and class_category= #{classCategory }
 		</if>
 	</select>

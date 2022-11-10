@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.cart.model.vo.Cart;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
+import kr.or.product.model.vo.Product;
 
 @Repository
 public class CartDao {
@@ -20,5 +21,13 @@ public class CartDao {
 		List list = sqlSession.selectList("cart.selectAllCartList", m);
 		return (ArrayList<Cart>) list;
 	}
+
+	public int deleteCart(Cart c) {
+		System.out.println(c);
+		return sqlSession.delete("cart.deleteCart", c);
+	}
+
+	
+	
 
 }

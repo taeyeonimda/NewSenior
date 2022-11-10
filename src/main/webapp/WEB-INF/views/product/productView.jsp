@@ -10,7 +10,7 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/resources/TGbtstr/css/productView.css">
-
+<link rel="stylesheet" href="/resources/MAINbtstr/css/bootstrap.min.css">
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <style>
 ul {
@@ -24,6 +24,7 @@ ul {
 ul li {
     text-align: center;
     float: left;
+    
 }
 
 ul li a {
@@ -32,6 +33,8 @@ ul li a {
     padding: 9px 12px;
     border-right: solid 1px #ccc;
     box-sizing: border-box;
+    height: 38px;
+    line-height: 25px;
 }
 
 ul li.on {
@@ -48,7 +51,7 @@ ul li.on a {
 	    <div class="productContent">
 	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</button>
 	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
-
+		<input type="hidden" name="userId" id="userId" value="${sessionScope.m.memberId }">
         <div class="productWrap">
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
@@ -87,7 +90,7 @@ ul li.on a {
                 		<input type="hidden" value="${p.productNo }" name="productNo">
 	        	        <input type="hidden" value="${p.productName }" name="buyName">
 		                <input type="hidden" value="${p.productPrice }" name="buyPrice">
-		                <!-- <input type="hidden" value="${p.productFileVO[0].filePath }" name="productFileVO"> -->
+		                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
 		                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
 						<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
 	                	<button type="submit">장바구니</button>
@@ -128,6 +131,7 @@ ul li.on a {
               <div>
                 <div><img alt="" src="/resources/upload/productImg/${p.productFileVO[1].filePath }"></div>
               	<div><img alt="" src="/resources/upload/productImg/${p.productFileVO[2].filePath }"></div>
+              	<div><img alt="" src="/resources/upload/productImg/${p.productFileVO[3].filePath }"></div>
               </div>
               <div>
               	<textarea id="productContentArea" readonly>${p.productContent }</textarea>
@@ -237,6 +241,7 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
+
 		function deleteProduct(productNo) {
 			if(confirm("상품을 삭제하시겠습니까?")){
 				location.href="/deleteProduct.do?productNo="+productNo;
@@ -290,7 +295,6 @@ ul li.on a {
 				}
 			};
 		
-			
 		$("#productReviewInsertBtn").on("click",function(){
 			const memberId = $("[name=productMemberId]").val();
 			const productNo = $("[name=productNo]").val();
@@ -336,7 +340,6 @@ ul li.on a {
 					three2Textarea.attr("readonly",true);
 					//
 					three2Div.append(three2Textarea);
-					
 					const three3Div = $("<div>");
 					three3Div.addClass("reviewsBtnBox");
 					const updateBtn = $("<button>수정</button>");
@@ -348,7 +351,6 @@ ul li.on a {
 					//
 					three3Div.append(updateBtn);
 					three3Div.append(deleteBtn);
-					
 					
 					const three4Div = $("<div>");
 					three4Div.addClass("reviewsScore");
@@ -410,7 +412,7 @@ ul li.on a {
 			let dataPerPage; //한 페이지에 나타낼 글의 수
 			let pageCount = 5; //페이징에 나타낼 페이지 수
 			let reviewCurrentPage=1; //현재 페이지
-			
+			const userId = $("#userId").val();
 			
 			$(document).ready(function(){
 				dataPerPage = $("#reviewListBtn").val(); 
@@ -429,7 +431,6 @@ ul li.on a {
 					}
 				});
 				displayData(1, dataPerPage);
-				
 				paging(totalData, dataPerPage, pageCount, 1);
 			});
 			
@@ -503,6 +504,7 @@ ul li.on a {
 			  let chartHtml = "";
 			  const productNo = $("[name=productNo1]").val();
 			  console.log("productNo1 : "+productNo);
+			  
 			//Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
 			  currentPage = Number(currentPage);
 			  dataPerPage = Number(dataPerPage);
@@ -512,6 +514,7 @@ ul li.on a {
 				  url : "/productReviewList.do",
 				  success : function(data){
 					  for (var i = (currentPage - 1) * dataPerPage;i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
+					  console.log("아이디 :" + data[i].memberId);
 						  
 						  const oneDiv = $("<div>");
 							oneDiv.addClass("reviewsWrap reviewMenu");
@@ -536,9 +539,11 @@ ul li.on a {
 							three2Textarea.attr("readonly",true);
 							//
 							three2Div.append(three2Textarea);
+								
 							
 							const three3Div = $("<div>");
 							three3Div.addClass("reviewsBtnBox");
+							if(userId != '' && userId == data[i].memberId){
 							const updateBtn = $("<button>수정</button>");
 							updateBtn.addClass("reviewUpdateBtn");
 							updateBtn.attr("onclick","modifyComment(this,"+data[i].reviewNo+","+data[i].productNo+")");
@@ -548,7 +553,10 @@ ul li.on a {
 							//
 							three3Div.append(updateBtn);
 							three3Div.append(deleteBtn);
-							
+							} else {
+								three2Textarea.css("margin-right","52px");
+							}
+
 							const three4Div = $("<div>");
 							three4Div.addClass("reviewsScore");
 							const fourNextDiv = $("<div>");
@@ -667,6 +675,7 @@ ul li.on a {
 				}	
 			});
 		});
+		
 		</script>
 </body>
 </html>
