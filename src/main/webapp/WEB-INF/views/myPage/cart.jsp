@@ -78,6 +78,7 @@
                       <tr style="text-align: center;">
                         <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
                         <th style=" width: 25%;">이미지</th>
+                     
                         <th style=" width: 25%;">상품명</th>
                         <th style=" width: 10%;">금액</th>
                         <th style=" width: 10%;">수량</th>
@@ -90,9 +91,34 @@
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
 					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
-					            <td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto }"></td>
-					            <td style="text-align:center">${Cart.buyName }</td>
-								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
+					         
+					            <c:choose>
+						           	<c:when test="${Cart.productPhoto != null}">
+						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto}"></td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityPhoto != null}">
+						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/activity/${Cart.activityPhoto}"></td>
+						           	</c:when>		
+					            </c:choose>
+					         	
+					         	<c:choose>
+						           	<c:when test="${Cart.buyName != null}">
+						           		<td style="text-align:center">${Cart.buyName }</td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityName != null}">
+						           		<td style="text-align:center">${Cart.activityName }</td>
+						           	</c:when>		
+					            </c:choose>
+
+					            <c:choose>
+						           	<c:when test="${Cart.buyPrice != 0}">
+						           		<td style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/>카트댐?</td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityPrice != ''}">
+						           		<td style="text-align:center">${Cart.activityPrice }액티비댐?</td>
+						           	</c:when>		
+					            </c:choose>
+								
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" pattern="#,###"/></td>
 								<td style="text-align:center">무료배송</td>
 								<td style="text-align:center">
@@ -100,8 +126,7 @@
 									<input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }">
 								</td>
 								
-			            	</tr>
-			            	
+			            	</tr>	
 	             		</c:forEach>
 	                    	<tr>
 		                      	<td colspan="5"></td>
@@ -160,8 +185,8 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    	<script>
-		$("#payBtn").on("click",function(){
+    	<script>    
+    	$("#payBtn").on("click",function(){
 			const price = $(".payPrice").val();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();

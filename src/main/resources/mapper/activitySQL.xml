@@ -169,6 +169,16 @@
 		from activity_file
 		where activity_fileno = #{_parameter}
 	</delete>
+	
+	<insert id="actInsertCart" parameterType="Ca">
+		insert into carts values(
+			cart_seq.nextval,
+			#{memberNo},
+			null,
+			#{activityNo},null,
+			#{buyAmount}
+		)
+	</insert>
 </mapper>
 
 
