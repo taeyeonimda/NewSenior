@@ -27,7 +27,7 @@
 		        <c:choose>
 		        	<c:when test="${not empty pList }">
 		        		<p class="fs-5 fw-bold text-primary text-center mb-5">${sessionScope.m.memberName }님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
-				        <div class="row mb-5">
+				        <div class="row mb-5" style="justify-content: space-evenly;">
 				        	<c:forEach items="${pList }" var="pl">
 							<div class="col-md-6 col-lg-4 mb-3">
 								<div class="card h-100">
@@ -43,7 +43,7 @@
 						</div>
 		        	</c:when>
 		        	<c:otherwise>
-		        		<div class="fs-5 fw-bold text-primary text-center">선택된 관심사가 없습니다 마이페이지에서 등록하고 동호회를 추천 받으세요 !</div>
+		        		<div class="fs-5 fw-bold text-primary text-center mb-5">선택된 관심사가 없습니다<br>마이페이지에서 등록하고 동호회를 추천 받으세요</div>
 		        	</c:otherwise>
 		        </c:choose>
 	        </c:if>
@@ -76,19 +76,17 @@
 		
 	</div> <!-- pageContent End -->
 	
-	<div id="memberNo">${sessionScope.m.memberNo }</div>
+	<div id="memberNo" style="display: none;">${sessionScope.m.memberNo }</div>
 	
 <div class="modal-wrap">
-    <div class="club-info-modal bg-secondary">
-    	<div class="modal-title">
-	        <div class="modal-img-div">
-	            <img class="modal-img">
-	        </div>
-	    </div>
+    <div class="club-info-modal bg-light">
+        <div class="modal-img-div">
+            <img class="modal-img">
+        </div>
         <div class="club-info">
             <div class="club-info-box">
-            	<h3 class="mb-3 text-light"></h3>
-            	<p class="text-light"></p> 
+            	<h3 class="mb-3 text-dark"></h3>
+            	<p class="text-secondary"></p> 
             </div>
             <div class="modal-btn-box">
             	<button onclick="closeModal();" class="btn btn-primary">닫기</button>

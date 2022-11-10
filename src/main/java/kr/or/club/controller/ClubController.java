@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
+import com.fasterxml.jackson.core.JsonParser;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 import common.FileRename;
 import kr.or.club.model.service.ClubService;
@@ -190,10 +193,92 @@ public class ClubController {
 		int result = service.insertBoardCom(cbc);
 		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
 	}
-
-	@RequestMapping(value = "/deleteClubComment.do")
+	@RequestMapping(value = "/deleteComment.do")
 	public String deleteClubComment(ClubBoardComment cbc) {
 		int result = service.deleteClubComment(cbc);
 		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateClubBoard.do", produces = "application/json;charset=utf-8")
+	public String updateClubBoard(ClubBoard cb, MultipartFile[] upfile, String oldFilepath, String status, HttpServletRequest request) throws UnsupportedEncodingException {
+		System.out.println("upfile"+upfile);
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/club/");
+		String filepath = null;
+		
+		// upfile 먼저
+		if(!upfile[0].isEmpty()) {
+			for(MultipartFile file : upfile) {
+				String filename = file.getOriginalFilename();
+				filepath = fileRename.fileRename(savePath, filename);
+				System.out.println(filepath);
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					try {
+						byte[] bytes = file.getBytes();
+						bos.write(bytes);
+						bos.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				cb.setClubBoardFilepath(filepath);
+			}// for문 종료
+		}
+		
+		if(oldFilepath != null && status.equals("stay")) {
+			filepath = oldFilepath;
+			cb.setClubBoardFilepath(filepath);
+		}
+
+		int result = service.updateClubBoard(cb);
+		if(result>0) {
+			if(status.equals("delete")) {
+				File oldfile = new File(savePath+oldFilepath);
+				if(oldfile.exists()) { // 파일이 존재하면
+					oldfile.delete(); // 파일 삭제	
+				}
+			}
+		}
+		return new Gson().toJson(cb);
+	}
+	
+	// 동호회장 변경
+	@RequestMapping(value = "/changeClubLeader.do")
+	public String changeClubLeader(Club c) {
+		int result = service.updateClubLeader(c);
+		return "redirect:/clubDetail.do?clubNo="+c.getClubNo();
+	}
+	// 동호회 탈퇴하기
+	@RequestMapping(value = "/quitClub.do")
+	public String quitClub(ClubBoard cb) {	// 클럽게시판 객체 빌려쓰기
+		int result = service.deleteClubMember(cb);
+		return "redirect:/popularClubList.do?memberNo="+cb.getMemberNo();
+	}
+	// 동호회 회원 강퇴 시키기
+	@RequestMapping(value = "/blockMember.do")
+	public String blockMember(int[] memberNo, int clubNo){
+		System.out.println(memberNo);
+		int result = service.blockClubMember(memberNo, clubNo);
+		return "redirect:/clubDetail.do?memberNo="+clubNo;
+	}
+	// 클럽 detail에서 보여줄 내 동호회 버튼
+	@ResponseBody
+	@RequestMapping(value="/getMyClubList.do", produces = "application/json;charset=utf-8")
+	public String myClubList(Member m) {
+		ArrayList<Club> myList = service.searchMyClub(m);
+		return new Gson().toJson(myList);
+	}
+	// 클럽을 없애는 delete
+	@RequestMapping(value="/deleteClub.do")
+	public String deleteClub(Club c) {
+		int result = service.deleteClub(c);
+		return "redirect:/popularClubList.do?memberNo="+c.getClubLeader();
 	}
 }

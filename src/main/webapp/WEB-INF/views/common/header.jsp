@@ -31,10 +31,17 @@
     	<link href="/resources/TGbtstr/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
         <link href="/resources/TGbtstr/css/styleTG.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+          <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- 로그인 모달 css
         <link href="/resources/css/login/login.css" rel="stylesheet">
         -->
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
+ 		<link rel="stylesheet" href="/resources/css/datepicker.css"><!--datepickercss--> 
+ 		
+ 		<script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
+		<!-- 카카오 로그인 -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        
          <style type="text/css">
          @charset "UTF-8";
 			.detail {
@@ -176,7 +183,6 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
-
                     	<a href="/classList.do?classCategory=AL&reqPage=1" class="dropdown-item">전체</a>
                         <a href="/classList.do?classCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
                         <a href="/classList.do?classCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
@@ -188,7 +194,7 @@
                         <a href="/classList.do?classCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
                         <a href="/classList.do?classCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
                         <a href="/classList.do?classCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
-                        <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>
+                        <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>                      
                     </div>
                 </div>
                 <c:choose>
@@ -263,7 +269,7 @@
           <div>
             <input type="text" placeholder="아이디를 입력해주세요." class="boxSize_2" name="memberId" style="font-size: 1.3em;"><br>
             <input type="password" placeholder="비밀번호를 입력해주세요." class="boxSize_2" name="memberPw" style="font-size: 1.3em;"><br>
-            <input type="submit" value="로그인" class="boxSize_2 color_g loginBtn_1" style="color:#fff; font-size: 1.3rem;">
+            <input type="submit" value="로그인" class="boxSize_2 color_g loginBtn_1 lb" style="color:#fff; font-size: 1.3rem;">
           </div>
         </form>
         <div class="txt_1 flex00 flex_01">
@@ -276,7 +282,23 @@
         </div>
         <h3 class="txt_3">SNS계정으로 간편하게 로그인하세요.</h3>
         <div><span>카카오로그인</span>/<span>네이버로그인</span></div>
-        <div><a href="/joinFrm.do"><input type="button" value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1.3rem;"></a></div>
+        <div><a href="/joinFrm.do"><input value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1.3rem;"></a></div>
+        
+        <!-- 카카오 로그인 -->
+     
+        <ul>
+			<li onclick="kakaoLogin();">
+		      <a href="javascript:void(0)">
+		          <span>카카오 로그인</span>
+		      </a>
+			</li>
+			<li onclick="kakaoLogout();">
+		      <a href="javascript:void(0)">
+		          <span>카카오 로그아웃</span>
+		      </a>
+			</li>
+		</ul>
+		
       </div>
     </div>
   </div>
@@ -298,6 +320,7 @@
     <script src="/resources/js/login.js"></script>
     -->
     <script type="text/javascript">
+    
     $(".loginBtn").click(function(){
       $(".popup_bg00").stop().fadeIn();
       $(".popup00.personal_pop00").stop().fadeIn();
@@ -324,6 +347,93 @@
     		return true;
     	}
     }
+  
+    Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	  function kakaoLogin() {
+
+		    $.ajax({
+		        url: '/login/getKakaoAuthUrl',
+		        type: 'get',
+		        async: false,
+		        dataType: 'text',
+		        success: function (res) {
+		            location.href = res;
+		        }
+		    });
+
+		  }
+
+		  $(document).ready(function() {
+
+		      var kakaoInfo = '${kakaoInfo}';
+
+		      if(kakaoInfo != ""){
+		          var data = JSON.parse(kakaoInfo);
+
+		          alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
+		          alert(
+		          "user : \n" + "email : "
+		          + data['email']  
+		          + "\n nickname : " 
+		          + data['nickname']);
+		      }
+		  });  
+
+	//카카오로그인
+	Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	function kakaoLogin() {
+	    Kakao.Auth.login({
+	      success: function (response) {
+	        Kakao.API.request({
+	          url: '/v2/user/me',
+	          success: function (response) {
+	        	  console.log(response.id)
+	        	  console.log(response.properties.nickname)
+	        	  console.log(response.kakao_account.email)
+	        	  //로그인 성공 후 insert 하기
+	        	  $.ajax({
+	        		  url: "/kakaoLogin.do",
+	        		  type:'post',
+	        		  data:{
+	        			  kakaoYN:'y',
+	        			  nickName:response.properties.nickname,
+	        			  memberId:response.kakao_account.email,
+	        			  memberEmail:response.properties.email
+	        			  },
+	        		 success:function(data){
+	        			 
+	        		 }
+	        	  });
+	        	  
+	          },
+	          fail: function (error) {
+	            console.log(error)
+	          },
+	        })
+	      },
+	      fail: function (error) {
+	        console.log(error)
+	      },
+	    })
+	  }
+	//카카오 로그아웃
+	function kakaoLogout() {
+	    if (Kakao.Auth.getAccessToken()) {
+	      Kakao.API.request({
+	        url: '/v1/user/unlink',
+	        success: function (response) {
+	        	console.log(response)
+	        },
+	        fail: function (error) {
+	          console.log(error)
+	        },
+	      })
+	      Kakao.Auth.setAccessToken(undefined)
+	    }
+	  }  
+
     </script>
 </body>
 </html>

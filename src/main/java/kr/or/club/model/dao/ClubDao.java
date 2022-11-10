@@ -88,4 +88,28 @@ public class ClubDao {
 	public int deleteClubComment(ClubBoardComment cbc) {
 		return sqlSession.delete("club.deleteClubComment", cbc);
 	}
+
+	public int updateClubBoard(ClubBoard cb) {
+		return sqlSession.update("club.updateClubBoard", cb);
+	}
+
+	public int updateClubLeader(Club c) {
+		return sqlSession.update("club.updateClubLeader", c);
+	}
+
+	public int deleteClubMember(ClubBoard cb) {
+		return sqlSession.delete("club.deleteClubMember", cb);
+	}
+
+	public int insertBlockMember(ClubBoard cb) {
+		return sqlSession.insert("club.insertBlockMember", cb);
+	}
+
+	public int deleteClubMember(Club c) {
+		return sqlSession.delete("club.deleteClubLeader", c);
+	}
+
+	public int deleteClub(Club c) {
+		return sqlSession.delete("club.deleteClub", c);
+	}
 }

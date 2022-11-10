@@ -13,19 +13,19 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
     <!-- page Content 시작-->
     <div class="page-content">
-	<p> 내 클럽 정보와 새로 가입하는 클럽번호 받아와서 리스트로 보여줌 새로 가입한 클럽번호와 일치하면 new로 표시</p>
-		<div class="mylist" style="width: 80%; margin: 0 auto"> <!-- 인기 리스트 div  -->
+	
+		<div class="mylist" style="width: 70%; margin: 0 auto"> <!-- 인기 리스트 div  -->
+			<p class="fs-5 fw-bold text-primary mt-5 text-shadow">내 동호회</p>
 	        <c:choose>
 	        	<c:when test="${not empty myList }">
-			        <div class="row mb-5">
+			        <div class="row mb-5" style="flex-wrap: wrap;">
 			        	<c:forEach items="${myList }" var="ml">
 			        	<c:if test="${ml.clubNo eq newClub }">
-						<div class="col-md-6 col-lg-4 mb-3">
-							<div class="card h-100">
-			      				<img src="/resources/upload/club/${ml.clubMainImg }">
-			      				<div class="card-body">
-			      					<p class="fs-5 fw-bold text-primary">new!</p>
-					        		<h5 class="card-title">${ml.clubName }</h5>
+						<div class="col-md-6 col-lg-4 mb-5">
+							<div class="card h-100 shadow" style="border: 5px solid #E8F5E9;">
+			      				<img src="/resources/upload/club/${ml.clubMainImg }" height="60%;" style="min-height: 60%;">
+			      				<div class="card-body" style="min-height: 40%;">
+					        		<h5 class="card-title">${ml.clubName } <span class="fs-5 fw-bold text-danger">new!</span></h5>
 					        		<p class="card-text">${ml.clubIntro }</p>
 					        		<p class="card-text">${ml.clubMemberCnt }/${ml.clubLimit }</p>
 					        		<a href="/clubDetail.do?clubNo=${ml.clubNo }" class="btn btn-outline-primary">입장하기</a>
@@ -36,10 +36,10 @@
 			  			</c:forEach>
 			  			<c:forEach items="${myList }" var="ml">
 			        	<c:if test="${ml.clubNo ne newClub }">
-						<div class="col-md-6 col-lg-4 mb-3">
-							<div class="card h-100">
-			      				<img src="/resources/upload/club/${ml.clubMainImg }">
-			      				<div class="card-body">
+						<div class="col-md-6 col-lg-4 mb-5">
+							<div class="card h-100 shadow">
+			      				<img src="/resources/upload/club/${ml.clubMainImg }" style="min-height: 60%;">
+			      				<div class="card-body" style="min-height: 40%;">
 					        		<h5 class="card-title">${ml.clubName }</h5>
 					        		<p class="card-text">${ml.clubIntro }</p>
 					        		<p class="card-text">${ml.clubMemberCnt }/${ml.clubLimit }</p>
