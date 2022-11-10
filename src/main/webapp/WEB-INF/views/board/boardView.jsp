@@ -26,7 +26,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<h1>자유게시판 게시글 상세보기</h1>
+
 	<table border="1">
 		<tr>
 			<th>글번호</th>
@@ -62,7 +62,9 @@
 			<th>첨부파일</th>
 			<td colspan="3">
 			<c:forEach items="${b.fileList }" var="bf">
-				<p>${bf.filename }</p>
+				<p>
+				<a href="/boardFileDown.do?fileNo=${bf.fileNo }">${bf.filename }</a>
+				</p>
 			</c:forEach>
 		</tr>
 		<tr>

@@ -16,7 +16,7 @@
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	
 	<h1>자유게시판 작성</h1>
-	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
+	<form action="/boardWrite.do" id="boardWriteForm" method="post" enctype="multipart/form-data">
 		<table border="1">
 			<tr>
 				<th>카테고리</th>
@@ -36,8 +36,8 @@
 				<td>
 				${sessionScope.m.nickName }
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-				<input type="hidden" name="boardType" value="F">
-													<%--게시판 바꾸면 이 값도 바꿔줌 --%>
+				<input type="hidden" name="boardType" value="${boardType}">
+													<%--게시판 바꾸면 이 값도 바뀜 / 주소에 boardType넘겨줌 --%>
 				</td>	
 			</tr>
 			<tr>
@@ -45,19 +45,12 @@
 				<td><input type="file" name="boardFile" multiple></td>
 			</tr>
 			<tr>
-				<th>파일목록</th>
-				<td colspan="3">
-			<c:forEach items="${b.fileList }" var="bf">
-				<td>${b.filename }</td>
-			</c:forEach>
-		</tr>
-			<tr>
 				<th>내용</th>
 				<td><textarea name="boardContent" id="boardContent"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="4">
-					<input type="submit" value="작성">
+					<input type="submit" id="boardWriteBtn" value="작성">
 				</td>
 			</tr>
 			
@@ -103,6 +96,25 @@
 			//				-> 설정되어 있는 기본 enctype을 제거
 			
 		}
+		
+		$("#boardWriteBtn").on("click",function(e){
+			const boardTitle = $("[name=boardTitle]")
+			const boardContent = $("#boardContent")
+			const boardWriteForm =$("#boardWriteForm")
+			if(boardTitle.val()==""){
+				alert('제목을 입력해주세요');
+				return false;
+			}
+			if(boardContent.val()==""){
+				alert('내용을 입력해주세요');
+				return false;
+			}
+		
+			boardWriteForm.submit();
+		
+			});
+		
+			
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	
