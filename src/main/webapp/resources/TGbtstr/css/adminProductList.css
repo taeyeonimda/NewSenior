@@ -1,0 +1,4 @@
+@charset "UTF-8";
+.adminProductTable tr td, .adminProductTable tr th{
+	border: 1px solid black;
+}
