@@ -90,8 +90,7 @@
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
 					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
-					            <td style="text-align:center">${Cart.buyName }</td>
-					            <!-- <td style="text-align:center">${Cart.productNo }</td> -->
+					            <td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto }"></td>
 					            <td style="text-align:center">${Cart.buyName }</td>
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" pattern="#,###"/></td>
