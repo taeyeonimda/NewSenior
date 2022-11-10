@@ -11,12 +11,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/resources/TGbtstr/css/productView.css">
 <link rel="stylesheet" href="/resources/MAINbtstr/css/bootstrap.min.css">
+<script src="https://unpkg.com/mathjs/lib/browser/math.js"></script> <!-- math 사용 위한 라이브러리 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <style>
 ul {
     text-align: center;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #dee2e6;
     border-right: 0;
     list-style-type: none;
 }
@@ -24,7 +25,12 @@ ul {
 ul li {
     text-align: center;
     float: left;
-    
+}
+ul li:hover{
+	z-index: 2;
+    color: #2a722d;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
 }
 
 ul li a {
@@ -34,16 +40,23 @@ ul li a {
     border-right: solid 1px #ccc;
     box-sizing: border-box;
     height: 38px;
-    line-height: 25px;
+    line-height: 22px;
 }
 
 ul li.on {
-    background: #eda712;
+    background: #fff;
 }
 
 ul li.on a {
-    color: #fff;
+    color: #348E38;
 }
+#pagingul{
+	padding: 0;
+}
+.changeColor{
+	background-color: #0F4229;
+	color: white;
+};
 </style>
 </head>
 <body>
@@ -78,9 +91,12 @@ ul li.on a {
                         <span class="material-icons" id="plus">add</span>
                     </div>
                     <div style="width: 300px;">
-                    	<input type="text" class="sumPrice" 
+                    	<input type="hidden" class="sumPrice" 
                     	value="${p.productPrice }" readonly
-                    	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center; background-color:beige;">
+                    	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center;">
+                    	<input type="text" class="showSumPrice" 
+                    	value="${p.productPrice }" readonly
+                    	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center; background-color:#f8f8f8;">
                     	<span style="font-size: 14px; margin: 0;">원</span>
                    	</div>
                 </div>
@@ -241,7 +257,12 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
+		
 
+		function showPrice(){
+			
+		};
+	
 		function deleteProduct(productNo) {
 			if(confirm("상품을 삭제하시겠습니까?")){
 				location.href="/deleteProduct.do?productNo="+productNo;
@@ -388,10 +409,7 @@ ul li.on a {
 					twoDiv.append(three3Div);
 					twoDiv.append(three4Div);
 					
-					
 					oneDiv.append(twoDiv);
-					
-					
 					
 					$(".reviewContentWrap").after(oneDiv);
 					$(".input-score").each(function(index,item){
@@ -407,6 +425,16 @@ ul li.on a {
 				}
 			});
 		});
+			$("#plus").on("click",function(){
+				const price = $(".sumPrice").val();
+				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				$(".showSumPrice").val(pricecomma);
+			});
+			$("#minus").on("click",function(){
+				const price = $(".sumPrice").val();
+				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				$(".showSumPrice").val(pricecomma);
+			});
 			
 			let totalData; //총 데이터
 			let dataPerPage; //한 페이지에 나타낼 글의 수
@@ -415,6 +443,12 @@ ul li.on a {
 			const userId = $("#userId").val();
 			
 			$(document).ready(function(){
+				const price = $(".sumPrice").val();
+				console.log(price);
+				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				console.log("돈 : "+pricecomma);
+				$(".showSumPrice").val(pricecomma);
+				
 				dataPerPage = $("#reviewListBtn").val(); 
 				console.log("dataPerPage : "+dataPerPage);
 				const productNo = $("[name=productNo1]").val();
@@ -460,20 +494,24 @@ ul li.on a {
 				//태그생성
 				let pageHtml = "";
 				if(prev > 0){
-					pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='prev'>이전</a></li>";
+					//pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#Redirect' id='prev'> 이전 </a></li>";
 				}
 				
 				//페이징 번호 처리
 				for(var i = first; i <= last; i++){
 					if(currentPage == i){
-						pageHtml += "<li class='page-item '><a class='page-link active-page' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						//pageHtml += "<li class='page-item '><a class='page-link active-page' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						pageHtml +=  "<li class='on'><a href='#Redirect' id='" + i + "'>" + i + "</a></li>";
 					}else {
-						pageHtml += "<li class='page-item'><a class='page-link' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						//pageHtml += "<li class='page-item'><a class='page-link' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li><a href='#Redirect' id='" + i + "'>" + i + "</a></li>";
 					}
 				}
 				
 				if(last < totalPage){
-					pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='next'> 다음 </a></li>";
+					//pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='next'> 다음 </a></li>";
+					pageHtml += "<li><a href='#Redirect' id='next'> 다음 </a></li>";
 				}
 				
 				$("#pagingul").html(pageHtml);
@@ -514,7 +552,6 @@ ul li.on a {
 				  url : "/productReviewList.do",
 				  success : function(data){
 					  for (var i = (currentPage - 1) * dataPerPage;i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
-					  console.log("아이디 :" + data[i].memberId);
 						  
 						  const oneDiv = $("<div>");
 							oneDiv.addClass("reviewsWrap reviewMenu");
@@ -603,7 +640,7 @@ ul li.on a {
 									span.eq(i).css("color","gold");
 								}
 							});
-					  } //dataList는 임의의 데이터임.. 각 소스에 맞게 변수를 넣어주면 됨...
+					  } 
 					  
 				  }
 			  });
@@ -648,6 +685,8 @@ ul li.on a {
 			$("body").append(form);
 			form.submit();
 		};
+				
+
 		
 		$("#directBuy").on("click",function(){
 			const price = $(".sumPrice").val();
@@ -675,7 +714,11 @@ ul li.on a {
 				}	
 			});
 		});
-		
+		const pageli = $("#pagingul").children(); 
+		$(pageli).on("click",function(){
+			console.log("zzz");
+			$(this).css("background-color","black");
+		});
 		</script>
 </body>
 </html>
