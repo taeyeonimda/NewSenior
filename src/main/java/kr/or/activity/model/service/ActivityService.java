@@ -13,6 +13,7 @@ import kr.or.activity.model.vo.ActivityPageData;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
 import kr.or.activity.model.vo.FileVo;
+import kr.or.cart.model.vo.Cart;
 
 @Service
 public class ActivityService {
@@ -201,5 +202,11 @@ public class ActivityService {
 		ActivityPageData apd = new ActivityPageData(list, pageNavi, reqPage, numPerPage);
 		
 		return apd;
+	}
+
+	//장바구니에넣기
+	@Transactional
+	public int actInsertCart(Cart cart) {
+		return dao.actInsertCart(cart);
 	}
 }

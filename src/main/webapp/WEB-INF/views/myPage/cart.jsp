@@ -77,10 +77,10 @@
                     <thead>
                       <tr style="text-align: center;">
                         <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
-                        <th style=" width: 10%;">상품번호</th>
+						<th style=" width: 10%;">상품번호</th>
                         <th style=" width: 20%;">이미지</th>
                         <th style=" width: 20%;">상품명</th>
-                        <th style=" width: 10%;">금액</th>
+ 						<th style=" width: 10%;">금액</th>
                         <th style=" width: 10%;">수량</th>
                         <th style=" width: 10%;">배송비</th>
                         <th style=" width: 10%;">총 금액</th>
@@ -90,20 +90,55 @@
 	                    <tbody>
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
-					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${Cart.productNo }"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
-					            <td style="text-align:center">${Cart.productNo }</td>
-					            <td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto }"></td>
-					            <td style="text-align:center">${Cart.buyName }</td>
-								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
-								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" pattern="#,###"/></td>
+					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
+					            
+					         	<td style="text-align:center">${Cart.cartNo }</td>
+					         
+					         
+					            <c:choose>
+						           	<c:when test="${Cart.productPhoto != null}">
+						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto}"></td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityPhoto != null}">
+						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/activity/${Cart.activityPhoto}"></td>
+						           	</c:when>		
+					            </c:choose>
+					         	
+					         	<c:choose>
+						           	<c:when test="${Cart.buyName != null}">
+						           		<td style="text-align:center">${Cart.buyName }</td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityName != null}">
+						           		<td style="text-align:center">${Cart.activityName }</td>
+						           	</c:when>		
+					            </c:choose>
+
+					            <c:choose>
+						           	<c:when test="${Cart.buyPrice != 0}">
+						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/>카트댐?</td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityPrice != ''}">
+						           		<td class="buyPrice" style="text-align:center">${Cart.activityPrice }</td>
+						           	</c:when>		
+					            </c:choose>
+					            
+								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" /></td>
 								<td style="text-align:center">무료배송</td>
+
+					         
+					           
+								
 								<td style="text-align:center">
-									<fmt:formatNumber value="${Cart.buyPrice*Cart.buyAmount }" pattern="#,###"/>
+								 	<c:if test="${Cart.buyPrice != 0}">
+								 	<fmt:formatNumber value="${Cart.buyPrice*Cart.buyAmount }" pattern="#,###"/>
+								 	</c:if>
+										<c:if test="${Cart.activityPrice != ''}">
+						           		<fmt:formatNumber value="${Cart.activityPrice*Cart.buyAmount }" pattern="#,###"/>
+						           	</c:if>		
 									<input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }">
 								</td>
 								
-			            	</tr>
-			            	
+			            	</tr>	
 	             		</c:forEach>
 	                    	<tr>
 		                      	<td colspan="4"></td>
@@ -164,9 +199,11 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    	<script>
+    	<script>    
+
 		$("#payBtn").on("click",function(){
 			const price = $(".hiddenPayPrice").val();
+
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			

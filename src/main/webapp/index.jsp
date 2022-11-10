@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+   
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
     
@@ -47,6 +47,7 @@
 
 
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	
 	<a href="/mypage.do" style="font-size:30px;">마이페이지</a>
 
 
@@ -705,9 +706,9 @@
     <script src="/resources/MAINbtstr/lib/parallax/parallax.min.js"></script>
     <script src="/resources/MAINbtstr/lib/isotope/isotope.pkgd.min.js"></script>
     <script src="/resources/MAINbtstr/lib/lightbox/js/lightbox.min.js"></script>
-
     <!-- Template Javascript -->
     <script src="/resources/MAINbtstr/js/main.js"></script>
+    
 </body>
 
 </html>

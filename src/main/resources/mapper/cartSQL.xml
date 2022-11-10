@@ -6,6 +6,11 @@
 select
     cart_no as cartNo,
     product_no as productNo,
+   	activity_no as activityNo,
+   	(select filepath from activity where activity.activity_no = carts.activity_no)as activityPhoto,
+   	(select activity_name from activity where activity.activity_no = carts.activity_no)as activityName,
+    (select activity_price from activity where activity.activity_no = carts.activity_no)as activityPrice,
+   	
     (select product_name from products where products.product_no=carts.product_no) as buyName,
     (select PRODUCT_PRICE from products where products.product_no=carts.product_no)as buyPrice,
     (select PRODUCT_FILEPATH from product_file where product_file.product_no = carts.product_no and rownum=1)as productPhoto,

@@ -186,8 +186,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-right: 15px;">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
+             <!-- 클래스 -->
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">클래스</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/classList.do?classCategory=AL&reqPage=1'">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
                     	<a href="/classList.do?classCategory=AL&reqPage=1" class="dropdown-item">전체</a>
                         <a href="/classList.do?classCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
@@ -203,6 +204,24 @@
                         <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>                      
                     </div>
                 </div>
+                <!-- 액티비티 -->
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/activityList.do?activityCategory=AL&reqPage=1'">액티비티</a>
+                    <div class="dropdown-menu bg-light m-0">
+                    	<a href="/activityList.do?activityCategory=AL&reqPage=1" class="dropdown-item">전체</a>
+                        <a href="/activityList.do?activityCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
+                        <a href="/activityList.do?activityCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
+                        <a href="/activityList.do?activityCategory=CR&reqPage=1" class="dropdown-item">공예</a>
+                        <a href="/activityList.do?activityCategory=DE&reqPage=1" class="dropdown-item">디자인</a>
+                        <a href="/activityList.do?activityCategory=EX&reqPage=1" class="dropdown-item">운동 / 건강</a>
+                        <a href="/activityList.do?activityCategory=FS&reqPage=1" class="dropdown-item">패션</a>
+                        <a href="/activityList.do?activityCategory=ME&reqPage=1" class="dropdown-item">미디어</a>
+                        <a href="/activityList.do?activityCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
+                        <a href="/activityList.do?activityCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
+                        <a href="/activityList.do?activityCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
+                    </div>
+                </div>
+                
                 <c:choose>
                 	<c:when test="${not empty sessionScope.m }">
                 		<a href="/popularClubList.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">동호회</a>
@@ -220,23 +239,7 @@
                         <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
                     </div>
                 </div>
-
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">액티비티</a>
-                    <div class="dropdown-menu bg-light m-0">
-                    	<a href="/activityList.do?activityCategory=AL&reqPage=1" class="dropdown-item">전체</a>
-                        <a href="/activityList.do?activityCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
-                        <a href="/activityList.do?activityCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
-                        <a href="/activityList.do?activityCategory=CR&reqPage=1" class="dropdown-item">공예</a>
-                        <a href="/activityList.do?activityCategory=DE&reqPage=1" class="dropdown-item">디자인</a>
-                        <a href="/activityList.do?activityCategory=EX&reqPage=1" class="dropdown-item">운동 / 건강</a>
-                        <a href="/activityList.do?activityCategory=FS&reqPage=1" class="dropdown-item">패션</a>
-                        <a href="/activityList.do?activityCategory=ME&reqPage=1" class="dropdown-item">미디어</a>
-                        <a href="/activityList.do?activityCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
-                        <a href="/activityList.do?activityCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
-                        <a href="/activityList.do?activityCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
-                    </div>
-                </div>
+            
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공지사항</a>

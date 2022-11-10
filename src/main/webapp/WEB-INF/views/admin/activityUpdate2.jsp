@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-	
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
 	data-theme="theme-default" data-assets-path="../assets/"
@@ -244,86 +242,66 @@
 				<hr>
 				<div>상세이미지</div>
 				<hr>
-			
-			
-					
-		
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="border: 1px dotted #6c757d; margin: 5px">
-  <div class="carousel-inner">
-  <c:forEach items="${act.fileList }" var="details"  >
-    <div class="carousel-item ">
-    	<p style="text-align:center; margin-top:10px;">
-    	<input style="color:red; font-weight:bold; "class="btn btn-warning" value="삭제하기" onclick="deleteDetImages(${details.fileNo});" readonly>
-    	<img onclick="deleteDetImages(${details.fileNo});" 	
-    	src="/resources/upload/common/xBotton2.png"	
-    	style="cursor: pointer;" /></p>		
-      <img src="/resources/upload/activity/${details.filepath }" class="d-block w-100" alt="...">
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-   </c:forEach>
-    <script>
-    	let carouselItem = $(".carousel-item");
-    	carouselItem.eq(0).addClass("active");
-    </script>
-  </div>
-  
-</div>
-		
+				<div class="imageDiv">
+					<c:forEach items="${act.fileList }" var="details">
+						<div
+							style="display: inline-block; border: 1px dotted #6c757d; margin: 5px">
+							<p
+								style="position: absolute; width: 400px; font-size: 20px; font-weight: 900; text-align: right; padding: 3px 3px 0 0">
+								<img onclick="deleteDetImages(${details.fileNo});"
+									src="/resources/upload/common/xBotton3.png"
+									style="cursor: pointer; opacity: 0.7" />
+							</p>
+							<img style="width: 400px; height: 400px;"
+								src="/resources/upload/activity/${details.filepath }" />
+						</div>
+					</c:forEach>
 
-				
+				</div>
+
+
 
 			</div>
+
 		</div>
 	</div>
 
 	<script>
-	
-	function deleteDetImages(number){
-		location.href="/delActdFiles.do?fileNo="+number+"&activityNo="+${act.activityNo};
-	}
-	function f_datepicker(obj) {
-		 $( obj ).datepicker().datepicker("show");
+		function deleteDetImages(number){
+			location.href="/delActdFiles.do?fileNo="+number+"&activityNo="+${act.activityNo};
 		}
-		
-		
-	//인원수 옵션값넣기
-	const limitSelect = $("select[name=activityLimit]");
-		for(let i=1;i<=30;i++){
-			limitSelect.append(
-					$('<option>').prop({
-						innerHTML: i+'명',
-						value: i
-					})
-					)
-		}
-		
-		$.datepicker.setDefaults({
-			dateFormat: 'yy-mm-dd',
-			prevText: '이전 달',
-			nextText: '다음 달',
-			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-			monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-			dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-			dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-			minDate: '-100y',
-			showMonthAfterYear: true,
-			changeYear: true,
-			yearSuffix: '년'
-		});
-			
-		
-			
+		function f_datepicker(obj) {
+			 $( obj ).datepicker().datepicker("show");
+			}
 	
-		
-</script>
+	
+		//인원수 옵션값넣기
+		const limitSelect = $("select[name=activityLimit]");
+			for(let i=1;i<=30;i++){
+				limitSelect.append(
+						$('<option>').prop({
+							innerHTML: i+'명',
+							value: i
+						})
+						)
+			}
+			
+			$.datepicker.setDefaults({
+				dateFormat: 'yy-mm-dd',
+				prevText: '이전 달',
+				nextText: '다음 달',
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				minDate: '-100y',
+				showMonthAfterYear: true,
+				changeYear: true,
+				yearSuffix: '년'
+			});
+				
+	</script>
 
 	<!-- / Content -->
 	<!-- Footer Start -->

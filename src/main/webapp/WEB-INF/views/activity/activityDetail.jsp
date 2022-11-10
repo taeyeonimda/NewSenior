@@ -28,12 +28,12 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-primary rounded p-sm-3 wow fadeIn" style="width:360px; height:400px; opacity: 0.9">
+        <div class="sidenav bg-primary rounded p-sm-3 wow fadeIn" style="width:360px; height:400px; opacity: 0.9; text-align:left;">
             <div class="side-box rounded">
-                <h6 class="side-title-box display-5 text-center text-light">
+                <h6 class="side-title-box display-5 text-light">
                  	${act.activityName}
                 </h6>
-                <div class="side-teacher-box" style="text-align: center; color:white; margin-bottom:70px;"> 
+                <div class="side-teacher-box" style="text-align:left; color:white; margin-bottom:70px;"> 
                     <span>담당자 : ${act.activityManagerName}</span>
                 </div>
           		
@@ -47,18 +47,43 @@
 	                        <option value="5">5인</option>
 	                        <option value="6">6인</option>
 	                    </select>
-	                    <span id="amountPrice" style="width:150px; color: white;">${act.activityPrice }</span>
+	                    <span id="amountPrice" style="width:150px; color: white;">${act.activityPrice }원</span>
 	                   
                     </div>
                 </div>
                 <div>
                 <span style="display: flex; justify-content: center;">
                 	<div style="color:white; line-height:58px"><span>총합 : </span><span id="realAmount"></span><span> 원</span></div>
-                    <button class="btn btn-primary py-3 px-5" style="background-color:#9BA17B; margin-left:20px">신청하기</button>
+                    	<button id="submitBtn" type="button" class="btn btn-primary py-3 px-5" style="background-color:#9BA17B; margin-left:20px">신청하기</button>
                     </span>
                 </div>
             </div>
         </div>
+        <script>
+        $("#submitBtn").on("click",function(){
+        	console.log('${sessionScope.m.memberNo}');
+        	console.log($("#amountSelect").val());//amout값
+        	console.log('${act.activityNo}');
+        	$.ajax({
+        		url:"/actInsertCart.do",
+        		data:{
+        			memberNo: ${sessionScope.m.memberNo},
+        			activityNo : ${act.activityNo},
+        			buyAmount : $("#amountSelect").val()
+        		},
+        		success:function(data){
+        			console.log("success"+data);
+        		},
+        		fail:function(data){
+        			console.log("fail:function"+data);
+        		},
+        		error:function(data){
+        			console.log("error:function"+data);
+        		}
+        	})
+        })
+        	
+        </script>
         <!-- sideBar End-->
         <!-- class main -->
         <div class="container-xxl py-5 mt-5">
