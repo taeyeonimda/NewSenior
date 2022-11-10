@@ -84,5 +84,40 @@ public class ClubService {
 	public int deleteClubComment(ClubBoardComment cbc) {
 		return dao.deleteClubComment(cbc);
 	}
+	@Transactional
+	public int updateClubBoard(ClubBoard cb) {
+		return dao.updateClubBoard(cb);
+	}
+	@Transactional
+	public int updateClubLeader(Club c) {
+		return dao.updateClubLeader(c);
+	}
+	@Transactional
+	public int deleteClubMember(ClubBoard cb) {
+		return dao.deleteClubMember(cb);
+	}
+	@Transactional
+	public int blockClubMember(int[] memberNoArr, int clubNo) {
+		int result = 0;
+		// 먼저 블락 테이블에 insert
+		for(int i=0; i<memberNoArr.length; i++) {
+			ClubBoard cb = new ClubBoard();
+			cb.setClubNo(clubNo);
+			cb.setMemberNo(memberNoArr[i]);
+			result = dao.insertBlockMember(cb);
+			// 블락 끝났으면 클럽에서 추방
+			if (result>0) {
+				result = dao.deleteClubMember(cb);
+			}
+		}
+		return result;
+	}
+	public int deleteClub(Club c) {
+		int result = dao.deleteClubMember(c);
+		if(result>0) {
+			result = dao.deleteClub(c);
+		}
+		return result;
+	}
 
 }

@@ -26,11 +26,13 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<h1>자유게시판 게시글 상세보기</h1>
+
 	<table border="1">
 		<tr>
 			<th>글번호</th>
 			<td>${b.boardNo }</td>
+		</tr>
+		<tr>	
 			<th>카테고리</th>
 			<c:if test ="${b.boardCategory eq 'info'}">
 				<td>정보</td>
@@ -42,6 +44,8 @@
 		<tr>
 			<th>닉네임</th>
 			<td>${b.nickName }</td>
+		</tr>
+		<tr>
 			<th>작성일</th>
 			<td>${b.boardDate }</td>
 		</tr>
@@ -58,10 +62,13 @@
 			<th>첨부파일</th>
 			<td colspan="3">
 			<c:forEach items="${b.fileList }" var="bf">
-				<p>${bf.filename }</p>
+				<p>
+				<a href="/boardFileDown.do?fileNo=${bf.fileNo }">${bf.filename }</a>
+				</p>
 			</c:forEach>
 		</tr>
 		<tr>
+			<th>내용</th>
 			<td colspan="6">
 				<div>${b.boardContent }</div>
 			</td>
@@ -72,7 +79,6 @@
 					<button><a class="btn bc44" href="/boardUpdateFrm.do?boardNo=${b.boardNo}">수정</a></button>
 					<!-- <button><a class="btn bc44" id="delBtn" href="/boardDelete.do?boardNo=${b.boardNo}">삭제</a></button> -->
 					<button class="btn bc44" onclick="boardDelete(${b.boardNo});">삭제</button>
-					
 				</th>
 			</tr>
 			</c:if>

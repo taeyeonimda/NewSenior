@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import common.ProductFileRename;
+import kr.or.cart.model.vo.Cart;
 import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
 import kr.or.product.model.vo.ProductFileVO;
@@ -127,6 +128,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productUpdate.do")
 	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList,int[] fileNoList) {
+		System.out.println("controller : "+productFile.length);
 		ArrayList<ProductFileVO> flist = new ArrayList<ProductFileVO>();
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
 			for(MultipartFile file : productFile) {
@@ -143,7 +145,6 @@ public class ProductController {
 					ProductFileVO pfv = new ProductFileVO();
 					pfv.setFileName(filename);
 					pfv.setFilePath(filepath);
-					flist.add(pfv);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -193,5 +194,12 @@ public class ProductController {
 	public String reviewUpdate(ProductReview pr) {
 		int result = service.reviewUpdate(pr);
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
+	}
+	
+	@RequestMapping(value="/insertCart.do")
+	public String insertCart(Cart c) {
+		int result = service.insertCart(c);
+		System.out.println(result);
+		return "redirect:/cart.do?memberNo="+c.getMemberNo();
 	}
 }

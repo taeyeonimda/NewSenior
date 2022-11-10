@@ -15,12 +15,9 @@
 			board_category as boardCategory,
             nickname as nickName
 		from board join members using(member_no)order by board_no desc)b)
-        where rn between #{start} and #{end} 
-        <choose>
-			<when test="boardType='F'">
-				and boardType='F'
-			</when>
-		</choose>
+        where (boardType=#{boardType}) and rn between #{start} and #{end} 
+        <!-- where절 우선순위때문에 이렇게 만듦 -->
+				
 	</select>   
 	
 	<!-- 검색기능 자유게시판 : boardType='F' -->
@@ -67,10 +64,21 @@
 	        <if test="searchTag.equals('boardTitle') and categoryTag.equals('etc')">
 	         where boardTitle like '%'||#{searchInput}||'%' and boardCategory='etc')b)
 	         </if>
-	     
-	      <!-- input null & 카테고리 전체 // 공통조건 -->
-	      	
+	         
+	         <!-- input 제목 & 카테고리 전체  -->
+	           <if test="searchTag.equals('boardTitle') and categoryTag.equals('all')">
+	           where boardTitle like '%'||#{searchInput}||'%')b)
+	           </if>
+	           
+	           <!-- input 작성자 & 카테고리 전체  -->
+	           <if test="searchTag.equals('nickName') and categoryTag.equals('all')">
+	           where nickName like '%'||#{searchInput}||'%')b)
+	           </if>
+
 	      	where prn between #{start} and #{end} and boardType='F'
+	      	<!--where (boardType=#{boardType}) and rn between #{start} and #{end}   -->
+	      	
+	      	 
 
 	</select>
 	
@@ -83,10 +91,78 @@
 		</choose>
 	</select>    
 	
-		<select id="totalCount2" parameterType="String" resultType="int">
-		select count(*) from board where board_type=#{_parameter}
+	<select id="totalCount2" parameterType="String" resultType="int">
+		select count(*) from board where board_type=#{boardType}
 		
 	</select>  
+	
+	<select id="totalCount3" parameterType="map" resultType="int">
+		select count(*) from board where board_type=#{boardType}
+		
+	</select>
+	
+		<update id="readCount" parameterType="int">
+			update board set board_count = board_count+1 where board_no=#{_parameter}
+		</update>
+	
+	
+	<!-- boardtypeF -->
+	<select id="totalCountF2" resultType="int">
+		select count(*) as searchcnt from 
+		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
+        (select b.*from
+            (select
+                board_no as boardNo,
+                member_no as memberNo,
+                board_title as boardTitle,
+                board_content as boardContent,
+                board_count as boardCount,
+                to_char(board_date,('YYYY-MM-DD')) as boardDate,
+                board_type as boardType,
+                board_category as boardCategory,
+                nickname as nickName
+            from board join members using(member_no)order by board_no desc)b
+            
+            <!-- input null & and 카테고리 : 정보 -->
+	  		<if test="searchTag.equals('') and categoryTag.equals('info')">
+	        where boardCategory='info')b)
+	        </if> 
+	        
+	        <!-- input null & and 카테고리 : 잡담 -->
+	        <if test="searchTag.equals('') and categoryTag.equals('etc')">
+	        where boardCategory='etc')b)
+	        </if>
+	        
+	        <!-- input 작성자 and 카테고리 : 정보 -->
+	        <if test="searchTag.equals('nickName') and categoryTag.equals('info')">
+	        where nickName like '%'||#{searchInput}||'%' and boardCategory='info')b)
+	        </if>
+	        <!-- input 작성자 and 카테고리 : 잠답 -->
+	        <if test="searchTag.equals('nickName') and categoryTag.equals('etc')">
+	        where nickName like '%'||#{searchInput}||'%' and boardCategory='etc')b)
+	        </if>
+	        
+	        <!-- input 제목 and 카테고리 : 정보 -->
+	        <if test="searchTag.equals('boardTitle') and categoryTag.equals('info')">
+	        where boardTitle like '%'||#{searchInput}||'%' and boardCategory='info')b)
+	        </if>
+	        <!-- input 제목 and 카테고리 : 잠답 -->
+	        <if test="searchTag.equals('boardTitle') and categoryTag.equals('etc')">
+	         where boardTitle like '%'||#{searchInput}||'%' and boardCategory='etc')b)
+	         </if>
+	         
+	         <!-- input 제목 & 카테고리 전체  -->
+	           <if test="searchTag.equals('boardTitle') and categoryTag.equals('all')">
+	           where boardTitle like '%'||#{searchInput}||'%')b)
+	           </if>
+	           
+	           <!-- input 작성자 & 카테고리 전체  -->
+	           <if test="searchTag.equals('nickName') and categoryTag.equals('all')">
+	           where nickName like '%'||#{searchInput}||'%')b)
+	           </if>
+
+	      	where boardType='F'
+	</select>
 	
 	<select id="selectOneBoard" parameterType="_int" resultType="b">
 		select
@@ -114,6 +190,14 @@
 	</select>
 	
 	<update id="updateBoard" parameterType="b">
+		update board 
+			set
+			board_title = #{boardTitle},
+			board_content = #{boardContent},
+			board_category= #{boardCategory}
+		where board_no = #{boardNo}
+	</update>
+	<update id="updateBoard2" parameterType="b">
 		update board 
 			set
 			board_title = #{boardTitle},

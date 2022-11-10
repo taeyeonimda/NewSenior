@@ -77,10 +77,10 @@
                     <thead>
                       <tr style="text-align: center;">
                         <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
-                        <th style=" width: 10%;">상품번호</th>
-                        <th style=" width: 30%;">상품명</th>
-                        <th style=" width: 15%;">금액</th>
-                        <th style=" width: 15%;">수량</th>
+                        <th style=" width: 25%;">이미지</th>
+                        <th style=" width: 25%;">상품명</th>
+                        <th style=" width: 10%;">금액</th>
+                        <th style=" width: 10%;">수량</th>
                         <th style=" width: 10%;">배송비</th>
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
@@ -90,7 +90,7 @@
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
 					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
-					            <td style="text-align:center">${Cart.productNo }</td>
+					            <td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto }"></td>
 					            <td style="text-align:center">${Cart.buyName }</td>
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" pattern="#,###"/></td>

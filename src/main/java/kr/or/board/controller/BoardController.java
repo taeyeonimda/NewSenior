@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class BoardController {
 	private FileRename fileRename;
 
 	@RequestMapping(value="/boardList.do")
-	public String boardList(int reqPage,Model model,String boardType) {
+	public String boardList(int reqPage,Model model,String boardType,HttpSession session) {
 		HashMap<String, Object> pageMap = service.selectBoardList(reqPage,boardType);
 		System.out.println(pageMap);
 		model.addAttribute("list",(ArrayList<Board>)pageMap.get("list"));
@@ -41,17 +42,36 @@ public class BoardController {
 		model.addAttribute("reqPage",(int)pageMap.get("reqPage"));
 		model.addAttribute("numPerPage",(int)pageMap.get("numPerPage"));
 		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
+		//model.addAttribute("boardType",(int)pageMap.get("boardType"));
+		model.addAttribute("boardType",boardType);
+		//session.setAttribute("boardType",boardType);	
+		System.out.println(boardType);
 		return "board/boardList";
 	}
 	
 	@RequestMapping(value="/boardView.do")
-	public String boardView(int boardNo,Model model) {
+	public String boardView(int boardNo,Model model,String boardType) {
 		HashMap<String, Object> pageViewMap = service.selectOneBoard(boardNo);
 		model.addAttribute("b",(Board)pageViewMap.get("b"));
 		//댓글추가
 		model.addAttribute("commentList",(ArrayList<BoardComment>)pageViewMap.get("commentList"));
 		//대댓글 추가
 		model.addAttribute("reCommentList",(ArrayList<BoardComment>)pageViewMap.get("reCommentList"));
+		
+		/*
+		 //Q&A boardView 따로 만들기 -- 이런식 
+		 //Q&A와 notice는 관리자만 답변 달기 가능
+		if(boardType=="Q") {
+			return "board/boardViewQ";
+		}elseif(boardType=="N") {
+			return "board/boardViewN";
+		}else{
+			return "board/boardView";
+		}
+		 */ 
+		
+		/* 아니면 boardList처럼 sql에서 분류??*/
+		/*아니면 boardView jsp에서 c:if로 조건걸어주기*/
 		return "board/boardView";
 	}
 	
@@ -61,7 +81,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardWrite.do")
-	public String boardWrite(Board b,MultipartFile[] boardFile,HttpServletRequest request) {
+	public String boardWrite(Board b,MultipartFile[] boardFile,HttpServletRequest request,String boardType) {
 																//ㄴ파일업로드 경로 구하기 위해서
 														//ㄴboardWriteFrm.jsp에 있는 이름 그대로
 														//<input type="file" name="boardFile" multiple>
@@ -103,7 +123,7 @@ public class BoardController {
 		b.setFileList(filelist);
 		int result = service.insertBoard(b);
 
-		return "redirect:/boardList.do?reqPage=1";
+		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
 		//return "redirect:/boardList.do?reqPage=1&boardType=F";
 	}
 	
@@ -112,6 +132,7 @@ public class BoardController {
 	public String boardUpdateFrm(int boardNo,Model model){
 		HashMap<String, Object> Map = service.selectOneBoard(boardNo);
 		model.addAttribute("b",(Board)Map.get("b"));
+		System.out.println("(Board)Map.get('b'):"+(Board)Map.get("b"));
 		return "board/boardUpdateFrm";
 	}
 	
@@ -121,7 +142,9 @@ public class BoardController {
 								// 배열: 삭제할파일 no, 삭제할 파일 경로
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 		
-		
+		System.out.println("fileNoList:"+fileNoList);
+		System.out.println("filepathList:"+filepathList);
+		System.out.println("boardFile:"+boardFile);
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
 		
 		if(!boardFile[0].isEmpty()) {
@@ -145,6 +168,8 @@ public class BoardController {
 					f.setFilepath(filepath);
 					fileList.add(f);
 					
+					System.out.println("f:"+f);
+					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -166,12 +191,15 @@ public class BoardController {
 			}
 		}
 		
+		
 		return "redirect:/boardView.do?boardNo="+b.getBoardNo();
+		//return "redirect:/boardViewQ.do?boardNo="+b.getBoardNo();
+		//return "redirect:/boardViewN.do?boardNo="+b.getBoardNo();
 	}
 	
 	//게시물 삭제
 	@RequestMapping(value="/boardDelete.do")
-	public String boardDelete(int boardNo, HttpServletRequest request) {
+	public String boardDelete(int boardNo, HttpServletRequest request,String boardType) {
 		//borad테이블 삭제
 		ArrayList<FileVO> list = service.boardDelete(boardNo);
 		
@@ -183,7 +211,7 @@ public class BoardController {
 				delFile.delete();
 			}
 		}
-		return "redirect:/boardList.do?reqPage=1";
+		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
 	}
 	
 	//댓글입력
@@ -194,6 +222,7 @@ public class BoardController {
 //		return "board/boardView.do?boardNo="+bc.getBoardRef();
 	
 		return "redirect:/boardView.do?boardNo="+bc.getBoardRef();
+
 	
 	// 댓글 수정
 	}
@@ -201,6 +230,7 @@ public class BoardController {
 	public String boardCommUpdate(BoardComment bc,int boardNo) {
 		int result = service.updateBoardComment(bc);
 		return "redirect:/boardView.do?boardNo="+boardNo;
+		
 	}
 	
 	//댓글삭제
@@ -211,7 +241,7 @@ public class BoardController {
 	}
 	
 	
-	// 에이터 사용 이미지 업로드
+	// 데이터 사용 이미지 업로드
 	@RequestMapping(value="/uploadImages.do")
 	public void uploadImage(Board b,MultipartFile[] file,HttpServletRequest request,HttpServletResponse response) throws IOException {
 																//ㄴ파일업로드 경로 구하기 위해서
@@ -255,7 +285,7 @@ public class BoardController {
 	
 	// 카테고리별 검색기능 -- 게시판 별로 따로 제작???
 	@RequestMapping(value="/searchBoard.do")
-	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model) {
+	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model,HttpSession session) {
 		
 		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag,searchInput);
 		
@@ -268,7 +298,10 @@ public class BoardController {
 		model.addAttribute("searchTag",(String)categoryMap.get("searchTag"));
 		model.addAttribute("searchInput",(String)categoryMap.get("searchInput"));
 		
-		
+		session.setAttribute("categoryTag",(String)categoryMap.get("categoryTag"));
+		session.setAttribute("searchTag",(String)categoryMap.get("searchTag"));
+		session.setAttribute("searchInput",(String)categoryMap.get("searchInput"));	
+		System.out.println("session :"+session);
 		return "board/boardList";
 	}
 	

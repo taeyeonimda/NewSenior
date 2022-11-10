@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,25 +19,26 @@
             <div class="side-box rounded mt-2">
                 <p class="fs-5 fw-bold text-primary mt-5">내 동호회</p>
                 <div class="side-info-box text-center">
-                    <div class="side-info-box text-center">
-                        <div><span>동아리이름</span><span>(이동)</span></div>
-                        <div><span>동아리이름</span><span>(이동)</span></div>
-                        <div><span>동아리이름</span><span>(이동)</span></div>
+                    <div class="side-info-box text-center" id="myClubList">
+						<!-- ajax로 가져오는 정보 -->
                     </div>
                 </div>
-                <div>
-                    <div class="btn-group mt-2" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-primary">Left</button>
-                        <button type="button" class="btn btn-outline-primary"> </button>
-                        <button type="button" class="btn btn-outline-primary">Right</button>
-                    </div>
-                </div>
+                <div class="pagination">
+					<!-- 페이징 구역 -->
+				</div>
             </div>
             <div class="side-box rounded mt-5">
                 <p class="fs-5 fw-bold text-primary">${c.clubName } </p>
                 <div class="side-info-box text-center">
                 	<c:forEach items="${c.memberList }" var="cm">
-                		<div><span>${cm.nickName }</span><span>(${cm.memberId })</span></div>
+                		<c:if test="${cm.memberNo eq c.clubLeader }">
+                			<div><span>${cm.nickName }</span><span>(${cm.memberId })</span><span class="fw-bold text-dark"> - 동호회장</span></div>
+                		</c:if>
+                	</c:forEach>
+                	<c:forEach items="${c.memberList }" var="cm">
+                		<c:if test="${cm.memberNo ne c.clubLeader }">
+                			<div><span>${cm.nickName }</span><span>(${cm.memberId })</span></div>
+                		</c:if>
                 	</c:forEach>
                 </div>
                 <div>
@@ -65,13 +67,46 @@
                     <p>${c.clubIntro } </p>
                 </div>
                 <div>
-                    <button class="btn btn-primary py-2 px-4 mt-2" >동호회 탈퇴하기</button>
+                	<c:choose>
+                		<c:when test="${c.clubLeader eq sessionScope.m.memberNo }">
+                			<button class="btn btn-primary py-2 px-4 mt-2" id="clubMgrBtn" onclick="clubMgrModal();">동호회 관리</button>
+                		</c:when>
+                		<c:otherwise>
+                			<button class="btn btn-primary py-2 px-4 mt-2" onclick="quitClub(${c.clubNo}, ${sessionScope.m.memberNo });">동호회 탈퇴하기</button>
+                		</c:otherwise>
+                	</c:choose>
                 </div>
             </div>
         </div>
 
         <!-- 동호회 board -->
         <div class="center-div">
+        	<!-- 클럽 공지사항 -->
+        	<div class="container-xxl py-3 shadow" style="background-image: url(/resources/upload/club/${c.clubMainImg });">
+                <div class="container class-container">
+                    <div class="row pt-2">
+                        <div class="wow fadeInUp" data-wow-delay="0.1s">
+                        	<div>
+                        		<div class="flex-space-between">
+                        			<p class="fs-5 fw-bold text-primary">공쥐</p>
+		                            <div class="text-right">
+		                            <c:if test="${c.clubLeader eq sessionScope.m.memberNo }">
+		                            	<a href="#Redirect" style="margin-right: 14px;" onclick="updateBoard(this); return false;">수정</a>
+										<a href="#Redirect" onclick="deleteBoard(${cb.clubBoardNo}); return false;">삭제</a>
+									</c:if>
+		                            </div>
+                        		</div>
+	                            <pre style="font-family: sans-serif" class="bg-light">우리 회원들은 항상 뜨개구리를 사랑해야 하고
+뜨개구리에게 최선을 다해야 합니다
+뜨개굴뜨개굴
+다른 사람의 뜨개굴을 흉보면 쫓겨납니다</pre>
+                        	</div>
+                        	
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- 글쓰기 버튼 구역 -->
             <div class="container-xxl py-5">
                 <div class="container class-container">
@@ -104,26 +139,50 @@
 			                    <div class="row align-items-end club-board-div">
 			                        <div class="ml-20">
 				                        <div class="flex-space-between" style="width: 90%;">
-				                        	<div class="profile-box" style="background: #BDBDBD;">
-												<img class="profile" src="/resources/upload/club/person_1.jpg">
-												<p class="text-primary">${cb.clubBoardWriter }</p>
-											</div>
+				                        	<div class="flex-space-between" style="width:22%;">
+				                        		<div class="profile-box" style="background: #BDBDBD;">
+													<img class="profile" src="/resources/upload/club/person_1.jpg">
+												</div>
+												<div class="mb-4">
+													<p class="text-primary fs-5" style="margin-bottom: 0;">${cb.clubBoardWriter }</p>
+													<pre>${cb.clubBoardDate }</pre>
+												</div>
+				                        	</div>
 											<div>
 											<c:if test="${sessionScope.m.memberNo eq cb.clubBoardWriter }">
-												<a href="#" style="margin-right: 14px;">수정</a>
-												<a href="#" onclick="deleteBoard(${cb.clubBoardNo})">삭제</a>
+												<a href="#Redirect" style="margin-right: 14px;" onclick="updateBoard(this); return false;">수정</a>
+												<a href="#Redirect" onclick="deleteBoard(${cb.clubBoardNo}); return false;">삭제</a>
 											</c:if>
 											</div>
 				                        </div>
-			                            <p class="mb-4">${cb.clubBoardDate }</p>
-			                            <c:if test="${not empty cb.clubBoardFilepath }">
+				                        <div class="boardBox">
+				                            <c:if test="${not empty cb.clubBoardFilepath }">
 			                        		<div class="clubBoardTitle">
 			                        			<div class="clubBoardImgBox">
 			                        				<img class="clubBoardImg" src="/resources/upload/club/${cb.clubBoardFilepath } ">
 			                        			</div>
 			                        		</div>
-			                        	</c:if>
-			                            <p class="mb-4">${cb.clubBoardContent }</p>
+				                        	</c:if>
+				                            <p class="mb-4">${cb.clubBoardContent }</p>
+			                            </div>
+			                            <div style="display: none;" class="updateBox" class="mt-5">
+				                        	<div class="updateInputBox">
+												<input type="hidden" name="clubNo" class="updateClubNo" value="${c.clubNo }">
+												<input type="hidden" name="clubNo" class="updateClubBoardNo" value="${cb.clubBoardNo }">
+												<input type="hidden" name="status" value="stay" class="status"> <!--기존파일 지웠다 / 아니다 신호 -->
+												<textarea name="clubBoardContent" class="updateContent">${cb.clubBoardContent }</textarea><br>
+												<c:choose>
+													<c:when test="${not empty cb.clubBoardFilepath }">
+														<pre class="delFile">${cb.clubBoardFilepath }</pre><button class="delFile btn btn-secondary">삭제</button>
+														<input type="file" name ="upfile" class="upfile" multiple style="display:none;" accept=".gif, .jpg, .png"><!--삭제하면 파일 선택 show-->
+							                            <input type="hidden" name="oldFilepath" value="${cb.clubBoardFilepath }" class="oldFilepath">
+													</c:when>
+													<c:otherwise>
+														<input type="file" name ="upfile" class="upfile" multiple accept=".gif, .jpg, .png">
+													</c:otherwise>
+												</c:choose>
+											</div>
+			                        	</div>
 			                        </div>
 			                    </div>
 			                    <hr>
@@ -232,24 +291,24 @@
             	</c:when>
             </c:choose>
 
-        </div> <!-- 넓이제한-->
+        </div> <!-- 넓이제한 End -->
     </div><!--page-content End-->
 <div class="modal-wrap">
-    <div class="modal-chat bg-secondary">
+    <div class="modal-chat bg-white">
     	<button onclick="closeModal();">X</button>
-		<div id="member-box" class="bg-secondary mt-5 mb-5">
+		<div id="member-box" class="bg-white mt-5 mb-5">
 			<div class="mt-5"></div>
             <input type="hidden" value="${c.clubNo }" id="clubNo">
-            <img src="/resources/MAINbtstr/img/로고4.png" onclick="initChat('${sessionScope.m.memberId}');">
-            <p class="text-light mt-3">클릭하면 채팅방으로 이동합니다</p>
+            <img src="/resources/MAINbtstr/img/로고2.png" onclick="initChat('${sessionScope.m.memberId}');">
+            <p class="text-secondary mt-3">클릭하면 채팅방으로 이동합니다</p>
         </div>
 		<div class="chatting">
-			<div class="messageArea bg-secondary"></div>
+			<div class="messageArea bg-white"></div>
 			<div class="sendBox">
 				<input type="text" id="sendMsg">
-				<button id="sendBtn" class="btn btn-outline-light" onclick="sendMsg();">전송</button>
-				<input type ="file" class="input-form text-light" name ="chatFile" id="chatFile" multiple="multiple">
-				<button type="button" class="btn btn-outline-light" onclick="fileSend();" id="sendFileBtn">보내기</button>
+				<button id="sendBtn" class="btn btn-outline-secondary" onclick="sendMsg();">전송</button>
+				<input type ="file" class="input-form text-secondary" name ="chatFile" id="chatFile" multiple="multiple">
+				<button type="button" class="btn btn-outline-secondary" onclick="fileSend();" id="sendFileBtn">보내기</button>
 				<div id="fileMsgBox"></div>
 			</div>
 		</div>
@@ -267,7 +326,7 @@
 				<input type="hidden" name="clubNo" value="${c.clubNo }">
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				<textarea name="clubBoardContent"></textarea><br>
-				<input type="file" multiple name="files"><br>
+				<input type="file" multiple name="files" accept=".gif, .jpg, .png"><br>
 			</div>
 			<div class="writeModalButtonBox">
 				<button class="btn btn-primary py-2 px-4" type="submit">글쓰기</button><button type="button" class="btn btn-primary py-2 px-4" onclick="closeWriteModal();">닫기</button>
@@ -277,18 +336,152 @@
     </div>
 </div>
 
+<div class="clubLeader-modal-wrap">
+    <div class="clubLeader-modal">
+        <div class="clubLeaderModalTop">
+            <h3 class="text-secondary">동호회 관리</h3>
+        </div>
+        <div class="clubLeaderModalContent">
+        <c:choose>
+        	<c:when test="${fn:length(c.memberList) > 1 }">
+        		<p>동호회장을 동호회 멤버에게 양도할 수 있습니다</p>
+        		<form action="/changeClubLeader.do" method="post">
+					<select name="clubLeader" id="leaderNo" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="selectLeader();">
+						<option value="">선택해주세요.</option>
+						<c:forEach items="${c.memberList }" var="cml">
+		               		<c:if test="${cml.memberNo ne sessionScope.m.memberNo }">
+		               			<option value="${cml.memberNo }">${cml.nickName } (${cml.memberId })</option>
+		               		</c:if>
+		                </c:forEach>
+					</select>
+					<input type="hidden" name="clubNo" value="${c.clubNo }">
+					<button class="btn btn-secondary" id="changeLeaderBtn">동호회 양도하기</button>
+				</form>
+        	</c:when>
+        	<c:otherwise>
+        		<p>동호회를 삭제하면 기록이 남지 않습니다</p>
+        		<button onclick="deleteClub(${c.clubNo });" class="btn btn-secondary">동호회 없애기</button>
+        	</c:otherwise>
+        </c:choose>
+        </div>
+        <div class="align-center mt-5" style="width: 50%; margin: 0 auto;">
+	        <table border="1">
+	        	<tr>
+	        		<th>선택</th>
+	        		<th>닉넴</th>
+	        		<th>아이디</th>
+	        	</tr>
+				<c:forEach items="${c.memberList }" var="cm">
+				<c:if test="${cm.memberNo ne sessionScope.m.memberNo }">
+	            <tr>
+	        		<td><input type="checkbox" name="blockMemberNo" value="${cm.memberNo }"></td>
+	        		<td>${cm.nickName }</td>
+	        		<td>${cm.memberId }</td>
+	        	</tr>
+	        	</c:if>
+	            </c:forEach>
+	        </table>
+	        <p>선택한 회원을 추방하시겠습니까?</p>
+			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
+        </div>
+	    <div class="clubLeaderModalBtnBox mt-4">
+			<button class="btn btn-secondary py-2 px-4" onclick="leaderModalClose();">닫기</button>
+		</div>
+    </div>
+</div>
+
+<div id="memberNo" style="display: none;">${sessionScope.m.memberNo }</div>
 
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 	<script>
+
+	// side bar 스크롤
+    function stopSide(){
+        const position  = $(window).scrollTop();
+        let windowHeight = window.innerHeight; // 스크린 창
+        if(position > windowHeight){
+            $(".sidenav-left").addClass("left-absolute");
+            $(".sidenav-right").addClass("right-absolute");
+        }else{
+        	$(".sidenav-left").removeClass("left-absolute");
+        	$(".sidenav-right").removeClass("right-absolute");
+        }
+    }
+    $(window).on("scroll",function(){
+        stopSide();
+        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
+    });
+    $(function(){
+    	stopSide();
+    });
+
+    
+    // 글쓰기 버튼
+    function boardModal() {
+    	$(".write-modal-wrap").css("display", "flex");
+	}
+    function closeWriteModal() {
+    	$(".write-modal-wrap").css("display", "none");
+	}
+    
+    
+	// 리더의 모달
+	function clubMgrModal() {
+		$(".clubLeader-modal-wrap").css("display", "flex");
+	}
+	function leaderModalClose() {
+		$(".clubLeader-modal-wrap").css("display", "none");
+	}
+	$("#changeLeaderBtn").on("click", function() {
+		const leaderNo = $("#leaderNo").val();
+		if(leaderNo==''){
+			arlet("선택된 회원이 없습니다");
+			$("#changeLeaderBtn").attr("type", "button");
+		}
+	})
 	
-	function boardDelete(boardNo){
-		if(confirm("공지사항을 삭제하시겠습니까?")){
-			location.href="/deleteClubBoard.do?clubBoardNo="+noticeNo;
+	// 나는 바보다  select 값 가져오는 방법 (가져올 필요 없는데 가져옴)
+	function selectLeader() {
+		const leaderNo=$("#leaderNo option:selected").val();
+		alert("value="+leaderNo);
+	}
+	function quitClub(clubNo, memberNo) {
+		if(confirm("동호회를 탈퇴하시겠습니까?")){
+			location.href="/quitClub.do?clubNo="+clubNo+"&memberNo="+memberNo;
 		}
 	}
+	function boardDelete(boardNo){
+		if(confirm("게시글을 삭제하시겠습니까?")){
+			location.href="/deleteClubBoard.do?clubBoardNo="+boardNo;
+		}
+	}
+	// 클럽 삭제
+	function deleteClub(clubNo) {
+		confirm("정말삭제하시겟습니까?"+clubNo)
+	}
 	
+	// 클럽 회원 추방
+	function blockMember(clubNo) {
+		var memberNoArr = [];
+		$("input[name=blockMemberNo]:checked").each(function(){
+			memberNoArr.push($(this).val());
+		});
+		console.log(memberNoArr);
+		let str;
+		for(let i=0; i<memberNoArr.length; i++){
+			if(i<1){
+				str = "clubNo="+clubNo+"&memberNo"+"="+memberNoArr[i];
+			}else{
+				str += "&memberNo"+"="+memberNoArr[i];
+			}
+		}
+		alert(str);
+		location.href="/blockMember.do?"+str;
+	}
+	
+	// 댓글
 	$(".recShow").on("click", function(){
 		// 몇번째 recShow인지
 		const idx = $(".recShow").index(this);
@@ -363,39 +556,14 @@
 		}
 	}
 	
-	
-	// side bar 스크롤
-    function stopSide(){
-        const position  = $(window).scrollTop();
-        console.log("p:"+position);
-        let windowHeight = window.innerHeight; // 스크린 창
-        console.log("wH:"+windowHeight);
-        if(position > windowHeight){
-            $(".sidenav-left").addClass("left-absolute");
-            $(".sidenav-right").addClass("right-absolute");
-        }else{
-        	$(".sidenav-left").removeClass("left-absolute");
-        	$(".sidenav-right").removeClass("right-absolute");
-        }
-    }
-    $(window).on("scroll",function(){
-        stopSide();
-        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
-    });
-    $(function(){
-    	stopSide();
-    });
+	// 클럽 삭제
+	function deleteClub(clubNo) {
+		const memberNo = $("#memberNo").text();
+		location.href = "/deleteClub.do?clubNo="+clubNo+"&clubLeader="+memberNo;
+	}
 
-    
-    // 글쓰기 버튼
-    function boardModal() {
-    	$(".write-modal-wrap").css("display", "flex");
-	}
-    function closeWriteModal() {
-    	$(".write-modal-wrap").css("display", "none");
-	}
-    
-    
+	
+	
     // 채팅모달
     function openModal() {
     	$("#member-box").show();
@@ -417,7 +585,7 @@
 	function initChat(param) {
 		memberId = param;
 		// 웹소켓 연결 시도
-		ws = new WebSocket("ws://192.168.10.55/chat.do");
+		ws = new WebSocket("ws://172.30.1.57/chat.do");
 		// 웹소켓 연결 성공 시 실행할 함수 지정
 		ws.onopen = startChat;
 		// 서버에서 데이터 받으면 처리할 함수
@@ -487,22 +655,214 @@
 			$("#fileMsgBox").text("선택된 파일이 없습니다");
 		}
 	}
-
 	function appendChat(msg) {
 		$(".messageArea").append(msg);
 		$(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
 	}
-	
 	function appendId(msg) {
 		$("#member-box").append(msg);
 	}
-	
 	$("#sendMsg").on("keyup", function(key) {
 		if(key.keyCode==13){
 			sendMsg();
 		}
 	})
 
+	
+	
+	// 클럽 게시판 수정
+	function updateBoard(obj) { // 수정 눌렀을 때 버튼 상태 : 수정완료 / 수정취소
+		$(obj).parent().parent().next().hide();
+		$(obj).parent().parent().next().next().show();
+		$(obj).text("수정완료");
+		$(obj).attr("onclick", "updateComplete(this)");
+		$(obj).next().text("수정취소");
+		$(obj).next().attr("onclick", "updateCancle(this)");
+	}
+	
+	function updateComplete(obj) { // 수정완료 눌렀을 때 버튼 상태 : 모두 끝난 뒤, 수정 / 삭제
+		const boardBox = $(obj).parent().parent().next();
+		const updateBox = $(obj).parent().parent().next().next();
+		const formData = new FormData();
+		// 파일 input
+		const upfileInput = updateBox.find(".upfile");
+		const files = upfileInput[0].files;
+		console.log(files);
+		formData.append('upfile', files[0]);
+		formData.append('clubNo', updateBox.find(".updateClubNo").val());
+		formData.append('clubBoardContent', updateBox.find(".updateContent").val());
+		formData.append('clubBoardNo', updateBox.find(".updateClubBoardNo").val());
+		formData.append('oldFilepath', updateBox.find(".oldFilepath").val());
+		formData.append('status', updateBox.find(".status").val());
+		
+		console.log(formData);
+
+		$.ajax({
+			url : "/updateClubBoard.do",
+			data : formData,
+			type : "post",
+			contentType: false,
+            processData: false,
+			enctype : 'multipart/form-data',
+			success : function(cb) {
+				const boardBox = $(obj).parent().parent().next();
+				if(cb.clubBoardFilepath != null){
+					const img = $(obj).parent().parent().next().find('img');
+					boardBox.html("<div class='clubBoardTitle'><div class='clubBoardImgBox'><img class='clubBoardImg' src='/resources/upload/club/"+cb.clubBoardFilepath+" '></div></div><p class='mb-4'>"+cb.clubBoardContent+"</p>");
+				}else{
+					boardBox.html("<p class='mb-4'>"+cb.clubBoardContent+"</p>");
+				}	
+				boardBox.show(); // boardBox보이기
+				boardBox.next().hide(); // updateBox숨기기
+				$(obj).text("수정");
+				$(obj).attr("onclick", "updateBoard(this)");
+				$(obj).next().text("삭제");
+				$(obj).next().attr("onclick", "deleteBoard(this)");
+			}
+		})
+	}
+	
+	function updateCancle(obj) { // 수정취소 눌렀을 때 : 수정 / 삭제
+		$(obj).parent().parent().next().show();
+		$(obj).parent().parent().next().next().hide();
+		$(obj).text("삭제");
+		$(obj).attr("onclick", "deleteBoard(this)");
+		$(obj).prev().text("수정");
+		$(obj).prev().attr("onclick", "updateBoard(this)");
+	}
+	
+	
+	//첨부파일 
+ 	$("button.delFile").on("click",function(){
+ 		$(".delFile").hide();
+ 		$(this).next().show();
+ 		$("[name=status]").val("delete"); <%--status의 값이 delete로 넘어감--%>
+ 	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+ 	var totalData; //총 데이터 수
+    var dataPerPage; //한 페이지에 나타낼 글 수
+    var pageCount = 5; //페이징에 나타낼 페이지 수
+    var currentPage = 1; //현재 페이지
+    var data; //controller에서 가져온 data 전역변수
+    var keyword;
+    
+    $(document).ready(function () {
+    	initMyClubList();
+    });
+    
+    function initMyClubList() {
+   	 	//dataPerPage 선택값 가져오기
+   	 	$("#myClubList div").remove();
+	    dataPerPage = 3;
+ 		const keyword = $("#serchInput").val();
+	    $.ajax({ // ajax로 데이터 가져오기
+	    	method: "post",
+	    	url: "/getMyClubList.do",
+	    	data: {memberNo : $("#memberNo").text() },
+	    	success: function (data) {
+	    	   totalData = data.length;
+	    	   console.log("totalData:"+totalData);
+	    	   displayData(1, dataPerPage, keyword); //글 목록 표시 호출 (테이블 생성)
+	    	   paging(totalData, dataPerPage, pageCount, 1); //페이징 표시 호출
+	    	   $("myClubList");
+	    	}
+    	});
+	}
+
+    function paging(totalData, dataPerPage, pageCount, currentPage) {
+		  var num = Number(totalData)/dataPerPage;
+		  var totalPage = Math.ceil(num);
+	
+		  if(totalPage<Number(pageCount)){
+			  pageCount=totalPage;
+		  }
+		  
+		  var num2 = Number(currentPage)/Number(pageCount);
+		  var pageGroup = Math.ceil(num2);
+		  var last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+		  
+		  if (last > totalPage) {
+		    last = totalPage;
+		  }
+		
+		  let first = last-(pageCount-1); //화면에 보여질 첫번째 페이지 번호
+		  let next = last+1;
+		  let prev = first-1;
+		
+		  let pageHtml = "";
+		
+		  if (prev > 0) {
+    		  pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='prev'>이전</a></li>";
+    	  }
+
+    	 //페이징 번호 표시 
+    	  for (var i = first; i <= last; i++) {
+    	    if (currentPage == i) {
+    	      pageHtml +=
+    	        "<li class='page-item '><a class='page-link active-page' href='#' id='" + i + "'>" + i + "</a></li>";
+    	    } else {
+    	      pageHtml += "<li class='page-item'><a class='page-link' href='#' id='" + i + "'>" + i + "</a></li>";
+    	    }
+    	  }
+    	  
+    	  if (last < totalPage) {
+    	    pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='next'> 다음 </a></li>";
+    	  }
+		
+		  $(".pagination").html(pageHtml);
+		
+		  //페이징 번호 클릭 이벤트 
+		    $(".pagination span").click(function () {
+		    	console.log("시작");
+		    	$("#myClubList div").remove();
+		        let $id = $(this).attr("id");
+		        selectedPage = $(this).text();
+		
+		        if ($id == "next") selectedPage = next;
+		        if ($id == "prev") selectedPage = prev;
+		
+		        //전역변수에 선택한 페이지 번호를 담는다...
+		       	CurrentPage = selectedPage;
+		        //페이징 표시 재호출
+		        paging(totalData, dataPerPage, pageCount, selectedPage);
+		        //글 목록 표시 재호출
+		        displayData(selectedPage, dataPerPage);
+		    });
+	}
+  	
+	    function displayData(selectedPage, dataPerPage) {
+	      	$.ajax({ // ajax로 데이터 가져오기
+		    	method: "post",
+		    	url: "/getMyClubList.do",
+		    	data: {memberNo : $("#memberNo").text() },
+		    	success: function (list) {
+		    		currentPage = Number(selectedPage);
+			      	dataPerPage = Number(dataPerPage);
+		    		console.log(currentPage);
+		    		console.log(dataPerPage);
+		    		for (let i=(currentPage-1)*dataPerPage; i<(currentPage-1)*dataPerPage+dataPerPage; i++) {
+						const div = $("<div>");
+						div.append("<span onclick='locationClub("+list[i].clubNo+")'>"+list[i].clubName+"</span>");
+						$("#myClubList").append(div);
+					}
+		    	}
+		    });
+	    }
+    
+		function locationClub(clubNo) {
+			var result = confirm("이동하시겠습니까?");
+			if(result){
+				location.href = "/clubDetail.do?clubNo="+clubNo;
+			}
+		}
 	</script>
 </body>
 </html>

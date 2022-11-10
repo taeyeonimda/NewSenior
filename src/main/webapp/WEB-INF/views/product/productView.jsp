@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,8 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/resources/TGbtstr/css/productView.css">
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <style>
 ul {
     text-align: center;
@@ -43,13 +46,14 @@ ul li.on a {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	    <div class="productContent">
-	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</div>
+	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</button>
 	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
 
         <div class="productWrap">
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
             </div>
+            
             <div style="width: 500px;" class="prodContent">
                 <h3>${p.productName }</h3>
                 <h4>${p.wonPrice }<span>원</span></h4>
@@ -63,6 +67,7 @@ ul li.on a {
                 <div class="classMove">
                     <a href="javascript:void(0)">관련클래스 바로가기 >>></a>
                 </div>
+                
                 <div class="productQty">
                     <div style="width: 200px;">
                         <span class="material-icons" id="minus">remove</span>
@@ -76,12 +81,22 @@ ul li.on a {
                     	<span style="font-size: 14px; margin: 0;">원</span>
                    	</div>
                 </div>
-                <input type="hidden"  ${p.productName } ${p.wonPrice } ${p.productPrice } >
-                <div>
-                  <button type="button" onclick="insertCart();">장바구니</button>
-                  <button>바로구매</button>
-                </div>
+	                <div>
+	                
+                <form id="insertCartForm" action="/insertCart.do" autocomplete="off" >
+                		<input type="hidden" value="${p.productNo }" name="productNo">
+	        	        <input type="hidden" value="${p.productName }" name="buyName">
+		                <input type="hidden" value="${p.productPrice }" name="buyPrice">
+		                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
+		                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
+						<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+	                	<button type="submit">장바구니</button>
+	                 	<button type="button" id="directBuy">바로구매</button>
+            	</form>
+	                </div>
+	                
             </div>
+            
             
             <div class="subTitle" style="width: 1200px;">
               <div>상세내용</div>
@@ -235,9 +250,30 @@ ul li.on a {
 				span.eq(i).css("color","gold");
 			}
 		});
-		$("#reviewDeleteBtn").on("click",function(){
-		});
 		
+			function reviewUpdate(obj,reviewNo,productNo){
+				const reviewContent = $(obj).parent().prev().children().val();
+				console.log(reviewContent);
+				if(confirm("리뷰를 수정하시겠습니까?")){
+					$.ajax({
+						url : "/productReviewUpdate.do",
+						method : "post",
+						data : {
+							reviewContent:reviewContent,
+							reviewNo:reviewNo,
+							productNo:productNo
+						},
+						success:function(data){
+							alert("수정완료!");
+							$(obj).parent().prev().children().css("background-color","white").attr("readonly",true);
+							$(".reviewUpdateBtn").attr("onclick","modifyComment(this,"+reviewNo+","+productNo+")");
+							$(".reviewUpdateBtn").text("수정");
+							$(".reviewUpdateBtn").next().text("삭제");
+						}
+					});
+				}
+			}
+			
 			function deleteReview(reviewNo,obj){
 				if(confirm("리뷰를 삭제하시겠습니까?")){
 					$.ajax({
@@ -254,6 +290,7 @@ ul li.on a {
 				}
 			};
 		
+			
 		$("#productReviewInsertBtn").on("click",function(){
 			const memberId = $("[name=productMemberId]").val();
 			const productNo = $("[name=productNo]").val();
@@ -422,20 +459,20 @@ ul li.on a {
 				//태그생성
 				let pageHtml = "";
 				if(prev > 0){
-					pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='prev'>이전</a></li>";
+					pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='prev'>이전</a></li>";
 				}
 				
 				//페이징 번호 처리
 				for(var i = first; i <= last; i++){
 					if(currentPage == i){
-						pageHtml += "<li class='page-item '><a class='page-link active-page' href='#' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li class='page-item '><a class='page-link active-page' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
 					}else {
-						pageHtml += "<li class='page-item'><a class='page-link' href='#' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li class='page-item'><a class='page-link' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
 					}
 				}
 				
 				if(last < totalPage){
-					pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#' id='next'> 다음 </a></li>";
+					pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='next'> 다음 </a></li>";
 				}
 				
 				$("#pagingul").html(pageHtml);
@@ -577,7 +614,7 @@ ul li.on a {
 		function modifyComment(obj,reviewNo,productNo){
 			$(obj).parent().prev().children().attr("readonly",false).css("background-color","#F0FFF0");
 			$(obj).text("수정완료");
-			$(obj).attr("onclick","modifyComplete(this,"+reviewNo+","+productNo+")");
+			$(obj).attr("onclick","reviewUpdate(this,"+reviewNo+","+productNo+")");
 			
 			$(obj).next().text("수정취소");
 			$(obj).next().attr("onclick","modifyCancel(this,"+reviewNo+","+productNo+")");
@@ -603,6 +640,33 @@ ul li.on a {
 			$("body").append(form);
 			form.submit();
 		};
+		
+		$("#directBuy").on("click",function(){
+			const price = $(".sumPrice").val();
+			//console.log(price);
+			const d = new Date();
+			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			
+			IMP.init("imp43256257");
+			IMP.request_pay({
+				merchat_uid : "상품코드_"+date, //거래ID
+				name : "결제 테스트",			 //결제이름
+				amount : price,				//결제금액
+				buyer_email : "eyeyo93@gmail.com", //구매자 이메일
+				buyer_name : "구매자",		//구매자 이름
+				buyer_tel : "010-0000-0000", //구매자 전화번호
+				buyer_addr : "경기도 부천시", //구매자 주소
+				buyer_postcode : "12345"  //구매자 우편번호
+				
+				
+			},function(rsp){
+				if(rsp.success){
+					alert("결제성공");
+				}else {
+					alert("결제실패");
+				}	
+			});
+		});
 		</script>
 </body>
 </html>

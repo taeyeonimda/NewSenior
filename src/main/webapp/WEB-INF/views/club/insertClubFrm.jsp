@@ -37,7 +37,7 @@
 	                    <option value="CO">요리/미식</option>
 	                </select><br>
 				클럽소개 : <input type="text" name="clubIntro"><br>
-				클럽 메인 이미지 : <input type="file" multiple name="files"><br>
+				클럽 메인 이미지 : <input type="file" multiple name="files" accept=".gif, .jpg, .png"><br>
 				<button class="btn btn-primary py-3 px-4" type="submit">Submit Now</button>
 			</form>
 		</div>

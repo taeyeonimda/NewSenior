@@ -7,119 +7,11 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<style type="text/css">
-.detail {
-	display: inline-block;
-	cursor: pointer;
-}
-
-.popup {
-	display: none;
-	width: 90%;
-	height: 80vh;
-	position: fixed;
-	top: 51%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: #ffffff;
-	box-shadow: 10px 10px 10px rgb(0 0 0/ 20%);
-	color: #424242;
-	padding: 6% 5%;
-	font-size: 12px;
-	line-height: 1.5rem;
-	border-radius: 15px;
-	z-index: 99999;
-	overflow-y: scroll;
-	line-height: 1.5rem;
-}
-
-.zwicon-close {
-	color: rgb(255, 255, 255);
-	font-size: 2em;
-	background-color: #b91a1a;
-	padding-right: 10px;
-	padding-left: 10px;
-	border-radius: 70%;
-}
-
-.x_btn {
-	text-align: right;
-	margin: 15px;
-	cursor: pointer;
-}
-
-.zwicon-close:hover {
-	background-color: red;
-}
-
-.cont {
-	text-align: left;
-}
-
-.personal_pop {
-	z-index: 300;
-}
-
-.joinbox {
-	display: flex;
-	justify-content: center;
-	padding: 5% 0;
-}
-
-.sp {
-	display: inline-block;
-	width: 160px;
-	font-size: 1.5em;
-}
-
-.inbtn {
-	width: 480px;
-	height: 60px;
-	margin-bottom: 30px;
-	font-size: 1.2em;
-	border-radius: 5px;
-	border: 1.5px solid rgb(176, 174, 174);
-}
-
-.red {
-	color: #dc3545;
-	font-size: 0.7em;
-	vertical-align: top;
-}
-
-[type=checkbox] {
-	width: 20px;
-	height: 20px;
-}
-
-.fs {
-	font-size: 1.4em;
-}
-
-#memberJoin {
-	width: 480px;
-	height: 60px;
-	color: #E8F5E9;
-	background-color: #0F4229;
-	border: none;
-}
-
-#memberJoin:hover {
-	color: #E8F5E9;
-	background-color: #348E38;
-}
-
-.wra {
-	width: 800px;
-	padding: 10px;
-	margin: 0 auto;
-	background: #FFFFFF;
-	box-shadow: 0 0 45px rgb(0 0 0/ 10%);
-}
-</style>
+<link href="/resources/css/member/join.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header2.jsp"%>
+	<div class="wra0">
 	<div class="wra">
 		<form action="/join.do" method="post" class="joinbox">
 			<fieldset>
@@ -195,7 +87,7 @@
 			value="회원가입" id="memberJoin" class="fs">
 		</fieldset>
 	</div>
-
+</div>
 	<!-- 개인정보수집이용 동의 -->
 	<div class="popup_bg"></div>
 	<div class="popup personal_pop noto">
