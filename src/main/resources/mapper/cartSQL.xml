@@ -17,8 +17,8 @@ from carts
 where member_no=#{memberNo}
 </select>
 
-
-
-
-
+<delete id="deleteCart" parameterType="Ca">
+delete from carts
+	where product_no=#{productNo} and member_no=#{memberNo}
+</delete>
 </mapper>

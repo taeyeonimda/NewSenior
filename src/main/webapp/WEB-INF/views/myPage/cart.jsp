@@ -77,8 +77,9 @@
                     <thead>
                       <tr style="text-align: center;">
                         <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
-                        <th style=" width: 25%;">이미지</th>
-                        <th style=" width: 25%;">상품명</th>
+                        <th style=" width: 10%;">상품번호</th>
+                        <th style=" width: 20%;">이미지</th>
+                        <th style=" width: 20%;">상품명</th>
                         <th style=" width: 10%;">금액</th>
                         <th style=" width: 10%;">수량</th>
                         <th style=" width: 10%;">배송비</th>
@@ -89,7 +90,8 @@
 	                    <tbody>
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
-					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
+					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn"><input type="hidden" value="${Cart.productNo }"><input type="hidden" value="${sessionScope.m.memberNo }"></td>
+					            <td style="text-align:center">${Cart.productNo }</td>
 					            <td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto }"></td>
 					            <td style="text-align:center">${Cart.buyName }</td>
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
@@ -107,7 +109,8 @@
 		                      	<td colspan="5"></td>
 		                      	<td>결제할 총 금액</td>
 		                      	<td>
-		                      		<input type="text" style="border:none;" class="payPrice" readonly>
+		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+		                      		<input type="text" style="border:none;" class="payPrice" value="${Cart.buyPrice*Cart.buyAmount }" readonly>
 		                     	</td>
 	                      	</tr>
 	                      	
@@ -162,7 +165,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
 		$("#payBtn").on("click",function(){
-			const price = $(".payPrice").val();
+			const price = $(".hiddenPayPrice").val();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
@@ -215,24 +218,53 @@
 		window.onload=function(){
 			sum();
 		}
+
 		
-		// 체크한것 삭제
 		$(".deleteCheck").on("click", function(){
+			// 체크한것 삭제
+				
+			    const check = $(".deleteBtn:checked");
+			    if(check.length == 0) {
+			        alert("선택된 상품이 없습니다.")
+					return;
+			    }
+				const memberNo = $(".deleteBtn").next().next().val();
+				
+				const productNoArr = new Array();
+				
+				check.each(function(index,item){
+					const proNo = $(this).next().val();
+					productNoArr.push(proNo);
+				});
+				
+				console.log(memberNo);
+				location.href="/deleteCart.do?memberNo="+memberNo+"&productNoArr="+productNoArr.join("/");
+			});
+		
+		/*
+		$(".deleteCheck").on("click", function(){
+		// 체크한것 삭제
+			
 		    const check = $(".deleteBtn:checked");
 		    if(check.length == 0) {
 		        alert("선택된 상품이 없습니다.")
 				return;
 		    }
 			const productNoList = new Array();
-		    const userNo = check.next().val();
-
+		    const userNo = check.next().next().val();
+		    
+		    console.log(check.length);
 			for(let i=0; i<check.length; i++) {
-			    const productNo = check.eq(i).val();
+			    const productNo = $(check).next().val();
 			    productNoList.push(productNo);
 			}
-			location.href="/deleteCart.do?productNo="+productNoList.join("/");
+			    console.log(productNoList);
+			    console.log(userNo);
+			    
+			    
+			location.href="/deleteCart.do?memberNo="+memberNo+"&productNoList="+productNoList.join("/");
 		});
-		
+		*/
 		
 		
 	</script>
