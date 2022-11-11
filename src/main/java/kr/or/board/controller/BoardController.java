@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.FileRename;
 import kr.or.board.model.service.BoardService;
 import kr.or.board.model.vo.Board;
+import kr.or.board.model.vo.BoardCategoryVO;
 import kr.or.board.model.vo.BoardComment;
 import kr.or.board.model.vo.FileVO;
 
@@ -36,7 +37,7 @@ public class BoardController {
 	@RequestMapping(value="/boardList.do")
 	public String boardList(int reqPage,Model model,String boardType,HttpSession session) {
 		HashMap<String, Object> pageMap = service.selectBoardList(reqPage,boardType);
-		System.out.println(pageMap);
+		System.out.println("boardList pageMap : "+pageMap);
 		model.addAttribute("list",(ArrayList<Board>)pageMap.get("list"));
 		model.addAttribute("pageNavi",(String)pageMap.get("pageNavi"));
 		model.addAttribute("reqPage",(int)pageMap.get("reqPage"));
@@ -44,7 +45,8 @@ public class BoardController {
 		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
 		//model.addAttribute("boardType",(int)pageMap.get("boardType"));
 		model.addAttribute("boardType",boardType);
-		//session.setAttribute("boardType",boardType);	
+		model.addAttribute("cateList",(ArrayList<BoardCategoryVO>)pageMap.get("cateList"));
+		session.setAttribute("boardType",boardType);	
 		System.out.println(boardType);
 		return "board/boardList";
 	}
@@ -122,7 +124,7 @@ public class BoardController {
 		}
 		b.setFileList(filelist);
 		int result = service.insertBoard(b);
-
+		System.out.println("writeFrm : "+boardType);
 		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
 		//return "redirect:/boardList.do?reqPage=1&boardType=F";
 	}

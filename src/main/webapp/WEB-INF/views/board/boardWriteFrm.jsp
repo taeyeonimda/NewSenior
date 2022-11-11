@@ -15,17 +15,57 @@
 <script src="/resources/summernote/summernote-lite.js"></script>
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	
-	<h1>자유게시판 작성</h1>
+	<h1>글쓰기</h1>
 	<form action="/boardWrite.do" id="boardWriteForm" method="post" enctype="multipart/form-data">
 		<table border="1">
-			<tr>
+			<tr>	
 				<th>카테고리</th>
-				<td>
-				<select name="boardCategory">
-					<option value="info">정보</option>
-					<option value="etc">기타</option>
-				</select>
-				</td>
+				<c:if test="${boardType eq 'F' }">
+					<td>
+						<select name="boardCategory">
+							<option value="info">정보</option>
+							<option value="etc">기타</option>
+						</select>
+					</td>	
+				</c:if>
+				<c:if test="${boardType eq 'I' }">
+					<td>
+						<select name="boardCategory">
+							<option value="campaign">캠페인</option>
+							<option value="fair">박람회</option>
+							<option value="tour">여행</option>
+							<option value="ectI">기타</option>
+						</select>
+					</td>
+				</c:if>
+				<c:if test="${boardType eq 'Q' }">
+					<td>
+						<select name="boardCategory">
+							<option value="class">클래스</option>
+							<option value="club">동호회</option>
+							<option value="activity">액티비티</option>
+							<option value="product">상품</option>
+							<option value="pay">결제</option>
+							<option value="delivery">배송</option>
+						</select>
+					</td>
+				</c:if>
+				<c:if test="${boardType eq 'N' }">
+					<td>
+						<select name="boardCategory">
+							<option value="notice">공지사항</option>
+						</select>
+					</td>	
+				</c:if>
+				<c:if test="${boardType eq 'P' }">
+					<td>
+						<select name="boardCategory">
+							<option value="invite">모집중</option>
+							<option value="end">모집완료</option>
+						</select>
+					</td>	
+				</c:if>
+				
 			</tr>
 			<tr>
 				<th>제목</th>
@@ -36,7 +76,7 @@
 				<td>
 				${sessionScope.m.nickName }
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-				<input type="hidden" name="boardType" value="${boardType}">
+				<input type="hidden" name="boardType" value="${boardType }">
 													<%--게시판 바꾸면 이 값도 바뀜 / 주소에 boardType넘겨줌 --%>
 				</td>	
 			</tr>

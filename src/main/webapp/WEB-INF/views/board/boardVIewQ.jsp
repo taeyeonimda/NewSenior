@@ -41,24 +41,20 @@
 				<c:if test ="${b.boardCategory eq 'etc'}">
 					<td>기타</td>
 				</c:if>
-				<!-- notice -->
+				<!-- notice 추후 삭제예정 -->
 				<c:if test ="${b.boardCategory eq 'notice'}">
 					<td>공지</td>
 				</c:if>
 		</tr>
-		
 		<tr>
 			<th>닉네임</th>
 			<td>${b.nickName }</td>
 		</tr>
 		<tr>
-			<th>찍어보기</th>
-			<td>${bCateVO.boardCategory }</td>
-		</tr>
-		<tr>
 			<th>작성일</th>
 			<td>${b.boardDate }</td>
 		</tr>
+		
 			
 			<tr>
 				<th>제목</th>
@@ -95,7 +91,7 @@
 	</table>
 	
 		<%--댓글작성 form--%>
-		<c:if test="${not empty sessionScope.m }">
+		<c:if test="${not empty sessionScope.m && sessionScope.m.memberGrade eq 3}">
 		<div class="inputCommentBox">
 			<form action="/insertComment.do" method="post">
 				<ul>
@@ -138,7 +134,7 @@
 					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
 					<p>
 						<c:if test="${not empty sessionScope.m }">
-							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+							<c:if test="${sessionScope.m.memberGrade eq 3 }">
 								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
@@ -150,61 +146,6 @@
 					</p>
 				</li>
 		 	</ul>
-		 		
-		 		<%--대댓글 출력 반복문 --%>
-		 		<c:forEach items="${reCommentList }" var="bcc">
-		 			<c:if test="${bcc.boardCommRef eq bc.boardCommNo }">
-		 				<ul class="reCommentView">
-		 					<li>
-		 						<span>대댓글</span>
-		 					</li>
-		 					<li>
-								<p>
-									<span>${bcc.nickName }</span>
-									<span>${bcc.boardCommDate }</span>
-								</p>
-								<p>${bcc.boardCommContent }</p>
-								<textarea name="boardCommContent" style="display:none;">${bcc.boardCommContent}</textarea>
-								<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
-								<p>
-									<c:if test="${not empty sessionScope.m }">
-										<c:if test="${sessionScope.m.nickName eq bcc.nickName }">
-											<a href="javaScript:void(0)" onclick="modifyComment(this,${bcc.boardCommNo},${b.boardNo})">수정</a>
-											<a href="javaScript:void(0)" onclick="deleteComment(this,${bcc.boardCommNo},${b.boardNo})">삭제</a>
-										</c:if>
-									</c:if>
-									
-								</p>
-							</li>
-		 				</ul>
-		 			</c:if><%--해당댓글의 대댓글인지 체크 --%>
-		 		</c:forEach><%--대댓글 출력 반복문 --%>
-		 		
-		 		<%--대댓글 작성 폼
-		 		을 (댓글 나타내기창에) 숨겨두고 답글달기 누르면 나타나게 만든다 --%>
-		 		
-		 		<c:if test="${not empty sessionScope.m }">
-				<div class="inputRecommentBox">
-					<form action="/insertComment.do" method="post">
-						<ul>
-							<li>
-								<span>대댓글</span>
-							</li>
-							<li>
-								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
-								<input type="hidden" name="boardRef" value="${b.boardNo}">
-															<!-- ㄴ몇 번 글의 댓글인지 -->
-								<input type="hidden" name="boardCommRef" value="${bc.boardCommNo }">
-									<!-- ㄴ어떤 댓글의 대댓글인지 -->					<%--ㄴ해당 댓글 번호 --%>
-								<textarea name="boardCommContent"></textarea>
-							</li>
-							<li>
-								<button type="submit">등록</button>
-							</li>
-						</ul>
-					</form>
-				</div>
-				</c:if>
 		 
 		 </c:forEach><%--forEach(1): 댓글반복문 끝 --%>
 		</div><%--commentBox끝--%>
@@ -239,7 +180,7 @@
 				//수정 - > 수정완료
 				$(obj).text("수정완료");
 				//-> 함수 바꿔줌(수정 - > 수정완료)
-				$(obj).attr("onclick","modifyComplete(this,"+boardCommNo+","+boardNo+")");
+				$(obj). attr("onclick","modifyComplete(this,"+boardCommNo+","+boardNo+")");
 				
 				//삭제->수정취소
 				$(obj).next().text("수정취소");
