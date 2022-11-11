@@ -82,7 +82,7 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String loginCheckMember(Member m, HttpSession session,Model model) {
 		Member member = service.loginCheckMember(m);
-		boolean isLogin = true;
+		String isLogin = "asd";
 		
 		if(member!= null) {
 			session.setAttribute("m", member);
