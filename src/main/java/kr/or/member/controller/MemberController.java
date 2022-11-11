@@ -82,15 +82,19 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String loginCheckMember(Member m, HttpSession session,Model model) {
 		Member member = service.loginCheckMember(m);
+		String isLogin = "asd";
+		
 		if(member!= null) {
 			session.setAttribute("m", member);
+			model.addAttribute("isLogin",isLogin);
 			System.out.println("login정보:"+member);
 			return "redirect:/";
 		}else {
-			return "redirect:/";
+			model.addAttribute("msg", "로그인 실패");
+			model.addAttribute("url","/");
+			return "alert";
 		}
 	}
-	
 	
 	
 	//로그아웃

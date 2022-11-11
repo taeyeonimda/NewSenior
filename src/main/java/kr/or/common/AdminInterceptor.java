@@ -8,7 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import kr.or.member.model.vo.Member;
 
 
-public class LoginInterceptor implements HandlerInterceptor{
+public class AdminInterceptor implements HandlerInterceptor{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -17,8 +17,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		if(!request.getRequestURI().equals("/")) {
 			Member m = (Member)request.getSession().getAttribute("m");
-			if(m == null){
-				response.sendRedirect("/isLogin.do");
+			if(m == null||m.getMemberGrade()!=3){
+				response.sendRedirect("/");
 				isLogin = false;
 			}
 		}
