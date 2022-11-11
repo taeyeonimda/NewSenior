@@ -31,17 +31,16 @@
     	<link href="/resources/TGbtstr/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
         <link href="/resources/TGbtstr/css/styleTG.css" rel="stylesheet">
-          <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- 로그인 모달 css
         <link href="/resources/css/login/login.css" rel="stylesheet">
         -->
-         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
  		<link rel="stylesheet" href="/resources/css/datepicker.css"><!--datepickercss--> 
- 		
  		<script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
 		<!-- 카카오 로그인 -->
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        
+        <!-- sweetalert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>        
          <style type="text/css">
          @charset "UTF-8";
 			.detail {
@@ -332,6 +331,9 @@
     -->
     
     <script type="text/javascript">
+    function alert(text){
+		Swal.fire(text);
+	}
     
     $(".loginBtn").click(function(){
       $(".popup_bg00").stop().fadeIn();
