@@ -46,10 +46,8 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
+    <link href="/resources/TGbtstr/css/productUpdate.css" rel="stylesheet">
     
-    <script src="/resources/summernote/summernote-lite.js"></script>
-	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 </head>
 <body>
 	
