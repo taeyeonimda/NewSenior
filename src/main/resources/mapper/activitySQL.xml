@@ -48,13 +48,14 @@
 		where rnum between #{start} and #{end}
 	</select>
 
-	<select id="totalCount" resultType="int">
+	<select id="totalCount" parameterType="map" resultType="int">
 		select count(*) from activity
 	</select>
 	
-	<!--  
-	<select id="getOneActivity" parameterType="act" resultType="act">
-		select  
+	<select id ="categoryActivityList" parameterType="map" resultType="act">
+		select * from
+			(select rownum as rnum,a.* from
+			(select  
 				activity_no as activityNo,
 				activity_name as activityName,
 				to_char(activity_price,'999,999,999')as activityPrice,
@@ -72,26 +73,21 @@
 		from activity a
 		join members m 
 		on a.activity_manager = m.member_no
-		where a.activity_no = #{activityNo }
-	</select>-->
+		where activity_status= 0
+		<if test='!activityCategory.equals("AL")'>
+			and activity_category = #{activityCategory}
+		</if>
+		order by 1 desc)a)	
+		where rnum between #{start} and #{end}
+	</select>
 	
-	<!-- 스킵 
-	<resultMap type="act" id="getActivity">
-		<result column="activity_no" property="activityNo" />
-		<result column="activityame" property="activityName" />
-		<result column="activityPrice" property="activityPrice" />
-		<result column="activityManager" property="activityManager" />
-		<result column="activityIntroduce" property="activityIntroduce" />
-		<result column="activityDetail" property="activityDetail" />
-		<result column="activityLimit" property="activityLimit" />
-		<result column="activityCategory" property="activityCategory" />
-		<result column="activityStatus" property="activityStatus" />
-		<result column="startDate" property="startDate" />
-		<result column="endDate" property="endDate" />
-		<result column="filepath" property="filepath" />
-		<result property="activityManagerName" />
-	</resultMap>
-	-->
+	<select id="categoryActivityCnt" parameterType="map" resultType="int">
+		select count(*) from activity
+		where activity_status= 0
+		<if test='!activityCategory.equals("AL")'>
+			and activity_category= #{activityCategory }
+		</if>
+	</select>
 	
 	<select id="getOneActivity" parameterType="act" resultType="act" resultMap="getActivityInfo">
 		select  
@@ -148,6 +144,41 @@
 		from activity_file
 		where activity_no = #{activityNo}
 	</select>
+	
+	<update id="activityUpdate" parameterType="act">
+		update activity
+			set 
+			<if test="filepath != null">
+			filepath = #{filepath},
+			</if>
+			activity_name = #{activityName},
+			activity_price = #{activityPrice},
+			activity_introduce =#{activityIntroduce},
+			activity_detail =#{activityDetail},
+			activity_manager = #{activityManager},
+			activity_category =#{activityCategory},
+			activity_limit =#{activityLimit},
+			start_date =#{startDate},
+			end_date =#{endDate},
+			etc = #{etc}
+		where activity_no = #{activityNo}
+	</update>
+	
+	<delete id="delActdFiles" parameterType="_int">
+		delete 
+		from activity_file
+		where activity_fileno = #{_parameter}
+	</delete>
+	
+	<insert id="actInsertCart" parameterType="Ca">
+		insert into carts values(
+			cart_seq.nextval,
+			#{memberNo},
+			null,
+			#{activityNo},null,
+			#{buyAmount}
+		)
+	</insert>
 </mapper>
 
 

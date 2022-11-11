@@ -101,13 +101,17 @@
                   <div class="mb-3 row">
                     <label for="html5-search-input" class="col-md-2 col-form-label">메인이미지</label>
                     <div class="col-md-10">
-                      <input type="file" name="productFile" id="productFile" class="productFile">
+                      <input type="file" name="productFile" id="productFile" class="productFile mainImg">
                     </div>
                     <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지1</label>
                     <div class="col-md-10">
                       <input type="file" name="productFile" id="productFile" class="productFile">
                     </div>
                     <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지2</label>
+                    <div class="col-md-10">
+                      <input type="file" name="productFile" id="productFile" class="productFile">
+                    </div>
+                    <label for="html5-search-input" class="col-md-2 col-form-label">상세이미지3</label>
                     <div class="col-md-10">
                       <input type="file" name="productFile" id="productFile" class="productFile">
                     </div>
@@ -142,27 +146,7 @@
                       	</select>
                       </div>
                   </div>
-                      	<!-- 
-                        <button
-                          type="button"
-                          class="btn btn-outline-primary dropdown-toggle"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false">
-                          	카테고리선택
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item">디지털</a></li>
-                          <li><a class="dropdown-item">주식/재테크</a></li>
-                          <li><a class="dropdown-item">공예</a></li>
-                          <li><a class="dropdown-item">디자인</a></li>
-                          <li><a class="dropdown-item">운동/건강</a></li>
-                          <li><a class="dropdown-item">패션</a></li>
-                          <li><a class="dropdown-item">미디어</a></li>
-                          <li><a class="dropdown-item">악기/노래</a></li>
-                          <li><a class="dropdown-item">외국어</a></li>
-                          <li><a class="dropdown-item">요리/제과제빵</a></li>
-                        </ul>
-                       -->
+
                   
                   <div class="mb-3 row">
                     <label for="html5-email-input" class="col-md-2 col-form-label">상품소개</label>
@@ -171,16 +155,8 @@
                       <!-- <input class="form-control" type="email"  id="html5-email-input" /> -->
                     </div>
                   </div>
-                  <!-- 
-                  <div class="mb-3 row">
-                    <label for="html5-url-input" class="col-md-2 col-form-label">마켓 상세</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="url" id="html5-url-input" />
-                    </div>
-                  </div>
-                   -->
-                  <input id="insertBtn" type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" value="등록하기">
-                  
+ 
+                  <button type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" id="productInsertBtn" onclick="return productInsert();">등록하기</button>
                 </div>
               </div>
             </form>
@@ -207,9 +183,6 @@
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 <!-- Footer End -->
 	<script>
-		$("#insertBtn").on("click",function(){
-			
-		});
 	
 		$("#fileUpload").on("click",function(){
 			$(".productFile").click();
@@ -222,8 +195,24 @@
 			  console.log($(this).val())
 		});
 		
-		$("[name=productFile]")
-		
+		$(".mainImg").on("change",function(){
+			
+			
+		});
+		function productInsert(){
+			var mainImg = $(".mainImg").val();
+			 if(mainImg==''){
+				 alert("메인이미지를 등록해주세요.");
+				 return false;
+			 } else {
+				 if(confirm("상품을 등록하시겠습니까?")){
+					 
+				 }
+			 }
+		}
+		//$("#productInsertBtn").on("click",function(){
+			
+		//});
 		
 		</script>
 

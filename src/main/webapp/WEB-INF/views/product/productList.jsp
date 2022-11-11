@@ -13,9 +13,10 @@
         <div class="marketTitle">
             Market
         </div>
-        <div class="marketTitle">
+        
+        <!-- <div class="marketTitle">
         	<a href="/insertProductFrm.do">상품등록</a>
-        </div>
+        </div> -->
         
         <div class="productList">
          <c:forEach items="${list }" var="p">

@@ -112,4 +112,17 @@ public class ClubDao {
 	public int deleteClub(Club c) {
 		return sqlSession.delete("club.deleteClub", c);
 	}
+	
+	public int updateClubNotice(Club c) {
+		return sqlSession.update("club.updateClubNotice", c);
+	}
+
+	public int deleteClubBoard(ClubBoard cb) {
+		return sqlSession.delete("club.deleteClubBoard", cb);
+	}
+
+	public ArrayList<Club> selectMyClubStartEnd(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("club.selectMyClubStartEnd", map);
+		return (ArrayList<Club>)list;
+	}
 }

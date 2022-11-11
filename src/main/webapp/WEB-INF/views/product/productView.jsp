@@ -10,13 +10,14 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/resources/TGbtstr/css/productView.css">
-
+<link rel="stylesheet" href="/resources/MAINbtstr/css/bootstrap.min.css">
+<script src="https://unpkg.com/mathjs/lib/browser/math.js"></script> <!-- math 사용 위한 라이브러리 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <style>
 ul {
     text-align: center;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #dee2e6;
     border-right: 0;
     list-style-type: none;
 }
@@ -25,6 +26,12 @@ ul li {
     text-align: center;
     float: left;
 }
+ul li:hover{
+	z-index: 2;
+    color: #2a722d;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
 
 ul li a {
     display: block;
@@ -32,15 +39,24 @@ ul li a {
     padding: 9px 12px;
     border-right: solid 1px #ccc;
     box-sizing: border-box;
+    height: 38px;
+    line-height: 22px;
 }
 
 ul li.on {
-    background: #eda712;
+    background: #fff;
 }
 
 ul li.on a {
-    color: #fff;
+    color: #348E38;
 }
+#pagingul{
+	padding: 0;
+}
+.changeColor{
+	background-color: #0F4229;
+	color: white;
+};
 </style>
 </head>
 <body>
@@ -48,7 +64,7 @@ ul li.on a {
 	    <div class="productContent">
 	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</button>
 	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
-
+		<input type="hidden" name="userId" id="userId" value="${sessionScope.m.memberId }">
         <div class="productWrap">
             <div style="width: 500px;">
                 <img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" class="productImage">
@@ -75,9 +91,12 @@ ul li.on a {
                         <span class="material-icons" id="plus">add</span>
                     </div>
                     <div style="width: 300px;">
-                    	<input type="text" class="sumPrice" 
+                    	<input type="hidden" class="sumPrice" 
                     	value="${p.productPrice }" readonly
-                    	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center; background-color:beige;">
+                    	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center;">
+                    	<input type="text" class="showSumPrice" 
+                    	value="${p.productPrice }" readonly
+                    	style="font-weight: bold; margin: 0; border:none; width:100px; text-align:center; background-color:#f8f8f8;">
                     	<span style="font-size: 14px; margin: 0;">원</span>
                    	</div>
                 </div>
@@ -128,6 +147,7 @@ ul li.on a {
               <div>
                 <div><img alt="" src="/resources/upload/productImg/${p.productFileVO[1].filePath }"></div>
               	<div><img alt="" src="/resources/upload/productImg/${p.productFileVO[2].filePath }"></div>
+              	<div><img alt="" src="/resources/upload/productImg/${p.productFileVO[3].filePath }"></div>
               </div>
               <div>
               	<textarea id="productContentArea" readonly>${p.productContent }</textarea>
@@ -237,6 +257,7 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
+	
 		function deleteProduct(productNo) {
 			if(confirm("상품을 삭제하시겠습니까?")){
 				location.href="/deleteProduct.do?productNo="+productNo;
@@ -290,7 +311,6 @@ ul li.on a {
 				}
 			};
 		
-			
 		$("#productReviewInsertBtn").on("click",function(){
 			const memberId = $("[name=productMemberId]").val();
 			const productNo = $("[name=productNo]").val();
@@ -336,7 +356,6 @@ ul li.on a {
 					three2Textarea.attr("readonly",true);
 					//
 					three2Div.append(three2Textarea);
-					
 					const three3Div = $("<div>");
 					three3Div.addClass("reviewsBtnBox");
 					const updateBtn = $("<button>수정</button>");
@@ -348,7 +367,6 @@ ul li.on a {
 					//
 					three3Div.append(updateBtn);
 					three3Div.append(deleteBtn);
-					
 					
 					const three4Div = $("<div>");
 					three4Div.addClass("reviewsScore");
@@ -386,10 +404,7 @@ ul li.on a {
 					twoDiv.append(three3Div);
 					twoDiv.append(three4Div);
 					
-					
 					oneDiv.append(twoDiv);
-					
-					
 					
 					$(".reviewContentWrap").after(oneDiv);
 					$(".input-score").each(function(index,item){
@@ -405,14 +420,30 @@ ul li.on a {
 				}
 			});
 		});
+			$("#plus").on("click",function(){
+				const price = $(".sumPrice").val();
+				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				$(".showSumPrice").val(pricecomma);
+			});
+			$("#minus").on("click",function(){
+				const price = $(".sumPrice").val();
+				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				$(".showSumPrice").val(pricecomma);
+			});
 			
 			let totalData; //총 데이터
 			let dataPerPage; //한 페이지에 나타낼 글의 수
 			let pageCount = 5; //페이징에 나타낼 페이지 수
 			let reviewCurrentPage=1; //현재 페이지
-			
+			const userId = $("#userId").val();
 			
 			$(document).ready(function(){
+				const price = $(".sumPrice").val();
+				console.log(price);
+				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				console.log("돈 : "+pricecomma);
+				$(".showSumPrice").val(pricecomma);
+				
 				dataPerPage = $("#reviewListBtn").val(); 
 				console.log("dataPerPage : "+dataPerPage);
 				const productNo = $("[name=productNo1]").val();
@@ -429,7 +460,6 @@ ul li.on a {
 					}
 				});
 				displayData(1, dataPerPage);
-				
 				paging(totalData, dataPerPage, pageCount, 1);
 			});
 			
@@ -459,20 +489,24 @@ ul li.on a {
 				//태그생성
 				let pageHtml = "";
 				if(prev > 0){
-					pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='prev'>이전</a></li>";
+					//pageHtml = "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#Redirect' id='prev'> 이전 </a></li>";
 				}
 				
 				//페이징 번호 처리
 				for(var i = first; i <= last; i++){
 					if(currentPage == i){
-						pageHtml += "<li class='page-item '><a class='page-link active-page' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						//pageHtml += "<li class='page-item '><a class='page-link active-page' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						pageHtml +=  "<li class='on'><a href='#Redirect' id='" + i + "'>" + i + "</a></li>";
 					}else {
-						pageHtml += "<li class='page-item'><a class='page-link' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						//pageHtml += "<li class='page-item'><a class='page-link' href='#Redirect' id='" + i + "'>" + i + "</a></li>";
+						pageHtml += "<li><a href='#Redirect' id='" + i + "'>" + i + "</a></li>";
 					}
 				}
 				
 				if(last < totalPage){
-					pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='next'> 다음 </a></li>";
+					//pageHtml += "<li class='page-item disabled'><a class='page-link' tabindex='-1' aria-disabled='true' href='#Redirect' id='next'> 다음 </a></li>";
+					pageHtml += "<li><a href='#Redirect' id='next'> 다음 </a></li>";
 				}
 				
 				$("#pagingul").html(pageHtml);
@@ -503,6 +537,7 @@ ul li.on a {
 			  let chartHtml = "";
 			  const productNo = $("[name=productNo1]").val();
 			  console.log("productNo1 : "+productNo);
+			  
 			//Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
 			  currentPage = Number(currentPage);
 			  dataPerPage = Number(dataPerPage);
@@ -536,9 +571,11 @@ ul li.on a {
 							three2Textarea.attr("readonly",true);
 							//
 							three2Div.append(three2Textarea);
+								
 							
 							const three3Div = $("<div>");
 							three3Div.addClass("reviewsBtnBox");
+							if(userId != '' && userId == data[i].memberId){
 							const updateBtn = $("<button>수정</button>");
 							updateBtn.addClass("reviewUpdateBtn");
 							updateBtn.attr("onclick","modifyComment(this,"+data[i].reviewNo+","+data[i].productNo+")");
@@ -548,7 +585,10 @@ ul li.on a {
 							//
 							three3Div.append(updateBtn);
 							three3Div.append(deleteBtn);
-							
+							} else {
+								three2Textarea.css("margin-right","52px");
+							}
+
 							const three4Div = $("<div>");
 							three4Div.addClass("reviewsScore");
 							const fourNextDiv = $("<div>");
@@ -595,7 +635,7 @@ ul li.on a {
 									span.eq(i).css("color","gold");
 								}
 							});
-					  } //dataList는 임의의 데이터임.. 각 소스에 맞게 변수를 넣어주면 됨...
+					  } 
 					  
 				  }
 			  });
@@ -640,6 +680,8 @@ ul li.on a {
 			$("body").append(form);
 			form.submit();
 		};
+				
+
 		
 		$("#directBuy").on("click",function(){
 			const price = $(".sumPrice").val();
@@ -666,6 +708,11 @@ ul li.on a {
 					alert("결제실패");
 				}	
 			});
+		});
+		const pageli = $("#pagingul").children(); 
+		$(pageli).on("click",function(){
+			console.log("zzz");
+			$(this).css("background-color","black");
 		});
 		</script>
 </body>

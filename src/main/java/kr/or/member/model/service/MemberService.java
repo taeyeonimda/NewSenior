@@ -176,4 +176,16 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return dao.updateOneAddr(delivery);
 	}
+
+
+	public Member loginCheckKaKaoMember(Member m) {
+		// TODO Auto-generated method stub
+		return dao.loginCheckKakao(m);
+	}
+
+
+	public int insertKakaoMember(Member m) {
+		// TODO Auto-generated method stub
+		return dao.insertKakaoMemeber(m);
+	}
 }

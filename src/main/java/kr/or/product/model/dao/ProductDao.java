@@ -89,9 +89,27 @@ public class ProductDao {
 		return sqlSession.update("product.reviewUpdate",pr);
 	}
 
-	public int insertCart(Cart c) {
-		return sqlSession.insert("product.insertCart", c);
+//	public int insertCart(Cart c) {
+//		return sqlSession.insert("product.insertCart", c);
+//	}
+
+	public boolean searchSameBook(Cart c) {
+		boolean sameCheck = false;
+		List list = sqlSession.selectList("cart.sameCheck",c);
+		if(list.size() != 0) {	// 뭔가 있음
+			sameCheck=true;
+		}else {
+			sameCheck=false;
+		}
+		return sameCheck;
 	}
+
+	public int updateCartQuan(Cart c) {
+		return sqlSession.update("cart.updateAmount", c);
+	}
+
+	
+
 
 
 	

@@ -23,4 +23,21 @@ public class CartController {
 		model.addAttribute("list",list);
 		return "myPage/cart";
 	}
+	
+	@RequestMapping(value="/deleteCart.do")
+	public String deleteCart(String productNoArr, int memberNo) {
+		boolean result = service.deleteCart(productNoArr,memberNo);
+		return "redirect:/cart.do?memberNo="+memberNo;
+				
+	}
+	
+	
+	@RequestMapping(value="/insertCart.do")
+	public String insertCart(Cart c,int productNo, int buyAmount) {
+		int result = service.insertCart(c,productNo, buyAmount);
+		return "redirect:/cart.do?memberNo="+c.getMemberNo();
+	}
+	
+	
+		
 }

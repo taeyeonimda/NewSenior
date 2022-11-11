@@ -41,6 +41,14 @@ public class ProductController {
 		return "product/productList";
 	}
 	
+	@RequestMapping(value = "/adminProductList.do")
+	public String adminProductList(Model model, int reqPage) {
+		ProductPageData	ppd = service.adminProduct(reqPage);
+		model.addAttribute("list",ppd.getList());
+		model.addAttribute("pageNavi",ppd.getPageNavi());
+		return "product/adminProductList";
+	}
+	
 	
 	@RequestMapping(value="/insertProductFrm.do")
 	public String insertProductFrm() {
@@ -195,11 +203,5 @@ public class ProductController {
 		int result = service.reviewUpdate(pr);
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
 	}
-	
-	@RequestMapping(value="/insertCart.do")
-	public String insertCart(Cart c) {
-		int result = service.insertCart(c);
-		System.out.println(result);
-		return "redirect:/cart.do?memberNo="+c.getMemberNo();
-	}
+
 }

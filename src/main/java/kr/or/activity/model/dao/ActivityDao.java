@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.activity.model.vo.Activity;
 import kr.or.activity.model.vo.FileVo;
+import kr.or.cart.model.vo.Cart;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Repository
@@ -53,5 +54,35 @@ public class ActivityDao {
 	public ArrayList<FileVo> getOneFile(int activityNo) {
 		List list = sqlSession.selectList("activity.getOneFiles",activityNo);
 		return (ArrayList<FileVo>)list;
+	}
+
+
+	public int activityUpdate(Activity activity) {
+		int result = sqlSession.update("activity.activityUpdate",activity);
+		return result;
+	}
+
+
+	public int delActdFiles(int fileNo) {
+		int result = sqlSession.delete("activity.delActdFiles",fileNo);
+		return result;
+	}
+
+	//카테고리별로 페이징
+	public ArrayList<Activity> categoryActivityList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("activity.categoryActivityList",map);
+		return (ArrayList<Activity>)list;
+	}
+
+	//카테고리별로합쳐서카운팅
+	public int categoryActivityCnt(HashMap<String, String> str) {
+		int totalCount = sqlSession.selectOne("activity.categoryActivityCnt",str);
+		return totalCount;
+	}
+
+
+	public int actInsertCart(Cart cart) {
+		int result = sqlSession.insert("activity.actInsertCart",cart);
+		return result;
 	}
 }

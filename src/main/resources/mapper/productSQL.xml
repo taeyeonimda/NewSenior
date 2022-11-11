@@ -124,5 +124,5 @@ insert into carts values(
 	#{buyAmount}
 )
 </insert>
-  
+
 </mapper>

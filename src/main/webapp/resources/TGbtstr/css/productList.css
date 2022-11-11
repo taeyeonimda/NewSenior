@@ -99,7 +99,7 @@
   }
   .productQty{
     overflow: hidden;
-    background-color: seashell;
+    background-color: #f8f8f8;
     height: 54px;
   }
   .productQty>div{

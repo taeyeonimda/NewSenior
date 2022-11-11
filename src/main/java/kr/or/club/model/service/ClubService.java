@@ -112,12 +112,29 @@ public class ClubService {
 		}
 		return result;
 	}
+	@Transactional
 	public int deleteClub(Club c) {
 		int result = dao.deleteClubMember(c);
 		if(result>0) {
 			result = dao.deleteClub(c);
 		}
 		return result;
+	}
+	@Transactional
+	public int updateClubNotice(Club c) {
+		int result = dao.updateClubNotice(c);
+		return result;
+	}
+	@Transactional
+	public int deleteClubBoard(ClubBoard cb) {
+		return dao.deleteClubBoard(cb);
+	}
+	public ArrayList<Club> searchMyClub(Member m, int startIndex, int endIndex) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", m.getMemberNo());
+		map.put("startIndex", startIndex);
+		map.put("endIndex", endIndex);
+		return dao.selectMyClubStartEnd(map);
 	}
 
 }

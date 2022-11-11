@@ -6,6 +6,11 @@
 select
     cart_no as cartNo,
     product_no as productNo,
+   	activity_no as activityNo,
+   	(select filepath from activity where activity.activity_no = carts.activity_no)as activityPhoto,
+   	(select activity_name from activity where activity.activity_no = carts.activity_no)as activityName,
+    (select activity_price from activity where activity.activity_no = carts.activity_no)as activityPrice,
+   	
     (select product_name from products where products.product_no=carts.product_no) as buyName,
     (select PRODUCT_PRICE from products where products.product_no=carts.product_no)as buyPrice,
     (select PRODUCT_FILEPATH from product_file where product_file.product_no = carts.product_no and rownum=1)as productPhoto,
@@ -17,8 +22,19 @@ from carts
 where member_no=#{memberNo}
 </select>
 
+<delete id="deleteCart" parameterType="Ca">
+delete from carts
+	where product_no=#{productNo} and member_no=#{memberNo}
+</delete>
 
+<select id="sameCheck" parameterType="Ca" resultType="Ca">
+select product_no as productNo from carts where product_no=#{productNo} and member_no = #{memberNo}
+</select>
 
-
+<update id="updateAmount">
+update carts set 
+	buy_amount = buy_amount+#{buyAmount} 
+	where product_no=#{productNo}
+</update>
 
 </mapper>
