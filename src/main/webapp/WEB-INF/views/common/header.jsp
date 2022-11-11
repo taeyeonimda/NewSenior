@@ -234,6 +234,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu bg-light m-0">
+                     <div id="isLogin">${isLogin.isLogin }</div>
                         <a href="/boardList.do?reqPage=1&boardType=F" class="dropdown-item">자유게시판</a>
                         <a href="boardList.do?reqPage=1&boardType=P" class="dropdown-item">동호회모집</a>
                         <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
@@ -274,6 +275,7 @@
     <div class="x_btn00"><span class="zwicon-close00">X</span></div>
     <div class="cont00">
       <h1 id="login_header" style="color:#000;">로그인</h1>
+     
       <hr>
       <div class="login_cont">
         <form action="/login.do" method="post" onsubmit="return loginchk();">
@@ -332,6 +334,8 @@
     -->
     
     <script type="text/javascript">
+   
+    
     function alert(text){
 		Swal.fire(text);
 	}
