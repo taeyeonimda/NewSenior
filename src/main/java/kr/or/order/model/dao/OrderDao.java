@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.cart.model.vo.Cart;
+import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderDetail;
@@ -19,8 +20,8 @@ public class OrderDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Order> selectAllOrderHistory(Member m) {
-		List list = sqlSession.selectList("order.selectAllOrderHistory", m);
+	public ArrayList<Order> selectAllOrderHistory(Order o) {
+		List list = sqlSession.selectList("order.selectAllOrderHistory", o);
 		return (ArrayList<Order>) list;
 	}
 	
@@ -30,19 +31,21 @@ public class OrderDao {
 		return (ArrayList<OrderDetail>) list;
 	}
 
+	public ArrayList<Cart> goOrderHistory(Cart c) {
+		List list = sqlSession.selectList("order.goOrderHistory",c);
+		return (ArrayList<Cart>) list;
+	}
 
-	public int insertOrder(Order o) {
-		int result = sqlSession.insert("order.insertOrder",o);
+
+	public int goDelivery(Delivery de) {
+		int result = sqlSession.insert("order.goDelivery",de);
 		return result;
 	}
 
 
-	
-
-
-	public ArrayList<Cart> goOrderHistory(Cart c) {
-		List list = sqlSession.selectList("order.goOrderHistory",c);
-		return (ArrayList<Cart>) list;
+	public int insertOrder(Order o) {
+		int result = sqlSession.insert("order.insertOrder",o);
+		return result;
 	}
 
 

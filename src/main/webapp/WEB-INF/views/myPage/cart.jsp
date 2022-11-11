@@ -76,12 +76,11 @@
                     <thead>
                       <tr style="text-align: center;">
                         <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
-						<th style=" width: 10%;">상품번호</th>
-                        <th style=" width: 20%;">이미지</th>
-                        <th style=" width: 20%;">상품명</th>
+						<th style=" width: 10%;">카트번호</th>
+                        <th style=" width: 25%;">이미지</th>
+                        <th style=" width: 25%;">상품명</th>
  						<th style=" width: 10%;">금액</th>
                         <th style=" width: 10%;">수량</th>
-                        <th style=" width: 10%;">배송비</th>
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
@@ -125,16 +124,18 @@
 					            </c:choose>
 					            
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" /></td>
-								<td style="text-align:center">무료배송</td>
+								
 
 					         
 								 	<c:if test="${Cart.buyPrice != 0}">
 								 		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.buyPrice*Cart.buyAmount }</td>
 								 		<td style="text-align:center;" class="realPrice"></td>
 								 	</c:if>
-										<c:if test="${Cart.activityPrice != ''}">
+									<c:if test="${Cart.activityPrice != ''}">
 						           		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
-						           		<td style="text-align:center;" class="realPrice"></td>
+						           		<td style="text-align:center;" class="realPrice">
+						           			<input type="hidden" class="numPrice">
+						           		</td>
 						           	</c:if>		
 									<td><input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }"></td>
 								
@@ -206,26 +207,25 @@
 			sum();
 			let i =0;
 			let totalPrice = $(".cartTotalPrice");
+			let sumPrice=0;
+			let numberPrice;
 			for(i; i<totalPrice.length; i++){
 				let price = totalPrice.eq(i).text();
-				let numberPrice = parseInt(price);
+				numberPrice = parseInt(price);
 				let realPrice = numberPrice.toLocaleString();
-				console.log(realPrice);
 				$(".realPrice").eq(i).text(realPrice);
+				
+				
+				console.log(typeof numberPrice);
+				console.log("price"+price);
+				console.log("number"+numberPrice);
+				console.log("realPrice"+realPrice);
+				sumPrice += numberPrice;
 			}
-		
-			console.log(qwdc.toLocaleString());
+
 			
-			/*
-			let totalPrice = $(".cartTotalPrice").text();
-			console.log(typeof totalPrice);
-			let qwdc = parseInt(totalPrice);
-			console.log(typeof qwdc);
-			console.log(qwdc.toLocaleString());	
-			*/
-			
+			$(".lastPrice").text(sumPrice);
 		}
-    	
     	
 		$("#payBtn").on("click",function(){
 			const price = $(".hiddenPayPrice").val();
@@ -259,7 +259,7 @@
 		
 
 		
-		function selectAll(selectAll)  {
+		function selectAll(selectAll)  { // 전체선택
 			  const checkboxes 
 			       = document.getElementsByName("productCheck");
 			  
@@ -276,13 +276,14 @@
 				result += Number(sumPrice.eq(i).val());
 			}
 			
-			//const showPrice = $(".payPrice").val(result);
-			//console.log(showPrice);
-			
+			const realPrice = $(".realPrice").text()
+			const numPrice = $(".numPrice").val()
+			console.log("ㅇㅇ")
+			console.log(realPrice);
+			console.log(numPrice);
+			console.log("ㅇㅇ")
 			const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			$(".lastPrice").text(lastPrice);
-			
-			
 		}
 		
 		
@@ -314,30 +315,6 @@
 		
 			
 		
-		/*
-		$(".deleteCheck").on("click", function(){
-		// 체크한것 삭제
-			
-		    const check = $(".deleteBtn:checked");
-		    if(check.length == 0) {
-		        alert("선택된 상품이 없습니다.")
-				return;
-		    }
-			const productNoList = new Array();
-		    const userNo = check.next().next().val();
-		    
-		    console.log(check.length);
-			for(let i=0; i<check.length; i++) {
-			    const productNo = $(check).next().val();
-			    productNoList.push(productNo);
-			}
-			    console.log(productNoList);
-			    console.log(userNo);
-			    
-			    
-			location.href="/deleteCart.do?memberNo="+memberNo+"&productNoList="+productNoList.join("/");
-		});
-		*/
 		
 		
 	</script>

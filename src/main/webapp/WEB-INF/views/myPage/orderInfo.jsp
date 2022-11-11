@@ -82,54 +82,100 @@
               <div class="card">
 
                 <div class="table-responsive text-nowrap">
-                  <form id="order-form" action="/insertOrder.do?memberNo=${sessionScope.m.memberNo}" method="post" autocomplete="off">
+					<!-- 
+					<form id="order-form" action="/insertOrder.do?memberNo=${sessionScope.m.memberNo}" method="post" autocomplete="off">
+ 					-->
+                	<form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
                   <table class="table table-borderless">
                     <thead>
                       <tr style="text-align: center;">
-                        <th style=" width: 15%;">상품번호</th>
+						<th style=" width: 10%;">카트번호</th>
+                        <th style=" width: 25%;">이미지</th>
                         <th style=" width: 35%;">상품명</th>
-                        <th style=" width: 15%;">금액</th>
-                        <th style=" width: 15%;">수량</th>
-                        <th style=" width: 10%;">배송비</th>
+ 						<th style=" width: 10%;">금액</th>
+                        <th style=" width: 10%;">수량</th>
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
-	             		<c:forEach items="${list }" var="Or">
-	             		<tr class="forTr">
-							<td><input type="text" value="${Or.productNo }" name="productNo" style="border:none" readonly></td>
-							<td><input type="text" value="${Or.buyName }" name="buyName" style="border:none" readonly>
-								<input type="hidden" value="${Or.memberNo }" name="memberNo" style="border:none" readonly>
-							</td>
-							<td><fmt:formatNumber value="${Or.buyPrice }" pattern="#,###"/></td>
-							<td><fmt:formatNumber value="${Or.buyAmount }" pattern="#,###"/></td>
-							
-							<td style="text-align: center;">무료배송</td>
-							<td style="float:right; padding-right:30px;">
-								<fmt:formatNumber value="${Or.buyPrice*Or.buyAmount }" pattern="#,###"/>
-								<input type="hidden" value=" ${Or.buyAmount*Or.buyPrice }" style="border:none" class="sumPrice" readonly><span >원</span>
-							</td>
-						</tr>
-						</c:forEach>
+                    
+	                    <tbody>
+	                    <c:forEach items="${list }" var="Cart">
+			            	<tr class="showCartList">
+					            <td style="text-align:center">
+						            <input type="hidden" value="${sessionScope.m.memberNo }">
+						            <input class="proNo" type="hidden" value="${Cart.productNo }">
+						            <input class="cartNo" type="hidden" value="${Cart.cartNo }" name="cartNo">
+					            </td>
+					         	
+					            <c:choose>
+						           	<c:when test="${Cart.productPhoto != null}">
+						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto}"></td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityPhoto != null}">
+						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/activity/${Cart.activityPhoto}"></td>
+						           	</c:when>		
+					            </c:choose>
+					         	
+					         	<c:choose>
+						           	<c:when test="${Cart.buyName != null}">
+						           		<td style="text-align:center">${Cart.buyName }</td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityName != null}">
+						           		<td style="text-align:center">${Cart.activityName }</td>
+						           	</c:when>		
+					            </c:choose>
+
+					            <c:choose>
+						           	<c:when test="${Cart.buyPrice != 0}">
+						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
+						           	</c:when>	
+						           	<c:when test="${Cart.activityPrice != ''}">
+						           		<td class="buyPrice" style="text-align:center">${Cart.activityPrice }</td>
+						           	</c:when>		
+					            </c:choose>
+					            
+								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" /></td>
+								
+
+					         
+								 	<c:if test="${Cart.buyPrice != 0}">
+								 		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.buyPrice*Cart.buyAmount }</td>
+								 		<td style="text-align:center;" class="realPrice"></td>
+								 	</c:if>
+									<c:if test="${Cart.activityPrice != ''}">
+						           		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
+						           		<td style="text-align:center;" class="realPrice">
+						           			<input type="hidden" class="numPrice">
+						           		</td>
+						           	</c:if>		
+									<td><input type="hidden" class="sumPrice"  value="${Cart.buyPrice*Cart.buyAmount }"></td>
+								
+								
+			            	</tr>	
+			              
+	             		</c:forEach>
 	                    	<tr>
 		                      	<td colspan="4"></td>
 		                      	<td>결제할 총 금액</td>
 		                      	<td>
-		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" readonly>
-		                      		<p class="lastPrice" style="float: left;"></p>
-		                      		<p style="float:left; margin: 0 5px;">원</p>
-		                      		
+		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+		                      		<p class="lastPrice"></p>
+		                      		<input type="hidden" name="allSumPrice" class="allSumPrice">
 		                     	</td>
 	                      	</tr>
+	                      	
 	                    </tbody>
 	                  </table>
-              	
-					
-					<br><br><br><br>
+                <!-- 
+              	</form>
+				<form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
+				 -->
 					<div style="text-align:center; font-size:30px;"><span>주문자 정보</span></div>
 					<div class="orderInfo" style="margin-left:15%;">
 						<div><span style="margin-right:10px;">주문자명</span><input type="text" value="${sessionScope.m.memberName }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
 						<div><span style="margin-right:10px;">전화번호</span><input type="text" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
 						<div><span style="margin-right:25px;">이메일</span><input type="text"  value="${sessionScope.m.memberEmail }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div>
+						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 					</div>
 					<br><br><br>
 					<div id="same-check" style="float:right; margin-right:10%;">
@@ -140,44 +186,45 @@
 					<div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
 					<div class="order-info shipping" style="margin-left:15%;">
 	                    <div class="order-box">
-	                        <label for="shippingName" class="order-label" style="width:70px;">수령인명</label>
-	                        <input type="text"  id="shippingName" class="order-input medium view-order-info"  style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" >
-	                        <input type="text" class="order-input medium hidden-order-info" name="receiveName" value="${sessionScope.m.memberName }" style="width:250px; display:none;border:none; border-bottom : 2px solid rgb(120,181,143);">
+	                        <label for="deliveryName" class="order-label" style="width:70px;">수령인명</label>
+	                        <input type="text"  id="deliveryName" class="basicInput view-order-info" name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" >
 	                    </div>
 	                        <br>
 	                    <div class="order-box">
-	                        <label for="shippingPhone" class="order-label" style="width:70px;">전화번호</label>
-	                        <input type="text"  id="shippingPhone" class="order-input medium view-order-info" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" >
-	                        <input type="text" class="order-input medium hidden-order-info" name="receivePhone" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);display:none;">
+	                        <label for="deliveryPhone" class="order-label" style="width:70px;">전화번호</label>
+	                        <input type="text"  id="deliveryPhone" class="basicInput medium view-order-info" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" >
 	                    </div>
 	                        <br>
 	                    <div class="order-box">
-	                        <label for="shippingPhone" class="order-label" style="width:70px;">이메일</label>
-	                        <input type="text"  id="shippingPhone" class="order-input medium view-order-info"  style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" >
-	                        <input type="text" class="order-input medium hidden-order-info" name="receiveEmail" value="${sessionScope.m.memberEmail }" style="width:250px; display:none;border:none; border-bottom : 2px solid rgb(120,181,143);">
+	                        <label for="deliveryEmail" class="order-label" style="width:70px;">이메일</label>
+	                        <input type="text"  id="deliveryEmail" class="basicInput medium view-order-info" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" >
 	                    </div>
 	                    <div class="order-box">
-	                        <label for="shippingAddr1" class="order-label" style="width:70px;">주소</label>
-	                        <input type="text" id="shippingAddr1" class="order-input long " style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
-	                        <button type="button" class="btn btn-outline-primary" name="receiveAddr" style="width:120px;height:40px;margin-bottom:30px;margin-top:10px;" id="addr-btn" onclick="searchAddr();">주소찾기</button>
+	                        <label for="deliveryAddr" class="order-label" style="width:70px;">주소</label>
+	                        <input type="text" id="deliveryAddr" class="addr1" name="deliveryAddr" style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
+	                        <button type="button" class="btn btn-outline-primary" style="width:120px;height:40px;margin-bottom:30px;margin-top:10px;" id="addr-btn" onclick="searchAddr();">주소찾기</button>
 	                    </div>
 	                    <div class="order-box">
-	                        <label for="shippingAddr2" class="order-label" id="detailAddress" style="width:70px;">상세 주소<span class="comment"></span></label>
-	                        <input type="text" id="shippingAddr2" class="order-input long " style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                        <label for="deliveryAddr2" class="order-label" id="detailAddress" style="width:70px;">우편번호<span class="comment"></span></label>
+	                        <input type="text" id="deliveryAddr2" class="addr2" name="zipcode" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                    </div><br>
+	                    <div class="order-box">
+	                        <label for="deliveryAddr2" class="order-label" id="detailAddress2" style="width:70px;">상세주소<span class="comment"></span></label>
+	                        <input type="text" id="deliveryAddr2" class="detailAddr" name="deliveryDetail" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div>
                 	</div>
                 	<br><br>
                 	<div class="agree" style="text-align:center;">
-		                    <input type="checkbox" id="infoAgree">
-	                        <label for="infoAgree">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
-			                  <button type="submit">ㅇㅇ</button>
+                   		<input type="checkbox" id="infoAgree">
+                        <label for="infoAgree">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
                     </div>
                     <br>                
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
+                  <button type="submit">연습버튼</button>
                     <button type="button" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
                     <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
                   </div>
-                  </form>
+              </form>
                   
                 </div>
               </div>
@@ -222,7 +269,8 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
 		$("#payBtn").on("click",function(){
-			const price = $(".hiddenPayPrice").val();
+			const price = $(".lastPrice").text();
+			console.log(price);
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
@@ -281,6 +329,27 @@
 			
 			window.onload=function(){
 				sum();
+				let i =0;
+				let totalPrice = $(".cartTotalPrice");
+				let sumPrice=0;
+				let numberPrice;
+				for(i; i<totalPrice.length; i++){
+					let price = totalPrice.eq(i).text();
+					numberPrice = parseInt(price);
+					let realPrice = numberPrice.toLocaleString();
+					$(".realPrice").eq(i).text(realPrice);
+					
+					
+					console.log(typeof numberPrice);
+					console.log("price"+price);
+					console.log("number"+numberPrice);
+					console.log("realPrice"+realPrice);
+					sumPrice += numberPrice;
+				}
+
+				
+				$(".lastPrice").text(sumPrice);
+				$(".allSumPrice").val(sumPrice);
 			}
 		
 		// 체크한것 삭제
@@ -302,23 +371,17 @@
 		
 		
 		$("#order-same").on("change", function(){
-		    if($(this).prop("checked")) {
-		        $(".view-order-info").hide();
-		        $(".view-order-info").attr("name", "1");
-		        $(".hidden-order-info").show();
-		        $(".hidden-order-info").eq(0).attr("name", "shippingName");
-		        $(".hidden-order-info").eq(1).attr("name", "shippingPhone");
-		        $(".hidden-order-info").eq(2).attr("name", "shippingAddr1");
-		        $(".hidden-order-info").eq(3).attr("name", "shippingAddr2");
-		    } else {
-		        $(".hidden-order-info").hide();
-		        $(".hidden-order-info").attr("name", "2");
-		        $(".view-order-info").show();
-		        $(".view-order-info").eq(0).attr("name", "shippingName");
-		        $(".view-order-info").eq(1).attr("name", "shippingPhone");
-		        $(".view-order-info").eq(2).attr("name", "shippingAddr1");
-		        $(".view-order-info").eq(3).attr("name", "shippingAddr2");
-		    }
+			if($(this).prop("checked")) {
+				$(".basicInput").eq(0).attr("value","${sessionScope.m.memberName }")
+				$(".basicInput").eq(1).attr("value","${sessionScope.m.memberPhone }")
+				$(".basicInput").eq(2).attr("value","${sessionScope.m.memberEmail }")
+			}else{
+				
+				$(".basicInput").eq(0).attr("value"," ")
+				$(".basicInput").eq(1).attr("value"," ")
+				$(".basicInput").eq(2).attr("value"," ")
+			}
+			
 		});
 		
 		function searchAddr() {
@@ -327,8 +390,8 @@
 		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 		            console.log(data);
-		            $("#postcode").val(data.zonecode);
-		            $("#shippingAddr1").val(data.roadAddress);
+		            $(".addr1").val(data.roadAddress);
+		            $(".addr2").val(data.zonecode);
 		            
 		        }
 		    }).open();
