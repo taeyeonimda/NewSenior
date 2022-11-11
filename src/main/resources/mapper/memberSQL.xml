@@ -148,7 +148,8 @@
 	    #{nickName},
 	    null,
 	    null,
-	    #{favorite}
+	    #{favorite},
+	    null
 	    )
 	</insert>
 	<insert id="insertKakaoMember" parameterType="m">

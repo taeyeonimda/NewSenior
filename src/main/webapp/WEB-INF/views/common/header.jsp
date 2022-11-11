@@ -171,7 +171,8 @@
 			}
 			input::placeholder {
 			font-weight:800;
-			color:#b8b8b8;
+			color: #9fa2a6;
+			
 			}
 	</style>
          
@@ -278,7 +279,7 @@
             <input type="submit" value="로그인" class="boxSize_2 color_g loginBtn_1 lb" style="color:#fff; font-size: 1.3rem;">
           </div>
         </form>
-        <div class="txt_1 flex00 flex_01">
+        <div class="txt_1 flex00 flex_01" style="width: 300px;">
           <div>
             <input type="checkbox">로그인 유지
           </div>
