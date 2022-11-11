@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-    
 <!DOCTYPE html>
 <html
   lang="en"
@@ -129,19 +128,19 @@
 								<td style="text-align:center">무료배송</td>
 
 					         
-					           
-								
-								<td style="text-align:center">
 								 	<c:if test="${Cart.buyPrice != 0}">
-								 	<fmt:formatNumber value="${Cart.buyPrice*Cart.buyAmount }" pattern="#,###"/>
+								 		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.buyPrice*Cart.buyAmount }</td>
+								 		<td style="text-align:center;" class="realPrice"></td>
 								 	</c:if>
 										<c:if test="${Cart.activityPrice != ''}">
-						           		<fmt:formatNumber value="${Cart.activityPrice*Cart.buyAmount }" pattern="#,###"/>
+						           		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
+						           		<td style="text-align:center;" class="realPrice"></td>
 						           	</c:if>		
-									<input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }">
-								</td>
+									<td><input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }"></td>
+								
 								
 			            	</tr>	
+			              
 	             		</c:forEach>
 	                    	<tr>
 		                      	<td colspan="4"></td>
@@ -203,7 +202,31 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>    
-
+    	window.onload=function(){
+			sum();
+			let i =0;
+			let totalPrice = $(".cartTotalPrice");
+			for(i; i<totalPrice.length; i++){
+				let price = totalPrice.eq(i).text();
+				let numberPrice = parseInt(price);
+				let realPrice = numberPrice.toLocaleString();
+				console.log(realPrice);
+				$(".realPrice").eq(i).text(realPrice);
+			}
+		
+			console.log(qwdc.toLocaleString());
+			
+			/*
+			let totalPrice = $(".cartTotalPrice").text();
+			console.log(typeof totalPrice);
+			let qwdc = parseInt(totalPrice);
+			console.log(typeof qwdc);
+			console.log(qwdc.toLocaleString());	
+			*/
+			
+		}
+    	
+    	
 		$("#payBtn").on("click",function(){
 			const price = $(".hiddenPayPrice").val();
 
@@ -262,9 +285,7 @@
 			
 		}
 		
-		window.onload=function(){
-			sum();
-		}
+		
 
 		
 		$(".deleteCheck").on("click", function(){
@@ -290,6 +311,8 @@
 				console.log(memberNo);
 				location.href="/deleteCart.do?memberNo="+memberNo+"&productNoArr="+productNoArr.join("/");
 			});
+		
+			
 		
 		/*
 		$(".deleteCheck").on("click", function(){

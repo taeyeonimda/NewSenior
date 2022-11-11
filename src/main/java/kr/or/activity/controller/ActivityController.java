@@ -48,9 +48,9 @@ public class ActivityController {
 	public String activity2(Cart cart,Model model) {
 		int result = service.actInsertCart(cart);
 		if(result>0) {
-			return "good";
+			return "1";
 		}
-		return "noGood";
+		return "0";
 	}
 	
 	

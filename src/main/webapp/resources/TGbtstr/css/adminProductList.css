@@ -1,4 +1,51 @@
 @charset "UTF-8";
-.adminProductTable tr td, .adminProductTable tr th{
-	border: 1px solid black;
+.adminProductTable{
+	border: 1.2px solid black;
+	margin-top: 5px;
+}
+.adminProductTable tr th{
+	border: 1px solid rgba(1,1,1,0.5);
+	text-align: center;
+	color: white;
+	background-color: #0F4229;
+	height: 35px;
+	font-size: 18px;
+}
+
+.adminProductTable tr td {
+	border-bottom: 1px solid rgba(1,1,1,0.3);
+	border-right: 1px solid rgba(1,1,1,0.3);
+	height: 45px;
+	padding-left: 8px;
+	font-size: 18px;
+}
+
+.adminProductTable tr td:first-child{
+	text-align: center;
+}
+.adminProductTable tr td:nth-child(3){
+	text-align: center;
+}
+.adminProductTable tr td:nth-child(4){
+	text-align: center;
+}
+.adminProductTable tr td:nth-child(5){
+	text-align: center;
+}
+.adminProductTable tr td:nth-child(6){
+	text-align: center;
+}
+.productTitle> a{
+	color: black;
+}
+.paging{
+	margin-top: 10px;
+}
+button{
+	background-color: white;
+	border: 1px solid rgba(1,1,1,0.2);
+}
+button:hover{
+	background-color: #0F4229;
+	color: white;
 }

@@ -46,10 +46,8 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
+    <link href="/resources/TGbtstr/css/productUpdate.css" rel="stylesheet">
     
-    <script src="/resources/summernote/summernote-lite.js"></script>
-	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 </head>
 <body>
 	
@@ -66,85 +64,125 @@
           <ul class="menu-inner py-1">
 
             <!-- 회원관리 -->
-            <li class="menu-item ">
-              <a href="memberMgrAdmin.html" class="menu-link">
+            <li class="menu-item adminMenuItem">
+              <a href="/adminPage.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">회원 관리</div>
               </a>
             </li>
+            
+            <!-- Tables -->
+            <li class="menu-item adminClassMenu">
+              <a href="/adminMgrClass.do?reqPage=1" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">클래스관리(관리자페이지)</div>
+              </a>
+            </li>
 
             <!-- 클래스관리 -->
-            <li class="menu-item">
-              <a href="classMgrTeacher.html" class="menu-link">
+            <li class="menu-item classMgrTeacher">
+              <a href="classMgrTeacher.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">클래스관리(강사페이지)</div>
               </a>
             </li>
+
             <!-- 클래스등록 -->
-            <li class="menu-item">
-              <a href="classEnroll.html" class="menu-link">
+            <li class="menu-item classEnroll">
+              <a href="classEnroll.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">클래스 등록</div>
               </a>
             </li>
 
             <!-- 액티비티등록 -->
-            <li class="menu-item ">
-              <a href="activityEnroll.html" class="menu-link">
+            <li class="menu-item activityEnroll">
+              <a href="activityEnroll.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">액티비티 등록</div>
               </a>
             </li>
 
             <!-- 액티비티관리 -->
-            <li class="menu-item ">
-              <a href="activityMgrAdmin.html" class="menu-link">
+            <li class="menu-item activityMgrAdmin">
+              <a href="activityMgrAdmin.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">액티비티 관리</div>
               </a>
             </li>
 
             <!-- 상품등록 -->
-            <li class="menu-item active">
-              <a href="goodsEnroll.html" class="menu-link">
+            <li class="menu-item insertProductFrm">
+              <a href="insertProductFrm.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">상품 등록</div>
               </a>
             </li>
 
             <!-- 상품관리 -->
-            <li class="menu-item">
-              <a href="goodsMgrAdmin.html" class="menu-link">
+            <li class="menu-item goodsMgrAdmin">
+              <a href="/adminProductList.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">상품 관리</div>
               </a>
             </li>
 
-            <!-- Tables -->
-            <li class="menu-item">
-              <a href="classMgrAdmin.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">클래스관리(관리자페이지)</div>
-              </a>
-            </li>
 
             <!-- 장바구니 -->
-            <li class="menu-item ">
-              <a href="cart.html" class="menu-link">
+            <li class="menu-item cart">
+              <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">장바구니</div>
               </a>
             </li>
 
             <!-- 마이페이지 -->
-            <li class="menu-item  ">
-              <a href="mypage.html" class="menu-link">
+            <li class="menu-item  mypage">
+              <a href="mypage.do" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Basic Inputs">마이페이지</div>
               </a>
             </li>
-          </ul>
+                      <!-- 주문내역 -->
+          <li class="menu-item orderHistory">
+            <a href="orderHistory.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">주문내역</div>
+            </a>
+          </li>
+          
+          <!-- 내동호회 -->
+          <li class="menu-item myClub ">
+            <a href="myClub.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">내동호회</div>
+            </a>
+          </li>
+          
+          <!-- 수강현황 -->
+          <li class="menu-item  classHistory">
+            <a href="classHistory.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">수강현황</div>
+            </a>
+          </li>
+          <!-- 나의후기 -->
+          <li class="menu-item  myComment">
+            <a href="myComment.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">나의후기</div>
+            </a>
+          </li>
+          
+          <!-- 강사정보 -->
+          <li class="menu-item teacherInfo ">
+            <a href="teacherInfo.do" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic Inputs">강사정보</div>
+            </a>
+          </li>
         </aside>
+         
         <!-- / Menu -->
 
         <!-- Layout container -->

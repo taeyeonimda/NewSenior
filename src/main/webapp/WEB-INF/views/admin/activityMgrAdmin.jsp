@@ -144,7 +144,7 @@
 									<td><input type="button" class="btn btn-primary"
 										value="수정" onclick="activityUpdate(${act.activityNo})"></td>
 									<td><input type="button" class="btn btn-warning"
-										value="삭제"></td>
+										value="삭제" onclick="activityDelete(${act.activityNo})"></td>
 								</tr>
 							</c:forEach>
 
@@ -270,6 +270,12 @@
 		}
     function activityUpdate(number){
     	location.href="/activityUpdateFrm.do?activityNo="+number;
+    }
+    
+    function activityDelete(number){
+    	if(confirm("삭제 하시겠습니까?")){
+    		location.href="/activityDelete.do?activityNo="+number;
+    	}
     }
     </script>
 	<script async defer src="https://buttons.github.io/buttons.js"></script>

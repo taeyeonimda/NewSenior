@@ -83,9 +83,10 @@
 	
 	<!-- 예약작업관련 어노테이션 활성화 -->
 	<task:annotation-driven/>
-	
+	<!-- 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor" class="kr.or.common.LoginInterceptor" />
-
+	<!-- 로그인&운영자 인터셉터 -->
+	<beans:bean id="AdminInterceptor" class="kr.or.common.AdminInterceptor" />
 
 
 
@@ -93,14 +94,21 @@
    <!--interceptor 프로그램 등록-->
 	<interceptors>
 		<interceptor>
-			 
-			<mapping path="/mypage.do" />
+			<mapping path="/mypage.do" /><!-- 로그인 한사람만 볼 수 있는 페이지 -->
 			<exclude-mapping path="/login.do"/>
 			<exclude-mapping path="/joinFrm.do"/> 
 			<exclude-mapping path="/roomPage.do"/> 
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/adminPage.do" />
+			<beans:ref bean="AdminInterceptor" /><!-- 로그인 한사람중 관리자만 볼 수 있는 페이지 -->
+		</interceptor>
+		
 	</interceptors> 
+	
+
 	
 	
 	<context:component-scan base-package="kr.or.senior" />

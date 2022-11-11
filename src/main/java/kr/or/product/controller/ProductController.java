@@ -127,6 +127,19 @@ public class ProductController {
 		return "redirect:/productList.do?reqPage=1";
 	}
 	
+	@RequestMapping(value = "/adminDeleteProduct.do")
+	public String adminDeleteProduct(int productNo, HttpServletRequest request) {
+		ArrayList<ProductFileVO> list = service.deleteProduct(productNo);
+		if(list != null) {
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+			for(ProductFileVO file : list) {
+				File delFile = new File(path+file.getFilePath());
+				delFile.delete();
+			}
+		}
+		return "redirect:/adminProductList.do?reqPage=1";
+	}
+	
 	@RequestMapping(value = "/productUpdateFrm.do")
 	public String productUpdateFrm(int productNo, Model model) {
 		Product p = service.productView(productNo);

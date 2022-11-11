@@ -213,4 +213,10 @@ public class AdminActivityController {
 		}
 		return "admin/activityMgrAdmin";
 	}
+	
+	@RequestMapping(value="/activityDelete.do")
+	public String activityDelete(Activity act) {
+		int result = service.activityDelete(act); 
+		return "admin/activityMgrAdmin";
+	}
 }

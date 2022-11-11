@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="top: 30px; display: inline-block; width: 300px;  min-height: 700px;">
           <ul class="menu-inner py-1">
 
@@ -50,7 +51,7 @@
                 <div data-i18n="Basic Inputs">액티비티 관리</div>
               </a>
             </li>
-
+			<c:if test="${sessionScope.m ne null and sessionScope.m.memberGrade eq 3}">
             <!-- 상품등록 -->
             <li class="menu-item insertProductFrm">
               <a href="insertProductFrm.do" class="menu-link">
@@ -66,7 +67,7 @@
                 <div data-i18n="Basic Inputs">상품 관리</div>
               </a>
             </li>
-
+			</c:if>
 
             <!-- 장바구니 -->
             <li class="menu-item cart">
