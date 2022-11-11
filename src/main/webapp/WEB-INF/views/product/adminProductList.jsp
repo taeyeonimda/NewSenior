@@ -72,23 +72,33 @@
 
               <!-- HTML5 Inputs -->
             <form action="/insertProduct.do" method="post" enctype="multipart/form-data">
-              <div class="card mb-4" style="width: 60%; float: left;">
+              <div class="card mb-4" style="width: 90%; float: left;">
                 <h5 class="card-header" style="text-align: center;">상품 관리하기</h5>
                 <div class="card-body">
-                <table style="border: 1px solid black;" class="adminProductTable">
+                <table style="border: 1px solid black; width: 100%" class="adminProductTable">
                 <tr>
-                	<th>상품번호</th><th>상품명</th><th>상품가격</th><th>수량</th>
+                	<th style="width: 8%;">상품번호</th><th style="width: 45%;">상품명</th><th style="width: 15%;">상품가격</th><th style="width: 10%;">수량</th><th style="width: 10%;">판매상태</th><th style="width: 12%">상품관리</th>
                 </tr>
                   <c:forEach items="${list }" var="p">
                   <tr>
-                  	<td>${p.productNo }</td>
-                  	<td>${p.productName }</td>
-                  	<td>${p.productPrice }</td>
+                  	<td class="productNo">${p.productNo }</td>
+                  	<td class="productTitle"><a href="/productView.do?productNo=${p.productNo }">${p.productName }</a></td>
+                  	<td>${p.wonPrice }<span>원</span></td>
                   	<td>${p.productQty }</td>
+                  	<c:if test="${p.productStatus eq 0 }">
+                  		<td>판매중</td>
+                  	</c:if>
+                  	<c:if test="${p.productStatus eq 1 }">
+                  		<td>품절</td>
+                  	</c:if>
+                  	<td>
+                  		<button type="button" class="productUpdateBtn" onclick="productUpdate(this,${p.productNo});">수정</button>
+                  		<button type="button" class="productDeleteBtn" onclick="productDelete(this,${p.productNo});">삭제</button>
+                  	</td>
                   </tr>
 			  	  </c:forEach>
 			  	 </table>
-                  <div>${pageNavi }</div>
+                  <div class="paging">${pageNavi }</div>
                 </div>
               </div>
             </form>
@@ -96,8 +106,6 @@
             </div>
 
         <!-- / Content -->
-
-
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -115,22 +123,20 @@
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 <!-- Footer End -->
 	<script>
+		
+		function productDelete(obj, productNo){
+			if(confirm("상품을 삭제하시겠습니까?")){
+				location.href="/adminDeleteProduct.do?productNo="+productNo;
+			}
+		}
 	
-		$("#fileUpload").on("click",function(){
-			$(".productFile").click();
-		});
-		
-		$("#productCategory").change(function(){
-			  console.log($(this).val())
-		});
-		$("#productStatus").change(function(){
-			  console.log($(this).val())
-		});
-		
-		$(".mainImg").on("change",function(){
-			
-			
-		});
+		function productUpdate(obj, productNo) {
+			if(confirm("상품정보를 수정하시겠습니까?")){
+				location.href="/productUpdateFrm.do?productNo="+productNo;
+			}
+		}
+	
+	
 		function productInsert(){
 			var mainImg = $(".mainImg").val();
 			 if(mainImg==''){
@@ -142,9 +148,6 @@
 				 }
 			 }
 		}
-		//$("#productInsertBtn").on("click",function(){
-			
-		//});
 		
 		</script>
 
@@ -170,3 +173,4 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
+                  	
