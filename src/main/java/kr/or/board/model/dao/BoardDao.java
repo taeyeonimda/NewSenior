@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.board.model.vo.Board;
+import kr.or.board.model.vo.BoardCategoryVO;
 import kr.or.board.model.vo.BoardComment;
 import kr.or.board.model.vo.FileVO;
 
@@ -109,6 +110,10 @@ public class BoardDao {
 	}
 	public int updateboard2(Board b) {
 		return sqlSession.update("board.updateBoard2",b);
+	}
+	public ArrayList<BoardCategoryVO> selectAllCategroy(String boardType) {
+		List list = sqlSession.selectList("board.selectAllCategory",boardType);
+		return (ArrayList<BoardCategoryVO>) list;
 	}
 	
 	

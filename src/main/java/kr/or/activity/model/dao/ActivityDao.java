@@ -85,4 +85,10 @@ public class ActivityDao {
 		int result = sqlSession.insert("activity.actInsertCart",cart);
 		return result;
 	}
+
+
+	public int activityDelete(Activity act) {
+		int result = sqlSession.insert("activity.activityDelete",act);
+		return result;
+	}
 }
