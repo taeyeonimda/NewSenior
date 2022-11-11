@@ -44,8 +44,11 @@ public class CartController {
 	
 	
 	@RequestMapping(value="/insertCart.do")
-	public String insertCart(Cart c,int productNo, int buyAmount) {
+	public String insertCart(Cart c,int productNo, int buyAmount,Model model) {
 		int result = service.insertCart(c,productNo, buyAmount);
+//		model.addAttribute("msg","메시지?");
+//		model.addAttribute("url", "/cart.do?memberNo="+c.getMemberNo());
+//		return "redirect";
 		return "redirect:/cart.do?memberNo="+c.getMemberNo();
 	}
 	
