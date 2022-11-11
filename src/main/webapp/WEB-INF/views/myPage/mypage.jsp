@@ -57,6 +57,7 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -242,7 +243,7 @@
 	<!-- 배송지 등록 모달 -->
 
 	<div class="popup_bg00"></div>
-	<div class="popup00 personal_pop00 noto bg_s">
+	<div class="popup00 personal_pop00 noto bg_s" style="width: 60%;">
 		<div class="x_btn00">
 			<span class="zwicon-close00">X</span>
 		</div>
@@ -253,7 +254,7 @@
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<!-- HTML5 Inputs -->
 					<form action="/insertAddr.do" method="post" onsubmit="return deliverychk();" id="formId">
-						<div class="card mb-4" /* style="width: 60%;*/">
+						<div class="card mb-4"  style="width: 80%;">
 							<h5 class="card-header">배송지등록/수정</h5>
 							<div class="card-body" style="padding-top: 20px;">
 								<div class="mb-3 row">
@@ -292,7 +293,7 @@
 									<label for="html5-url-input" class="col-md-2 col-form-label"></label>
 									<div class="col-md-10">
 										<input class="form-control " type="text" placeholder="상세주소"
-											id="html5-email-input" name="deliveryDetail" />
+											id="html5-email-input" name="deliveryDetail"/>
 									</div>
 								</div>
 								<div class="mb-3 row">
@@ -314,8 +315,7 @@
 						</div>
 						<input type="hidden" value="${member.memberNo }" name="memberNum">
 						<input type="hidden" name="deliveryNum">
-						<div>
-
+						<div style="margin: 0 20px; ">
 							<button type="button" class="btn btn-outline-warning closeBtn" style="width: 50%;">닫기</button><button class="btn btn-outline-warning saveBtn" style="width: 50%;">저장</button><button class="btn btn-outline-warning updateBtn1" style="width: 50%; display: none;">수정</button>
 						</div> 
 					</form>
