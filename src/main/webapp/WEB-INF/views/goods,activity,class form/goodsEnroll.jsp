@@ -122,7 +122,7 @@
                     <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
                       <div class="btn-group" style="width: 150px;">
                       	<select id="productCategory" name="productCategory">
-                      		<option>카테고리 선택</option>
+                      		<option value="">카테고리 선택</option>
                       		<option value="dg">디지털</option>
                       		<option value="fu">주식/재테크</option>
                       		<option value="cr">공예</option>
@@ -201,18 +201,20 @@
 		});
 		function productInsert(){
 			var mainImg = $(".mainImg").val();
+			var category = $("#productCategory").val();
+			console.log(category);
 			 if(mainImg==''){
 				 alert("메인이미지를 등록해주세요.");
 				 return false;
+			 } else if(category ==''){
+				 alert("카테고리를 선택해주세요.")
+				 return false;
 			 } else {
-				 if(confirm("상품을 등록하시겠습니까?")){
+				if(confirm("상품을 등록하시겠습니까?")){
 					 
 				 }
 			 }
 		}
-		//$("#productInsertBtn").on("click",function(){
-			
-		//});
 		
 		</script>
 
