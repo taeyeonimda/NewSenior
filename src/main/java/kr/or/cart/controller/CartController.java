@@ -1,5 +1,6 @@
 package kr.or.cart.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,17 @@ public class CartController {
 	@RequestMapping(value="/cart.do")
 	public String cart(Model model, Member m) {
 		ArrayList<Cart> list = service.selectAllCartList(m);
+		/*	DecimalFormat formatter = new DecimalFormat("###,###");
+	
+		for(int i =0;i<list.size();i++) {
+			int a = Integer.parseInt(formatter.format(list.get(i).getBuyPrice()));
+			int b = Integer.parseInt(formatter.format(list.get(i).getActivityPrice()));
+			System.out.println("프로덕트 가격"+a);
+			System.out.println("액티비티 가격"+b);
+		}
+	*/
 		model.addAttribute("list",list);
+		
 		return "myPage/cart";
 	}
 	

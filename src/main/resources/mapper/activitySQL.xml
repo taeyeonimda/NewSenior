@@ -179,6 +179,12 @@
 			#{buyAmount}
 		)
 	</insert>
+	
+	<delete id="activityDelete" parameterType="act">
+		delete 
+		from activity
+		where activity_no = #{activityNo}
+	</delete>
 </mapper>
 
 

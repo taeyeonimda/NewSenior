@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
-    <title>클래스 상세</title>
+    <title>액티비티 상세페이지</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -59,31 +59,7 @@
                 </div>
             </div>
         </div>
-        <script>
-        $("#submitBtn").on("click",function(){
-        	console.log('${sessionScope.m.memberNo}');
-        	console.log($("#amountSelect").val());//amout값
-        	console.log('${act.activityNo}');
-        	$.ajax({
-        		url:"/actInsertCart.do",
-        		data:{
-        			memberNo: ${sessionScope.m.memberNo},
-        			activityNo : ${act.activityNo},
-        			buyAmount : $("#amountSelect").val()
-        		},
-        		success:function(data){
-        			console.log("success"+data);
-        		},
-        		fail:function(data){
-        			console.log("fail:function"+data);
-        		},
-        		error:function(data){
-        			console.log("error:function"+data);
-        		}
-        	})
-        })
-        	
-        </script>
+        
         <!-- sideBar End-->
         <!-- class main -->
         <div class="container-xxl py-5 mt-5">
@@ -389,6 +365,35 @@
 		        }
 		    })
 			
+		    $("#submitBtn").on("click",function(){
+        	console.log('${sessionScope.m.memberNo}');
+        	console.log($("#amountSelect").val());//amout값
+        	console.log('${act.activityNo}');
+        	$.ajax({
+        		url:"/actInsertCart.do",
+        		data:{
+        			memberNo: ${sessionScope.m.memberNo},
+        			activityNo : ${act.activityNo},
+        			buyAmount : $("#amountSelect").val()
+        		},
+        		success:function(data){
+        			if(data==1){
+        				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+        					location.href="/cart.do?memberNo="+${sessionScope.m.memberNo};
+        				}else{
+        					console.log("a");
+        				}
+        				
+        			}
+        		},
+        		fail:function(data){
+        			console.log("fail:function"+data);
+        		},
+        		error:function(data){
+        			console.log("error:function"+data);
+        		}
+        	})
+        })
 	</script>
 	<!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -209,4 +209,10 @@ public class ActivityService {
 	public int actInsertCart(Cart cart) {
 		return dao.actInsertCart(cart);
 	}
+	//액티비티 삭제
+	@Transactional
+	public int activityDelete(Activity act) {
+		
+		return dao.activityDelete(act);
+	}
 }
