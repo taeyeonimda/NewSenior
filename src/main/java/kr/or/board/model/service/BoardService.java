@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.board.model.dao.BoardDao;
 import kr.or.board.model.vo.Board;
+import kr.or.board.model.vo.BoardCategoryVO;
 import kr.or.board.model.vo.BoardComment;
 import kr.or.board.model.vo.FileVO;
 
@@ -34,6 +35,9 @@ public class BoardService {
 		
 		ArrayList<Board> list = dao.selectBoardList(pageMap);
 		pageMap.put("list", list);
+		ArrayList<BoardCategoryVO> boardCate = dao.selectAllCategroy(boardType);
+		pageMap.put("boardCate", boardCate); //
+		System.out.println("boardCate(서비스) : "+boardCate);
 		
 		//pageNavi 시작
 		//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
@@ -180,12 +184,16 @@ public class BoardService {
 		 //조회수
 		 int readCount = dao.updateReadCount(boardNo);
 		 
+		 //카테고리 조회
+		 
+			 //
 		 //조회된 결과 hashMap에 넣기 : board(file포함),
 		 HashMap<String, Object> pageViewMap = new HashMap<String, Object>();
 		 pageViewMap.put("b", b);
 		 pageViewMap.put("commentList", commentList);
 		 pageViewMap.put("reCommentList", reCommentList);
 		 pageViewMap.put("readCount", readCount);
+		 
 		 
 		return pageViewMap;
 	}
@@ -250,6 +258,9 @@ public class BoardService {
 
 	// 댓글 작성
 	public int insertComment(BoardComment bc) {
+		//int result = dao.insertComment(bc);
+
+		//return result;
 		return dao.insertComment(bc);
 	}
 	

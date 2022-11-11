@@ -18,8 +18,17 @@ public class Board {
 	private String boardDate;
 	private String boardType;
 	private String boardCategory;
+	private int boardCommCnt;
 	
 	private String nickName; // 조인해서 가져온 컬럼
+	
+	private int qnaAnswer;
+	
+	
+	
+	private String boardName;
+	private String categoryCode;
+	private String categoryName;
 	
 	private ArrayList<FileVO> fileList; // 추가함
 	

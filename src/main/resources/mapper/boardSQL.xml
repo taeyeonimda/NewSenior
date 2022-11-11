@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
 	<select id="selectBoardList" parameterType="map" resultType="b">
-		select * from 
+select * from 
 		(select row_number() over(partition by boardType order by boardNo desc) as rn, b.*from
 		(select
 			board_no as boardNo,
@@ -13,11 +13,11 @@
 			to_char(board_date,('YYYY-MM-DD')) as boardDate,
 			board_type as boardType,
 			board_category as boardCategory,
+            (select count(*) from board_comment where board_ref = board_no) as boardCommCnt,
             nickname as nickName
-		from board join members using(member_no)order by board_no desc)b)
-        where (boardType=#{boardType}) and rn between #{start} and #{end} 
-        <!-- where절 우선순위때문에 이렇게 만듦 -->
-				
+			from board 
+			join members using(member_no)order by board_no desc) b)
+   		 	where (boardType=#{boardType}) and rn between #{start} and #{end} 
 	</select>   
 	
 	<!-- 검색기능 자유게시판 : boardType='F' -->
@@ -270,21 +270,14 @@
 	</delete>
 	
 	
-	<select id="selectBoardList22" parameterType="map" resultType="b">
-	select * from
-		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
-            (select
-                board_no as boardNo,
-                member_no as memberNo,
-                board_title as boardTitle,
-                board_content as boardContent,
-                board_count as boardCount,
-                to_char(board_date,('YYYY-MM-DD')) as boardDate,
-                board_type as boardType,
-                board_category as boardCategory,
-                nickname as nickName
-            from board join members using(member_no) 
-            where board_title like '%'||'제목'||'%'
-            order by board_no desc)b)
-	</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+	<select id="selectAllCategory" parameterType="String" resultType="bCateVO">
+		select 
+			board_category as boardCategory,
+			category_name as categroyName,
+			board_type as boardType,
+			board_name as boardName
+		from board_category_tbl
+		where board_type=#{boardType}
+		
+	</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 </mapper>

@@ -69,10 +69,16 @@
             </c:forEach>
             </div>
         </div>
-
+	<c:if test="${not empty sessionScope.m }">
+		<button><a href="/boardWriteFrm.do">글작성</a></button>
+		</c:if>
+		
+		<!-- 자유게시판, 정보게시판, 동호회모집, 공지사항 -->
+		<c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P' or boardType eq 'N' }">
+		
 	<table border="1">
 		<tr>
-			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th><th>보드타입</th>
+			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th><th>보드타입</th><th>카테리스트</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
@@ -84,11 +90,62 @@
 			<c:if test ="${b.boardCategory eq 'etc'}">
 				<td>기타</td>
 			</c:if>
-			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }</a></td>
+			<c:if test ="${b.boardCategory eq 'notice'}">
+				<td>공지사항</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'invite'}">
+				<td>모집중</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'end'}">
+				<td>모집완료</td>
+			</c:if>
+			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
 			<td>${b.boardDate }</td>
 			<td>${b.boardType }</td>
+		</tr>
+		</c:forEach>
+		<c:forEach items="${boardCate}" var="bCateVO">
+		
+			<td>${bCateVO.boardCategory }</td>
+
+		</c:forEach>
+		<tr>
+			<th colspan="5">
+				${pageNavi }
+			</th>
+		</tr>
+		</table>
+		</c:if>
+		<!-- 자유게시판, 정보게시판, 동호회모집, 공지사항  끝-->
+		
+		<!-- Q&A  -->
+		<c:if test="${boardType eq 'Q' }">
+		
+	<table border="1">
+		<tr>
+			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th><th>보드타입</th><th>답변여부</th>
+		</tr>
+		<c:forEach items="${list }" var="b" varStatus="i">
+		<tr>
+		
+			<td>${(reqPage-1)*numPerPage+i.count }</td>
+			<c:if test ="${b.boardCategory eq 'info'}">
+				<td>정보</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'etc'}">
+				<td>기타</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'notice'}">
+				<td>공지사항</td>
+			</c:if>
+			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
+			<td>${b.nickName }</td>
+			<td>${b.boardCount }</td>
+			<td>${b.boardDate }</td>
+			<td>${b.boardType }</td>
+			<td>답변대기중</td>
 		</tr>
 		</c:forEach>
 		<tr>
@@ -97,6 +154,9 @@
 			</th>
 		</tr>
 		</table>
+		</c:if>
+		<!-- Q&A 끝-->
+		
 		
 		<div class="searchForm">
 			<form action="/searchBoard.do?reqPage=1" method="post">
@@ -113,9 +173,7 @@
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>
-		<c:if test="${not empty sessionScope.m }">
-		<button><a href="/boardWriteFrm.do">글작성</a></button>
-		</c:if>
+		
 
 		
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
