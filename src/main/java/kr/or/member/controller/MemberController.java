@@ -90,10 +90,11 @@ public class MemberController {
 			System.out.println("login정보:"+member);
 			return "redirect:/";
 		}else {
-			return "redirect:/";
+			model.addAttribute("msg", "로그인 실패");
+			model.addAttribute("url","/");
+			return "alert";
 		}
 	}
-	
 	
 	
 	//로그아웃
