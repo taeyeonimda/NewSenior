@@ -31,17 +31,16 @@
     	<link href="/resources/TGbtstr/css/productList.css" rel="stylesheet">
         <!-- Template Stylesheet -->
         <link href="/resources/TGbtstr/css/styleTG.css" rel="stylesheet">
-          <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- 로그인 모달 css
         <link href="/resources/css/login/login.css" rel="stylesheet">
         -->
-         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- datepicker -->
  		<link rel="stylesheet" href="/resources/css/datepicker.css"><!--datepickercss--> 
- 		
  		<script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
 		<!-- 카카오 로그인 -->
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        
+        <!-- sweetalert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>        
          <style type="text/css">
          @charset "UTF-8";
 			.detail {
@@ -171,7 +170,8 @@
 			}
 			input::placeholder {
 			font-weight:800;
-			color:#b8b8b8;
+			color: #9fa2a6;
+			
 			}
 	</style>
          
@@ -234,6 +234,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu bg-light m-0">
+                     	<a href="#">a${isLogin }</a>
                         <a href="/boardList.do?reqPage=1&boardType=F" class="dropdown-item">자유게시판</a>
                         <a href="boardList.do?reqPage=1&boardType=P" class="dropdown-item">동호회모집</a>
                         <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
@@ -274,6 +275,7 @@
     <div class="x_btn00"><span class="zwicon-close00">X</span></div>
     <div class="cont00">
       <h1 id="login_header" style="color:#000;">로그인</h1>
+     
       <hr>
       <div class="login_cont">
         <form action="/login.do" method="post" onsubmit="return loginchk();">
@@ -283,7 +285,7 @@
             <input type="submit" value="로그인" class="boxSize_2 color_g loginBtn_1 lb" style="color:#fff; font-size: 1.3rem;">
           </div>
         </form>
-        <div class="txt_1 flex00 flex_01">
+        <div class="txt_1 flex00 flex_01" style="width: 300px;">
           <div>
             <input type="checkbox">로그인 유지
           </div>
@@ -332,6 +334,11 @@
     -->
     
     <script type="text/javascript">
+   
+    
+    function alert(text){
+		Swal.fire(text);
+	}
     
     $(".loginBtn").click(function(){
       $(".popup_bg00").stop().fadeIn();

@@ -12,7 +12,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gardener - Gardening Website Template</title>
+    <title>회원관리 페이지</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -44,7 +44,18 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
+    
+    <!--  
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	-->
+	
+	
 </head>
+<!-- sweetalert -->
+
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 
@@ -68,7 +79,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 
 
-              <div style="font-size: 25px;">회원 관리</div>
+              <div style="font-size: 25px;" onclick="test('제목임','내용임','warning');">회원 관리</div>
               <div class="card" >
 
                 <div class="table-responsive text-nowrap">
@@ -187,6 +198,50 @@
 </div>
 <!-- Footer End -->
 	<script>
+	$(()=>{ 
+		alert("스트롱맨~");
+		/*
+		swal({
+			  title: "Good job!",
+			  text: "You clicked the button!",
+			  icon: "success",
+			  button: "Aww yiss!",
+			  dangerMode:true,	
+		});
+		*/
+		/*
+		확인 취소에 아이콘넣은거
+		swal("제목", {
+			  buttons: ["확인", "취소"],
+			  icon: "/resources/img/KakaoTalk_20221111_113436901.jpg",
+			});
+		*/
+		
+		
+		
+	});
+	function test(title,text,icon){
+		Swal.fire({
+			  title: title,//제목
+			  text: text,//내용
+			  icon: icon,//아이콘
+			  imageUrl: "/resources/img/KakaoTalk_20221111_113436901.jpg",
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '삭제',
+			  cancelButtonText: '취소'
+			}).then((result) => {
+				//result.value ==true이니까 트루일때만 실행하는거
+			  if (result.value) {
+	              alert("삭제눌렀음~");
+			  }else{
+				  alert("삭제안눌렀음~");
+			  }
+			})//then끝
+	}
+	
+	
 		$(".changeLevel").on(
 				"click",
 				function() {

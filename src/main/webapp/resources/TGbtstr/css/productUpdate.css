@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.productDelBtn1{
+	border : 1px solid rgba(1,1,1,0.2);
+	background-color : white;
+}
+.productDelBtn1:hover{
+	background-color: #0F4229;
+	color: white;
+}

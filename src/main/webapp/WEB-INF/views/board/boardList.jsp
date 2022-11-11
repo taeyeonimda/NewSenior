@@ -72,10 +72,8 @@
 	<c:if test="${not empty sessionScope.m }">
 		<button><a href="/boardWriteFrm.do">글작성</a></button>
 		</c:if>
-		
-		<!-- 자유게시판, 정보게시판, 동호회모집, 공지사항 -->
-		<c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P' or boardType eq 'N' }">
-		
+
+		<c:if test="${boardType ne 'Q' }">
 	<table border="1">
 		<tr>
 			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th><th>보드타입</th><th>카테리스트</th>
@@ -84,21 +82,38 @@
 		<tr>
 		
 			<td>${(reqPage-1)*numPerPage+i.count }</td>
+			<!-- 자유게시판 -->
 			<c:if test ="${b.boardCategory eq 'info'}">
 				<td>정보</td>
 			</c:if>
 			<c:if test ="${b.boardCategory eq 'etc'}">
 				<td>기타</td>
 			</c:if>
+			<!-- 공지사항 -->
 			<c:if test ="${b.boardCategory eq 'notice'}">
 				<td>공지사항</td>
 			</c:if>
+			<!-- 동호회모집 -->
 			<c:if test ="${b.boardCategory eq 'invite'}">
 				<td>모집중</td>
 			</c:if>
 			<c:if test ="${b.boardCategory eq 'end'}">
 				<td>모집완료</td>
 			</c:if>
+			<!-- 정보게시판 -->
+			<c:if test ="${b.boardCategory eq 'campaign'}">
+				<td>캠페인</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'fair'}">
+				<td>박람회</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'tour'}">
+				<td>여행</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'ectI'}">
+				<td>기타</td>
+			</c:if>
+			
 			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
@@ -118,7 +133,7 @@
 		</tr>
 		</table>
 		</c:if>
-		<!-- 자유게시판, 정보게시판, 동호회모집, 공지사항  끝-->
+
 		
 		<!-- Q&A  -->
 		<c:if test="${boardType eq 'Q' }">
@@ -131,21 +146,36 @@
 		<tr>
 		
 			<td>${(reqPage-1)*numPerPage+i.count }</td>
-			<c:if test ="${b.boardCategory eq 'info'}">
-				<td>정보</td>
+			<!-- QNA -->
+			<c:if test ="${b.boardCategory eq 'class'}">
+				<td>클래스</td>
 			</c:if>
-			<c:if test ="${b.boardCategory eq 'etc'}">
-				<td>기타</td>
+			<c:if test ="${b.boardCategory eq 'club'}">
+				<td>동호회</td>
 			</c:if>
-			<c:if test ="${b.boardCategory eq 'notice'}">
-				<td>공지사항</td>
+			<c:if test ="${b.boardCategory eq 'activity'}">
+				<td>액티비티</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'product'}">
+				<td>상품</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'pay'}">
+				<td>결제</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'delivery'}">
+				<td>배송</td>
 			</c:if>
 			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
 			<td>${b.boardDate }</td>
 			<td>${b.boardType }</td>
-			<td>답변대기중</td>
+			<c:if test="${b.boardCommCnt eq 0 }">
+				<td>답변대기중</td>
+			</c:if>
+			<c:if test="${b.boardCommCnt ne 0 }">
+				<td>답변완료</td>
+			</c:if>
 		</tr>
 		</c:forEach>
 		<tr>
@@ -161,6 +191,7 @@
 		<div class="searchForm">
 			<form action="/searchBoard.do?reqPage=1" method="post">
 				<select name="categoryTag">
+				<!-- 보드별로 카테고리 추가하기 -->
 					<option value="all">전체</option>
 					<option value="info" <c:if test="${b.boardCategory eq 'info'}">selected</c:if>>정보</option>
 					<option value="etc" <c:if test="${b.boardCategory eq 'etc'}">selected</c:if>>기타</option>

@@ -48,7 +48,7 @@
 				</select><span id="emailChk"></span><br> <span class="sp">비밀번호<span class="red">*</span></span><span id="pw1Chk"></span><br> 
 				<input type="password" placeholder="비밀번호를 입력해주세요." name="memberPw" class="inbtn mp1"><br> <span class="sp">비밀번호확인<span
 					class="red">*</span></span><span id="pw2Chk"></span><br> 
-					<input type="password" placeholder="비밀번호를 입력해주세요." name="memberPw_re mp2" class="inbtn"><br> 
+					<input type="password" placeholder="비밀번호를 입력해주세요." name="memberPw_re" class="inbtn mp2"><br> 
 					<span class="sp">전화번호<span class="red">*</span></span><br>
 				<table>
 					<tr>
@@ -214,7 +214,7 @@
 		  });
 		  
 		  //닉네임 중복체크
-		  $("nn1").on("change",function(){
+		  $(".nn1").on("change",function(){
 			const nickName = $(this).val();
 			$.ajax({
 				url : "/idCheck.do",

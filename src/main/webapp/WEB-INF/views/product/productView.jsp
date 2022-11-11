@@ -62,8 +62,6 @@ ul li.on a {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	    <div class="productContent">
-	    <button type="button" onclick="deleteProduct(${p.productNo})">상품삭제</button>
-	    <div><a href="/productUpdateFrm.do?productNo=${p.productNo}">상품수정</a></div>
 		<input type="hidden" name="userId" id="userId" value="${sessionScope.m.memberId }">
         <div class="productWrap">
             <div style="width: 500px;">
@@ -303,6 +301,8 @@ ul li.on a {
 							reviewNo:reviewNo					
 						},
 						success : function(data){
+							$(".reviewsTotalDiv").empty();
+							displayData(1, dataPerPage);
 							alert("삭제가 완료되었습니다.");
 							$(obj).parent().parent().parent().remove();
 							
@@ -327,6 +327,11 @@ ul li.on a {
 					reviewScore : reviewScore,
 				},
 				success : function(data){
+					displayData(1, dataPerPage);
+					$("#customerReview").val('');
+					$(".input-score>span").text('0');
+					$(".star-wrap").children().css("color","");
+					/*
 					var now = new Date();
 					var year = now.getFullYear();
 					var month = ('0'+(now.getMonth()+1)).slice(-2);
@@ -406,6 +411,13 @@ ul li.on a {
 					
 					oneDiv.append(twoDiv);
 					
+					var reviewContentCount=$(".reviewsContent").length;
+					console.log("리뷰개수 :"+reviewContentCount);
+					if(reviewContentCount == 10){
+						$(".reviewsWrap").last().remove();
+					}
+					
+					
 					$(".reviewContentWrap").after(oneDiv);
 					$(".input-score").each(function(index,item){
 						const score = $(item).children().eq(1).text();
@@ -417,6 +429,7 @@ ul li.on a {
 					$("#customerReview").val('');
 					$(".input-score>span").text('0');
 					$(".star-wrap").children().css("color","");
+					*/
 				}
 			});
 		});
@@ -546,6 +559,7 @@ ul li.on a {
 				  data : {productNo : productNo},
 				  url : "/productReviewList.do",
 				  success : function(data){
+					  $(".reviewsTotalDiv").empty();
 					  for (var i = (currentPage - 1) * dataPerPage;i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
 						  
 						  const oneDiv = $("<div>");
