@@ -46,7 +46,7 @@ public class BoardController {
 		//model.addAttribute("boardType",(int)pageMap.get("boardType"));
 		model.addAttribute("boardType",boardType);
 		model.addAttribute("cateList",(ArrayList<BoardCategoryVO>)pageMap.get("cateList"));
-		session.setAttribute("boardType",boardType);	
+		session.setAttribute("boardType",boardType);// 매우중요 : 게실글 작성시, 게시글 작성 후 boardType별로 리스트 나타낼 때 꼭 필요
 		System.out.println(boardType);
 		return "board/boardList";
 	}

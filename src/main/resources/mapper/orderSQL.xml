@@ -2,27 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="order">
 
-<!-- 
-<select id="a" resultType="Or" parameterType="m" resultMap="getBoard">
-	select
-	    *
-    from pays
-	where member_no=#{memberNo}
-</select>
- -->
-
 <select id="selectAllOrderHistory" parameterType="_int" resultType="Or">
-	select
+select
 	    order_no as orderNo,
 	    order_date as orderDate,
-	    receive_name as receiveName,
-	    receive_addr as receiveAddr,
-	    receive_phone as receivePhone,
+	    (select receiver_name from(select receiver_name from delivery_tbl where member_no=#{memberNo} order by rownum desc) where rownum =1) as receiverName,
 	    order_amount as orderAmount,
 	    order_price as orderPrice,
 	    member_no as memberNo
     from pays
 	where member_no=#{memberNo}
+    order by 1
 </select>
 
 
@@ -40,6 +30,7 @@
 	where pay_details.order_no=#{orderNo} and member_no=#{memberNo}
 </select>
 
+
 <insert id="insertOrder" parameterType="Or">
 	insert into pays values(
 	pays_seq.nextval,
@@ -53,10 +44,70 @@
 	)
 </insert>
 
+ <!-- 
+ <insert id="insertOrder" parameterType="Or">
+ select
+    cart_no as cartNo,
+    buy_amount as buyAmount,    
+    case
+        when
+            product_no is not null
+        then
+            to_char((select product_price from products where product_no=c.product_no))
+        when
+            activity_no is not null
+        then
+            (select activity_price from activity where activity_no=c.activity_no)
+        when
+            class_no is not null
+        then
+            (select class_price from classes where class_no=c.class_no)
+    end as buyPrice
+from carts c
+where
+cart_no in
+	<foreach collection="array" item="cartNo" open="(" close=")" separator=",">
+		#{cartNo}
+	</foreach>
+	
+ </insert>
+  -->
+<insert id="goDelivery" parameterType="d">
+insert into delivery_tbl values(
+	delivery_seq.nextval,
+	'임의배송지',
+	#{deliveryPhone},
+	#{zipcode},
+	#{deliveryAddr},
+	#{deliveryDetail},
+	#{receiverName},
+	'n',
+	#{memberNo}
+)
+</insert>
 
 
+<select id="goOrderHistory" parameterType="m" resultType="Ca">
+select
+    cart_no as cartNo,
+    product_no as productNo,
+   	activity_no as activityNo,
+   	(select filepath from activity where activity.activity_no = carts.activity_no)as activityPhoto,
+   	(select activity_name from activity where activity.activity_no = carts.activity_no)as activityName,
+    (select activity_price from activity where activity.activity_no = carts.activity_no)as activityPrice,
+   	
+    (select product_name from products where products.product_no=carts.product_no) as buyName,
+    (select PRODUCT_PRICE from products where products.product_no=carts.product_no)as buyPrice,
+    (select PRODUCT_FILEPATH from product_file where product_file.product_no = carts.product_no and rownum=1)as productPhoto,
+    buy_amount as buyAmount,
+    member_no as memberNo,
+    activity_no as activityNo,
+    class_no as classNo
+from carts
+where member_no=#{memberNo}
+</select>
 
-
+<!-- 
 <select id="goOrderHistory" resultType="Or" parameterType="_int">
 	select
 	    product_no as productNo,
@@ -67,7 +118,7 @@
 	from carts
 	where member_no=#{memberNo}
 </select>
-
+ -->
 
 
 	

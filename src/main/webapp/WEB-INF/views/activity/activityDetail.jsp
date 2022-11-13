@@ -11,9 +11,9 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
         <!-- Page Header Start -->
-        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/img/다운로드\ \(2\).jpg) center center no-repeat; background-size: cover;">
+        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(../MAINbtstr/img/은비(5).jpg) center center no-repeat; background-size: cover;">
             <div class="container text-center py-5">
-                <h1 class="display-3 text-white mb-4 animated slideInDown">${cla.className }</h1>
+                <h1 class="display-3 text-white mb-4 animated slideInDown">${act.activityName }</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -28,18 +28,26 @@
 
 
         <!-- sideBar-->
-        <div class="sidenav bg-primary rounded p-sm-3 wow fadeIn" style="width:360px; height:400px; opacity: 0.9; text-align:left;">
-            <div class="side-box rounded">
-                <h6 class="side-title-box display-5 text-light">
+        <div class="sidenav bg-light rounded p-sm-3 wow fadeIn" style="text-align:center;">
+            <div class="side-box rounded mt-3">
+                <h6 class="side-title-box display-5 ">
                  	${act.activityName}
                 </h6>
-                <div class="side-teacher-box" style="text-align:left; color:white; margin-bottom:70px;"> 
-                    <span>담당자 : ${act.activityManagerName}</span>
+                <div class="side-select-box display-5" style="font-size:2rem;" > 
+                    <p>담당자 : ${act.activityManagerName}</p>
                 </div>
-          		
-                <div class="side-select-box form-floating mb-4"> 
+                <div class="side-select-box display-5" style="font-size:1.3rem; margin:10px;" > 
+                    <p>시작일 : ${act.startDate }</p>
+                </div>
+                <div class="side-select-box display-5" style="font-size:1.3rem;" > 
+                    <p>종료일 : ${act.startDate }</p>
+                </div>
+                 <div class="side-select-box display-5" style="font-size:1.3rem;" > 
+                    <p style="margin-bottom:10px;">가격 : ${act.activityPrice }원</p>
+                </div>
+                <div class="side-select-box form-floating mb-2"> 
                     <div class="amount-box">
-	                    <select name="amount" id="amountSelect" class="bg-white border-0" style="width:150px; padding: 0; padding-left: 30px; padding-right: 30px;">
+	                    <select name="amount" id="amountSelect" class="form-select form-select-lg" aria-label=".form-select-sm example">
 	                        <option value="1" selected>1인</option>
 	                        <option value="2">2인</option>
 	                        <option value="3">3인</option>
@@ -47,20 +55,28 @@
 	                        <option value="5">5인</option>
 	                        <option value="6">6인</option>
 	                    </select>
-	                    <span id="amountPrice" style="width:150px; color: white;">${act.activityPrice }원</span>
-	                   
                     </div>
                 </div>
-                <div>
-                <span style="display: flex; justify-content: center;">
-                	<div style="color:white; line-height:58px"><span>총합 : </span><span id="realAmount"></span><span> 원</span></div>
-                    	<button id="submitBtn" type="button" class="btn btn-primary py-3 px-5" style="background-color:#9BA17B; margin-left:20px">신청하기</button>
-                    </span>
-                </div>
+                <div class="side-select-box display-5 mb-2"> 
+               		<input class="form-control" name = "startDate"  id="activityStartDate" 
+               		       onclick="javascript:f_datepicker(this);" placeholder="신청할 날짜를 선택해주세요."/>
+               </div>
+               <div class="side-select-box display-5 mb-2"> 
+               		<div style="font-size:1.5rem;"><span>총합 : </span><span id="realAmount"></span><span> 원</span></div>
+               </div>
+        
+                <div class="side-select-box display-5 mb-2">
+                <c:if test="${not empty sessionScope.m }"> 
+                	<button id="submitBtn" type="button" class="btn btn-primary py-3 px-5" style="font-size:1.5rem;">신청하기</button>
+                </c:if>
+                <c:if test="${empty sessionScope.m }"> 
+                    <button type="button" class="btn btn-primary py-3 px-5" style="font-size:1.5rem;" onclick="location.href='/index.jsp?login=1'" >로그인하러가기</button> 
+                </c:if>
+               </div>
             </div>
         </div>
-        
         <!-- sideBar End-->
+        
         <!-- class main -->
         <div class="container-xxl py-5 mt-5">
             <div class="container">
@@ -77,7 +93,7 @@
 						<h3>${act.activityPrice }원</h3>
 						<br><br><br><br><br>
 						<p><strong style="font-size:1.3em">담당자</strong><h3>${act.activityManagerName }	님</h3></p>
-						<p><span>시작일:  ${act.startDate }</span></p> 
+						<p><span>시작일: ${act.startDate }</span></p> 
 						<p><span>종료일: ${act.endDate }</span></p>
 					 
 						</div>
@@ -105,11 +121,8 @@
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" >
                         <p class="fs-5 fw-bold text-primary">담당자 : ${act.activityManagerName }님과 함께하는</p>
                         <h1 class="display-5 mb-4">액티비티 활동!</h1>
-                        <input class="form-control" name = "startDate"  id="activityStartDate" style="width: 200px; display: inline-block;" 
-                          onclick="javascript:f_datepicker(this);" placeholder="시작일 ex) 20221024"/>
-						
                         <c:forEach items="${act.fileList }" var="details">
-                        <p class="mb-4"><img src="resources/upload/activity/${details.filepath }"/></p>
+                        <p class="mb-4"><img style="width:650px; height:450px;"src="resources/upload/activity/${details.filepath }"/></p>
                         </c:forEach> 
                     </div>
                    
@@ -214,9 +227,31 @@
 
     <!-- side-bar script-->
 	<script>
+	$(function(){
+        showSide();
+    	const amount = $("[name=amount]").val()
+    	const amountPrice ='${act.activityPrice }';
+    	const amountPrice2 ='${act.activityPrice }';
+    	console.log("amountPrice2값:::::"+amountPrice2)
+    	const splits = amountPrice2.split(',');
+    	let realPrice ="";
+    	
+    	console.log(splits);
+    	for(let i=0;i<splits.length;i++){
+    		realPrice += splits[i];
+    	}
+    	
+    	
+		$("#realAmount").text(amount*realPrice);
+		
+		
+		
+    });
+	
 	   const startDate = '${act.startDate}';
        const endDate = '${act.endDate}';
-		function f_datepicker(obj) {
+		
+       function f_datepicker(obj) {
 			$(obj).datepicker().datepicker("show");
 					
 		}
@@ -234,46 +269,25 @@
 			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 			//minDate : '-100y',
 			minDate: new Date(startDate),
-  			maxDate: new Date(endDate),
+ 			maxDate: new Date(endDate),
 			showMonthAfterYear : true,
 			changeYear : true,
 			yearSuffix : '년'
 		});
 		
-		$(function(){
-	    	const amount = $("[name=amount]").val()
-	    	const amountPrice ='${act.activityPrice }';
-	    	const amountPrice2 ='${act.activityPrice }';
-	    	console.log("amountPrice2값:::::"+amountPrice2)
-	    	const splits = amountPrice2.split(',');
-	    	let realPrice ="";
-	    	
-	    	console.log(splits);
-	    	for(let i=0;i<splits.length;i++){
-	    		realPrice += splits[i];
-	    	}
-	    	
-	  
-			
-			$("#realAmount").text(amount*realPrice);
-	    });
-	 
 	    
 	    
 	    	$("#amountSelect").on("change",function(){
 	    		const amount = $("[name=amount]").val()
 	        	const amountPrice ='${act.activityPrice }';
 	        	const amountPrice2 ='${act.activityPrice }';
-	        	console.log("amountPrice2값:::::"+amountPrice2)
+	        
 	        	const splits = amountPrice2.split(',');
 	        	let realPrice ="";
 	        	
-	        	console.log(splits);
 	        	for(let i=0;i<splits.length;i++){
 	        		realPrice += splits[i];
 	        	}
-	        	
-	      
 	    		
 	    		$("#realAmount").text(amount*realPrice);
 	    	})
@@ -307,12 +321,7 @@
 		        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
 	        });
 
-	        $(function(){
-	            showSide();
-	         
-	            console.log(startDate);
-	            console.log(typeof startDate);
-	        });
+	        
 
 	       
 	        
@@ -326,7 +335,7 @@
 		        $("#star-box").css("visibility", "hidden");
 		        $("#star-box").children().css("color", "lightgrey");
 		    })
-			
+			 
 		    const starBox = $(".comment-box>div:first-child");
 		    const stars = $("#star-box>span"); // star아이콘모음
 		    stars.on("mouseover", function(){
@@ -366,34 +375,44 @@
 		    })
 			
 		    $("#submitBtn").on("click",function(){
-        	console.log('${sessionScope.m.memberNo}');
-        	console.log($("#amountSelect").val());//amout값
-        	console.log('${act.activityNo}');
-        	$.ajax({
-        		url:"/actInsertCart.do",
-        		data:{
-        			memberNo: ${sessionScope.m.memberNo},
-        			activityNo : ${act.activityNo},
-        			buyAmount : $("#amountSelect").val()
-        		},
-        		success:function(data){
-        			if(data==1){
-        				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
-        					location.href="/cart.do?memberNo="+${sessionScope.m.memberNo};
-        				}else{
-        					console.log("a");
-        				}
-        				
-        			}
-        		},
-        		fail:function(data){
-        			console.log("fail:function"+data);
-        		},
-        		error:function(data){
-        			console.log("error:function"+data);
-        		}
-        	})
-        })
+		    	let memberNo ='';
+		    	let activityNo ='';
+        		memberNo = '${sessionScope.m.memberNo}';
+        		activityNo = ${act.activityNo}; 
+        	
+		    	
+		   	
+		    	if('${sessionScope.m}' !=null || '${sessionScope.m}' !=''){
+		    		$.ajax({
+		        		url:"/actInsertCart.do",
+		        		data:{
+		        			memberNo: memberNo,
+		        			activityNo : activityNo,
+		        			buyAmount : $("#amountSelect").val()
+		        		},
+		        		success:function(data){
+		        			if(data==1){
+		        				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+		        					location.href="/cart.do?memberNo="+memberNo;
+		        				}else{
+		        					console.log("a");
+		        				}
+		        				
+		        			}
+		        		},
+		        		fail:function(data){
+		        			console.log("fail:function"+data);
+		        		},
+		        		error:function(data){
+		        			console.log("error:function"+data);
+		        		}
+		        	})//ajax
+		    	}else{
+		    		
+		    	} 
+		    	
+        })//버튼
+        
 	</script>
 	<!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -12,7 +12,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gardener - Gardening Website Template</title>
+    <title>클래스 등록</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -69,7 +69,7 @@
                 <div class="col-xl-6">
                   <!-- HTML5 Inputs -->
                 <form action="#">
-                  <div class="card mb-4">
+                  <div class="card mb-4" style="width:100wh;">
                     <h5 class="card-header" style="text-align: center;">클래스 등록하기</h5>
                     <div class="card-body">
                       <div class="mb-3 row">

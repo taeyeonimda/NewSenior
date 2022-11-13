@@ -188,4 +188,17 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return dao.insertKakaoMemeber(m);
 	}
+
+
+	public int deleteUser(Member m) {
+		// TODO Auto-generated method stub
+		return dao.deleteUser(m);
+	}
+
+	/*
+	public int deleteMember() {
+		// TODO Auto-generated method stub
+		return dao.deleteMember();
+	}
+	*/
 }

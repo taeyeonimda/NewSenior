@@ -132,7 +132,7 @@ select * from
 	        <if test="searchTag.equals('') and categoryTag.equals('etc')">
 	        where boardCategory='etc')b)
 	        </if>
-	        
+     
 	        <!-- input 작성자 and 카테고리 : 정보 -->
 	        <if test="searchTag.equals('nickName') and categoryTag.equals('info')">
 	        where nickName like '%'||#{searchInput}||'%' and boardCategory='info')b)

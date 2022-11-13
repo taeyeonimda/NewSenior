@@ -81,8 +81,7 @@
                     <tr>
                       <th>주문번호</th>
                       <th>주문일자</th>
-                      <th>수령인</th>
-                      <th>주소</th>
+                      <th>상품명</th>
                       <th>총 주문금액</th>
                       <th>상세보기</th>
                       <!-- 주문번호 1개당 1tr -->
@@ -95,12 +94,18 @@
 		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo });">
 		            		<td>${Or.orderNo }</td>
 							<td>${Or.orderDate }</td>
-							<td>${Or.receiveName }</td>
-							<td>${Or.receiveAddr }</td>
+							<td>${Or.buyName }</td>
 							<td>${Or.orderAmount*Or.orderPrice }원</td>
+							<td>${Or.buyAmount+Or.buyPrice }원</td>
 							<td class="btn">상세보기</td>
 		                </tr>
              		</c:forEach>
+             		
+             		<!-- 
+        					<td>${Or.receiverName }</td>
+							<td>${Or.deliveryAddr }</td>
+							<td>${Or.allSumPrice }원</td>
+             		 -->
              		
              		<c:if test="">
 		                <tr>
@@ -113,33 +118,7 @@
               </div>
             </div>
        
-			<br><br><br>
-          <div style="font-size: 25px;">주문내역</div>
-          <div style="font-size: 17px;">상품</div>
-            <div class="card">
 
-              <div class="table-responsive text-nowrap">
-                
-                <table class="table table-borderless">
-                  <thead>
-                    <tr>
-                      	<th>주문일자</th>
-                      	<th>상품이름</th>
-                      	<th>수량</th>
-                      	<th>금액</th>
-                      	<th>총 주문금액</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      	<td>2022-10-27</td>
-                      	<td>카스타드</td>
-                      	<td>1</td>
-                      	<td>300원</td>
-                      	<td>300원</td>
-                    </tr>
-                  </tbody>
-                </table>
               </div>
             </div>
           
