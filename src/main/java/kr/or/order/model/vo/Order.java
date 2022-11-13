@@ -21,6 +21,7 @@ public class Order {
 	private String buyName;
 	private int buyPrice;
 	private int buyAmount;
+	
 	private String receiveName;
 	private String receiveAddr;
 	private String receivePhone;
@@ -31,5 +32,6 @@ public class Order {
 	private String orderDetailAmount;
 	private int orderAmount;
 	private int orderPrice;
+	
 	private ArrayList<Product> productList;
 }

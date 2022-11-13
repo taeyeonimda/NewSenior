@@ -49,11 +49,8 @@
                     <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" style="width:408px; height:408px;"src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
-                            <h4 class="text-white mb-4">${cla.className }</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/upload/class/${cla.filepath }" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
+                            <h3 class="text-white mb-4">${cla.className }</h3>
+                            <h5 class="text-light mb-4 fw-bold">${cla.classPrice }</h5>
                         </div>
                     </div>
                 </div>

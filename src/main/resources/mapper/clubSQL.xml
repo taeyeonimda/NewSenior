@@ -227,7 +227,7 @@
 	
 	<!-- 클럽에서 보는 나의 동호회 : 3 개씩 가져오기 -->
 	<select id="selectMyClubStartEnd" parameterType="map" resultType="c">
-		select * from (select rownum, r.* from (select
+		select * from (select rownum as rnum, r.* from (select
 		    club_no as clubNo,
 			cnt as clubMemberCnt,
 			club_name as clubName,
@@ -238,6 +238,6 @@
 			club_intro as clubIntro 
 		from (select club_no, count(*) as cnt from club_members group by club_no)
 		right join clubs using (club_no)
-		where club_no in (select club_no from club_members where member_no=#{memberNo }) order by cnt desc)r) where rownum between #{startIndex } and #{endIndex }
+		where club_no in (select club_no from club_members where member_no=#{memberNo }) order by cnt desc)r) where rnum between #{startIndex } and #{endIndex }
 	</select>
 </mapper>

@@ -101,7 +101,7 @@
 									</c:if>
 		                            </div>
                         		</div>
-	                            <pre style="font-family: sans-serif" class="bg-light">${c.clubNotice }</pre>
+	                            <pre style="font-family: sans-serif">${c.clubNotice }</pre>
 	                            <textarea rows="5" cols="95" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
@@ -339,13 +339,13 @@
 
 <div class="clubLeader-modal-wrap">
     <div class="clubLeader-modal">
-        <div class="clubLeaderModalTop">
+        <div class="clubLeaderModalTop mt-5">
             <h3 class="text-secondary">동호회 관리</h3>
         </div>
         <div class="clubLeaderModalContent">
         <c:choose>
         	<c:when test="${fn:length(c.memberList) > 1 }">
-        		<p>동호회장을 동호회 멤버에게 양도할 수 있습니다</p>
+        		<p>동호회장을 다른 동호회원에게 양도할 수 있습니다</p>
         		<form action="/changeClubLeader.do" method="post">
 					<select name="clubLeader" id="leaderNo" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="selectLeader();">
 						<option value="">선택해주세요.</option>
@@ -365,26 +365,36 @@
         	</c:otherwise>
         </c:choose>
         </div>
+        <hr>
         <div class="align-center mt-5" style="width: 50%; margin: 0 auto;">
-	        <table border="1">
-	        	<tr>
-	        		<th>선택</th>
-	        		<th>닉넴</th>
-	        		<th>아이디</th>
-	        	</tr>
-				<c:forEach items="${c.memberList }" var="cm">
-				<c:if test="${cm.memberNo ne sessionScope.m.memberNo }">
-	            <tr>
-	        		<td><input type="checkbox" name="blockMemberNo" value="${cm.memberNo }"></td>
-	        		<td>${cm.nickName }</td>
-	        		<td>${cm.memberId }</td>
-	        	</tr>
-	        	</c:if>
-	            </c:forEach>
-	        </table>
+        <c:choose>
+        	<c:when test="${fn:length(c.memberList) > 1 }">
+        		<table class="table">
+		        	<tr>
+		        		<th>선택</th>
+		        		<th>닉네임</th>
+		        		<th>아이디</th>
+		        	</tr>
+					<c:forEach items="${c.memberList }" var="cm">
+					<c:if test="${cm.memberNo ne sessionScope.m.memberNo }">
+		            <tr>
+		        		<td><input type="checkbox" name="blockMemberNo" value="${cm.memberNo }"></td>
+		        		<td>${cm.nickName }</td>
+		        		<td>${cm.memberId }</td>
+		        	</tr>
+		        	</c:if>
+		            </c:forEach>
+		        </table>
 	        <p>선택한 회원을 추방하시겠습니까?</p>
 			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
-        </div>
+        	</c:when>
+        	<c:otherwise>
+        		<p>관리할 회원이 없습니다</p>
+        		<pre>동호회 게시판에서 우리 동호회를 홍보할 수 있습니다</pre>
+        		<a href="#" class="btn btn-secondary">이동스</a>
+        	</c:otherwise>
+        </c:choose>
+	    </div>
 	    <div class="clubLeaderModalBtnBox mt-4">
 			<button class="btn btn-secondary py-2 px-4" onclick="leaderModalClose();">닫기</button>
 		</div>
@@ -793,39 +803,40 @@
 	
 	
 	
-	let startIndex = 1;
-	let searchStep = 3;
+	
     
     $(document).ready(function () {
     	initMyClubList(startIndex);
     });
     
+    let startIndex=1;
+	const searchStep = 3;
     function initMyClubList(startIndex) { // total 구하는 ajax
+    	if(startIndex == 1){
+    		$(".pagination-my span:first-child").css("visibility", "hidden");
+    	}
    	 	//dataPerPage 선택값 가져오기
+   	 	console.log(startIndex);
    	 	$("#myClubList div").remove();
-	    dataPerPage = 3;
- 		const keyword = $("#serchInput").val();
 	    $.ajax({ // ajax로 데이터 가져오기
 	    	method: "post",
 	    	url: "/getMyClubListTotal.do",
 	    	data: { memberNo : $("#memberNo").text() },
 	    	success: function (list) {
-				const totalList = list.length;
-				paging(totalList, startIndex); //페이징 표시
+	    		console.log(list.length);
+				paging(list.length, startIndex); //페이징 표시
 	    	} // success End
     	});
 	}
 
     function paging(totalList, startIndex) {
     	let endIndex = startIndex+searchStep-1;
-    	var num = Number(totalList)/searchStep;
+    	var num = totalList/searchStep;
 		var totalPage = Math.ceil(num); // 총 페이지 수
     	
    	 	//dataPerPage 선택값 가져오기
    	 	$("#myClubList div").remove();
-	    
- 		const keyword = $("#serchInput").val();
-	    $.ajax({ // ajax로 데이터 가져오기
+	    $.ajax({
 	    	method: "post",
 	    	url: "/getMyClubList.do",
 	    	data: { memberNo : $("#memberNo").text(),
@@ -833,31 +844,28 @@
 	    			endIndex : endIndex
 	    	},
 	    	success: function (list) {
-	    		console.log(list);
-	    		const total = list.length;
 	    		for (let i=0; i<list.length; i++) {
 					const div = $("<div>");
 					div.append("<span onclick='locationClub("+list[i].clubNo+")'>"+list[i].clubName+"</span>");
 					$("#myClubList").append(div);
 				}
-		
-	    		 // 더보기 버튼 삭제
-	    		$(".pagination-my span").css("visibility", "visible");
-	    		if(endIndex <= totalPage){
+	    		
+	    		if(endIndex >= totalList){ //4-7을 구해올 건데, 7 > 총 구해온 list수보다 크면
 	    			$(".pagination-my span:last-child").css("visibility", "hidden");
-	    		}else if(startIndex <= totalPage){
-	    			$(".pagination-my span:first-child").css("visibility", "hidden");
 	    		}
+
 	    	} // success End
     	});
 	}
     
     $(".pagination-my span:last-child").on("click", function() {
-    	startIndex--;
+    	$(".pagination-my span:first-child").css("visibility", "visible");
+    	startIndex=startIndex+searchStep;
     	initMyClubList(startIndex);
 	})
     $(".pagination-my span:first-child").on("click", function() {
-    	startIndex++;
+    	$(".pagination-my span:last-child").css("visibility", "visible");
+    	startIndex=startIndex-searchStep;
     	initMyClubList(startIndex);
 	})
     
