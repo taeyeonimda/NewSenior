@@ -87,7 +87,7 @@
         <div class="center-div">
         
         	<!-- 클럽 공지사항 -->
-        	<div class="container-xxl py-3 shadow bg-light mb-5">
+        	<div class="container-xxl py-3 shadow bg-img mb-5">
                 <div class="container class-container">
                     <div class="row pt-2">
                         <div class="wow fadeInUp" data-wow-delay="0.1s">
@@ -102,7 +102,7 @@
 		                            </div>
                         		</div>
 	                            <pre style="font-family: sans-serif" class="bg-light">${c.clubNotice }</pre>
-	                            <textarea rows="5" cols="100" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
+	                            <textarea rows="5" cols="95" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
                     </div>

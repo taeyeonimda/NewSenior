@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.cart.model.vo.Cart;
+import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.dao.OrderDao;
 import kr.or.order.model.vo.Order;
@@ -18,33 +19,35 @@ public class OrderService {
 	@Autowired
 	private OrderDao dao;
 
-	public ArrayList<Order> selectAllOrderHistory(Member m) {
-		ArrayList<Order> list = dao.selectAllOrderHistory(m);
+	public ArrayList<Order> selectAllOrderHistory(Order o) {
+		ArrayList<Order> list = dao.selectAllOrderHistory(o);
 		return (ArrayList<Order>) list;
 	}
-
+	
 	
 	public ArrayList<OrderDetail> selectOrderDetail(Order o) {
 		ArrayList<OrderDetail> list = dao.selectOrderDetail(o);
 		return (ArrayList<OrderDetail>) list;
 	}
 
-	@Transactional
-	public int insertOrder(Order o) {
-		int result = dao.insertOrder(o);
-		
-		
-		return result;
-	}
-
-
-	
-
-
 	public ArrayList<Cart> goOrderHistory(Cart c) {
 		ArrayList<Cart> list = dao.goOrderHistory(c);
 		return (ArrayList<Cart>) list;
 	}
+
+
+	public int gogoDelivery(Delivery de) {
+		return dao.goDelivery(de);
+	}
+
+
+	public int insertOrder(Order o) {
+		int result = dao.insertOrder(o);
+		return result;
+	}
+
+
+
 	
 	
 	

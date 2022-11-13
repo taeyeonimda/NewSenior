@@ -18,7 +18,8 @@
 		nickname as nickName,
 		member_state as memberState,	
 	    member_img as memberImg,
-	    favorite
+	    favorite,
+	    kakaologin as kakaoLogin
 		from members order by 1 desc)m)
 		where rnum between #{start} and #{end}
 	</select>

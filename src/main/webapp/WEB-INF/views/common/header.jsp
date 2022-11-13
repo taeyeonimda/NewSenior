@@ -274,6 +274,7 @@
     <div class="x_btn00"><span class="zwicon-close00">X</span></div>
     <div class="cont00">
       <h1 id="login_header" style="color:#000;">로그인</h1>
+     
       <hr>
       <div class="login_cont">
         <form action="/login.do" method="post" onsubmit="return loginchk();">
@@ -332,6 +333,8 @@
     -->
     
     <script type="text/javascript">
+   
+    
     function alert(text){
 		Swal.fire(text);
 	}

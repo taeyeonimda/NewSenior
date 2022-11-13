@@ -12,13 +12,13 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
         <!-- Page Header Start -->
-        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" stydata-wow-delay="0.1s" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/img/다운로드\ \(2\).jpg) center center no-repeat; background-size: cover;">
+        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(../MAINbtstr/img/은비(5).jpg) center center no-repeat; background-size: cover;">
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">${cla.className }</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/class-list.html">class</a></li>
+                        <li class="breadcrumb-item"><a href=#">class</a></li>
                         <li class="breadcrumb-item active" aria-current="page">About</li>
                     </ol>
                 </nav>
@@ -53,26 +53,38 @@
                         </c:choose>
                     </ul>
                 </div>
-                <div class="side-select-box form-floating mb-4">
-                    <div class="amount-box">
-	                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="changePrice();">
-	                        <option value='' selected>인원수</option>
-	                        <option value="1">1인</option>
-	                        <option value="2">2인</option>
-	                        <option value="3">3인</option>
-	                        <option value="4">4인</option>
-	                        <option value="5">5인</option>
-	                        <option value="6">6인</option>
-	                    </select>
-	                    <span id="priceBox">
-	                    <span>${cla.classPrice }</span>
-	                    <fmt:formatNumber value="${cla.classPrice }" pattern="#,###"/>
-	                    </span><span>원</span>
-                    </div>
-                </div>
-                <div class="mb-2">
-                    <button class="btn btn-primary py-3 px-5">신청하기</button>
-                </div>
+                <c:choose>
+                	<c:when test="${not empty sessionScope.m }">
+                	<div class="side-select-box form-floating mb-4">
+	                    <div class="amount-box">
+		                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="changePrice();">
+		                        <option value='' selected>인원수</option>
+		                        <option value="1">1인</option>
+		                        <option value="2">2인</option>
+		                        <option value="3">3인</option>
+		                        <option value="4">4인</option>
+		                        <option value="5">5인</option>
+		                        <option value="6">6인</option>
+		                    </select>
+		                    <div id="priceBox">
+			                    <span id="originalPrice">${cla.classPrice }</span>
+			                    <span id="changePrive"></span>
+			                    <fmt:formatNumber value="${cla.classPrice }" pattern="#,###"/>
+			                    <span>원</span>
+		                    </div>
+	                    </div>
+	                </div>
+	                <div class="mb-2">
+	                	<button onclick="openConfirm('${cla.className }');" class="btn btn-primary py-3 px-5">신청하기</button>
+	                </div>
+                	</c:when>
+                	<c:otherwise>
+                	<div class="mb-2">
+	                	<button class="btn btn-primary py-3 px-5" type="button">로그인이 필요한 서비스입니다</button>
+	                </div>
+                	</c:otherwise>
+                </c:choose>
+                
             </div>
         </div>
 			
@@ -105,7 +117,6 @@
                         <p class="fs-5 fw-bold text-primary">${cla.teacherName } 강사와 함께하는 ${cla.className }</p>
                         <h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
                         <pre class="mb-4 font-set font-set fs-6">${cla.curriculum }</pre>
-                        <a class="btn btn-primary py-3 px-4" href="">Explore More</a>
                     </div>
                     <div class="product-title mt-5">
                         <div class="product-img-div">
@@ -127,9 +138,9 @@
                         <p class="fs-5 fw-bold text-primary">강사소개</p>
                         <img class="img-fluid rounded" data-wow-delay="0.1s" src="/resources/MAINbtstr/img/모델클래스 (1).jpg">
                     </div>
-                    <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
+                    <div class="col-lg-7 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
                         <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
-                        <pre>${cla.teacherIntroduce }</pre>
+                        <pre style="width: 70%;">${cla.teacherIntroduce } 하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이</pre>
                     </div>
                 </div>
             </div>
@@ -139,7 +150,7 @@
       
       	<!-- ajax로 가져옴 -->
       	<div class="container class-container">
-      		<div class="row" id="reviewBox">
+      		<div id="reviewBox">
         	</div>
       	</div>
 
@@ -192,7 +203,8 @@
         <!-- 후기 -->
 		<button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
     </div><!--page-content End-->
-    
+   
+
     
 <div class="rmodal-wrap">
     <div class="modal-review">
@@ -244,6 +256,43 @@
 
     <!-- side-bar script-->
     <script>
+    
+    
+    
+	    function openConfirm(className){
+	    	const amount = $("select[name=amount]").val();
+	    	if(amount==''){
+	    		alert("인원수를 선택하세요");
+	    	}else{
+	    		const priceSpan = $("#priceBox span:first-child");
+	    		console.log(priceSpan.html());
+	    		const price = Number(price)*Number(amount);
+	    		Swal.fire({
+					title: className,//제목
+					text: price,
+					imageUrl: "/resources/img/제목없음.png",
+					showCancelButton: true,
+					cancelButtonColor: '#525368',
+					confirmButtonColor: '#348E38',
+					cancelButtonText: '취소',
+					confirmButtonText: '신청하기'
+				}).then((result) => {
+					//result.value == true이니까 트루일때만 실행하는거
+				  if (result.value) {
+		              // location.href = "/cartIn.do?classNo=?&memberNo=?&amount=?"
+				  }
+				})//then끝
+	    	}
+
+			
+		}
+
+    	
+    	
+    	function closeModal() {
+    		$(".confirm-modal-wrap").css("display", "none");
+		}
+    
         function showSide(){
             const position  = $(window).scrollTop();
 
@@ -276,11 +325,15 @@
         });
 
         
+        
+        
      	// side select 가격 바꾸기 css
 	    function changePrice(){
 	    	const selectVal = $("select[name=amount]").val();
-	    	let price = $("#priceBox").text();
-	    	// select element에서 선택된 option의 value가 저장된다.  
+	    	const originalPrice = $("#priceBox span:first-child").text(); // 기본값
+	    	console.log(originalPrice);
+	    	// select element에서 선택된 option의 value가 저장된다.
+	    	
 	    	if(selectVal != ''){
 	    		price = selectVal*Number(price);
 	    		$("#priceBox").text(price);
@@ -354,14 +407,18 @@
 						div.addClass("mb-4");
 						const star = Number(list[i].reviewRate);
 		                const profilDiv = $("<div>");
-		                profilDiv.addClass("profil-title");
+		                profilDiv.addClass("memberBox");
 		                const profileImgDiv = $("<div>");
-		                profileImgDiv.addClass("profil-img-div");
-		                profileImgDiv.html("<img src='/resources/upload/"+list[i].memberImg+"' class='profil-img'>");
+		                profileImgDiv.addClass("profile-box");
+		                if(list[i].memberImg == null){
+		                	profileImgDiv.html("<img src='/resources/upload/class/iconmonstr-user-7-48.png' class='profile'>");
+		                }else{
+		                	profileImgDiv.html("<img src='/resources/upload/"+list[i].memberImg+"' class='profile'>");
+		                }
 		                const profilInfoDiv = $("<div>");
-		                profilInfoDiv.addClass("profil-info-div");
+		                profilInfoDiv.addClass("profil-info");
 		                profilInfoDiv.html("<div>"+star+"</div><div>"+list[i].reviewWriter+"</div><div>"+list[i].reviewDate+"</div>");
-		                profilDiv.append(profilDiv).append(profilInfoDiv);
+		                profilDiv.append(profileImgDiv).append(profilInfoDiv);
 		                
 		                const contentDiv = $("<div>");
 		                contentDiv.html("<div>"+list[i].reviewContent+"</div><div><a href='/'>수정</a> / <a href='/'>삭제</a></div>");

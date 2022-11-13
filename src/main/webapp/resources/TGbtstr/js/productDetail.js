@@ -42,11 +42,16 @@ $(".subTitle>div").on("click",function(){
     $(".subTitle>div").removeClass("selectColor");
     const index = $(".subTitle>div").index(this);
     $(".subTitle>div").eq(index).addClass("selectColor");
+    $(".subTitle>div>button").removeClass("selectColor");
+    if(index == 1){
+    	$(".subTitle>div>button").addClass("selectColor");
+    }
     $(".prodContentMenu").hide();
     $(".prodContentMenu").eq(index).show();
-    
 });
-
+$(".subTitle>div>button").on("click",function(){
+	$(".subTitle>div>button").addClass("selectColor");
+});
 
 $(".real-score").show();
 const stars = $(".star-wrap>span");

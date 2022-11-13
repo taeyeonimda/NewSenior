@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 	.inputCommentBox{
 		color : blue;
@@ -22,11 +23,11 @@
 		color : red;
 	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
+	<!-- 헤더 넣기 -->
 	<table border="1">
 		<tr>
 			<th>글번호</th>
@@ -35,16 +36,56 @@
 		<tr>
 			<th>카테고리</th>
 			
-				<c:if test ="${b.boardCategory eq 'info'}">
-					<td>정보</td>
-				</c:if>
-				<c:if test ="${b.boardCategory eq 'etc'}">
-					<td>기타</td>
-				</c:if>
-				<!-- notice -->
-				<c:if test ="${b.boardCategory eq 'notice'}">
-					<td>공지</td>
-				</c:if>
+					<!-- 자유게시판 -->
+			<c:if test ="${b.boardCategory eq 'info'}">
+				<td>정보</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'etc'}">
+				<td>기타</td>
+			</c:if>
+			<!-- 공지사항 -->
+			<c:if test ="${b.boardCategory eq 'notice'}">
+				<td>공지사항</td>
+			</c:if>
+			<!-- 동호회모집 -->
+			<c:if test ="${b.boardCategory eq 'invite'}">
+				<td>모집중</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'end'}">
+				<td>모집완료</td>
+			</c:if>
+			<!-- 정보게시판 -->
+			<c:if test ="${b.boardCategory eq 'campaign'}">
+				<td>캠페인</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'fair'}">
+				<td>박람회</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'tour'}">
+				<td>여행</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'ectI'}">
+				<td>기타</td>
+			</c:if>
+			<!-- QNA -->
+			<c:if test ="${b.boardCategory eq 'class'}">
+				<td>클래스</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'club'}">
+				<td>동호회</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'activity'}">
+				<td>액티비티</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'product'}">
+				<td>상품</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'pay'}">
+				<td>결제</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'delivery'}">
+				<td>배송</td>
+			</c:if>
 		</tr>
 		
 		<tr>
@@ -112,7 +153,7 @@
 						<textarea name="boardCommContent"></textarea>
 					</li>
 					<li>
-						<button type="submit">등록</button>
+						<button type="submit" name="commentWriteBtn1">등록</button>
 					</li>
 				</ul>
 			</form>
@@ -142,11 +183,12 @@
 								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
-						</c:if>
+						
 						
 						<a href="javaScript:void(0)" class="reCommentShow">답글달기</a>
 									<%-- href는 효과만 / a태그 기본이벤트 제거 --%>
 									<%--대댓글 작성 폼을 (댓글 나타내기창에) 숨겨두고 답글달기 누르면 나타나게 만든다 --%>
+						</c:if>
 					</p>
 				</li>
 		 	</ul>
@@ -199,7 +241,7 @@
 								<textarea name="boardCommContent"></textarea>
 							</li>
 							<li>
-								<button type="submit">등록</button>
+								<button type="submit" name="commentWriteBtn2">등록</button>
 							</li>
 						</ul>
 					</form>
@@ -317,6 +359,18 @@
 				location.href="/deleteBoardComment.do?boardCommNo="+boardCommNo+"&boardNo="+boardNo;
 			}
 		}
+			/*
+			${"[name=commentWriteBtn1]"}.on("click",function(){
+				console.log("클릭이벤트 동작");
+				const commContent = ${"[name=boardCommContent]"};
+				if(commContent.val()==""){
+					alert('내용을 입력해주세요');
+				}
+				
+			})
+			*/
+			
+			
 			
 			</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
