@@ -120,11 +120,19 @@ public class MemberDao {
 		int result = sqlSession.insert("member.insertKakaoMember",m);
 		return result;
 	}
-
+	//member_state에 sysdate 주기
 	public int deleteUser(Member m) {
 		// TODO Auto-generated method stub
 		int result = sqlSession.update("member.deleteUser",m);
 		return result;
 	}
+	/*
+	//일정 시간 지나면 db 삭제 진행 
+	public int deleteMember() {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("member.deleteMember");
+		return result;
+	}
+	*/
 
 }

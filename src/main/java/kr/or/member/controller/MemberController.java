@@ -82,10 +82,15 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String loginCheckMember(Member m, HttpSession session,Model model) {
 		Member member = service.loginCheckMember(m);
-		
+		System.out.println("login정보:"+member);
 		if(member!= null) {
 			session.setAttribute("m", member);
-			System.out.println("login정보:"+member);
+			if(member.getMemberState() != null) {
+				session.invalidate();
+				model.addAttribute("msg","이미 탈퇴하신 회원입니다.");
+				model.addAttribute("url","/");
+				return "alert";
+			}
 			return "redirect:/";
 		}else {
 			return "redirect:/index.jsp?login=1";
@@ -191,14 +196,23 @@ public class MemberController {
 			Member member = service.loginCheckKaKaoMember(m);
 			if(member != null) {
 				session.setAttribute("m", member);
+				System.out.println("######여기1");
+				if(member.getMemberState() != null) {
+					session.invalidate();
+					System.out.println("######여기2");
+					return "4";
+				}
 				return "0";
 			}else {
-				
+				System.out.println("######여기2");
 				int result = service.insertKakaoMember(m);
 				System.out.println("kakao result:"+result);
+				System.out.println("######여기3");
 				if(result>0) {
+					System.out.println("######여기4");
 					return "1";
 				}else {
+					System.out.println("######여기5");
 					return "2";
 				}
 			}
@@ -388,13 +402,21 @@ public class MemberController {
 				return "alert";
 			}
 		}
-		/*
+		
 		//회원탈퇴(member_state에 시간 넣고 -> 5분뒤 삭제 )
 		@RequestMapping(value="/deleteMember.do")
-		public String deleteMember(@SessionAttribute Member m) {
+		public String deleteMember(@SessionAttribute Member m, Model model, HttpSession session) {
+			System.out.println("###member###:"+m);
 			int result = service.deleteUser(m);
-			return "redirect:/";
+			if(result>0) {
+				session.invalidate();
+				return "redirect:/";
+			}else {
+				model.addAttribute("msg", "회원 탈퇴에 실패했습니다.");
+				model.addAttribute("url","/mypage.do");
+				return "alert";
+			}
 		}
-		*/
+		
 		
 }

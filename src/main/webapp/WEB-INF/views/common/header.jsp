@@ -223,7 +223,7 @@
                 </div>
                 
                 <c:choose>
-                	<c:when test="${not empty sessionScope.m }">
+                	<c:when test="${not empty sessionScope.m}">
                 		<a href="/popularClubList.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">동호회</a>
                 	</c:when>
                 	<c:otherwise>
@@ -254,7 +254,7 @@
 
             </div>
             <c:choose>
-				<c:when test="${empty sessionScope.m }">
+				<c:when test="${empty sessionScope.m}">
             <div>
                 <a href="javascript:void(0)" class="loginBtn">로그인</a><span> / </span>
                 <a href="/joinFrm.do">회원가입</a>
@@ -400,6 +400,8 @@
 	        				 alert("카카오 회원가입 성공하셨습니다. 로그인 해주세요");
 	        				 window.location.href = "/kakao.do";
 	        				 //실패
+	        			 }else if(data == "4"){
+	        				 alert("이미 탈퇴한 회원입니다.");
 	        			 }else{
 	        				 alert("실패")
 	        			 }

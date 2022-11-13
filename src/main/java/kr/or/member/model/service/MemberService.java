@@ -190,8 +190,15 @@ public class MemberService {
 	}
 
 
-	public int deleteMember(Member m) {
+	public int deleteUser(Member m) {
 		// TODO Auto-generated method stub
 		return dao.deleteUser(m);
 	}
+
+	/*
+	public int deleteMember() {
+		// TODO Auto-generated method stub
+		return dao.deleteMember();
+	}
+	*/
 }

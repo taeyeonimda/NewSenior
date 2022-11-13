@@ -93,7 +93,7 @@
 							<label for="html5-text-input" class="col-md-2 col-form-label">닉네임</label>
 							<div class="col-md-10">
 								<input class="form-control" type="text" id="html5-text-input"
-									value="${member.nickName }" name="nickName" />
+									value="${member.nickName }" name="nickName" maxlength="6"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
@@ -542,7 +542,7 @@
     	
     	//회원 탈퇴 버튼 클릭시 comfirm
     	function delMember(){
-    		if(window.confirm("진짜로 정말로 탈퇴하실건가요?? 왜욥?? ")){
+    		if(window.confirm("진짜로 회원탈퇴를 하시겠습니까? 탈퇴 후 3개월동안은 재가입이 불가능합니다. ")){
     			return true;
     		}else{
     			return false;
