@@ -121,4 +121,10 @@ public class MemberDao {
 		return result;
 	}
 
+	public int deleteUser(Member m) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("member.deleteUser",m);
+		return result;
+	}
+
 }

@@ -195,4 +195,7 @@
 		member_email=#{memberEmail}
 	</update>
 	
+	<update id="deleteUser" parameterType="m">
+	update members set member_state = sysdate
+	</update>
 </mapper>

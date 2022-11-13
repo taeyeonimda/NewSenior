@@ -390,11 +390,12 @@ public class MemberController {
 			}
 		}
 		/*
-		 
-		//회원탈퇴
+		//회원탈퇴(member_state에 시간 넣고 -> 5분뒤 삭제 )
 		@RequestMapping(value="/deleteMember.do")
-		public String deleteMember() {
-			
+		public String deleteMember(@SessionAttribute Member m) {
+			int result = service.deleteUser(m);
+			return "redirect:/";
 		}
 		*/
+		
 }

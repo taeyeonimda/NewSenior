@@ -83,6 +83,7 @@
 	
 	<!-- 예약작업관련 어노테이션 활성화 -->
 	<task:annotation-driven/>
+	
 	<!-- 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor" class="kr.or.common.LoginInterceptor" />
 	<!-- 로그인&운영자 인터셉터 -->
