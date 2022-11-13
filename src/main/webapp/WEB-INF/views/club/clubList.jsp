@@ -11,6 +11,76 @@
 </head>
 <style>
 
+/*인기 클럽이미지*/
+.pclubImgBox {
+    width: 200px;
+    height: 200px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
+.pclubImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.serviceBox{
+    color: #db7100;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    text-align: center;
+    padding: 25px 10px 0;
+    position: relative;
+    z-index: 1;
+}
+.serviceBox:before{
+    content: "";
+    height: 180px;
+    width: 180px;
+    border: 2px dashed #348E38;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: -1;
+    background-image: url("/resources/img/은비1.jpg");
+    background-size: 100%;
+}
+.serviceBox .title{
+    color: #fff;
+    background-color: #db7100;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px 6px;
+    margin: 0 -10px 5px;
+    display: inline-block;
+}
+.serviceBox .service-icon{
+    font-size: 45px;
+    margin: 0 0 70px;
+}   
+.serviceBox .description{
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23px;
+}
+.serviceBox.gray{ color: #5A696E; }
+.serviceBox.gray:before{ border-color: #5A696E; }
+.serviceBox.gray .title{ background-color: #5A696E; }
+.serviceBox.pink{ color: #F1605D; }
+.serviceBox.pink:before{ border-color: #F1605D; }
+.serviceBox.pink .title{ background-color: #F1605D; }
+.serviceBox.purple{ color: #8D4B7F; }
+.serviceBox.purple:before{ border-color: #8D4B7F; }
+.serviceBox.purple .title{ background-color: #8D4B7F; }
+@media only screen and (max-width: 990px){
+    .serviceBox{ margin: 0 0 30px; }
+}
+
 .clubListBox{
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
@@ -64,26 +134,29 @@
                 </nav>
             </div>
         </div>
+
+        
         <!-- Page Header End -->
         <div class="popular-box"> <!-- 인기 리스트 div  -->
         	<c:if test="${not empty sessionScope.m }">
 		        <c:choose>
 		        	<c:when test="${not empty pList }">
 		        		<p class="fs-5 fw-bold text-primary mt-5 text-center">'${sessionScope.m.nickName }'님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
-				        <div class="row popular-list mb-5" style="justify-content: space-evenly; width: 88%; margin: 0 auto;">
-				        	<c:forEach items="${pList }" var="pl">
-							<div class="col-md-6" style="height: 300px; margin-top: 20px; width: 30%;">
-							<img alt="" src="/resources/img/우수.png" width="130px;" class="goobImg">
-								<div class="card h-100" style="">
-				      				<img src="/resources/upload/club/${pl.clubMainImg }" height="250px;" width="100%;">
-				      				<div class="card-body">
-						        		<h5 class="card-title">${pl.clubName }</h5>
-						        		<p class="card-text">${pl.clubIntro }</p> 
-						        		<a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
-					      			</div>
-				    			</div>
-				  			</div>
-				  			</c:forEach>
+			        	<div class="container" style="width: 70%; margin-top: 50px; margin-bottom: 100px;">
+						    <div class="row flex-space-between">
+						    <c:forEach items="${pList }" var="pl">
+							    <div class="col-md-3 col-sm-6">
+							        <div class="serviceBox mb-5">
+							            <div class="service-icon"></div>
+							        </div>
+							        <div style="margin-top: 200px; word-break:break-all;" >
+							            <h3 class="card-title">${pl.clubName }</h3>
+										<p class="description" style="width: 100%;">${pl.clubIntro } dddddddddddddddddddddddddddddddddddddddddddddd</p> 
+							            <a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
+							        </div>
+							    </div>
+							    </c:forEach>
+						    </div>
 						</div>
 		        	</c:when>
 		        	<c:otherwise>
@@ -323,21 +396,43 @@
     		}
 		}
 
-    	
-    	function myClubCheck(clubNo) {
-			const memberNo = $("#memberNo");
-			const checkNoSpan = $(".checkNo");
-			console.log(checkNoSpan.length);
-
+    	function myClubCheck(memberNo, clubNo) {
+    		const btn = $("#enterBtn");
+    		btn.text('가입하기');
+    		btn.attr('onclick', 'joinClub('+memberNo+', '+clubNo+');');
+    		$.ajax({
+    			url:"/searchMyClub.do",
+    			data:{memberNo: memberNo},
+    			success:function(myList){
+    				for(let i=0; i<myList.length; i++){
+    					console.log(myList);
+    					if(myList[i].clubNo==clubNo){
+    						btn.text('입장하기');
+    						btn.attr('onclick', 'enterClub('+myList[i].clubNo+');');
+    					}
+    				}
+    			}
+    		})
 		}
+
     	
     	
     	function joinClub(memberNo, clubNo) {
-    		if(confirm('정말 가입하시겠습니까?')){
-    			location.href="/myClubList.do?memberNo="+memberNo+"&clubNo="+clubNo;
-    		}else{
-    			$(".modal-wrap").css("display", "none");
-    		}
+    		Swal.fire({
+				title: "동호회 가입",//제목
+				text: '동호회에 가입하시겠습니까?',
+				imageUrl: "/resources/img/제목없음.png",
+				showCancelButton: true,
+				cancelButtonColor: '#525368',
+				confirmButtonColor: '#348E38',
+				cancelButtonText: '닫기',
+				confirmButtonText: '가입하기'
+			}).then((result) => {
+				//result.value == true이니까 트루일때만 실행하는거
+			  if (result.value) {
+				  location.href="/myClubList.do?memberNo="+memberNo+"&clubNo="+clubNo;
+			  }
+			})//then끝
 		}
     	
     	function enterClub(clubNo) {

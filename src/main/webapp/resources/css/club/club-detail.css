@@ -227,7 +227,7 @@
 
 /* The sidebar menu */
 .sidenav-right {
-    width: 18%;
+    width: 20%;
     position: fixed;
     z-index: 1;
     top: 0px;
@@ -265,7 +265,7 @@
     margin: 0 auto;
 }
 .center-div{
-    width: 50%;
+    width: 45%;
     margin: 0 auto;
     min-height: 1200px;
 }
@@ -599,6 +599,7 @@ textarea:focus{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding-bottom: 60px;
 }
 .text-box{
 	width: 75%;
@@ -631,4 +632,11 @@ textarea:focus{
 }
 
 
-
+.closeBtnDiv{
+	text-align: right;
+	width: 98%;
+	padding-top: 5px;
+}
+.closeBtnDiv span:hover {
+	cursor: pointer;
+}

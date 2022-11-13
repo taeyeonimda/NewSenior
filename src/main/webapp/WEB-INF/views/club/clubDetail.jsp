@@ -87,6 +87,7 @@
         <div class="center-div">
         
         	<!-- 클럽 공지사항 -->
+        	<img alt="" src="/resources/img/은비.jpg" width="100%;">
         	<div class="container-xxl py-3 shadow bg-img mb-5">
                 <div class="container class-container">
                     <div class="row pt-2">
@@ -102,7 +103,7 @@
 		                            </div>
                         		</div>
 	                            <pre style="font-family: sans-serif">${c.clubNotice }</pre>
-	                            <textarea rows="5" cols="95" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
+	                            <textarea rows="5" cols="82" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
                     </div>
@@ -140,7 +141,7 @@
 			                    <div class="row align-items-end club-board-div">
 			                        <div class="ml-20">
 				                        <div class="flex-space-between" style="width: 90%;">
-				                        	<div class="flex-space-between" style="width:22%;">
+				                        	<div class="flex-space-between" style="width:27%;">
 				                        		<div class="profile-box" style="background: #BDBDBD;">
 													<img class="profile" src="/resources/upload/club/person_1.jpg">
 												</div>
@@ -159,7 +160,7 @@
 				                        <div class="boardBox">
 				                            <c:if test="${not empty cb.clubBoardFilepath }">
 			                        		<div class="clubBoardTitle">
-			                        			<div class="clubBoardImgBox">
+			                        			<div class="clubBoardImgBox text-center">
 			                        				<img class="clubBoardImg" src="/resources/upload/club/${cb.clubBoardFilepath } ">
 			                        			</div>
 			                        		</div>
@@ -296,7 +297,7 @@
     </div><!--page-content End-->
 <div class="modal-wrap">
     <div class="modal-chat bg-white">
-    	<button onclick="closeModal();">X</button>
+    	<div class="closeBtnDiv"><span class="material-symbols-outlined fw-bold" onclick="closeModal();">close</span></div>
 		<div id="member-box" class="bg-white mt-5 mb-5">
 			<div class="mt-5"></div>
             <input type="hidden" value="${c.clubNo }" id="clubNo">
@@ -306,10 +307,14 @@
 		<div class="chatting">
 			<div class="messageArea bg-white"></div>
 			<div class="sendBox">
-				<input type="text" id="sendMsg">
-				<button id="sendBtn" class="btn btn-outline-secondary" onclick="sendMsg();">전송</button>
-				<input type ="file" class="input-form text-secondary" name ="chatFile" id="chatFile" multiple="multiple">
-				<button type="button" class="btn btn-outline-secondary" onclick="fileSend();" id="sendFileBtn">보내기</button>
+				<div class="flex-space-between">
+					<input type="text" class="form-control bg-light border-0" width="80%;" id="sendMsg">
+					<button id="sendBtn" class="btn btn-outline-secondary" onclick="sendMsg();">전송</button>
+				</div>
+				<div class="flex-space-between">
+					<input type ="file" class="form-control border-0 text-secondary" name ="chatFile" id="chatFile" multiple="multiple">
+					<button type="button" class="btn btn-outline-secondary" onclick="fileSend();" id="sendFileBtn">보내기</button>
+				</div>
 				<div id="fileMsgBox"></div>
 			</div>
 		</div>
@@ -338,7 +343,7 @@
 </div>
 
 <div class="clubLeader-modal-wrap">
-    <div class="clubLeader-modal">
+    <div class="clubLeader-modal bg-white">
         <div class="clubLeaderModalTop mt-5">
             <h3 class="text-secondary">동호회 관리</h3>
         </div>
@@ -455,12 +460,23 @@
 	// 나는 바보다  select 값 가져오는 방법 (가져올 필요 없는데 가져옴)
 	function selectLeader() {
 		const leaderNo=$("#leaderNo option:selected").val();
-		alert("value="+leaderNo);
 	}
 	function quitClub(clubNo, memberNo) {
-		if(confirm("동호회를 탈퇴하시겠습니까?")){
-			location.href="/quitClub.do?clubNo="+clubNo+"&memberNo="+memberNo;
-		}
+		Swal.fire({
+			title: "동호회 탈퇴",//제목
+			text: "정말 탈퇴하시겠습니까?",
+			imageUrl: "/resources/img/제목없음.png",
+			showCancelButton: true,
+			cancelButtonColor: '#525368',
+			confirmButtonColor: '#348E38',
+			cancelButtonText: '취소',
+			confirmButtonText: '탈퇴하기'
+		}).then((result) => {
+			//result.value == true이니까 트루일때만 실행하는거
+		  if (result.value) {
+			  location.href="/quitClub.do?clubNo="+clubNo+"&memberNo="+memberNo;
+		  }
+		})//then끝
 	}
 	function boardDelete(clubNo, clubBoardNo){
 		if(confirm("게시글을 삭제하시겠습니까?"+clubBoardNo)){
@@ -560,7 +576,9 @@
 	}
     function closeModal() {
     	endChat();
-    	ws.close();
+    	if(ws != null){
+    		ws.close();
+    	}
     	$(".chatting").hide();
     	$(".messageArea *").remove();
     	$(".modal-wrap").css("display", "none");
@@ -575,7 +593,7 @@
 	function initChat(param) {
 		memberId = param;
 		// 웹소켓 연결 시도
-		ws = new WebSocket("ws://192.168.10.55/chat.do");
+		ws = new WebSocket("ws://192.168.123.101/chat.do");
 		// 웹소켓 연결 성공 시 실행할 함수 지정
 		ws.onopen = startChat;
 		// 서버에서 데이터 받으면 처리할 함수
