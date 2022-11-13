@@ -18,7 +18,8 @@
 		nickname as nickName,
 		member_state as memberState,	
 	    member_img as memberImg,
-	    favorite
+	    favorite,
+	    kakaologin as kakaoLogin
 		from members order by 1 desc)m)
 		where rnum between #{start} and #{end}
 	</select>
@@ -60,7 +61,8 @@
 			member_name as memberName,
 			member_email as memberEmail,
 			member_phone as memberPhone,
-			member_grade as memberGrade
+			member_grade as memberGrade,
+			member_state as memberState
 	from members
 	where member_id=#{memberId} 
 	<if test="memberPw != null">
@@ -72,7 +74,8 @@
 	select
 			kakaoLogin as kakaoLogin,
 			nickName as nickName,
-			member_email as memberEmail
+			member_email as memberEmail,
+			member_state as memberState
 	from members
 	where kakaoLogin=#{kakaoLogin} 
 	</select>
@@ -195,4 +198,17 @@
 		member_email=#{memberEmail}
 	</update>
 	
+	<update id="deleteUser" parameterType="m">
+	 update members set member_state =  to_char(sysdate,'yyyy-mm-dd') where 
+	 <if test="memberNo != 0">
+	 member_no = #{memberNo}
+	 </if>
+	 <if test="kakaoLogin != null">
+	 kakaoLogin = #{kakaoLogin}
+	 </if>
+	</update>
+	
+	<delete id="deleteMember">
+	delete from members where member_state is not null
+	</delete>
 </mapper>

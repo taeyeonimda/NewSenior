@@ -83,6 +83,7 @@
 	
 	<!-- 예약작업관련 어노테이션 활성화 -->
 	<task:annotation-driven/>
+	
 	<!-- 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor" class="kr.or.common.LoginInterceptor" />
 	<!-- 로그인&운영자 인터셉터 -->
@@ -94,8 +95,10 @@
    <!--interceptor 프로그램 등록-->
 	<interceptors>
 		<interceptor>
-			<mapping path="/mypage.do" />
-			<exclude-mapping path="/login.do"/>
+			<mapping path="/mypage.do" /><!-- 로그인 한사람만 갈 수 있는 페이지 -->
+			<mapping path="/actInsertCart.do"/>
+			
+			<exclude-mapping path="/login.do"/><!-- 로그인 안해도 갈수 있는 페이지 -->
 			<exclude-mapping path="/joinFrm.do"/> 
 			<exclude-mapping path="/roomPage.do"/> 
 			<beans:ref bean="loginInterceptor" />
@@ -103,7 +106,7 @@
 		
 		<interceptor>
 			<mapping path="/adminPage.do" />
-			<beans:ref bean="AdminInterceptor" />
+			<beans:ref bean="AdminInterceptor" /><!-- 로그인 한사람중 관리자만 볼 수 있는 페이지 -->
 		</interceptor>
 		
 	</interceptors> 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.or.cart.model.vo.Cart;
+import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
@@ -27,8 +28,8 @@ public class OrderController {
 	private OrderService service;
 	
 	@RequestMapping(value="/orderHistory.do")
-	public String orderHistory(Model model, Member m ) {
-		ArrayList<Order> list = service.selectAllOrderHistory(m);
+	public String orderHistory(Model model, Order o ) {
+		ArrayList<Order> list = service.selectAllOrderHistory(o);
 		model.addAttribute("list",list);
 		return "myPage/orderHistory";
 	}
@@ -41,14 +42,22 @@ public class OrderController {
 	    return "myPage/orderDetailHistory";
 	 }
 	
-	@RequestMapping(value="/insertOrder.do")
-	public String insertOrder(Order o,Model model,HttpServletRequest request) {
-		int result = service.insertOrder(o);
-		
-		return "myPage/orderHistory";
-	}
+//	@RequestMapping(value="/insertOrder.do")
+//	public String insertOrder(Order o) {
+//		// int[] cartNo,Model model,HttpServletRequest request
+//		System.out.println(o);
+//		int result = service.insertOrder(o);
+//		return "redirect:/orderHistory.do?memberNo="+o.getMemberNo();
+//	}
 	
-
+	@RequestMapping(value="/goDelivery.do")
+	public String goDelivery(Delivery de,Order o) {
+		int result1 = service.insertOrder(o);
+		
+		System.out.println(o);
+		int result2 = service.gogoDelivery(de);
+		return "redirect:/orderHistory.do?memberNo="+de.getMemberNo();
+	}
 	
 	@RequestMapping(value="/goOrderHistory.do")
 	public String goOrderHistory(Cart c, Model model) {

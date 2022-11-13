@@ -26,6 +26,12 @@ public class Order {
 	private String receivePhone;
 	private String receiveEmail;
 	
+	private String receiverName;
+	private String deliveryPhone;
+	private String deliveryAddr;
+	private int allSumPrice; 
+	
+	private int cartNo;
 	private String orderDate;
 	private String orderName;
 	private String orderDetailAmount;
