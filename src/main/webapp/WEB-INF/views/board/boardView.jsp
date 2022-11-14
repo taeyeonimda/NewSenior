@@ -22,13 +22,63 @@
 	.reCommentView{
 		color : red;
 	}
+	
+	.page-content table{
+		width:70%;
+		margin:0 auto;
+		text-align:center;
+		border-collapse: collapse;
+	}
+
+	table tr>.th1 {
+		border-right : 1px solid ;
+	}
+	table tr{
+		border : 1px solid ;
+	}
+	table td{
+		border-right : 1px solid ;
+	}
+	
+	/*제목,첨부파일,내용*/
+	table .td2{
+		text-align : left;
+		padding-left : 15px;
+	}
+	
+	#boardContent{
+		text-align: start;
+		height :400px;
+		padding-top : 15px;
+	}
+
+	.updateDelBox{
+		display:flex;
+		flex-direction: row;
+		justify-content:center;
+	}
+	#updateBtn,#delBtn{
+		width : 200px;
+		height : 50px;
+		margin-top : 30px;
+		background-color: green;
+		border-radius : 15px;
+		border-color : transparent;
+	}
+	button>a{
+		color : white;
+	}
+	#updateBtn {
+		margin-right : 30px;
+	}
+	
 </style>
 
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<div class="page-content">
+
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
@@ -106,12 +156,11 @@
             </c:forEach>
             </div>
         </div>
-	<table border="1">
+  <div class="page-content">
+	<table class="boardTbl">
 		<tr>
-			<th>글번호</th>
+			<th class="th1">글번호</th>
 			<td>${b.boardNo }</td>
-		</tr>
-		<tr>
 			<th>카테고리</th>
 			
 					<!-- 자유게시판 -->
@@ -164,50 +213,41 @@
 			<c:if test ="${b.boardCategory eq 'delivery'}">
 				<td>배송</td>
 			</c:if>
-		</tr>
-		
-		<tr>
 			<th>닉네임</th>
 			<td>${b.nickName }</td>
-		</tr>
-		<tr>
 			<th>작성일</th>
-			<td>${b.boardDate }</td>
-		</tr>
-			
-			<tr>
-				<th>제목</th>
-				<td colspan="3">${b.boardTitle }</td>
-			</tr>
-			<tr>
-				<th>보드타입</th>
-				<td colspan="3">${b.boardType }</td>
-			</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td colspan="3">
-			<c:forEach items="${b.fileList }" var="bf">
-				<p>
-				<a href="/boardFileDown.do?fileNo=${bf.fileNo }">${bf.filename }</a>
-				</p>
-			</c:forEach>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td colspan="6">
-				<div>${b.boardContent }</div>
+			<td>
+			${b.boardDate }
+			<input type="hidden" value="${b.boardType }">
 			</td>
 		</tr>
-		<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
-			<tr class="tr-1">
-				<th colspan="6">
-					<button><a class="btn bc44" href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}">수정</a></button>
-					<button><a class="btn bc44" id="delBtn" href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}">삭제</a></button>
-					<!--<button class="btn bc44" onclick="boardDelete(${b.boardNo},${b.boardType});">삭제</button> -->
-				</th>
+			<tr>
+				<th class="th1">제목</th>
+				<td colspan="7" class="td2">${b.boardTitle }</td>
 			</tr>
-			</c:if>
-	</table>
+		<tr>
+			<th class="th1">첨부파일</th>
+			<td colspan="7" class="td2">
+			<c:forEach items="${b.fileList }" var="bf">
+				<p><a href="/boardFileDown.do?fileNo=${bf.fileNo }">${bf.filename }</a></p>
+			</c:forEach>
+			</td>
+		</tr>
+		<tr>
+			<th class="th1">내용</th>
+			<td colspan="7" class="td2">
+				<div id="boardContent" style="overflow:scroll;">${b.boardContent }</div>
+			</td>
+		</tr>
+		</table>
+		<!-- 테이블 밖으로 뺐음 -->
+		<div class="updateDelBox">
+				<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
+					<button class="updateBtn bc44" id="updateBtn"><a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}">수정</a></button>
+					<button class="delBtn bc44" id="delBtn"><a href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}">삭제</a></button>
+				</c:if>
+		</div>
+	
 	<c:if test="${b.boardType ne 'Q' and b.boardType ne 'N'}">
 		<%--댓글작성 form--%>
 		<c:if test="${not empty sessionScope.m }">
@@ -357,8 +397,6 @@
 		<%--댓글 출력 --%>
 		<%--forEach(1): 댓글반복문 시작(댓글 출력, 대댓글 출력, 대댓글 작성폼   --%>
 		<div class="commentBox">
-		
-		
 		 <c:forEach items="${commentList }" var="bc">
 		 	<ul class="commentView">
 		 		<li>
@@ -384,6 +422,7 @@
 		 	</ul>
 		 </c:forEach>
 	</c:if>
+</div>
 		<script>
 		
 			//답글달기를 누르면 답글달기 - > 취소 / 취소 -> 답글달기
@@ -488,7 +527,6 @@
 			}
 			$("#delBtn").on("click",function(){
 				confirm("글을 삭제하시겠습니까?")
-
 			});
 			
 			$(".commentWriteBtn1").on("click",function(){
@@ -506,7 +544,6 @@
 					return false;
 				}
 			});
-
 
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){
