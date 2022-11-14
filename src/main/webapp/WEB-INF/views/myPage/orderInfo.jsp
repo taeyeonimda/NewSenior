@@ -316,7 +316,7 @@
 				}
 
 				
-				$(".lastPrice").text(realPrice);
+				
 //				$(".allSumPrice").val(numberPrice);
 			}
 		
