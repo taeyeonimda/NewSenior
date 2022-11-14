@@ -54,6 +54,63 @@ public class BoardService {
 		System.out.println("totalCount : "+totalCount);
 		System.out.println("boardType :" +boardType);
 		
+		
+		/*
+		 //지정해줘야할 값 : 페이지 네비게이션 길이
+		int pageNaviSize = 5;
+		
+		//페이지 네비게이션 시작번호 지정
+		int pageNo = 1;
+		//ㄴ내가 요청한 페이지가 가운데에 오게
+		if(reqPage>3) {
+			pageNo = reqPage-2;
+		}
+		
+		//페이지 네비게이션 시작
+		String pageNavi = "";
+		
+		//이전버튼
+		if(pageNo != 1 ) {
+			//pageNavi += "<a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
+			pageNavi += "<a href='/boardList.do?reqPage="+(pageNo-1)+"&boardType="+boardType+"'>[이전]</a>";
+			//&boardType="+boardType+"
+		}
+		
+		//페이지 숫자
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				//내가 요청한 페이지 : 페이지 이동할 필요 없음
+				pageNavi +="<span>"+pageNo+"<span>";
+				//pageNavi +="<span>"+pageNo+"&boardType="+boardType+"<span>";
+			}else {
+				//내가 요청한 페이지 아닐 때 : 요청한 페이지로 이동
+				//pageNavi += "<a href='/boardList.do?reqPage="+(pageNo)+"'>"+pageNo+"</a>";
+				pageNavi += "<a href='/boardList.do?reqPage="+(pageNo)+"&boardType="+boardType+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		} //for문 종료
+		
+		//다음페이지
+		if(pageNo<=totalPage) {
+			//pageNavi +="<a href='/boardList.do?reqPage="+pageNo+"'>[다음]</a>";
+			pageNavi +="<a href='/boardList.do?reqPage="+pageNo+"&boardType="+boardType+"'>[다음]</a>";
+		}
+		
+	
+		System.out.println(list);
+		System.out.println(pageNavi);
+		
+		pageMap.put("pageNavi", pageNavi);
+		pageMap.put("numPerPage", numPerPage);
+		pageMap.put("reqPage", reqPage);
+		
+		
+		return pageMap;
+	}
+		 */
 		int pageNaviSize = 5;
 		
 		//페이지 네비게이션 시작번호 지정
