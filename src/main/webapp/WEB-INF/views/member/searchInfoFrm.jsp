@@ -9,17 +9,22 @@
 <style type="text/css">
 .wra {
 		width: 450px;
-		height:400px;
-		margin: 100px auto;
+		height:320px;
+		margin: 15px auto;
 		padding-top: 35px;
 		background: #FFFFFF;
-		box-shadow: 0 0 45px rgb(0 0 0/ 10%);
-		border-radius: 5%;
+		/*box-shadow: 0 0 45px rgb(0 0 0/ 10%);
+		border-radius: 5%;*/
 	}
 	.txt1{
 		text-align: center;
-		font-size: 2em;
-		color:#000;
+		font-size: 1.5em;
+		color:#fff;
+		border: 1px solid #dc3545;
+		background-color:#dc3545;
+		border-radius: 50px;
+		width: 250px;
+		margin: 0 auto;
 	}
 	.txt2{
 		text-align: left;
@@ -36,30 +41,37 @@
 		height: 50px;
 		font-size: 1.3em;
 		margin-bottom: 20px;
-		border-radius: 5px;
+		border-radius: 4px;
 		border: 1px solid #aaa;
 	}
 	.box3{
 		width: 90px;
 		height: 50px;
 		font-size: 1.3em;
-		margin-bottom: 40px;
-		border-radius: 5px;
+		margin-bottom: 15px;
+		border-radius: 4px;
 		border: 1px solid #aaa;
 	}
 	.box4{
 	border: none;
-	color: #fff;
-	background-color: #dc3545;
+	color: #dc3545;
+	background-color: #fff;
+	border: 1px solid  #dc3545;
 	}
 	.box4:hover{
 	color: #fff;
-	background-color: #ffc107;
+	background-color: #dc3545;
+	}
+	input::placeholder{
+	padding-left: 15px;
+	}
+	#memberPhone1{
+	padding-left: 10px;
 	}
 </style>
 </head>
 <body>
-<%@include file="/WEB-INF/views/common/header2.jsp"%>
+<%@include file="/WEB-INF/views/common/header3.jsp"%>
 	<div class="wra">
 		<form action="/searchId.do" method="post">
 			<div class="txt1">아이디 찾기</div><br>
@@ -76,18 +88,18 @@
 						</select>
 						- <input name="memberPhone2" id="memberPhone2" class="tel box3"  placeholder="1234"> -
 						<input name="memberPhone3" id="memberPhone3" class="tel box3" placeholder="5678"><br>
-			<input type="submit" value="아이디찾기" class="box2 box4">
+			<input type="submit" value="아이디 찾기" class="box2 box4">
 			</div>
 		</form>
 	</div>
-	
+	<hr style="width: 500px; margin: 0 auto;">
 	<div class="wra">
 		<form action="/searchPw.do" method="post" onsubmit="return checkPw();">
 			<div class="txt1">비밀번호 찾기</div><br>
 			<div class="box1">
-				<input type="text" placeholder="아이디를 입력해주세요." name="memberId"  class="box2">
-				<input type="email" placeholder="이메일을 입력해주세요." name="memberEmail" class="box2"><br>
-			<input type="submit" value="비밀번호찾기" id="pwBtn"  class="box2 box4">
+				<input type="text" placeholder="아이디를 입력해주세요." name="memberId"  class="box2 mi">
+				<input type="email" placeholder="이메일을 입력해주세요." name="memberEmail" class="box2 em"><br>
+			<input type="submit" value="비밀번호 찾기" id="pwBtn"  class="box2 box4">
 			</div>
 		</form>
 	</div>
@@ -95,8 +107,8 @@
 	
 	<script type="text/javascript">
 	function checkPw(){
-		const memberId = $("[name=memberId]").val();
-		const memberEmail = $("[name=memberEmail]").val();
+		const memberId = $(".mi").val();
+		const memberEmail = $(".em").val();
 		//공백인지 확인
 		if(memberId == "" || memberEmail == ""){
 			alert("입력이 안된 곳이 있습니다.")

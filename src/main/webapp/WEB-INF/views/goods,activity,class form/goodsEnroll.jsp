@@ -188,17 +188,6 @@
 			$(".productFile").click();
 		});
 		
-		$("#productCategory").change(function(){
-			  console.log($(this).val())
-		});
-		$("#productStatus").change(function(){
-			  console.log($(this).val())
-		});
-		
-		$(".mainImg").on("change",function(){
-			
-			
-		});
 		function productInsert(){
 			var mainImg = $(".mainImg").val();
 			var category = $("#productCategory").val();
