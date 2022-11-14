@@ -215,7 +215,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<span>댓글</span>
+						<span>댓글general</span>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -312,10 +312,10 @@
 															<!-- ㄴ몇 번 글의 댓글인지 -->
 								<input type="hidden" name="boardCommRef" value="${bc.boardCommNo }">
 									<!-- ㄴ어떤 댓글의 대댓글인지 -->					<%--ㄴ해당 댓글 번호 --%>
-								<textarea name="boardCommContent" class="boardCommContent"></textarea>
+								<textarea name="boardCommContent"></textarea>
 							</li>
 							<li>
-								<button type="submit" name="commentWriteBtn2" class="commentWriteBtn2">등록</button>
+								<button type="submit" name="commentWriteBtn2">등록</button>
 							</li>
 						</ul>
 					</form>
@@ -334,7 +334,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<span>댓글</span>
+						<span>댓글QQQ</span>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -346,7 +346,7 @@
 						<textarea name="boardCommContent"></textarea>
 					</li>
 					<li>
-						<button type="submit" name="commentWriteBtn1" class="commentWriteBtn1">등록</button>
+						<button type="submit" name="commentWriteBtn1">등록</button>
 					</li>
 				</ul>
 			</form>
@@ -489,23 +489,7 @@
 			$("#delBtn").on("click",function(){
 				confirm("글을 삭제하시겠습니까?")
 				
-			});
-			
-			$(".commentWriteBtn1").on("click",function(){
-				const boardCommContent =$("[name=boardCommContent]");
-				if(boardCommContent.val()==""){
-					alert('내용을 입력해주세요');
-					return false;
-				}
-			});
-			
-			$(".commentWriteBtn2").on("click",function(){
-				const boardCommContent =$(".boardCommContent");
-				if(boardCommContent.val()==""){
-					alert('내용을 입력해주세요');
-					return false;
-				}
-			});
+			});c
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){
 			//obj는 사실 필요없는 매개변수(형식 맞춰주기 위해서 기입)
