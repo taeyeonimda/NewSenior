@@ -201,8 +201,8 @@
 										${d.deliveryDetail }
 									</td>
 									<td style="line-height: 72px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
-										<button class="delBtn"  style="position: relative; top:20px;">
+									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
+										<button class="delBtn btn btn-outline-warning "  style="position: relative; top:20px;">
 											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}">삭제</a>
 										</button>
 									</td>
@@ -216,8 +216,8 @@
 										${d.deliveryDetail }
 									</td>
 									<td style="line-height: 72px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
-										<button class="delBtn" style="position: relative; top:20px;">
+									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;" class="btn btn-outline-warning delbtn">수정</button>
+										<button class="delBtn2 btn btn-outline-warning delbtn" style="position: relative; top:20px;">
 											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }" >삭제</a>
 										</button></td>
 								</tr>
@@ -542,7 +542,7 @@
     	
     	//회원 탈퇴 버튼 클릭시 comfirm
     	function delMember(){
-    		if(window.confirm("진짜로 회원탈퇴를 하시겠습니까? 탈퇴 후 3개월동안은 재가입이 불가능합니다. ")){
+    		if(window.confirm("회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다. 회원 탈퇴를 진행하시겠습니까?")){
     			return true;
     		}else{
     			return false;

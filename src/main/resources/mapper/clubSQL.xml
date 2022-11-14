@@ -144,7 +144,7 @@
 			club_limit as clubLimit,
 			club_Leader as clubLeader,
 			filepath as clubMainImg,
-			club_intro as clubIntr
+			club_intro as clubIntro
 		from
     		(select rownum, c.*, (select count(*) from club_members m where m.club_no=c.club_no) as cnt
     		from clubs c where club_category=(select favorite from members where member_no=#{memberNo }))
@@ -239,5 +239,16 @@
 		from (select club_no, count(*) as cnt from club_members group by club_no)
 		right join clubs using (club_no)
 		where club_no in (select club_no from club_members where member_no=#{memberNo }) order by cnt desc)r) where rnum between #{startIndex } and #{endIndex }
+	</select>
+	
+	
+	<!-- 가입여부 조회 -->
+	<select id="myClubCheck" parameterType="c" resultType="int">
+		select count(*) from club_members where club_no=#{clubNo } and member_no=#{clubLeader }
+	</select>
+	
+	<!-- 블락 멤버를 조회 -->
+	<select id="selectBlockMember" parameterType="c" resultType="int">
+		select count(*) from block_members where club_no=#{clubNo } and member_no=#{clubLeader }
 	</select>
 </mapper>

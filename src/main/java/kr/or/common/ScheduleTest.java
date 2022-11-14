@@ -27,8 +27,8 @@ public class ScheduleTest {
 	} 
 	 */
 
-	/*
-	@Scheduled(cron = "0 58 14 * * *")
+	//회원 탈퇴 60분마다 (쿼리문은 하루 지난 회원만)
+	@Scheduled(cron = "0 */2 * * * *")
 	public void scheduleTest4() {
 		int result = service.deleteMember();
 		if(result>0) {
@@ -37,5 +37,5 @@ public class ScheduleTest {
 			System.out.println("state 있는 멤버 삭제  실패");
 		}
 	}
-	 * */
+	 
 }

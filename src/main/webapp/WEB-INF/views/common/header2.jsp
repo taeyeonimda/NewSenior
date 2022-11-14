@@ -45,14 +45,18 @@
 <!-- 로그인 모달 css
         <link href="/resources/css/login/login.css" rel="stylesheet">
         -->
+        
+        <!-- 카카오 로그인 -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <!-- sweetalert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>      
 <style type="text/css">
 @charset "UTF-8";
 
 		.m-0 {
 			text-align: center;
-			padding-top: 30px;
+			padding-top: 25px;
 			padding-bottom: 20px;
-			background-color: #ffc107;
 			color: #fff;
 			font-size: 3em;
 		}
@@ -65,7 +69,7 @@
 			  width: 50%;
 			  height: 80vh;
 			  position: fixed;
-			  top: 51%;
+			  top: 48%;
 			  left: 50%;
 			  transform: translate(-50%, -50%);
 			  background: #fff;
@@ -186,12 +190,12 @@
 			    justify-content: space-evenly;
 			}
 	</style>
-         
+             
 </style>
 </head>
 <body>
 		<a href="/" class="navbar-brand d-flex align-items-center px-2 px-lg-3 m-0">
-            <img src="/resources/MAINbtstr/img/로고1.png" width="250px;">
+            <img src="/resources/MAINbtstr/img/로고1.png" width="400px;">
         </a>
 	<div class="div1">
           <a href="javascript:void(0)" class="loginBtn">로그인</a>
@@ -202,17 +206,18 @@
   <div class="popup00 personal_pop00 noto bg_s">
     <div class="x_btn00"><span class="zwicon-close00">X</span></div>
     <div class="cont00">
-      <h1 id="login_header">로그인</h1>
+      <h1 id="login_header" style="color:#000;">로그인</h1>
+     
       <hr>
       <div class="login_cont">
         <form action="/login.do" method="post" onsubmit="return loginchk();">
           <div>
             <input type="text" placeholder="아이디를 입력해주세요." class="boxSize_2" name="memberId" style="font-size: 1.3em;"><br>
             <input type="password" placeholder="비밀번호를 입력해주세요." class="boxSize_2" name="memberPw" style="font-size: 1.3em;"><br>
-            <input type="submit" value="로그인" class="boxSize_2 color_g loginBtn_1" style="color:#fff; font-size: 1.3rem;">
+            <input type="submit" value="로그인" class="boxSize_2 color_g loginBtn_1 lb" style="color:#fff; font-size: 1.3rem;">
           </div>
         </form>
-        <div class="txt_1 flex00 flex_01">
+        <div class="txt_1 flex00 flex_01" style="width: 300px;">
           <div>
             <input type="checkbox">로그인 유지
           </div>
@@ -220,13 +225,29 @@
             <a href="/searchInfoFrm.do" class="c_red txt_d1 fw_8" >아이디/비밀번호 찾기</a>
           </div>
         </div>
-        <h3 class="txt_3">SNS계정으로 간편하게 로그인하세요.</h3>
-        <div><span>카카오로그인</span>/<span>네이버로그인</span></div>
-        <div><a href="/joinFrm.do"><input type="button" value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1.3rem;"></a></div>
+        <h3 class="txt_4" style="color:#000; font-size: 16px;">SNS계정으로 간편하게 로그인하세요.</h3>
+        <div onclick="kakaoLogin();">
+        	<a  href="javascript:void(0)">
+        		 <span><img alt="카카오로그인" src="/resources/img/kakao_login.png" style="width: 50%;"></span>
+        	</a>
+        </div>
+        <hr>
+        <div><a href="/joinFrm.do"><input value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c" style="font-size: 1rem; text-align: center; "></a></div>
+        
+        <!-- 카카오 로그인 -->
+     
+        <ul style="display: none;">
+			<li onclick="kakaoLogout();">
+		      <a href="javascript:void(0)">
+		          <span>카카오 회원 탈퇴</span>
+		      </a>
+			</li>
+		</ul>
+		
       </div>
     </div>
   </div>
-   
+
    
    
    
@@ -275,9 +296,91 @@
 	    	}else{
 	    		return true;
 	    	}
-	    	
-	    	
 	    }
+	    
+	    function alert(text){
+			Swal.fire(text);
+		}
+	    
+	    /*카카오 로그인 두번째 시도*/
+	    //카카오로그인
+		Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
+		console.log(Kakao.isInitialized()); // sdk초기화여부판단
+		function kakaoLogin() {
+		    Kakao.Auth.login({
+		      success: function (response) {
+		        Kakao.API.request({
+		          url: '/v2/user/me',
+		          success: function (response) {
+		        	  console.log(response)
+		        	  console.log(response.id)
+		        	  console.log(response.properties.nickname)
+		        	  console.log(response.kakao_account.email)
+		        	  //로그인 성공 후 insert 하기
+		        	  $.ajax({
+		        		  url: "/kakaoLogin.do",
+		        		  type:'post',
+		        		  data:{
+		        			  kakaoLogin:response.id,
+		        			  nickName:response.properties.nickname,
+		        			  memberId:response.kakao_account.email,
+		        			  memberEmail:response.kakao_account.email
+		        			  },
+		        		 success:function(data){
+		        			 //로그인 성공
+		        			 if(data == "0"){
+		        				 alert("로그인 성공");
+		        				 window.location.href = "/kakao.do";
+		        				 //회원가입 성공
+		        			 }else if(data == "1"){
+		        				 alert("카카오 회원가입 성공하셨습니다. 로그인 해주세요");
+		        				 window.location.href = "/kakao.do";
+		        				 //실패
+		        			 }else if(data == "4"){
+		        				 alert("이미 탈퇴한 회원입니다.");
+		        			 }else{
+		        				 alert("실패")
+		        			 }
+		        		 }
+		        	  });
+		        	  
+		          },
+		          fail: function (error) {
+		            console.log(error)
+		          },
+		        })
+		      },
+		      fail: function (error) {
+		        console.log(error)
+		      },
+		    })
+		  }
+		//카카오 로그아웃
+		function kakaoLogout() {
+		    if (Kakao.Auth.getAccessToken()) {
+		      Kakao.API.request({
+		        url: '/v1/user/unlink',
+		        success: function (response) {
+		        	console.log(response)
+		        	$.ajax({
+		        		url:"/kakaoLogout.do",
+		        		type:"post",
+		        		data: {kakaoLogin:response.id},
+		        		success:function(data){
+		        			alert("로그아웃 성공");
+		        		}
+		        		
+		        		
+		        	});
+		        },
+		        fail: function (error) {
+		          console.log(error)
+		        },
+		      })
+		      Kakao.Auth.setAccessToken(undefined)
+		    }
+		  }  
+
 	</script>
 
 

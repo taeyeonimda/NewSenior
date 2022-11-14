@@ -9,11 +9,9 @@
 <style type="text/css">
 .wra {
 	width: 500px;
-	height:300px;
 	padding: 50px 0;
-	margin: 200px auto;
+	margin: 100px auto;
 	background: #FFFFFF;
-	box-shadow: 0 0 45px rgb(0 0 0/ 10%);
 }
 	.txt1{
 	text-align: center;
@@ -35,7 +33,7 @@
 	.box3{
 	width: 100px;
 	height: 50px;
-	background-color:#0F4229;
+	background-color:#dc3545;
 	border:none;
 	color: #fff;
 	font-size: 1.3em;
@@ -43,18 +41,20 @@
 	.box3:hover{
 	background-color:#198754;
 	}
-	
+	#pw1Chk{
+	text-align: left;;
+	}
 </style>
 </head>
 <body>
-<%@include file="/WEB-INF/views/common/header2.jsp"%>
+<%@include file="/WEB-INF/views/common/header3.jsp"%>
 	<div class="wra">
 		<form action="/pwChange.do" method="post" onsubmit="return checkPw();">
 			<div class="txt1">비밀번호 변경</div><br>
 			<div class="txt2">새로운 비밀번호를 입력해주세요.</div>
 			<div class="box1">
 			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-			<input type="password" name="memberPw" class="box2"><input type="hidden"><input type="submit" value="변경" id="pwBtn"  class="box3"><br>
+			<input type="password" name="memberPw" class="box2 pw2"><input type="hidden"><input type="submit" value="변경" id="pwBtn"  class="box3"><br>
 			<span id="pw1Chk"></span>
 			</div>
 		</form>
@@ -70,7 +70,7 @@
 	});
 	//비밀번호 유효성검사
 	 function checkPw() {
-       let pw = $("[name=memberPw]").val();
+       let pw = $(".pw2").val();
        let number = pw.search(/[0-9]/g);
        let english = pw.search(/[a-z]/ig);
        let spece = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
