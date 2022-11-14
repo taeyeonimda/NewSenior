@@ -79,6 +79,12 @@ select * from
 	      	<!--where (boardType=#{boardType}) and rn between #{start} and #{end}   -->
 	</select>
 	
+	<!-- 지금쓰는 쿼리 -->
+	<select id="totalCount2" parameterType="String" resultType="int">
+		select count(*) from board where board_type=#{boardType}
+		
+	</select>  
+	
 	<select id="totalCount" resultType="int">
 		select count(*) from board
 		<choose>
@@ -88,11 +94,7 @@ select * from
 		</choose>
 	</select>    
 	
-	<!-- 지금쓰는 쿼리 -->
-	<select id="totalCount2" parameterType="String" resultType="int">
-		select count(*) from board where board_type=#{boardType}
-		
-	</select>  
+	
 	
 	<select id="totalCount3" parameterType="map" resultType="int">
 		select count(*) from board where board_type=#{boardType}
@@ -160,6 +162,7 @@ select * from
 	           </if>
 
 	      	where boardType='F'
+	      	
 	</select>
 	
 	<select id="selectOneBoard" parameterType="_int" resultType="b">
