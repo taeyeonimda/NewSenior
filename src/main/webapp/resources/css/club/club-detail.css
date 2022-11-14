@@ -3,7 +3,6 @@
     display: flex;
     justify-content: space-between;
 }
-
 *{
 	font-family: sans-serif;
 }
@@ -36,6 +35,7 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
+	justify-content: space-between;
 }
 .lists{
 	border: 1px solid #bbb;
@@ -60,6 +60,45 @@
 
 
 
+
+/*마이리스트*/
+.popular-list{
+	margin: 0 auto;
+	display: flex;
+	flex-flow: row wrap;
+	flex: auto;
+	position: relative;
+	height: 400px;
+}
+.popular-list>div{
+	flex-shrink: 0;	
+	width: 33.3%;
+	height: 350px;
+}
+.my-list-page{
+	margin: 0 auto;
+	display: flex;
+	flex-flow: row wrap;
+	flex: auto;
+	position: relative;
+	min-height: 678px;
+}
+.my-list-page>div{
+	flex-shrink: 0;	
+	width: 33.3%;
+	min-height: 480px;
+}
+.my-list-page .card-body{
+	height: 50%;
+}
+.goobImg{
+	position: absolute;
+}
+.popular-list>div:first-child .goobImg{
+	z-index: 3;
+	top: 0;
+	left: 0;
+}
 /* 페이징 */
 .pagingBox{
 	display: flex;
@@ -103,11 +142,12 @@
 .club-info-modal{
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-    width: 40%;
-    height: 65%;
+    width: 33%;
+    border-radius: 15px;
     align-items: center;
     text-align: center;
 }
+
 .modal-top h1{
     text-align: center;
     margin: 30px auto;
@@ -123,11 +163,10 @@
 .modal-img-div{
     text-align:center;
     display:table;
-    border:1px solid #cecece;
-    width: 90%;
+    width: 100%;
     height: 40%;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 20px;
 }
 .modal-img{
@@ -138,21 +177,18 @@
 
 .club-info{
 	width: 100%;
-	margin-top: 20px;
 }
 .club-info-box{
-	width: 73%;
+	width: 90%;
 	text-align: left;
 	margin: 0 auto;
 }
 .modal-btn-box{
-	width: 80%;
+	width: 90%;
 	text-align: right;
 	margin: 0 auto;
+	margin-bottom: 20px;
 }
-
-
-
 
 
 
@@ -186,12 +222,12 @@
 }
 
 .bg-img{
-	background-image: url("/resources/img/은비(4).jpg");
+	background-image: url("/resources/img/은비4.jpg");
 }
 
 /* The sidebar menu */
 .sidenav-right {
-    width: 18%;
+    width: 20%;
     position: fixed;
     z-index: 1;
     top: 0px;
@@ -229,7 +265,7 @@
     margin: 0 auto;
 }
 .center-div{
-    width: 50%;
+    width: 45%;
     margin: 0 auto;
     min-height: 1200px;
 }
@@ -349,7 +385,7 @@ textarea[name=clubBoardContent]{
 
 /* 동호회 관리 모달*/
 .clubLeader-modal{
-    background-color: #fff;
+    background-image: url("../img/은비5.jpg");
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
     width: 500px;
     height: 550px;
@@ -563,6 +599,7 @@ textarea:focus{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding-bottom: 60px;
 }
 .text-box{
 	width: 75%;
@@ -595,4 +632,11 @@ textarea:focus{
 }
 
 
-
+.closeBtnDiv{
+	text-align: right;
+	width: 98%;
+	padding-top: 5px;
+}
+.closeBtnDiv span:hover {
+	cursor: pointer;
+}

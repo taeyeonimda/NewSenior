@@ -52,13 +52,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardView.do")
-	public String boardView(int boardNo,Model model,String boardType) {
+	public String boardView(int boardNo,Model model,String boardType,HttpSession session,Board b) {
 		HashMap<String, Object> pageViewMap = service.selectOneBoard(boardNo);
 		model.addAttribute("b",(Board)pageViewMap.get("b"));
 		//댓글추가
 		model.addAttribute("commentList",(ArrayList<BoardComment>)pageViewMap.get("commentList"));
 		//대댓글 추가
 		model.addAttribute("reCommentList",(ArrayList<BoardComment>)pageViewMap.get("reCommentList"));
+		session.setAttribute("boardType",boardType);
+		System.out.println("controllerView boardType :"+boardType);
 		
 		/*
 		 //Q&A boardView 따로 만들기 -- 이런식 
@@ -74,7 +76,13 @@ public class BoardController {
 		
 		/* 아니면 boardList처럼 sql에서 분류??*/
 		/*아니면 boardView jsp에서 c:if로 조건걸어주기*/
-		return "board/boardView";
+		
+			System.out.println("controller view b.getBoardType() : "+b.getBoardType());
+			
+			
+				return "board/boardView";
+			
+			
 	}
 	
 	@RequestMapping(value="/boardWriteFrm.do")
@@ -125,7 +133,7 @@ public class BoardController {
 		b.setFileList(filelist);
 		int result = service.insertBoard(b);
 		System.out.println("writeFrm : "+boardType);
-		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
+		return "redirect:/boardList.do?reqPage=1&boardType="+boardType; //이건 성공
 		//return "redirect:/boardList.do?reqPage=1&boardType=F";
 	}
 	
@@ -139,7 +147,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardUpdate.do")
-	public String boardUpdate(int[] fileNoList, String[] filepathList,Board b,MultipartFile[] boardFile, HttpServletRequest request) {
+	public String boardUpdate(int[] fileNoList, String[] filepathList,Board b,MultipartFile[] boardFile, HttpServletRequest request,String boardType) {
 								//ㄴ(jsp에서)데이터가 같은 name으로 여러개 넘어오면 배열로 받기
 								// 배열: 삭제할파일 no, 삭제할 파일 경로
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
@@ -193,7 +201,7 @@ public class BoardController {
 			}
 		}
 		
-		
+		//return "redirect:/boardView.do?boardNo="+b.getBoardNo()+"&boardType="+boardType;
 		return "redirect:/boardView.do?boardNo="+b.getBoardNo();
 		//return "redirect:/boardViewQ.do?boardNo="+b.getBoardNo();
 		//return "redirect:/boardViewN.do?boardNo="+b.getBoardNo();
@@ -214,6 +222,7 @@ public class BoardController {
 			}
 		}
 		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
+		//return "redirect:/boardList.do?reqPage=1";
 	}
 	
 	//댓글입력
@@ -224,6 +233,7 @@ public class BoardController {
 //		return "board/boardView.do?boardNo="+bc.getBoardRef();
 	
 		return "redirect:/boardView.do?boardNo="+bc.getBoardRef();
+		
 
 	
 	// 댓글 수정

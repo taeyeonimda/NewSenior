@@ -12,7 +12,7 @@
 	
 	<div class="page-content">
         <!-- Page Header Start -->
-        <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container-fluid club-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLASS</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
@@ -49,11 +49,8 @@
                     <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" style="width:408px; height:408px;"src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
-                            <h4 class="text-white mb-4">${cla.className }</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/upload/class/${cla.filepath }" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
+                            <h3 class="text-white mb-4">${cla.className }</h3>
+                            <h5 class="text-light mb-4 fw-bold">${cla.classPrice }</h5>
                         </div>
                     </div>
                 </div>

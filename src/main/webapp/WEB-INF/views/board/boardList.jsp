@@ -16,10 +16,19 @@
                 <h1 class="display-3 text-white mb-4 animated slideInDown">커뮤니티</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="#">자유게시판</a></li>
-                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
-                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
+                    	<c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P'}">
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
+	                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
+                        </c:if>
+                        <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></li>
+	                        <li class="breadcrumb-item active" aria-current="page">강사모집</li>
+                        </c:if>
+                        
                     </ol>
                 </nav>
             </div>
@@ -31,13 +40,22 @@
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 <c:if test="${boardType eq 'F'}">
-                	<h1 class="display-5 mb-5">자유게시판</h1>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'I'}">
-                	<h1 class="display-5 mb-5">정보게시판</h1>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'P'}">
-                	<h1 class="display-5 mb-5">동호회모집</h1>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
+                </c:if>
+                <c:if test="${boardType eq 'N'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></h1>
+                </c:if>
+                <c:if test="${boardType eq 'Q'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></h1>
+                </c:if>
+                <c:if test="${boardType eq 'A'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></h1>
                 </c:if>
             </div>
             
@@ -45,7 +63,7 @@
                 <div class="col-12 text-center">
                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
                         <c:forEach items="${list}" var="cateList">
-                        	<li class="mx-2 ${cateList.boardType }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardType}&reqPage=1">${cateList.boardType }</a></li>
+                        	<li class="mx-2 ${cateList.boardCategory }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardCategory}&reqPage=1">${cateList.boardCategory }</a></li>
                         </c:forEach>   
                     </ul>
         	   </div>
@@ -74,9 +92,15 @@
 		</c:if>
 
 		<c:if test="${boardType ne 'Q' }">
+		<div class="boardWrap">
 	<table border="1">
 		<tr>
-			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th><th>보드타입</th><th>카테리스트</th>
+			<th style="width: 10%;">번호</th>
+			<th style="width: 15%;">카테고리</th>
+			<th style="width: 35%;">제목</th>
+			<th style="width: 15%;">작성자</th>
+			<th style="width: 10%;">조회수</th>
+			<th style="width: 20%;">작성일</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
@@ -118,20 +142,18 @@
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
 			<td>${b.boardDate }</td>
-			<td>${b.boardType }</td>
+			<!--<td>${b.boardType }</td>  -->
+			<td><input type="hidden" value="${b.boardType }"></td>
 		</tr>
 		</c:forEach>
-		<c:forEach items="${boardCate}" var="bCateVO">
 		
-			<td>${bCateVO.boardCategory }</td>
-
-		</c:forEach>
 		<tr>
 			<th colspan="5">
 				${pageNavi }
 			</th>
 		</tr>
 		</table>
+		</div>
 		</c:if>
 
 		
@@ -140,7 +162,13 @@
 		
 	<table border="1">
 		<tr>
-			<th>번호</th><th>카테고리</th><th>제목</th><th>작성자<th>조회수</th><th>작성일</th><th>보드타입</th><th>답변여부</th>
+			<th style="width: 10%;">번호</th>
+			<th style="width: 10%;">카테고리</th>
+			<th style="width: 35%;">제목</th>
+			<th style="width: 10%;">작성자</th>
+			<th style="width: 10%;">조회수</th>
+			<th style="width: 15%;">작성일</th>
+			<th style="width: 10%;">답변여부</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
@@ -169,12 +197,11 @@
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
 			<td>${b.boardDate }</td>
-			<td>${b.boardType }</td>
 			<c:if test="${b.boardCommCnt eq 0 }">
 				<td>답변대기중</td>
 			</c:if>
 			<c:if test="${b.boardCommCnt ne 0 }">
-				<td>답변완료</td>
+				<td style="color : green">답변완료</td>
 			</c:if>
 		</tr>
 		</c:forEach>
@@ -191,7 +218,7 @@
 		<div class="searchForm">
 			<form action="/searchBoard.do?reqPage=1" method="post">
 				<select name="categoryTag">
-				<!-- 보드별로 카테고리 추가하기 -->
+				<!-- 보드별로 카테고리 추가하기 (writeFrm 참고)-->
 					<option value="all">전체</option>
 					<option value="info" <c:if test="${b.boardCategory eq 'info'}">selected</c:if>>정보</option>
 					<option value="etc" <c:if test="${b.boardCategory eq 'etc'}">selected</c:if>>기타</option>

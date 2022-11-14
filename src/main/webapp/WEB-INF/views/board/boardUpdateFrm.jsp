@@ -14,30 +14,17 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<script src="/resources/summernote/summernote-lite.js"></script>
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
-
-
 	
 <h1>게시판 수정</h1>
 	<form action="/boardUpdate.do" id="boardUpdateForm" method="post" enctype="multipart/form-data">
 		<table border="1">
-			<tr>
-				
-			</tr>
 			<tr>
 				<th>글번호</th>
 				<td><input type="hidden" name="boardNo" value="${b.boardNo}">${b.boardNo}</td>
 			</tr>
 			<tr>
 				<th>카테고리</th>
-				<!-- 
-				<td>
-				<select name="boardCategory">
-					<option value="info" <c:if test="${b.boardCategory eq 'info'}">selected</c:if>>정보</option>
-					<option value="etc" <c:if test="${b.boardCategory eq 'etc'}">selected</c:if>>기타</option>
-				</select>
-				</td>
-				-->
-				<c:if test="${boardType eq 'F' }">
+				<c:if test="${b.boardType eq 'F' }">
 					<td>
 						<select name="boardCategory">
 							<option value="info"<c:if test="${b.boardCategory eq 'info'}">selected</c:if>>정보</option>
@@ -45,7 +32,7 @@
 						</select>
 					</td>	
 				</c:if>
-				<c:if test="${boardType eq 'I' }">
+				<c:if test="${b.boardType eq 'I' }">
 					<td>
 						<select name="boardCategory">
 							<option value="campaign"<c:if test="${b.boardCategory eq 'campaign'}">selected</c:if>>캠페인</option>
@@ -55,7 +42,7 @@
 						</select>
 					</td>
 				</c:if>
-				<c:if test="${boardType eq 'Q' }">
+				<c:if test="${b.boardType eq 'Q' }">
 					<td>
 						<select name="boardCategory">
 							<option value="class"<c:if test="${b.boardCategory eq 'class'}">selected</c:if>>클래스</option>
@@ -67,14 +54,14 @@
 						</select>
 					</td>
 				</c:if>
-				<c:if test="${boardType eq 'N' }">
+				<c:if test="${b.boardType eq 'N' }">
 					<td>
 						<select name="boardCategory">
 							<option value="notice"<c:if test="${b.boardCategory eq 'notice'}">selected</c:if>>공지사항</option>
 						</select>
 					</td>	
 				</c:if>
-				<c:if test="${boardType eq 'P' }">
+				<c:if test="${b.boardType eq 'P' }">
 					<td>
 						<select name="boardCategory">
 							<option value="invite"<c:if test="${b.boardCategory eq 'invite'}">selected</c:if>>모집중</option>

@@ -18,10 +18,10 @@
 			<p class="fs-5 fw-bold text-primary mt-5 text-shadow">내 동호회</p>
 	        <c:choose>
 	        	<c:when test="${not empty myList }">
-			        <div class="row mb-5" style="flex-wrap: wrap;">
+			        <div class="mb-5 row my-list-page" style="flex-wrap: wrap;">
 			        	<c:forEach items="${myList }" var="ml">
 			        	<c:if test="${ml.clubNo eq newClub }">
-						<div class="col-md-6 col-lg-4 mb-5">
+						<div class="col-md-6 mb-5">
 							<div class="card h-100 shadow" style="border: 5px solid #E8F5E9;">
 			      				<img src="/resources/upload/club/${ml.clubMainImg }" height="60%;" style="min-height: 60%;">
 			      				<div class="card-body" style="min-height: 40%;">
