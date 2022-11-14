@@ -13,8 +13,6 @@
 		margin: 100px auto;
 		padding-top: 35px;
 		background: #FFFFFF;
-		box-shadow: 0 0 45px rgb(0 0 0/ 10%);
-		border-radius: 5%;
 	}
 	.txt1{
 		text-align: center;
@@ -60,12 +58,11 @@
 </style>
 </head>
 <body>
-<%@include file="/WEB-INF/views/common/header2.jsp"%>
-
+<%@include file="/WEB-INF/views/common/header3.jsp"%>
 	<div class="wra">
 		<div class="txt2">임시비밀번호가 이메일로 전송되었습니다.</div><br>
 			<div class="box1">
-			<button  class="box2 box4 btn" style="background-color: #dc3545; color:#fff;">로그인하러가기</button>
+			<button  class="box2 box4 btn" style="background-color: #fff; color:#dc3545; border: 1px solid #dc3545;">로그인하러가기</button>
 			</div>
 		</div>
 	<script type="text/javascript">
@@ -73,10 +70,10 @@
 		$(".loginBtn").click();
 	});
 	$(".btn").on("mouseover",function(){
-		$(this).css("background-color"," #ffc107").css("color","#fff");
+		$(this).css("background-color"," #dc3545").css("color","#fff");
 	});
 	$(".btn").on("mouseout",function(){
-		$(this).css("background-color"," #dc3545").css("color","#fff");
+		$(this).css("background-color"," #fff").css("color","#dc3545");
 	});
 	</script>
 	
