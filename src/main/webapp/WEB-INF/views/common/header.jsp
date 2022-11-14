@@ -383,6 +383,7 @@
 	        	  console.log(response.properties.nickname)
 	        	  console.log(response.kakao_account.email)
 	        	  //로그인 성공 후 insert 하기
+	        	  
 	        	  $.ajax({
 	        		  url: "/kakaoLogin.do",
 	        		  type:'post',

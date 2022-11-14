@@ -71,10 +71,17 @@
 
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<!-- HTML5 Inputs -->
-			<form action="/mypageUpdate.do" me>
+			<form action="/mypageUpdate.do"  method="post" enctype="multipart/form-data">
 				<div class="card mb-4" /*style="width: 60%;*/">
 					<h5 class="card-header">내정보</h5>
 					<div class="card-body" style="padding-top: 20px;">
+					<div class="mb-3 row">
+							<label for="html5-text-input" class="col-md-2 col-form-label">프로필</label>
+							<div class="col-md-10 ">
+								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" width="100px;"><br><br>
+								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="memberImg" name="files" accept=".gif, .jpg, .png"></span><button class="btn btn-outline-warning myImg">프로필 바꾸기</button>
+							</div>
+						</div>
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
 							<div class="col-md-10">
@@ -548,6 +555,7 @@
     			return false;
     		}
     	}
+    	
     </script>
 </body>
 </html>
