@@ -10,9 +10,11 @@
 <link href="/resources/css/member/join.css" rel="stylesheet">
 </head>
 <body>
-	<%@include file="/WEB-INF/views/common/header2.jsp"%>
+	<%@include file="/WEB-INF/views/common/header3.jsp"%>
 	<div class="wra0">
 	<div class="wra">
+	<div class="wra_title">회원가입</div>
+	<hr>
 		<form action="/join.do" method="post" class="joinbox">
 			<fieldset>
 				<span class="sp">이름<span class="red">*</span></span>

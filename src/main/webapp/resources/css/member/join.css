@@ -3,7 +3,10 @@
 	display: inline-block;
 	cursor: pointer;
 }
-
+.wra_title{
+	text-align: center;
+	font-size: 2em; 
+}
 .popup {
 	display: none;
 	width: 90%;
@@ -85,19 +88,20 @@
 
 .fs {
 	font-size: 1.4em;
+	margin-top: 15px;
 }
 
 #memberJoin {
 	width: 480px;
 	height: 60px;
-	color: #E8F5E9;
-	background-color: #0F4229;
-	border: none;
+	color: #dc3545;
+	background-color: #fff;
+	border: 1px solid #dc3545;
 }
 
 #memberJoin:hover {
-	color: #E8F5E9;
-	background-color: #348E38;
+	color: #fff;
+	background-color: #dc3545;
 }
 
 .wra {
@@ -105,5 +109,4 @@
 	padding: 10px;
 	margin: 0 auto;
 	background: #FFFFFF;
-	box-shadow: 0 0 45px rgb(0 0 0/ 10%);
 }

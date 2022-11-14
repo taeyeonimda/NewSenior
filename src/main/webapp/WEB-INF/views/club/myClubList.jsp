@@ -21,12 +21,14 @@
 			        <div class="mb-5 row my-list-page" style="flex-wrap: wrap;">
 			        	<c:forEach items="${myList }" var="ml">
 			        	<c:if test="${ml.clubNo eq newClub }">
-						<div class="col-md-6 mb-5">
-							<div class="card h-100 shadow" style="border: 5px solid #E8F5E9;">
-			      				<img src="/resources/upload/club/${ml.clubMainImg }" height="60%;" style="min-height: 60%;">
-			      				<div class="card-body" style="min-height: 40%;">
+						<div class="mb-5">							
+							<div class="card shadow" style="border: 5px solid #0F4229;">
+			      				<div class="card-img">
+									<img src="/resources/upload/club/${ml.clubMainImg }" width="100%">
+								</div>
+			      				<div class="card-body" style="height: 66%;">
 					        		<h5 class="card-title">${ml.clubName } <span class="fs-5 fw-bold text-danger">new!</span></h5>
-					        		<p class="card-text">${ml.clubIntro }</p>
+					        		<p class="card-text clubIntro">${ml.clubIntro }</p>
 					        		<p class="card-text">${ml.clubMemberCnt }/${ml.clubLimit }</p>
 					        		<a href="/clubDetail.do?clubNo=${ml.clubNo }" class="btn btn-outline-primary">입장하기</a>
 				      			</div>
@@ -36,12 +38,14 @@
 			  			</c:forEach>
 			  			<c:forEach items="${myList }" var="ml">
 			        	<c:if test="${ml.clubNo ne newClub }">
-						<div class="col-md-6 col-lg-4 mb-5">
-							<div class="card h-100 shadow">
-			      				<img src="/resources/upload/club/${ml.clubMainImg }" style="min-height: 60%;">
-			      				<div class="card-body" style="min-height: 40%;">
+						<div class="mb-5">
+							<div class="card shadow" style="border: 5px solid #E8F5E9;">
+								<div class="card-img">
+									<img src="/resources/upload/club/${ml.clubMainImg }" width="100%">
+								</div>
+			      				<div class="card-body" style="height: 66%;">
 					        		<h5 class="card-title">${ml.clubName }</h5>
-					        		<p class="card-text">${ml.clubIntro }</p>
+					        		<p class="card-text clubIntro">${ml.clubIntro }</p>
 					        		<p class="card-text">${ml.clubMemberCnt }/${ml.clubLimit }</p>
 					        		<a href="/clubDetail.do?clubNo=${ml.clubNo }" class="btn btn-outline-primary">입장하기</a>
 				      			</div>
@@ -49,7 +53,6 @@
 			  			</div>
 			  			</c:if>
 			  			</c:forEach>
-			  			
 					</div>
 	        	</c:when>
 	        	<c:otherwise>

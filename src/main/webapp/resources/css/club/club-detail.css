@@ -3,6 +3,10 @@
     display: flex;
     justify-content: space-between;
 }
+.flex-space-around{
+	display: flex;
+	justify-content: space-around;
+}
 *{
 	font-family: sans-serif;
 }
@@ -99,6 +103,8 @@
 	top: 0;
 	left: 0;
 }
+
+
 /* 페이징 */
 .pagingBox{
 	display: flex;
@@ -135,65 +141,90 @@
 
 
 
+.clubIntro{
+	height: 110px;
+	overflow: auto;
+  	text-overflow: ellipsis;
+ 	word-break: break-all;
+ 	word-wrap: break-word;
+ 	padding: 10px;
+}
+.clubIntro::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.clubIntro::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: #0F4229; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.clubIntro::-webkit-scrollbar-track {
+    background: #E8F5E9;  /*스크롤바 뒷 배경 색상*/
+}
 
 
 
 /* 클럽리스트 동호회 모달 */
-.club-info-modal{
-    background-color: #fff;
+.cookiesContainer{
+	background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-    width: 33%;
-    border-radius: 15px;
+    width: 320px;
     align-items: center;
     text-align: center;
+    border-radius: 25px;
+}
+.cookiesContent {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-radius: 20px;
+  padding: 30px 30px 50px;
+}
+.cookiesContent .close {
+    width: 30px;
+    font-size: 20px;
+    color: #c0c5cb;
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 10px;
+}
+.cookiesContent img {
+    width: 150px;
+    margin-bottom: 15px;
+}
+.cookiesContent p {
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+.cookiesContent .accept {
+    background-color: #525368;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0px 6px 18px -5px #525368;
 }
 
-.modal-top h1{
-    text-align: center;
-    margin: 30px auto;
-    font-size: 24px;
-    line-height: 24px;
-}
-#member-box{
-    margin: 0 auto;
-    width: 250px;
-    overflow: hidden;
-}
 
-.modal-img-div{
-    text-align:center;
-    display:table;
-    width: 100%;
-    height: 40%;
-    margin: 0 auto;
-    margin-top: 20px;
-    padding: 20px;
-}
-.modal-img{
-    width: 100%;
-  	height: 230px;
-  	object-fit: cover;
-}
+.card-img{
+	width: 320px;
+	height: 180px;
 
-.club-info{
+}
+.card-img>img{
+	object-fit: cover; 
 	width: 100%;
+	height: 100%;
 }
-.club-info-box{
-	width: 90%;
-	text-align: left;
-	margin: 0 auto;
-}
-.modal-btn-box{
-	width: 90%;
-	text-align: right;
-	margin: 0 auto;
-	margin-bottom: 20px;
-}
-
-
-
-
-
 /*----------------- club-detail -----------------*/
 .club-container{
 	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -441,27 +472,52 @@ textarea[name=clubBoardContent]{
 }
 
 
+.messageArea::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.messageArea::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: #0F4229; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.messageArea::-webkit-scrollbar-track {
+    background: #E8F5E9;  /*스크롤바 뒷 배경 색상*/
+}
+
+
 /* 채팅창 css */
 .chatting{
-	width: 500px;
+	width: 460px;
 	display: none;
 	margin: 0 auto;
 }
 .messageArea{
 	overflow-y: auto;
 	border 1px sold block;
-	height: 440px;
+	height: 410px;
 	display:flex;
 	flex-direction: column;
+	padding: 10px;
 }
 .messageArea>p{
 	text-align: center;
 	width: 100%;
 }
+.sendBox>*{
+	padding-bottom: 20px;
+} 
 #sendMsg{
 	width: 75%;
 }
 #sendBtn{
+	width: 20%;
+}
+#fileBox>input{
+	width: 75%;
+}
+#fileBox>button{
 	width: 20%;
 }
 .chat{

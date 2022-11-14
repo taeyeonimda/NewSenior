@@ -282,7 +282,9 @@ public class MemberController {
 				model.addAttribute("member", member);
 				return "member/searchIdSuccess";
 			} else {
-				return "redirect:/";
+				model.addAttribute("msg", "아이디를 찾을 수 없습니다.");
+				model.addAttribute("url","/searchInfoFrm.do");
+				return "alert";
 			}
 		}
 		
