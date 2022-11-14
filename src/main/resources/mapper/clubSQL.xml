@@ -144,7 +144,7 @@
 			club_limit as clubLimit,
 			club_Leader as clubLeader,
 			filepath as clubMainImg,
-			club_intro as clubIntr
+			club_intro as clubIntro
 		from
     		(select rownum, c.*, (select count(*) from club_members m where m.club_no=c.club_no) as cnt
     		from clubs c where club_category=(select favorite from members where member_no=#{memberNo }))

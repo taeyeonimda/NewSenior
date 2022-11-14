@@ -77,9 +77,6 @@ select * from
 
 	      	where prn between #{start} and #{end} and boardType='F'
 	      	<!--where (boardType=#{boardType}) and rn between #{start} and #{end}   -->
-	      	
-	      	 
-
 	</select>
 	
 	<select id="totalCount" resultType="int">
@@ -91,6 +88,7 @@ select * from
 		</choose>
 	</select>    
 	
+	<!-- 지금쓰는 쿼리 -->
 	<select id="totalCount2" parameterType="String" resultType="int">
 		select count(*) from board where board_type=#{boardType}
 		
