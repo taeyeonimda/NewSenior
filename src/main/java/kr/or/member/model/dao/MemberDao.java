@@ -135,4 +135,10 @@ public class MemberDao {
 	}
 	*/
 
+	public int deleteMember() {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("member.deleteMember");
+		return result;
+	}
+
 }

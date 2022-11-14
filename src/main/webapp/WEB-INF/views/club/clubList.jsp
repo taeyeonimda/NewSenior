@@ -12,18 +12,6 @@
 <style>
 
 /*인기 클럽이미지*/
-.pclubImgBox {
-    width: 200px;
-    height: 200px; 
-    border-radius: 70%;
-    overflow: hidden;
-}
-.pclubImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 
 .serviceBox{
     color: #db7100;
@@ -45,7 +33,7 @@
     left: 50%;
     z-index: -1;
     background-image: url("/resources/img/은비1.jpg");
-    background-size: 100%;
+    background-size: 110%;
 }
 .serviceBox .title{
     color: #fff;
@@ -151,7 +139,7 @@
 							        </div>
 							        <div style="margin-top: 200px; word-break:break-all;" >
 							            <h3 class="card-title">${pl.clubName }</h3>
-										<p class="description" style="width: 100%;">${pl.clubIntro } dddddddddddddddddddddddddddddddddddddddddddddd</p> 
+										<p class="description" style="width: 100%;">${pl.clubIntro } </p> 
 							            <a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
 							        </div>
 							    </div>
