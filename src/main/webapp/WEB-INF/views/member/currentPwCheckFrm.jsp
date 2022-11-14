@@ -9,11 +9,9 @@
 <style type="text/css">
 .wra {
 	width: 500px;
-	height:300px;
 	padding: 50px 0;
-	margin: 200px auto;
+	margin: 100px auto;
 	background: #FFFFFF;
-	box-shadow: 0 0 45px rgb(0 0 0/ 10%);
 }
 	.txt1{
 	text-align: center;
@@ -35,7 +33,7 @@
 	.box3{
 	width: 100px;
 	height: 50px;
-	background-color:#0F4229;
+	background-color:#dc3545;
 	border:none;
 	color: #fff;
 	font-size: 1.3em;
@@ -47,10 +45,11 @@
 </style>
 </head>
 <body>
-<%@include file="/WEB-INF/views/common/header2.jsp"%>
+<%@include file="/WEB-INF/views/common/header3.jsp"%>
 	<div class="wra">
 		<form action="/currentPwCheck.do" method="post">
-				<div class="txt1">비밀번호 변경</div><br>
+				<div class="txt1">비밀번호 변경</div>
+				<hr style="margin-bottom: 40px;">
 				<div class="txt2">현재 비밀번호를 입력해주세요.</div>
 				<div class="box1">
 				<input type="password" name="memberPw" class="box2"><input type="hidden" name="memberId" value="${sessionScope.m.memberId }"><input type="submit" value="확인" class="box3">

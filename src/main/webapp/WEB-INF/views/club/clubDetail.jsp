@@ -67,7 +67,7 @@
                 </div>
                 <p class="fs-5 fw-bold text-dark mt-2">${c.clubName }</p>
                 <div class="side-info-box text-center">
-                    <p>${c.clubIntro } </p>
+                    <p class="clubIntro">${c.clubIntro } </p>
                 </div>
                 <div>
                 	<c:choose>
@@ -306,12 +306,12 @@
         </div>
 		<div class="chatting">
 			<div class="messageArea bg-white"></div>
-			<div class="sendBox">
+			<div class="sendBox" id="sendBox">
 				<div class="flex-space-between">
 					<input type="text" class="form-control bg-light border-0" width="80%;" id="sendMsg">
 					<button id="sendBtn" class="btn btn-outline-secondary" onclick="sendMsg();">전송</button>
 				</div>
-				<div class="flex-space-between">
+				<div class="flex-space-between" id="fileBox">
 					<input type ="file" class="form-control border-0 text-secondary" name ="chatFile" id="chatFile" multiple="multiple">
 					<button type="button" class="btn btn-outline-secondary" onclick="fileSend();" id="sendFileBtn">보내기</button>
 				</div>
@@ -593,7 +593,7 @@
 	function initChat(param) {
 		memberId = param;
 		// 웹소켓 연결 시도
-		ws = new WebSocket("ws://192.168.123.101/chat.do");
+		ws = new WebSocket("ws://192.168.10.55/chat.do");
 		// 웹소켓 연결 성공 시 실행할 함수 지정
 		ws.onopen = startChat;
 		// 서버에서 데이터 받으면 처리할 함수

@@ -176,100 +176,13 @@
          
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="/" class="navbar-brand d-flex align-items-center px-2 px-lg-3">
-            <img src="/resources/MAINbtstr/img/로고1.png" width="250px">
+  	<a href="/" class="navbar-brand d-flex align-items-center px-2 px-lg-3 m-0">
+            <img src="/resources/MAINbtstr/img/로고1.png" width="400px;">
         </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-right: 15px;">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-             <!-- 클래스 -->
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/classList.do?classCategory=AL&reqPage=1'">클래스</a>
-                    <div class="dropdown-menu bg-light m-0">
-                    	<a href="/classList.do?classCategory=AL&reqPage=1" class="dropdown-item">전체</a>
-                        <a href="/classList.do?classCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
-                        <a href="/classList.do?classCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
-                        <a href="/classList.do?classCategory=CR&reqPage=1" class="dropdown-item">공예</a>
-                        <a href="/classList.do?classCategory=DE&reqPage=1" class="dropdown-item">디자인</a>
-                        <a href="/classList.do?classCategory=EX&reqPage=1" class="dropdown-item">운동 / 건강</a>
-                        <a href="/classList.do?classCategory=FS&reqPage=1" class="dropdown-item">패션</a>
-                        <a href="/classList.do?classCategory=ME&reqPage=1" class="dropdown-item">미디어</a>
-                        <a href="/classList.do?classCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
-                        <a href="/classList.do?classCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
-                        <a href="/classList.do?classCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
-                        <a href="/classList.do?classCategory=NO&reqPage=1" class="dropdown-item">기타</a>                      
-                    </div>
-                </div>
-                <!-- 액티비티 -->
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/activityList.do?activityCategory=AL&reqPage=1'">액티비티</a>
-                    <div class="dropdown-menu bg-light m-0">
-                    	<a href="/activityList.do?activityCategory=AL&reqPage=1" class="dropdown-item">전체</a>
-                        <a href="/activityList.do?activityCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
-                        <a href="/activityList.do?activityCategory=FU&reqPage=1" class="dropdown-item">주식 / 재태크</a>
-                        <a href="/activityList.do?activityCategory=CR&reqPage=1" class="dropdown-item">공예</a>
-                        <a href="/activityList.do?activityCategory=DE&reqPage=1" class="dropdown-item">디자인</a>
-                        <a href="/activityList.do?activityCategory=EX&reqPage=1" class="dropdown-item">운동 / 건강</a>
-                        <a href="/activityList.do?activityCategory=FS&reqPage=1" class="dropdown-item">패션</a>
-                        <a href="/activityList.do?activityCategory=ME&reqPage=1" class="dropdown-item">미디어</a>
-                        <a href="/activityList.do?activityCategory=SO&reqPage=1" class="dropdown-item">악기 / 노래</a>
-                        <a href="/activityList.do?activityCategory=FO&reqPage=1" class="dropdown-item">외국어</a>
-                        <a href="/activityList.do?activityCategory=CO&reqPage=1" class="dropdown-item">요리 / 제과제빵</a>
-                    </div>
-                </div>
-                
-                <c:choose>
-                	<c:when test="${not empty sessionScope.m}">
-                		<a href="/popularClubList.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">동호회</a>
-                	</c:when>
-                	<c:otherwise>
-                		<a href="/clubList.do" class="nav-item nav-link">동호회</a>
-                	</c:otherwise>
-                </c:choose>
-                
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
-                    <div class="dropdown-menu bg-light m-0">
-
-                     	<a href="#">${isLogin }</a>
-                        <a href="/boardList.do?reqPage=1&boardType=F" class="dropdown-item">자유게시판</a>
-                        <a href="boardList.do?reqPage=1&boardType=P" class="dropdown-item">동호회모집</a>
-                        <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
-                    </div>
-                </div>
-            
-                <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공지사항</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="/boardList.do?reqPage=1&boardType=N" class="dropdown-item">공지사항</a>
-                        <a href="boardList.do?reqPage=1&boardType=Q" class="dropdown-item">Q&A</a>
-                        <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">FAQ(없을수도)</a>
-                         <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">강사모집</a>
-                    </div>
-                </div>
-                
-                <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">장바구니</a>
-
-            </div>
-            <c:choose>
-				<c:when test="${empty sessionScope.m}">
-            <div>
-                <a href="javascript:void(0)" class="loginBtn">로그인</a><span> / </span>
-                <a href="/joinFrm.do">회원가입</a>
-            </div>
-			</c:when>
-			<c:otherwise>
-				<a href="/logout.do">로그아웃</a>/
-				<a href="/mypage.do">마이페이지</a>
-			</c:otherwise>
-			</c:choose>
-       	 </div>
-    </nav>
-
+	<div class="div1">
+          <a href="javascript:void(0)" class="loginBtn" style="color:#fff;">로그인</a>
+   </div>
+   
 	<!-- 로그인 모달 -->
 	<div class="popup_bg00"></div>
   <div class="popup00 personal_pop00 noto bg_s">

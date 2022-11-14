@@ -27,7 +27,7 @@ public class ScheduleTest {
 	} 
 	 */
 
-	//회원 탈퇴 2분마다 (쿼리문은 하루 지난 회원만)
+	//회원 탈퇴 60분마다 (쿼리문은 하루 지난 회원만)
 	@Scheduled(cron = "0 */2 * * * *")
 	public void scheduleTest4() {
 		int result = service.deleteMember();

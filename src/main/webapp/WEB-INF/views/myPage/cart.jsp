@@ -89,12 +89,13 @@
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
 					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn">
+				            	<input type="hidden" class="cartNoHidden" value="${Cart.cartNo }" name="cartNo">
 					            <input type="hidden" value="${sessionScope.m.memberNo }">
-					            <input class="proNo" type="hidden" value="${Cart.productNo }">
 					            </td>
 					            
-					         	<td style="text-align:center">${Cart.cartNo }</td>
-					         
+					         	<td style="text-align:center">
+					         		${Cart.cartNo }
+					            </td>
 					         
 					            <c:choose>
 						           	<c:when test="${Cart.productPhoto != null}">
@@ -216,10 +217,7 @@
 				$(".realPrice").eq(i).text(realPrice);
 				
 				
-				console.log(typeof numberPrice);
-				console.log("price"+price);
-				console.log("number"+numberPrice);
-				console.log("realPrice"+realPrice);
+				
 				sumPrice += numberPrice;
 			}
 
@@ -278,10 +276,6 @@
 			
 			const realPrice = $(".realPrice").text()
 			const numPrice = $(".numPrice").val()
-			console.log("ㅇㅇ")
-			console.log(realPrice);
-			console.log(numPrice);
-			console.log("ㅇㅇ")
 			const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			$(".lastPrice").text(lastPrice);
 		}
@@ -291,7 +285,6 @@
 		
 		$(".deleteCheck").on("click", function(){
 			// 체크한것 삭제
-				
 			    const check = $(".deleteBtn:checked");
 			    if(check.length == 0) {
 			        alert("선택된 상품이 없습니다.")
@@ -300,17 +293,15 @@
 				//const memberNo = $(".deleteBtn").next().next().val();
 				const memberNo = ${sessionScope.m.memberNo};
 				
-				const productNoArr = new Array();
+				const cartNoArr = new Array();
 				
 				check.each(function(index,item){
-				const productNo = $(check).next().next().val();
-					
-					productNoArr.push(productNo);
-				
+					let cartNo = $(item).next().val();	
+					cartNoArr.push(cartNo);
 				});
-				console.log(productNoArr);
-				console.log(memberNo);
-				location.href="/deleteCart.do?memberNo="+memberNo+"&productNoArr="+productNoArr.join("/");
+				
+				console.log(cartNoArr);
+				location.href="/deleteCart.do?memberNo="+memberNo+"&cartNoArr="+cartNoArr.join("/");
 			});
 		
 			
