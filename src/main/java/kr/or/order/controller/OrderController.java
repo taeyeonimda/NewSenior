@@ -82,7 +82,11 @@ public class OrderController {
 		return "myPage/orderInfo";
 	}
 	
-	
+	@RequestMapping(value="/inputDeliveryInfo.do")
+	public String inputDeliveryInfo(Order o) {
+		int result = service.inputDeliveryInfo(o);
+		return "redirect:/goOrderHistory.do?memberNo="+o.getMemberNo();
+	}
 	
 	
 }

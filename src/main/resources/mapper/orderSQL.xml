@@ -142,7 +142,9 @@ delete from carts
 where member_no=#{memberNo}
 </delete>
 
-	
+<update id="inputDeliveryInfo" parameterType="Or">
+
+</update>
 
 
 </mapper>

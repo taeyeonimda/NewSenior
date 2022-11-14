@@ -60,6 +60,11 @@ public class OrderDao {
 	}
 
 
+	public int inputDeliveryInfo(Order o) {
+		return sqlSession.update("order.inputDeliveryInfo", o);
+	}
+
+
 	
 
 	

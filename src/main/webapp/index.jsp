@@ -57,8 +57,8 @@
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="/resources/MAINbtstr/img/yellowbackground.jpg" alt="Image">
-                    <div class="carousel-caption">
+                    <img class="w-100" src="/resources/MAINbtstr/img/yellowbackground.jpg" style="width:800px; height:800px;">
+                    <div class="carousel-caption" style="background-color: rgba(15, 66, 41, 0);">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
@@ -70,8 +70,8 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="/resources/MAINbtstr/img/carousel-2.jpg"  alt="Image" style="width:1920px; height:1080px">
-                    <div class="carousel-caption">
+                    <img class="w-100" src="/resources/MAINbtstr/img/carousel-2.jpg"  alt="Image" style="width:800px; height:800px; ">
+                    <div class="carousel-caption" style="background-color: rgba(15, 66, 41, 0);">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7">
@@ -199,8 +199,8 @@
     <!-- About End -->
 
 
-    <!-- Facts Start -->
-    <div class="container-fluid facts my-5 py-5" data-parallax="scroll" data-image-src="/resources/MAINbtstr/img/trip.jpg" style="height:300px">
+    <!-- Facts Start   data-parallax="scroll"-->
+    <div class="container-fluid facts my-5 py-5"  style= "background-image:url('/resources/MAINbtstr/img/trip.jpg'); width:1920px; height:450px">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
