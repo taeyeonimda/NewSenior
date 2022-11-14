@@ -133,8 +133,6 @@ public class MemberController {
 		//마이페이지 내정보수정하기
 		@RequestMapping(value = "/mypageUpdate.do")
 		public String mypageUpdate(Member member, @SessionAttribute Member m, MultipartFile[] files, HttpServletRequest request) {
-			System.out.println("파일이다:"+member);
-			System.out.println("파일이다1:"+m);
 			
 			member.setKakaoLogin(m.getKakaoLogin());
 			
@@ -153,7 +151,6 @@ public class MemberController {
 			if(member.getKakaoLogin() == null) {
 				member.setMemberNo(m.getMemberNo());
 			}
-			System.out.println("null: +"+member);
 			//파일 
 			if(!files[0].isEmpty()) {
 				String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
@@ -178,9 +175,7 @@ public class MemberController {
 					member.setMemberImg(filepath);
 				}// for문 종료
 			}
-			System.out.println("파일이 잘 들어갔나:"+member);
 			int result = service.updateMember(member);
-			System.out.println("###"+result);
 			if (result > 0) {
 				m.setMemberPhone(member.getMemberPhone());
 				m.setMemberEmail(member.getMemberEmail());
@@ -188,7 +183,6 @@ public class MemberController {
 				m.setMemberBirth(member.getMemberBirth());
 				m.setNickName(member.getNickName());
 				m.setMemberImg(member.getMemberImg());
-				System.out.println("디비 거치고 온 member값: "+member);
 				return "redirect:/mypage.do";
 			} else {
 				return "redirect:/mypage.do";
@@ -251,7 +245,7 @@ public class MemberController {
 		
 		@RequestMapping(value="/kakao.do")
 		public String kakao() {
-			return "redirect:/";
+			return "redirect:/mypage.do";
 		}
 		
 		//회원가입_아이디체크
