@@ -9,6 +9,119 @@
     <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script> <!-- math 사용 위한 라이브러리 -->
 <title>동호회</title>
 </head>
+<style>
+
+/*인기 클럽이미지*/
+.pclubImgBox {
+    width: 200px;
+    height: 200px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
+.pclubImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.serviceBox{
+    color: #db7100;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    text-align: center;
+    padding: 25px 10px 0;
+    position: relative;
+    z-index: 1;
+}
+.serviceBox:before{
+    content: "";
+    height: 180px;
+    width: 180px;
+    border: 2px dashed #348E38;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: -1;
+    background-image: url("/resources/img/은비1.jpg");
+    background-size: 100%;
+}
+.serviceBox .title{
+    color: #fff;
+    background-color: #db7100;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px 6px;
+    margin: 0 -10px 5px;
+    display: inline-block;
+}
+.serviceBox .service-icon{
+    font-size: 45px;
+    margin: 0 0 70px;
+}   
+.serviceBox .description{
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23px;
+}
+.serviceBox.gray{ color: #5A696E; }
+.serviceBox.gray:before{ border-color: #5A696E; }
+.serviceBox.gray .title{ background-color: #5A696E; }
+.serviceBox.pink{ color: #F1605D; }
+.serviceBox.pink:before{ border-color: #F1605D; }
+.serviceBox.pink .title{ background-color: #F1605D; }
+.serviceBox.purple{ color: #8D4B7F; }
+.serviceBox.purple:before{ border-color: #8D4B7F; }
+.serviceBox.purple .title{ background-color: #8D4B7F; }
+@media only screen and (max-width: 990px){
+    .serviceBox{ margin: 0 0 30px; }
+}
+
+.clubListBox{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    width: 30%;
+    border-radius: 15px;
+    align-items: center;
+    text-align: center;
+    margin-right: 3%;
+    margin-bottom: 50px;
+}
+.clubListImgBox{
+    text-align:center;
+    display:table;
+    width: 100%;
+    height: 40%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+}
+.clubListImg{
+    width: 100%;
+  	height: 230px;
+  	object-fit: cover;
+}
+
+.clubListInfo{
+	width: 100%;
+}
+.clubListInfoBox{
+	width: 90%;
+	text-align: left;
+	margin: 0 auto;
+}
+.clubListBtnBox{
+	width: 80%;
+	margin: 0 auto;
+	text-align: right;
+	margin-bottom: 20px;
+}
+
+</style>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
@@ -21,25 +134,29 @@
                 </nav>
             </div>
         </div>
+
+        
         <!-- Page Header End -->
         <div class="popular-box"> <!-- 인기 리스트 div  -->
         	<c:if test="${not empty sessionScope.m }">
 		        <c:choose>
 		        	<c:when test="${not empty pList }">
-		        		<p class="fs-5 fw-bold text-primary text-center mb-5">${sessionScope.m.memberName }님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
-				        <div class="row mb-5" style="justify-content: space-evenly;">
-				        	<c:forEach items="${pList }" var="pl">
-							<div class="col-md-6 col-lg-4 mb-3">
-								<div class="card h-100">
-				      				<img src="/resources/upload/club/hero.png">
-				      				<div class="card-body">
-						        		<h5 class="card-title">${pl.clubName }</h5>
-						        		<p class="card-text">${pl.clubIntro }</p>
-						        		<a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
-					      			</div>
-				    			</div>
-				  			</div>
-				  			</c:forEach>
+		        		<p class="fs-5 fw-bold text-primary mt-5 text-center">'${sessionScope.m.nickName }'님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
+			        	<div class="container" style="width: 70%; margin-top: 50px; margin-bottom: 100px;">
+						    <div class="row flex-space-between">
+						    <c:forEach items="${pList }" var="pl">
+							    <div class="col-md-3 col-sm-6">
+							        <div class="serviceBox mb-5">
+							            <div class="service-icon"></div>
+							        </div>
+							        <div style="margin-top: 200px; word-break:break-all;" >
+							            <h3 class="card-title">${pl.clubName }</h3>
+										<p class="description" style="width: 100%;">${pl.clubIntro } dddddddddddddddddddddddddddddddddddddddddddddd</p> 
+							            <a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
+							        </div>
+							    </div>
+							    </c:forEach>
+						    </div>
 						</div>
 		        	</c:when>
 		        	<c:otherwise>
@@ -50,7 +167,7 @@
         </div> <!-- 인기 리스트 div End  -->
 
 
-		<div style="width: 80%; display: flex; justify-content: space-between; margin: 0 auto;">
+		<div class="mt-5" style="width: 80%; display: flex; justify-content: space-between; margin: 0 auto;">
         	<div id="displayCount">
         	</div>
         	<div class="club-input">
@@ -79,7 +196,7 @@
 	<div id="memberNo" style="display: none;">${sessionScope.m.memberNo }</div>
 	
 <div class="modal-wrap">
-    <div class="club-info-modal bg-light">
+    <div class="club-info-modal bg-white">
         <div class="modal-img-div">
             <img class="modal-img">
         </div>
@@ -87,6 +204,7 @@
             <div class="club-info-box">
             	<h3 class="mb-3 text-dark"></h3>
             	<p class="text-secondary"></p> 
+            	<pre></pre>
             </div>
             <div class="modal-btn-box">
             	<button onclick="closeModal();" class="btn btn-primary">닫기</button>
@@ -200,8 +318,12 @@
     	    });
     	}
     
+    
+
+    
 	  //현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
 	    function displayData(currentPage, dataPerPage, keyword) {
+	    	const memberNo = $("#memberNo").text();
 	      	currentPage = Number(currentPage);
 	      	dataPerPage = Number(dataPerPage);
 	      	$.ajax({ // ajax로 데이터 가져오기
@@ -214,11 +336,22 @@
 		    		console.log(data);
 		    		for (let i=(currentPage-1)*dataPerPage; i<(currentPage-1)*dataPerPage+dataPerPage; i++) {
 						const div = $("<div>");
-						div.addClass("lists");
-						div.attr("onclick", "clubInfoModal("+data[i].clubNo+")");
-						div.append("<img src='/resources/MAINbtstr/img/로고2.png' width='65px'>")
-						div.append("<h4 class='mb-3'>"+data[i].clubName+"</h4");
-						div.append("<p>참여인원수 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></p>");
+						div.addClass("clubListBox");
+						const imgDiv = $("<div>");
+						imgDiv.addClass("clubListImgBox");
+						imgDiv.html("<img class='clubListImg'  src='/resources/upload/club/"+data[i].clubMainImg+"'>");
+						div.append(imgDiv);
+						const infoDiv = $("<div>");
+						infoDiv.addClass('clubListInfo');
+						const clubInfoBox = $("<div>");
+						clubInfoBox.addClass('clubListInfoBox');
+						clubInfoBox.html("<h3 class='mb-3 text-secondary'>"+data[i].clubName+"</h3><p class='text-secondary'>"+data[i].clubIntro+"</p><pre>참여인원수 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></pre>");
+						infoDiv.append(clubInfoBox);
+						const modalBtnBox = $("<div>");
+						modalBtnBox.addClass("clubListBtnBox");
+						modalBtnBox.html("<button class='btn btn-outline-primary' onclick='clubInfoModal("+data[i].clubNo+");'>입장하기</button>");
+						infoDiv.append(modalBtnBox);
+						div.append(infoDiv);
 						$("#club-list").append(div);
 					}
 		    	}
@@ -229,27 +362,40 @@
     	function clubInfoModal(clubNo) {
     		const memberNo = $("#memberNo").text();
     		if(memberNo==""){
-    			alert("로그인 먼저 진행해 주세요");
-    			return;
+    			Swal.fire({
+					title: "로그인이 필요한 서비스입니다",//제목
+					text: '로그인 후 동호회에 가입할 수 있습니다',
+					imageUrl: "/resources/img/제목없음.png",
+					showCancelButton: true,
+					cancelButtonColor: '#525368',
+					confirmButtonColor: '#348E38',
+					cancelButtonText: '닫기',
+					confirmButtonText: '로그인 하러 가기'
+				}).then((result) => {
+					//result.value == true이니까 트루일때만 실행하는거
+				  if (result.value) {
+					   $(".loginBtn").click();
+				  }
+				})//then끝
+    		}else{
+    			$.ajax({
+    				url : "/selectOneClub.do",
+    				data : {clubNo:clubNo },
+    				success : function(one){
+    					const clubName = $(".club-info-box>h3");
+    					const clubContent = $(".club-info-box>p");
+    					const clubImg = $(".modal-img-div>img");
+    					const clubAmount = $(".club-info-box>pre")
+    					clubName.text(one.clubName);
+    					clubContent.text(one.clubIntro);
+    					clubImg.attr("src", "/resources/upload/club/"+one.clubMainImg);
+    					myClubCheck(memberNo, one.clubNo);
+    				}
+    			});
+    			$(".modal-wrap").css("display", "flex");
     		}
-			console.log(clubNo);
-			$.ajax({
-				url : "/selectOneClub.do",
-				data : {clubNo:clubNo },
-				success : function(one){
-					const clubName = $(".club-info-box>h3");
-					const clubContent = $(".club-info-box>p");
-					const clubImg = $(".modal-img-div>img");
-					clubName.text(one.clubName);
-					clubContent.text(one.clubIntro);
-					clubImg.attr("src", "/resources/upload/club/"+one.clubMainImg);
-					myClubCheck(memberNo, one.clubNo);
-				}
-			});
-			$(".modal-wrap").css("display", "flex");
 		}
 
-    	
     	function myClubCheck(memberNo, clubNo) {
     		const btn = $("#enterBtn");
     		btn.text('가입하기');
@@ -268,13 +414,25 @@
     			}
     		})
 		}
+
+    	
     	
     	function joinClub(memberNo, clubNo) {
-    		if(confirm('정말 가입하시겠습니까?')){
-    			location.href="/myClubList.do?memberNo="+memberNo+"&clubNo="+clubNo;
-    		}else{
-    			$(".modal-wrap").css("display", "none");
-    		}
+    		Swal.fire({
+				title: "동호회 가입",//제목
+				text: '동호회에 가입하시겠습니까?',
+				imageUrl: "/resources/img/제목없음.png",
+				showCancelButton: true,
+				cancelButtonColor: '#525368',
+				confirmButtonColor: '#348E38',
+				cancelButtonText: '닫기',
+				confirmButtonText: '가입하기'
+			}).then((result) => {
+				//result.value == true이니까 트루일때만 실행하는거
+			  if (result.value) {
+				  location.href="/myClubList.do?memberNo="+memberNo+"&clubNo="+clubNo;
+			  }
+			})//then끝
 		}
     	
     	function enterClub(clubNo) {

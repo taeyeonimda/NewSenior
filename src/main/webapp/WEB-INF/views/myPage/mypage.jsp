@@ -93,7 +93,7 @@
 							<label for="html5-text-input" class="col-md-2 col-form-label">닉네임</label>
 							<div class="col-md-10">
 								<input class="form-control" type="text" id="html5-text-input"
-									value="${member.nickName }" name="nickName" />
+									value="${member.nickName }" name="nickName" maxlength="6"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
@@ -163,7 +163,7 @@
 						style="float: right; color: #000;">내정보 변경하기</button>
 				</div>
 		</form>
-		<form action="/deleteMember.do" method="post">
+		<form action="/deleteMember.do" method="post" onsubmit="return delMember();">
 		<button type="submit" class="btn btn-outline-warning delbtn"
 						style="color: #000;">회원탈퇴</button>
 		</form>
@@ -540,7 +540,14 @@
     	    }).open();
     	}
     	
-    	
+    	//회원 탈퇴 버튼 클릭시 comfirm
+    	function delMember(){
+    		if(window.confirm("진짜로 회원탈퇴를 하시겠습니까? 탈퇴 후 3개월동안은 재가입이 불가능합니다. ")){
+    			return true;
+    		}else{
+    			return false;
+    		}
+    	}
     </script>
 </body>
 </html>

@@ -116,6 +116,7 @@ public class ClubController {
 		return "redirect:/popularClubList.do?memberNo="+c.getClubLeader();
 	}
 	
+	
 	@RequestMapping(value = "/clubDetail.do")
 	public String clubDetail(Club c, Model model){
 		HashMap<String, Object> map = service.selectOneClubMap(c);

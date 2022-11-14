@@ -69,7 +69,7 @@
 
               <!-- HTML5 Inputs -->
             <form  id="insertActFrm">
-              <div class="card mb-4" style="width: 60%; float: left;">
+              <div class="card mb-4">
                 <h5 class="card-header" style="text-align: center;">액티비티 등록하기</h5>
                 <div class="card-body">
                   <div class="mb-3 row">

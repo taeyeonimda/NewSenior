@@ -45,115 +45,116 @@
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
     
-    <!--  
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	-->
+   
 	
 	
 </head>
-<!-- sweetalert -->
+
 
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 
   <body>
     <!-- Layout wrapper -->
-    <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
-        <!-- Menu -->
-	
-	<%@include file="/WEB-INF/views/common/aside.jsp" %>
-        
-        <!-- / Menu -->
+	<div class="content-wrapper" style="left: 300px; flex-direction: row;">
+		<!-- Menu -->
 
-        <!-- Layout container -->
-        
+		<%@include file="/WEB-INF/views/common/aside.jsp"%>
 
+		<!-- / Menu -->
 
-          <!-- Content wrapper -->
-          
-            <!-- Content -->
-
-            <div class="container-xxl flex-grow-1 container-p-y">
+		<!-- Layout container -->
 
 
-              <div style="font-size: 25px;" onclick="test('제목임','내용임','warning');">회원 관리</div>
-              <div class="card" >
 
-                <div class="table-responsive text-nowrap">
-                  
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th style="width: 20px;">
-                          <input id="allChkBox" name="allChkBox" type="checkbox" style="width: 15px; height: 15px; ">
-                        </th>
-                        <th style="width: 20px;">회원번호</th>
-                        <th>아이디</th>
-                        <th>전화번호</th>
-						<th>이메일</th>
-						<th>생년월일</th>
-						<th>등급</th>
-						<th>등급변경</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                  
-                    <c:forEach items="${list }" var="mem">
-                      <tr>
-                        <td style="text-align: center;"><input class="chk" type="checkbox"></td>
-                        <td style="text-align: center;">${mem.memberNo }</td>
-                        <td>${mem.memberId }</td>
-                        <td>${mem.memberPhone }</td>
-                        <td>${mem.memberEmail }</td>
-                        <td>${mem.memberBirth }</td>
-                    	<td>
-						<c:if test="${mem.memberGrade eq 1}">
-						<select>
-						<option value="1" selected>회원</option>
-						<option value="2" >강사</option>
-						<option value="3" >관리자</option>
-						</select>
-						</c:if>
-						<c:if test="${mem.memberGrade eq 2}">
-						<select>
-						<option value="1" >회원</option>
-						<option value="2" selected>강사</option>
-						<option value="3" >관리자</option>
-						</select>
-						</c:if>
-						<c:if test="${mem.memberGrade eq 3}">
-						<select>
-						<option value="1" >회원</option>
-						<option value="2" >강사</option>
-						<option value="3" selected>관리자</option>
-						</select>
-						</c:if>
-						</td>
-						<td>
-							<button class="btn bc5 changeLevel">등급 변경</button>
-						</td>
-                      </tr>
-                     </c:forEach>
-                     <tr>
-				<th colspan="8">
-				<button class="btn bc44 bs4 checkedChangeLevel">선택회원 등급 변경</button>
-			</tr>
-                    
-                    </tbody>
-                  </table>
-                  <div id="pageNavi">${pageNavi }</div>
-                </div>
-              </div>
+		<!-- Content wrapper -->
+
+		<!-- Content -->
+
+		<div class="container-xxl flex-grow-1 container-p-y">
 
 
-</div></div>
-             
+			<div style="font-size: 25px;">회원 관리</div>
+			<div class="card">
+
+				<div class="table-responsive text-nowrap">
+
+					<table class="table table-border">
+						<thead>
+							<tr>
+								<th style="width: 20px;"><input id="allChkBox" name="allChkBox" type="checkbox" style="width: 15px; height: 15px;"></th>
+								<th style="width: 20px;">회원번호</th>
+								<th>아이디</th>
+								<th>전화번호</th>
+								<th>이메일</th>
+								<th>생년월일</th>
+								<th>등급</th>
+								<th>등급변경</th>
+								<th>카카오유저</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<c:forEach items="${list }" var="mem">
+								<tr>
+									<td style="text-align: center;"><input class="chk" type="checkbox"></td>
+									<td style="text-align: center;">${mem.memberNo }</td>
+									<td>${mem.memberId }</td>
+									<td>${mem.memberPhone }</td>
+									<td>${mem.memberEmail }</td>
+									<td>${mem.memberBirth }</td>
+									<td style="width:10%;"><c:if test="${mem.memberGrade eq 1}">
+											<select class="form-select" aria-label="Default select example">
+												<option value="1" selected>회원</option>
+												<option value="2">강사</option>
+												<option value="3">관리자</option>
+											</select>
+										</c:if> <c:if test="${mem.memberGrade eq 2}">
+											<select class="form-select" aria-label="Default select example">
+												<option value="1">회원</option>
+												<option value="2" selected>강사</option>
+												<option value="3">관리자</option>
+											</select>
+										</c:if> <c:if test="${mem.memberGrade eq 3}">
+											<select class="form-select" aria-label="Default select example">
+												<option value="1">회원</option>
+												<option value="2">강사</option>
+												<option value="3" selected>관리자</option>
+											</select>
+										</c:if>
+									</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary changeLevel">등급 변경</button>
+									</td>
+									<c:if test="${mem.kakaoLogin == null}">
+										<td style="line-height:1rem;">일반 유저</td>
+									</c:if>
+									<c:if test="${mem.kakaoLogin != null}">
+										<td>카카오 유저</td>
+									</c:if>
+								</tr>
+							</c:forEach>
+							<tr >
+								<th colspan="9" style="text-align:center;">
+									<button class="btn btn-primary checkedChangeLevel">선택회원
+										등급 변경</button>
+										</th>
+							</tr>
+							
+
+						</tbody>
+					</table>
+					<div id="pageNavi">${pageNavi }</div>
+				</div>
+			</div>
 
 
-<!-- Footer Start -->
+		</div>
+	</div>
+
+
+
+	<!-- Footer Start -->
 <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s" style="width: 100%;">
   <div class="container py-5">
       <div class="row g-5">
@@ -199,47 +200,9 @@
 <!-- Footer End -->
 	<script>
 	$(()=>{ 
-		alert("스트롱맨~");
-		/*
-		swal({
-			  title: "Good job!",
-			  text: "You clicked the button!",
-			  icon: "success",
-			  button: "Aww yiss!",
-			  dangerMode:true,	
-		});
-		*/
-		/*
-		확인 취소에 아이콘넣은거
-		swal("제목", {
-			  buttons: ["확인", "취소"],
-			  icon: "/resources/img/KakaoTalk_20221111_113436901.jpg",
-			});
-		*/
-		
-		
 		
 	});
-	function test(title,text,icon){
-		Swal.fire({
-			  title: title,//제목
-			  text: text,//내용
-			  icon: icon,//아이콘
-			  imageUrl: "/resources/img/KakaoTalk_20221111_113436901.jpg",
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: '삭제',
-			  cancelButtonText: '취소'
-			}).then((result) => {
-				//result.value ==true이니까 트루일때만 실행하는거
-			  if (result.value) {
-	              alert("삭제눌렀음~");
-			  }else{
-				  alert("삭제안눌렀음~");
-			  }
-			})//then끝
-	}
+	
 	
 	
 		$(".changeLevel").on(

@@ -59,19 +59,18 @@
 	                    <div class="amount-box">
 		                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="changePrice();">
 		                        <option value='' selected>인원수</option>
-		                        <option value="1">1인</option>
-		                        <option value="2">2인</option>
-		                        <option value="3">3인</option>
-		                        <option value="4">4인</option>
-		                        <option value="5">5인</option>
-		                        <option value="6">6인</option>
+		                        <option value=1>1인</option>
+		                        <option value=2>2인</option>
+		                        <option value=3>3인</option>
+		                        <option value=4>4인</option>
+		                        <option value=5>5인</option>
+		                        <option value=6>6인</option>
 		                    </select>
 		                    <div id="priceBox">
-			                    <span id="originalPrice">${cla.classPrice }</span>
-			                    <span id="changePrive"></span>
-			                    <fmt:formatNumber value="${cla.classPrice }" pattern="#,###"/>
+			                    <span>${cla.classPrice }</span>
 			                    <span>원</span>
 		                    </div>
+		                    <span id="originalPrice" style="display: none;">${cla.classPrice }</span>
 	                    </div>
 	                </div>
 	                <div class="mb-2">
@@ -101,7 +100,7 @@
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span><a href="#menu1">강사소개</a></span><span><a href="#menu2">강사소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
+                	<span><a href="#menu1">커리큘럼</a></span><span><a href="#menu2">강사소개</a></span><span><a href="#menu3">강사후기</a></span><span><a href="#menu4">준비물</a></span><span><a href="#menu5">환불규정</a></span>
                 </div>
             </div>
         </div>
@@ -110,7 +109,7 @@
 
 
         <!-- 강의소개 -->
-        <div class="container-xxl py-5 mt-5" id="#menu1">
+        <div class="container-xxl py-5 mt-5" id="menu1">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -131,7 +130,7 @@
         <!-- Features End -->
 
         <!-- 강사 소개 -->
-        <div class="container-xxl py-5 mt-5" id="#menu2">
+        <div class="container-xxl py-5 mt-5" id="menu2">
             <div class="container class-container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -147,7 +146,7 @@
         </div>
         <!-- About End -->
       
-      
+      	<div id="menu3"></div>
       	<!-- ajax로 가져옴 -->
       	<div class="container class-container">
       		<div id="reviewBox">
@@ -155,7 +154,7 @@
       	</div>
 
         <!-- 클래스 준비물 -->
-        <div class="container-xxl py-5" id="#menu3">
+        <div class="container-xxl py-5" id="menu3">
             <div class="container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
@@ -183,7 +182,7 @@
         <!-- Team End -->
 
         <!-- 환불규정 -->
-        <div class="container-xxl py-5 mt-5" id="#menu4">
+        <div class="container-xxl py-5 mt-5" id="menu4">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -200,6 +199,7 @@
         <hr>
         
         
+        <div id="menu5"></div>
         <!-- 후기 -->
 		<button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
     </div><!--page-content End-->
@@ -256,20 +256,25 @@
 
     <!-- side-bar script-->
     <script>
+		   
+		$(document).ready(function($) {
+		       $(".scroll_move").click(function(event){         
+		               event.preventDefault();
+		               $('html, body').animate({scrollTop:$(this.hash).offset().top}, 500);
+		       });
+		});
     
-    
-    
-	    function openConfirm(className){
+	    function openConfirm(className, classNo){
 	    	const amount = $("select[name=amount]").val();
 	    	if(amount==''){
 	    		alert("인원수를 선택하세요");
 	    	}else{
-	    		const priceSpan = $("#priceBox span:first-child");
-	    		console.log(priceSpan.html());
-	    		const price = Number(price)*Number(amount);
+	    		console.log(changeP);
+	    		const price = changeP.toLocaleString("ko-KR");
+	    		const text = '선택된 인원은 '+amount+'명, 총 결제 금액은 '+price+'입니다        결제하시겠습니까?';
 	    		Swal.fire({
 					title: className,//제목
-					text: price,
+					text: text,
 					imageUrl: "/resources/img/제목없음.png",
 					showCancelButton: true,
 					cancelButtonColor: '#525368',
@@ -279,7 +284,7 @@
 				}).then((result) => {
 					//result.value == true이니까 트루일때만 실행하는거
 				  if (result.value) {
-		              // location.href = "/cartIn.do?classNo=?&memberNo=?&amount=?"
+		              location.href = "/cartIn.do?classNo=?&memberNo=?&amount=?"
 				  }
 				})//then끝
 	    	}
@@ -322,21 +327,26 @@
         $(function(){
             showSide();
             getReview();
+            changePrice();
         });
 
         
         
-        
+        let selectVal=0;
+        let changeP=0;
      	// side select 가격 바꾸기 css
 	    function changePrice(){
-	    	const selectVal = $("select[name=amount]").val();
-	    	const originalPrice = $("#priceBox span:first-child").text(); // 기본값
+     		const div = $("#priceBox");
+	    	selectVal = $("select[name=amount]").val();
+	    	console.log(typeof selectVal);
+	    	const originalPrice = $("#originalPrice").text(); // 기본값
 	    	console.log(originalPrice);
-	    	// select element에서 선택된 option의 value가 저장된다.
-	    	
 	    	if(selectVal != ''){
-	    		price = selectVal*Number(price);
-	    		$("#priceBox").text(price);
+	    		changeP = Number(selectVal)*Number(originalPrice);
+	    		console.log(changeP);
+	    		div.find('span').eq(0).text(changeP.toLocaleString("ko-KR"));
+	    	}else{
+	    		div.find('span').eq(0).text(originalPrice.toLocaleString("ko-KR"));
 	    	}
 		};
        
