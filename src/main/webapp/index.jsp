@@ -51,8 +51,7 @@
 	<a href="/mypage.do" style="font-size:30px;">마이페이지</a>
 
 
-
-    <!-- Carousel Start -->
+ <!-- Carousel Start -->
     <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -70,13 +69,14 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="/resources/MAINbtstr/img/carousel-2.jpg"  alt="Image" style="width:800px; height:800px; ">
+                    <img class="w-100" src="/resources/img/은비7.jpg"  alt="Image" style="width:800px; height:800px; ">
                     <div class="carousel-caption" style="background-color: rgba(15, 66, 41, 0);">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">NewSeniors에서<br>인생 2막을<br> 열어보세요!</h1>
-                                    <a href="" class="btn btn-primary py-sm-3 px-sm-4">Explore More</a>
+                                	<h4 class="text-light">시니어 라이프 스타일 큐레이션</h4>
+                                    <hr>
+                                    <h1 class="display-1 text-white mb-5 animated slideInDown">NewSeniors</h1>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,6 @@
         </div>
     </div>
     <!-- Carousel End -->
-
 
     <!-- Top Feature Start -->
     <div class="container-fluid top-feature py-5 pt-lg-0">
@@ -199,8 +198,8 @@
     <!-- About End -->
 
 
-    <!-- Facts Start   data-parallax="scroll"-->
-    <div class="container-fluid facts my-5 py-5"  style= "background-image:url('/resources/MAINbtstr/img/trip.jpg'); width:1920px; height:450px">
+    <!-- Facts Start -->
+    <div class="container-fluid facts my-5 py-5" style= "background-image:url('/resources/MAINbtstr/img/trip.jpg'); height: 300px">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
@@ -351,48 +350,11 @@
 
 
     <!-- Quote Start -->
-    <div class="container-fluid quote my-5 py-5" data-parallax="scroll" data-image-src="/resources/MAINbtstr/img/various.jpg">
+    <div class="container-fluid my-5 py-5" data-parallax="scroll" data-image-src="/resources/MAINbtstr/img/various.jpg">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    <div class="bg-white rounded p-4 p-sm-5 wow fadeIn" data-wow-delay="0.5s">
-                        <h1 class="display-5 text-center mb-5">강사모집</h1>
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="gname" placeholder="Gurdian Name">
-                                    <label for="gname">이름</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control bg-light border-0" id="gmail" placeholder="Gurdian Email">
-                                    <label for="gmail">연락받을 이메일 </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="cname" placeholder="Child Name">
-                                    <label for="cname">연락받을 핸드폰번호</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="cage" placeholder="Child Age">
-                                    <label for="cage">개설과목 ex)동호회/액티비티/클래스</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control bg-light border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
-                                    <label for="message">하고싶은 말</label>
-                                </div>
-                            </div>
-                            <div class="col-12 text-center">
-                                <button class="btn btn-primary py-3 px-4" type="submit">제출하기</button>
-                            </div>
-                        </div>
-                    </div>
+                    <div></div>
                 </div>
             </div>
         </div>
