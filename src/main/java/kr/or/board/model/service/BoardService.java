@@ -275,7 +275,7 @@ public class BoardService {
 
 
 	//검색 기능 - 페이징처리해주기
-	public HashMap<String, Object> selectBoardList(int reqPage, String categoryTag, String searchTag, String searchInput) {
+	public HashMap<String, Object> selectBoardList(int reqPage, String categoryTag, String searchTag, String searchInput, String boardType) {
 		//한 페이지 당 보여줄 게시물 수
 				int numPerPage = 10;
 				
@@ -289,6 +289,7 @@ public class BoardService {
 				pageMap.put("categoryTag",categoryTag);
 				pageMap.put("searchTag",searchTag);
 				pageMap.put("searchInput",searchInput);
+				pageMap.put("boardType",boardType);
 				
 				//pageNavi 시작
 				//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
@@ -314,19 +315,19 @@ public class BoardService {
 				pageNavi += "<ul class='pagination justify-content-center'>";
 				if (pageNo != 1) {
 					pageNavi += "<li class='page-item disabled'>";
-					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/searchBoard.do?reqPage=" + (pageNo - 1) +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/searchBoard.do?reqPage=" + (pageNo - 1) +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+"&boardType="+boardType+ "'>";
 					pageNavi += "Previous";
 					pageNavi += "</a></li>";
 				}
 				for (int i = 0; i < pageNaviSize; i++) {
 					if (pageNo == reqPage) {
 						pageNavi += "<li class='page-item' >";
-						pageNavi += "<a class='page-link active-page' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
+						pageNavi += "<a class='page-link active-page' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+"&boardType="+boardType+ "'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					} else {
 						pageNavi += "<li class='page-item' >";
-						pageNavi += "<a class='page-link' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
+						pageNavi += "<a class='page-link' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+"&boardType="+boardType+ "'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					}
@@ -338,7 +339,7 @@ public class BoardService {
 				// 다음버튼 
 				if (pageNo <= totalPage) {
 					pageNavi += "<li class='page-item disabled' >";
-					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+ "'>";
+					pageNavi += "<a class='page-link'  tabindex='-1' aria-disabled='true' href='/searchBoard.do?reqPage=" + pageNo +"&searchTag="+searchTag+"&searchInput="+searchInput+"&categoryTag="+categoryTag+"&boardType="+boardType+ "'>";
 					pageNavi += "Previous";
 					pageNavi += "</a></li>";
 				}

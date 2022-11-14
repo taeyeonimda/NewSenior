@@ -18,7 +18,13 @@ select * from
 			from board 
 			join members using(member_no)order by board_no desc) b)
    		 	where (boardType=#{boardType}) and rn between #{start} and #{end} 
-	</select>   
+	</select> 
+	
+	<!-- 지금쓰는 쿼리 -->
+	<select id="totalCount2" parameterType="String" resultType="int">
+		select count(*) from board where board_type=#{boardType}
+		
+	</select>  
 	
 	<!-- 검색기능 자유게시판 : boardType='F' -->
 	<select id="selectBoardList2" parameterType="map" resultType="b">
@@ -75,34 +81,10 @@ select * from
 	           where nickName like '%'||#{searchInput}||'%')b)
 	           </if>
 
-	      	where prn between #{start} and #{end} and boardType='F'
-	      	<!--where (boardType=#{boardType}) and rn between #{start} and #{end}   -->
+	      	<!--where prn between #{start} and #{end} and boardType='F'  -->
+	      	<!--   -->
+	      	where (boardType=#{boardType}) and prn between #{start} and #{end}
 	</select>
-	
-	<select id="totalCount" resultType="int">
-		select count(*) from board
-		<choose>
-			<when test="board_type='F'">
-				where board_type='F'
-			</when>
-		</choose>
-	</select>    
-	
-	<!-- 지금쓰는 쿼리 -->
-	<select id="totalCount2" parameterType="String" resultType="int">
-		select count(*) from board where board_type=#{boardType}
-		
-	</select>  
-	
-	<select id="totalCount3" parameterType="map" resultType="int">
-		select count(*) from board where board_type=#{boardType}
-		
-	</select>
-	
-		<update id="readCount" parameterType="int">
-			update board set board_count = board_count+1 where board_no=#{_parameter}
-		</update>
-	
 	
 	<!-- boardtypeF -->
 	<select id="totalCountF2" resultType="int">
@@ -159,8 +141,33 @@ select * from
 	           where nickName like '%'||#{searchInput}||'%')b)
 	           </if>
 
-	      	where boardType='F'
+	      	<!-- where boardType='F' -->
+	      	where boardType=#{boardType}
 	</select>
+	
+	
+	<select id="totalCount" resultType="int">
+		select count(*) from board
+		<choose>
+			<when test="board_type='F'">
+				where board_type='F'
+			</when>
+		</choose>
+	</select>    
+	
+	
+	
+	<select id="totalCount3" parameterType="map" resultType="int">
+		select count(*) from board where board_type=#{boardType}
+		
+	</select>
+	
+		<update id="readCount" parameterType="int">
+			update board set board_count = board_count+1 where board_no=#{_parameter}
+		</update>
+	
+	
+	
 	
 	<select id="selectOneBoard" parameterType="_int" resultType="b">
 		select

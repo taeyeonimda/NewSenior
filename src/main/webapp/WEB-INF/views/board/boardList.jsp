@@ -214,9 +214,10 @@
 		</c:if>
 		<!-- Q&A 끝-->
 		
-		
+		<!-- 검색 form -->
 		<div class="searchForm">
-			<form action="/searchBoard.do?reqPage=1" method="post">
+			<!-- <form action="/searchBoard.do?reqPage=1" method="post"> -->
+			<form action="/searchBoard.do?reqPage=1&boardType=${boardType}" method="post">
 				<select name="categoryTag">
 				<!-- 보드별로 카테고리 추가하기 (writeFrm 참고)-->
 					<option value="all">전체</option>
