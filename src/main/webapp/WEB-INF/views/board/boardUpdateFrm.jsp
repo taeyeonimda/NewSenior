@@ -151,7 +151,9 @@
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td colspan="3"><input type="text" name="boardTitle" value="${b.boardTitle}"></td>
+				<td colspan="3">
+				<input type="text" name="boardTitle" value="${b.boardTitle}">
+				</td>
 			</tr>
 			<tr>
 				<th>작성자</th>
@@ -173,11 +175,10 @@
 				<th>파일목록</th>
 				<td colspan="3">
 			<c:forEach items="${b.fileList }" var="bf">
-				<td>${bf.filename }
-				<button type="button" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button></td>
-				<td>${bf.fileNo }</td>
-				<td>${bf.filepath }</td>
+				<p>${bf.filename }
+				<button type="button" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button></p>
 			</c:forEach>
+			</td>
 		</tr>
 			<tr>
 				<th>내용</th>

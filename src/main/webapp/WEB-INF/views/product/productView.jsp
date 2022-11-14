@@ -134,7 +134,7 @@ ul li.on a {
               <div>상세내용</div>
               <div style="height: 57px"><button type="button" id="reviewListBtn" value="10">리뷰</button></div>
               <div>교환/반품 안내</div>
-              <div><a href="#">문의남기기</a></div>
+              <div><a href="/boardList.do?reqPage=1&boardType=Q">문의남기기</a></div>
             </div>
             <div>
             <div class="detailContentWrap prodContentMenu">
@@ -170,6 +170,8 @@ ul li.on a {
 		    <div class="prodContentMenu productReviewDiv">
             <c:choose>
             	<c:when test="${!empty sessionScope.m }">
+            		<c:choose>
+            			<c:when test="${reviewCount < 1}">
 			            <div class="reviewContentWrap">
 			              <!-- <form action="/insertReview.do" method="post"> -->
 			                <div class="reviewContent">
@@ -201,7 +203,16 @@ ul li.on a {
 			                </div>
 			              <!-- </form>  -->
 			            </div>
+			            	</c:when>
+			            	<c:otherwise>
+			            		<div style="margin-top: 10px;"><h6>리뷰작성은 1회만 작성하실수 있습니다.</h3></div>
+			            	</c:otherwise>
+			            	
+			            </c:choose>
 		            </c:when>
+		            <c:otherwise>
+		            	<div style="margin-top: 10px;"><h6>리뷰작성은 로그인 후 이용하실수 있습니다.</h3></div>
+		            </c:otherwise>
 	            </c:choose>
 	            <div class="reviewsTotalDiv">
 	            	
@@ -322,7 +333,7 @@ ul li.on a {
 							displayData(1, dataPerPage);
 							alert("삭제가 완료되었습니다.");
 							$(obj).parent().parent().parent().remove();
-							
+							$(".reviewContent").show();
 						}
 					});
 				}
@@ -348,6 +359,8 @@ ul li.on a {
 					$("#customerReview").val('');
 					$(".input-score>span").text('0');
 					$(".star-wrap").children().css("color","");
+					$(".reviewContent").hide();
+					alert("리뷰등록 완료!");
 					/*
 					var now = new Date();
 					var year = now.getFullYear();
@@ -546,7 +559,7 @@ ul li.on a {
 				
 				//페이징 번호 클릭 이벤트 
 				$("#pagingul li a").click(function () {
-				$(".reviewsWrap").remove();
+				//$(".reviewsWrap").remove();
 				let $id = $(this).attr("id");
 				selectedPage = $(this).text();
 
@@ -673,7 +686,7 @@ ul li.on a {
 			}
 			
 			$("#reviewListBtn").click(function () {
-				$(".reviewsWrap").remove();
+				//$(".reviewsWrap").remove();
 			    dataPerPage = $("#reviewListBtn").val();
 			    console.log("dataPerPage1 : "+dataPerPage);
 			    //전역 변수에 담긴 globalCurrent 값을 이용하여 페이지 이동없이 글 표시개수 변경 
@@ -716,7 +729,8 @@ ul li.on a {
 		
 		$("#directBuy").on("click",function(){
 			const price = $(".sumPrice").val();
-			//console.log(price);
+			const productQty = $(".productBuyQty").text();
+			const productNo = $("[name=productNo]").val();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
