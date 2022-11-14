@@ -394,8 +394,8 @@
 			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
         	</c:when>
         	<c:otherwise>
-        		<p>관리할 회원이 없습니다</p>
-        		<pre>동호회 게시판에서 우리 동호회를 홍보할 수 있습니다</pre>
+        		<p class="fw-bold">관리할 회원이 없습니다</p>
+        		<p>동호회 게시판에서 <br> 우리 동호회를 홍보할 수 있습니다</p>
         		<a href="#" class="btn btn-secondary">이동스</a>
         	</c:otherwise>
         </c:choose>

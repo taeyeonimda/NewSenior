@@ -40,8 +40,8 @@ public class BoardController {
 		System.out.println("boardList pageMap : "+pageMap);
 		model.addAttribute("list",(ArrayList<Board>)pageMap.get("list"));
 		model.addAttribute("pageNavi",(String)pageMap.get("pageNavi"));
-		model.addAttribute("reqPage",(int)pageMap.get("reqPage"));
-		model.addAttribute("numPerPage",(int)pageMap.get("numPerPage"));
+		model.addAttribute("reqPage",(Integer)pageMap.get("reqPage"));
+		model.addAttribute("numPerPage",(Integer)pageMap.get("numPerPage"));
 		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
 		//model.addAttribute("boardType",(int)pageMap.get("boardType"));
 		model.addAttribute("boardType",boardType);
@@ -303,8 +303,8 @@ public class BoardController {
 		
 		model.addAttribute("list",(ArrayList<Board>)categoryMap.get("list"));
 		model.addAttribute("pageNavi",(String)categoryMap.get("pageNavi"));
-		model.addAttribute("reqPage",(int)categoryMap.get("reqPage"));
-		model.addAttribute("numPerPage",(int)categoryMap.get("numPerPage"));
+		model.addAttribute("reqPage",(Integer)categoryMap.get("reqPage"));
+		model.addAttribute("numPerPage",(Integer)categoryMap.get("numPerPage"));
 		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
 		model.addAttribute("categoryTag",(String)categoryMap.get("categoryTag"));
 		model.addAttribute("searchTag",(String)categoryMap.get("searchTag"));

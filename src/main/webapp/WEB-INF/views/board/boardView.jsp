@@ -489,6 +489,7 @@
 			$("#delBtn").on("click",function(){
 				confirm("글을 삭제하시겠습니까?")
 				
+<<<<<<< HEAD
 			});
 			
 			$(".commentWriteBtn1").on("click",function(){
@@ -506,6 +507,9 @@
 					return false;
 				}
 			});
+=======
+			});c
+>>>>>>> refs/heads/master
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){
 			//obj는 사실 필요없는 매개변수(형식 맞춰주기 위해서 기입)
