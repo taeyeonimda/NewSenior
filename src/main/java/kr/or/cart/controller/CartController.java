@@ -36,8 +36,9 @@ public class CartController {
 	}
 	
 	@RequestMapping(value="/deleteCart.do")
-	public String deleteCart(String productNoArr, int memberNo) {
-		boolean result = service.deleteCart(productNoArr,memberNo);
+	public String deleteCart(String cartNoArr, int memberNo) {
+		boolean result = service.deleteCart(cartNoArr,memberNo);
+		System.out.println(cartNoArr);
 		return "redirect:/cart.do?memberNo="+memberNo;
 				
 	}

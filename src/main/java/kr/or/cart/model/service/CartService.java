@@ -22,14 +22,15 @@ public class CartService {
 		return (ArrayList<Cart>) list;
 	}
 
-	public boolean deleteCart(String productNoArr, int memberNo) {
-		StringTokenizer token = new StringTokenizer(productNoArr, "/");
+	public boolean deleteCart(String cartNoArr, int memberNo) {
+		System.out.println(cartNoArr);
+		StringTokenizer token = new StringTokenizer(cartNoArr, "/");
 		boolean result = true;
 
 		while (token.hasMoreTokens()) {
-			int proNo = Integer.parseInt(token.nextToken());
+			int cartNo = Integer.parseInt(token.nextToken());
 			Cart c = new Cart();
-			c.setProductNo(proNo);
+			c.setCartNo(cartNo);
 			c.setMemberNo(memberNo);
 			int changeResult = dao.deleteCart(c);
 			System.out.println(c);

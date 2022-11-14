@@ -37,6 +37,7 @@ public class ClubService {
 	}
 	public Club selectOneClub(Club club) {
 		Club c = dao.selectOneClub(club);
+		c.setClubMemberCnt(c.getMemberList().size());
 		return c;
 	}
 	@Transactional
@@ -135,6 +136,16 @@ public class ClubService {
 		map.put("startIndex", startIndex);
 		map.put("endIndex", endIndex);
 		return dao.selectMyClubStartEnd(map);
+	}
+	public String searchBlockMember(Club c) {
+		int result = dao.searchBlockMember(c);
+		// 1이면, 블락멤버
+		if(result==0) {
+			result = dao.myClubCheck(c);	// -1이면 블락 멤버, 0이면 가입하지 않은 멤버, 1이면 가입한 멤버
+			return String.valueOf(result);
+		}else {
+			return String.valueOf(-1);
+		}
 	}
 
 }

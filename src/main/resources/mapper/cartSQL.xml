@@ -24,7 +24,18 @@ where member_no=#{memberNo}
 
 <delete id="deleteCart" parameterType="Ca">
 delete from carts
-	where product_no=#{productNo} and member_no=#{memberNo}
+where cart_no=#{cartNo}
+	<!-- 
+	<if test="productNo != null">
+		where product_no=#{productNo} and member_no=#{memberNo}
+	</if>
+	<if test="activityNo != null">
+		where activity_no=#{activityNo} and member_no=#{memberNo}
+	</if>
+	<if test="classNo != null">
+		where class_no=#{classNo} and member_no=#{memberNo}
+	</if>
+	 -->
 </delete>
 
 <select id="sameCheck" parameterType="Ca" resultType="Ca">

@@ -81,9 +81,6 @@ public class ProductDao {
 		return sqlSession.selectOne("product.reviewTotalCount",productNo);
 	}
 
-	public int productReviewCount(int productNo) {
-		return sqlSession.selectOne("product.productReviewCount",productNo);
-	}
 
 	public int reviewUpdate(ProductReview pr) {
 		return sqlSession.update("product.reviewUpdate",pr);
@@ -106,6 +103,11 @@ public class ProductDao {
 
 	public int updateCartQuan(Cart c) {
 		return sqlSession.update("cart.updateAmount", c);
+	}
+
+	public int productReviewCount(HashMap<String, Object> map) {
+		
+		return sqlSession.selectOne("product.productReviewCount",map);
 	}
 
 	

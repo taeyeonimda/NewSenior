@@ -95,13 +95,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productView.do")
-	public String productView(int productNo, Model model) {
+	public String productView(int productNo, Model model, String memberId) {
 		Product p = service.productView(productNo);
-		int result = service.productReviewCount(productNo);
+		int result = service.productReviewCount(productNo, memberId);
 		model.addAttribute("p",p);
+		model.addAttribute("reviewCount",result);
 		return "product/productView";
 	}
-	
 	
 	
 	@ResponseBody
@@ -216,5 +216,5 @@ public class ProductController {
 		int result = service.reviewUpdate(pr);
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
 	}
-
+	
 }

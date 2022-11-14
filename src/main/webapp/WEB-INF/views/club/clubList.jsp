@@ -11,31 +11,19 @@
 </head>
 <style>
 
-/*인기 클럽이미지*/
-
-.serviceBox{
-    color: #db7100;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    text-align: center;
-    padding: 25px 10px 0;
-    position: relative;
-    z-index: 1;
+.serviceBox1 {
+    width: 230px;
+    height: 230px; 
+    border-radius: 70%;
+    overflow: hidden;
+    border: 4px dashed #20c997;
 }
-.serviceBox:before{
-    content: "";
-    height: 180px;
-    width: 180px;
-    border: 2px dashed #348E38;
-    border-radius: 50%;
-    transform: translateX(-50%);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    z-index: -1;
-    background-image: url("/resources/img/은비1.jpg");
-    background-size: 110%;
+.serviceBox1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-.serviceBox .title{
+.title{
     color: #fff;
     background-color: #db7100;
     font-size: 18px;
@@ -131,15 +119,15 @@
 		        	<c:when test="${not empty pList }">
 		        		<p class="fs-5 fw-bold text-primary mt-5 text-center">'${sessionScope.m.nickName }'님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
 			        	<div class="container" style="width: 70%; margin-top: 50px; margin-bottom: 100px;">
-						    <div class="row flex-space-between">
+						    <div class="flex-space-around">
 						    <c:forEach items="${pList }" var="pl">
 							    <div class="col-md-3 col-sm-6">
-							        <div class="serviceBox mb-5">
-							            <div class="service-icon"></div>
+							        <div class="serviceBox1 mb-3">
+							        	<img alt="" src="/resources/upload/club/${pl.clubMainImg }">
 							        </div>
-							        <div style="margin-top: 200px; word-break:break-all;" >
+							        <div style="word-break:break-all;" >
 							            <h3 class="card-title">${pl.clubName }</h3>
-										<p class="description" style="width: 100%;">${pl.clubIntro } </p> 
+										<p class="description clubIntro bg-light" style="width: 100%;">${pl.clubIntro } </p> 
 							            <a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
 							        </div>
 							    </div>
@@ -184,23 +172,17 @@
 	<div id="memberNo" style="display: none;">${sessionScope.m.memberNo }</div>
 	
 <div class="modal-wrap">
-    <div class="club-info-modal bg-white">
-        <div class="modal-img-div">
-            <img class="modal-img">
-        </div>
-        <div class="club-info">
-            <div class="club-info-box">
-            	<h3 class="mb-3 text-dark"></h3>
-            	<p class="text-secondary"></p> 
-            	<pre></pre>
-            </div>
-            <div class="modal-btn-box">
-            	<button onclick="closeModal();" class="btn btn-primary">닫기</button>
-            	<a href="javascript:void(0);" class="btn btn-primary" id="enterBtn">입장하기</a>
-            </div>
-        </div>
-    </div>
+	<div class="cookiesContainer">
+		<div class="cookiesContent" id="cookiesPopup">
+			<button class="close" onclick="closeModal();">✖</button>
+			<img src="/resources/img/4191760.jpg" alt="cookies-img" />
+			<h4 class="fs-5 fw-bold text-dark"></h4>
+			<p></p>
+			<button class="accept"></button>
+		</div>
+	</div>
 </div>
+
 
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
@@ -242,8 +224,7 @@
 
     function paging(totalData, dataPerPage, pageCount, currentPage) {
     	  console.log("currentPage:" + currentPage);
-    	  
-    	  console.log(totalData);
+
     	  var totalPage = Math.ceil(Number(totalData)/dataPerPage); //총 페이지 수
     	  // console.log(totalPage);
     	  
@@ -319,9 +300,6 @@
 		    	url: "/searchAllClub.do",
 		    	data: {keyword : keyword},
 		    	success: function (data) {
-		    		console.log("currentPage"+currentPage);
-		    		console.log("dataPerPage"+dataPerPage);
-		    		console.log(data);
 		    		for (let i=(currentPage-1)*dataPerPage; i<(currentPage-1)*dataPerPage+dataPerPage; i++) {
 						const div = $("<div>");
 						div.addClass("clubListBox");
@@ -333,11 +311,16 @@
 						infoDiv.addClass('clubListInfo');
 						const clubInfoBox = $("<div>");
 						clubInfoBox.addClass('clubListInfoBox');
-						clubInfoBox.html("<h3 class='mb-3 text-secondary'>"+data[i].clubName+"</h3><p class='text-secondary'>"+data[i].clubIntro+"</p><pre>참여인원수 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></pre>");
-						infoDiv.append(clubInfoBox);
 						const modalBtnBox = $("<div>");
 						modalBtnBox.addClass("clubListBtnBox");
-						modalBtnBox.html("<button class='btn btn-outline-primary' onclick='clubInfoModal("+data[i].clubNo+");'>입장하기</button>");
+						if(data[i].clubMemberCnt>=data[i].clubLimit){
+							clubInfoBox.html("<h3 class='mb-3 text-secondary'>"+data[i].clubName+"</h3><p class='text-secondary clubIntro'>"+data[i].clubIntro+"</p><p class='text-danger fw-bold'>참여인원 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></p>");
+							infoDiv.append(clubInfoBox);
+						}else{
+							clubInfoBox.html("<h3 class='mb-3 text-secondary'>"+data[i].clubName+"</h3><p class='text-secondary clubIntro'>"+data[i].clubIntro+"</p><p class='text-secondary fw-bold'>참여인원 : <span>"+data[i].clubMemberCnt+"</span> / <span>"+data[i].clubLimit+"</span></p>");
+							infoDiv.append(clubInfoBox);
+						}
+						modalBtnBox.html("<button class='btn btn-outline-dark' onclick='clubInfoModal("+data[i].clubNo+");'>입장하기</button>");
 						infoDiv.append(modalBtnBox);
 						div.append(infoDiv);
 						$("#club-list").append(div);
@@ -370,40 +353,59 @@
     				url : "/selectOneClub.do",
     				data : {clubNo:clubNo },
     				success : function(one){
-    					const clubName = $(".club-info-box>h3");
-    					const clubContent = $(".club-info-box>p");
-    					const clubImg = $(".modal-img-div>img");
-    					const clubAmount = $(".club-info-box>pre")
+    					const clubName = $(".cookiesContent>h4");
+    					console.log(one);
     					clubName.text(one.clubName);
-    					clubContent.text(one.clubIntro);
-    					clubImg.attr("src", "/resources/upload/club/"+one.clubMainImg);
-    					myClubCheck(memberNo, one.clubNo);
+    					const clubCheck = one.clubLimit - one.memberList.length;
+    					clubMemberCheck(memberNo, one.clubNo, clubCheck);
     				}
     			});
     			$(".modal-wrap").css("display", "flex");
     		}
 		}
-
-    	function myClubCheck(memberNo, clubNo) {
-    		const btn = $("#enterBtn");
-    		btn.text('가입하기');
-    		btn.attr('onclick', 'joinClub('+memberNo+', '+clubNo+');');
+		
+    	// -1이면 블락 멤버, 0이면 가입하지 않은 멤버, 1이면 가입한 멤버
+    	function clubMemberCheck(memberNo, clubNo, clubCheck) {
+    		console.log(clubNo, clubCheck);
+    		const btn = $(".accept");
+    		const clubContent = $(".cookiesContent>p");
+    		btn.css("display", "block");
     		$.ajax({
-    			url:"/searchMyClub.do",
-    			data:{memberNo: memberNo},
-    			success:function(myList){
-    				for(let i=0; i<myList.length; i++){
-    					console.log(myList);
-    					if(myList[i].clubNo==clubNo){
-    						btn.text('입장하기');
-    						btn.attr('onclick', 'enterClub('+myList[i].clubNo+');');
+    			url:"/searchBlockMember.do",
+    			data:{
+    				clubLeader: memberNo, // 클럽 객체를 사용하기 때문에 clubLeader일 뿐, 일반 회원 check
+    				clubNo 	: clubNo
+    			},
+    			success:function(result){
+    				if(result=='-1'){
+    					btn.css("display", "none");
+    					clubContent.html('동호회에 입장할 수 없습니다.');
+    				}else if(result=='1'){
+    					btn.text('입장하기');
+						clubContent.html('이미 가입한 동호회입니다.<br>입장하시겠습니까?');
+						btn.attr('onclick', 'enterClub('+clubNo+');');
+						btn.removeClass('btn-danger');
+    		    		btn.addClass('btn-warning');
+    				}else{
+    					if(clubCheck>0){
+    						btn.text('가입하기');
+        		    		btn.attr('onclick', 'joinClub('+memberNo+', '+clubNo+');');
+        		    		clubContent.html('가입하지 않은 동호회입니다.<br>새로 가입하시겠습니까?');
+        		    		btn.removeClass('btn-danger');
+        		    		btn.addClass('btn-warning');
+    					}else{
+    						btn.text('가입불가');
+    						btn.removeClass('btn-warning');
+    						btn.addClass('btn-danger');
+    						btn.attr('onclick', 'closeModal();');
+        		    		clubContent.html('동호회 정원이 초과하여<br>가입할 수 없습니다.');
     					}
     				}
     			}
     		})
 		}
-
     	
+
     	
     	function joinClub(memberNo, clubNo) {
     		Swal.fire({
@@ -418,7 +420,7 @@
 			}).then((result) => {
 				//result.value == true이니까 트루일때만 실행하는거
 			  if (result.value) {
-				  location.href="/myClubList.do?memberNo="+memberNo+"&clubNo="+clubNo;
+				  location.href="/joinClub.do?memberNo="+memberNo+"&clubNo="+clubNo;
 			  }
 			})//then끝
 		}
