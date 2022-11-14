@@ -57,20 +57,28 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="w-100" src="/resources/MAINbtstr/img/yellowbackground.jpg" style="width:800px; height:800px;">
-                    <div class="carousel-caption" style="background-color: rgba(15, 66, 41, 0);">
+                    <div class="carousel-caption" style="background-color: rgba(15, 66, 41, .2);">
                         <div class="container">
                             <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Not living young<br> but living as I am</h1>
-                                    <a href="" class="btn btn-primary py-sm-3 px-sm-4">Explore More</a>
+                            	<div style="width:86%;">
+                                    <h1 class="display-5 text-white mb-5 animated slideInDown" style="text-align: left;">Not living young</h1>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                            	<div style="width: 96%;">
+                                    <h1 class="display-5 text-white mb-5 animated slideInDown" style="text-align: right; padding-bottom: 20px;">but living as I am</h1>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8" style="height: 400px;">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="/resources/img/은비7.jpg"  alt="Image" style="width:800px; height:800px; ">
-                    <div class="carousel-caption" style="background-color: rgba(15, 66, 41, 0);">
+                    <img class="w-100" src="/resources/img/은비7.jpg"  alt="Image" style="width:800px; height:800px; object-fit:cover;">
+                    <div class="carousel-caption" style="background-color: rgba(15, 66, 41, .2);">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7">
@@ -108,7 +116,7 @@
                             	<i class="fa fa-users text-primary"></i>
                             </div>
                             <div class="ps-3">
-                                <h4>동호회</h4>
+                                <h4>온라인 동호회</h4>
                                 <span>누구나 가입 가능한<br> 다양한 종류의 동호회가 가득!</span>
                             </div>
                         </div>
@@ -121,8 +129,8 @@
                                 <span class="material-symbols-outlined" style="font-weight : 900; color:#348e38;">directions_run</span>
                             </div>
                             <div class="ps-3">
-                                <h4>액티비티</h4>
-                                <span>지루한 모임은 그만!<br> 활발한 활동을 좋아한다면 여기로!</span>
+                                <h4>클래스</h4>
+                                <span>배움에는 끝이 없다! <br> 잘 배우고, 잘 늙어가는 방법</span>
                             </div>
                         </div>
                     </div>
@@ -134,8 +142,8 @@
                                 <span class="material-symbols-outlined" style="font-weight : 900; color:#348e38;">school</span>
                             </div>
                             <div class="ps-3">
-                                <h4>클래스</h4>
-                                <span>배움에는 끝이없다!<br> 다양한 배울거리가 가득!</span>
+                                <h4>액티비티</h4>
+                                <span>지루한 모임은 그만!<br> 활발한 활동을 좋아한다면 여기로!</span>
                             </div>
                         </div>
                     </div>
@@ -197,40 +205,42 @@
     </div>
     <!-- About End -->
 
-
-    <!-- Facts Start -->
-    <div class="container-fluid facts my-5 py-5" style= "background-image:url('/resources/MAINbtstr/img/trip.jpg'); height: 300px">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-                    <!-- <h1 class="display-4 text-white" data-toggle="counter-up">5060</h1> -->
-                    <!-- <span class="display-6 text-white">50대와ㅇㅇㅇㅇ</span> -->
-                    <!-- <span class="fs-5 fw-semi-bold text-light">Awards Achieved</span> -->
-                </div> 
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                    <!-- <h1 class="display-4 text-white" data-toggle="counter-up">5060</h1> -->
-                    <br>
-                    <span class="display-6 text-white">5060 모여라</span>
-                    <!-- <span class="fs-5 fw-semi-bold text-light">Awards Achieved</span> -->
+	<!-- 여백 -->
+    <div class="container-xxl py-4">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
                 </div>
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                    <!-- <h1 class="display-4 text-white" data-toggle="counter-up">5060</h1> -->
-                    <br>
-                    <span class="display-6 text-white">여행패키지!</span>
-                    <!-- <span class="fs-5 fw-semi-bold text-light">Awards Achieved</span> -->
-                </div>
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.9s">
-                    <!-- <h1 class="display-4 text-white" data-toggle="counter-up">5060</h1> -->
-                    <!-- <span class="display-6 text-white">여행패키지</span> -->
-                    <!-- <span class="fs-5 fw-semi-bold text-light">Awards Achieved</span> -->
-                </div>
- 
             </div>
         </div>
     </div>
-    <!-- Facts End -->
+    <!-- 여백 End -->
 
+	<!-- Quote Start -->
+    <div class="container-fluid my-5 py-5" data-parallax="scroll" data-image-src="/resources/MAINbtstr/img/various.jpg" style="height: 360px;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quote End -->
 
+	<!-- 여백 -->
+    <div class="container-xxl py-4">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 여백 End -->
+    
     <!-- Features Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -267,7 +277,6 @@
                                 </div>
                             </div>
                         </div>
-                       
                         <div class="col-md-6 wow fadeIn" data-wow-delay="0.7s">
                         <a href="">
                             <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
@@ -285,7 +294,18 @@
     </div>
     <!-- Features End -->
 
-
+	<!-- 여백 -->
+    <div class="container-xxl py-4">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 여백 End -->
+    
     <!-- Service Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -348,9 +368,20 @@
     </div>
     <!-- Service End -->
 
+	<!-- 여백 -->
+    <div class="container-xxl py-4">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 여백 End -->
 
     <!-- Quote Start -->
-    <div class="container-fluid my-5 py-5" data-parallax="scroll" data-image-src="/resources/MAINbtstr/img/various.jpg">
+    <div class="container-fluid my-5 py-5" data-parallax="scroll" data-image-src="/resources/img/bgImg.png" style="height: 400px;">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
@@ -361,6 +392,17 @@
     </div>
     <!-- Quote End -->
 
+	<!-- 여백 -->
+    <div class="container-xxl py-4">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 여백 End -->
 
     <!-- Projects Start -->
     <div class="container-xxl py-5">
@@ -499,7 +541,7 @@
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px; height:300px;">
                 <p class="fs-5 fw-bold text-primary">NewSenior</p>
-                <h1 class="display-5 mb-5">이 달의 우수 강사님</h1>
+                <h1 class="display-5">이 달의 우수 강사님</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
