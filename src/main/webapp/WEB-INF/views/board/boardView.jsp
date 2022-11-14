@@ -486,10 +486,9 @@
 					location.href="/boardDelete.do?boardNo="+boardNo+"&boardType="+boardType;	
 				}
 			}
+			
 			$("#delBtn").on("click",function(){
-				confirm("글을 삭제하시겠습니까?")
-				
-<<<<<<< HEAD
+				confirm("글을 삭제하시겠습니까?");
 			});
 			
 			$(".commentWriteBtn1").on("click",function(){
@@ -507,16 +506,14 @@
 					return false;
 				}
 			});
-=======
-			});c
->>>>>>> refs/heads/master
+
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){
-			//obj는 사실 필요없는 매개변수(형식 맞춰주기 위해서 기입)
-			if(confirm("댓글을 삭제하시겠습니까?")) {
-				location.href="/deleteBoardComment.do?boardCommNo="+boardCommNo+"&boardNo="+boardNo;
+				//obj는 사실 필요없는 매개변수(형식 맞춰주기 위해서 기입)
+				if(confirm("댓글을 삭제하시겠습니까?")) {
+					location.href="/deleteBoardComment.do?boardCommNo="+boardCommNo+"&boardNo="+boardNo;
+				}
 			}
-		}
 		
 			</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
