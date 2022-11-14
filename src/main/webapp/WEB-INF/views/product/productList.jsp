@@ -21,7 +21,7 @@
         <div class="productList">
          <c:forEach items="${list }" var="p">
             <div>
-                <a href="/productView.do?productNo=${p.productNo }">
+                <a href="/productView.do?productNo=${p.productNo }&memberId=${sessionScope.m.memberId}">
                 	<img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" style="width:360px; height: 300px;">
                     <!-- <div class="productImg"><img src="/resources/TGbtstr/img/국수키트.jpg" alt=""></div> -->
                     <div class="productName">${p.productName }</div>

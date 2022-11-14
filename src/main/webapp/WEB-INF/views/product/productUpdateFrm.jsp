@@ -233,8 +233,8 @@
                     <div class="col-md-10">
                     <c:choose>
                     <c:when test="${!empty p.productFileVO[0].fileName}">
-                      <input type="file" name="productFile" id="producetFile1" class="productFile" style="display: none;">
-                      <span id="productImg1">${p.productFileVO[0].fileName }</span>
+                      <input type="file" name="productFile" id="producetFile1" class="productFile upImg" style="display: none;">
+                      <span id="productImg1" class="mainImg">${p.productFileVO[0].fileName }</span>
                       <button class="productDelBtn1" type="button" onclick="deleteimgFile(this,${p.productFileVO[0].fileNo},'${p.productFileVO[0].filePath }')">삭제</button>
                     </c:when>
                     <c:otherwise>
@@ -350,7 +350,7 @@
                   </div>
                    -->
                   <input type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" value="수정하기">
-                  
+                  <button type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" onclick="return productUpdateBtn();">수정하기</button>
                 </div>
               </div>
             </form>
@@ -377,6 +377,26 @@
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 <!-- Footer End -->
 	<script>
+	function productUpdateBtn(){
+		var mainImg = $(".mainImg").text();
+		var updateImg = $(".upImg").val();
+		console.log("아아"+mainImg);
+		console.log("나나"+updateImg);
+		var category = $("#productCategory").val();
+		if((mainImg==''&&updateImg=='')){
+			 alert("메인이미지를 등록해주세요.");
+			 return false;
+		 } else if(category ==''){
+			 alert("카테고리를 선택해주세요.")
+			 return false;
+		 }else {
+			if(confirm("상품정보를 수정하시겠습니까?"))	{
+				
+			}else {
+				return false;
+			}
+		 }	
+	}
 	$("#fileUpload").on("click",function(){
 			$(".productFile").click();
 	});
@@ -388,9 +408,9 @@
 	
 	$(".productDelBtn1").on("click",function(){
 		//$("#productImg1").remove();
-		$(this).prev().remove();
+		$(this).prev().text("").hide();
 		//$("#producetFile1").show();
-		$(this).prev().show();
+		$(this).prev().prev().show();
 		$(this).hide();
 	});
 	function deleteimgFile(obj,fileNo,filepath){

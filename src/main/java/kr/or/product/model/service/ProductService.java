@@ -145,8 +145,11 @@ public class ProductService {
 		return dao.deleteReview(reviewNo);
 	}
 
-	public int productReviewCount(int productNo) {
-		return dao.productReviewCount(productNo);
+	public int productReviewCount(int productNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo",productNo);
+		map.put("memberId",memberId);
+		return dao.productReviewCount(map);
 	}
 
 	public int reviewUpdate(ProductReview pr) {
@@ -217,7 +220,5 @@ public class ProductService {
 		ProductPageData ppd = new ProductPageData(list,pageNavi);
 		return ppd;
 	}
-
-
 
 }

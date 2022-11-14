@@ -34,6 +34,18 @@ public class OrderController {
 		return "myPage/orderHistory";
 	}
 	
+	@RequestMapping(value="/findDate.do")
+	public String findDate(Model model,Order o, String startDate,String orderDate, String endDate) {
+		o.setStartDate(startDate);
+		o.setOrderDate(orderDate);
+		o.setEndDate(endDate);
+		ArrayList<Order> list2 = service.findDate(o);
+		System.out.println(o);
+		model.addAttribute("o", o);
+		model.addAttribute("list",list2);
+		return "myPage/orderHistory";
+	}
+	
 	
 	@RequestMapping(value="/orderDetail.do")
 	public String orderDetail(Order o, Model model) {
@@ -56,6 +68,10 @@ public class OrderController {
 		
 		System.out.println(o);
 		int result2 = service.gogoDelivery(de);
+		
+		int result3 = service.deleteOrder(o);
+		System.out.println(o.getMemberNo());
+		
 		return "redirect:/orderHistory.do?memberNo="+de.getMemberNo();
 	}
 	
