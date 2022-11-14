@@ -160,7 +160,7 @@
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
 		                      		<p class="lastPrice"></p>
-		                      		<input type="hidden" name="allSumPrice" class="allSumPrice">
+		                      		<input type="hidden" name="allSumPrice" class="allSumPrice" >
 		                     	</td>
 	                      	</tr>
 	                      	
@@ -187,17 +187,17 @@
 					<div class="order-info shipping" style="margin-left:15%;">
 	                    <div class="order-box">
 	                        <label for="deliveryName" class="order-label" style="width:70px;">수령인명</label>
-	                        <input type="text"  id="deliveryName" class="basicInput view-order-info" name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" >
+	                        <input type="text"  id="deliveryName" class="basicInput view-order-info" name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div>
 	                        <br>
 	                    <div class="order-box">
 	                        <label for="deliveryPhone" class="order-label" style="width:70px;">전화번호</label>
-	                        <input type="text"  id="deliveryPhone" class="basicInput medium view-order-info" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" >
+	                        <input type="text"  id="deliveryPhone" class="basicInput medium view-order-info" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
 	                    </div>
 	                        <br>
 	                    <div class="order-box">
 	                        <label for="deliveryEmail" class="order-label" style="width:70px;">이메일</label>
-	                        <input type="text"  id="deliveryEmail" class="basicInput medium view-order-info" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" >
+	                        <input type="text"  id="deliveryEmail" class="basicInput medium view-order-info" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div>
 	                    <div class="order-box">
 	                        <label for="deliveryAddr" class="order-label" style="width:70px;">주소</label>
@@ -220,7 +220,7 @@
                     </div>
                     <br>                
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
-                  <button type="submit">연습버튼</button>
+                  <!-- <button type="submit">연습버튼</button> -->
                     <button type="button" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
                     <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
                   </div>
@@ -268,35 +268,7 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
-		$("#payBtn").on("click",function(){
-			const price = $(".lastPrice").text();
-			console.log(price);
-			const d = new Date();
-			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			
-			IMP.init("imp10385324");
-			IMP.request_pay({
-				pg: "html5_inicis",
-				merchat_uid : "상품코드_"+date, 			// 거래 ID
-				name : "결제 테스트",			  			// 결제 이름
-				amount : price,							// 결제 금액
-				buyer_email : "wnstjr5558@naver.com",	// 구매자 이메일
-				buyer_name : "구매자",					// 구매자
-				buyer_tel : "010-1234-1234",			// 구매자 전화번호
-				buyer_addr : "서울시 영등포구 당산동",			// 구매자 주소
-				buyer_postcode : "12345"				// 구매자 우편변호
-			
-			},function(rsp){
-				if(rsp.success){
-					alert("결제 성공");
-					const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
-					$("#order-form").append(input);	
-		            $("#order-form").submit();
-				}else{
-					alert("결제 실패");
-				}
-			});
-		});
+		
 		
 
 		
@@ -311,17 +283,16 @@
 		
 		
 			function sum(){
+				
 				const sumPrice = $(".sumPrice");
 				let result = 0;
 				for(let i=0; i<sumPrice.length; i++){
 					result += Number(sumPrice.eq(i).val());
 				}
 				
-				//const showPrice = $(".payPrice").val(result);
-				//console.log(showPrice);
 				
 				const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-				console.log(lastPrice);
+				$(".allSumPrice").val(result);
 				$(".lastPrice").text(lastPrice);
 				
 				
@@ -333,23 +304,20 @@
 				let totalPrice = $(".cartTotalPrice");
 				let sumPrice=0;
 				let numberPrice;
+				let realPrice=0;
 				for(i; i<totalPrice.length; i++){
 					let price = totalPrice.eq(i).text();
 					numberPrice = parseInt(price);
-					let realPrice = numberPrice.toLocaleString();
+					realPrice = numberPrice.toLocaleString();
 					$(".realPrice").eq(i).text(realPrice);
 					
 					
-					console.log(typeof numberPrice);
-					console.log("price"+price);
-					console.log("number"+numberPrice);
-					console.log("realPrice"+realPrice);
 					sumPrice += numberPrice;
 				}
 
 				
-				$(".lastPrice").text(sumPrice);
-				$(".allSumPrice").val(sumPrice);
+				
+//				$(".allSumPrice").val(numberPrice);
 			}
 		
 		// 체크한것 삭제
@@ -397,7 +365,34 @@
 		    }).open();
 		}
 		
-		
+		$("#payBtn").on("click",function(){
+			const price = $(".allSumPrice").val();
+			const d = new Date();
+			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			
+			IMP.init("imp10385324");
+			IMP.request_pay({
+				pg: "html5_inicis",
+				merchat_uid : "상품코드_"+date, 			// 거래 ID
+				name : "결제 테스트",			  			// 결제 이름
+				amount : price,							// 결제 금액
+				buyer_email : "wnstjr5558@naver.com",	// 구매자 이메일
+				buyer_name : "구매자",					// 구매자
+				buyer_tel : "010-1234-1234",			// 구매자 전화번호
+				buyer_addr : "서울시 영등포구 당산동",			// 구매자 주소
+				buyer_postcode : "12345"				// 구매자 우편변호
+			
+			},function(rsp){
+				if(rsp.success){
+					alert("결제 성공");
+					const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
+					$("#goDeliveryTable").append(input);	
+		            $("#goDeliveryTable").submit();
+				}else{
+					alert("결제 실패");
+				}
+			});
+		});
 	</script>
   </body>
 </html>
