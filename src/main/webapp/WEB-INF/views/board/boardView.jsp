@@ -197,7 +197,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
+						<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -258,7 +258,7 @@
 		 						<span class="material-symbols-outlined">
 									subdirectory_arrow_right
 								</span>
-								<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
+								<div class="memberImg"><img src="/resources/upload/member/${bcc.memberImg}"></div>
 		 						
 		 					</li>
 		 					<li>
@@ -294,7 +294,7 @@
 								<span class="material-symbols-outlined">
 									subdirectory_arrow_right
 								</span>							
-								<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
+								<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
 							<li>
 								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 								<input type="hidden" name="boardRef" value="${b.boardNo}">
