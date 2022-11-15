@@ -197,7 +197,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<span>댓글</span>
+						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -223,11 +223,11 @@
 		 <c:forEach items="${commentList }" var="bc">
 		 	<ul class="commentView">
 		 		<li>
-						<span>댓글</span>
+						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 				</li>
 				<li>
 					<p>
-						<span>${bc.nickName }</span>
+						<span style="color:green;">${bc.nickName }</span>
 						<span>${bc.boardCommDate }</span>
 					</p>
 					<p>${bc.boardCommContent }</p>
@@ -258,11 +258,12 @@
 		 						<span class="material-symbols-outlined">
 									subdirectory_arrow_right
 								</span>
-		 						<span>대댓글</span>
+								<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
+		 						
 		 					</li>
 		 					<li>
 								<p>
-									<span>${bcc.nickName }</span>
+									<span style="color:green;">${bcc.nickName }</span>
 									<span>${bcc.boardCommDate }</span>
 								</p>
 								<p>${bcc.boardCommContent }</p>
@@ -290,15 +291,17 @@
 					<form action="/insertComment.do" method="post">
 						<ul>
 							<li>
-								<span>대댓글</span>
-							</li>
+								<span class="material-symbols-outlined">
+									subdirectory_arrow_right
+								</span>							
+								<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 							<li>
 								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 								<input type="hidden" name="boardRef" value="${b.boardNo}">
 															<!-- ㄴ몇 번 글의 댓글인지 -->
 								<input type="hidden" name="boardCommRef" value="${bc.boardCommNo }">
 									<!-- ㄴ어떤 댓글의 대댓글인지 -->					<%--ㄴ해당 댓글 번호 --%>
-								<textarea name="boardCommContent" class="boardCommContent"></textarea>
+								<textarea name="boardCommContent" class="ReCommContent"></textarea>
 							</li>
 							<li>
 								<button type="submit" name="commentWriteBtn2" class="commentWriteBtn2">등록</button>
@@ -486,13 +489,13 @@
 			});
 			
 			$(".commentWriteBtn2").on("click",function(){
-				const boardCommContent =$(".boardCommContent");
-				if(boardCommContent.val()==""){
+				const ReCommContent =$(".ReCommContent");
+				if(ReCommContent.val()==""){
 					alert('내용을 입력해주세요');
 					return false;
 				}
 			});
-		});
+		
 
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){

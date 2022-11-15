@@ -61,6 +61,8 @@ public class BoardController {
 		model.addAttribute("reCommentList",(ArrayList<BoardComment>)pageViewMap.get("reCommentList"));
 		session.setAttribute("boardType",boardType);
 		System.out.println("controllerView boardType :"+boardType);
+		System.out.println("memberImg: "+b.getMemberImg());
+
 		return "board/boardView";
 			
 			
