@@ -49,14 +49,17 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                
                 <c:if test="${b.boardType eq 'F'}">
+               		 <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${b.boardType eq 'I'}">
+                	<p class="fs-5 fw-bold text-primary">all about Senior Activity</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${b.boardType eq 'P'}">
+                	<p class="fs-5 fw-bold text-primary">우리 동호회를 소개합니다</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
                 </c:if>
                 <c:if test="${b.boardType eq 'N'}">
@@ -194,7 +197,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
+						<div class="memberImg"><img src="/resources/upload/member/${b.memberImg}"></div>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -312,7 +315,7 @@
 								<span class="material-symbols-outlined">
 									subdirectory_arrow_right
 								</span>							
-								<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
+								<div class="memberImg"><img src="/resources/upload/member/${b.memberImg}"></div>
 							<li>
 								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 								<input type="hidden" name="boardRef" value="${b.boardNo}">
@@ -333,15 +336,16 @@
 		</div><%--commentBox끝--%>
 	</c:if><!-- boardType Q or N이 아닌경우 -->
 	
+	<!-- QnA게시판 / 공지사항 -->
+	
 	<c:if test="${b.boardType eq 'Q' or b.boardType eq 'N' }">
 		<%--댓글작성 form--%>
-		<c:if test="${not empty sessionScope.m }">
-			<c:if test="${sessionScope.m.memberGrade eq 3}">
+		<c:if test="${not empty sessionScope.m && m.memberGrade eq 3}">
 		<div class="inputCommentBox">
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<span>댓글</span>
+						<div class="memberImg"><img src="/resources/upload/member/${b.memberImg}"></div>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -350,37 +354,48 @@
 						<input type="hidden" name="boardCommRef" value="0">
 							<!-- ㄴ어떤 댓글의 대댓글인지 -->	<!-- ㄴ댓글,대댓글 구분 (0번 시퀀스는 쓰지 않으므로 0번은 대댓글이 아닌 일반댓글)-->
 														<!-- 참조하는 대댓글이 없음 -->
-						<textarea name="boardCommContent"></textarea>
+						<textarea name="boardCommContent" style="border: none; resize:none;"></textarea>
 					</li>
-					<li>
+					<li class="commentWriteBtn1Box">
 						<button type="submit" name="commentWriteBtn1" class="commentWriteBtn1">등록</button>
 					</li>
 				</ul>
 			</form>
 		</div>
-			</c:if>
 		</c:if>
 		
 		<%--댓글 출력 --%>
 		<%--forEach(1): 댓글반복문 시작(댓글 출력, 대댓글 출력, 대댓글 작성폼   --%>
 		<div class="commentBox">
+		
 		 <c:forEach items="${commentList }" var="bc">
 		 	<ul class="commentView">
 		 		<li>
-						<span>댓글</span>
+						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 				</li>
-				<li>
-					<p class="comment-info">
-						<span>${bc.nickName }</span>
+					<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+				<li class="myComment" style="background-color:#E8F5E9;">
+					</c:if>
+					<c:if test="${sessionScope.m.nickName ne bc.nickName }">
+				<li class="myComment">
+					</c:if>
+					<p>
+					<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+						<span style="color:green;"><a href="/mypage.do">${bc.nickName }</a></span>
+					</c:if>	
+					<c:if test="${sessionScope.m.nickName ne bc.nickName }">
+						<span style="color:green;">${bc.nickName }</span>
+					</c:if>	
 						<span>${bc.boardCommDate }</span>
 					</p>
 					<p>${bc.boardCommContent }</p>
 					<textarea name="boardCommContent" style="display:none;">${bc.boardCommContent}</textarea>
 					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
+
 					<p>
 						<c:if test="${not empty sessionScope.m }">
 							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
-								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
+								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a></button>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
 						</c:if>
@@ -388,8 +403,9 @@
 				</li>
 		 	</ul>
 		 </c:forEach>
-		 </div>
+		 </div>		
 	</c:if>
+	
 </div>	
 
 		<script>

@@ -43,14 +43,17 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                
                 <c:if test="${boardType eq 'F'}">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'I'}">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'P'}">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'N'}">
@@ -66,11 +69,7 @@
             
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
-                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <c:forEach items="${list}" var="cateList">
-                        	<li class="mx-2 ${cateList.boardCategory }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardCategory}&reqPage=1">${cateList.boardCategory }</a></li>
-                        </c:forEach>   
-                    </ul>
+                    
         	   </div>
                     <div style="display: none;" class="category">${classCategory }</div>
                 </div>

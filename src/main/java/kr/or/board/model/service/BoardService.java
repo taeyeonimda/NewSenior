@@ -306,6 +306,12 @@ public class BoardService {
 	}
 
 
+	public FileVO boardFileDown(int fileNo) {
+		FileVO f = dao.boardFileDown(fileNo);
+		return f;
+	}
+
+
 
 
 
