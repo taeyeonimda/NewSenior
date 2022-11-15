@@ -133,7 +133,7 @@ public class MemberController {
 		
 		//마이페이지 내정보수정하기
 		@RequestMapping(value = "/mypageUpdate.do")
-		public String mypageUpdate(Member member, @SessionAttribute Member m, MultipartFile[] files, HttpServletRequest request) {
+		public String mypageUpdate(Member member, @SessionAttribute Member m, MultipartFile[] files, HttpServletRequest request, String defaultImg) {
 			
 			member.setKakaoLogin(m.getKakaoLogin());
 			if(member.getMemberId() == "") {
@@ -175,14 +175,17 @@ public class MemberController {
 					member.setMemberImg(filepath);
 				}// for문 종료
 			}
-		
-			System.out.println("여기두두두ㅜ두둗:"+m);
+			
 			if(member.getMemberImg() == null) {
 				member.setMemberImg(m.getMemberImg());
 			}
+			if(defaultImg != null) {
+				if(defaultImg.equals("user.png")) {
+					member.setMemberImg("user.png");
+				}
+			}
 			System.out.println(member.getMemberImg());
 			int result = service.updateMember(member);
-			System.out.println("###여기서도 찍어보기###:"+member);
 			if (result > 0) {
 				m.setMemberPhone(member.getMemberPhone());
 				m.setMemberEmail(member.getMemberEmail());
@@ -190,7 +193,6 @@ public class MemberController {
 				m.setMemberBirth(member.getMemberBirth());
 				m.setNickName(member.getNickName());
 				m.setMemberImg(member.getMemberImg());
-				System.out.println("여기서 찍기&&&"+m);
 				return "redirect:/mypage.do";
 			} else {
 				return "redirect:/mypage.do";
