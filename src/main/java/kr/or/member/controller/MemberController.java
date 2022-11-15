@@ -12,6 +12,7 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -135,7 +136,6 @@ public class MemberController {
 		public String mypageUpdate(Member member, @SessionAttribute Member m, MultipartFile[] files, HttpServletRequest request) {
 			
 			member.setKakaoLogin(m.getKakaoLogin());
-			
 			if(member.getMemberId() == "") {
 				member.setMemberId(m.getMemberId());
 			}
@@ -175,7 +175,14 @@ public class MemberController {
 					member.setMemberImg(filepath);
 				}// for문 종료
 			}
+		
+			System.out.println("여기두두두ㅜ두둗:"+m);
+			if(member.getMemberImg() == null) {
+				member.setMemberImg(m.getMemberImg());
+			}
+			System.out.println(member.getMemberImg());
 			int result = service.updateMember(member);
+			System.out.println("###여기서도 찍어보기###:"+member);
 			if (result > 0) {
 				m.setMemberPhone(member.getMemberPhone());
 				m.setMemberEmail(member.getMemberEmail());
@@ -183,6 +190,7 @@ public class MemberController {
 				m.setMemberBirth(member.getMemberBirth());
 				m.setNickName(member.getNickName());
 				m.setMemberImg(member.getMemberImg());
+				System.out.println("여기서 찍기&&&"+m);
 				return "redirect:/mypage.do";
 			} else {
 				return "redirect:/mypage.do";
@@ -244,8 +252,8 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value="/kakao.do")
-		public String kakao() {
-			return "redirect:/mypage.do";
+		public String kakao(@SessionAttribute Member m) {
+			return "redirect:/";
 		}
 		
 		//회원가입_아이디체크
@@ -430,7 +438,7 @@ public class MemberController {
 			}
 		}
 		
-		//회원탈퇴(member_state에 시간 넣고 -> 5분뒤 삭제 )
+		//회원탈퇴
 		@RequestMapping(value="/deleteMember.do")
 		public String deleteMember(@SessionAttribute Member m, Model model, HttpSession session) {
 			System.out.println("###member###:"+m);
@@ -443,37 +451,5 @@ public class MemberController {
 				model.addAttribute("url","/mypage.do");
 				return "alert";
 			}
-		}
-		
-		//파일 업로드
-		@ResponseBody
-		@RequestMapping(value="/imgUpload.do")
-		public String imgUpload(@SessionAttribute Member m, MultipartFile[] files, HttpServletRequest request, Model model) throws UnsupportedEncodingException {
-			if(!files[0].isEmpty()) {
-				String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
-				for(MultipartFile file : files) {
-					String filename = file.getOriginalFilename();
-					String filepath = fileRename.fileRename(savePath, filename);
-					try {
-						FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
-						BufferedOutputStream bos = new BufferedOutputStream(fos);
-						try {
-							byte[] bytes = file.getBytes();
-							bos.write(bytes);
-							bos.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					m.setMemberImg(filepath);
-					System.out.println("filepath"+filepath);
-					model.addAttribute("memberImg", m.getMemberImg());
-				}// for문 종료
-			}
-			return "0";
 		}
 }

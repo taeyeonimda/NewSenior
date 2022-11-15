@@ -167,7 +167,7 @@
 						</div>
 					</div>
 					<button type="submit" class="btn btn-outline-warning"
-						style="float: right; color: #000;">내정보 변경하기</button>
+						style="float: right; color: #000;" onclick="filename();">내정보 변경하기</button>
 				</div>
 		</form>
 		<form action="/deleteMember.do" method="post" onsubmit="return delMember();">
@@ -560,6 +560,7 @@
     		alert("회원정보를 입력해주세요!");
     	}
     	*/
+    
     </script>
 </body>
 </html>
