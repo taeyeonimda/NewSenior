@@ -16,6 +16,7 @@ public class ActivityReview {
 	private String actReviewDate;
 	
 	private String memberName; //join해서 이름불러올꺼
+	private String memberImg;
 //    ACTIVITY_REVIEW_NO NUMBER PRIMARY KEY,
 //    ACTIVITY_NO NUMBER NOT NULL REFERENCES ACTIVITY, 
 //    ACTIVITY_REVIEW_WRITER NUMBER,

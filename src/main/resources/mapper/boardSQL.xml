@@ -179,6 +179,7 @@ select * from
 			board_type as boardType,
 			board_content as boardContent,
 			board_category as boardCategory,
+			member_img as memberImg,
 			nickname as nickName
 		from board join members using(member_no)
 		where board_no = #{_parameter}
@@ -223,6 +224,7 @@ select * from
 			to_char(board_comm_date,('YYYY-MM-DD HH24:MI:SS')) as boardCommDate,
 			board_ref as boardRef,
 			board_comm_ref as boardCommRef,
+			member_img as memberImg,
 			nickname as nickName
 		from board_comment join members using(member_no)
 		where board_ref = #{_parameter} and board_comm_ref is null order by 1
@@ -236,6 +238,7 @@ select * from
 			to_char(board_comm_date,('YYYY-MM-DD HH24:MI:SS')) as boardCommDate,
 			board_ref as boardRef,
 			board_comm_ref as boardCommRef,
+			member_img as memberImg,
 			nickname as nickName
 		from board_comment join members using(member_no)
 		where board_ref = #{_parameter} and board_comm_ref is not null order by 1

@@ -16,5 +16,6 @@ public class BoardComment {
 	private int memberNo;
 	//조인해서 추가한 컬럼
 	private String nickName;
+	private String memberImg;
 	
 }

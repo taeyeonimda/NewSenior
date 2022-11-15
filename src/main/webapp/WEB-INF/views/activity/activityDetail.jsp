@@ -16,6 +16,7 @@
 #myform fieldset legend{
     text-align: right;
 }
+
 #myform input[type=radio]{
     display: none;
 }
@@ -33,6 +34,9 @@
 #myform input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
+
+
+/*먼지모르지만 안쓰는거*/
 #reviewContents {
     width: 100%;
     height: 150px;
@@ -42,6 +46,118 @@
     border-radius: 5px;
     font-size: 16px;
     resize: none;
+}
+
+.review-el__header {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+.review-el__header--left {
+    display: flex;
+    align-items: flex-start;
+}
+.review-el__thumbnail {
+    margin-right: 8px;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    border: 1px solid #e9ecef;
+}
+
+.review-el__thumbnail>img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    max-width: 100%;
+    display: block;
+
+}
+.review-el__user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-el__star-cover {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.review-el__star {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.decimal-star {
+    position: relative;
+    display: inline-block;
+}
+
+.review-el__star input[type=checkbox]{
+    display: none;
+}
+.review-el__star label{
+    font-size: 1.2em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+
+.review-el__star input[type=checkbox]:checked+label{
+	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.review-el__name {
+    font-weight: 400;
+    line-height: 1.38;
+    letter-spacing: -.3px;
+    font-size: 13px;
+    color: #868e96;
+    font-weight: 700;
+}
+.review-el__star-num {
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -.3px;
+    font-size: 15px;
+    color: #343a40;
+    font-weight: 700;
+}
+
+
+.review-el__body {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    letter-spacing: -.3px;
+    color: #495057;
+    font-size: 15px;
+    white-space: pre-line;
+}
+
+.review-el__tools {
+    display: flex;
+    align-items: center;
+}
+
+.review-el__tool {
+    font-weight: 400;
+    line-height: 1.38;
+    letter-spacing: -.3px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    color: #adb5bd;
+    font-weight: 500;
+}
+    
+.review-el__tool--reply {
+    margin-left: 2px;
+}
+.review-el__tool--clickable {
+	margin-left: 3px;
+    cursor: pointer;
 }
 </style>
 <body>
@@ -219,20 +335,20 @@
 						<div>
 							<textarea class="col-auto form-control" type="text"
 								id="actReviewContent" name="actReviewContent"
-								placeholder="좋은 수강평을 남겨주시면 Cocolo에 큰 힘이 됩니다! 포인트 5000p도 지급!!"></textarea>
+								placeholder="액티비티를 구매하신분만 리뷰등록이 가능합니다."></textarea>
 						</div>
 						<button id="reviewSubmit" type="button" class="btn btn-primary">등록</button>
-						<button type="button" class="btn btn-primary">수정</button>
-						<button type="button" class="btn btn-primary">삭제</button>
-						<button type="button" class="btn btn-primary">대댓글</button>
 					</form>
 
 	
 				</div>
 				<hr>
-				<!-- ajax로 붙여넣을공간 -->	
+				
+					<!-- ajax로 붙여넣을공간 -->	
 				<div id="ajaxReviewList">
 					
+        		</div>
+    
 				</div>
 				
 				<script>
@@ -308,41 +424,7 @@
 	</script>
 			</div>
 		</div>
-		<!-- 후기 내가쓴거  -->
-		
-		
-		<!-- 후기 -->
-        <!-- 
-        <div class="container-xxl py-5 mt-5" id="#menu5">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="flex-space-between">
-                        <div id="total-star">총 별점 : <span>★★★★★</span></div>
-                        <div>
-                            <button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="profil-title">
-                        <div class="profil-img-div">
-                            <img src="img/person_1.jpg" class="profil-img">
-                        </div>
-                        <div class="profil-info-div">
-                            <div>★★★★★</div>
-                            <div>닉네임</div>
-                            <div>작성일</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div>컨텡층ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-                        <div>수정 / 삭제</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         -->
+	
         
     </div><!--page-content End-->
 
@@ -362,24 +444,26 @@
     	const amount = $("[name=amount]").val()
     	const amountPrice ='${act.activityPrice }';
     	const amountPrice2 ='${act.activityPrice }';
-    	console.log("amountPrice2값:::::"+amountPrice2)
+    	
     	const splits = amountPrice2.split(',');
     	let realPrice ="";
     	
-    	console.log(splits);
+    	
     	for(let i=0;i<splits.length;i++){
     		realPrice += splits[i];
     	}
     	
-    	console.log(reqPage);
+    	
 		$("#realAmount").text(amount*realPrice);
 		
 		showList(reqPage);
 		
-		
+	
 		
 		
     });
+	
+	$("[name=actReviewRate2]").attr("readonly",true);
 	
 	function goPage(number){
 		//$("#ajaxReviewList").remove();
@@ -396,16 +480,58 @@
 				reqPage : number 
 			},
 			success : function(data){
-				console.log("리뷰 현재페이지"+data.reqPage);
-				console.log("리뷰 리스트 길이"+data.list.length);
+	
 				for(let i =0; i<data.list.length;i++){
-					console.log("리뷰내용"+data.list[i].actReviewContent);
-					let rvContentDiv = "<div>"+data.list[i].actReviewContent+"</div>";
-					$("#ajaxReviewList").append(rvContentDiv);
+					const div = $("<div>");//'<div class="review-list__content">'
+					div.addClass("review-list__content");
+					let longDiv = 
+						'<div class="review-list__el-cover" >'
+						+'<div class="review-list__el review-el">'
+						+	'<div class="review-el__header">'
+						+'<div class="review-el__header--left">'
+						+'<div class="review-el__thumbnail">'
+						+'<img	src="/resources/upload/member/'+data.list[i].memberImg+'" '
+						+'alt="'+data.list[i].memberName+' thumbnail"></div>'
+						+'<div class="review-el__user-info">'
+						+  '<div class="review-el__star-cover">'
+						+   '<span class="review-el__star">'
+						+		'<input type="checkbox" name="actReviewRate2" value="5" id="'+data.list[i].actRiviewWriter+i+'1" disabled>'
+						+			'<label for="'+data.list[i].actRiviewWriter+i+'1">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="4" id="'+data.list[i].actRiviewWriter+i+'2" disabled>'
+						+			'<label for="'+data.list[i].actRiviewWriter+i+'2">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="3" id="'+data.list[i].actRiviewWriter+i+'3" disabled>'
+						+			'<label for="'+data.list[i].actRiviewWriter+i+'3">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="2" id="'+data.list[i].actRiviewWriter+i+'4" disabled>'
+						+			'<label	for="'+data.list[i].actRiviewWriter+i+'4">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="1" id="'+data.list[i].actRiviewWriter+i+'5" disabled>'
+						+			'<label	for="'+data.list[i].actRiviewWriter+i+'5">★</label></span>'
+						+	'<span class="review-el__star-num">'+data.list[i].actReviewRate+'</span></div>'//리뷰별점끝
+						+				'<div class="review-el__name">'+data.list[i].memberName+'</div>'
+						+			'</div> </div> </div>'//star-cover user info left
+						+	'<div class="review-el__body">'+data.list[i].actReviewContent+'</div>'
+						+	'<div class="review-el__tools">'
+						+		'<div class="review-el__tools--left">'
+						+			'<span class="review-el__tool">'+data.list[i].actReviewDate+'</span>' 
+						+			 '<span class="review-el__tool review-el__tool--reply' 
+						+			 ' review-el__tool--clickable e-add-reply">   ∙답글 작성</span>'
+						+		'</div>	</div>	</div>	</div>';
+						
+					div.append(longDiv);
+					$("#ajaxReviewList").append(div);
+					
+					let realRate = data.list[i].actReviewRate;
+					
+					console.log(i + ":"+realRate);
+					let actReviewRate2 = div.find("[name=actReviewRate2]");
+					
+					for(let j=0;j<realRate;j++){
+						console.log("i값"+i);
+						console.log("j값"+j);
+						actReviewRate2.eq(j).attr("checked",true);
+					}
+					
 				}
-				console.log("리뷰 리스트"+data.list.reviewNo);
-				console.log("리뷰 넘퍼페이지"+data.numPerPage);
-				console.log("리뷰 페이지네비"+data.pageNavi);
+			
 				
 				$("#ajaxReviewList").append(data.pageNavi);
 			},
