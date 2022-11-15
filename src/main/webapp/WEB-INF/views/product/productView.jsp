@@ -57,6 +57,7 @@ ul li.on a {
 	background-color: #0F4229;
 	color: white;
 };
+
 </style>
 </head>
 <body>
@@ -73,7 +74,6 @@ ul li.on a {
                 <h4>${p.wonPrice }<span>원</span></h4>
                 <input type="hidden" class="hiddenPrice" value=${p.productPrice }>
                 <p>배송비-무료</p>
-                
                 <h6>클래스 종합키트</h6>
                 <br>
                 <br>
@@ -137,7 +137,7 @@ ul li.on a {
               <div><a href="/boardList.do?reqPage=1&boardType=Q">문의남기기</a></div>
             </div>
             <div>
-            <div class="detailContentWrap prodContentMenu">
+            <div class="detailContentWrap prodContentMenu" style="width: 1200px;">
               <div class="detailContent">상품필수정보</div>
               <div class="detailContentBox">
                 <div>
@@ -205,7 +205,7 @@ ul li.on a {
 			            </div>
 			            	</c:when>
 			            	<c:otherwise>
-			            		<div style="margin-top: 10px;"><h6>리뷰작성은 1회만 작성하실수 있습니다.</h3></div>
+			            		<div style="margin-top: 10px;"><h6>리뷰작성은 <span style="color: red;">1회만</span> 작성하실수 있습니다.</h3></div>
 			            	</c:otherwise>
 			            	
 			            </c:choose>

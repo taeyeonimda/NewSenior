@@ -151,7 +151,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productUpdate.do")
-	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList,int[] fileNoList, MultipartFile productMainFile, String productMainpath, int mainFileNo) {
+	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList,int[] fileNoList, MultipartFile productMainFile, String productMainpath, Integer mainFileNo) {
 		ProductFileVO mainFile = null;
 		ArrayList<ProductFileVO> flist = new ArrayList<ProductFileVO>();
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
@@ -163,7 +163,6 @@ public class ProductController {
 				mainFile.setFilePath(mainFilepath);
 				mainFile.setProductNo(p.getProductNo());
 				mainFile.setFileNo(mainFileNo);
-				
 				try {
 					FileOutputStream fos = new FileOutputStream(new File(savePath+mainFilepath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
