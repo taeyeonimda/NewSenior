@@ -72,10 +72,12 @@
 	
 	<select id="selectKaKaoLogin" parameterType="m" resultType="m">
 	select
+			member_no as memberNo,
 			kakaoLogin as kakaoLogin,
 			nickName as nickName,
 			member_email as memberEmail,
-			member_state as memberState
+			member_state as memberState,
+			member_img as memberImg
 	from members
 	where kakaoLogin=#{kakaoLogin} 
 	</select>

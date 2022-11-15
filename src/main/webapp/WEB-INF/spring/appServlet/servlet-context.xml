@@ -99,6 +99,7 @@
 			<mapping path="/actInsertCart.do"/>
 			<mapping path="/insertActHistory.do"/>
 			<mapping path="/insertActivityReview.do"/>
+			<mapping path="/deleteMyReview.do"/>
 			
 			
 			

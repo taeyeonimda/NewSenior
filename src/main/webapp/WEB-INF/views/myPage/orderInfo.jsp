@@ -104,7 +104,7 @@
 					            <td style="text-align:center">
 						            <input type="hidden" value="${sessionScope.m.memberNo }">
 						            <input class="proNo" type="hidden" value="${Cart.productNo }">
-						            <input class="cartNo" type="hidden" value="${Cart.cartNo }" name="cartNo">
+						            <input class="cartNo" type="text" value="${Cart.cartNo }" name="cartNo" style="border: none; text-align:center;" readonly>
 					            </td>
 					         	
 					            <c:choose>
@@ -187,17 +187,17 @@
 					<div class="order-info shipping" style="margin-left:15%;">
 	                    <div class="order-box">
 	                        <label for="deliveryName" class="order-label" style="width:70px;">수령인명</label>
-	                        <input type="text"  id="deliveryName" class="basicInput view-order-info" name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                        <input type="text"  id="deliveryName" class="basicInput " name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div>
 	                        <br>
 	                    <div class="order-box">
 	                        <label for="deliveryPhone" class="order-label" style="width:70px;">전화번호</label>
-	                        <input type="text"  id="deliveryPhone" class="basicInput medium view-order-info" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
+	                        <input type="text"  id="deliveryPhone" class="basicInput" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
 	                    </div>
 	                        <br>
 	                    <div class="order-box">
 	                        <label for="deliveryEmail" class="order-label" style="width:70px;">이메일</label>
-	                        <input type="text"  id="deliveryEmail" class="basicInput medium view-order-info" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                        <input type="text"  id="deliveryEmail" class="basicInput" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div>
 	                    <div class="order-box">
 	                        <label for="deliveryAddr" class="order-label" style="width:70px;">주소</label>

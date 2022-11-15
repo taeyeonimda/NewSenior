@@ -22,14 +22,16 @@ public class Order {
 	private int buyPrice;
 	private int buyAmount;
 	
-	private String receiveName;
-	private String receiveAddr;
-	private String receivePhone;
-	private String receiveEmail;
+//	private String receiveName;
+//	private String receiveAddr;
+//	private String receivePhone;
+//	private String receiveEmail;
 	
 	private String receiverName;
 	private String deliveryPhone;
+	private String deliveryEmail;
 	private String deliveryAddr;
+	private String deliveryAddr2;
 	private int allSumPrice; 
 	
 	private int cartNo;

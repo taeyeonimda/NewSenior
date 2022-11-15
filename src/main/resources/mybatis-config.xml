@@ -33,6 +33,7 @@
 		 <typeAlias type="kr.or.nsClass.model.vo.NsClass" alias="cla"/>
 		 <typeAlias type="kr.or.nsClass.model.vo.FileVo" alias="claF"/>
 		 <typeAlias type="kr.or.nsClass.model.vo.ClassCategory" alias="claCate"/>
+		 <typeAlias type="kr.or.nsClass.model.vo.ClassHistory" alias="clh"/>
 		 
 		  <typeAlias type="kr.or.activity.model.vo.Activity" alias="act"/>
 		  <typeAlias type="kr.or.activity.model.vo.FileVo" alias="actF"/>

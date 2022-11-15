@@ -81,40 +81,35 @@
               <div class="table-responsive text-nowrap">
                 <input type="hidden" class="memberNo" value="${sessionScope.m.memberNo }">
                 
+               	
                 <table class="table table-borderless">
-                  <thead>
                     <tr>
-                      <th>주문번호</th>
-                      <th>주문일자</th>
-                      <th>총 주문금액</th>
-                      <th>상세보기</th>
+                      	<th style="width:10%">주문번호</th>
+                      	<th style="width:15%">주문일자</th>
+                    	<th style="width:15%">수령인</th>
+                      	<th style="width:20%">전화번호</th>
+                      	<th style="width:30%">주소</th>
+                      	<th style="width:10%">총 주문금액</th>
                       <!-- 주문번호 1개당 1tr -->
                       <!-- 상세주문 끝나면 여기서는 주문번호, 일자, 총주문금액만 보여주고 -->
                       <!-- 상세주문에서 제품정보, 각각의 수량과 금액, 설명 보여주기 -->
                     </tr>
-                  </thead>
-                  <tbody>
-                    <c:forEach items="${list }" var="Or">
-                    <input type="hidden" value="${Or.orderDate }" name="orderDate">
-						<%-- <c:if test="${Or.orderDate > startDate && endDate > Or.orderDate }"> --%>
-				            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo });">
-				            		<td>${Or.orderNo }</td>
-									<td>${Or.orderDate }</td>
-									<td>${Or.orderPrice }원</td>
-									<td class="btn">상세보기</td>
-				                </tr>
-						<%-- </c:if> --%>
-             		</c:forEach>
-             		
-             		
-             		<c:if test="">
-		                <tr>
-		                	<td style="text-align:center;">주문 내역이 없습니다.</td>
-		                </tr>
-        			</c:if>
-        			
-                  </tbody>
-                </table>
+	                    <c:forEach items="${list }" var="Or">
+	                    	<input type="hidden" value="${d.orderDate }" name="orderDate">
+			            	<tr>
+		            			<td>${Or.orderNo }</td>
+								<td>${Or.orderDate }</td>
+			            		<td>${Or.receiverName }</td>
+			            		<td>${Or.deliveryPhone }</td>
+			            		<td>${Or.deliveryAddr }${Or.deliveryAddr2 }</td>
+								<td>${Or.orderPrice }원</td>
+<!--							<td onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo },${Or.orderPrice });">
+									<button type="submit"> 상세보기 </button>
+								</td>
+ -->
+			                </tr>
+	             		</c:forEach>             		
+               	</table>
                 
               </div>
             </div>

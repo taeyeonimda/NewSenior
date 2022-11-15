@@ -20,6 +20,7 @@ select
     class_no as classNo
 from carts
 where member_no=#{memberNo}
+order by 1
 </select>
 
 <delete id="deleteCart" parameterType="Ca">

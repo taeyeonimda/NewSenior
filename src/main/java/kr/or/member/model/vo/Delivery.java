@@ -17,4 +17,6 @@ public class Delivery {
 	private String receiverName; //수령인
 	private String defaultAddr;  //기본배송지(y)/아님(n)
 	private int memberNo; //주문번호(members참조)
+	private String orderDate; // 이거하나면 내가 편해져
+	private int orderPrice;
 }
