@@ -56,6 +56,11 @@ public class OrderService {
 	public int deleteOrder(Order o) {
 		return dao.deleteOrder(o);
 	}
+
+
+	public int inputDeliveryInfo(Order o) {
+		return dao.inputDeliveryInfo(o);
+	}
 	
 	
 }

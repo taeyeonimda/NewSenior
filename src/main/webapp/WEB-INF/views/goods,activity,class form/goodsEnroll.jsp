@@ -201,6 +201,8 @@
 			 } else {
 				if(confirm("상품을 등록하시겠습니까?")){
 					 
+				 } else {
+					 return false;
 				 }
 			 }
 		}

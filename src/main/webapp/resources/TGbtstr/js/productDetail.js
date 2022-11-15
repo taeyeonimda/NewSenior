@@ -7,7 +7,7 @@ $("#minus").on("click",function(){
     const Qty = $(this).next();
     const buyQty = Qty.text();
     if(buyQty == 1){
-     	alert("돌아가");
+     	
     	return;
     }
     const minusQty = Number(buyQty)-1;
@@ -24,7 +24,7 @@ $("#plus").on("click",function(){
     const Qty = $(this).prev();
     const buyQty = Qty.text();
     if(buyQty == 10){
-     	alert("그만 사");
+     	
     	return;
     }
     const plusQty = Number(buyQty)+1;

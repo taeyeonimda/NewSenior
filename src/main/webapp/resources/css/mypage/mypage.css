@@ -222,3 +222,7 @@ input[type=checkbox] {
 .sp1 {
 	font-size: 1.2em;
 }
+input[type=file]{
+	display: inline-block;
+	width: 200px;
+}

@@ -185,6 +185,57 @@
 		from activity
 		where activity_no = #{activityNo}
 	</delete>
+	
+	<insert id="insertActHistory" parameterType="actH">
+		insert into activity_history values(
+			#{memberNo},
+			#{activityNo}
+		)
+	</insert>
+	
+	<select id="checkActHistory" parameterType="actH" resultType="actH">
+		select
+		member_no as membmerNo,
+		activity_no as activityNo
+		from activity_history
+		where member_no = #{memberNo}
+		and activity_no = #{activityNo}
+	</select>
+	
+	<insert id="insertActivityReview" parameterType="actR">
+		insert into activity_review values(
+			ACTIVITY_REVIEW_NO_SEQ.nextval,
+			#{activityNo},
+			#{actRiviewWriter},
+			#{actReviewContent},
+			#{actReviewRate},
+			to_char(sysdate,'yyyy-mm-dd')
+		)
+	</insert>
+	
+	<select id ="actReviewList" parameterType="map" resultType="actR">
+		select * from
+			(select rownum as rnum,a.* from
+			(select  
+				activity_review_no as actReviewNo,
+                activity_no as activityNo,	   
+                activity_review_writer as actRiviewWriter,
+                activity_review_content as actReviewContent,
+                activity_review_rate as actReviewRate,
+                activity_review_date as actReviewDate,
+                m.member_name as memberName
+		from ACTIVITY_REVIEW a
+		left join members m 
+		on a.activity_review_writer = m.member_no
+		where activity_no = #{activityNo}
+		order by 1 desc)a)	
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectActReviewCnt" resultType="int" parameterType="int">
+		select count(*) from ACTIVITY_REVIEW
+		where activity_no = #{activityNo}
+	</select>
 </mapper>
 
 
