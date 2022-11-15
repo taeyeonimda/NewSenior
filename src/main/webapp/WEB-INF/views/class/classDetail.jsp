@@ -244,7 +244,7 @@
                 <input type="hidden" name="reviewRate" id="star">
                 <input type="hidden" name="classTeacher" value="${cla.classTeacher }">
                 <input type="hidden" name="classNo" value="${cla.classNo }">
-                <input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
+                <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
                 <textarea name="reviewContent" id="review-textarea"></textarea>
                 <div id="modal-btn-box">
                     <button type="button" id="review-cancel" class="btn bc5">취소</button>

@@ -273,8 +273,10 @@
 
 	<!-- 클래스 리뷰 작성 -->
 	<insert id="insertClassReview" parameterType="crv">
-		insert into class_review values (class_review_seq.nextval, #{classNo}, #{classTeacher}, #{reviewWriter}, #{reviewContent}, #{reviewRate}, to_char(sysdate, 'yyyy-mm-dd'))
+		insert into class_review values (class_review_seq.nextval, #{classNo}, #{classTeacher}, #{memberNo }, #{reviewContent}, #{reviewRate}, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
+	
+	
 	<!-- 클래스 리뷰 불러오기 -->
 	<select id="selectTeacherReview" parameterType="cla" resultType="crv">
 		select
@@ -288,7 +290,7 @@
 			(select class_name from classes c where c.class_no = r.class_no) as className,
 			class_review_content as reviewContent
 		from class_review r
-		join members on (member_id=class_review_writer)
+		join members on (member_no=class_review_writer)
 		where class_teacher = #{classTeacher}
 		order by class_review_no desc
 	</select>
