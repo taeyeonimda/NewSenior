@@ -11,6 +11,7 @@ public class OrderDetail {
 	private int orderNo;
 	private int orderDetailNo;
 	private int orderDetailAmount;
+	private int orderPrice;
 	private int productNo;
 	private String productName;
 	private int memberNo;

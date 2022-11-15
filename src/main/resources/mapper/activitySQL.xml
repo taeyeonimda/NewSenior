@@ -237,6 +237,12 @@
 		select count(*) from ACTIVITY_REVIEW
 		where activity_no = #{activityNo}
 	</select>
+	
+	<delete id="deleteMyReview" parameterType="int">
+		delete 
+		from activity_review
+		where activity_review_no = #{actReviewNo}
+	</delete>
 </mapper>
 
 

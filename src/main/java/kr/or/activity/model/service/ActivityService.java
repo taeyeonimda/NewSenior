@@ -303,4 +303,9 @@ public class ActivityService {
 				return arpd;
 
 			}
+
+	@Transactional
+	public int deleteMyReview(int actReviewNo) {
+		return dao.deleteMyReview(actReviewNo);
+	}
 }

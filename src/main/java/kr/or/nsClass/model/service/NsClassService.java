@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.member.model.vo.MemberPageData;
 import kr.or.nsClass.model.dao.NsClassDao;
+import kr.or.nsClass.model.vo.ClassHistory;
 import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
@@ -275,5 +276,8 @@ public class NsClassService {
 	}
 	public ArrayList<ClassReview> getTeacherReview(NsClass cla) {
 		return dao.getTeacherReview(cla);
+	}
+	public int insertPayClassHistory(ClassHistory clh) {
+		return dao.insertPayClassHistory(clh);
 	}
 }

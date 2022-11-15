@@ -4,7 +4,7 @@
 	<insert id="insertAddr" parameterType="d">
 		insert into delivery_tbl
 		values(
-		delivery_seq.nextval,
+		pays_seq.nextval,
 		#{deliveryName},
 		#{deliveryPhone},
 		#{zipcode},

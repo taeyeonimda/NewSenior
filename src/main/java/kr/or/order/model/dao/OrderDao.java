@@ -20,9 +20,9 @@ public class OrderDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Order> selectAllOrderHistory(Order o) {
-		List list = sqlSession.selectList("order.selectAllOrderHistory", o);
-		return (ArrayList<Order>) list;
+	public ArrayList<Delivery> selectAllOrderHistory(Delivery de) {
+		List list = sqlSession.selectList("order.selectAllOrderHistory", de);
+		return (ArrayList<Delivery>) list;
 	}
 	
 	
@@ -62,6 +62,12 @@ public class OrderDao {
 
 	public int inputDeliveryInfo(Order o) {
 		return sqlSession.update("order.inputDeliveryInfo", o);
+	}
+
+
+	public ArrayList<Order> selectDetailOrderHistory(Order o) {
+		List list = sqlSession.selectList("order.selectDetailOrderHistory",o);
+		return (ArrayList<Order>) list;
 	}
 
 

@@ -19,32 +19,51 @@ select
 </select>
 
 
+<!-- (select receiver_name from(select receiver_name from delivery_tbl where member_no=#{memberNo} order by rownum desc) where rownum =1) -->
 <select id="selectAllOrderHistory" parameterType="_int" resultType="Or">
 select
 	    order_no as orderNo,
 	    order_date as orderDate,
-	    (select receiver_name from(select receiver_name from delivery_tbl where member_no=#{memberNo} order by rownum desc) where rownum =1) as receiverName,
+	    receive_name as receiverName,
+	    receive_addr as deliveryAddr,
+	    receive_addr2 as deliveryAddr2,
+	    receive_phone as deliveryPhone,
 	    order_amount as orderAmount,
 	    order_price as orderPrice,
 	    member_no as memberNo
-    from pays
-	where member_no=#{memberNo}
-    order by 1
+from pays
+where member_no=#{memberNo}
+order by 1
 </select>
-
+<!-- 
+<select id="selectDetailOrderHistory" parameterType="Or" resultType="Or">
+select
+	    order_no as orderNo,
+	    order_date as orderDate,
+	    receive_name as receiverName,
+	    receive_addr as deliveryAddr,
+	    receive_addr2 as deliveryAddr2,
+	    receive_phone as deliveryPhone,
+	    order_amount as orderAmount,
+	    order_price as orderPrice,
+	    member_no as memberNo
+from pays
+where member_no=#{memberNo} and order_no=#{orderNo}
+order by 1
+</select>
+ -->
 
 <select id="selectOrderDetail" resultType="Or" parameterType="Or">
-	select
-		pay_details.order_no as orderNo,
-		order_date as orderDate,
-		order_detail_amount as orderDetailAmount,
-		(select product_name from products where products.product_no=pay_details.product_no) as productName,
-		receive_phone as receivePhone,
-		receive_addr as receiveAddr,
-		receive_name as receiveName,
-		member_no as memberNo
-	from pays, pay_details
-	where pay_details.order_no=#{orderNo} and member_no=#{memberNo}
+select
+    order_no     as orderNo,
+    order_date   as orderDate,
+    order_amount as orderAmount,
+    order_price  as orderPrice,
+    receive_name as receiverName,
+    receive_addr as receiverAddr,
+    receive_phone as receiverPhone
+from pays
+where pays.order_no = #{orderNo} and member_no=#{memberNo}
 </select>
 
 
@@ -55,9 +74,10 @@ select
 	to_char(sysdate,'yyyy-mm-dd'),
 	#{buyAmount},
 	#{allSumPrice},
-	#{receiveName},
-	#{receiveAddr},
-	#{receivePhone}
+	#{receiverName},
+	#{deliveryAddr},
+	#{deliveryAddr2},
+	#{deliveryPhone}
 	)
 </insert>
 
@@ -91,7 +111,7 @@ cart_no in
   -->
 <insert id="goDelivery" parameterType="d">
 insert into delivery_tbl values(
-	delivery_seq.nextval,
+	pays_seq.currval,
 	'임의배송지',
 	#{deliveryPhone},
 	#{zipcode},
@@ -112,7 +132,6 @@ select
    	(select filepath from activity where activity.activity_no = carts.activity_no)as activityPhoto,
    	(select activity_name from activity where activity.activity_no = carts.activity_no)as activityName,
     (select activity_price from activity where activity.activity_no = carts.activity_no)as activityPrice,
-   	
     (select product_name from products where products.product_no=carts.product_no) as buyName,
     (select PRODUCT_PRICE from products where products.product_no=carts.product_no)as buyPrice,
     (select PRODUCT_FILEPATH from product_file where product_file.product_no = carts.product_no and rownum=1)as productPhoto,

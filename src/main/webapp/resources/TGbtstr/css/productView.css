@@ -46,7 +46,7 @@
     border-radius: 5px;
     color: black;
     margin-left: 10px;
-    border: none;
+    border: 1px solid rgba(1,1,1,0.3);
     background-color: white;
 }
 .reviewsBtnBox>button:hover{
@@ -91,10 +91,13 @@
 }
 
 #productContentArea{
-	    resize: none;
+	resize: none;
     border: 1px solid rgba(1,1,1,0.1);
-    width: 800px;
+    width: 1200px;
     line-height: 20px;
     height: 300px;
     outline: none;
+}
+.productReviewDiv{
+	width: 1200px;
 }
