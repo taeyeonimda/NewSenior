@@ -17,6 +17,7 @@ public class Cart {
 	private String productType;// P = 키트상품 / A = 액티비티 / C = 클래스
 	private String buyName; // product 테이블과 join해서 가져오자
 	private int memberNo;
+	
 	private String receiveName;
 	private String receiveAddr;
 	private String productPhoto;
@@ -24,4 +25,8 @@ public class Cart {
 	private String activityName;
 	private String activityPhoto; //액티비티 사진
 	private int activityPrice; //액티비티 가격
+	
+	private String className;
+	private String classPhoto; //액티비티 사진
+	private int classPrice; //액티비티 가격
 }

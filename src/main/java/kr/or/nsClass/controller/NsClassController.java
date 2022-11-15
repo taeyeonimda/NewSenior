@@ -27,6 +27,7 @@ import kr.or.category.model.service.CategoryService;
 import kr.or.category.model.vo.Category;
 import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.service.NsClassService;
+import kr.or.nsClass.model.vo.ClassHistory;
 import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.FileVo;
 import kr.or.nsClass.model.vo.NsClass;
@@ -163,5 +164,18 @@ public class NsClassController {
 	public String getTeacherReview(NsClass cla) {
 		ArrayList<ClassReview> crList = service.getTeacherReview(cla);
 		return new Gson().toJson(crList);
+	}
+	
+	@RequestMapping(value = "/payClass.do")
+	public String payClass(ClassHistory clh, Model model) {
+		NsClass c = new NsClass();
+		c.setClassNo(clh.getClassNo());
+		NsClass cla = service.selectOneClass(c);
+		int price = Integer.parseInt(cla.getClassPrice())*clh.getAmount();
+		clh.setPayPrice(price);
+		System.out.println(clh);
+		model.addAttribute("clh", clh);
+		model.addAttribute("cla", cla);
+		return "myPage/orderInfoClass";
 	}
 }
