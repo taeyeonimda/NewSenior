@@ -223,7 +223,8 @@
                 activity_review_content as actReviewContent,
                 activity_review_rate as actReviewRate,
                 activity_review_date as actReviewDate,
-                m.member_name as memberName
+                m.member_name as memberName,
+                m.member_img as memberImg
 		from ACTIVITY_REVIEW a
 		left join members m 
 		on a.activity_review_writer = m.member_no
@@ -236,6 +237,12 @@
 		select count(*) from ACTIVITY_REVIEW
 		where activity_no = #{activityNo}
 	</select>
+	
+	<delete id="deleteMyReview" parameterType="int">
+		delete 
+		from activity_review
+		where activity_review_no = #{actReviewNo}
+	</delete>
 </mapper>
 
 

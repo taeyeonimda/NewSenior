@@ -8,69 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ <link href="/resources/css/board/boardView.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
-	.inputCommentBox{
-		color : blue;
-	}
-	.commentView{
-		color : blue;
-	}
-	.inputRecommentBox{
-		display:none;
-		color : red;
-	}
-	.reCommentView{
-		color : red;
-	}
 	
-	.page-content table{
-		width:70%;
-		margin:0 auto;
-		text-align:center;
-		border-collapse: collapse;
-	}
-
-	table tr>.th1 {
-		border-right : 1px solid ;
-	}
-	table tr{
-		border : 1px solid ;
-	}
-	table td{
-		border-right : 1px solid ;
-	}
 	
-	/*제목,첨부파일,내용*/
-	table .td2{
-		text-align : left;
-		padding-left : 15px;
-	}
-	
-	#boardContent{
-		text-align: start;
-		height :400px;
-		padding-top : 15px;
-	}
-
-	.updateDelBox{
-		display:flex;
-		flex-direction: row;
-		justify-content:center;
-	}
-	#updateBtn,#delBtn{
-		width : 200px;
-		height : 50px;
-		margin-top : 30px;
-		background-color: green;
-		border-radius : 15px;
-		border-color : transparent;
-	}
-	button>a{
-		color : white;
-	}
-	#updateBtn {
-		margin-right : 30px;
-	}
 	
 </style>
 
@@ -235,8 +177,8 @@
 		</tr>
 		<tr>
 			<th class="th1">내용</th>
-			<td colspan="7" class="td2">
-				<div id="boardContent" style="overflow:scroll;">${b.boardContent }</div>
+			<td colspan="7" class="td2 boardContent">
+				<div id="boardContent">${b.boardContent }</div>
 			</td>
 		</tr>
 		</table>
@@ -255,7 +197,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<span>댓글</span>
+						<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -266,7 +208,7 @@
 														<!-- 참조하는 대댓글이 없음 -->
 						<textarea name="boardCommContent"></textarea>
 					</li>
-					<li class="commentWriteBtn1">
+					<li class="commentWriteBtn1Box">
 						<button type="submit" name="commentWriteBtn1" class="commentWriteBtn1">등록</button>
 					</li>
 				</ul>
@@ -281,20 +223,21 @@
 		 <c:forEach items="${commentList }" var="bc">
 		 	<ul class="commentView">
 		 		<li>
-						<span>댓글</span>
+						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 				</li>
 				<li>
 					<p>
-						<span>${bc.nickName }</span>
+						<span style="color:green;">${bc.nickName }</span>
 						<span>${bc.boardCommDate }</span>
 					</p>
 					<p>${bc.boardCommContent }</p>
 					<textarea name="boardCommContent" style="display:none;">${bc.boardCommContent}</textarea>
 					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
+
 					<p>
 						<c:if test="${not empty sessionScope.m }">
 							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
-								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
+								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a></button>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
 						
@@ -312,11 +255,15 @@
 		 			<c:if test="${bcc.boardCommRef eq bc.boardCommNo }">
 		 				<ul class="reCommentView">
 		 					<li>
-		 						<span>대댓글</span>
+		 						<span class="material-symbols-outlined">
+									subdirectory_arrow_right
+								</span>
+								<div class="memberImg"><img src="/resources/upload/member/${bcc.memberImg}"></div>
+		 						
 		 					</li>
 		 					<li>
 								<p>
-									<span>${bcc.nickName }</span>
+									<span style="color:green;">${bcc.nickName }</span>
 									<span>${bcc.boardCommDate }</span>
 								</p>
 								<p>${bcc.boardCommContent }</p>
@@ -344,15 +291,17 @@
 					<form action="/insertComment.do" method="post">
 						<ul>
 							<li>
-								<span>대댓글</span>
-							</li>
+								<span class="material-symbols-outlined">
+									subdirectory_arrow_right
+								</span>							
+								<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
 							<li>
 								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 								<input type="hidden" name="boardRef" value="${b.boardNo}">
 															<!-- ㄴ몇 번 글의 댓글인지 -->
 								<input type="hidden" name="boardCommRef" value="${bc.boardCommNo }">
 									<!-- ㄴ어떤 댓글의 대댓글인지 -->					<%--ㄴ해당 댓글 번호 --%>
-								<textarea name="boardCommContent" class="boardCommContent"></textarea>
+								<textarea name="boardCommContent" class="ReCommContent"></textarea>
 							</li>
 							<li>
 								<button type="submit" name="commentWriteBtn2" class="commentWriteBtn2">등록</button>
@@ -403,7 +352,7 @@
 						<span>댓글</span>
 				</li>
 				<li>
-					<p>
+					<p class="comment-info">
 						<span>${bc.nickName }</span>
 						<span>${bc.boardCommDate }</span>
 					</p>
@@ -421,8 +370,10 @@
 				</li>
 		 	</ul>
 		 </c:forEach>
+		 </div>
 	</c:if>
-</div>
+</div>	
+
 		<script>
 		
 			//답글달기를 누르면 답글달기 - > 취소 / 취소 -> 답글달기
@@ -538,13 +489,13 @@
 			});
 			
 			$(".commentWriteBtn2").on("click",function(){
-				const boardCommContent =$(".boardCommContent");
-				if(boardCommContent.val()==""){
+				const ReCommContent =$(".ReCommContent");
+				if(ReCommContent.val()==""){
 					alert('내용을 입력해주세요');
 					return false;
 				}
 			});
-		});
+		
 
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){

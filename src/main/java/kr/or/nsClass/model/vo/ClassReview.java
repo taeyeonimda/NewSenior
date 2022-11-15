@@ -11,7 +11,8 @@ public class ClassReview {
 	private int classReviewNo;		// 리뷰식별번호
 	private int classNo;			// 리뷰 클래스 번호 고유식별번호
 	private int classTeacher;		// 클래스 담당 강사 고유식별번호
-	private String reviewWriter;	// 리뷰 작성자 아이디
+	private String reviewWriter;	// 리뷰 작성자 닉네임 가져오기 용
+	private int memberNo;	// 리뷰 작성자 넘버
 	private String reviewContent;	// 리뷰 내용
 	private int reviewRate;			// 리뷰 별점
 	private String reviewDate;		// 리뷰 작성일

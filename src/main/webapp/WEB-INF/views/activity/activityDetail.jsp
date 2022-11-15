@@ -5,48 +5,13 @@
 <head>
     <meta charset="utf-8">
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
+    <link href="/resources/css/activity/activityDetail.css" rel="stylesheet">
     <title>액티비티 상세페이지</title>
 </head>
-<style>
-#myform fieldset{
-    display: inline-block;
-    direction: rtl;
-    border:0;
-}
-#myform fieldset legend{
-    text-align: right;
-}
-#myform input[type=radio]{
-    display: none;
-}
-#myform label{
-    font-size: 3em;
-    color: transparent;
-    text-shadow: 0 0 0 #f0f0f0;
-}
-#myform label:hover{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#myform label:hover ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#myform input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#reviewContents {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: solid 1.5px #D3D3D3;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: none;
-}
-</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
+	<script src="/resources/js/activity/activity.js"></script>
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(../MAINbtstr/img/은비(5).jpg) center center no-repeat; background-size: cover;">
             <div class="container text-center py-5">
@@ -219,20 +184,20 @@
 						<div>
 							<textarea class="col-auto form-control" type="text"
 								id="actReviewContent" name="actReviewContent"
-								placeholder="좋은 수강평을 남겨주시면 Cocolo에 큰 힘이 됩니다! 포인트 5000p도 지급!!"></textarea>
+								placeholder="액티비티를 구매하신분만 리뷰등록이 가능합니다."></textarea>
 						</div>
 						<button id="reviewSubmit" type="button" class="btn btn-primary">등록</button>
-						<button type="button" class="btn btn-primary">수정</button>
-						<button type="button" class="btn btn-primary">삭제</button>
-						<button type="button" class="btn btn-primary">대댓글</button>
 					</form>
 
 	
 				</div>
 				<hr>
-				<!-- ajax로 붙여넣을공간 -->	
+				
+					<!-- ajax로 붙여넣을공간 -->	
 				<div id="ajaxReviewList">
 					
+        		</div>
+    
 				</div>
 				
 				<script>
@@ -308,41 +273,7 @@
 	</script>
 			</div>
 		</div>
-		<!-- 후기 내가쓴거  -->
-		
-		
-		<!-- 후기 -->
-        <!-- 
-        <div class="container-xxl py-5 mt-5" id="#menu5">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="flex-space-between">
-                        <div id="total-star">총 별점 : <span>★★★★★</span></div>
-                        <div>
-                            <button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="profil-title">
-                        <div class="profil-img-div">
-                            <img src="img/person_1.jpg" class="profil-img">
-                        </div>
-                        <div class="profil-info-div">
-                            <div>★★★★★</div>
-                            <div>닉네임</div>
-                            <div>작성일</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div>컨텡층ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-                        <div>수정 / 삭제</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         -->
+	
         
     </div><!--page-content End-->
 
@@ -354,32 +285,35 @@
 
 
     <!-- side-bar script-->
-	<script>
+
+	<!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <script>
+    let reqPage;
+
+	document.addEventListener("DOMContentLoaded", function(){
+	      showSide();
+	        
+	    	const amount = $("[name=amount]").val()
+	    	const amountPrice ='${act.activityPrice }';
+	    	const amountPrice2 ='${act.activityPrice }';
+	    	
+	    	const splits = amountPrice2.split(',');
+	    	let realPrice ="";
+	    	 
+	    	
+	    	for(let i=0;i<splits.length;i++){
+	    		realPrice += splits[i];
+	    	}
+	    	
+	    	
+			$("#realAmount").text(amount*realPrice);
+			reqPage=1;
+			showList(reqPage);
+});
 	
-	$(function(){
-        showSide();
-        let reqPage=1;
-    	const amount = $("[name=amount]").val()
-    	const amountPrice ='${act.activityPrice }';
-    	const amountPrice2 ='${act.activityPrice }';
-    	console.log("amountPrice2값:::::"+amountPrice2)
-    	const splits = amountPrice2.split(',');
-    	let realPrice ="";
-    	
-    	console.log(splits);
-    	for(let i=0;i<splits.length;i++){
-    		realPrice += splits[i];
-    	}
-    	
-    	console.log(reqPage);
-		$("#realAmount").text(amount*realPrice);
-		
-		showList(reqPage);
-		
-		
-		
-		
-    });
+	$("[name=actReviewRate2]").attr("readonly",true);
 	
 	function goPage(number){
 		//$("#ajaxReviewList").remove();
@@ -387,6 +321,7 @@
 	}
 	
 	function showList(number){
+	
 		$("#ajaxReviewList").children().remove();	
 		$.ajax({
 			method : "POST",
@@ -396,16 +331,76 @@
 				reqPage : number 
 			},
 			success : function(data){
-				console.log("리뷰 현재페이지"+data.reqPage);
-				console.log("리뷰 리스트 길이"+data.list.length);
+	
 				for(let i =0; i<data.list.length;i++){
-					console.log("리뷰내용"+data.list[i].actReviewContent);
-					let rvContentDiv = "<div>"+data.list[i].actReviewContent+"</div>";
-					$("#ajaxReviewList").append(rvContentDiv);
+					const div = $("<div>");//'<div class="review-list__content">'
+					div.addClass("review-list__content");
+					let longDiv = 
+						'<div class="review-list__el-cover" >'
+						+'<div class="review-list__el review-el">'
+						+	'<div class="review-el__header">'
+						+'<div class="review-el__header--left">'
+						+'<div class="review-el__thumbnail">'
+						+'<img	src="/resources/upload/member/'+data.list[i].memberImg+'" '
+						+'alt="'+data.list[i].memberName+' thumbnail"></div>'
+						+'<div class="review-el__user-info">'
+						+  '<div class="review-el__star-cover">'
+						+   '<span class="review-el__star">'
+						+		'<input type="checkbox" name="actReviewRate2" value="5" id="'+data.list[i].actRiviewWriter+i+'1" disabled>'
+						+			'<label for="'+data.list[i].actRiviewWriter+i+'1">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="4" id="'+data.list[i].actRiviewWriter+i+'2" disabled>'
+						+			'<label for="'+data.list[i].actRiviewWriter+i+'2">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="3" id="'+data.list[i].actRiviewWriter+i+'3" disabled>'
+						+			'<label for="'+data.list[i].actRiviewWriter+i+'3">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="2" id="'+data.list[i].actRiviewWriter+i+'4" disabled>'
+						+			'<label	for="'+data.list[i].actRiviewWriter+i+'4">★</label>'
+						+		'<input type="checkbox" name="actReviewRate2" value="1" id="'+data.list[i].actRiviewWriter+i+'5" disabled>'
+						+			'<label	for="'+data.list[i].actRiviewWriter+i+'5">★</label></span>'
+						+	'<span class="review-el__star-num">'+data.list[i].actReviewRate+'</span></div>'//리뷰별점끝
+						+				'<div class="review-el__name">'+data.list[i].memberName+'</div>'
+						+			'</div> </div> </div>'//star-cover user info left
+						+	'<div class="review-el__body">'+data.list[i].actReviewContent+'</div>'
+						+	'<div class="review-el__tools">'
+						+		'<div class="review-el__tools--left">'
+						+			'<span class="review-el__tool">'+data.list[i].actReviewDate+'</span>' 
+						+			 '<span class="review-el__tool review-el__tool--reply' 
+						+			 ' review-el__tool--clickable e-add-reply " onclick="deleteMyReview('+data.list[i].actReviewNo+');">   ∙ 삭제</span>'
+						+			 '<input type="hidden" value="'+data.list[i].actRiviewWriter+'" class="review_el_writerId">'
+						+		'</div>	</div>	</div>	</div>';
+						
+					div.append(longDiv);
+					//ajax불러온걸 append
+					$("#ajaxReviewList").append(div);
+					
+					//별점불러와서 값바꿔주는거
+					let realRate = data.list[i].actReviewRate;
+					let actReviewRate2 = div.find("[name=actReviewRate2]");
+					
+					for(let j=0;j<realRate;j++){
+						actReviewRate2.eq(j).attr("checked",true);
+					}
+					
+					let reviewWriterNo = '${sessionScope.m.memberNo}';//멤버넘버
+					let delSpan = div.find(".review-el__tool--clickable");//삭제써져있는 span
+					let reviewHiddenNo = div.find(".review_el_writerId");//멤버넘버 히든
+					
+					
+					
+					
+					delSpan.hide();
+					
+					for(let k=0;k<reviewWriterNo;k++){
+						
+						if(reviewWriterNo==reviewHiddenNo.eq(k).val()){
+							
+							delSpan.eq(k).show();
+						}
+						
+					}
+					
+					
 				}
-				console.log("리뷰 리스트"+data.list.reviewNo);
-				console.log("리뷰 넘퍼페이지"+data.numPerPage);
-				console.log("리뷰 페이지네비"+data.pageNavi);
+			
 				
 				$("#ajaxReviewList").append(data.pageNavi);
 			},
@@ -413,7 +408,7 @@
 				console.log("액티비티 리스트 에러"+data);
 			}
 		})//리뷰목록 리스트 ajax
-		
+		reqPage=number;
 	}
 	
 	
@@ -549,7 +544,7 @@
 		    	let memberNo ='';
 		    	let activityNo ='';
         		memberNo = '${sessionScope.m.memberNo}';
-        		activityNo = ${act.activityNo}; 
+        		activityNo = '${act.activityNo}'; 
         	
 		    	
 		   	
@@ -584,19 +579,43 @@
 		    	
         })//버튼
         
-	</script>
-	<!-- JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/parallax/parallax.min.js"></script>
-    <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <!-- Template Javascript -->
-
-    <script src="js/main.js"></script>
+        function deleteMyReview(num){
+		    	console.log(reqPage);
+		    	Swal.fire({
+					  text: "삭제하시겠습니까?",//내용
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: '삭제',
+					  cancelButtonText: '취소'
+					}).then((result) => {
+						//result.value == true이니까 트루일때만 실행하는거
+					  if (result.value) {
+						  
+						  $.ajax({
+				        		url:"/deleteMyReview.do",
+				        		data:{
+				        			actReviewNo : num
+				        		},
+				        		success:function(data){
+				        			if(data==1){
+				        				showList(reqPage);
+				        			}else{
+				        				alert("잘못된 접근입니다.");
+				        			}
+				        		},
+				        		fail:function(data){
+				        			console.log("fail:function"+data);
+				        		},
+				        		error:function(data){
+				        			console.log("error:function"+data);
+				        		}
+				        	})//ajax
+					  }
+						
+					})//then끝
+		    }
+    
+    </script>
 </body>
 </html>

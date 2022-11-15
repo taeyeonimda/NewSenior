@@ -222,7 +222,7 @@
                 </div>
                 
                 <c:choose>
-                	<c:when test="${not empty sessionScope.m}">
+                	<c:when test="${not empty sessionScope.m.favorite}">
                 		<a href="/popularClubList.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">동호회</a>
                 	</c:when>
                 	<c:otherwise>

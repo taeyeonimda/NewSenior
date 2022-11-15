@@ -124,4 +124,10 @@ public class ActivityDao {
 		int totalCount = sqlSession.selectOne("activity.selectActReviewCnt",activityNo);
 		return totalCount;
 	}
+
+
+	public int deleteMyReview(int actReviewNo) {
+		int result = sqlSession.delete("activity.deleteMyReview",actReviewNo);
+		return result;
+	}
 }

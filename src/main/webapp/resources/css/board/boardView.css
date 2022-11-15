@@ -1,0 +1,291 @@
+@charset "UTF-8";
+	
+	.page-content .boardTbl{
+		width:70%;
+		margin:0 auto;
+		text-align:center;
+		border-collapse: collapse;
+	}
+
+	.boardTbl tr>.th1 {
+		border-right : 1px solid ;
+		padding:5px;
+	}
+	.boardTbl tr{
+		border : 1px solid ;
+		
+	}
+	.boardTbl td{
+		border-right : 1px solid ;
+		padding:5px;
+	}
+	
+	/*제목,첨부파일,내용*/
+	.boardTbl .td2{
+		text-align : left;
+		padding-left : 15px;
+	}
+	
+	#boardContent{
+		min-height :300px;
+		padding-top : 15px;
+	}
+
+	.updateDelBox{
+		display:flex;
+		flex-direction: row;
+		justify-content:center;
+	}
+	#updateBtn,#delBtn{
+		width : 100px;
+		height : 50px;
+		margin-top : 30px;
+		background-color:#0F4229;
+		border-radius : 15px;
+		border : none;
+
+	}
+	button>a{
+		color : white;
+	}
+	button>a:hover{
+		text-decoration: none;
+		color: black;
+	}
+	#updateBtn {
+		margin-right : 30px;
+	}
+	
+	/**********댓글 입력 form***********/
+	.inputCommentBox{
+		margin:50px;
+		width:70%;
+		margin:0 auto;
+	}
+	.inputCommentBox>form>ul{
+		list-style-type: none;
+		display:flex;
+		margin-top:30px;
+		padding:0px;
+	}
+	
+	.inputCommentBox>form>ul>li:first-child{
+		width:15%;
+		display:flex;
+		justify-content:center;
+		align-items : right;
+		
+	}
+	.inputCommentBox>form>ul>li:first-child>div{
+		margin-right:10px;
+	}
+	.inputCommentBox>form>ul>li:first-child>div>img{
+		width:100px;
+		height:100px;
+	}
+
+	.inputCommentBox>form>ul>li:nth-child(2){
+		width:72%;
+	}
+	.inputCommentBox>form>ul>li:nth-child(2)>textarea{
+		width :100%;
+		min-height:100px;
+		max-height:100px;
+		outline:none;
+	}
+		/*등록버튼 가운데 정렬*/
+	.inputCommentBox>form>ul>li:nth-child(3){
+		width:15%;
+		display:flex;
+		justify-content:center;
+		align-items : center; /*수직 가운데 정렬*/
+	}
+	
+	.commentWriteBtn1,.commentWriteBtn2{
+		width:70px;
+		height : 50px;
+		background-color:#0F4229;
+		color:white;
+		border-radius : 15px;
+		border : none;
+		line-height: 50px;
+		
+	}
+	
+	/******************************대댓글 입력 form*/
+	
+	.inputRecommentBox{
+		margin:50px;
+		
+		margin:0 auto;
+		display:none;
+		padding:0;
+	}
+	
+	.inputRecommentBox>form>ul{
+		list-style-type: none;
+		display:flex;
+		padding:0px;
+	}
+	
+	/*프로필 이미지*/
+	.inputRecommentBox>form>ul>li:first-child{
+		width:50%;
+		display:flex;
+		justify-content:right;
+		/*align-items : center; /*수직 가운데 정렬*/	
+	}
+	
+	.inputRecommentBox>form>ul>li:first-child>span{
+		font-size:50px;
+	}
+	.inputRecommentBox>form>ul>li:first-child>div{
+		margin-right:10px;
+	}
+	.inputRecommentBox>form>ul>li:first-child>div>img{
+		width:100px;
+		height:100px;
+	}
+	
+	.inputRecommentBox>form>ul>li:nth-child(2){
+		width:100%;
+	}
+	.inputRecommentBox>form>ul>li:nth-child(2)>textarea{
+		width :95%;
+		min-height:100px;
+		max-height:100px;
+		outline:none;
+	}
+		/*등록버튼 가운데 정렬*/
+	.inputRecommentBox>form>ul>li:last-child{
+		width:10%;
+		display:flex;
+		justify-content:right;
+		align-items : center; /*수직 가운데 정렬*/
+	}
+	
+
+	
+	
+	/***************************************댓글 view*/
+	.commentBox{
+		width:70%;
+		margin:0 auto;
+		
+	}
+	.commentBox>.commentView{
+		margin-top:50px;
+		list-style-type:none;
+		display:flex;	
+		padding:0;
+	}
+	
+	/*프로필 사진 가운데 정렬*/
+	.commentView>li:first-child{
+		width:15%;
+		display:flex;
+		justify-content:right;
+		align-items : center;
+		
+	}
+	.commentView>li:first-child>div{
+		margin-right:10px;
+	}
+	.commentView>li:first-child>div>img{
+		width:100px;
+		height:100px;
+	}
+	.commentView>li:nth-child(2){
+		width: 86%;	
+		border:1px solid;	
+	}
+	.commentView>li:nth-child(2)>p:first-child{
+		display:flex;
+		justify-content: left;
+		align-items : row;
+	}
+	.commentView>li:nth-child(2)>p:first-child{
+		display:flex;
+		justify-content: left;
+		align-items : row;
+	}
+	.commentView>li:nth-child(2)>p:first-child>span{
+		padding-left:20px;
+		padding-top : 5px;
+	}
+	
+	.commentView>li:nth-child(2)>p:nth-child(2){
+		padding-left:20px;
+	}
+	.commentView>li:nth-child(2)>p:last-child{
+		display:flex;
+		justify-content: right;
+		align-items : row;
+		
+	}
+	.commentView>li:nth-child(2)>p:last-child>a{
+		margin-right:10px;
+	}
+	
+	/***********************************대댓글 view*/
+	
+	.commentBox>.reCommentView{
+		list-style-type:none;
+		display:flex;	
+		justify-content:right; /*오른쪽*/
+		padding:0;
+	}
+	
+	.reCommentView>li:first-child{
+		width:30%;
+		display:flex;
+		justify-content:right;
+		align-items : center;
+	}
+	.reCommentView>li:first-child>div{
+		margin-right:10px;
+	}
+	.reCommentView>li:first-child>div>img{
+		width:100px;
+		height:100px;
+	}
+	.reCommentView>li:first-child>span{
+		font-size:50px;
+	}
+	
+	
+	.reCommentView>li:nth-child(2){
+		width:70%;	/*70%*/
+		border:1px solid;	
+	}
+	.reCommentView>li:nth-child(2)>p:first-child{
+		display:flex;
+		justify-content: left;
+		align-items : row;
+	}
+	.reCommentView>li:nth-child(2)>p:first-child>span{
+		padding-left:20px;
+		padding-top : 5px;
+	}
+	
+	.reCommentView>li:nth-child(2)>p:nth-child(2){
+		padding-left:20px;
+	}
+	
+
+	.reCommentView>li:nth-child(2)>p:first-child>span{
+		margin-left:10px;
+	}
+	.reCommentView>li:nth-child(2)>p:last-child{
+		display:flex;
+		justify-content: right;
+		align-items : row;
+		
+	}
+	.reCommentView>li:nth-child(2)>p:last-child>a{
+		margin-right:10px;
+	}
+	
+
+	
+	
