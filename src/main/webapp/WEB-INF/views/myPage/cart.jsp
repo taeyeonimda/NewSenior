@@ -86,6 +86,11 @@
                     </thead>
                     
 	                    <tbody>
+                    		<c:choose>
+                    		<c:when test="${empty list}">
+	                    		<td colspan="7" style="text-align : center; font-size:30px; font-weight:900; padding-top:20px; color:rgba(255,10,10,0.7);">장바구니 없졍</td>
+                    		</c:when>
+                    		<c:otherwise>
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
 					            <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn">
@@ -123,7 +128,6 @@
 						           		<td class="buyPrice" style="text-align:center">${Cart.activityPrice }</td>
 						           	</c:when>		
 					            </c:choose>
-					            
 								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" /></td>
 								
 
@@ -141,9 +145,11 @@
 									<td><input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }"></td>
 								
 								
-			            	</tr>	
-			              
+			            	</tr>
 	             		</c:forEach>
+	             		</c:otherwise>
+	             		</c:choose>
+	             		<c:if test="${!empty list }">
 	                    	<tr>
 		                      	<td colspan="4"></td>
 		                      	<td>결제할 총 금액</td>
@@ -153,18 +159,23 @@
 		                      		
 		                     	</td>
 	                      	</tr>
-	                      	
+                      	</c:if>
 	                    </tbody>
 	                  </table>
-              	<button type="submit" style="float: right; width:250px; margin: 10px; margin-top:20px;" class="btn btn-outline-primary" id="testPay" >주문하기</button>
+              	<c:if test="${!empty list }">
+              		<button type="submit" style="float: right; width:250px; margin: 10px; margin-top:20px;" class="btn btn-outline-primary" id="testPay" >주문하기</button>
+              	</c:if>
 					</form>
-                  <div style="margin: 10px; border-top: 1px solid #ddd;">
                     <!-- <button style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button> -->
-                    <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
+                  <div style="margin: 10px; border-top: 1px solid #ddd;">
+                   <c:if test="${!empty list }">
+                    	<a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
+                   	</c:if>
                   </div>
                 </div>
               </div>
-</div></div>
+              </div>
+</div>
   
             <!-- / Content -->
 
@@ -222,7 +233,7 @@
 			}
 
 			
-			$(".lastPrice").text(sumPrice);
+			$(".lastPrice").text(realPrice);
 		}
     	
 		$("#payBtn").on("click",function(){
@@ -290,23 +301,25 @@
 			        alert("선택된 상품이 없습니다.")
 					return;
 			    }
-				//const memberNo = $(".deleteBtn").next().next().val();
-				const memberNo = ${sessionScope.m.memberNo};
-				
-				const cartNoArr = new Array();
-				
-				check.each(function(index,item){
-					let cartNo = $(item).next().val();	
-					cartNoArr.push(cartNo);
-				});
-				
-				console.log(cartNoArr);
-				location.href="/deleteCart.do?memberNo="+memberNo+"&cartNoArr="+cartNoArr.join("/");
+		    	if(confirm("삭제하시겠습니까?")){
+		    		//const memberNo = $(".deleteBtn").next().next().val();
+					const memberNo = ${sessionScope.m.memberNo};
+					
+					const cartNoArr = new Array();
+					
+					check.each(function(index,item){
+						let cartNo = $(item).next().val();	
+						cartNoArr.push(cartNo);
+					});
+					
+					console.log(cartNoArr);
+					location.href="/deleteCart.do?memberNo="+memberNo+"&cartNoArr="+cartNoArr.join("/");
+					
+		    	}else{
+		    		return false;
+		    	}
+		    	
 			});
-		
-			
-		
-		
 		
 	</script>
   </body>

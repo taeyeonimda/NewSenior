@@ -216,7 +216,7 @@
     					<img src="/resources/upload/class/New_Year.png" class="review-img">
     				</div>
     			</div>
-    			<p class="fs-5 fw-bold text-primary mt-2">[ ${cla.className } ]를 수강하셨습니다</p>
+    			<p class="fs-5 fw-bold text-primary mt-2">[ ${cla.className } ]를 수강하셨습니다.</p>
     		</div>
     	</div>
         <div class="review-content">
@@ -312,7 +312,7 @@
                 $(".sidenav").fadeOut(0);
             }
 
-            if(position > 4000 || 905 > position){
+            if(position > 7000 || 905 > position){
                 $("#scroll-select").removeClass("scroll-select-box-fixed");
             }else if(position > 905){
                 $("#scroll-select").addClass("scroll-select-box-fixed");
@@ -351,16 +351,19 @@
 		};
        
         
+		
+		
+		
         // 리뷰 script
 	    $("#review-btn").on("click", function(){
-	    	$(".comment-box>div:last-child>span").text("는 어떠셨나요?");
 	        $(".rmodal-wrap").css("display", "flex");
 	    })
 		
 	    $("#modal-btn-box>button:first-child").on("click",function(){
 	        $(".rmodal-wrap").css("display", "none");
-	        $(".comment-box>div:last-child>span").css("visibility", "hidden");
-	        $("#star-box").children().css("color", "lightgrey");
+	        $(".comment-box>div:first-child").css("visibility", "hidden");
+	        $(".comment-box>div:last-child>span").text("는 어떠셨나요?");
+	        $("#star-box>span").css("color", "lightgrey");
 	    })
 		
 	    const starBox = $(".comment-box>div:first-child");
@@ -414,7 +417,7 @@
 						const div = $("<div>");
 						div.addClass("shadow");
 						div.addClass("reviewDiv");
-						div.addClass("mb-4");
+						div.addClass("mb-5");
 						const star = Number(list[i].reviewRate);
 		                const profilDiv = $("<div>");
 		                profilDiv.addClass("memberBox");
@@ -431,8 +434,8 @@
 		                profilDiv.append(profileImgDiv).append(profilInfoDiv);
 		                
 		                const contentDiv = $("<div>");
-		                contentDiv.html("<div>"+list[i].reviewContent+"</div><div><a href='/'>수정</a> / <a href='/'>삭제</a></div>");
-		                
+		                contentDiv.html("<div class='mt-3'>"+list[i].reviewContent+"</div>");
+		                // <div><a href='/'>수정</a> / <a href='/'>삭제</a></div>
 		                div.append(profilDiv);
 		                div.append(contentDiv);
 		                reviewBox.append(div);

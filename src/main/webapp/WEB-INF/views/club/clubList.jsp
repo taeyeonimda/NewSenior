@@ -122,12 +122,12 @@
 						    <div class="flex-space-around">
 						    <c:forEach items="${pList }" var="pl">
 							    <div class="col-md-3 col-sm-6">
-							        <div class="serviceBox1 mb-5">
+							        <div class="serviceBox1 mb-3">
 							        	<img alt="" src="/resources/upload/club/${pl.clubMainImg }">
 							        </div>
 							        <div style="word-break:break-all;" >
 							            <h3 class="card-title">${pl.clubName }</h3>
-										<p class="description clubIntro" style="width: 100%;">${pl.clubIntro } </p> 
+										<p class="description clubIntro bg-light" style="width: 100%;">${pl.clubIntro } </p> 
 							            <a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
 							        </div>
 							    </div>

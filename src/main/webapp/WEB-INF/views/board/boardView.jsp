@@ -544,6 +544,7 @@
 					return false;
 				}
 			});
+		});
 
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){
@@ -557,26 +558,3 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
