@@ -10,8 +10,9 @@
     <title>뉴시니어스</title>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <!-- Favicon -->
-        <link href="/resources/TGbtstr/img/favicon.ico" rel="icon">
-
+		<link rel="icon" href="/resources/img/favicon-16x16.png" type="image/x-icon" sizes="16x16">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
