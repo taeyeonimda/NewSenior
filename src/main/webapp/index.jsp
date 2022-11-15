@@ -72,7 +72,9 @@
 
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	
+	<!--  
 	<a href="/mypage.do" style="font-size:30px;">마이페이지</a>
+	-->
 
 
  <!-- Carousel Start -->

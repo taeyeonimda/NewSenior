@@ -48,7 +48,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header3.jsp"%>
-	<div class="wra">
+	<div class="wra" style="font-family: 'GmarketSansMedium'!important;">
 		<form action="/pwChange.do" method="post" onsubmit="return checkPw();">
 			<div class="txt1">비밀번호 변경</div><br>
 			<div class="txt2">새로운 비밀번호를 입력해주세요.</div>
