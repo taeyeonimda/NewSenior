@@ -287,5 +287,14 @@ select * from
 		from board_category_tbl
 		where board_type=#{boardType}
 		
-	</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+	</select>        
+	<select id="boardFileDown" parameterType="int" resultType="bf">
+		select 
+		file_no as FileNo,
+		filepath,
+		filename,
+		board_no as boardNo
+		from board_file where file_no=#{_parameter}
+		
+	</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 </mapper>
