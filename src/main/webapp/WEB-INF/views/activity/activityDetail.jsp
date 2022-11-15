@@ -7,6 +7,43 @@
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
     <title>액티비티 상세페이지</title>
 </head>
+<style>
+#myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
+</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
@@ -82,11 +119,10 @@
             <div class="container">
 				<div class="class-row g-4">
 					<div class="col-xl-12 wow fadeInUp" data-wow-delay="0.1s" style= "display: flex">
-						<div class="col-xl-6 team-item rounded class-item"
-							style=" height: auto; margin: auto;">
-							<img style="width:580px; height:580px;"class="img-fluid" src="/resources/upload/activity/${act.filepath }" alt="">
+						<div class="col-xl-6 team-item rounded class-item">
+							<img style="width:800px;" class="img-fluid" src="/resources/upload/activity/${act.filepath }" alt="액티비티메인사진">
 						</div >
-						
+						<!-- 
 						<div class="col-xl-6 team-item rounded class-item" style="font-size:1.1em; ">
 						
 						<h1>${act.activityName }</h1>
@@ -97,14 +133,17 @@
 						<p><span>종료일: ${act.endDate }</span></p>
 					 
 						</div>
+						-->
 					</div>
 				</div>
 				<!-- scroll bar start -->
-				<!-- 
-				<div class="scroll-select-box" id="scroll-select" style="border:1px dotted #6c757d; width: 1250px">
-                	<span>강사소개</span><span><a href="#menu2">강의소개</a></span><span><a href="#menu3">준비물</a></span><span><a href="#menu4">환불규정</a></span><span><a href="#menu5">후기</a></span>
-                	  
-                </div> -->
+				
+				<div class="scroll-select-box" id="scroll-select" style="width:1400px">
+                	<span><a href="#menu1">상세사진</a></span>
+                	<span><a href="#menu2">상세소개</a></span>
+                	<span><a href="#menu3">기타사항</a></span>
+                	<span><a href="#menu4">후기</a></span>
+                </div>
                 <!-- scroll bar end -->
             </div>
             
@@ -157,7 +196,123 @@
         
         <!-- Features End -->
         <hr>
-        <!-- 후기 -->
+
+		<div class="container-xxl py-5 mt-5" id="#menu5">
+			<div class="container">
+				<div class="row g-5">
+					<form class="mb-3" name="myform" id="myform" method="post">
+							<input type="hidden" name="activityNo" value="${act.activityNo }">
+							<input type="hidden" name="actRiviewWriter" value="${sessionScope.m.memberNo }">
+						<fieldset>
+							<span class="text-bold">별점을 선택해주세요</span> 
+							<input type="radio" name="actReviewRate" value="5" id="rate1" checked><label
+								for="rate1">★</label>
+							<input type="radio" name="actReviewRate" value="4" id="rate2"><label
+								for="rate2">★</label>
+							<input type="radio" name="actReviewRate" value="3" id="rate3"><label
+								for="rate3">★</label>
+							<input type="radio" name="actReviewRate" value="2" id="rate4"><label
+								for="rate4">★</label>
+							<input type="radio" name="actReviewRate" value="1" id="rate5" ><label
+								for="rate5">★</label>
+						</fieldset>
+						<div>
+							<textarea class="col-auto form-control" type="text"
+								id="actReviewContent" name="actReviewContent"
+								placeholder="좋은 수강평을 남겨주시면 Cocolo에 큰 힘이 됩니다! 포인트 5000p도 지급!!"></textarea>
+						</div>
+						<button id="reviewSubmit" type="button" class="btn btn-primary">등록</button>
+						<button type="button" class="btn btn-primary">수정</button>
+						<button type="button" class="btn btn-primary">삭제</button>
+						<button type="button" class="btn btn-primary">대댓글</button>
+					</form>
+
+	
+				</div>
+				<hr>
+				<!-- ajax로 붙여넣을공간 -->	
+				<div id="ajaxReviewList">
+					
+				</div>
+				
+				<script>
+		
+	
+		$("#reviewSubmit").on("click",function(){
+			const activityNo = $('input[name=activityNo]').val();
+			const actRiviewWriter = $('input[name=actRiviewWriter]').val();
+			const actReviewRate = $('input[name=actReviewRate]:checked').val();
+			const actReviewContent = $('textarea[name=actReviewContent]').val();
+			const blank_pattern = /^\s+|\s+$/g;
+
+
+			const member = '${sessionScope.m}';
+			
+			if(member ==''){
+				alert("로그인 후 리뷰 작성이 가능합니다");
+				return false;
+			}
+			
+			$.ajax({
+				method :"POST",
+				data:{
+					memberNo : actRiviewWriter,
+					activityNo : activityNo			
+				},
+				url :"/checkActHistory.do",
+				success: function(data){
+					//data가 1일경우 히스토리에 있음
+					if(data==1){
+						//history에서 목록이 있을경우 댓글 insert
+						if(actReviewContent.replace(blank_pattern, "").length == 0 ||
+								actReviewContent.replace(blank_pattern, "") == ""){
+						alert("내용을 입력해주세요.");
+						$('textarea[name=actReviewContent]').focus();
+						return false;
+						}else{
+							
+						$.ajax({
+							method :"POST",
+							data:{
+								activityNo: activityNo,
+								actRiviewWriter: actRiviewWriter,
+								actReviewRate : actReviewRate,
+								actReviewContent : actReviewContent
+							},
+							url:"/insertActivityReview.do" ,
+							success: function(data){
+								alert("리뷰가 등록되었습니다");
+								$("#actReviewContent").val("");
+								goPage(1);
+							},
+							error: function(data){
+								alert("내부서버 문제로 인한 에러가 발생했습니다.");
+							}
+						})//댓글insert ajax부분
+						}
+						
+					}else{	
+						alert("구매 후 리뷰를 남겨주세요.");
+					}
+					
+				},
+				fail: function(data){
+					alert(data+"실패");
+				},
+				error: function(data){
+					alert("내부서버 문제로 인한 에러가 발생했습니다.");
+				}
+					
+			})//
+		})//리뷰 등록버튼 
+	</script>
+			</div>
+		</div>
+		<!-- 후기 내가쓴거  -->
+		
+		
+		<!-- 후기 -->
+        <!-- 
         <div class="container-xxl py-5 mt-5" id="#menu5">
             <div class="container">
                 <div class="row g-5">
@@ -187,38 +342,11 @@
                 </div>
             </div>
         </div>
+         -->
+        
     </div><!--page-content End-->
-<div class="rmodal-wrap">
-    <div class="modal-review">
-        <div class="modal-top">
-            <h1>리뷰쓰기</h1>
-        </div>
-        <div class="modal-content">
-            <div id="star-box">
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-            </div>
-            <div class="comment-box">
-                <div><span class="real-score"></span>점 주셨네요</div>
-                <div>클래스는 <span>어땠나요?</span></div>
-            </div>
-            <form action="/insertDoctorReview.do" method="post" autocomplete="off" id="review-form">
-                <input type="hidden" name="star" id="star">
-                <input type="hidden" name="doctorId">
-                <input type="hidden" name="bookNo">
-                <input type="hidden" name="memberNo">
-                <textarea name="review" id="review-textarea"></textarea>
-                <div id="modal-btn-box">
-                    <button type="button" id="review-cancel" class="btn bc5">취소</button>
-                    <button type="submit" id="review-submit" class="btn bc5">등록</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
+            
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -227,8 +355,10 @@
 
     <!-- side-bar script-->
 	<script>
+	
 	$(function(){
         showSide();
+        let reqPage=1;
     	const amount = $("[name=amount]").val()
     	const amountPrice ='${act.activityPrice }';
     	const amountPrice2 ='${act.activityPrice }';
@@ -241,12 +371,53 @@
     		realPrice += splits[i];
     	}
     	
-    	
+    	console.log(reqPage);
 		$("#realAmount").text(amount*realPrice);
+		
+		showList(reqPage);
+		
 		
 		
 		
     });
+	
+	function goPage(number){
+		//$("#ajaxReviewList").remove();
+		showList(number);
+	}
+	
+	function showList(number){
+		$("#ajaxReviewList").children().remove();	
+		$.ajax({
+			method : "POST",
+			url : "/actReviewList.do",
+			data : {
+				activityNo : ${act.activityNo},
+				reqPage : number 
+			},
+			success : function(data){
+				console.log("리뷰 현재페이지"+data.reqPage);
+				console.log("리뷰 리스트 길이"+data.list.length);
+				for(let i =0; i<data.list.length;i++){
+					console.log("리뷰내용"+data.list[i].actReviewContent);
+					let rvContentDiv = "<div>"+data.list[i].actReviewContent+"</div>";
+					$("#ajaxReviewList").append(rvContentDiv);
+				}
+				console.log("리뷰 리스트"+data.list.reviewNo);
+				console.log("리뷰 넘퍼페이지"+data.numPerPage);
+				console.log("리뷰 페이지네비"+data.pageNavi);
+				
+				$("#ajaxReviewList").append(data.pageNavi);
+			},
+			error:function(data){
+				console.log("액티비티 리스트 에러"+data);
+			}
+		})//리뷰목록 리스트 ajax
+		
+	}
+	
+	
+	
 	
 	   const startDate = '${act.startDate}';
        const endDate = '${act.endDate}';
@@ -296,15 +467,15 @@
 	    
 	        function showSide(){
 	            const position  = $(window).scrollTop();
-	            console.log(position);
+	            console.log("현재포지션"+position);
 	            let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
 		        let windowHeight = window.innerHeight; // 스크린 창
 	            let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x, footer제외
-	            if(position > 3800){
+	            if(position > 3500){
 	                $(".sidenav").fadeOut(1);
 	            }else if(position > 250 ){ // 스크롤 위치 343보다 클 때만 보이겠다
 	                $(".sidenav").fadeIn(300);
-	                console.log(fullHeight);
+	                console.log("최고높이"+fullHeight);
 	            }else {
 	                $(".sidenav").fadeOut(1);
 	            }

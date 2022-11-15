@@ -349,7 +349,6 @@
                     </div>
                   </div>
                    -->
-                  <input type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" value="수정하기">
                   <button type="submit" style="float: right; width:150px;" class="btn btn-outline-primary" onclick="return productUpdateBtn();">수정하기</button>
                 </div>
               </div>
