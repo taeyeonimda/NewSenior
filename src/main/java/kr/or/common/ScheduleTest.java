@@ -32,9 +32,9 @@ public class ScheduleTest {
 	public void scheduleTest4() {
 		int result = service.deleteMember();
 		if(result>0) {
-			System.out.println("state 있는 멤버 삭제 성공");
+			//System.out.println("state 있는 멤버 삭제 성공");
 		}else {
-			System.out.println("state 있는 멤버 삭제  실패");
+			//System.out.println("state 있는 멤버 삭제  실패");
 		}
 	}
 	 

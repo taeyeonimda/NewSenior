@@ -20,9 +20,9 @@ public class Board {
 	private String boardCategory;
 	private int boardCommCnt;
 	
-	private String nickName; // 조인해서 가져온 컬럼
 	
-	private int qnaAnswer;
+	private String nickName; // 조인해서 가져온 컬럼
+	private String memberImg; // 조인해서 가져온 컬럼
 	
 	
 	
