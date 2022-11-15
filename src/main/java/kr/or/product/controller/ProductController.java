@@ -58,7 +58,10 @@ public class ProductController {
 	@RequestMapping(value="/insertProduct.do")
 	public String insertProduct(Product p, MultipartFile[] productFile, HttpServletRequest request) {
 		ArrayList<ProductFileVO> fileList = new ArrayList<ProductFileVO>();
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+			
+		
 			//input이 3개면 각각 조건을 비교해야함
 			for(MultipartFile file : productFile) {
 				if(!file.isEmpty()) {
@@ -148,10 +151,34 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productUpdate.do")
-	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList,int[] fileNoList) {
-		System.out.println("controller : "+productFile.length);
+	public String productUpdate(Product p, MultipartFile[] productFile, HttpServletRequest request, String[] productpathList,int[] fileNoList, MultipartFile productMainFile, String productMainpath, int mainFileNo) {
+		ProductFileVO mainFile = null;
 		ArrayList<ProductFileVO> flist = new ArrayList<ProductFileVO>();
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+			if(!productMainFile.isEmpty()) {
+				mainFile = new ProductFileVO();
+				String mainFilename = productMainFile.getOriginalFilename();
+				String mainFilepath = fileRename.productFileRename(savePath, mainFilename);
+				mainFile.setFileName(mainFilename);
+				mainFile.setFilePath(mainFilepath);
+				mainFile.setProductNo(p.getProductNo());
+				mainFile.setFileNo(mainFileNo);
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+mainFilepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					
+					byte[] bytes = productMainFile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			for(MultipartFile file : productFile) {
 				if(!file.isEmpty()) {
 				String filename = file.getOriginalFilename();
@@ -180,8 +207,14 @@ public class ProductController {
 				flist.add(pfile);
 			}
 		}
-		//p.setProductFileVO(flist);
-		int result = service.productUpdate(p,flist, fileNoList);
+		
+		int result = service.productUpdate(p,flist, fileNoList, mainFile);
+		if(productMainpath != null && result == 2) {
+			if(productMainpath != null) {
+			File mainDelFile = new File(savePath+productMainpath);
+			mainDelFile.delete();
+			}
+		}
 		if(productpathList != null && result ==(flist.size()+fileNoList.length+1)) {
 			if(productpathList != null) {
 				for(String productpath : productpathList) {

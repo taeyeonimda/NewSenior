@@ -111,11 +111,15 @@ public class ProductService {
 		}
 	}
 
-	public int productUpdate(Product p, ArrayList<ProductFileVO> flist, int[] fileNoList) {
+	public int productUpdate(Product p, ArrayList<ProductFileVO> flist, int[] fileNoList, ProductFileVO mainFile) {
+		
 		int result = dao.productUpdate(p);
-		System.out.println(flist);
-		System.out.println(fileNoList);
 		if(result > 0) {
+			
+			if(mainFile != null) {
+				result += dao.updateProductImg(mainFile);
+			}
+			
 			for(ProductFileVO pfv : flist) {
 				pfv.setProductNo(p.getProductNo());
 				result += dao.insertProductFile(pfv);
