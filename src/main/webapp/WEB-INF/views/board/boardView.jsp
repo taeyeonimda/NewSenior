@@ -72,11 +72,7 @@
             
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
-                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <c:forEach items="${list}" var="cateList">
-                        	<li class="mx-2 ${cateList.boardCategory }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardCategory}&reqPage=1">${cateList.boardCategory }</a></li>
-                        </c:forEach>   
-                    </ul>
+                    
         	   </div>
                     <div style="display: none;" class="category">${classCategory }</div>
                 </div>
@@ -87,7 +83,8 @@
                     <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img"style="width:408px;height:408px;"src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
-                            <h4 class="text-white mb-4">${cla.className }</h4>
+                            <h4 class="text-white mb-4">정보</h4>
+                            <h4 class="text-white mb-4">기타</h4>
                             <div class="d-flex">
                                 <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/upload/class/${cla.filepath }" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
@@ -105,7 +102,7 @@
 			<td>${b.boardNo }</td>
 			<th>카테고리</th>
 			
-					<!-- 자유게시판 -->
+			<!-- 자유게시판 -->
 			<c:if test ="${b.boardCategory eq 'info'}">
 				<td>정보</td>
 			</c:if>
@@ -165,7 +162,7 @@
 		</tr>
 			<tr>
 				<th class="th1">제목</th>
-				<td colspan="7" class="td2">${b.boardTitle }</td>
+				<td colspan="7" class="td2 boardTitle">${b.boardTitle }</td>
 			</tr>
 		<tr>
 			<th class="th1">첨부파일</th>
@@ -182,7 +179,7 @@
 			</td>
 		</tr>
 		</table>
-		<!-- 테이블 밖으로 뺐음 -->
+		<!-- 테이블 밖으로 꺼냈음 -->
 		<div class="updateDelBox">
 				<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
 					<button class="updateBtn bc44" id="updateBtn"><a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}">수정</a></button>
@@ -206,7 +203,7 @@
 						<input type="hidden" name="boardCommRef" value="0">
 							<!-- ㄴ어떤 댓글의 대댓글인지 -->	<!-- ㄴ댓글,대댓글 구분 (0번 시퀀스는 쓰지 않으므로 0번은 대댓글이 아닌 일반댓글)-->
 														<!-- 참조하는 대댓글이 없음 -->
-						<textarea name="boardCommContent"></textarea>
+						<textarea name="boardCommContent" style="border: none; resize:none;"></textarea>
 					</li>
 					<li class="commentWriteBtn1Box">
 						<button type="submit" name="commentWriteBtn1" class="commentWriteBtn1">등록</button>
@@ -225,9 +222,19 @@
 		 		<li>
 						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 				</li>
-				<li>
+					<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+				<li class="myComment" style="background-color:#E8F5E9;">
+					</c:if>
+					<c:if test="${sessionScope.m.nickName ne bc.nickName }">
+				<li class="myComment">
+					</c:if>
 					<p>
+					<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+						<span style="color:green;"><a href="/mypage.do">${bc.nickName }</a></span>
+					</c:if>	
+					<c:if test="${sessionScope.m.nickName ne bc.nickName }">
 						<span style="color:green;">${bc.nickName }</span>
+					</c:if>	
 						<span>${bc.boardCommDate }</span>
 					</p>
 					<p>${bc.boardCommContent }</p>
@@ -261,9 +268,20 @@
 								<div class="memberImg"><img src="/resources/upload/member/${bcc.memberImg}"></div>
 		 						
 		 					</li>
-		 					<li>
+		 				<c:if test="${sessionScope.m.nickName eq bcc.nickName }">
+							<li class="myReComment" style="background-color:#E8F5E9;">
+						</c:if>
+						<c:if test="${sessionScope.m.nickName ne bcc.nickName }">
+							<li class="myReComment">
+						</c:if>
+						 					
 								<p>
-									<span style="color:green;">${bcc.nickName }</span>
+								<c:if test="${sessionScope.m.nickName eq bcc.nickName }">
+									<span style="color:green;"><a href="/mypage.do">${bcc.nickName }</a></span>
+								</c:if>	
+								<c:if test="${sessionScope.m.nickName ne bcc.nickName }">
+									<span style="color:green;">${bcc.nickName }</a></span>
+								</c:if>	
 									<span>${bcc.boardCommDate }</span>
 								</p>
 								<p>${bcc.boardCommContent }</p>
@@ -488,14 +506,15 @@
 				}
 			});
 			
+			//답글달기
 			$(".commentWriteBtn2").on("click",function(){
 				const ReCommContent =$(".ReCommContent");
-				if(ReCommContent.val()==""){
+				const idx = $(".ReCommContent").index(this);
+				if((this).val()==""){
 					alert('내용을 입력해주세요');
 					return false;
 				}
 			});
-		
 
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){

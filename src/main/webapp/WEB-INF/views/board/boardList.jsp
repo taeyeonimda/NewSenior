@@ -61,11 +61,7 @@
             
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
-                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <c:forEach items="${list}" var="cateList">
-                        	<li class="mx-2 ${cateList.boardCategory }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardCategory}&reqPage=1">${cateList.boardCategory }</a></li>
-                        </c:forEach>   
-                    </ul>
+                    
         	   </div>
                     <div style="display: none;" class="category">${classCategory }</div>
                 </div>
