@@ -22,18 +22,145 @@
 	.reCommentView{
 		color : red;
 	}
+	
+	.page-content table{
+		width:70%;
+		margin:0 auto;
+		text-align:center;
+		border-collapse: collapse;
+	}
+
+	table tr>.th1 {
+		border-right : 1px solid ;
+	}
+	table tr{
+		border : 1px solid ;
+	}
+	table td{
+		border-right : 1px solid ;
+	}
+	
+	/*제목,첨부파일,내용*/
+	table .td2{
+		text-align : left;
+		padding-left : 15px;
+	}
+	
+	#boardContent{
+		text-align: start;
+		height :400px;
+		padding-top : 15px;
+	}
+
+	.updateDelBox{
+		display:flex;
+		flex-direction: row;
+		justify-content:center;
+	}
+	#updateBtn,#delBtn{
+		width : 200px;
+		height : 50px;
+		margin-top : 30px;
+		background-color: green;
+		border-radius : 15px;
+		border-color : transparent;
+	}
+	button>a{
+		color : white;
+	}
+	#updateBtn {
+		margin-right : 30px;
+	}
+	
 </style>
 
 </head>
 <body>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<!-- 헤더 넣기 -->
-	<table border="1">
+
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container text-center py-5">
+                <h1 class="display-3 text-white mb-4 animated slideInDown">커뮤니티</h1>
+                <nav aria-label="breadcrumb animated slideInDown">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                    	<c:if test="${b.boardType eq 'F' or b.boardType eq 'I' or b.boardType eq 'P'}">
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
+	                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
+                        </c:if>
+                        <c:if test="${b.boardType eq 'N' or b.boardType eq 'Q' or b.boardType eq 'A'}">
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></li>
+	                        <li class="breadcrumb-item active" aria-current="page">강사모집</li>
+                        </c:if>
+                        
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Page Header End -->
+    <!-- Projects Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                <c:if test="${b.boardType eq 'F'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
+                </c:if>
+                <c:if test="${b.boardType eq 'I'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
+                </c:if>
+                <c:if test="${b.boardType eq 'P'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
+                </c:if>
+                <c:if test="${b.boardType eq 'N'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></h1>
+                </c:if>
+                <c:if test="${b.boardType eq 'Q'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></h1>
+                </c:if>
+                <c:if test="${b.boardType eq 'A'}">
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></h1>
+                </c:if>
+            </div>
+            
+            <div class="row wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-12 text-center">
+                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
+                        <c:forEach items="${list}" var="cateList">
+                        	<li class="mx-2 ${cateList.boardCategory }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardCategory}&reqPage=1">${cateList.boardCategory }</a></li>
+                        </c:forEach>   
+                    </ul>
+        	   </div>
+                    <div style="display: none;" class="category">${classCategory }</div>
+                </div>
+            </div>
+            <div class="row g-4 portfolio-container">
+            <c:forEach items="${clist }" var="cla" varStatus="i">
+            	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
+                        <img class="img-fluid class-img"style="width:408px;height:408px;"src="/resources/upload/class/${cla.filepath }" alt="">
+                        <div class="portfolio-text">
+                            <h4 class="text-white mb-4">${cla.className }</h4>
+                            <div class="d-flex">
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/upload/class/${cla.filepath }" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+            </div>
+        </div>
+  <div class="page-content">
+	<table class="boardTbl">
 		<tr>
-			<th>글번호</th>
+			<th class="th1">글번호</th>
 			<td>${b.boardNo }</td>
-		</tr>
-		<tr>
 			<th>카테고리</th>
 			
 					<!-- 자유게시판 -->
@@ -86,55 +213,42 @@
 			<c:if test ="${b.boardCategory eq 'delivery'}">
 				<td>배송</td>
 			</c:if>
-		</tr>
-		
-		<tr>
 			<th>닉네임</th>
 			<td>${b.nickName }</td>
-		</tr>
-		<tr>
-			<th>찍어보기</th>
-			<td>${bCateVO.boardCategory }</td>
-		</tr>
-		<tr>
 			<th>작성일</th>
-			<td>${b.boardDate }</td>
-		</tr>
-			
-			<tr>
-				<th>제목</th>
-				<td colspan="3">${b.boardTitle }</td>
-			</tr>
-			<tr>
-				<th>보드타입</th>
-				<td colspan="3">${b.boardType }</td>
-			</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td colspan="3">
-			<c:forEach items="${b.fileList }" var="bf">
-				<p>
-				<a href="/boardFileDown.do?fileNo=${bf.fileNo }">${bf.filename }</a>
-				</p>
-			</c:forEach>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td colspan="6">
-				<div>${b.boardContent }</div>
+			<td>
+			${b.boardDate }
+			<input type="hidden" value="${b.boardType }">
 			</td>
 		</tr>
-		<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
-			<tr class="tr-1">
-				<th colspan="6">
-					<button><a class="btn bc44" href="/boardUpdateFrm.do?boardNo=${b.boardNo}">수정</a></button>
-					<!-- <button><a class="btn bc44" id="delBtn" href="/boardDelete.do?boardNo=${b.boardNo}">삭제</a></button> -->
-					<button class="btn bc44" onclick="boardDelete(${b.boardNo});">삭제</button>
-				</th>
+			<tr>
+				<th class="th1">제목</th>
+				<td colspan="7" class="td2">${b.boardTitle }</td>
 			</tr>
-			</c:if>
-	</table>
+		<tr>
+			<th class="th1">첨부파일</th>
+			<td colspan="7" class="td2">
+			<c:forEach items="${b.fileList }" var="bf">
+				<p><a href="/boardFileDown.do?fileNo=${bf.fileNo }">${bf.filename }</a></p>
+			</c:forEach>
+			</td>
+		</tr>
+		<tr>
+			<th class="th1">내용</th>
+			<td colspan="7" class="td2">
+				<div id="boardContent" style="overflow:scroll;">${b.boardContent }</div>
+			</td>
+		</tr>
+		</table>
+		<!-- 테이블 밖으로 뺐음 -->
+		<div class="updateDelBox">
+				<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
+					<button class="updateBtn bc44" id="updateBtn"><a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}">수정</a></button>
+					<button class="delBtn bc44" id="delBtn"><a href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}">삭제</a></button>
+				</c:if>
+		</div>
 	
+	<c:if test="${b.boardType ne 'Q' and b.boardType ne 'N'}">
 		<%--댓글작성 form--%>
 		<c:if test="${not empty sessionScope.m }">
 		<div class="inputCommentBox">
@@ -152,8 +266,8 @@
 														<!-- 참조하는 대댓글이 없음 -->
 						<textarea name="boardCommContent"></textarea>
 					</li>
-					<li>
-						<button type="submit" name="commentWriteBtn1">등록</button>
+					<li class="commentWriteBtn1">
+						<button type="submit" name="commentWriteBtn1" class="commentWriteBtn1">등록</button>
 					</li>
 				</ul>
 			</form>
@@ -238,10 +352,10 @@
 															<!-- ㄴ몇 번 글의 댓글인지 -->
 								<input type="hidden" name="boardCommRef" value="${bc.boardCommNo }">
 									<!-- ㄴ어떤 댓글의 대댓글인지 -->					<%--ㄴ해당 댓글 번호 --%>
-								<textarea name="boardCommContent"></textarea>
+								<textarea name="boardCommContent" class="boardCommContent"></textarea>
 							</li>
 							<li>
-								<button type="submit" name="commentWriteBtn2">등록</button>
+								<button type="submit" name="commentWriteBtn2" class="commentWriteBtn2">등록</button>
 							</li>
 						</ul>
 					</form>
@@ -250,6 +364,65 @@
 		 
 		 </c:forEach><%--forEach(1): 댓글반복문 끝 --%>
 		</div><%--commentBox끝--%>
+	</c:if><!-- boardType Q or N이 아닌경우 -->
+	
+	<c:if test="${b.boardType eq 'Q' or b.boardType eq 'N' }">
+		<%--댓글작성 form--%>
+		<c:if test="${not empty sessionScope.m }">
+			<c:if test="${sessionScope.m.memberGrade eq 3}">
+		<div class="inputCommentBox">
+			<form action="/insertComment.do" method="post">
+				<ul>
+					<li>
+						<span>댓글</span>
+					</li>
+					<li>
+						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+						<input type="hidden" name="boardRef" value="${b.boardNo}">
+													<!-- ㄴ몇 번 글의 댓글인지 -->
+						<input type="hidden" name="boardCommRef" value="0">
+							<!-- ㄴ어떤 댓글의 대댓글인지 -->	<!-- ㄴ댓글,대댓글 구분 (0번 시퀀스는 쓰지 않으므로 0번은 대댓글이 아닌 일반댓글)-->
+														<!-- 참조하는 대댓글이 없음 -->
+						<textarea name="boardCommContent"></textarea>
+					</li>
+					<li>
+						<button type="submit" name="commentWriteBtn1" class="commentWriteBtn1">등록</button>
+					</li>
+				</ul>
+			</form>
+		</div>
+			</c:if>
+		</c:if>
+		
+		<%--댓글 출력 --%>
+		<%--forEach(1): 댓글반복문 시작(댓글 출력, 대댓글 출력, 대댓글 작성폼   --%>
+		<div class="commentBox">
+		 <c:forEach items="${commentList }" var="bc">
+		 	<ul class="commentView">
+		 		<li>
+						<span>댓글</span>
+				</li>
+				<li>
+					<p>
+						<span>${bc.nickName }</span>
+						<span>${bc.boardCommDate }</span>
+					</p>
+					<p>${bc.boardCommContent }</p>
+					<textarea name="boardCommContent" style="display:none;">${bc.boardCommContent}</textarea>
+					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
+					<p>
+						<c:if test="${not empty sessionScope.m }">
+							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
+								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
+							</c:if>
+						</c:if>
+					</p>
+				</li>
+		 	</ul>
+		 </c:forEach>
+	</c:if>
+</div>
 		<script>
 		
 			//답글달기를 누르면 답글달기 - > 취소 / 취소 -> 답글달기
@@ -347,11 +520,32 @@
 			}
 			
 			//게시글 삭제
-			function boardDelete(boardNo){
+			function boardDelete(boardNo,boardType){
 				if(confirm("글을 삭제하시겠습니까?")){
-					location.href="/boardDelete.do?boardNo="+boardNo;	
+					location.href="/boardDelete.do?boardNo="+boardNo+"&boardType="+boardType;	
 				}
 			}
+			$("#delBtn").on("click",function(){
+				confirm("글을 삭제하시겠습니까?")
+			});
+			
+			$(".commentWriteBtn1").on("click",function(){
+				const boardCommContent =$("[name=boardCommContent]");
+				if(boardCommContent.val()==""){
+					alert('내용을 입력해주세요');
+					return false;
+				}
+			});
+			
+			$(".commentWriteBtn2").on("click",function(){
+				const boardCommContent =$(".boardCommContent");
+				if(boardCommContent.val()==""){
+					alert('내용을 입력해주세요');
+					return false;
+				}
+			});
+		});
+
 			//comment 삭제
 			function deleteComment(obj,boardCommNo,boardNo){
 			//obj는 사실 필요없는 매개변수(형식 맞춰주기 위해서 기입)
@@ -359,43 +553,8 @@
 				location.href="/deleteBoardComment.do?boardCommNo="+boardCommNo+"&boardNo="+boardNo;
 			}
 		}
-			/*
-			${"[name=commentWriteBtn1]"}.on("click",function(){
-				console.log("클릭이벤트 동작");
-				const commContent = ${"[name=boardCommContent]"};
-				if(commContent.val()==""){
-					alert('내용을 입력해주세요');
-				}
-				
-			})
-			*/
-			
-			
-			
+		
 			</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

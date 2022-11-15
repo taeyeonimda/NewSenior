@@ -71,10 +71,17 @@
 
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<!-- HTML5 Inputs -->
-			<form action="/mypageUpdate.do" me>
+			<form action="/mypageUpdate.do"  method="post" enctype="multipart/form-data">
 				<div class="card mb-4" /*style="width: 60%;*/">
 					<h5 class="card-header">내정보</h5>
 					<div class="card-body" style="padding-top: 20px;">
+					<div class="mb-3 row">
+							<label for="html5-text-input" class="col-md-2 col-form-label">프로필</label>
+							<div class="col-md-10 ">
+								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" style="width:100px; height:100px; border-radius: 50%;"><br><br>
+								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="memberImg" name="files" accept=".gif, .jpg, .png"></span><button class="btn btn-outline-warning myImg">프로필 바꾸기</button>
+							</div>
+						</div>
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
 							<div class="col-md-10">
@@ -201,8 +208,8 @@
 										${d.deliveryDetail }
 									</td>
 									<td style="line-height: 72px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
-										<button class="delBtn"  style="position: relative; top:20px;">
+									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
+										<button class="delBtn btn btn-outline-warning "  style="position: relative; top:20px;">
 											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}">삭제</a>
 										</button>
 									</td>
@@ -216,8 +223,8 @@
 										${d.deliveryDetail }
 									</td>
 									<td style="line-height: 72px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
-										<button class="delBtn" style="position: relative; top:20px;">
+									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;" class="btn btn-outline-warning delbtn">수정</button>
+										<button class="delBtn2 btn btn-outline-warning delbtn" style="position: relative; top:20px;">
 											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }" >삭제</a>
 										</button></td>
 								</tr>
@@ -301,7 +308,7 @@
 									<div class="col-md-10">
 										<input class="form-control" type="text" id="html5-url-input"
 											placeholder="010-1234-5678" name="deliveryPhone"
-											onkeyup="phone_keyup(this)" />
+											onkeyup="phone_keyup(this)" maxlength="13" />
 									</div>
 								</div>
 								<div class="mb-3 row">
@@ -542,12 +549,17 @@
     	
     	//회원 탈퇴 버튼 클릭시 comfirm
     	function delMember(){
-    		if(window.confirm("진짜로 회원탈퇴를 하시겠습니까? 탈퇴 후 3개월동안은 재가입이 불가능합니다. ")){
+    		if(window.confirm("회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다. 회원 탈퇴를 진행하시겠습니까?")){
     			return true;
     		}else{
     			return false;
     		}
     	}
+    	/*
+    	if($("input[name=memberPhone]").val() =="" || $("input[name=memberBirth]").val() == ""){
+    		alert("회원정보를 입력해주세요!");
+    	}
+    	*/
     </script>
 </body>
 </html>

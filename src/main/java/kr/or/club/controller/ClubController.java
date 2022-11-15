@@ -74,14 +74,17 @@ public class ClubController {
 		return "club/insertClubFrm";
 	}
 	
+	@RequestMapping(value = "/joinClub.do")
+	public String insertClubMember(Member m, Club c, Model model) {
+		service.insertClubMember(m, c);
+		return "redirect:/myClubList.do?memberNo="+m.getMemberNo()+"&clubNo="+c.getClubNo();
+	}
+	
 	@RequestMapping(value = "/myClubList.do")
 	public String myClubList(Member m, Club c, Model model) {
-		int result = service.insertClubMember(m, c);
-		if(result>0) {
-			ArrayList<Club> myList = service.searchMyClub(m);
-			model.addAttribute("myList", myList);
-			model.addAttribute("newClub", c.getClubNo());
-		}
+		ArrayList<Club> myList = service.searchMyClub(m);
+		model.addAttribute("myList", myList);
+		model.addAttribute("newClub", c.getClubNo());
 		return "club/myClubList";
 	}
 	
@@ -301,5 +304,12 @@ public class ClubController {
 	public String deleteClubBoard(ClubBoard cb) {
 		int result = service.deleteClubBoard(cb);
 		return "redirect:/clubDetail.do?clubNo="+cb.getClubNo();
+	}
+	// 블락 멤버 확인
+	@ResponseBody
+	@RequestMapping(value = "/searchBlockMember.do", produces = "application/json;charset=utf-8")
+	public String blockMemberCheck(Club c) {
+		String result = service.searchBlockMember(c);
+		return new Gson().toJson(result);
 	}
 }

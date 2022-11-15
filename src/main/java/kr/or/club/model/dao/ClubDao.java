@@ -125,4 +125,14 @@ public class ClubDao {
 		List list = sqlSession.selectList("club.selectMyClubStartEnd", map);
 		return (ArrayList<Club>)list;
 	}
+
+	public int searchBlockMember(Club c) {
+		int result = sqlSession.selectOne("club.selectBlockMember", c);
+		return result;
+	}
+
+	public int myClubCheck(Club c) {
+		int result = sqlSession.selectOne("club.myClubCheck", c);
+		return result;
+	}
 }

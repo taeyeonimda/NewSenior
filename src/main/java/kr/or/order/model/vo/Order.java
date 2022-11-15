@@ -39,5 +39,8 @@ public class Order {
 	private int orderAmount;
 	private int orderPrice;
 	
+	private String startDate;
+	private String endDate;
+	
 	private ArrayList<Product> productList;
 }

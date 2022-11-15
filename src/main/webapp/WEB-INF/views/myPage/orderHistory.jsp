@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html
   lang="en"
@@ -67,21 +68,24 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
 
-
-            <br><br><br>
-            <div style="font-size: 25px;">주문내역</div>
-            ${productNo}
-            <div style="font-size: 15px;">클래스, 액티비티, 키트</div>
+			  <br/>
+			  <h3> 기간 조회하기 </h3>
+			  <br/><br/>
+			  
+			  시작 날짜 : <input type="date" class="datepicker" id="startDate" value="2022-01-01" name="endDate"> <br/> <br/>
+			  종료 날짜 : <input type="date" class="datepicker" id="endDate" value="2022-12-31" name="startDate">
+			  <input type="submit" onclick="findDate(${sessionScope.m.memberNo })">
+			
             <div class="card">
 
               <div class="table-responsive text-nowrap">
-                <input type="hidden" name="memNo" value="${sessionScope.m.memberNo }">
+                <input type="hidden" class="memberNo" value="${sessionScope.m.memberNo }">
+                
                 <table class="table table-borderless">
                   <thead>
                     <tr>
                       <th>주문번호</th>
                       <th>주문일자</th>
-                      <th>상품명</th>
                       <th>총 주문금액</th>
                       <th>상세보기</th>
                       <!-- 주문번호 1개당 1tr -->
@@ -91,21 +95,17 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${list }" var="Or">
-		            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo });">
-		            		<td>${Or.orderNo }</td>
-							<td>${Or.orderDate }</td>
-							<td>${Or.buyName }</td>
-							<td>${Or.orderAmount*Or.orderPrice }원</td>
-							<td>${Or.buyAmount+Or.buyPrice }원</td>
-							<td class="btn">상세보기</td>
-		                </tr>
+                    <input type="hidden" value="${Or.orderDate }" name="orderDate">
+						<%-- <c:if test="${Or.orderDate > startDate && endDate > Or.orderDate }"> --%>
+				            	<tr class="showOrderDetail" onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo });">
+				            		<td>${Or.orderNo }</td>
+									<td>${Or.orderDate }</td>
+									<td>${Or.orderPrice }원</td>
+									<td class="btn">상세보기</td>
+				                </tr>
+						<%-- </c:if> --%>
              		</c:forEach>
              		
-             		<!-- 
-        					<td>${Or.receiverName }</td>
-							<td>${Or.deliveryAddr }</td>
-							<td>${Or.allSumPrice }원</td>
-             		 -->
              		
              		<c:if test="">
 		                <tr>
@@ -115,6 +115,7 @@
         			
                   </tbody>
                 </table>
+                
               </div>
             </div>
        
@@ -166,6 +167,18 @@
 	    function goToOrderDetail(orderNo,memberNo) {
 			location.href = "/orderDetail.do?orderNo="+orderNo+"&memberNo="+memberNo;
 		}
+		
+	    
+	    function findDate(memberNo){
+	    	const startDate = document.querySelector("#startDate").value;
+	    	const orderDate = document.querySelector("[name=orderDate]").value;
+	    	const endDate = document.querySelector("#endDate").value;
+	    	console.log(startDate);
+	    	console.log(orderDate);
+	    	console.log(endDate);	
+	    	location.href="/findDate.do?memberNo="+memberNo+"&startDate="+startDate+"&orderDate="+orderDate+"&endDate="+endDate;
+	    }
+	    
     </script>
   </body>
 </html>

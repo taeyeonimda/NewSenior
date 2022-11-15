@@ -99,17 +99,32 @@ ul li.on a {
                    	</div>
                 </div>
 	                <div>
-	                
-                <form id="insertCartForm" action="/insertCart.do" autocomplete="off" >
-                		<input type="hidden" value="${p.productNo }" name="productNo">
-	        	        <input type="hidden" value="${p.productName }" name="buyName">
-		                <input type="hidden" value="${p.productPrice }" name="buyPrice">
-		                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
-		                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
-						<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
-	                	<button type="submit">장바구니</button>
-	                 	<button type="button" id="directBuy">바로구매</button>
-            	</form>
+	            <c:choose>
+	            	<c:when test="${!empty sessionScope.m }">
+		                <form id="insertCartForm" action="/insertCart.do" autocomplete="off" >
+		                		<input type="hidden" value="${p.productNo }" name="productNo">
+			        	        <input type="hidden" value="${p.productName }" name="buyName">
+				                <input type="hidden" value="${p.productPrice }" name="buyPrice">
+				                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
+				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
+								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+			                	<button type="submit">장바구니</button>
+			                 	<button type="button" id="directBuy">바로구매</button>
+		            	</form>
+	            	</c:when>
+	            	<c:otherwise>
+	            		<form id="insertCartForm" action="/insertCart.do" autocomplete="off" >
+		                		<input type="hidden" value="${p.productNo }" name="productNo">
+			        	        <input type="hidden" value="${p.productName }" name="buyName">
+				                <input type="hidden" value="${p.productPrice }" name="buyPrice">
+				                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
+				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
+								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+			                	<button type="submit" onclick="goCartAlert()">장바구니</button>
+			                 	<button type="button" id="loginCheckBtn">바로구매</button>
+		            	</form>
+	            	</c:otherwise>
+            	</c:choose>
 	                </div>
 	                
             </div>
@@ -119,7 +134,7 @@ ul li.on a {
               <div>상세내용</div>
               <div style="height: 57px"><button type="button" id="reviewListBtn" value="10">리뷰</button></div>
               <div>교환/반품 안내</div>
-              <div><a href="#">문의남기기</a></div>
+              <div><a href="/boardList.do?reqPage=1&boardType=Q">문의남기기</a></div>
             </div>
             <div>
             <div class="detailContentWrap prodContentMenu">
@@ -155,6 +170,8 @@ ul li.on a {
 		    <div class="prodContentMenu productReviewDiv">
             <c:choose>
             	<c:when test="${!empty sessionScope.m }">
+            		<c:choose>
+            			<c:when test="${reviewCount < 1}">
 			            <div class="reviewContentWrap">
 			              <!-- <form action="/insertReview.do" method="post"> -->
 			                <div class="reviewContent">
@@ -186,7 +203,16 @@ ul li.on a {
 			                </div>
 			              <!-- </form>  -->
 			            </div>
+			            	</c:when>
+			            	<c:otherwise>
+			            		<div style="margin-top: 10px;"><h6>리뷰작성은 1회만 작성하실수 있습니다.</h3></div>
+			            	</c:otherwise>
+			            	
+			            </c:choose>
 		            </c:when>
+		            <c:otherwise>
+		            	<div style="margin-top: 10px;"><h6>리뷰작성은 로그인 후 이용하실수 있습니다.</h3></div>
+		            </c:otherwise>
 	            </c:choose>
 	            <div class="reviewsTotalDiv">
 	            	
@@ -255,7 +281,9 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
-	
+		$("#loginCheckBtn").on("click",function(){
+			alert("로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.");
+		});
 		function deleteProduct(productNo) {
 			if(confirm("상품을 삭제하시겠습니까?")){
 				location.href="/deleteProduct.do?productNo="+productNo;
@@ -305,7 +333,7 @@ ul li.on a {
 							displayData(1, dataPerPage);
 							alert("삭제가 완료되었습니다.");
 							$(obj).parent().parent().parent().remove();
-							
+							$(".reviewContent").show();
 						}
 					});
 				}
@@ -331,6 +359,8 @@ ul li.on a {
 					$("#customerReview").val('');
 					$(".input-score>span").text('0');
 					$(".star-wrap").children().css("color","");
+					$(".reviewContent").hide();
+					alert("리뷰등록 완료!");
 					/*
 					var now = new Date();
 					var year = now.getFullYear();
@@ -529,7 +559,7 @@ ul li.on a {
 				
 				//페이징 번호 클릭 이벤트 
 				$("#pagingul li a").click(function () {
-				$(".reviewsWrap").remove();
+				//$(".reviewsWrap").remove();
 				let $id = $(this).attr("id");
 				selectedPage = $(this).text();
 
@@ -656,7 +686,7 @@ ul li.on a {
 			}
 			
 			$("#reviewListBtn").click(function () {
-				$(".reviewsWrap").remove();
+				//$(".reviewsWrap").remove();
 			    dataPerPage = $("#reviewListBtn").val();
 			    console.log("dataPerPage1 : "+dataPerPage);
 			    //전역 변수에 담긴 globalCurrent 값을 이용하여 페이지 이동없이 글 표시개수 변경 
@@ -699,7 +729,8 @@ ul li.on a {
 		
 		$("#directBuy").on("click",function(){
 			const price = $(".sumPrice").val();
-			//console.log(price);
+			const productQty = $(".productBuyQty").text();
+			const productNo = $("[name=productNo]").val();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
@@ -728,6 +759,15 @@ ul li.on a {
 			console.log("zzz");
 			$(this).css("background-color","black");
 		});
+		
+		function goCartAlert(){
+			if (confirm("장바구니로 이동하시겠습니까?")){
+				location.href="/"
+			}else{
+				return
+			}
+		}
+		
 		</script>
 </body>
 </html>

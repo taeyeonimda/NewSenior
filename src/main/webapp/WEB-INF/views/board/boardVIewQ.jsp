@@ -34,17 +34,25 @@
 		</tr>
 		<tr>
 			<th>카테고리</th>
-			
-				<c:if test ="${b.boardCategory eq 'info'}">
-					<td>정보</td>
-				</c:if>
-				<c:if test ="${b.boardCategory eq 'etc'}">
-					<td>기타</td>
-				</c:if>
-				<!-- notice 추후 삭제예정 -->
-				<c:if test ="${b.boardCategory eq 'notice'}">
-					<td>공지</td>
-				</c:if>
+			<!-- QNA -->
+			<c:if test ="${b.boardCategory eq 'class'}">
+				<td>클래스</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'club'}">
+				<td>동호회</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'activity'}">
+				<td>액티비티</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'product'}">
+				<td>상품</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'pay'}">
+				<td>결제</td>
+			</c:if>
+			<c:if test ="${b.boardCategory eq 'delivery'}">
+				<td>배송</td>
+			</c:if>
 		</tr>
 		<tr>
 			<th>닉네임</th>
@@ -96,7 +104,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<span>댓글</span>
+						<span>댓글boardViewQ</span>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -131,7 +139,7 @@
 					</p>
 					<p>${bc.boardCommContent }</p>
 					<textarea name="boardCommContent" style="display:none;">${bc.boardCommContent}</textarea>
-					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
+					
 					<p>
 						<c:if test="${not empty sessionScope.m }">
 							<c:if test="${sessionScope.m.memberGrade eq 3 }">

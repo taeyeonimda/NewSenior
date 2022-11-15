@@ -171,7 +171,6 @@
 			input::placeholder {
 			font-weight:800;
 			color: #9fa2a6;
-			
 			}
 	</style>
          
@@ -234,6 +233,8 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu bg-light m-0">
+
+                     	<a href="#">${isLogin }</a>
                         <a href="/boardList.do?reqPage=1&boardType=F" class="dropdown-item">자유게시판</a>
                         <a href="boardList.do?reqPage=1&boardType=P" class="dropdown-item">동호회모집</a>
                         <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
@@ -247,6 +248,7 @@
                         <a href="/boardList.do?reqPage=1&boardType=N" class="dropdown-item">공지사항</a>
                         <a href="boardList.do?reqPage=1&boardType=Q" class="dropdown-item">Q&A</a>
                         <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">FAQ(없을수도)</a>
+                         <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">강사모집</a>
                     </div>
                 </div>
                 
@@ -303,7 +305,7 @@
         
         <!-- 카카오 로그인 -->
      
-        <ul>
+        <ul style="display: none;">
 			<li onclick="kakaoLogout();">
 		      <a href="javascript:void(0)">
 		          <span>카카오 회원 탈퇴</span>
@@ -381,6 +383,7 @@
 	        	  console.log(response.properties.nickname)
 	        	  console.log(response.kakao_account.email)
 	        	  //로그인 성공 후 insert 하기
+	        	  
 	        	  $.ajax({
 	        		  url: "/kakaoLogin.do",
 	        		  type:'post',

@@ -40,8 +40,8 @@ public class BoardController {
 		System.out.println("boardList pageMap : "+pageMap);
 		model.addAttribute("list",(ArrayList<Board>)pageMap.get("list"));
 		model.addAttribute("pageNavi",(String)pageMap.get("pageNavi"));
-		model.addAttribute("reqPage",(int)pageMap.get("reqPage"));
-		model.addAttribute("numPerPage",(int)pageMap.get("numPerPage"));
+		model.addAttribute("reqPage",(Integer)pageMap.get("reqPage"));
+		model.addAttribute("numPerPage",(Integer)pageMap.get("numPerPage"));
 		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
 		//model.addAttribute("boardType",(int)pageMap.get("boardType"));
 		model.addAttribute("boardType",boardType);
@@ -52,29 +52,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardView.do")
-	public String boardView(int boardNo,Model model,String boardType) {
+	public String boardView(int boardNo,Model model,String boardType,HttpSession session,Board b) {
 		HashMap<String, Object> pageViewMap = service.selectOneBoard(boardNo);
 		model.addAttribute("b",(Board)pageViewMap.get("b"));
 		//댓글추가
 		model.addAttribute("commentList",(ArrayList<BoardComment>)pageViewMap.get("commentList"));
 		//대댓글 추가
 		model.addAttribute("reCommentList",(ArrayList<BoardComment>)pageViewMap.get("reCommentList"));
-		
-		/*
-		 //Q&A boardView 따로 만들기 -- 이런식 
-		 //Q&A와 notice는 관리자만 답변 달기 가능
-		if(boardType=="Q") {
-			return "board/boardViewQ";
-		}elseif(boardType=="N") {
-			return "board/boardViewN";
-		}else{
-			return "board/boardView";
-		}
-		 */ 
-		
-		/* 아니면 boardList처럼 sql에서 분류??*/
-		/*아니면 boardView jsp에서 c:if로 조건걸어주기*/
+		session.setAttribute("boardType",boardType);
+		System.out.println("controllerView boardType :"+boardType);
 		return "board/boardView";
+			
+			
 	}
 	
 	@RequestMapping(value="/boardWriteFrm.do")
@@ -125,11 +114,13 @@ public class BoardController {
 		b.setFileList(filelist);
 		int result = service.insertBoard(b);
 		System.out.println("writeFrm : "+boardType);
-		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
+		return "redirect:/boardList.do?reqPage=1&boardType="+boardType; //이건 성공
 		//return "redirect:/boardList.do?reqPage=1&boardType=F";
 	}
 	
 	// 게시물 수정
+	// 수정버튼 누르면 주소창에 boardType보내줌 
+	//"/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType} // boardView.jsp
 	@RequestMapping(value="/boardUpdateFrm.do")
 	public String boardUpdateFrm(int boardNo,Model model){
 		HashMap<String, Object> Map = service.selectOneBoard(boardNo);
@@ -139,7 +130,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardUpdate.do")
-	public String boardUpdate(int[] fileNoList, String[] filepathList,Board b,MultipartFile[] boardFile, HttpServletRequest request) {
+	public String boardUpdate(int[] fileNoList, String[] filepathList,Board b,MultipartFile[] boardFile, HttpServletRequest request,String boardType) {
 								//ㄴ(jsp에서)데이터가 같은 name으로 여러개 넘어오면 배열로 받기
 								// 배열: 삭제할파일 no, 삭제할 파일 경로
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
@@ -193,13 +184,13 @@ public class BoardController {
 			}
 		}
 		
-		
+		//return "redirect:/boardView.do?boardNo="+b.getBoardNo()+"&boardType="+boardType;
 		return "redirect:/boardView.do?boardNo="+b.getBoardNo();
-		//return "redirect:/boardViewQ.do?boardNo="+b.getBoardNo();
-		//return "redirect:/boardViewN.do?boardNo="+b.getBoardNo();
 	}
 	
 	//게시물 삭제
+	//삭제버튼 누르면 주소창에 boardType보내줌
+	///boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}(boardView.jsp)
 	@RequestMapping(value="/boardDelete.do")
 	public String boardDelete(int boardNo, HttpServletRequest request,String boardType) {
 		//borad테이블 삭제
@@ -214,6 +205,7 @@ public class BoardController {
 			}
 		}
 		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
+		//return "redirect:/boardList.do?reqPage=1";
 	}
 	
 	//댓글입력
@@ -224,6 +216,7 @@ public class BoardController {
 //		return "board/boardView.do?boardNo="+bc.getBoardRef();
 	
 		return "redirect:/boardView.do?boardNo="+bc.getBoardRef();
+		
 
 	
 	// 댓글 수정
@@ -287,18 +280,19 @@ public class BoardController {
 	
 	// 카테고리별 검색기능 -- 게시판 별로 따로 제작???
 	@RequestMapping(value="/searchBoard.do")
-	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model,HttpSession session) {
+	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model,HttpSession session,String boardType) {
 		
-		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag,searchInput);
+		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag,searchInput,boardType);
 		
 		model.addAttribute("list",(ArrayList<Board>)categoryMap.get("list"));
 		model.addAttribute("pageNavi",(String)categoryMap.get("pageNavi"));
-		model.addAttribute("reqPage",(int)categoryMap.get("reqPage"));
-		model.addAttribute("numPerPage",(int)categoryMap.get("numPerPage"));
+		model.addAttribute("reqPage",(Integer)categoryMap.get("reqPage"));
+		model.addAttribute("numPerPage",(Integer)categoryMap.get("numPerPage"));
 		//reqPage,numPerPage는 글번호와 상관없이 가장 최신글이 1번으로 출력되게 하기 위해서 보내줌
 		model.addAttribute("categoryTag",(String)categoryMap.get("categoryTag"));
 		model.addAttribute("searchTag",(String)categoryMap.get("searchTag"));
 		model.addAttribute("searchInput",(String)categoryMap.get("searchInput"));
+		model.addAttribute("searchInput",(String)categoryMap.get("boardType"));
 		
 		session.setAttribute("categoryTag",(String)categoryMap.get("categoryTag"));
 		session.setAttribute("searchTag",(String)categoryMap.get("searchTag"));

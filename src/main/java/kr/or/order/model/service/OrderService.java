@@ -47,10 +47,20 @@ public class OrderService {
 	}
 
 
+	public ArrayList<Order> findDate(Order o) {
+		ArrayList<Order> list = dao.findDate(o);
+		return (ArrayList<Order>) list;
+	}
 
-	
-	
-	
+
+	public int deleteOrder(Order o) {
+		return dao.deleteOrder(o);
+	}
+
+
+	public int inputDeliveryInfo(Order o) {
+		return dao.inputDeliveryInfo(o);
+	}
 	
 	
 }

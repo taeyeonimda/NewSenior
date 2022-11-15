@@ -195,10 +195,11 @@ public class MemberService {
 		return dao.deleteUser(m);
 	}
 
-	/*
+
 	public int deleteMember() {
 		// TODO Auto-generated method stub
 		return dao.deleteMember();
 	}
-	*/
+
+	
 }

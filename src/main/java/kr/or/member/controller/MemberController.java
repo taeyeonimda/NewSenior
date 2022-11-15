@@ -1,19 +1,18 @@
 package kr.or.member.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
+import common.FileRename;
 import kr.or.category.model.service.CategoryService;
 import kr.or.category.model.vo.Category;
 import kr.or.common.MailSender;
@@ -41,6 +39,8 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private CategoryService service2;
+	@Autowired
+	private FileRename fileRename;
 	
 	@RequestMapping(value="/memberMgrAdmin.do")
 	public String memberMgrAdmin() {
@@ -132,9 +132,10 @@ public class MemberController {
 		
 		//마이페이지 내정보수정하기
 		@RequestMapping(value = "/mypageUpdate.do")
-		public String mypageUpdate(Member member, @SessionAttribute Member m) {
-			System.out.println("생일이다:"+member.getMemberBirth());
+		public String mypageUpdate(Member member, @SessionAttribute Member m, MultipartFile[] files, HttpServletRequest request) {
+			
 			member.setKakaoLogin(m.getKakaoLogin());
+			
 			if(member.getMemberId() == "") {
 				member.setMemberId(m.getMemberId());
 			}
@@ -147,17 +148,41 @@ public class MemberController {
 			if(member.getMemberBirth() == "") {
 				member.setMemberBirth(m.getMemberBirth());
 			}
-			System.out.println("생일:"+member.getMemberBirth());
-			System.out.println("controller에서 member값: "+member);
+			if(member.getKakaoLogin() == null) {
+				member.setMemberNo(m.getMemberNo());
+			}
+			//파일 
+			if(!files[0].isEmpty()) {
+				String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+				for(MultipartFile file : files) {
+					String filename = file.getOriginalFilename();
+					String filepath = fileRename.fileRename(savePath, filename);
+					try {
+						FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+						BufferedOutputStream bos = new BufferedOutputStream(fos);
+						try {
+							byte[] bytes = file.getBytes();
+							bos.write(bytes);
+							bos.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					member.setMemberImg(filepath);
+				}// for문 종료
+			}
 			int result = service.updateMember(member);
-			System.out.println("###"+result);
 			if (result > 0) {
 				m.setMemberPhone(member.getMemberPhone());
 				m.setMemberEmail(member.getMemberEmail());
 				m.setFavorite(member.getFavorite());
 				m.setMemberBirth(member.getMemberBirth());
 				m.setNickName(member.getNickName());
-				System.out.println("디비 거치고 온 member값: "+member);
+				m.setMemberImg(member.getMemberImg());
 				return "redirect:/mypage.do";
 			} else {
 				return "redirect:/mypage.do";
@@ -220,7 +245,7 @@ public class MemberController {
 		
 		@RequestMapping(value="/kakao.do")
 		public String kakao() {
-			return "redirect:/";
+			return "redirect:/mypage.do";
 		}
 		
 		//회원가입_아이디체크
@@ -282,7 +307,9 @@ public class MemberController {
 				model.addAttribute("member", member);
 				return "member/searchIdSuccess";
 			} else {
-				return "redirect:/";
+				model.addAttribute("msg", "아이디를 찾을 수 없습니다.");
+				model.addAttribute("url","/searchInfoFrm.do");
+				return "alert";
 			}
 		}
 		
@@ -418,5 +445,35 @@ public class MemberController {
 			}
 		}
 		
-		
+		//파일 업로드
+		@ResponseBody
+		@RequestMapping(value="/imgUpload.do")
+		public String imgUpload(@SessionAttribute Member m, MultipartFile[] files, HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+			if(!files[0].isEmpty()) {
+				String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+				for(MultipartFile file : files) {
+					String filename = file.getOriginalFilename();
+					String filepath = fileRename.fileRename(savePath, filename);
+					try {
+						FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+						BufferedOutputStream bos = new BufferedOutputStream(fos);
+						try {
+							byte[] bytes = file.getBytes();
+							bos.write(bytes);
+							bos.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					m.setMemberImg(filepath);
+					System.out.println("filepath"+filepath);
+					model.addAttribute("memberImg", m.getMemberImg());
+				}// for문 종료
+			}
+			return "0";
+		}
 }

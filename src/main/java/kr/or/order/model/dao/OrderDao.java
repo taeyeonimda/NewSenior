@@ -49,6 +49,22 @@ public class OrderDao {
 	}
 
 
+	public ArrayList<Order> findDate(Order o) {
+		List list = sqlSession.selectList("order.findDate", o);
+		return (ArrayList<Order>) list;
+	}
+
+
+	public int deleteOrder(Order o) {
+		return sqlSession.delete("order.deleteOrder", o);
+	}
+
+
+	public int inputDeliveryInfo(Order o) {
+		return sqlSession.update("order.inputDeliveryInfo", o);
+	}
+
+
 	
 
 	
