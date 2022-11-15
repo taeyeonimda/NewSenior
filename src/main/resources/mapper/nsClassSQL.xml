@@ -294,4 +294,9 @@
 	</select>
 	
 	
+	<!-- 클래스 결제 -->
+	<insert id="insertPayClassHistory" parameterType="clh">
+		insert into class_history values (class_history_seq.nextval, #{classNo }, #{memberNo }, #{amount }, 0)
+	</insert>
+	
 </mapper>
