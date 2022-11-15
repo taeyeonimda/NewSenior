@@ -120,7 +120,7 @@ ul li.on a {
 				                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
 				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
 								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
-			                	<button type="submit">장바구니</button>
+			                	<button type="submit" onclick="goCartAlert()">장바구니</button>
 			                 	<button type="button" id="loginCheckBtn">바로구매</button>
 		            	</form>
 	            	</c:otherwise>
@@ -759,6 +759,15 @@ ul li.on a {
 			console.log("zzz");
 			$(this).css("background-color","black");
 		});
+		
+		function goCartAlert(){
+			if (confirm("장바구니로 이동하시겠습니까?")){
+				location.href="/"
+			}else{
+				return
+			}
+		}
+		
 		</script>
 </body>
 </html>
