@@ -71,15 +71,15 @@
 
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<!-- HTML5 Inputs -->
-			<form action="/mypageUpdate.do"  method="post" enctype="multipart/form-data">
+			<form action="/mypageUpdate.do"  method="post" enctype="multipart/form-data" class="upform">
 				<div class="card mb-4" /*style="width: 60%;*/">
 					<h5 class="card-header">내정보</h5>
 					<div class="card-body" style="padding-top: 20px;">
 					<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">프로필</label>
 							<div class="col-md-10 ">
-								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" style="width:100px; height:100px; border-radius: 50%;"><br><br>
-								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="memberImg" name="files" accept=".gif, .jpg, .png"></span><button class="btn btn-outline-warning myImg">프로필 바꾸기</button>
+								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" style="width:100px; height:100px; border-radius: 50%;" class="fileImg"><br><br>
+								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="imgInput" name="files" accept=".gif, .jpg, .png" onchange="readURL(this)"></span><button type="button" class="btn btn-outline-warning delImg" onclick="imgdel();">삭제</button>
 							</div>
 						</div>
 						<div class="mb-3 row">
@@ -555,12 +555,29 @@
     			return false;
     		}
     	}
-    	/*
-    	if($("input[name=memberPhone]").val() =="" || $("input[name=memberBirth]").val() == ""){
-    		alert("회원정보를 입력해주세요!");
+    	//삭제 
+    	function imgdel(){
+    		$(".fileImg").attr("src", "/resources/upload/member/user.png");
+    		$(".upform").attr("action","/mypageUpdate.do?defaultImg=user.png");
+    		 let reader = new FileReader();
+    		 reader.onload = function (e) {
+                 let img = $(".fileImg");
+                 $(img).attr('src', e.target.result);
+             }
+    		
     	}
-    	*/
-    
+    	//미리보기
+    	function readURL(obj) {
+            let reader = new FileReader();
+            if(!obj.files.length) {
+                return;
+            }
+            reader.readAsDataURL(obj.files[0]);
+            reader.onload = function (e) {
+                let img = $(".fileImg");
+                $(img).attr('src', e.target.result);
+            }
+        }
     </script>
 </body>
 </html>
