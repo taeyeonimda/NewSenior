@@ -27,12 +27,24 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 	
+//	@RequestMapping(value="/orderHistory.do")
+//	public String orderHistory(Model model, Order o ) {
+//		ArrayList<Order> list = service.selectAllOrderHistory(o);
+//		model.addAttribute("list",list);
+//		
+//		return "myPage/orderHistory";
+//	}
+//	
+
 	@RequestMapping(value="/orderHistory.do")
-	public String orderHistory(Model model, Order o ) {
-		ArrayList<Order> list = service.selectAllOrderHistory(o);
+	public String orderHistory(Model model, Delivery de ) {
+		ArrayList<Delivery> list = service.selectAllOrderHistory(de);
 		model.addAttribute("list",list);
+		
 		return "myPage/orderHistory";
 	}
+	
+	
 	
 	@RequestMapping(value="/findDate.do")
 	public String findDate(Model model,Order o, String startDate,String orderDate, String endDate) {
@@ -48,9 +60,16 @@ public class OrderController {
 	
 	
 	@RequestMapping(value="/orderDetail.do")
-	public String orderDetail(Order o, Model model) {
-		ArrayList<OrderDetail> list = service.selectOrderDetail(o);
-		model.addAttribute("list",list);
+	public String orderDetail(OrderDetail od, Model model, int orderNo, int memberNo, int orderPrice) {
+		//, int orderNo, int memberNo
+		od.setMemberNo(memberNo);
+		od.setOrderNo(orderNo);
+		od.setOrderPrice(orderPrice);
+		
+		//ArrayList<Order> list2 = service.selectDetailOrderHistory(o);
+		//model.addAttribute("list2",list2);
+		//ArrayList<OrderDetail> list = service.selectOrderDetail(o);
+		//model.addAttribute("list",list);
 	    return "myPage/orderDetailHistory";
 	 }
 	
@@ -66,11 +85,11 @@ public class OrderController {
 	public String goDelivery(Delivery de,Order o) {
 		int result1 = service.insertOrder(o);
 		
-		System.out.println(o);
 		int result2 = service.gogoDelivery(de);
 		
 		int result3 = service.deleteOrder(o);
-		System.out.println(o.getMemberNo());
+		
+		//int result4 = service.insertDetail(o);
 		
 		return "redirect:/orderHistory.do?memberNo="+de.getMemberNo();
 	}

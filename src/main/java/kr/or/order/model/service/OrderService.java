@@ -19,9 +19,9 @@ public class OrderService {
 	@Autowired
 	private OrderDao dao;
 
-	public ArrayList<Order> selectAllOrderHistory(Order o) {
-		ArrayList<Order> list = dao.selectAllOrderHistory(o);
-		return (ArrayList<Order>) list;
+	public ArrayList<Delivery> selectAllOrderHistory(Delivery de) {
+		ArrayList<Delivery> list = dao.selectAllOrderHistory(de);
+		return (ArrayList<Delivery>) list;
 	}
 	
 	
@@ -60,6 +60,11 @@ public class OrderService {
 
 	public int inputDeliveryInfo(Order o) {
 		return dao.inputDeliveryInfo(o);
+	}
+
+
+	public ArrayList<Order> selectDetailOrderHistory(Order o) {
+		return dao.selectDetailOrderHistory(o);
 	}
 	
 	

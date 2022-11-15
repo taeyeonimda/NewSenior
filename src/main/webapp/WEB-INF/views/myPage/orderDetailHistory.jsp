@@ -77,21 +77,23 @@
                 
                 <table class="table table-borderless">
                 	<tr>
-                		<th>주문날짜</th>
-                		<th>상품이름</th>
-                		<th>주문갯수</th>
-                		<th>전화번호</th>
-                		<th>주소</th>
-                		<th>수령인</th>
+                		<th>주문번호</th>
+                		<th>주문일자</th>
+                		<th>구매수량</th>
+                		<th>총주문금액</th>
+                		<th>수령인이름</th>
+                		<th>수령주소</th>
+                		<th>수령인 전화번호</th>
                 	</tr>	
-					<c:forEach items="${list }" var="Or">
+					<c:forEach items="${list2 }" var="Or">
 					<tr>
+						<td>${Or.orderNo }</td>
 						<td>${Or.orderDate }</td>
-						<td>${Or.productName }</td>
-						<td>${Or.orderDetailAmount }</td>
-						<td>${Or.receivePhone }</td>
-						<td>${Or.receiveAddr }</td>
-						<td>${Or.receiveName }</td>
+						<td>${Or.orderAmount }</td>
+						<td>${Or.orderPrice }</td>
+						<td>${Or.receiverName }</td>
+						<td>${Or.receiverAddr }</td>
+						<td>${Or.receiverPhone }</td>
 					</tr>
 					</c:forEach>
 				</table>
