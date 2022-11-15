@@ -522,7 +522,7 @@
                     <div class="portfolio-inner rounded">
                         <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:410px; height:400px">
                         <div class="portfolio-text">
-                            <h4 class="text-white mb-4">동호회3${param.login }</h4>
+                            <h4 class="text-white mb-4">동호회3</h4>
                             <div class="d-flex">
                                 <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/MAINbtstr/img/service-6.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>

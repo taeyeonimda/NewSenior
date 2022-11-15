@@ -10,8 +10,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.activity.model.vo.Activity;
+import kr.or.activity.model.vo.ActivityHistory;
+import kr.or.activity.model.vo.ActivityReview;
 import kr.or.activity.model.vo.FileVo;
 import kr.or.cart.model.vo.Cart;
+import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Repository
@@ -90,5 +93,35 @@ public class ActivityDao {
 	public int activityDelete(Activity act) {
 		int result = sqlSession.insert("activity.activityDelete",act);
 		return result;
+	}
+
+
+	public int insertActHistory(ActivityHistory actH) {
+		int result = sqlSession.insert("activity.insertActHistory",actH);
+		return result;
+	}
+
+
+	public ActivityHistory checkActHistory(ActivityHistory actH) {
+		ActivityHistory actHi = sqlSession.selectOne("activity.checkActHistory",actH);
+		return actHi;
+	}
+
+
+	public int insertActivityReview(ActivityReview actR) {
+		int result = sqlSession.insert("activity.insertActivityReview",actR);
+		return result;
+	}
+
+
+	public ArrayList<ActivityReview> actReviewList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("activity.actReviewList",map);
+		return (ArrayList<ActivityReview>)list;
+	}
+
+
+	public int selectActReviewCnt(int activityNo) {
+		int totalCount = sqlSession.selectOne("activity.selectActReviewCnt",activityNo);
+		return totalCount;
 	}
 }

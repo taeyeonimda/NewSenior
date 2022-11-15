@@ -36,6 +36,8 @@
 		 
 		  <typeAlias type="kr.or.activity.model.vo.Activity" alias="act"/>
 		  <typeAlias type="kr.or.activity.model.vo.FileVo" alias="actF"/>
+		  <typeAlias type="kr.or.activity.model.vo.ActivityHistory" alias="actH"/>
+		  <typeAlias type="kr.or.activity.model.vo.ActivityReview" alias="actR"/>
 		  
 		  <typeAlias type="kr.or.category.model.vo.Category" alias="category"/>
 		
