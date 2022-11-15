@@ -97,6 +97,10 @@
 		<interceptor>
 			<mapping path="/mypage.do" /><!-- 로그인 한사람만 갈 수 있는 페이지 -->
 			<mapping path="/actInsertCart.do"/>
+			<mapping path="/insertActHistory.do"/>
+			<mapping path="/insertActivityReview.do"/>
+			
+			
 			
 			<exclude-mapping path="/login.do"/><!-- 로그인 안해도 갈수 있는 페이지 -->
 			<exclude-mapping path="/joinFrm.do"/> 
