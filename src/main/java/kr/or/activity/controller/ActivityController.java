@@ -99,6 +99,17 @@ public class ActivityController {
 		model.addAttribute("numPerPage",arpd.getNumPerPage());
 		
 		return new Gson().toJson(model);
-
+	}
+	
+	//리뷰삭제
+	@ResponseBody
+	@RequestMapping(value = "/deleteMyReview.do")
+	public String deleteMyReview(int actReviewNo) {
+		int result = service.deleteMyReview(actReviewNo);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
 	}
 }
