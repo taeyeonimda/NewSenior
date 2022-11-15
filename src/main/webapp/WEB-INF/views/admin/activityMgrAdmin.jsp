@@ -54,6 +54,25 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
+		<style>
+.swal2-icon {
+    position: relative;
+    box-sizing: content-box;
+    justify-content: center;
+    width: 3em;
+    height: 3em;
+    margin: 1.25em auto 1.875em;
+    border: 0.25em solid transparent;
+    border-radius: 50%;
+    font-family: inherit;
+    line-height: 3em;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+</style>
 <body>
 	<!-- Layout wrapper -->
 	<div class="content-wrapper"
@@ -256,6 +275,7 @@
 	<!-- Page JS -->
 
 	<!-- Place this tag in your head or just before your close body tag. -->
+
 	<script>
     $("#allChkBox").on("click", function() {
 		if ($("input[name=allChkBox]").is(":checked")) {
@@ -273,9 +293,24 @@
     }
     
     function activityDelete(number){
-    	if(confirm("삭제 하시겠습니까?")){
-    		location.href="/activityDelete.do?activityNo="+number;
-    	}
+    	
+    	Swal.fire({
+			  title: "선택한 목록을 삭제하시겠습니까??",//제목
+			  icon: "warning",//아이콘
+			  imageWidth: "30",
+			  imageHeight: "30",
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '삭제',
+			  cancelButtonText: '취소'
+			}).then((result) => {
+				//result.value == true이니까 트루일때만 실행하는거
+			  if (result.value) {
+				  location.href="/activityDelete.do?activityNo="+number;
+			  }
+			})//then끝
+  
     }
     </script>
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
