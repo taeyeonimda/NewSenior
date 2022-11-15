@@ -176,6 +176,8 @@ public class MemberController {
 				}// for문 종료
 			}
 			
+			System.out.println("$$$$"+member.getMemberImg());
+			System.out.println("^^^^^"+m.getMemberImg());
 			if(member.getMemberImg() == null) {
 				member.setMemberImg(m.getMemberImg());
 			}
@@ -231,7 +233,7 @@ public class MemberController {
 			Member member = service.loginCheckKaKaoMember(m);
 			if(member != null) {
 				session.setAttribute("m", member);
-				System.out.println("######여기1");
+				System.out.println("######여기1"+member);
 				if(member.getMemberState() != null) {
 					session.invalidate();
 					System.out.println("######여기2");

@@ -233,9 +233,9 @@
                     <div class="col-md-10">
                     <c:choose>
                     <c:when test="${!empty p.productFileVO[0].fileName}">
-                      <input type="file" name="productFile" id="producetFile1" class="productFile upImg" style="display: none;">
+                      <input type="file" name="productMainFile" id="producetFile1" class="productFile upImg" style="display: none;">
                       <span id="productImg1" class="mainImg">${p.productFileVO[0].fileName }</span>
-                      <button class="productDelBtn1" type="button" onclick="deleteimgFile(this,${p.productFileVO[0].fileNo},'${p.productFileVO[0].filePath }')">삭제</button>
+                      <button class="productDelBtn1" type="button" onclick="deleteMainFile(this,${p.productFileVO[0].fileNo},'${p.productFileVO[0].filePath }')">삭제</button>
                     </c:when>
                     <c:otherwise>
                       <input type="file" name="productFile" id="productFile2" class="productFile" style="display: block;">
@@ -412,6 +412,18 @@
 		$(this).prev().prev().show();
 		$(this).hide();
 	});
+	function deleteMainFile(obj,mainFileNo,mainFilepath){
+		const mainFileNoInput = $("<input>");
+		mainFileNoInput.attr("name","mainFileNo");
+		mainFileNoInput.val(mainFileNo);
+		mainFileNoInput.hide();
+		const mainFilepathInput = $("<input>");
+		mainFilepathInput.attr("name","productMainpath");
+		mainFilepathInput.val(mainFilepath);
+		mainFilepathInput.hide();
+		
+		$("#productUpdateFrm").append(mainFileNoInput).append(mainFilepathInput);
+	}
 	function deleteimgFile(obj,fileNo,filepath){
 		const fileNoInput = $("<input>");
 		fileNoInput.attr("name","fileNoList");

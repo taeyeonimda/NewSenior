@@ -36,7 +36,31 @@
     <!-- Template Stylesheet -->
     <link href="/resources/MAINbtstr/css/style.css" rel="stylesheet">
 </head>
+<style>
+.speech-bubble {
+	position: relative;
+	background: #E8F5E9;
+	border-radius: .4em;
+	width: 450px;
+	margin-right: 20px;
+	padding: 30px;
+}
 
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	right: 50;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 54px solid transparent;
+	border-right-color: #E8F5E9;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -27px;
+	margin-left: -54px;
+}
+</style>
 <body>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -77,7 +101,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="/resources/img/은비7.jpg"  alt="Image" style="width:800px; height:800px; object-fit:cover;">
+                    <img class="w-100" src="/resources/img/은비7.jpg"  alt="Image" style="height:800px; object-fit:cover;">
                     <div class="carousel-caption" style="background-color: rgba(15, 66, 41, .2);">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -404,144 +428,12 @@
     </div>
     <!-- 여백 End -->
 
-    <!-- Projects Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-bold text-primary">NewSeinors</p>
-                <h1 class="display-5 mb-5">뉴 시니어스의 다양한 활동들</h1>
-            </div>
-            <div class="row wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-12 text-center">
-                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">전체보기</li>
-                        <li class="mx-2" data-filter=".NSactivity">액티비티</li>
-                        <li class="mx-2" data-filter=".NSclass">클래스</li>
-                        <li class="mx-2" data-filter=".NSclub">동호회</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row g-4 portfolio-container" >
-                <div class="col-lg-4 col-md-6 portfolio-item NSactivity wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded" >
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-1.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text" style="width:400px;">
-                            <h4 class="text-white mb-4">액티비티1</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-1.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass1.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">클래스1</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-2.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-3.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">동호회1</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-3.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass2.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">클래스2</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-4.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSactivity wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-5.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">액티비티2</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-5.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/modelClass3.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">클래스3</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-6.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclass wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">클래스4</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-6.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">동호회2</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-6.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item NSclub wow fadeInUp" data-wow-delay="0.3s" style="width:430px; height:400px">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/service-6.jpg" alt="" style="width:410px; height:400px">
-                        <div class="portfolio-text">
-                            <h4 class="text-white mb-4">동호회3</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="/resources/MAINbtstr/img/service-6.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Projects End -->
-
-
     <!-- Team Start -->
     <div class="container-xxl py-5">
         <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px; height:300px;">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px; height:200px;">
                 <p class="fs-5 fw-bold text-primary">NewSenior</p>
-                <h1 class="display-5">이 달의 우수 강사님</h1>
+                <h1 class="display-5">이 달의 우수 강사</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -592,6 +484,17 @@
     <!-- Team End -->
     
 
+	<!-- 여백 -->
+    <div class="container-xxl py-4">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 여백 End -->
 
     <!-- Testimonial Start -->
     <div class="container-xxl py-5">
@@ -605,23 +508,44 @@
                 </div>
                 <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="owl-carousel testimonial-carousel">
-                        <div class="testimonial-item">
-                            <img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/kimchildo.jfif" alt="">
-                            <p class="fs-5">모델 김칠두임돠</p>
-                            <h4>모델 </h4>
-                            <span>김칠두</span>
+                        <div class="testimonial-item" style="display: flex; justify-content: space-between;">
+                        	<div>
+                        		<img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/시니모델3.jpg" alt="">
+	                            <p class="fs-5">무신사의 시니어 모델</p>
+	                            <h4>모델</h4>
+	                            <span>김칠두</span>
+                        	</div>
+                        	<div class="speech-bubble">
+                        		<p>"간절함은 모든 것을 이겨요.
+								마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요.
+								나를 보면서 '70대 노인도 하는데 나는 왜 못 해?'라는 생각을 하고 용기 내서 나아가길 바랍니다."</p>
+                        	</div>
                         </div>
-                        <div class="testimonial-item">
-                            <img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/milanonna.jfif" alt="">
-                            <p class="fs-5">패션유튜버 밀라논나임돠</p>
-                            <h4>95만유튜버 </h4>
-                            <span>밀라논나</span>
+                        <div class="testimonial-item" style="display: flex; justify-content: space-between;">
+                        	<div>
+                        		<img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/시니모델2.png" alt="">
+	                            <p class="fs-5">78살에 데뷔</p>
+	                            <h4>시니어 모델</h4>
+	                            <span>최순화</span>
+                        	</div>
+                        	<div class="speech-bubble">
+                        		<p>"간절함은 모든 것을 이겨요.
+								마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요.
+								나를 보면서 '70대 노인도 하는데 나는 왜 못 해?'라는 생각을 하고 용기 내서 나아가길 바랍니다."</p>
+                        	</div>
                         </div>
-                        <div class="testimonial-item">
-                            <img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/parkmakrye.jfif" alt="" >
-                            <p class="fs-5">안녕 나는 박막례</p>
-                            <h4>127만 유튜버</h4>
-                            <span>박막례</span>
+                        <div class="testimonial-item" style="display: flex; justify-content: space-between;">
+                        	<div>
+                        		<img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/시니모델1.jpg" alt="">
+	                            <p class="fs-5">127만 구독자 달성</p>
+	                            <h4>유튜버</h4>
+	                            <span>박막례</span>
+                        	</div>
+                        	<div class="speech-bubble">
+                        		<p>"간절함은 모든 것을 이겨요.
+								마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요.
+								나를 보면서 '70대 노인도 하는데 나는 왜 못 해?'라는 생각을 하고 용기 내서 나아가길 바랍니다."</p>
+                        	</div>
                         </div>
                     </div>
                 </div>
@@ -630,7 +554,18 @@
     </div>
     <!-- Testimonial End -->
 
-
+	<!-- 여백 -->
+    <div class="container-xxl py-4">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 여백 End -->
+    
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">

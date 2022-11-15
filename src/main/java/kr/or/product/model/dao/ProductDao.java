@@ -110,6 +110,14 @@ public class ProductDao {
 		return sqlSession.selectOne("product.productReviewCount",map);
 	}
 
+	public int searchLowNum(int productNo) {
+		return sqlSession.selectOne("product.searchLowNum",productNo);
+	}
+
+	public int updateProductImg(ProductFileVO mainFile) {
+		return sqlSession.update("product.updateProductImg",mainFile);
+	}
+
 	
 
 
