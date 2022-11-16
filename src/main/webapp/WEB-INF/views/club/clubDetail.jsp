@@ -584,6 +584,7 @@
 	
     // 채팅모달
     function openModal() {
+		alert("안녕하세요 모달입니다");
     	$("#member-box").show();
     	$(".modal-wrap").css("display", "flex");
 	}
