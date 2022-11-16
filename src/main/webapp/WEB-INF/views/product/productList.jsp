@@ -17,9 +17,10 @@
         <!-- <div class="marketTitle">
         	<a href="/insertProductFrm.do">상품등록</a>
         </div> -->
-        
         <div class="productList">
          <c:forEach items="${list }" var="p">
+         <c:choose>
+         <c:when test="${p.productStatus eq 0 }">
             <div>
                 <a href="/productView.do?productNo=${p.productNo }&memberId=${sessionScope.m.memberId}">
                 	<img src="/resources/upload/productImg/${p.productFileVO[0].filePath }" style="width:360px; height: 300px;">
@@ -29,6 +30,8 @@
                     <div class="productPrice">${p.wonPrice }<span>원</span></div>
                 </a>
             </div>
+            </c:when>
+            </c:choose>
        	 </c:forEach>
         </div>
         <div style="text-align: center;">
