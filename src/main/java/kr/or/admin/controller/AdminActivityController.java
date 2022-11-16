@@ -109,7 +109,6 @@ public class AdminActivityController {
 		
 		
 		
-		System.out.println("액티비티 컨트롤러 체크" +activity);
 		int result = service.insertActivity(activity);
 		if(result>0) {
 			return "admin/activityMgrAdmin";

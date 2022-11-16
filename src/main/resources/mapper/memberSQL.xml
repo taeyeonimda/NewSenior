@@ -77,6 +77,7 @@
 			nickName as nickName,
 			member_email as memberEmail,
 			member_state as memberState,
+			member_grade as memberGrade,
 			member_img as memberImg
 	from members
 	where kakaoLogin=#{kakaoLogin} 

@@ -94,7 +94,8 @@ public class MemberController {
 			}
 			return "redirect:/";
 		}else {
-			return "redirect:/index.jsp?login=1";
+		
+			return "redirect:/main.do?login=1";
 		}
 	}
 	
@@ -122,6 +123,8 @@ public class MemberController {
 			m1.setKakaoLogin(m.getKakaoLogin());
 			Member member = service.selectOneMember(m1);
 			ArrayList<Delivery> list = service.selectAllDelivery(member);
+			System.out.println("마이페이지컨트롤러 세션 m"+m);
+			System.out.println("마이페이지컨트롤러 멤버"+member);
 			if (member != null) {
 				model.addAttribute("list",list);
 				model.addAttribute("member", member);
