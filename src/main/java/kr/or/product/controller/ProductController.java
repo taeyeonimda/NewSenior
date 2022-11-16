@@ -249,4 +249,12 @@ public class ProductController {
 		return "redirect:/productView.do?productNo="+pr.getProductNo();
 	}
 	
+	@RequestMapping(value = "/directBuyProduct.do")
+	public String directBuyProduct(int productNo,Model model,int productBuyQty) {
+		Product p = service.directBuyProduct(productNo);
+		model.addAttribute("p",p);
+		model.addAttribute("pp",productBuyQty);
+		return "product/productDirectBuy";
+	}
+	
 }
