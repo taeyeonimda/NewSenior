@@ -121,7 +121,7 @@ ul li.on a {
 				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
 								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
 			                	<button type="submit">장바구니</button>
-			                 	<button type="button" id="loginCheckBtn">바로구매</button>
+			                 	<button type="button" id="loginCheckButton">로그인이 필요한 서비스입니다.</button>
 		            	</form>
 	            	</c:otherwise>
             	</c:choose>
@@ -205,13 +205,13 @@ ul li.on a {
 			            </div>
 			            	</c:when>
 			            	<c:otherwise>
-			            		<div style="margin-top: 10px;"><h6>리뷰작성은 <span style="color: red;">1회만</span> 작성하실수 있습니다.</h3></div>
+			            		<div style="margin-top: 10px;"><h6>리뷰작성은 <span style="color: red;">1회만</span> 작성하실수 있습니다.</h6></div>
 			            	</c:otherwise>
 			            	
 			            </c:choose>
 		            </c:when>
 		            <c:otherwise>
-		            	<div style="margin-top: 10px;"><h6>리뷰작성은 로그인 후 이용하실수 있습니다.</h3></div>
+		            	<div style="margin-top: 10px;"><h6>리뷰작성은 로그인 후 이용하실수 있습니다.</h6></div>
 		            </c:otherwise>
 	            </c:choose>
 	            <div class="reviewsTotalDiv">
@@ -281,14 +281,16 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
-		$("#loginCheckBtn").on("click",function(){
-			alert("로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.");
-		});
+		function loginCheckBtn(){
+			alert("로그인이 필요한 서비스입니다.");
+		}
+		
 		function deleteProduct(productNo) {
 			if(confirm("상품을 삭제하시겠습니까?")){
 				location.href="/deleteProduct.do?productNo="+productNo;
 			}
 		}
+		
 		
 		$(".reviewsScore").each(function(index,item){
 			const score = $(item).children().eq(1).children().text();
