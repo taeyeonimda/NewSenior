@@ -22,7 +22,6 @@
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
                         </c:if>
                         <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
@@ -46,11 +45,11 @@
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'I'}">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                <p class="fs-5 fw-bold text-primary">all about Senior Activity</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'P'}">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                <p class="fs-5 fw-bold text-primary">우리 동호회를 소개합니다</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'N'}">
@@ -92,19 +91,19 @@
 	
 		<c:if test="${boardType ne 'Q' }">
 		<div class="boardWrap">
-	<table class="boardListTbl tablep''' border="1">
+	<table class="boardListTbl table" border="1">
 		<tr>
-			<th>번호</th>
-			<th>카테고리</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>조회수</th>
-			<th>작성일</th>
+			<th style="background-color:#0F4229; color:white;">번호</th>
+			<th style="background-color:#0F4229; color:white;">카테고리</th>
+			<th style="background-color:#0F4229; color:white;">제목</th>
+			<th style="background-color:#0F4229; color:white;">작성자</th>
+			<th style="background-color:#0F4229; color:white;">조회수</th>
+			<th style="background-color:#0F4229; color:white;">작성일</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
 		
-			<td>${(reqPage-1)*numPerPage+i.count }</td>
+			<td class="tdNumber">${(reqPage-1)*numPerPage+i.count }</td>
 			<!-- 자유게시판 -->
 			<c:if test ="${b.boardCategory eq 'info'}">
 				<td>정보</td>
@@ -137,44 +136,39 @@
 				<td>기타</td>
 			</c:if>
 			
-			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
+			<td class="boardTitle"><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }<span>[${b.boardCommCnt }]</span></a></td>
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
-			<td>${b.boardDate }</td>
-			<!--<td>${b.boardType }</td>  -->
-			<td><input type="hidden" value="${b.boardType }"></td>
+			<td>${b.boardDate }
+			<input type="hidden" value="${b.boardType }"></td>
 		</tr>
 		</c:forEach>
 		
-		<tr>
-			<th colspan="5">
-				${pageNavi }
-			</th>
-		</tr>
 		</table>
+		
+		<div class="pageNavi">
+				${pageNavi }
+		</div>
 	</div>
 		</c:if>
-		
-			
-
 		
 		<!-- Q&A  -->
 		<c:if test="${boardType eq 'Q' }">
 <div class="boardWrap">
-	<table class="boardListTbl" border="1">
+	<table class="boardListTbl table" border="1">
 		<tr>
-			<th>번호</th>
-			<th>카테고리</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>조회수</th>
-			<th>작성일</th>
-			<th>답변여부</th>
+			<th style="background-color:#0F4229; color:white;">번호</th>
+			<th style="background-color:#0F4229; color:white;">카테고리</th>
+			<th style="background-color:#0F4229; color:white;">제목</th>
+			<th style="background-color:#0F4229; color:white;">작성자</th>
+			<th style="background-color:#0F4229; color:white;">조회수</th>
+			<th style="background-color:#0F4229; color:white;">작성일</th>
+			<th style="background-color:#0F4229; color:white;">답변여부</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
 		
-			<td>${(reqPage-1)*numPerPage+i.count }</td>
+			<td class="tdNumber">${(reqPage-1)*numPerPage+i.count }</td>
 			<!-- QNA -->
 			<c:if test ="${b.boardCategory eq 'class'}">
 				<td>클래스</td>
@@ -194,15 +188,24 @@
 			<c:if test ="${b.boardCategory eq 'delivery'}">
 				<td>배송</td>
 			</c:if>
-			<c:if test="${not empty sessionScope.m }">
-				<c:if test="${sessionScope.m.nickName eq b.nickName || m.memberGrade eq 3 }">
-					<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
-				</c:if>
-			</c:if>
-			<c:if test="${empty sessionScope.m || sessionScope.m.nickName ne b.nickName}">
-				<td><a href="javascript:void(0);"
-								onclick="alert('작성자만 확인할 수 있습니다.');">${b.boardTitle }[${b.boardCommCnt }]</a></td>
-			</c:if>
+			<c:choose>
+				<c:when test="${not empty sessionScope.m }">
+					<c:choose>
+						<c:when test="${sessionScope.m.nickName eq b.nickName || m.memberGrade eq 3 }">
+							<td class="boardTitle"><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }<span>[${b.boardCommCnt }]</span></td>
+						</c:when>
+						<c:otherwise>
+							<td class="boardTitle"><a href="javascript:void(0);"
+								onclick="alert('작성자만 확인할 수 있습니다.');">${b.boardTitle }<span>[${b.boardCommCnt }]</span></a></td>
+						</c:otherwise>
+					</c:choose>	
+				</c:when>
+				<c:otherwise>
+					<td class="boardTitle"><a href="javascript:void(0);"
+								onclick="alert('작성자만 확인할 수 있습니다.');">${b.boardTitle }<span>[${b.boardCommCnt }]</span></td>
+				</c:otherwise>
+			</c:choose>
+			
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
 			<td>${b.boardDate }</td>
@@ -210,16 +213,14 @@
 				<td>답변대기중</td>
 			</c:if>
 			<c:if test="${b.boardCommCnt ne 0 }">
-				<td style="color : green">답변완료</td>
+				<td style="color : green;font-weight: 900;">답변완료</td>
 			</c:if>
 		</tr>
 		</c:forEach>
-		<tr>
-			<th colspan="5">
-				${pageNavi }
-			</th>
-		</tr>
 		</table>
+		<div class="pageNavi">
+				${pageNavi }
+		</div>
 	</div>	
 		</c:if>
 		<!-- Q&A 끝-->
@@ -241,7 +242,7 @@
 				<c:if test="${boardType eq 'F' }">
 					<td>
 						<select name="categoryTag">
-							<option value="">카테고리 전체</option>
+							<option value="">카테고리</option>
 							<option value="info">정보</option>
 							<option value="etc">기타</option>
 						</select>
@@ -250,7 +251,7 @@
 				<c:if test="${boardType eq 'I' }">
 					<td>
 						<select name="categoryTag">
-							<option value="">카테고리 전체</option>
+							<option value="">카테고리</option>
 							<option value="campaign">캠페인</option>
 							<option value="fair">박람회</option>
 							<option value="tour">여행</option>
@@ -261,7 +262,7 @@
 				<c:if test="${boardType eq 'Q' }">
 					<td>
 						<select name="categoryTag">
-							<option value="">카테고리 전체</option>
+							<option value="">카테고리</option>
 							<option value="class">클래스</option>
 							<option value="club">동호회</option>
 							<option value="activity">액티비티</option>
@@ -274,7 +275,7 @@
 				<c:if test="${boardType eq 'N' }">
 					<td>
 						<select name="categoryTag">
-							<option value="">카테고리 전체</option>
+							<option value="">카테고리</option>
 							<option value="notice">공지사항</option>
 						</select>
 					</td>	
@@ -282,14 +283,14 @@
 				<c:if test="${boardType eq 'P' }">
 					<td>
 						<select name="categoryTag">
-							<option value="">카테고리 전체</option>
+							<option value="">카테고리</option>
 							<option value="invite">모집중</option>
 							<option value="end">모집완료</option>
 						</select>
 					</td>	
 				</c:if>
 				<select name="searchTag">
-					<option value="">전체</option>
+					<option value="">제목/작성자</option>
 					<option value="boardTitle">제목</option>
 					<option value="nickName">작성자</option>
 				</select>

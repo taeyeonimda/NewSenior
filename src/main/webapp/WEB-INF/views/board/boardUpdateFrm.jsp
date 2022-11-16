@@ -8,6 +8,7 @@
 <title>게시판 수정</title>
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+	<link href="/resources/css/board/boardUpdate.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 	
 </head>
@@ -28,7 +29,6 @@
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
                         </c:if>
                         <c:if test="${b.boardType eq 'N' or b.boardType eq 'Q' or b.boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
@@ -46,14 +46,17 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                
                 <c:if test="${b.boardType eq 'F'}">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${b.boardType eq 'I'}">
+                <p class="fs-5 fw-bold text-primary">all about Senior Activity</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${b.boardType eq 'P'}">
+                <p class="fs-5 fw-bold text-primary">우리 동호회를 소개합니다</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
                 </c:if>
                 <c:if test="${b.boardType eq 'N'}">
@@ -69,11 +72,6 @@
             
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
-                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <c:forEach items="${list}" var="cateList">
-                        	<li class="mx-2 ${cateList.boardCategory }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardCategory}&reqPage=1">${cateList.boardCategory }</a></li>
-                        </c:forEach>   
-                    </ul>
         	   </div>
                     <div style="display: none;" class="category">${classCategory }</div>
                 </div>
@@ -95,14 +93,15 @@
             </c:forEach>
             </div>
         </div>
+ <div class="boardUpdateWrap">
 	<form action="/boardUpdate.do" id="boardUpdateForm" method="post" enctype="multipart/form-data">
-		<table border="1">
+		<table class="boardUpdateTbl table" border="1">
 			<tr>
-				<th>글번호</th>
+				<th style="background-color:#0F4229; color:white;">글번호</th>
 				<td><input type="hidden" name="boardNo" value="${b.boardNo}">${b.boardNo}</td>
 			</tr>
 			<tr>
-				<th>카테고리</th>
+				<th style="background-color:#0F4229; color:white;">카테고리</th>
 				<c:if test="${b.boardType eq 'F' }">
 					<td>
 						<select name="boardCategory">
@@ -152,13 +151,13 @@
 				
 			</tr>
 			<tr>
-				<th>제목</th>
+				<th style="background-color:#0F4229; color:white;">제목</th>
 				<td colspan="3">
 				<input type="text" name="boardTitle" value="${b.boardTitle}">
 				</td>
 			</tr>
 			<tr>
-				<th>작성자</th>
+				<th style="background-color:#0F4229; color:white;">작성자</th>
 				<td>
 				${sessionScope.m.nickName }
 				<input type="hidden" name="boardType" value="${boardType}">
@@ -166,34 +165,32 @@
 				</td>	
 			</tr>
 			<tr>	
-				<th>작성일</th>
+				<th style="background-color:#0F4229; color:white;">작성일</th>
 				<td>${b.boardDate }</td>
 			</tr>
 			<tr>
-				<th>첨부파일 추가하기</th>
+				<th style="background-color:#0F4229; color:white;">첨부파일 추가하기</th>
 				<td><input type="file" name="boardFile" multiple></td>
 			</tr>
 			<tr>
-				<th>파일목록</th>
+				<th style="background-color:#0F4229; color:white;">파일목록</th>
 				<td colspan="3">
 			<c:forEach items="${b.fileList }" var="bf">
 				<p>${bf.filename }
-				<button type="button" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button></p>
+				<button type="button" class="fileDeleteBtn" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button></p>
 			</c:forEach>
 			</td>
 		</tr>
 			<tr>
-				<th>내용</th>
-				<td><textarea name="boardContent" id="boardContent">${b.boardContent }</textarea></td>
+				<th style="background-color:#0F4229; color:white;">내용</th>
+				<td class="boardContent"><textarea name="boardContent" id="boardContent">${b.boardContent }</textarea></td>
 			</tr>
-			<tr>
-				<td colspan="4">
-					<input type="submit" id="boardUpdateBtn" value="수정하기">
-				</td>
-			</tr>
-			
 		</table>
+			<div class="boardUpdateBtnBox">
+					<input type="submit" id="boardUpdateBtn" class="boardUpdateBtn" value="작성">
+				</div>
 	</form>
+</div>	
 	<script>
 	$("#boardContent").summernote({
 		height:400,

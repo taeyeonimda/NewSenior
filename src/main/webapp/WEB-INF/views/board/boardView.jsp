@@ -31,7 +31,6 @@
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
                         </c:if>
                         <c:if test="${b.boardType eq 'N' or b.boardType eq 'Q' or b.boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
@@ -389,13 +388,13 @@
 						<span>${bc.boardCommDate }</span>
 					</p>
 					<p>${bc.boardCommContent }</p>
-					<textarea name="boardCommContent" style="display:none;">${bc.boardCommContent}</textarea>
+					<textarea name="boardCommContent" class="commUpdateContent" style="display:none;">${bc.boardCommContent}</textarea>
 					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
 
 					<p>
 						<c:if test="${not empty sessionScope.m }">
 							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
-								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a></button>
+								<a href="javaScript:void(0)" class="commUpdateTag" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a></button>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
 						</c:if>
