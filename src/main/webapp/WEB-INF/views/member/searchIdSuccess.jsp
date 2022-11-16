@@ -55,7 +55,7 @@
 <body>
 <%@include file="/WEB-INF/views/common/header3.jsp"%>
 
-	<div class="wra">
+	<div class="wra" style="font-family: 'GmarketSansMedium'!important;">
 		<div class="txt2">${member.memberName }님의  아이디는 <span style="color:red;">${member.memberId }</span>입니다.</div><br>
 			<div class="box1">
 			<button  class="box2 box4 btn" style="background-color: #fff; color:#dc3545; border: 1px solid #dc3545;">로그인하러가기</button>

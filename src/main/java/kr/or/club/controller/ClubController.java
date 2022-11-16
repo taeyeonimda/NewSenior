@@ -123,6 +123,7 @@ public class ClubController {
 	@RequestMapping(value = "/clubDetail.do")
 	public String clubDetail(Club c, Model model){
 		HashMap<String, Object> map = service.selectOneClubMap(c);
+		System.out.println(map.get("club"));
 		model.addAttribute("c", map.get("club"));
 		model.addAttribute("cbList", map.get("board"));
 		return "club/clubDetail";

@@ -1,7 +1,9 @@
 package kr.or.board.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -209,6 +212,53 @@ public class BoardController {
 		return "redirect:/boardList.do?reqPage=1&boardType="+boardType;
 		//return "redirect:/boardList.do?reqPage=1";
 	}
+	
+	//파일 다운로드
+		@RequestMapping(value="/boardFileDown.do")
+		public void boardFileDown(int fileNo,HttpServletResponse response,HttpServletRequest request) { 
+			//fileNo : DB에서 filename,filepath를 조회하기 위한 값
+			//request : 파일이 위치하는 경로를 찾기 위해서 필요
+			//response : 사용자에게 파일을 보내주기 위해 필요
+			
+			//비즈니스 로직
+			//ArrayList<FileVO> downfileList = service.getBoard(fileNo);
+			FileVO f = service.boardFileDown(fileNo);
+			//파일다운로드 경로
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
+			String downFile = savePath+f.getFilepath();
+			
+			 try {
+				//속도개선
+		         FileInputStream fis = new FileInputStream(downFile);
+		         BufferedInputStream bis = new BufferedInputStream(fis);
+		         //파일을 사용자에게 내보내기위한 스트림 생성
+		         ServletOutputStream sos = response.getOutputStream();
+		         BufferedOutputStream bos = new BufferedOutputStream(sos);
+		         //파일명 처리
+		         String resFilename = new String(f.getFilename().getBytes("utf-8"),"ISO-8859-1");//ISO-8859-1 크롬
+		         //파일다운로드를 위한 http헤더 설정
+		         response.setContentType("application/octet-stream");
+		         response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+		         //파일전송
+		         while(true) {
+		            int read = bis.read(); //읽어옴
+		            if(read != -1) {
+		               bos.write(read);
+		            }else {
+		               break;
+		            }
+		         }
+		         bos.close();
+		         bis.close(); //반환 
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	
 	//댓글입력
 	

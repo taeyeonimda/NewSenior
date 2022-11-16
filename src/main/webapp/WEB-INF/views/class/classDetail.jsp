@@ -57,7 +57,7 @@
                 	<c:when test="${not empty sessionScope.m }">
                 	<div class="side-select-box form-floating mb-4">
 	                    <div class="amount-box">
-		                    <select name="amount" class="bg-white border-0 form-control" onchange="changePrice();">
+		                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="changePrice();">
 		                        <option value='' selected>인원수</option>
 		                        <option value=1>1인</option>
 		                        <option value=2>2인</option>
@@ -74,7 +74,7 @@
 	                    </div>
 	                </div>
 	                <div class="mb-2">
-	                	<button onclick="openConfirm('${cla.className }', ${cla.classNo }, ${sessionScope.m.memberNo });" class="btn btn-primary py-3 px-5">신청하기</button>
+	                	<button onclick="openConfirm('${cla.className }');" class="btn btn-primary py-3 px-5">신청하기</button>
 	                </div>
                 	</c:when>
                 	<c:otherwise>
@@ -109,8 +109,7 @@
 
 
         <!-- 강의소개 -->
-        <div id="menu1" class="mb-5"></div>
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="menu1">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -129,11 +128,9 @@
             </div>
         </div>
         <!-- Features End -->
-		
-		
+
         <!-- 강사 소개 -->
-        <div id="menu2" class="mb-5">
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="menu2">
             <div class="container class-container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -148,17 +145,14 @@
             </div>
         </div>
         <!-- About End -->
-
-
-      	<div id="menu3" style="height: 100px;"></div>
-      	<!-- ajax로 가져옴 review -->
+      
+      	<div id="menu3"></div>
+      	<!-- ajax로 가져옴 -->
       	<div class="container class-container">
       		<div id="reviewBox">
         	</div>
       	</div>
 
-
-		<div id="menu4"></div>
         <!-- 클래스 준비물 -->
         <div class="container-xxl py-5" id="menu3">
             <div class="container">
@@ -186,10 +180,9 @@
             </div>
         </div>
         <!-- Team End -->
-		
-		<div id="menu5"></div>
+
         <!-- 환불규정 -->
-        <div class="container-xxl py-5 mt-5" id="menu5">
+        <div class="container-xxl py-5 mt-5" id="menu4">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -206,6 +199,7 @@
         <hr>
         
         
+        <div id="menu5"></div>
         <!-- 후기 -->
 		<button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
     </div><!--page-content End-->
@@ -244,7 +238,7 @@
                 <input type="hidden" name="reviewRate" id="star">
                 <input type="hidden" name="classTeacher" value="${cla.classTeacher }">
                 <input type="hidden" name="classNo" value="${cla.classNo }">
-                <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+                <input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
                 <textarea name="reviewContent" id="review-textarea"></textarea>
                 <div id="modal-btn-box">
                     <button type="button" id="review-cancel" class="btn bc5">취소</button>
@@ -270,13 +264,14 @@
 		       });
 		});
     
-	    function openConfirm(className, classNo, memberNo){
+	    function openConfirm(className, classNo){
 	    	const amount = $("select[name=amount]").val();
 	    	if(amount==''){
 	    		alert("인원수를 선택하세요");
 	    	}else{
+	    		console.log(changeP);
 	    		const price = changeP.toLocaleString("ko-KR");
-	    		const text = '선택된 인원은 '+amount+'명, 총 결제 금액은 '+price+'입니다            결제하시겠습니까?';
+	    		const text = '선택된 인원은 '+amount+'명, 총 결제 금액은 '+price+'입니다        결제하시겠습니까?';
 	    		Swal.fire({
 					title: className,//제목
 					text: text,
@@ -289,7 +284,7 @@
 				}).then((result) => {
 					//result.value == true이니까 트루일때만 실행하는거
 				  if (result.value) {
-		              location.href = "/payClass.do?classNo="+classNo+"&memberNo="+memberNo+"&amount="+amount;
+		              location.href = "/cartIn.do?classNo=?&memberNo=?&amount=?"
 				  }
 				})//then끝
 	    	}

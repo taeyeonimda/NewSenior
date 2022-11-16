@@ -37,14 +37,14 @@
 	<!-- 클럽 정보/ 클럽 가입자 정보 한 번에 조회 -->
 	<select id="selectOneClub" parameterType="c" resultType="c" resultMap="getClubMember">
 		select
-			*
-		from clubs
+			c.*, (select category_name from category t where t.category_code = c.club_category) as clubCategory
+		from clubs c
 		where club_no = #{clubNo }
 	</select>
 	<resultMap type="c" id="getClubMember">
 		<result column="club_no" property="clubNo"/>
 		<result column="club_name" property="clubName"/>
-		<result column="club_category" property="clubCategory"/>
+		<result column="clubCategory" property="clubCategory"/>
 		<result column="club_limit" property="clubLimit"/>
 		<result column="club_Leader" property="clubLeader"/>
 		<result column="filepath" property="clubMainImg"/>
@@ -80,15 +80,15 @@
 	<!-- 클럽 보드 정보 / 클럽 보드 댓글 한 번에 조회 -->
 	<select id="selectAllClubBoard" parameterType="int" resultType="cb" resultMap="getAllComment">
 		select
-			*
-		from club_boards
+			b.*, (select nickName from members m where m.member_no=b.member_no) as clubBoardWriter
+		from club_boards b
 		where club_no = #{clubNo }
 		order by club_board_no desc
 	</select>
 	<resultMap type="cb" id="getAllComment">
 		<result column="club_board_no" property="clubBoardNo"/>
 		<result column="club_no" property="clubNo"/>
-		<result column="member_no" property="clubBoardWriter"/>
+		<result column="clubBoardWriter" property="clubBoardWriter"/>
 		<result column="club_board_date" property="clubBoardDate"/>
 		<result column="club_board_Content" property="clubBoardContent"/>
 		<result column="filepath" property="clubBoardFilepath"/>
@@ -105,10 +105,12 @@
 			club_no as clubNo,
 			board_no as clubBoardNo,
 			member_no as clubComWriter,
+			nickname as nickName,
 			club_com_content as clubComContent,
 			club_com_date as clubComDate,
 			club_com_ref as clubComRef
 		from club_board_coms
+		join members m using (member_no)
 		where club_no=#{_parameter}
 	</select>
 	
@@ -135,20 +137,21 @@
 		insert into club_board_coms values (club_com_seq.nextval, #{clubNo }, #{clubBoardNo }, #{clubComWriter }, #{clubComContent }, #{clubComRef }, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
 
-	<!-- 인기동호회 검색 -->
+	<!-- 내 카테고리에 해당하는 인기동호회 검색 -->
 	<select id="searchClubList" parameterType="m" resultType="c">
-		select 
-			club_no as clubNo,
-			club_name as clubName,
-			club_category as clubCategory,
-			club_limit as clubLimit,
-			club_Leader as clubLeader,
-			filepath as clubMainImg,
-			club_intro as clubIntro
-		from
-    		(select rownum, c.*, (select count(*) from club_members m where m.club_no=c.club_no) as cnt
-    		from clubs c where club_category=(select favorite from members where member_no=#{memberNo }))
-    	where rownum between 1 and 3
+		select * from
+		(select rownum as rnum, r.*
+		from (select
+		    club_no as clubNo,
+		    club_name as clubName,
+		    club_category as clubCategory,
+		    club_limit as clubLimit,
+		    club_Leader as clubLeader,
+		    filepath as clubMainImg,
+		    club_intro as clubIntro,
+		(select count(*) from club_members m where m.club_no=c.club_no) as clubMemberCnt
+		from clubs c where club_category=(select favorite from members where member_no=26) order by clubMemberCnt desc)r)
+		where rnum between 1 and 3
 	</select>
 
 	<select id="getTotalPage" resultType="int">
@@ -241,7 +244,6 @@
 		where club_no in (select club_no from club_members where member_no=#{memberNo }) order by cnt desc)r) where rnum between #{startIndex } and #{endIndex }
 	</select>
 	
-	
 	<!-- 가입여부 조회 -->
 	<select id="myClubCheck" parameterType="c" resultType="int">
 		select count(*) from club_members where club_no=#{clubNo } and member_no=#{clubLeader }
@@ -250,5 +252,20 @@
 	<!-- 블락 멤버를 조회 -->
 	<select id="selectBlockMember" parameterType="c" resultType="int">
 		select count(*) from block_members where club_no=#{clubNo } and member_no=#{clubLeader }
+	</select>
+	
+	<!-- main.do 인기 동호회 top3 -->
+	<select id="selectMainClubs" resultType="c">
+		select * from (select rownum as rnum, r.*
+		from (select
+		club_no as clubNo,
+		    club_name as clubName,
+		    club_category as clubCategory,
+		    club_limit as clubLimit,
+		    club_Leader as clubLeader,
+		    filepath as clubMainImg,
+		    club_intro as clubIntro,
+		(select count(*) from club_members m where m.club_no=c.club_no) as clubMemberCnt
+		from clubs c order by clubMemberCnt desc)r) where rnum between 1 and 3;
 	</select>
 </mapper>

@@ -14,6 +14,7 @@ public class ClubBoardComment {
 	private int clubNo;
 	private int clubBoardNo;
 	private int clubComWriter;
+	private String nickName;
 	private String clubComContent;
 	private String clubComDate;
 	private int clubComRef;		// 대댓글이 달린 댓글 참조 // 0이면 없슴

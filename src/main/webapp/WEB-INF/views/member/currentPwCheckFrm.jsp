@@ -46,7 +46,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header3.jsp"%>
-	<div class="wra">
+	<div class="wra" style="font-family: 'GmarketSansMedium'!important;">
 		<form action="/currentPwCheck.do" method="post">
 				<div class="txt1">비밀번호 변경</div>
 				<hr style="margin-bottom: 40px;">

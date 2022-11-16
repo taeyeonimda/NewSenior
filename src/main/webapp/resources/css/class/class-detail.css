@@ -122,7 +122,6 @@
 }
 
 
-
 /* The sidebar menu */
 .sidenav {
     display: none;
@@ -185,19 +184,12 @@
 .amount-box{
 	display: flex;
 	justify-content: space-between;
-	width: 90%;
 }
-.amount-box>select{
-	padding: 0; 
-	padding-left: 30px;
-	padding-right: 30px;
+.amount-box>span{
+	display: inline-block;
 	width: 50%;
-}
-.amount-box>div{
-	width: 50%;
-	height: 50px;
-	line-height: 50px;
-	text-align: right;
+	height: 58px;
+	line-height: 58px;
 }
 
 #total-star{

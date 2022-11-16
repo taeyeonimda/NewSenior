@@ -38,14 +38,17 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                
                 <c:if test="${boardType eq 'F'}">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'I'}">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'P'}">
+                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'N'}">
@@ -61,11 +64,7 @@
             
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
-                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
-                        <c:forEach items="${list}" var="cateList">
-                        	<li class="mx-2 ${cateList.boardCategory }" data-filter="*"><a href="/classList.do?classCategory=${cateList.boardCategory}&reqPage=1">${cateList.boardCategory }</a></li>
-                        </c:forEach>   
-                    </ul>
+                    
         	   </div>
                     <div style="display: none;" class="category">${classCategory }</div>
                 </div>
@@ -162,13 +161,13 @@
 		
 	<table border="1">
 		<tr>
-			<th style="width: 10%;">번호</th>
-			<th style="width: 10%;">카테고리</th>
-			<th style="width: 35%;">제목</th>
-			<th style="width: 10%;">작성자</th>
-			<th style="width: 10%;">조회수</th>
-			<th style="width: 15%;">작성일</th>
-			<th style="width: 10%;">답변여부</th>
+			<th>번호</th>
+			<th>카테고리</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>조회수</th>
+			<th>작성일</th>
+			<th>답변여부</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
@@ -193,7 +192,15 @@
 			<c:if test ="${b.boardCategory eq 'delivery'}">
 				<td>배송</td>
 			</c:if>
-			<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
+			<c:if test="${not empty sessionScope.m }">
+				<c:if test="${sessionScope.m.nickName eq b.nickName || m.memberGrade eq 3 }">
+					<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }[${b.boardCommCnt }]</a></td>
+				</c:if>
+			</c:if>
+			<c:if test="${empty sessionScope.m || sessionScope.m.nickName ne b.nickName}">
+				<td><a href="javascript:void(0);"
+								onclick="alert('작성자만 확인할 수 있습니다.');">${b.boardTitle }[${b.boardCommCnt }]</a></td>
+			</c:if>
 			<td>${b.nickName }</td>
 			<td>${b.boardCount }</td>
 			<td>${b.boardDate }</td>

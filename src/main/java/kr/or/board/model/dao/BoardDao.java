@@ -115,6 +115,10 @@ public class BoardDao {
 		List list = sqlSession.selectList("board.selectAllCategory",boardType);
 		return (ArrayList<BoardCategoryVO>) list;
 	}
+	public FileVO boardFileDown(int fileNo) {
+		
+		return sqlSession.selectOne("board.boardFileDown",fileNo);
+	}
 	
 	
 	
