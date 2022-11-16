@@ -18,6 +18,7 @@ select * from
 			from board 
 			join members using(member_no)order by board_no desc) b)
    		 	where (boardType=#{boardType}) and rn between #{start} and #{end} 
+   		
 	</select> 
 	
 	<!-- 지금쓰는 쿼리 -->
@@ -86,7 +87,7 @@ select * from
 	      	where (boardType=#{boardType}) and prn between #{start} and #{end}
 	</select>
 	
-	<!-- boardtypeF -->
+	<!-- 검색 : boardtypeF totalCount -->
 	<select id="totalCountF2" resultType="int">
 		select count(*) as searchcnt from 
 		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
@@ -295,6 +296,99 @@ select * from
 		filename,
 		board_no as boardNo
 		from board_file where file_no=#{_parameter}
-		
-	</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	</select>
+	
+		<!-- 검색기능  -->
+	<select id="selectBoardList22" parameterType="map" resultType="b">
+	    select * from 
+		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
+        (select b.*from
+            (select
+                board_no as boardNo,
+                member_no as memberNo,
+                board_title as boardTitle,
+                board_content as boardContent,
+                board_count as boardCount,
+                to_char(board_date,('YYYY-MM-DD')) as boardDate,
+                board_type as boardType,
+                board_category as boardCategory,
+                nickname as nickName
+            from board join members using(member_no)order by board_no desc)b
+            <!-- 1)카테고리 태그만 있는경우 : 성공-->
+            <if test="categoryTag != null and searchTag.equals('all')">
+            	where boardCategory=#{categoryTag})b)
+            </if>
+            
+           <!-- 2) searchInput만 있는 경우 : 성공-->
+            		<!--닉네임으로 조회  --> 
+            <if test="categoryTag.equals('all') and searchTag.equals('nickName')">
+            	where nickName like '%'||#{searchInput}||'%')b)
+            </if>
+            		<!--제목으로 조회  --> 
+            <if test="categoryTag.equals('all') and searchTag.equals('boardTitle')">
+            	where boardTitle like '%'||#{searchInput}||'%')b)
+            </if>
+            
+            <!-- 3) 카테고리 태그  & searchInput 모두 있는경우-->
+            	<!--닉네임으로 조회  --> 
+            <if test="categoryTag != null and searchTag.equals('nickName')">
+            	where nickName like '%'||#{searchInput}||'%' and boardCategory=#{categoryTag})b)
+            </if>
+            
+            	<!--제목으로 조회  --> 
+            <if test="categoryTag != null and searchTag.equals('boardTitle')">
+            	where boardTitle like '%'||#{searchInput}||'%' and boardCategory=#{categoryTag})b)
+            </if>
+            
+	      	<!--where prn between #{start} and #{end} and boardType='F'  -->
+	      	<!--   -->
+	      	where (boardType=#{boardType}) and prn between #{start} and #{end}
+	</select>
+	
+	<!-- 검색 : totalCount -->
+	<select id="totalCount22" resultType="int">
+		select count(*) as searchcnt from 
+		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.*from
+        (select b.*from
+            (select
+                board_no as boardNo,
+                member_no as memberNo,
+                board_title as boardTitle,
+                board_content as boardContent,
+                board_count as boardCount,
+                to_char(board_date,('YYYY-MM-DD')) as boardDate,
+                board_type as boardType,
+                board_category as boardCategory,
+                nickname as nickName
+            from board join members using(member_no)order by board_no desc)b
+           	
+           	<!-- 1)카테고리 태그만 있는경우 : 성공-->
+             <if test="categoryTag != null and searchTag.equals('all')">
+            	where boardCategory=#{categoryTag})b)
+            </if>
+     
+     		<!-- 2) searchInput만 있는 경우 : 성공-->
+            		<!--닉네임으로 조회  --> 
+            <if test="categoryTag.equals('all') and searchTag.equals('nickName')">
+            	where nickName like '%'||#{searchInput}||'%')b)
+            </if>
+            		<!--제목으로 조회  --> 
+            <if test="categoryTag.equals('all') and searchTag.equals('boardTitle')">
+            	where boardTitle like '%'||#{searchInput}||'%')b)
+            </if>
+            
+             <!-- 3) 카테고리 태그  & searchInput 모두 있는경우-->
+            	<!--닉네임으로 조회  --> 
+            <if test="categoryTag != null and searchTag.equals('nickName')">
+            	where nickName like '%'||#{searchInput}||'%' and boardCategory=#{categoryTag})b)
+            </if>
+            	<!--제목으로 조회  --> 
+            <if test="categoryTag != null and searchTag.equals('boardTitle')">
+            	where boardTitle like '%'||#{searchInput}||'%' and boardCategory=#{categoryTag})b)
+            </if>
+            
+	      	<!-- where boardType='F' -->
+	      	where boardType=#{boardType}
+	</select>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 </mapper>

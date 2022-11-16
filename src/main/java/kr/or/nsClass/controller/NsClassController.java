@@ -171,7 +171,7 @@ public class NsClassController {
 		NsClass c = new NsClass();
 		c.setClassNo(clh.getClassNo());
 		NsClass cla = service.selectOneClass(c);
-		int price = Integer.parseInt(cla.getClassPrice())*clh.getAmount();
+		int price = Integer.parseInt(cla.getClassPrice())*clh.getAmount(); // 총 가격 계산
 		clh.setPayPrice(price);
 		System.out.println(clh);
 		model.addAttribute("clh", clh);

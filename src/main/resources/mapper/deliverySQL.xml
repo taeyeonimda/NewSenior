@@ -67,4 +67,17 @@
 		default_addr = #{defaultAddr}
 		where delivery_no=#{deliveryNo}
 	</update>
+	
+	<select id="inputDelivery" parameterType="d" resultType="d">
+	select
+	    delivery_name as deliveryName,
+	    delivery_phone as deliveryPhone,
+	    zipcode as zipcode,
+	    delivery_addr as deliveryAddr,
+	    delivery_detail as deliveryDetail,
+	    receiver_name as receiverName
+	from delivery_tbl
+	where default_addr='y' and member_no=#{memberNo}
+	</select>
+	
 </mapper>

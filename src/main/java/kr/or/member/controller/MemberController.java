@@ -481,4 +481,16 @@ public class MemberController {
 				return "alert";
 			}
 		}
+		
+		//기본배송지 불러오기
+		@ResponseBody
+		@RequestMapping(value="/inputDelivery.do", produces = "application/json;charset=utf-8")
+		public String inputDelivery(int memberNo) {
+			Delivery de = service.inputDelivery(memberNo);
+			Gson gson = new Gson();
+			String result = gson.toJson(de);
+			
+			return result;
+		}
+		
 }

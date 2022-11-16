@@ -322,22 +322,22 @@
             </div>
             <c:choose>
 				<c:when test="${empty sessionScope.m}">
-            <div>
-                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px; margin-right: 20px;"></a><span> / </span>
-                <a href="/joinFrm.do"><img alt="회원가입" src="/resources/img/join.png" style="width: 60px; margin-right: 20px;"></a>
-            </div>
-			</c:when>
-			<c:otherwise>
-				<a href="/logout.do"><img alt="로그아웃" src="/resources/img/power (1).png" style="width: 40px; margin-right: 10px;"></a>
-				<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
-			</c:otherwise>
+		            <div>
+		                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px;" ></a><span> / </span>
+		                <a href="/joinFrm.do"><img alt="회원가입" src="/resources/img/join.png" style="width: 60px;"></a>
+		            </div>
+				</c:when>
+				<c:otherwise>
+					<a href="/logout.do"><img alt="로그아웃" src="/resources/img/power (1).png" style="width: 40px; margin-right: 10px;"></a>
+					<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
+				</c:otherwise>
 			</c:choose>
        	 </div>
     </nav>
 
 	<!-- 로그인 모달 -->
 	<div class="popup_bg00"></div>
-  <div class="popup00 personal_pop00 noto bg_s" >
+  	<div class="popup00 personal_pop00 noto bg_s" >
     <div class="x_btn00"><span class="zwicon-close00">X</span></div>
       <h1 id="login_header" style="color:#000; font-family: 'KOHIBaeumOTF'!important;">로그인</h1>
      
@@ -400,10 +400,9 @@
 
     <!-- Template Javascript -->
     <script src="/resources/TGbtstr/js/mainTG.js"></script>
-    <!-- 로그인 js 
+    <!-- 로그인 js -->
     <script src="/resources/js/login.js"></script>
-    -->
-    
+
     <script type="text/javascript">
    
     
@@ -521,8 +520,6 @@
 	      Kakao.Auth.setAccessToken(undefined)
 	    }
 	  }  
-
-    
     </script>
     
     

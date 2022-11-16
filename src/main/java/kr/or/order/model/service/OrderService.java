@@ -66,6 +66,9 @@ public class OrderService {
 	public ArrayList<Order> selectDetailOrderHistory(Order o) {
 		return dao.selectDetailOrderHistory(o);
 	}
+
+
+
 	
 	
 }

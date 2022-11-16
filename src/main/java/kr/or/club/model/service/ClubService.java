@@ -147,5 +147,8 @@ public class ClubService {
 			return String.valueOf(-1);
 		}
 	}
+	public ArrayList<Club> selectMainClubs() {
+		return dao.selectMainClubs();
+	}
 
 }
