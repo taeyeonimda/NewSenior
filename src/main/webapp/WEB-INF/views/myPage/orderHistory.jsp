@@ -103,11 +103,13 @@
 			            		<td>${Or.deliveryPhone }</td>
 			            		<td>${Or.deliveryAddr }${Or.deliveryAddr2 }</td>
 								<td>${Or.orderPrice }원</td>
-<!--							<td onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo },${Or.orderPrice });">
+<!--
+								<td onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo },${Or.orderPrice });">
 									<button type="submit"> 상세보기 </button>
 								</td>
  -->
 			                </tr>
+			                
 	             		</c:forEach>             		
                	</table>
                 

@@ -48,6 +48,13 @@
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
 </head>
+
+<style>
+.showCartList td{
+	line-height:70px;
+}
+</style>
+
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 
