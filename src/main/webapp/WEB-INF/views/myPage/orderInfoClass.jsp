@@ -107,7 +107,6 @@
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
     <!-- / Layout wrapper -->
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 
@@ -145,7 +144,7 @@
         });
 
 		$("#payBtn").on("click",function(){
-			const price = $(".lastPrice").val();
+			const price = $(".lastPrice").text();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
@@ -163,9 +162,6 @@
 			},function(rsp){
 				if(rsp.success){
 					alert("결제 성공");
-					const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
-					$("#goDeliveryTable").append(input);	
-		            $("#goDeliveryTable").submit();
 				}else{
 					alert("결제 실패");
 				}

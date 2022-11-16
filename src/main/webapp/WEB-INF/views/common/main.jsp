@@ -19,8 +19,13 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">  
-
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- 폰트추가 -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+	
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -44,8 +49,10 @@
 	width: 450px;
 	margin-right: 20px;
 	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-
 .speech-bubble:after {
 	content: '';
 	position: absolute;
@@ -60,6 +67,8 @@
 	margin-top: -27px;
 	margin-left: -54px;
 }
+
+
 </style>
 <body>
     <!-- Spinner Start -->
@@ -68,11 +77,7 @@
     </div>
     <!-- Spinner End -->
 
-
-
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	
-	<a href="/mypage.do" style="font-size:30px;">마이페이지</a>
 
 
  <!-- Carousel Start -->
@@ -140,7 +145,7 @@
                             	<i class="fa fa-users text-primary"></i>
                             </div>
                             <div class="ps-3">
-                                <h4>온라인 동호회</h4>
+                                <h4 class="loginCheck">온라인 동호회</h4>
                                 <span>누구나 가입 가능한<br> 다양한 종류의 동호회가 가득!</span>
                             </div>
                         </div>
@@ -154,7 +159,7 @@
                             </div>
                             <div class="ps-3">
                                 <h4>클래스</h4>
-                                <span>배움에는 끝이 없다! <br> 잘 배우고, 잘 늙어가는 방법</span>
+                                <span>배움에는 끝이 없다! <br> 잘 배우고, 잘 늙어가는 뉴 시니어</span>
                             </div>
                         </div>
                     </div>
@@ -186,7 +191,7 @@
                     <img class="/resources/MAINbtstr/img-fluid rounded" data-wow-delay="0.1s" src="/resources/MAINbtstr/img/activeSenior.png" style="width:400px; height:564px;">
                 </div>
                 <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="padding-left:130px;">
-                    <h2 class="display-1 text-primary mb-0">NewSenior</h2>
+                    <h2 class="display-1 text-primary mb-0">NewSeniors</h2>
                     <p class="text-primary mb-4">─────────────────────────────</p>
                     <h1 class="display-5 mb-4">이달의 <br> 인기 동호회 TOP3</h1>
                     <p class="text-primary mb-4">─────────────────────────────</p>
@@ -195,33 +200,15 @@
                 </div>
                 <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="row g-5">
+                    <c:forEach items="${clubList }" var="cl" varStatus="i">
                         <div class="col-12 col-sm-6 col-lg-12">
-                        	<a href="">
                             <div class="border-start ps-4">
-                                <div style="color:#348e38; font-size:45px; font-weight:900">1</div>
-                                <h4 class="mb-3">등산 동호회</h4>
-                                <span style="color:#0f4229;">인생의 가치는 정상에서 느끼는 법!<br>매주 토요일 오전 6시에 모여요!</span>
+                                <div style="color:#348e38; font-size:45px; font-weight:900">${i.count }</div>
+                                <h4 class="mb-3">${cl.clubName }</h4>
+                                <p style="color:#0f4229; max-height:50px; text-overflow: ellipsis; overflow: hidden;">${cl.clubIntro }</p>
                             </div>
-                            </a>
                         </div>
-						<div class="col-12 col-sm-6 col-lg-12">
-							<a href="">
-                            <div class="border-start ps-4">
-                                <div style="color:#348e38; font-size:45px; font-weight:900">2</div>
-                                <h4 class="mb-3">골프 동호회</h4>
-                                <span style="color:#0f4229;">나이스샷~!버디하러 가실 5060 친구들 모여라!</span>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-12">
-                        	<a href="">
-                            <div class="border-start ps-4">
-                                <div style="color:#348e38; font-size:45px; font-weight:900">3</div>
-                                <h4 class="mb-3">맛집 동호회</h4>
-                                <span style="color:#0f4229;">두번째 스무살들의 모임 두스모~! 맛집탐방하러 가요~</span>
-                            </div>
-                            </a>
-                        </div>
+                    </c:forEach>
                     </div>
                 </div>
             </div>
@@ -516,22 +503,18 @@
 	                            <span>김칠두</span>
                         	</div>
                         	<div class="speech-bubble">
-                        		<p>"간절함은 모든 것을 이겨요.
-								마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요.
-								나를 보면서 '70대 노인도 하는데 나는 왜 못 해?'라는 생각을 하고 용기 내서 나아가길 바랍니다."</p>
+                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px; text-align: center;">"간절함은 모든 것을 이겨요.<br>마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요."</p>
                         	</div>
                         </div>
                         <div class="testimonial-item" style="display: flex; justify-content: space-between;">
                         	<div>
-                        		<img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/시니모델2.png" alt="">
+                        		<img class="img-fluid rounded mb-3" src="/resources/MAINbtstr/img/시니모델2.PNG" alt="">
 	                            <p class="fs-5">78살에 데뷔</p>
 	                            <h4>시니어 모델</h4>
 	                            <span>최순화</span>
                         	</div>
                         	<div class="speech-bubble">
-                        		<p>"간절함은 모든 것을 이겨요.
-								마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요.
-								나를 보면서 '70대 노인도 하는데 나는 왜 못 해?'라는 생각을 하고 용기 내서 나아가길 바랍니다."</p>
+                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px; text-align: center;">"나를 보면서<br>'70대 노인도 하는데 나는 왜 못 해?'라는<br>생각을 하고 용기 내서 나아가길 바랍니다."</p>
                         	</div>
                         </div>
                         <div class="testimonial-item" style="display: flex; justify-content: space-between;">
@@ -542,9 +525,7 @@
 	                            <span>박막례</span>
                         	</div>
                         	<div class="speech-bubble">
-                        		<p>"간절함은 모든 것을 이겨요.
-								마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요.
-								나를 보면서 '70대 노인도 하는데 나는 왜 못 해?'라는 생각을 하고 용기 내서 나아가길 바랍니다."</p>
+                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px; text-align: center;">"뼈만 안 다치면 추억이다."</p>
                         	</div>
                         </div>
                     </div>
@@ -652,6 +633,10 @@
     	  $(".popup_bg00").stop().fadeIn();
           $(".popup00.personal_pop00").stop().fadeIn();
           $("body").addClass("bg_g");
+          
+		$(".loginCheck").on("click", function() {
+			$(".loginBtn").click();
+		})
     </script>
     </c:if>
     

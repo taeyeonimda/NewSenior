@@ -288,7 +288,7 @@ public class BoardController {
 	}
 	
 	
-	// 데이터 사용 이미지 업로드
+	// 에디터 사용 이미지 업로드
 	@RequestMapping(value="/uploadImages.do")
 	public void uploadImage(Board b,MultipartFile[] file,HttpServletRequest request,HttpServletResponse response) throws IOException {
 																//ㄴ파일업로드 경로 구하기 위해서
@@ -333,7 +333,8 @@ public class BoardController {
 	// 카테고리별 검색기능 -- 게시판 별로 따로 제작???
 	@RequestMapping(value="/searchBoard.do")
 	public String searchCategory(int reqPage, String categoryTag, String searchTag, String searchInput,Model model,HttpSession session,String boardType) {
-		
+		System.out.println(" 검색 categoryTag :" +categoryTag);
+		System.out.println(" 검색 searchTag :" +searchTag);
 		HashMap<String, Object> categoryMap = service.selectBoardList(reqPage,categoryTag,searchTag,searchInput,boardType);
 		
 		model.addAttribute("list",(ArrayList<Board>)categoryMap.get("list"));
@@ -351,6 +352,7 @@ public class BoardController {
 		session.setAttribute("searchInput",(String)categoryMap.get("searchInput"));	
 		System.out.println("session :"+session);
 		return "board/boardList";
+		
 	}
 	
 	
