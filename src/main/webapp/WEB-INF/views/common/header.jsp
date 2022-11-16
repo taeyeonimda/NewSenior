@@ -315,8 +315,8 @@
             <c:choose>
 				<c:when test="${empty sessionScope.m}">
             <div>
-                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px; margin-right: 20px;"></a><span> / </span>
-                <a href="/joinFrm.do"><img alt="회원가입" src="/resources/img/join.png" style="width: 60px; margin-right: 20px;"></a>
+                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px; ></a><span> / </span>
+                <a href="/joinFrm.do"><img alt="회원가입" src="/resources/img/join.png" style="width: 60px;"></a>
             </div>
 			</c:when>
 			<c:otherwise>

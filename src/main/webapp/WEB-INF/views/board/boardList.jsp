@@ -225,13 +225,67 @@
 		<div class="searchForm">
 			<!-- <form action="/searchBoard.do?reqPage=1" method="post"> -->
 			<form action="/searchBoard.do?reqPage=1&boardType=${boardType}" method="post">
-				<select name="categoryTag">
-				<!-- 보드별로 카테고리 추가하기 (writeFrm 참고)-->
+				<!--<select name="categoryTag">
+			
+				
 					<option value="all">전체</option>
 					<option value="info" <c:if test="${b.boardCategory eq 'info'}">selected</c:if>>정보</option>
 					<option value="etc" <c:if test="${b.boardCategory eq 'etc'}">selected</c:if>>기타</option>
-				</select>
+				</select> 
+				-->
+				
+				<c:if test="${boardType eq 'F' }">
+					<td>
+						<select name="categoryTag">
+							<option value="all">전체</option>
+							<option value="info">정보</option>
+							<option value="etc">기타</option>
+						</select>
+					</td>	
+				</c:if>
+				<c:if test="${boardType eq 'I' }">
+					<td>
+						<select name="categoryTag">
+							<option value="all">전체</option>
+							<option value="campaign">캠페인</option>
+							<option value="fair">박람회</option>
+							<option value="tour">여행</option>
+							<option value="ectI">기타</option>
+						</select>
+					</td>
+				</c:if>
+				<c:if test="${boardType eq 'Q' }">
+					<td>
+						<select name="categoryTag">
+							<option value="all">전체</option>
+							<option value="class">클래스</option>
+							<option value="club">동호회</option>
+							<option value="activity">액티비티</option>
+							<option value="product">상품</option>
+							<option value="pay">결제</option>
+							<option value="delivery">배송</option>
+						</select>
+					</td>
+				</c:if>
+				<c:if test="${boardType eq 'N' }">
+					<td>
+						<select name="categoryTag">
+							<option value="all">전체</option>
+							<option value="notice">공지사항</option>
+						</select>
+					</td>	
+				</c:if>
+				<c:if test="${boardType eq 'P' }">
+					<td>
+						<select name="categoryTag">
+							<option value="all">전체</option>
+							<option value="invite">모집중</option>
+							<option value="end">모집완료</option>
+						</select>
+					</td>	
+				</c:if>
 				<select name="searchTag">
+					<option value="all">전체</option>
 					<option value="boardTitle">제목</option>
 					<option value="nickName">작성자</option>
 				</select>
