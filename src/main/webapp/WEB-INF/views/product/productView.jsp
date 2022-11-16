@@ -355,6 +355,7 @@ ul li.on a {
 					reviewScore : reviewScore,
 				},
 				success : function(data){
+					
 					displayData(1, dataPerPage);
 					$("#customerReview").val('');
 					$(".input-score>span").text('0');
