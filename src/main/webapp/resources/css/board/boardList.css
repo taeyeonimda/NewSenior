@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.boardWrap .boardListTbl{
+		width:70%;
+		margin:0 auto;
+		text-align:center;
+		border-collapse: collapse;	
+	}
+
+
+.writeBtnBox>.writeBtn{
+		width:70px;
+		height : 30px;
+		background-color:#0F4229;
+		color:white;
+		border-radius : 10px;
+		border : none;
+		line-height: 30px;
+		display:flex;
+		justify-content: center;
+		margin-left:70px;
+}
+.writeBtnBox>.writeBtn>a {
+	color:white;
+}
+
+.searchWrap {
+	display:flex;
+	width:70%;
+	margin:0 auto;
+	justify-content:center;
+	margin-top:30px;
+	
+}
+.searchForm .searchBtn {
+		width:70px;
+		height : 30px;
+		background-color:#E8F5E9;
+		color:#0F4229;
+		border-radius : 10px;
+		border : none;
+		line-height: 30px;
+		
+}

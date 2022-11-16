@@ -39,9 +39,7 @@ public class MemberDao {
 	
 	//마이페이지 가기
 	public Member selectOneMember(Member m1) {
-		System.out.println("m1:"+m1);
 		Member member = sqlSession.selectOne("member.selectOneMember",m1);
-		System.out.println("member:"+member);
 		return member;
 	}
 
@@ -51,9 +49,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member m) {
-		System.out.println("dao m:"+m);
 		int result = sqlSession.insert("member.insertMember",m);
-		System.out.println("dao result:"+result);
 		return result;
 	}
 

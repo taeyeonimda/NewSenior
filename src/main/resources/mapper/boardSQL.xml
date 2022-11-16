@@ -363,17 +363,17 @@ select * from
             from board join members using(member_no)order by board_no desc)b
            	
            	<!-- 1)카테고리 태그만 있는경우 : 성공-->
-             <if test="categoryTag != null and searchTag.equals('all')">
+             <if test="categoryTag != null and searchTag.equals('')">
             	where boardCategory=#{categoryTag})b)
             </if>
      
      		<!-- 2) searchInput만 있는 경우 : 성공-->
             		<!--닉네임으로 조회  --> 
-            <if test="categoryTag.equals('all') and searchTag.equals('nickName')">
+            <if test="categoryTag.equals('') and searchTag.equals('nickName')">
             	where nickName like '%'||#{searchInput}||'%')b)
             </if>
             		<!--제목으로 조회  --> 
-            <if test="categoryTag.equals('all') and searchTag.equals('boardTitle')">
+            <if test="categoryTag.equals('') and searchTag.equals('boardTitle')">
             	where boardTitle like '%'||#{searchInput}||'%')b)
             </if>
             
@@ -389,6 +389,102 @@ select * from
             
 	      	<!-- where boardType='F' -->
 	      	where boardType=#{boardType}
+	</select>
+	
+	<!-- 검색기능  -->
+	<select id="selectBoardList222" parameterType="map" resultType="b">
+	    select * from 
+		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.* from
+        
+            (select
+                board_no as boardNo,
+                member_no as memberNo,
+                board_title as boardTitle,
+                board_content as boardContent,
+                board_count as boardCount,
+                to_char(board_date,('YYYY-MM-DD')) as boardDate,
+                board_type as boardType,
+                board_category as boardCategory,
+                (select count(*) from board_comment where board_ref = board_no) as boardCommCnt,
+                nickname as nickName
+            from board join members using(member_no) 
+            where board_type=#{boardType}
+            <choose>
+           		 <when test="categoryTag.equals('')">
+           		 	<choose>
+           		 		<when test="searchTag.equals('boardTitle')">
+           		 			and board_title like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 		<when test="searchTag.equals('nickName')">
+           		 			and nickname like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 	</choose>
+           		 </when>
+           		 <otherwise>
+           		 	and board_category=#{categoryTag}
+           		 	<choose>
+           		 		<when test="searchTag.equals('boardTitle')">
+           		 			and board_title like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 		<when test="searchTag.equals('nickName')">
+           		 			and nickname like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 	</choose>
+           		 </otherwise>           		 
+           	</choose>
+            
+            order by board_no desc)b)
+            
+	      	<!--where prn between #{start} and #{end} and boardType='F'  -->
+	      	<!--   -->
+	      	where prn between #{start} and #{end}
+	</select>
+	
+	<!-- 검색 : totalCount -->
+	<select id="totalCount222" resultType="int">
+		select count(*) as searchcnt from 
+		(select row_number() over(partition by boardType order by boardNo desc) as prn, b.* from
+        
+            (select
+                board_no as boardNo,
+                member_no as memberNo,
+                board_title as boardTitle,
+                board_content as boardContent,
+                board_count as boardCount,
+                to_char(board_date,('YYYY-MM-DD')) as boardDate,
+                board_type as boardType,
+                board_category as boardCategory,
+                nickname as nickName
+            from board join members using(member_no) 
+            where board_type=#{boardType}
+            <choose>
+           		 <when test="categoryTag.equals('')">
+           		 	<choose>
+           		 		<when test="searchTag.equals('boardTitle')">
+           		 			and board_title like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 		<when test="searchTag.equals('nickName')">
+           		 			and nickname like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 	</choose>
+           		 </when>
+           		 <otherwise>
+           		 	and board_category=#{categoryTag}
+           		 	<choose>
+           		 		<when test="searchTag.equals('boardTitle')">
+           		 			and board_title like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 		<when test="searchTag.equals('nickName')">
+           		 			and nickname like '%'||#{searchInput}||'%'
+           		 		</when>
+           		 	</choose>
+           		 </otherwise>           		 
+           	</choose>
+            
+            order by board_no desc)b)
+       
+            
+	      
 	</select>
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 </mapper>

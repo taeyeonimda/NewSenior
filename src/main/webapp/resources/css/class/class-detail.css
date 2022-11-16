@@ -40,21 +40,6 @@
 }
 
 /* 이미지 div안에 맞춰 넣는 css*/
-.product-title{
-    text-align:center;
-    display:table;
-    border:1px solid #cecece;
-    width: 860px;
-    height: 1200px;
-}
-.product-img-div{
-    display:table-cell;
-    vertical-align:middle;
-}
-.product-img{
-    min-width: 100%;
-    max-height: 600px;
-}
 
 
 

@@ -25,6 +25,23 @@
 	height: 58px;
 	line-height: 58px;
 }
+
+.product-title{
+    text-align:center;
+    display:table;
+    border:1px solid #cecece;
+    width: 460px;
+    height: 1200px;
+}
+.product-img-div{
+    display: table-cell;
+    vertical-align: middle;
+}
+.product-img{
+    width: 824px;
+    max-height: 600px;
+}
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
