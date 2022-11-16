@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ <link href="/resources/css/board/boardList.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -86,20 +88,18 @@
             </c:forEach>
             </div>
         </div>
-	<c:if test="${not empty sessionScope.m }">
-		<button><a href="/boardWriteFrm.do">글작성</a></button>
-		</c:if>
-
+        
+	
 		<c:if test="${boardType ne 'Q' }">
 		<div class="boardWrap">
-	<table border="1">
+	<table class="boardListTbl tablep''' border="1">
 		<tr>
-			<th style="width: 10%;">번호</th>
-			<th style="width: 15%;">카테고리</th>
-			<th style="width: 35%;">제목</th>
-			<th style="width: 15%;">작성자</th>
-			<th style="width: 10%;">조회수</th>
-			<th style="width: 20%;">작성일</th>
+			<th>번호</th>
+			<th>카테고리</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>조회수</th>
+			<th>작성일</th>
 		</tr>
 		<c:forEach items="${list }" var="b" varStatus="i">
 		<tr>
@@ -152,14 +152,16 @@
 			</th>
 		</tr>
 		</table>
-		</div>
+	</div>
 		</c:if>
+		
+			
 
 		
 		<!-- Q&A  -->
 		<c:if test="${boardType eq 'Q' }">
-		
-	<table border="1">
+<div class="boardWrap">
+	<table class="boardListTbl" border="1">
 		<tr>
 			<th>번호</th>
 			<th>카테고리</th>
@@ -218,10 +220,12 @@
 			</th>
 		</tr>
 		</table>
+	</div>	
 		</c:if>
 		<!-- Q&A 끝-->
 		
 		<!-- 검색 form -->
+	<div class="searchWrap">
 		<div class="searchForm">
 			<!-- <form action="/searchBoard.do?reqPage=1" method="post"> -->
 			<form action="/searchBoard.do?reqPage=1&boardType=${boardType}" method="post">
@@ -237,7 +241,7 @@
 				<c:if test="${boardType eq 'F' }">
 					<td>
 						<select name="categoryTag">
-							<option value="all">전체</option>
+							<option value="">카테고리 전체</option>
 							<option value="info">정보</option>
 							<option value="etc">기타</option>
 						</select>
@@ -246,7 +250,7 @@
 				<c:if test="${boardType eq 'I' }">
 					<td>
 						<select name="categoryTag">
-							<option value="all">전체</option>
+							<option value="">카테고리 전체</option>
 							<option value="campaign">캠페인</option>
 							<option value="fair">박람회</option>
 							<option value="tour">여행</option>
@@ -257,7 +261,7 @@
 				<c:if test="${boardType eq 'Q' }">
 					<td>
 						<select name="categoryTag">
-							<option value="all">전체</option>
+							<option value="">카테고리 전체</option>
 							<option value="class">클래스</option>
 							<option value="club">동호회</option>
 							<option value="activity">액티비티</option>
@@ -270,7 +274,7 @@
 				<c:if test="${boardType eq 'N' }">
 					<td>
 						<select name="categoryTag">
-							<option value="all">전체</option>
+							<option value="">카테고리 전체</option>
 							<option value="notice">공지사항</option>
 						</select>
 					</td>	
@@ -278,14 +282,14 @@
 				<c:if test="${boardType eq 'P' }">
 					<td>
 						<select name="categoryTag">
-							<option value="all">전체</option>
+							<option value="">카테고리 전체</option>
 							<option value="invite">모집중</option>
 							<option value="end">모집완료</option>
 						</select>
 					</td>	
 				</c:if>
 				<select name="searchTag">
-					<option value="all">전체</option>
+					<option value="">전체</option>
 					<option value="boardTitle">제목</option>
 					<option value="nickName">작성자</option>
 				</select>
@@ -293,6 +297,18 @@
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>
+			<div class="writeBtnBox">
+				<c:if test="${not empty sessionScope.m }">
+					<button class="writeBtn"><a href="/boardWriteFrm.do">글작성</a></button>
+				</c:if>
+			</div>
+		
+	</div>
+	<script>
+	
+	</script>
+	
+
 		
 
 		

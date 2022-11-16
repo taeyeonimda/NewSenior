@@ -132,6 +132,15 @@ public class BoardDao {
 		int totalCount = sqlSession.selectOne("board.totalCount22",boardType);
 		return totalCount;
 	}
+	public int selectBoardCount222(HashMap<String, Object> pageMap) {
+		int totalCount = sqlSession.selectOne("board.totalCount222",pageMap);
+		return totalCount;
+	}
+	public ArrayList<Board> selectBoardList222(HashMap<String, Object> pageMap) {
+		List list = sqlSession.selectList("board.selectBoardList222",pageMap);
+		System.out.println(pageMap);
+		return (ArrayList<Board>) list;
+	}
 	
 	
 	
