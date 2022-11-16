@@ -78,15 +78,13 @@ ul li.on a {
                 <br>
                 <br>
                 <br>
-                <div class="classMove">
-                    <a href="javascript:void(0)">관련클래스 바로가기 >>></a>
-                </div>
+                
                 
                 <div class="productQty">
                     <div style="width: 200px;">
-                        <span class="material-icons" id="minus">remove</span>
+                        <span class="material-icons minus" id="minus">remove</span>
                         <span class="productBuyQty">1</span>
-                        <span class="material-icons" id="plus">add</span>
+                        <span class="material-icons plus" id="plus">add</span>
                     </div>
                     <div style="width: 300px;">
                     	<input type="hidden" class="sumPrice" 
@@ -113,15 +111,10 @@ ul li.on a {
 		            	</form>
 	            	</c:when>
 	            	<c:otherwise>
-	            		<form id="insertCartForm" action="/insertCart.do" autocomplete="off" >
-		                		<input type="hidden" value="${p.productNo }" name="productNo">
-			        	        <input type="hidden" value="${p.productName }" name="buyName">
-				                <input type="hidden" value="${p.productPrice }" name="buyPrice">
-				                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
-				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
+	            		<form id="insertCartForm" action="javascript:void(0)">
 								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
-			                	<button type="submit">장바구니</button>
-			                 	<button type="button" id="loginCheckButton">로그인이 필요한 서비스입니다.</button>
+			                	<!-- <button type="submit">장바구니</button> -->
+			                 	<button type="button" id="loginCheckButton">상품 구매는 로그인이 필요합니다.</button>
 		            	</form>
 	            	</c:otherwise>
             	</c:choose>
@@ -281,6 +274,10 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
+		$("#loginCheckButton").on("click",function(){
+			
+			$(".loginBtn").children().click();
+		});
 		function loginCheckBtn(){
 			alert("로그인이 필요한 서비스입니다.");
 		}
@@ -466,12 +463,12 @@ ul li.on a {
 				}
 			});
 		});
-			$("#plus").on("click",function(){
+			$(".plus").on("click",function(){
 				const price = $(".sumPrice").val();
 				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 				$(".showSumPrice").val(pricecomma);
 			});
-			$("#minus").on("click",function(){
+			$(".minus").on("click",function(){
 				const price = $(".sumPrice").val();
 				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 				$(".showSumPrice").val(pricecomma);
@@ -766,14 +763,14 @@ ul li.on a {
 		function goCartAlert(){
 			if (confirm("장바구니에 추가하겠습니까?")){
 				if(confirm("장바구니로 이동하시겠습니까?")){
-					location.href="/cart.do?memberNo="+${sessionScope.m.memberNo }
+					location.href="/cart.do?memberNo="
 				}else{
 					return false;
 				}
 			}else{
 				return false;
 			}
-		}
+		};
 		
 		</script>
 </body>
