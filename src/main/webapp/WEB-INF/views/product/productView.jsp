@@ -105,14 +105,14 @@ ul li.on a {
 				                <input type="hidden" value="${p.productPrice }" name="buyPrice">
 				                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
 				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
-								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+								<input type="hidden" class="changeProductAmount" value="1" name="buyAmount">
 			                	<button type="submit" onclick="return goCartAlert()">장바구니</button>
 			                 	<button type="button" id="directBuy" onclick="directBuy1(${p.productNo})">바로구매</button>
 		            	</form>
 	            	</c:when>
 	            	<c:otherwise>
 	            		<form id="insertCartForm" action="javascript:void(0)">
-								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+								<input type="hidden" class="changeProductAmount" value="1" name="buyAmount">
 			                	<!-- <button type="submit">장바구니</button> -->
 			                 	<button type="button" id="loginCheckButton">상품 구매는 로그인이 필요합니다.</button>
 		            	</form>
