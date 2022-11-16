@@ -34,7 +34,7 @@
 
 /* 클럽 리스트 */
 .club-list{
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 	display: flex;
 	flex-flow: row wrap;
@@ -152,17 +152,35 @@
 .clubIntro::-webkit-scrollbar {
     width: 8px;  /* 스크롤바의 너비 */
 }
-
 .clubIntro::-webkit-scrollbar-thumb {
     height: 10%; /* 스크롤바의 길이 */
     background: #0F4229; /* 스크롤바의 색상 */
     border-radius: 10px;
 }
-
 .clubIntro::-webkit-scrollbar-track {
     background: #E8F5E9;  /*스크롤바 뒷 배경 색상*/
 }
 
+
+.clubIntro2{
+	height: 110px;
+	overflow: auto;
+  	text-overflow: ellipsis;
+ 	word-break: break-all;
+ 	word-wrap: break-word;
+ 	padding: 10px;
+}
+.clubIntro2::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+.clubIntro2::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: #464758; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+.clubIntro2::-webkit-scrollbar-track {
+    background: #eee;  /*스크롤바 뒷 배경 색상*/
+}
 
 
 /* 클럽리스트 동호회 모달 */

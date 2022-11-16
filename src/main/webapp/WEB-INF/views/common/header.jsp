@@ -16,7 +16,8 @@
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
     
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -44,6 +45,12 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>        
          <style type="text/css">
          @charset "UTF-8";
+         .swal2-popup {
+		    width: 24em !important;
+		 }
+         .swal2-styled.swal2-confirm{
+         	background-color: #0F4229 !important;
+         }
 			.detail {
 			  display: inline-block;
 			  cursor: pointer;
@@ -314,22 +321,22 @@
             </div>
             <c:choose>
 				<c:when test="${empty sessionScope.m}">
-            <div>
-                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px; ></a><span> / </span>
-                <a href="/joinFrm.do"><img alt="회원가입" src="/resources/img/join.png" style="width: 60px;"></a>
-            </div>
-			</c:when>
-			<c:otherwise>
-				<a href="/logout.do"><img alt="로그아웃" src="/resources/img/power (1).png" style="width: 40px; margin-right: 10px;"></a>
-				<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
-			</c:otherwise>
+		            <div>
+		                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px;" ></a><span> / </span>
+		                <a href="/joinFrm.do"><img alt="회원가입" src="/resources/img/join.png" style="width: 60px;"></a>
+		            </div>
+				</c:when>
+				<c:otherwise>
+					<a href="/logout.do"><img alt="로그아웃" src="/resources/img/power (1).png" style="width: 40px; margin-right: 10px;"></a>
+					<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
+				</c:otherwise>
 			</c:choose>
        	 </div>
     </nav>
 
 	<!-- 로그인 모달 -->
 	<div class="popup_bg00"></div>
-  <div class="popup00 personal_pop00 noto bg_s" >
+  	<div class="popup00 personal_pop00 noto bg_s" >
     <div class="x_btn00"><span class="zwicon-close00">X</span></div>
       <h1 id="login_header" style="color:#000; font-family: 'KOHIBaeumOTF'!important;">로그인</h1>
      
@@ -367,7 +374,7 @@
         
         <!-- 카카오 로그인 -->
      
-        <ul style="display: none;">
+        <ul>
 			<li onclick="kakaoLogout();">
 		      <a href="javascript:void(0)">
 		          <span>카카오 회원 탈퇴</span>
@@ -392,16 +399,17 @@
 
     <!-- Template Javascript -->
     <script src="/resources/TGbtstr/js/mainTG.js"></script>
-    <!-- 로그인 js 
+    <!-- 로그인 js -->
     <script src="/resources/js/login.js"></script>
-    -->
-    
+
     <script type="text/javascript">
    
     
     function alert(text){
 		Swal.fire(text);
 	}
+    
+    
     
     $(".loginBtn").click(function(){
       $(".popup_bg00").stop().fadeIn();
@@ -418,6 +426,7 @@
       $("body").removeClass("bg_g");
     }
     
+  
     function loginchk(){
     	const memberId = $("[name=memberId]").val();
     	const memberPw = $("[name=memberPw]").val();
@@ -429,6 +438,7 @@
     		return true;
     	}
     }
+    
     
     /*카카오 로그인 두번째 시도*/
     //카카오로그인
@@ -509,8 +519,6 @@
 	      Kakao.Auth.setAccessToken(undefined)
 	    }
 	  }  
-
-    
     </script>
     
     

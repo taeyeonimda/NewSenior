@@ -266,6 +266,6 @@
 		    filepath as clubMainImg,
 		    club_intro as clubIntro,
 		(select count(*) from club_members m where m.club_no=c.club_no) as clubMemberCnt
-		from clubs c order by clubMemberCnt desc)r) where rnum between 1 and 3;
+		from clubs c order by clubMemberCnt desc)r) where rnum between 1 and 3
 	</select>
 </mapper>

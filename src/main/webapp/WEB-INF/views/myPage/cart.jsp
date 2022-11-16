@@ -95,7 +95,7 @@
 	                    <tbody>
                     		<c:choose>
                     		<c:when test="${empty list}">
-	                    		<td colspan="7" style="text-align : center; font-size:30px; font-weight:900; padding-top:20px; color:rgba(255,10,10,0.7);">장바구니 없졍</td>
+	                    		<td colspan="7" style="text-align : center; font-size:30px; font-weight:900; padding-top:20px; color:rgba(100,50,50,0.7);">장바구니가 비었습니다.</td>
                     		</c:when>
                     		<c:otherwise>
 	                    <c:forEach items="${list }" var="Cart">
@@ -145,9 +145,7 @@
 								 	</c:if>
 									<c:if test="${Cart.activityPrice != ''}">
 						           		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
-						           		<td style="text-align:center;" class="realPrice">
-						           			<input type="hidden" class="numPrice">
-						           		</td>
+						           		<td style="text-align:center;" class="realPrice"></td>
 						           	</c:if>		
 									<td><input type="hidden" class="sumPrice" value="${Cart.buyPrice*Cart.buyAmount }"></td>
 								
@@ -222,6 +220,15 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>    
+    	function sum(){
+    		const sumPrice = $(".sumPrice");
+			let result = 0;
+			for(let i=0; i<sumPrice.length; i++){
+				result += Number(sumPrice.eq(i).val());
+			}
+			
+			
+		}
     	window.onload=function(){
 			sum();
 			let i =0;
@@ -232,16 +239,17 @@
 				let price = totalPrice.eq(i).text();
 				numberPrice = parseInt(price);
 				let realPrice = numberPrice.toLocaleString();
-				$(".realPrice").eq(i).text(realPrice);
-				
-				
-				
+				$(".realPrice").eq(i).text(realPrice);				
 				sumPrice += numberPrice;
 			}
-
-			
+			console.log(sumPrice);
+			let realPrice = sumPrice.toLocaleString();
 			$(".lastPrice").text(realPrice);
+			
 		}
+    	
+    	
+    	
     	
 		$("#payBtn").on("click",function(){
 			const price = $(".hiddenPayPrice").val();
@@ -285,18 +293,7 @@
 			}
 		
 		
-		function sum(){
-			const sumPrice = $(".sumPrice");
-			let result = 0;
-			for(let i=0; i<sumPrice.length; i++){
-				result += Number(sumPrice.eq(i).val());
-			}
-			
-			const realPrice = $(".realPrice").text()
-			const numPrice = $(".numPrice").val()
-			const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-			$(".lastPrice").text(lastPrice);
-		}
+		
 		
 		
 

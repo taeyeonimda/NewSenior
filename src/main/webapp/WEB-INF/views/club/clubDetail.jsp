@@ -7,9 +7,19 @@
 <meta charset="UTF-8">
 <title>동호회 상세</title>
     <link href="/resources/css/club/club-detail.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&display=swap" rel="stylesheet">
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
+<style>
+.closeSpan:hover,
+.myClubBox>div>span
+{
+	cursor: pointer;
+}
+</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
     <!-- page Content 시작-->
@@ -20,7 +30,7 @@
 	            <div class="side-box rounded mt-2">
 	                <p class="fs-5 fw-bold text-primary mt-5">내 동호회</p>
 	                <div class="side-info-box text-center">
-	                    <div class="side-info-box text-center" id="myClubList">
+	                    <div class="side-info-box text-center myClubBox" id="myClubList">
 							<!-- ajax로 가져오는 정보 -->
 	                    </div>
 	                </div>
@@ -30,7 +40,7 @@
 	            </div>
 	            <div class="side-box rounded mt-5">
 	                <p class="fs-5 fw-bold text-primary">${c.clubName } </p>
-	                <div class="side-info-box text-center">
+	                <div class="side-info-box text-center clubIntro" style="overflow: auto; min-height: 180px;">
 	                	<c:forEach items="${c.memberList }" var="cm">
 	                		<c:if test="${cm.memberNo eq c.clubLeader }">
 	                			<div><span>${cm.nickName }</span><span>(${cm.memberId })</span><span class="fw-bold text-dark"> - 동호회장</span></div>
@@ -50,7 +60,7 @@
             <div></div>
         </div>
 
-        <!-- sideBar-left 동호회 정보 목록 /  채팅하기 버튼 -->
+        <!-- sideBar-left 동호회 정보  -->
         <div class="sidenav-left bg-light rounded p-sm-5 wow fadeIn">
             <div class="side-box rounded mt-5">
                 <nav aria-label="breadcrumb animated slideInDown">
@@ -103,7 +113,7 @@
 		                            </div>
                         		</div>
 	                            <pre style="font-family: sans-serif">${c.clubNotice }</pre>
-	                            <textarea rows="5" cols="82" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
+	                            <textarea rows="5" cols="90" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
                     </div>
@@ -344,8 +354,8 @@
 
 <div class="clubLeader-modal-wrap">
     <div class="clubLeader-modal bg-white">
-        <div class="clubLeaderModalTop mt-5">
-            <h3 class="text-secondary">동호회 관리</h3>
+        <div class="clubLeaderModalTop mt-3" style="display: flex; width: 97%; justify-content: flex-end;">
+            <h3 class="text-secondary" style="margin-right: 130px;">동호회 관리</h3><span class="material-symbols-outlined fw-bold closeSpan" onclick="leaderModalClose();">close</span>
         </div>
         <div class="clubLeaderModalContent">
         <c:choose>
@@ -371,15 +381,19 @@
         </c:choose>
         </div>
         <hr>
-        <div class="align-center mt-5" style="width: 50%; margin: 0 auto;">
+        <div class="align-center" style="width: 60%; margin: 0 auto;">
+        <table class="table" style="margin-bottom: 0;">
+        	<tr>
+        		<th>선택</th>
+        		<th>닉네임</th>
+        		<th>아이디</th>
+        	</tr>
+        </table>
+        </div>
+        <div class="align-center clubIntro2" style="width: 60%; margin: 0 auto; height: 240px; margin-top: 0;">
         <c:choose>
         	<c:when test="${fn:length(c.memberList) > 1 }">
-        		<table class="table">
-		        	<tr>
-		        		<th>선택</th>
-		        		<th>닉네임</th>
-		        		<th>아이디</th>
-		        	</tr>
+        		<table class="table" style="margin-top: 0;">
 					<c:forEach items="${c.memberList }" var="cm">
 					<c:if test="${cm.memberNo ne sessionScope.m.memberNo }">
 		            <tr>
@@ -390,8 +404,6 @@
 		        	</c:if>
 		            </c:forEach>
 		        </table>
-	        <p>선택한 회원을 추방하시겠습니까?</p>
-			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
         	</c:when>
         	<c:otherwise>
         		<p class="fw-bold">관리할 회원이 없습니다</p>
@@ -400,9 +412,10 @@
         	</c:otherwise>
         </c:choose>
 	    </div>
-	    <div class="clubLeaderModalBtnBox mt-4">
-			<button class="btn btn-secondary py-2 px-4" onclick="leaderModalClose();">닫기</button>
-		</div>
+	    <div class="mt-3">
+	    	<p>선택한 회원을 추방하시겠습니까?</p>
+			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
+	    </div>
     </div>
 </div>
 
@@ -571,6 +584,7 @@
 	
     // 채팅모달
     function openModal() {
+		alert("안녕하세요 모달입니다");
     	$("#member-box").show();
     	$(".modal-wrap").css("display", "flex");
 	}

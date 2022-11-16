@@ -239,43 +239,43 @@
 		
 			
 			if(className==""){
-				alert("클래스이름");
+				alert("클래스 이름을 작성해 주세요.");
 				return false;
 			}
 			if(files==""){
-				alert("파일즈");
+				alert("파일을 등록해 주세요");
 				return false;
 			}
 			
 			if(teacherIntroduce==""){
-				alert("teacherIntroduce");
+				alert("강사 정보를 작성해 주세요");
 				return false;
 			}
 			if(curriculum==""){
-				alert("curriculum");
+				alert("커리큘럼을 작성해 주세요");
 				return false;
 			}
 			if(startDate==""){
-				alert("startDate");
+				alert("시작일을 등록하세요");
 				return false;
 			}
 			if(endDate==""){
-				alert("endDate");
+				alert("마감일을 등록하세요");
 				return false;
 			}
 			
 			if(category==""){
-				alert("category");
+				alert("카테고리를 선택하세요");
 				return false;
 			}
 
 			if(classLimit ==""){
-				alert("classLimit");
+				alert("클럽제한을 선택하세요");
 				return false;
 			}
 			
 			if(products==""){
-				alert("products");
+				alert("준비물 유무를 선택하세요");
 				return false;
 			}
 			

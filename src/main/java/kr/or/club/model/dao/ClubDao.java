@@ -135,4 +135,9 @@ public class ClubDao {
 		int result = sqlSession.selectOne("club.myClubCheck", c);
 		return result;
 	}
+
+	public ArrayList<Club> selectMainClubs() {
+		List list = sqlSession.selectList("club.selectMainClubs");
+		return (ArrayList<Club>)list;
+	}
 }

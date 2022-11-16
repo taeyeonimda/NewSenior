@@ -12,11 +12,12 @@
 <style>
 
 .serviceBox1 {
-    width: 230px;
-    height: 230px; 
+    width: 250px;
+    height: 250px; 
     border-radius: 70%;
     overflow: hidden;
     border: 4px dashed #20c997;
+    margin: 0 auto;
 }
 .serviceBox1 img {
     width: 100%;
@@ -81,7 +82,6 @@
   	height: 230px;
   	object-fit: cover;
 }
-
 .clubListInfo{
 	width: 100%;
 }
@@ -118,7 +118,7 @@
 		        <c:choose>
 		        	<c:when test="${not empty pList }">
 		        		<p class="fs-5 fw-bold text-primary mt-5 text-center">'${sessionScope.m.nickName }'님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
-			        	<div class="container" style="width: 70%; margin-top: 50px; margin-bottom: 100px;">
+			        	<div class="container" style="width: 90%; margin-top: 50px; margin-bottom: 100px;">
 						    <div class="flex-space-around">
 						    <c:forEach items="${pList }" var="pl">
 							    <div class="col-md-3 col-sm-6">
@@ -126,8 +126,8 @@
 							        	<img alt="" src="/resources/upload/club/${pl.clubMainImg }">
 							        </div>
 							        <div style="word-break:break-all;" >
-							            <h3 class="card-title">${pl.clubName }</h3>
-										<p class="description clubIntro bg-light" style="width: 100%;">${pl.clubIntro } </p> 
+							            <h3 class="card-title" style="width: 90%; margin:0 auto; text-align: center;">${pl.clubName }</h3>
+										<p class="description clubIntro" style="width: 90%;">${pl.clubIntro } </p> 
 							            <a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
 							        </div>
 							    </div>
