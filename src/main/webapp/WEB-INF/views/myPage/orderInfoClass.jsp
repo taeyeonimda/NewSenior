@@ -69,7 +69,7 @@
 						<div class="mt-5">
 							<h5 class="mb-4">${cla.className } (${cla.startDate } ~ ${cla.endDate })</h5>
 							<p>수강 시작일 : ${cla.startDate }</p>
-							<p>수강 인원 : ${clh.amount } 인</p>
+							<p id="amount">수강 인원 : ${clh.amount } 인</p>
 							<p>수강 장소 : 시니어 클럽 잠실점</p>
 							<p>결제할 총 금액</p>
 							<p class="lastPrice" style="display: none;">${clh.payPrice }</p>
@@ -95,6 +95,8 @@
 				
 				<div style="margin: 10px; border-top: 1px solid #ddd;">
                     <button type="button" style="float: right; width:250px; height:40px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
+                    <div style="display: none;">${cla.classNo }</div>
+                    <div style="display: none;">${sessionScope.m.memberNo }</div>
                 </div>
 			</div>
 		</div>
@@ -147,7 +149,9 @@
 			const price = $(".lastPrice").text();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			
+			const classNo = $("#payBtn").next().text();
+			const memberNo = $("#payBtn").next().next().text();
+			const amount = $("#amount").text();
 			IMP.init("imp10385324");
 			IMP.request_pay({
 				pg: "html5_inicis",
@@ -161,7 +165,7 @@
 				buyer_postcode : "12345"				// 구매자 우편변호
 			},function(rsp){
 				if(rsp.success){
-					alert("결제 성공");
+					alert("결제완료");
 				}else{
 					alert("결제 실패");
 				}

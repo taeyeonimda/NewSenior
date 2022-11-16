@@ -19,11 +19,6 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="/resources/JSbtstr/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/resources/JSbtstr/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/resources/JSbtstr/css/demo.css" />
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,44 +28,32 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="/resources/JSbtstr/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="/resources/JSbtstr/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="/resources/JSbtstr/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="/resources/JSbtstr/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
 </head>
 <body>
-<%@include file="/WEB-INF/views/common/header.jsp" %>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
 <body>
-  <!-- Layout wrapper -->
-  <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
-      <!-- Menu -->
-
-      <%@include file="/WEB-INF/views/common/aside.jsp" %>
-      <!-- / Menu -->
-
-        <!-- Layout container -->
+  	<%@include file="/WEB-INF/views/common/header.jsp" %>
+       	<!-- Page Header Start -->
+        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/resources/img/은비5.jpg) center center no-repeat; background-size: cover;">
+            <div class="container text-center py-5">
+                <h1 class="display-3 text-white mb-4 animated slideInDown">클래스 신청</h1>
+                <nav aria-label="breadcrumb animated slideInDown">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item">뉴시니어스의 강사가 되어 나만의 재능을 나눠보세요</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Page Header End -->
         
-
-
-          <!-- Content wrapper -->
-          
-            <!-- Content -->
-
-            <div class="container-xxl flex-grow-1 container-p-y">
-              
-
-                <div class="col-xl-6">
+        
+    <div class="page-content rounded mt-5">
+            <div class="container-xxl flex-grow-1 container-p-y mt-5">
+                <div class="col-xl-6 " style="margin: 0 auto;">
                   <!-- HTML5 Inputs -->
                 <form action="#">
                   <div class="card mb-4" style="width:100wh;">
-                    <h5 class="card-header" style="text-align: center;">클래스 등록하기</h5>
+                    <h5 class="card-header" style="text-align: center; background-color: #0F4229; color: white;">클래스 신청서</h5>
                     <div class="card-body">
                       <div class="mb-3 row">
                         <label for="html5-text-input" class="col-md-2 col-form-label">클래스명</label>
@@ -150,65 +133,20 @@
                   <!-- File input -->
                </div></div></div>
             <!-- / Content -->
-	
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+    <!-- Back to Top -->
+	<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
 
 
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s" style="width: 100%;">
-  <div class="container py-5">
-      <div class="row g-5">
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Our Office</h4>
-              <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-              <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-              <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-              <div class="d-flex pt-2">
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Services</h4>
-              <a class="btn btn-link" href="">Landscaping</a>
-              <a class="btn btn-link" href="">Pruning plants</a>
-              <a class="btn btn-link" href="">Urban Gardening</a>
-              <a class="btn btn-link" href="">Garden Maintenance</a>
-              <a class="btn btn-link" href="">Green Technology</a>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Quick Links</h4>
-              <a class="btn btn-link" href="">About Us</a>
-              <a class="btn btn-link" href="">Contact Us</a>
-              <a class="btn btn-link" href="">Our Services</a>
-              <a class="btn btn-link" href="">Terms & Condition</a>
-              <a class="btn btn-link" href="">Support</a>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Newsletter</h4>
-              <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-              <div class="position-relative w-100">
-                  <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                  <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-<!-- Footer End -->
+
+
 <script>
-	
-
 
 	function f_datepicker(obj) {
 		 $( obj ).datepicker().datepicker("show");
 		}
-		
-		
-	
 
 	
 	console.log($("input[name=teacherName]").val());
@@ -299,12 +237,6 @@
 			}
 			
 
-			
-			
-		
-			
-			
-			
 			console.log(formData.get("className"));
 			console.log(formData.get("files"));
 			console.log(formData.get("teacherName"));

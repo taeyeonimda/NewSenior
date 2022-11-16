@@ -277,6 +277,7 @@ public class NsClassService {
 	public ArrayList<ClassReview> getTeacherReview(NsClass cla) {
 		return dao.getTeacherReview(cla);
 	}
+	@Transactional
 	public int insertPayClassHistory(ClassHistory clh) {
 		return dao.insertPayClassHistory(clh);
 	}
