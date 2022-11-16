@@ -9,6 +9,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>클래스 상세</title>
 </head>
+<style>
+.changeFont{
+	margin-left: 20px;
+}
+.changeFont>button:last-child{
+	margin-left: 5px;
+}
+.amount-box{
+	width: 82%;
+	margin: 0 auto;
+}
+#priceBox>span{
+	display: inline-block;
+	height: 58px;
+	line-height: 58px;
+}
+</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
         <!-- Page Header Start -->
@@ -40,15 +57,15 @@
                 </div>
                 <div class="side-info-box">
                     <ul>
-                        <li class="mb-2"><span class="text-secondary">시작일 : ${cla.startDate }</span></li>
-                        <li class="mb-2"><span class="text-secondary">종료일 : ${cla.endDate }</span></li>
-                        <li class="mb-2"><span class="text-secondary">초급자 대상</span></li>
+                        <li class="mb-2"><span class="text-secondary fw-change">시작일 : ${cla.startDate }</span></li>
+                        <li class="mb-2"><span class="text-secondary fw-change">종료일 : ${cla.endDate }</span></li>
+                        <li class="mb-2"><span class="text-secondary fw-change">초급자 대상</span></li>
                         <c:choose>
                         	<c:when test="${cla.products eq 0 }">
-                        		<li class="mb-4"><span class="text-primary">준비물 없음</span></li>
+                        		<li class="mb-4 fw-change"><span class="text-primary">준비물 없음</span></li>
                         	</c:when>
                         	<c:otherwise>
-                        		<li class="mb-4"><span class="text-primary">준비물 필요</span></li>
+                        		<li class="mb-4 fw-change"><span class="text-primary">준비물 필요</span></li>
                         	</c:otherwise>
                         </c:choose>
                     </ul>
@@ -57,7 +74,7 @@
                 	<c:when test="${not empty sessionScope.m }">
                 	<div class="side-select-box form-floating mb-4">
 	                    <div class="amount-box">
-		                    <select name="amount" class="bg-white border-0" style="padding: 0; padding-left: 30px; padding-right: 30px;" onchange="changePrice();">
+		                    <select name="amount" class="bg-white border-0 fw-change" style="padding: 10px; padding-left: 30px; padding-right: 30px;" onchange="changePrice();">
 		                        <option value='' selected>인원수</option>
 		                        <option value=1>1인</option>
 		                        <option value=2>2인</option>
@@ -66,7 +83,7 @@
 		                        <option value=5>5인</option>
 		                        <option value=6>6인</option>
 		                    </select>
-		                    <div id="priceBox">
+		                    <div id="priceBox" class="fw-change">
 			                    <span>${cla.classPrice }</span>
 			                    <span>원</span>
 		                    </div>
@@ -74,7 +91,7 @@
 	                    </div>
 	                </div>
 	                <div class="mb-2">
-	                	<button onclick="openConfirm('${cla.className }');" class="btn btn-primary py-3 px-5">신청하기</button>
+	                	<button onclick="openConfirm('${cla.className }', ${cla.classNo }, ${sessionScope.m.memberNo });" class="btn btn-primary py-3 px-5 fw-change">신청하기</button>
 	                </div>
                 	</c:when>
                 	<c:otherwise>
@@ -90,17 +107,17 @@
 
         <!-- class main -->
         <div class="container-xxl py-5 mt-5">
-        	<div class="bg-white">
-            	<button class="btn btn-secondary py-2 px-3">글씨크게</button><button class="btn btn-secondary py-2 px-3">글씨작게</button>
-            </div>
             <div class="container">
+            	<div class="bg-white changeFont">
+	            	<button class="btn btn-outline-secondary py-2 px-3" id="bigFont" onclick="bigger();">글씨크게</button><button class="btn btn-secondary py-2 px-3" onclick="smaller();" id="smallFont">글씨작게</button>
+	            </div>
                 <div class="class-row g-4">
                     <div class="col-md-8 wow fadeInUp" data-wow-delay="0.1s">
                     	<img class="img-fluid" src="/resources/upload/class/${cla.filepath }" alt="">
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span><a href="#menu1">커리큘럼</a></span><span><a href="#menu2">강사소개</a></span><span><a href="#menu3">강사후기</a></span><span><a href="#menu4">준비물</a></span><span><a href="#menu5">환불규정</a></span>
+                	<span><a href="#menu1" class="fw-change">커리큘럼</a></span><span><a href="#menu2" class="fw-change">강사소개</a></span><span><a href="#menu3" class="fw-change">강사후기</a></span><span><a href="#menu4" class="fw-change">준비물</a></span><span><a href="#menu5" class="fw-change">환불규정</a></span>
                 </div>
             </div>
         </div>
@@ -115,7 +132,7 @@
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <p class="fs-5 fw-bold text-primary">${cla.teacherName } 강사와 함께하는 ${cla.className }</p>
                         <h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
-                        <pre class="mb-4 font-set font-set fs-6">${cla.curriculum }</pre>
+                        <pre class="mb-4 font-set fw-change">${cla.curriculum }</pre>
                     </div>
                     <div class="product-title mt-5">
                         <div class="product-img-div">
@@ -129,6 +146,7 @@
         </div>
         <!-- Features End -->
 
+
         <!-- 강사 소개 -->
         <div class="container-xxl py-5 mt-5" id="menu2">
             <div class="container class-container">
@@ -139,7 +157,7 @@
                     </div>
                     <div class="col-lg-7 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
                         <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
-                        <pre style="width: 70%;">${cla.teacherIntroduce } 하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이</pre>
+                        <pre style="width: 70%;" class="fw-change">${cla.teacherIntroduce } 하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이</pre>
                     </div>
                 </div>
             </div>
@@ -187,8 +205,8 @@
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <p class="fs-5 fw-bold text-primary">환불규정</p>
-                        <h6 class="display-5 mb-4">시작 8일 전까지 100% 환불</h6>
-                        <p class="mb-4">
+                        <h6 class="display-5 mb-4 fw-change">시작 8일 전까지 100% 환불</h6>
+                        <p class="mb-4 fw-change">
                             ㆍ모임시작 7일 ~ 2일 전까지 : 취소수수료 20% 공제 후 환불 <br>
                             ㆍ모임 시작일 1일 전 : 환불이 불가합니다. </p>
                     </div>
@@ -201,7 +219,7 @@
         
         <div id="menu5"></div>
         <!-- 후기 -->
-		<button id="review-btn" class="btn btn-primary py-3 px-5">후기작성</button>
+		<button id="review-btn" class="btn btn-primary py-3 px-5" style="display: none;">후기작성</button>
     </div><!--page-content End-->
    
 
@@ -256,7 +274,25 @@
 
     <!-- side-bar script-->
     <script>
-		   
+    
+    	// 글씨 크기 script
+    	function bigger() {
+			$("#bigFont").addClass("btn-secondary");
+			$("#smallFont").removeClass("btn-secondary");
+			$("#bigFont").removeClass("btn-outline-secondary");
+			$("#smallFont").addClass("btn-outline-secondary");
+			$(".fw-change").addClass("fs-5").addClass("fw-bold");
+		}
+    	function smaller() {
+			$("#smallFont").addClass("btn-secondary");
+			$("#bigFont").removeClass("btn-secondary");
+			$("#smallFont").removeClass("btn-outline-secondary");
+			$("#bigFont").addClass("btn-outline-secondary");
+			$(".fw-change").removeClass("fs-5").removeClass("fw-bold");
+		}
+
+    	
+    	
 		$(document).ready(function($) {
 		       $(".scroll_move").click(function(event){         
 		               event.preventDefault();
@@ -264,7 +300,7 @@
 		       });
 		});
     
-	    function openConfirm(className, classNo){
+	    function openConfirm(className, classNo, memberNo){
 	    	const amount = $("select[name=amount]").val();
 	    	if(amount==''){
 	    		alert("인원수를 선택하세요");
@@ -284,7 +320,7 @@
 				}).then((result) => {
 					//result.value == true이니까 트루일때만 실행하는거
 				  if (result.value) {
-		              location.href = "/cartIn.do?classNo=?&memberNo=?&amount=?"
+		              location.href = "/payClass.do?classNo="+classNo+"&memberNo="+memberNo+"&amount="+amount;
 				  }
 				})//then끝
 	    	}

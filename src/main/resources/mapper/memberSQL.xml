@@ -62,7 +62,8 @@
 			member_email as memberEmail,
 			member_phone as memberPhone,
 			member_grade as memberGrade,
-			member_state as memberState
+			member_state as memberState,
+			favorite
 	from members
 	where member_id=#{memberId} 
 	<if test="memberPw != null">
