@@ -153,9 +153,9 @@
 						           	</c:if>	
 									<td><input type="hidden" class="sumPrice"  value="${Cart.buyPrice*Cart.buyAmount }"></td>
 								
-								
+								<td><input type="hidden" class="cartActivityNo" value="${Cart.activityNo }"></td>	
 			            	</tr>	
-			              
+			              	
 	             		</c:forEach>
 	                    	<tr>
 		                      	<td colspan="4"></td>
@@ -184,6 +184,8 @@
 					<div id="same-check" style="float:right; margin-right:10%;">
                         <input type="checkbox" id="order-same" class="order-agree" >
                         <label for="order-same">기본 배송지 불러오기</label>
+                           <input type="checkbox" id="test-same" class="order-agree" >
+                        <label for="test-same">테스트용</label>
                     </div>
 					<br><br>
 					<div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
@@ -278,9 +280,7 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
-		
-		
-
+	
 		
 		function selectAll(selectAll)  {
 			  const checkboxes 
@@ -381,6 +381,15 @@
 		    }).open();
 		}
 		
+		$("#test-same").on("click", function(){
+		
+			
+		});
+		
+		
+		
+		
+		
 		$("#payBtn").on("click",function(){
 			const price = $(".allSumPrice").val();
 			const d = new Date();
@@ -400,11 +409,28 @@
 			
 			},function(rsp){
 				if(rsp.success){
+					
+					let cartActivityNo = $(".cartActivityNo").length;
+					let cartActivity = $(".cartActivityNo");
+					let memberNo = $(".hiddenMemberNo").val();
+					if(cartActivityNo!=0){
+						for(let s=0;s<cartActivityNo;s++){
+							$.ajax({
+								url:"/insertActHistory.do",
+								data:{
+									memberNo:memberNo,
+									activityNo:cartActivity.eq(s).val()
+								}
+							});//ajax
+						}
+					}
+
 					alert("결제 성공");
 					const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
 					$("#goDeliveryTable").append(input);	
 		            $("#goDeliveryTable").submit();
 				}else{
+					console.log(rsp)
 					alert("결제 실패");
 				}
 			});

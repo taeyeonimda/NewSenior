@@ -128,7 +128,7 @@ insert into delivery_tbl values(
 select
     cart_no as cartNo,
     product_no as productNo,
-   	activity_no as activityNo,
+   	(select activity_no from activity where activity.activity_no = carts.activity_no)as activityNo,
    	(select filepath from activity where activity.activity_no = carts.activity_no)as activityPhoto,
    	(select activity_name from activity where activity.activity_no = carts.activity_no)as activityName,
     (select activity_price from activity where activity.activity_no = carts.activity_no)as activityPrice,

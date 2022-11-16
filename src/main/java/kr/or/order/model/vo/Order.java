@@ -44,5 +44,8 @@ public class Order {
 	private String startDate;
 	private String endDate;
 	
+	
+	private int activityNo;
+	
 	private ArrayList<Product> productList;
 }
