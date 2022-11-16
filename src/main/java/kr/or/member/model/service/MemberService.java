@@ -12,6 +12,7 @@ import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import kr.or.nsClass.model.vo.ClassHistory;
 
 @Service
 public class MemberService {
@@ -199,6 +200,18 @@ public class MemberService {
 	public int deleteMember() {
 		// TODO Auto-generated method stub
 		return dao.deleteMember();
+	}
+
+
+	public ArrayList<ClassHistory> selectAllHistory(Member member) {
+		// TODO Auto-generated method stub
+		return dao.selectAllHistory(member);
+	}
+
+
+	public ArrayList<ClassHistory> selectEndHistory(Member member) {
+		// TODO Auto-generated method stub
+		return dao.selectEndHistory(member);
 	}
 
 	

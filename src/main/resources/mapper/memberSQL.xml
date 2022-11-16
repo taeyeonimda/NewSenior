@@ -219,4 +219,5 @@
 	delete from members where member_state =(SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD')as time
     FROM DUAL)
 	</delete>
+	
 </mapper>

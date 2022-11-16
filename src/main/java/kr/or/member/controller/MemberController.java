@@ -32,6 +32,7 @@ import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
+import kr.or.nsClass.model.vo.ClassHistory;
 
 @Controller
 public class MemberController {
@@ -54,18 +55,38 @@ public class MemberController {
 	}
 	 */
 	
+	//수강현황가기
 	@RequestMapping(value="/classHistory.do")
-	public String classHistory() {
-		return "myPage/classHistory";
+	public String classHistory(@SessionAttribute Member m, Model model) {
+		Member m1 = new Member();
+		m1.setMemberId(m.getMemberId());
+		m1.setKakaoLogin(m.getKakaoLogin());
+		Member member = service.selectOneMember(m1);
+		System.out.println("수강현황 멤버"+member);
+		ArrayList<ClassHistory> list = service.selectAllHistory(member);
+		System.out.println("수강현황 리스트"+list);
+		ArrayList<ClassHistory> endList = service.selectEndHistory(member);
+		System.out.println("수강종료 리스트"+endList);
+		if (member != null) {
+			model.addAttribute("list",list);
+			model.addAttribute("endList",endList);
+			model.addAttribute("member", member);
+			return "myPage/classHistory";
+		} else {
+			return "redirect:/";
+		}
 	}
+	//내동호회 가기
 	@RequestMapping(value="/myClub.do")
 	public String myClub() {
 		return "myPage/myClub";
 	}
+	//나의 후기 가기(내가쓴글 수정)
 	@RequestMapping(value="/myComment.do")
 	public String myComment() {
 		return "myPage/myComment";
 	}
+	//강사정보가기
 	@RequestMapping(value="/teacherInfo.do")
 	public String teacherInfo() {
 		return "myPage/teacherInfo";

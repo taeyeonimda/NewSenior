@@ -50,7 +50,8 @@
 <%@include file="/WEB-INF/views/common/header3.jsp"%>
 	<div class="wra" style="font-family: 'GmarketSansMedium'!important;">
 		<form action="/pwChange.do" method="post" onsubmit="return checkPw();">
-			<div class="txt1">비밀번호 변경</div><br>
+			<div class="txt1">비밀번호 변경</div>
+			<hr style="margin-bottom: 40px;">
 			<div class="txt2">새로운 비밀번호를 입력해주세요.</div>
 			<div class="box1">
 			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">

@@ -315,12 +315,12 @@
             <c:choose>
 				<c:when test="${empty sessionScope.m}">
             <div>
-                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px; ></a><span> / </span>
+                <a href="javascript:void(0)" class="loginBtn" ><img alt="로그인" src="/resources/img/log-in.png" style="width: 60px;" ></a><span> / </span>
                 <a href="/joinFrm.do"><img alt="회원가입" src="/resources/img/join.png" style="width: 60px;"></a>
             </div>
 			</c:when>
 			<c:otherwise>
-				<a href="/logout.do"><img alt="로그아웃" src="/resources/img/power (1).png" style="width: 40px; margin-right: 10px;"></a>
+				<a href="/logout.do"><img alt="로그아웃" src="/resources/img/logout.png" style="width: 40px; margin-right: 10px;"></a>
 				<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
 			</c:otherwise>
 			</c:choose>

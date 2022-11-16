@@ -18,6 +18,7 @@
 		 <typeAlias type="kr.or.order.model.vo.Order" alias="Or"/>
 		 <typeAlias type="kr.or.order.model.vo.OrderDetail" alias="Ord"/>
 		 <typeAlias type="kr.or.cart.model.vo.Cart" alias="Ca"/>
+		 <typeAlias type="kr.or.nsClass.model.vo.ClassHistory" alias="ch"/>
 		 
 		 
 		 
