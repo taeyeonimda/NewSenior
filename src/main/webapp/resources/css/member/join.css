@@ -6,6 +6,7 @@
 .wra_title{
 	text-align: center;
 	font-size: 2em; 
+	
 }
 .popup {
 	display: none;
@@ -47,6 +48,7 @@
 }
 
 .cont {
+	font-family: 'GmarketSansMedium';
 	text-align: left;
 }
 
@@ -64,15 +66,17 @@
 	display: inline-block;
 	width: 160px;
 	font-size: 1.5em;
+	font-family: 'GmarketSansMedium';
 }
 
 .inbtn {
-	width: 480px;
-	height: 60px;
+	width: 500px;
 	margin-bottom: 30px;
 	font-size: 1.2em;
-	border-radius: 5px;
 	border: 1.5px solid rgb(176, 174, 174);
+	height: 60px;
+    border-radius: 5px;
+     font-family: 'GmarketSansMedium';
 }
 
 .red {
@@ -89,10 +93,12 @@
 .fs {
 	font-size: 1.4em;
 	margin-top: 15px;
+	margin-right: 20px;
+	  font-family: 'GmarketSansMedium';
 }
 
 #memberJoin {
-	width: 480px;
+	width: 500px;
 	height: 60px;
 	color: #dc3545;
 	background-color: #fff;
@@ -107,6 +113,64 @@
 .wra {
 	width: 800px;
 	padding: 10px;
-	margin: 0 auto;
+	margin: 10px auto;
 	background: #FFFFFF;
 }
+.wra0{
+	margin: 100px;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//얇음
+			@font-face {
+			    font-family: 'LeferiPoint-WhiteObliqueA';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			//두껍
+			@font-face {
+			    font-family: 'GangwonEduPowerExtraBoldA';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			//물많이
+			@font-face {
+		    font-family: 'OKCHAN';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/OKCHAN.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+			}
+			
+			@font-face {
+			    font-family: 'KOHIBaeumOTF';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/KOHIBaeumOTF.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			@font-face {
+			    font-family: 'SANJUGotgam';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/SANJUGotgam.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}

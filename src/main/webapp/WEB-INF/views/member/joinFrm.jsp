@@ -8,27 +8,30 @@
 <title>회원가입</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <link href="/resources/css/member/join.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Amatic+SC&family=Bangers&family=Bungee+Inline&family=Carter+One&family=Lalezar&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;500;700;900&family=PT+Serif:wght@700&family=Russo+One&family=Saira+Condensed:wght@300;600&family=Secular+One&display=swap" rel="stylesheet">
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header3.jsp"%>
-	<div class="wra0">
+	<div class="wra0 ">
 	<div class="wra">
-	<div class="wra_title">회원가입</div>
+	<div class="wra_title display-1 text-primary mb-0" style="font-size: 3em; font-family: 'GangwonEduPowerExtraBoldA';">회원정보 입력</div>
 	<hr>
 		<form action="/join.do" method="post" class="joinbox">
 			<fieldset>
 				<span class="sp">이름<span class="red">*</span></span>
 				<span id="nameChk"></span><br> <input type="text"
-					placeholder="이름을 입력해주세요." name="memberName" class="inbtn mn1"><br>
+					placeholder="이름을 입력해주세요." name="memberName" class="inbtn mn1"  maxlength="7"><br>
 				<span class="sp">아이디<span class="red">*</span></span><span
 					id="idChk"></span><br> <input type="text"
-					placeholder="아이디을 입력해주세요." name="memberId" class="inbtn mi1"><br>
+					placeholder="아이디을 입력해주세요." name="memberId" class="inbtn mi1"  maxlength="11"><br>
 				<span class="sp">닉네임<span class="red">*</span></span><span
 					id="nicChk"></span><br> <input type="text"
-					placeholder="닉네임을 입력해주세요." name="nickName" class="inbtn nn1"><br>
+					placeholder="닉네임을 입력해주세요." name="nickName" class="inbtn nn1" maxlength="6"><br>
 				<span class="sp">이메일 <span class="red">*</span></span><br> <input
 					type="text" name="str_email01" id="str_email01 sz120"
-					style="width: 150px;" class="inbtn"> @ <input type="text"
+					style="width: 170px;" class="inbtn" maxlength="10"> @ <input type="text"
 					name="str_email02" id="str_email02" style="width: 150px;" disabled
 					value="naver.com" class="inbtn"> <select
 					style="width: 150px; margin-right: 10px" name="selectEmail"
@@ -54,8 +57,8 @@
 					<span class="sp">전화번호<span class="red">*</span></span><br>
 				<table>
 					<tr>
-						<td colspan="3"><select name="memberPhone1" id="memberPhone1"
-							style="height: 60px; width: 150px; font-size: 1.5em; border-radius: 5px; border: 1.5px solid rgb(176, 174, 174); color: #525368;">
+						<td colspan="3"><select name="memberPhone1" id="memberPhone1" class="inbtn"
+							style="height: 60px; width: 150px;  solid rgb(176, 174, 174); color: #525368; padding-left: 20px;">
 								<option value="010">010</option>
 								<option value="010">011</option>
 								<option value="010">016</option>
@@ -63,22 +66,22 @@
 								<option value="010">018</option>
 								<option value="010">019</option>
 						</select> - <input name="memberPhone2" id="memberPhone2" class="tel inbtn"
-							style="width: 150px; font-size: 1.5em;" placeholder="1234">
+							style="width: 160px; font-size: 1.5em;" placeholder="1234" onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');" maxlength="4">
 							- <input name="memberPhone3" id="memberPhone3" class="tel inbtn"
-							style="width: 150px; font-size: 1.5em;" placeholder="5678">
+							style="width: 160px; font-size: 1.5em;" placeholder="5678" onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');" maxlength="4">
 						</td>
 					</tr>
 				</table>
-				<span class="sp">관심사</span> <br> <select name="favorite"
-					style="width: 480px; font-size: 1.5em; height: 60px; margin-bottom: 30px; border-radius: 5px; border: 1.5px solid rgb(176, 174, 174); color: #525368;">
+				<span class="sp">관심사</span> <br> <select name="favorite" class="inbtn"
+					style="width: 500px; font-size: 1.5em; height: 60px; margin-bottom: 30px; border: 1.5px solid rgb(176, 174, 174); color: #525368; padding-left: 20px;">
 						<option value="NO">선택안함</option>
 					 <c:forEach items="${cateList}" var="cateList">
                         <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
                      </c:forEach>   
 					
-				</select> <br> <span class="sp">생년월일</span><span id="birthChk"></span><br>
+				</select> <br> <span class="sp">생년월일 <span class="red">*</span></span><span id="birthChk"></span><br>
 				<input type="text" placeholder="예) 1999-10-08" name="memberBirth"
-					onkeyup="birth_keyup(this)" class="inbtn" maxlength="10"><br>
+					onkeyup="birth_keyup(this); this.value=this.value.replace(/[^-0-9]/g,'');" class="inbtn" maxlength="10"><br>
 		</form>
 		<input type="checkbox" class="checkBtn"><span class="fs">
 			개인정보 수집 및 이용 동의</span> <span style="color: red; text-decoration: underline"
@@ -93,7 +96,14 @@
 		<div class="x_btn">
 			<span class="zwicon-close">X</span>
 		</div>
-		<div class="cont">
+		<div class="cont" style="font-size: 1.2rem;">
+		<h1 style="text-align: center;font-family: 'GangwonEduPowerExtraBoldA';">개인정보 수집 동의</h1>
+		<hr style="width: 500px; margin: 0 auto;">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 			여러분을 환영합니다.<br> 뉴시니어스 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. <br>본
 			약관은 다양한 뉴시니어스 서비스의 이용과 관련하여 뉴시니어스 서비스를 제공하는 뉴시니어스 주식회사(이하 ‘뉴시니어스’)와
 			이를 이용하는 뉴시니어스 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 뉴시니어스 서비스
@@ -377,6 +387,14 @@
 		        obj.value += '-';
 		    }
 		}
+		/*
+		//글자수 제한
+		oninput="handleInputLength(this, 6)" 
+		function handleInputLength(el, max) {
+  			if(el.value.length > max) {
+   			 el.value = el.value.substr(0, max);
+  			}
+		}*/
 	</script>
 </body>
 </html>

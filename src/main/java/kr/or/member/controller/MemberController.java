@@ -375,7 +375,9 @@ public class MemberController {
 			if(list.size()<5) {
 				if(delivery.getDefaultAddr().equals("y")) {
 					// 기본 배송지 값 'n'으로 다 바꾸기
+					System.out.println("딜리버리1111:"+delivery);
 					int result = service.updateAddr(delivery);
+					System.out.println("딜리버리222:"+delivery);
 					if(result>0) {
 						//기본 배송지 'y'로 insert
 						int result2 = service.insertAddr(delivery);
@@ -429,18 +431,38 @@ public class MemberController {
 		}
 		//배송지 정보 업데이트
 		@RequestMapping(value="/updateAddr.do")
-		public String updateAddr(Delivery delivery, Model model, int deliveryNum) {
-			System.out.println("###delivery###:"+delivery+deliveryNum);
+		public String updateAddr(Delivery delivery, Model model, int deliveryNum, @SessionAttribute Member m) {
 			delivery.setDeliveryNo(deliveryNum);
-			int result = service.updateOneAddr(delivery);
-			if(result>0) {
+			delivery.setMemberNo(m.getMemberNo());
+			if(delivery.getDefaultAddr().equals("y")) {
+				//배송지 전부 n으로 바꾸기
+				int result = service.updateAddr(delivery);
+				if(result>0) {
+					//기본 배송지 'y'로  update
+					int result2 = service.updateOneAddr(delivery);
+					if(result2>0) {
+						return "redirect:/mypage.do";
+					}else {
+						model.addAttribute("msg", "배송지 수정에 실패했습니다.11");
+						model.addAttribute("url","/mypage.do");
+						return "alert";
+					}
+				}else {
+					model.addAttribute("msg", "배송지 수정에 실패했습니다.22");
+					model.addAttribute("url","/mypage.do");
+					return "alert";
+				}
+			}
+			int result2 = service.updateOneAddr(delivery);
+			if(result2>0) {
 				return "redirect:/mypage.do";
 			}else {
-				model.addAttribute("msg", "배송지 수정에 실패했습니다.");
+				model.addAttribute("msg", "배송지 수정에 실패했습니다.33");
 				model.addAttribute("url","/mypage.do");
 				return "alert";
 			}
 		}
+		
 		
 		//회원탈퇴
 		@RequestMapping(value="/deleteMember.do")

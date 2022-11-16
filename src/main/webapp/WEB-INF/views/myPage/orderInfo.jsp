@@ -59,6 +59,11 @@
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
 </head>
+<style>
+.showCartList td{
+	line-height:70px;
+}
+</style>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 
@@ -180,7 +185,7 @@
 					<br><br><br>
 					<div id="same-check" style="float:right; margin-right:10%;">
                         <input type="checkbox" id="order-same" class="order-agree" >
-                        <label for="order-same">내 정보 불러오기</label>
+                        <label for="order-same">기본 배송지 불러오기</label>
                     </div>
 					<br><br>
 					<div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>

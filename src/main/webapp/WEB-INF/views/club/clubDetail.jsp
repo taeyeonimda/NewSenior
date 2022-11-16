@@ -151,7 +151,7 @@
 												</div>
 				                        	</div>
 											<div>
-											<c:if test="${sessionScope.m.memberNo eq cb.clubBoardWriter }">
+											<c:if test="${sessionScope.m.memberNo eq cb.memberNo }">
 												<a href="#Redirect" style="margin-right: 14px;" onclick="updateBoard(this); return false;">수정</a>
 												<a href="javascript:void(0);" onclick="boardDelete(${c.clubNo },${cb.clubBoardNo});">삭제</a>
 											</c:if>
@@ -215,7 +215,7 @@
 													</li>
 													<li class="comment-content-li">
 														<p class="comment-info">
-															<span class="text-primary">${cbc.clubComWriter }</span>
+															<span class="text-primary">${cbc.nickName }</span>
 															<span>${cbc.clubComDate }</span>
 														</p>
 														<p class="comment-content">${cbc.clubComContent }</p>
@@ -267,7 +267,7 @@
 													</li>
 													<li class="comment-content-li">
 														<p class="comment-info">
-															<span class="text-primary">${cbrc.clubComWriter }</span>
+															<span class="text-primary">${cbrc.nickName }</span>
 															<span>${cbrc.clubComDate }</span>
 														</p>
 														<p class="comment-content">${cbrc.clubComContent }</p>
