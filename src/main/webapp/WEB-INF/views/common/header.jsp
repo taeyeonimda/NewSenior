@@ -44,6 +44,14 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>        
          <style type="text/css">
          @charset "UTF-8";
+         .swal2-popup {
+		    width: 24em !important;
+		 }
+         .swal2-styled.swal2-confirm{
+         	background-color:#0F4229 !important;
+         }
+         
+         
 			.detail {
 			  display: inline-block;
 			  cursor: pointer;
@@ -367,7 +375,7 @@
         
         <!-- 카카오 로그인 -->
      
-        <ul style="display: none;">
+        <ul>
 			<li onclick="kakaoLogout();">
 		      <a href="javascript:void(0)">
 		          <span>카카오 회원 탈퇴</span>
@@ -402,6 +410,8 @@
 		Swal.fire(text);
 	}
     
+    
+    
     $(".loginBtn").click(function(){
       $(".popup_bg00").stop().fadeIn();
       $(".popup00.personal_pop00").stop().fadeIn();
@@ -417,6 +427,7 @@
       $("body").removeClass("bg_g");
     }
     
+  
     function loginchk(){
     	const memberId = $("[name=memberId]").val();
     	const memberPw = $("[name=memberPw]").val();
@@ -428,6 +439,7 @@
     		return true;
     	}
     }
+    
     
     /*카카오 로그인 두번째 시도*/
     //카카오로그인

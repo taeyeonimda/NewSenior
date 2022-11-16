@@ -257,7 +257,7 @@
     	<img onclick="deleteDetImages(${details.fileNo});" 	
     	src="/resources/upload/common/xBotton2.png"	
     	style="cursor: pointer;" /></p>		
-      <img src="/resources/upload/activity/${details.filepath }" class="d-block w-100" alt="...">
+      <img src="/resources/upload/activity/${details.filepath }" class="d-block" alt="..." style="width:20%; height:20%; margin:0 auto; !important">
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
