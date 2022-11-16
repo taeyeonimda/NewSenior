@@ -112,7 +112,7 @@ cart_no in
 <insert id="goDelivery" parameterType="d">
 insert into delivery_tbl values(
 	pays_seq.currval,
-	'임의배송지',
+	#{deliveryName},
 	#{deliveryPhone},
 	#{zipcode},
 	#{deliveryAddr},

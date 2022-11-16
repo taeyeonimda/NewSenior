@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>동호회 상세</title>
     <link href="/resources/css/club/club-detail.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&display=swap" rel="stylesheet">
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -103,7 +106,7 @@
 		                            </div>
                         		</div>
 	                            <pre style="font-family: sans-serif">${c.clubNotice }</pre>
-	                            <textarea rows="5" cols="82" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
+	                            <textarea rows="5" cols="90" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
                     </div>

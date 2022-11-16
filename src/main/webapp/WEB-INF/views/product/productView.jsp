@@ -761,6 +761,23 @@ ul li.on a {
 		});
 		
 		function goCartAlert(){
+			
+			Swal.fire({
+				title: "동호회 탈퇴",//제목
+				text: "정말 탈퇴하시겠습니까?",
+				imageUrl: "/resources/img/제목없음.png",
+				showCancelButton: true,
+				cancelButtonColor: '#525368',
+				confirmButtonColor: '#348E38',
+				cancelButtonText: '취소',
+				confirmButtonText: '탈퇴하기'
+			}).then((result) => {
+				//result.value == true이니까 트루일때만 실행하는거
+			  if (result.value) {
+				  location.href="/quitClub.do?clubNo="+clubNo+"&memberNo="+memberNo;
+			  }
+			})
+			
 			if (confirm("장바구니에 추가하겠습니까?")){
 				if(confirm("장바구니로 이동하시겠습니까?")){
 					location.href="/cart.do?memberNo="
@@ -771,6 +788,7 @@ ul li.on a {
 				return false;
 			}
 		};
+			
 		
 		</script>
 </body>

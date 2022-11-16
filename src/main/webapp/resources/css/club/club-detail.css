@@ -34,7 +34,7 @@
 
 /* 클럽 리스트 */
 .club-list{
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 	display: flex;
 	flex-flow: row wrap;

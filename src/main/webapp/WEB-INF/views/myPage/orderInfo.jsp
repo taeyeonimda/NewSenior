@@ -107,7 +107,7 @@
 	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
 					            <td style="text-align:center">
-						            <input type="hidden" value="${sessionScope.m.memberNo }">
+						            <input type="hidden" class="hiddenMemberNo" value="${sessionScope.m.memberNo }">
 						            <input class="proNo" type="hidden" value="${Cart.productNo }">
 						            <input class="cartNo" type="text" value="${Cart.cartNo }" name="cartNo" style="border: none; text-align:center;" readonly>
 					            </td>
@@ -149,10 +149,8 @@
 								 	</c:if>
 									<c:if test="${Cart.activityPrice != ''}">
 						           		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
-						           		<td style="text-align:center;" class="realPrice">
-						           			<input type="hidden" class="numPrice">
-						           		</td>
-						           	</c:if>		
+						           		<td style="text-align:center;" class="realPrice"></td>
+						           	</c:if>	
 									<td><input type="hidden" class="sumPrice"  value="${Cart.buyPrice*Cart.buyAmount }"></td>
 								
 								
@@ -190,33 +188,40 @@
 					<br><br>
 					<div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
 					<div class="order-info shipping" style="margin-left:15%;">
+						<div class="order-box">
+	                        <label for="deliveryName" class="order-label" id="deliveryName" style="width:80px;">배송지이름<span class="comment"></span></label>
+	                        <input type="text" id="deliveryName" class="basicInput" name="deliveryName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                    </div><br>
 	                    <div class="order-box">
-	                        <label for="deliveryName" class="order-label" style="width:70px;">수령인명</label>
+	                        <label for="deliveryName" class="order-label" style="width:80px;">수령인명</label>
 	                        <input type="text"  id="deliveryName" class="basicInput " name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div>
 	                        <br>
 	                    <div class="order-box">
-	                        <label for="deliveryPhone" class="order-label" style="width:70px;">전화번호</label>
+	                        <label for="deliveryPhone" class="order-label" style="width:80px;">전화번호</label>
 	                        <input type="text"  id="deliveryPhone" class="basicInput" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
 	                    </div>
 	                        <br>
+<!-- 
 	                    <div class="order-box">
-	                        <label for="deliveryEmail" class="order-label" style="width:70px;">이메일</label>
+	                        <label for="deliveryEmail" class="order-label" style="width:80px;">이메일</label>
 	                        <input type="text"  id="deliveryEmail" class="basicInput" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div>
+ -->
 	                    <div class="order-box">
-	                        <label for="deliveryAddr" class="order-label" style="width:70px;">주소</label>
-	                        <input type="text" id="deliveryAddr" class="addr1" name="deliveryAddr" style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
+	                        <label for="deliveryAddr" class="order-label" style="width:80px;">주소</label>
+	                        <input type="text" id="deliveryAddr" class="addr1 basicInput" name="deliveryAddr" style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
 	                        <button type="button" class="btn btn-outline-primary" style="width:120px;height:40px;margin-bottom:30px;margin-top:10px;" id="addr-btn" onclick="searchAddr();">주소찾기</button>
 	                    </div>
 	                    <div class="order-box">
-	                        <label for="deliveryAddr2" class="order-label" id="detailAddress" style="width:70px;">우편번호<span class="comment"></span></label>
-	                        <input type="text" id="deliveryAddr2" class="addr2" name="zipcode" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                        <label for="deliveryAddr2" class="order-label" id="detailAddress" style="width:80px;">우편번호<span class="comment"></span></label>
+	                        <input type="text" id="deliveryAddr2" class="addr2 basicInput" name="zipcode" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
 	                    </div><br>
 	                    <div class="order-box">
-	                        <label for="deliveryAddr2" class="order-label" id="detailAddress2" style="width:70px;">상세주소<span class="comment"></span></label>
-	                        <input type="text" id="deliveryAddr2" class="detailAddr" name="deliveryDetail" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
-	                    </div>
+	                        <label for="deliveryAddr2" class="order-label" id="detailAddress2" style="width:80px;">상세주소<span class="comment"></span></label>
+	                        <input type="text" id="deliveryAddr2" class="detailAddr basicInput" name="deliveryDetail" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+	                    </div><br>
+	                    
                 	</div>
                 	<br><br>
                 	<div class="agree" style="text-align:center;">
@@ -288,41 +293,31 @@
 		
 		
 			function sum(){
-				
-				const sumPrice = $(".sumPrice");
+	    		const sumPrice = $(".sumPrice");
 				let result = 0;
 				for(let i=0; i<sumPrice.length; i++){
 					result += Number(sumPrice.eq(i).val());
 				}
 				
 				
-				const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-				$(".allSumPrice").val(result);
-				$(".lastPrice").text(lastPrice);
-				
-				
 			}
-			
-			window.onload=function(){
+	    	window.onload=function(){
 				sum();
 				let i =0;
 				let totalPrice = $(".cartTotalPrice");
 				let sumPrice=0;
 				let numberPrice;
-				let realPrice=0;
 				for(i; i<totalPrice.length; i++){
 					let price = totalPrice.eq(i).text();
 					numberPrice = parseInt(price);
-					realPrice = numberPrice.toLocaleString();
-					$(".realPrice").eq(i).text(realPrice);
-					
-					
+					let realPrice = numberPrice.toLocaleString();
+					$(".realPrice").eq(i).text(realPrice);				
 					sumPrice += numberPrice;
 				}
-
+				let realPrice = sumPrice.toLocaleString();
+				$(".lastPrice").text(realPrice);
+				$(".allSumPrice").val(sumPrice);
 				
-				
-//				$(".allSumPrice").val(numberPrice);
 			}
 		
 		// 체크한것 삭제
@@ -345,24 +340,40 @@
 		
 		$("#order-same").on("change", function(){
 			if($(this).prop("checked")) {
-				$(".basicInput").eq(0).attr("value","${sessionScope.m.memberName }")
-				$(".basicInput").eq(1).attr("value","${sessionScope.m.memberPhone }")
-				$(".basicInput").eq(2).attr("value","${sessionScope.m.memberEmail }")
-			}else{
 				
-				$(".basicInput").eq(0).attr("value"," ")
-				$(".basicInput").eq(1).attr("value"," ")
-				$(".basicInput").eq(2).attr("value"," ")
+				$.ajax({
+					url : "/inputDelivery.do",
+					type : "get",
+					data : {
+						memberNo : $(".hiddenMemberNo").val()
+					},success:function(data){
+						$(".basicInput").eq(0).attr("value",data.deliveryName),
+						$(".basicInput").eq(1).attr("value",data.receiverName),
+						$(".basicInput").eq(2).attr("value",data.deliveryPhone),
+						$(".basicInput").eq(3).attr("value",data.deliveryAddr),
+						$(".basicInput").eq(4).attr("value",data.zipcode),
+						$(".basicInput").eq(5).attr("value",data.deliveryDetail)
+				
+					}
+				});
+			
+			}else{
+				$(".basicInput").eq(0).attr("value","")
+				$(".basicInput").eq(1).attr("value","")
+				$(".basicInput").eq(2).attr("value","")
+				$(".basicInput").eq(3).attr("value","")
+				$(".basicInput").eq(4).attr("value","")
+				$(".basicInput").eq(5).attr("value","")
 			}
 			
 		});
+
 		
 		function searchAddr() {
 		    new daum.Postcode({
 		        oncomplete: function(data) {
 		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-		            console.log(data);
 		            $(".addr1").val(data.roadAddress);
 		            $(".addr2").val(data.zonecode);
 		            

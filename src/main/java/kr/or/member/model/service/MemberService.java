@@ -201,5 +201,14 @@ public class MemberService {
 		return dao.deleteMember();
 	}
 
+
+	public Delivery inputDelivery(int memberNo) {
+		Delivery d = dao.inputDelivery(memberNo);
+		return d;
+	}
+	
+	
+
+	
 	
 }
