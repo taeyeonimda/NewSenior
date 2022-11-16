@@ -238,7 +238,8 @@ public class BoardService {
 				//int totalCount = dao.selectBoardCountF2(pageMap); // (정상 작동?)
 				//int totalCount = dao.selectBoardCount2(boardType);
 				//int totalCount = dao.selectBoardCount22(boardType);
-				int totalCount = dao.selectBoardCount22(pageMap);
+				//int totalCount = dao.selectBoardCount22(pageMap);
+				int totalCount = dao.selectBoardCount222(pageMap);
 				System.out.println("검색 totalCount : "+totalCount);
 				int totalPage = 0;
 				if(totalCount%numPerPage==0) {
@@ -296,7 +297,8 @@ public class BoardService {
 				
 				//ArrayList<Board> list = dao.selectBoardList2(pageMap);
 				// 바꿔주기
-				ArrayList<Board> list = dao.selectBoardList22(pageMap);
+				//ArrayList<Board> list = dao.selectBoardList22(pageMap);
+				ArrayList<Board> list = dao.selectBoardList222(pageMap);
 				pageMap.put("list", list);
 				
 				return pageMap;
