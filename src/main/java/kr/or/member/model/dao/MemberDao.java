@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
+import kr.or.nsClass.model.vo.ClassHistory;
 
 @Repository
 public class MemberDao {
@@ -141,7 +142,18 @@ public class MemberDao {
 		Delivery de = sqlSession.selectOne("delivery.inputDelivery", memberNo);
 		return de;
 	}
+	
+	public ArrayList<ClassHistory> selectAllHistory(Member member) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("nsClass.selectAllHistory",member);
+		return (ArrayList<ClassHistory>)list;
+	}
 
+	public ArrayList<ClassHistory> selectEndHistory(Member member) {
+		// TODO Auto-generated method stub
+		List endList = sqlSession.selectList("nsClass.selectEndHistory",member);
+		return (ArrayList<ClassHistory>)endList;
+	}
 	
 	
 	
