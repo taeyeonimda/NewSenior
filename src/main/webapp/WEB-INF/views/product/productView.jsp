@@ -105,14 +105,14 @@ ul li.on a {
 				                <input type="hidden" value="${p.productPrice }" name="buyPrice">
 				                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
 				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
-								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+								<input type="hidden" class="changeProductAmount" value="1" name="buyAmount">
 			                	<button type="submit" onclick="return goCartAlert()">장바구니</button>
-			                 	<button type="button" id="directBuy">바로구매</button>
+			                 	<button type="button" id="directBuy" onclick="directBuy1(${p.productNo})">바로구매</button>
 		            	</form>
 	            	</c:when>
 	            	<c:otherwise>
 	            		<form id="insertCartForm" action="javascript:void(0)">
-								<input type="hidden" class="changeProductAmount" value="${p.productQty }" name="buyAmount">
+								<input type="hidden" class="changeProductAmount" value="1" name="buyAmount">
 			                	<!-- <button type="submit">장바구니</button> -->
 			                 	<button type="button" id="loginCheckButton">상품 구매는 로그인이 필요합니다.</button>
 		            	</form>
@@ -274,6 +274,10 @@ ul li.on a {
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	<script src="/resources/TGbtstr/js/productDetail.js"></script>
 	<script>
+		function directBuy1(productNo){
+			location.href="/directBuyProduct.do?productNo="+productNo+"&productBuyQty="+$(".productBuyQty").text();
+		}	
+	
 		$("#loginCheckButton").on("click",function(){
 			
 			$(".loginBtn").children().click();
@@ -590,7 +594,7 @@ ul li.on a {
 				  url : "/productReviewList.do",
 				  success : function(data){
 					  $(".reviewsTotalDiv").empty();
-					  for (var i = (currentPage - 1) * dataPerPage;i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
+					  for (var i = (currentPage - 1) * dataPerPage;i < totalData+1; i++) {
 						  
 						  const oneDiv = $("<div>");
 							oneDiv.addClass("reviewsWrap reviewMenu");
@@ -602,7 +606,8 @@ ul li.on a {
 							
 							const three1Div = $("<div>");
 							three1Div.addClass("reviewsId");
-							const three1H6 = $("<h6>"+data[i].memberId+"</h6>"); //id
+							const three1H6 = $("<h6>"); //id
+							three1H6.append(data[i].memberId);
 							const three1P = $("<p>"+data[i].reviewDate+"</p>"); //date
 							//
 							three1Div.append(three1H6);
@@ -726,7 +731,7 @@ ul li.on a {
 		};
 				
 
-		
+		/*
 		$("#directBuy").on("click",function(){
 			const price = $(".sumPrice").val();
 			const productQty = $(".productBuyQty").text();
@@ -754,6 +759,7 @@ ul li.on a {
 				}	
 			});
 		});
+		*/
 		const pageli = $("#pagingul").children(); 
 		$(pageli).on("click",function(){
 			console.log("zzz");

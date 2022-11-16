@@ -225,4 +225,12 @@ public class ProductService {
 		return ppd;
 	}
 
+	public Product directBuyProduct(int productNo) {
+		Product p = dao.directBuyProduct(productNo);
+		
+			ArrayList<ProductFileVO> flist = dao.allProductFile(p.getProductNo());
+			p.setProductFileVO(flist);
+		return p;
+	}
+
 }

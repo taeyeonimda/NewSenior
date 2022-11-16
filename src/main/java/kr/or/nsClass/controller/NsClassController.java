@@ -70,7 +70,7 @@ public class NsClassController {
 		ArrayList<Category> cateList = service2.withOutAll();
         model.addAttribute("cateList", cateList);     
 		
-		return "myPage/classEnroll";
+		return "board/classEnroll";
 	}
 	
 	@RequestMapping(value = "/insertClass.do")
@@ -101,9 +101,7 @@ public class NsClassController {
 				filepaths = filepath;
 			}
 		}
-		
-		
-		
+	
 		if(!detailFiles[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/class/");
 			for(MultipartFile file: detailFiles) {
@@ -135,9 +133,9 @@ public class NsClassController {
 		System.out.println("아래서 확인:"+nsCl);
 	
 		if(result>0) {
-			return "admin/adminMgrClass";
+			return "redirect:/";
 		}else {
-			return "admin/adminMgrClass";
+			return "redirect:/";
 	
 		}	
 	}
@@ -178,4 +176,17 @@ public class NsClassController {
 		model.addAttribute("cla", cla);
 		return "myPage/orderInfoClass";
 	}
+	
+	@RequestMapping(value = "/insertClassHistory.do")
+	public String insertClassHistory(ClassHistory clh, Model model){
+		int result = service.insertPayClassHistory(clh);
+		NsClass nc = new NsClass();
+		nc.setClassNo(clh.getClassNo());
+		NsClass cla = service.selectOneClass(nc);
+		model.addAttribute("cla", cla);
+		System.out.println(cla);
+		return "redirect:/classDetail.do";
+	}
+	
+	
 }
