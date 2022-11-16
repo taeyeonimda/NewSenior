@@ -448,6 +448,7 @@
 				
 				//답글달기버튼 숨김 
 				$(obj).next().next().hide();
+			
 			}
 			
 			//				수정		 삭제		 답글달기
@@ -522,7 +523,7 @@
 				}
 			});
 			
-			//답글달기
+			//대댓글 작성 textarea ""일 때
 			$(".commentWriteBtn2").on("click",function(){
 				const ReCommContent =$(".ReCommContent");
 				const idx = $(".ReCommContent").index(this);
