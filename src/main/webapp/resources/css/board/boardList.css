@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+.boardWrap .boardListTbl{
+		width:70%;
+		margin:0 auto;
+		text-align:center;
+		border-collapse: collapse;
+		font-size:16px;
+	}
+.boardListTbl{
+	border: 2px solid #0F4229;
+}
+.boardListTbl .tdNumber{
+	font-weight: 900;
+}
+.boardWrap .boardListTbl .boardTitle{
+	text-align:left;
+	font-weight: 900;"
+}
+.boardWrap .boardListTbl .boardTitle span{
+	margin-left : 10px;
+
+	}
+
+
+.writeBtnBox>.writeBtn{
+		width:100px;
+		height :35px;
+		background-color:#0F4229;
+		color:white;
+		border-radius : 10px;
+		border : none;
+		line-height: 35px;
+		display:flex;
+		justify-content: center;
+		margin-left:70px;
+		font-weight: 900;
+		font-size:16px;
+}
+.writeBtnBox>.writeBtn>a {
+	color:white;
+}
+
+.searchWrap {
+	display:flex;
+	width:70%;
+	margin:0 auto;
+	justify-content:center;
+	margin-top:30px;
+	font-size:16px;
+	
+}
+.searchForm .searchBtn {
+		width:100px;
+		height : 35px;
+		background-color:green;
+		color:white;
+		border-radius : 10px;
+		border : none;
+		line-height: 30px;
+		font-weight: 900;
+		
+		
+}
+.searchForm select{
+	height:35px;
+
+}
+.searchForm input{
+	width:250px;
+	outline:none;
+	height:35px;
+}
+
+.boardWrap>.pageNavi{
+	margin-top:30px;
+	font-size:16px;
+	
+}

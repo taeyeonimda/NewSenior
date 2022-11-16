@@ -119,6 +119,28 @@ public class BoardDao {
 		
 		return sqlSession.selectOne("board.boardFileDown",fileNo);
 	}
+	public ArrayList<Board> selectBoardList22(HashMap<String, Object> pageMap) {
+		List list = sqlSession.selectList("board.selectBoardList22",pageMap);
+		System.out.println(pageMap);
+		return (ArrayList<Board>) list;
+	}
+	public int selectBoardCount22(HashMap<String, Object> pageMap) {
+		int totalCount = sqlSession.selectOne("board.totalCount22",pageMap);
+		return totalCount;
+	}
+	public int selectBoardCount22(String boardType) {
+		int totalCount = sqlSession.selectOne("board.totalCount22",boardType);
+		return totalCount;
+	}
+	public int selectBoardCount222(HashMap<String, Object> pageMap) {
+		int totalCount = sqlSession.selectOne("board.totalCount222",pageMap);
+		return totalCount;
+	}
+	public ArrayList<Board> selectBoardList222(HashMap<String, Object> pageMap) {
+		List list = sqlSession.selectList("board.selectBoardList222",pageMap);
+		System.out.println(pageMap);
+		return (ArrayList<Board>) list;
+	}
 	
 	
 	

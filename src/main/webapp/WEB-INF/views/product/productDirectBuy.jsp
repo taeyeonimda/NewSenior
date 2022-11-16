@@ -94,78 +94,25 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr style="text-align: center;">
-						<th style=" width: 10%;">카트번호</th>
                         <th style=" width: 25%;">이미지</th>
-                        <th style=" width: 35%;">상품명</th>
+                        <th style=" width: 45%;">상품명</th>
  						<th style=" width: 10%;">금액</th>
                         <th style=" width: 10%;">수량</th>
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
                     
+						           		
 	                    <tbody>
-	                    <c:forEach items="${list }" var="Cart">
 			            	<tr class="showCartList">
-					            <td style="text-align:center">
-						            <input type="hidden" class="hiddenMemberNo" value="${sessionScope.m.memberNo }">
-						            <input class="proNo" type="hidden" value="${Cart.productNo }">
-						            <input class="cartNo" type="text" value="${Cart.cartNo }" name="cartNo" style="border: none; text-align:center;" readonly>
-					            </td>
-					         	
-					            <c:choose>
-						           	<c:when test="${Cart.productPhoto != null}">
-						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto}"></td>
-						           	</c:when>	
-						           	<c:when test="${Cart.activityPhoto != null}">
-						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/activity/${Cart.activityPhoto}"></td>
-						           	</c:when>		
-					            </c:choose>
-					         	
-					         	<c:choose>
-						           	<c:when test="${Cart.buyName != null}">
-						           		<td style="text-align:center">${Cart.buyName }</td>
-						           	</c:when>	
-						           	<c:when test="${Cart.activityName != null}">
-						           		<td style="text-align:center">${Cart.activityName }</td>
-						           	</c:when>		
-					            </c:choose>
-
-					            <c:choose>
-						           	<c:when test="${Cart.buyPrice != 0}">
-						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
-						           	</c:when>	
-						           	<c:when test="${Cart.activityPrice != ''}">
-						           		<td class="buyPrice" style="text-align:center">${Cart.activityPrice }</td>
-						           	</c:when>		
-					            </c:choose>
-					            
-								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" /></td>
-								
-
-					         
-								 	<c:if test="${Cart.buyPrice != 0}">
-								 		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.buyPrice*Cart.buyAmount }</td>
-								 		<td style="text-align:center;" class="realPrice"></td>
-								 	</c:if>
-									<c:if test="${Cart.activityPrice != ''}">
-						           		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
-						           		<td style="text-align:center;" class="realPrice"></td>
-						           	</c:if>	
-									<td><input type="hidden" class="sumPrice"  value="${Cart.buyPrice*Cart.buyAmount }"></td>
-								
-								<td><input type="hidden" class="cartActivityNo" value="${Cart.activityNo }"></td>	
+						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${p.productFileVO[0].filePath }"></td>
+						           		<td style="text-align:center">${p.productName }</td>
+						           		<td style="text-align:center">${p.wonPrice }</td>
+						           		<td style="text-align:center" class="buyQty" >${pp }</td>
+						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${p.productPrice*pp }" pattern="#,###"/></td>
+								<td><input type="hidden" class="sumPrice"  value="${p.productPrice*pp }"></td>
 			            	</tr>	
-			              	
-	             		</c:forEach>
-	                    	<tr>
-		                      	<td colspan="4"></td>
-		                      	<td>결제할 총 금액</td>
-		                      	<td>
-		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p class="lastPrice"></p>
-		                      		<input type="hidden" name="allSumPrice" class="allSumPrice" >
-		                     	</td>
-	                      	</tr>
+			              
 	                      	
 	                    </tbody>
 	                  </table>
@@ -173,7 +120,7 @@
               	</form>
 				<form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
 				 -->
-					<div style="text-align:center; font-size:30px;"><span>주문자 정보</span></div>
+					<div style="text-align:center; font-size:30px; margin-top: 20px;"><span>주문자 정보</span></div>
 					<div class="orderInfo" style="margin-left:15%;">
 						<div><span style="margin-right:10px;">주문자명</span><input type="text" value="${sessionScope.m.memberName }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
 						<div><span style="margin-right:10px;">전화번호</span><input type="text" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
@@ -184,8 +131,6 @@
 					<div id="same-check" style="float:right; margin-right:10%;">
                         <input type="checkbox" id="order-same" class="order-agree" >
                         <label for="order-same">기본 배송지 불러오기</label>
-                           <input type="checkbox" id="test-same" class="order-agree" >
-                        <label for="test-same">테스트용</label>
                     </div>
 					<br><br>
 					<div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
@@ -278,7 +223,9 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
-	
+		
+		
+
 		
 		function selectAll(selectAll)  {
 			  const checkboxes 
@@ -351,7 +298,6 @@
 						$(".basicInput").eq(3).attr("value",data.deliveryAddr),
 						$(".basicInput").eq(4).attr("value",data.zipcode),
 						$(".basicInput").eq(5).attr("value",data.deliveryDetail)
-				
 					}
 				});
 			
@@ -365,7 +311,6 @@
 			}
 			
 		});
-
 		
 		function searchAddr() {
 		    new daum.Postcode({
@@ -379,17 +324,8 @@
 		    }).open();
 		}
 		
-		$("#test-same").on("click", function(){
-		
-			
-		});
-		
-		
-		
-		
-		
 		$("#payBtn").on("click",function(){
-			const price = $(".allSumPrice").val();
+			const price = $(".sumPrice").val();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			
@@ -407,32 +343,16 @@
 			
 			},function(rsp){
 				if(rsp.success){
-					
-					let cartActivityNo = $(".cartActivityNo").length;
-					let cartActivity = $(".cartActivityNo");
-					let memberNo = $(".hiddenMemberNo").val();
-					if(cartActivityNo!=0){
-						for(let s=0;s<cartActivityNo;s++){
-							$.ajax({
-								url:"/insertActHistory.do",
-								data:{
-									memberNo:memberNo,
-									activityNo:cartActivity.eq(s).val()
-								}
-							});//ajax
-						}
-					}
-
 					alert("결제 성공");
 					const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
 					$("#goDeliveryTable").append(input);	
 		            $("#goDeliveryTable").submit();
 				}else{
-					console.log(rsp)
 					alert("결제 실패");
 				}
 			});
 		});
+		
 	</script>
   </body>
 </html>

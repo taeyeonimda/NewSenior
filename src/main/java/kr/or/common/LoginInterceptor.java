@@ -18,7 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		if(!request.getRequestURI().equals("/")) {
 			Member m = (Member)request.getSession().getAttribute("m");
 			if(m == null){
-				response.sendRedirect("/index.jsp?login=1");
+				response.sendRedirect("/main.do?login=1");
 				isLogin = false;
 			}
 		}

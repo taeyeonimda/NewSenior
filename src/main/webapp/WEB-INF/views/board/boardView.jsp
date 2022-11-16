@@ -31,7 +31,6 @@
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
                         </c:if>
                         <c:if test="${b.boardType eq 'N' or b.boardType eq 'Q' or b.boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
@@ -241,13 +240,13 @@
 						<span>${bc.boardCommDate }</span>
 					</p>
 					<p>${bc.boardCommContent }</p>
-					<textarea name="boardCommContent" style="display:none;">${bc.boardCommContent}</textarea>
+					<textarea name="boardCommContent" class="commUpdateContent" style="display:none;">${bc.boardCommContent}</textarea>
 					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
 
 					<p>
 						<c:if test="${not empty sessionScope.m }">
 							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
-								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a></button>
+								<a class="commUpdateTag" href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
 						
@@ -288,12 +287,12 @@
 									<span>${bcc.boardCommDate }</span>
 								</p>
 								<p>${bcc.boardCommContent }</p>
-								<textarea name="boardCommContent" style="display:none;">${bcc.boardCommContent}</textarea>
+								<textarea name="boardCommContent" class="reCommUpdateContent" style="display:none;">${bcc.boardCommContent}</textarea>
 								<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
 								<p>
 									<c:if test="${not empty sessionScope.m }">
 										<c:if test="${sessionScope.m.nickName eq bcc.nickName }">
-											<a href="javaScript:void(0)" onclick="modifyComment(this,${bcc.boardCommNo},${b.boardNo})">수정</a>
+											<a href="javaScript:void(0)" class="reCommUpdateTag" onclick="modifyComment(this,${bcc.boardCommNo},${b.boardNo})">수정</a>
 											<a href="javaScript:void(0)" onclick="deleteComment(this,${bcc.boardCommNo},${b.boardNo})">삭제</a>
 										</c:if>
 									</c:if>
@@ -389,13 +388,13 @@
 						<span>${bc.boardCommDate }</span>
 					</p>
 					<p>${bc.boardCommContent }</p>
-					<textarea name="boardCommContent" style="display:none;">${bc.boardCommContent}</textarea>
+					<textarea name="boardCommContent" class="commUpdateContent" style="display:none;">${bc.boardCommContent}</textarea>
 					<%--ㄴ 수정용 textarea 숨겨두고 수정하게되면 javaScript레벨에서 form태그 만들어서 전송 --%>
 
 					<p>
 						<c:if test="${not empty sessionScope.m }">
 							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
-								<a href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a></button>
+								<a href="javaScript:void(0)" class="commUpdateTag" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a></button>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
 						</c:if>
@@ -412,8 +411,8 @@
 		
 			//답글달기를 누르면 답글달기 - > 취소 / 취소 -> 답글달기
 			$(".reCommentShow").on("click",function(){
-				//클릭한 답글달기가 몇 번째 댓글 것인지 구함 (이벤트를 발생시킨것이 몇 번째 인덱스인지)
 				const idx = $(".reCommentShow").index(this);
+				//ㄴ클릭한 답글달기가 몇 번째 댓글 것인지 구함 (이벤트를 발생시킨것이 몇 번째 인덱스인지)
 				if($(this).text() == "답글달기"){
 					//답글달기를 누르면 답글달기  -> 취소로 변경
 					$(this).text("취소");
@@ -448,7 +447,29 @@
 				
 				//답글달기버튼 숨김 
 				$(obj).next().next().hide();
+				
 			}
+			
+			//댓글 수정클릭시 focus
+			$(".commUpdateTag").on("click",function(){
+				const idx =$(".commUpdateTag").index(this);
+				console.log("수정클릭 이벤트 동작");
+				console.log(idx);
+				const commUpdateContent = $(".commUpdateContent");
+				commUpdateContent.eq(idx).focus();
+			});
+			
+			//대댓글 수정 클릭시 focus
+			//댓글 수정클릭시 focus
+			$(".reCommUpdateTag").on("click",function(){
+				const idx =$(".reCommUpdateTag").index(this);
+				console.log("수정클릭 이벤트 동작");
+				console.log(idx);
+				const reCommUpdateContent = $(".reCommUpdateContent");
+				reCommUpdateContent.eq(idx).focus();
+			});
+			
+			
 			
 			//				수정		 삭제		 답글달기
 			//-> <수정하기>	수정완료  수정취소   답글달기 x
@@ -522,7 +543,7 @@
 				}
 			});
 			
-			//답글달기
+			//대댓글 작성 textarea ""일 때
 			$(".commentWriteBtn2").on("click",function(){
 				const ReCommContent =$(".ReCommContent");
 				const idx = $(".ReCommContent").index(this);

@@ -5,18 +5,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<!-- 구글아이콘 -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="/resources/css/club/club-detail.css" rel="stylesheet">
     <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script> <!-- math 사용 위한 라이브러리 -->
 <title>동호회</title>
 </head>
 <style>
 
+.plBox{
+	padding: 20px;
+    border-radius: 15px;
+	background-color: #F5F5F5;
+}
+.plBox:hover{
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
 .serviceBox1 {
-    width: 230px;
-    height: 230px; 
+    width: 250px;
+    height: 250px; 
     border-radius: 70%;
     overflow: hidden;
     border: 4px dashed #20c997;
+    margin: 0 auto;
 }
 .serviceBox1 img {
     width: 100%;
@@ -59,29 +70,33 @@
 
 .clubListBox{
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    border: 1px solid #ddd;
     width: 30%;
-    border-radius: 15px;
     align-items: center;
     text-align: center;
     margin-right: 3%;
     margin-bottom: 50px;
+    border-radius: 15px;
+}
+.clubListBox:hover{
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 .clubListImgBox{
     text-align:center;
     display:table;
     width: 100%;
-    height: 40%;
+    height: 50%;
     margin: 0 auto;
-    margin-top: 20px;
-    padding: 20px;
+	margin-bottom: 20px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	overflow: hidden;
 }
 .clubListImg{
     width: 100%;
-  	height: 230px;
+  	height: 250px;
   	object-fit: cover;
 }
-
 .clubListInfo{
 	width: 100%;
 }
@@ -118,17 +133,19 @@
 		        <c:choose>
 		        	<c:when test="${not empty pList }">
 		        		<p class="fs-5 fw-bold text-primary mt-5 text-center">'${sessionScope.m.nickName }'님의 관심사에 해당하는 인기 동호회를 추천합니다</p>
-			        	<div class="container" style="width: 70%; margin-top: 50px; margin-bottom: 100px;">
+			        	<div class="container" style="width: 90%; margin-top: 50px; margin-bottom: 100px;">
 						    <div class="flex-space-around">
 						    <c:forEach items="${pList }" var="pl">
-							    <div class="col-md-3 col-sm-6">
+							    <div class="col-md-3 col-sm-6 plBox">
 							        <div class="serviceBox1 mb-3">
 							        	<img alt="" src="/resources/upload/club/${pl.clubMainImg }">
 							        </div>
 							        <div style="word-break:break-all;" >
-							            <h3 class="card-title">${pl.clubName }</h3>
-										<p class="description clubIntro bg-light" style="width: 100%;">${pl.clubIntro } </p> 
-							            <a href="javascript:void(0)" class="btn btn-outline-primary" onclick="clubInfoModal(${pl.clubNo })">들어가기</a>
+							            <h3 class="card-title" style="width: 90%; margin:0 auto; text-align: center; color: #168A67;">${pl.clubName }</h3>
+										<p class="description clubIntro" style="width: 90%;">${pl.clubIntro } </p> 
+							        </div>
+							        <div style="display: flex; justify-content: flex-end;">
+							        	<a href="javascript:void(0)" onclick="clubInfoModal(${pl.clubNo })"><span class="material-symbols-outlined" style="color: #168A67; font-size: 40px;">fast_forward</span></a>
 							        </div>
 							    </div>
 							    </c:forEach>

@@ -118,6 +118,11 @@ public class ProductDao {
 		return sqlSession.update("product.updateProductImg",mainFile);
 	}
 
+	public Product directBuyProduct(int productNo) {
+		Product list = sqlSession.selectOne("product.directBuyProduct",productNo);
+		return list;
+	}
+
 	
 
 

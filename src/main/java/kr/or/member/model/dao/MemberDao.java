@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
-import kr.or.nsClass.model.vo.ClassHistory;
 
 @Repository
 public class MemberDao {
@@ -40,9 +39,7 @@ public class MemberDao {
 	
 	//마이페이지 가기
 	public Member selectOneMember(Member m1) {
-		System.out.println("m1:"+m1);
 		Member member = sqlSession.selectOne("member.selectOneMember",m1);
-		System.out.println("member:"+member);
 		return member;
 	}
 
@@ -52,9 +49,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member m) {
-		System.out.println("dao m:"+m);
 		int result = sqlSession.insert("member.insertMember",m);
-		System.out.println("dao result:"+result);
 		return result;
 	}
 
@@ -121,7 +116,6 @@ public class MemberDao {
 		int result = sqlSession.insert("member.insertKakaoMember",m);
 		return result;
 	}
-	
 	//member_state에 sysdate 주기
 	public int deleteUser(Member m) {
 		// TODO Auto-generated method stub
@@ -143,16 +137,12 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<ClassHistory> selectAllHistory(Member member) {
-		// TODO Auto-generated method stub
-		List list = sqlSession.selectList("nsClass.selectAllHistory",member);
-		return (ArrayList<ClassHistory>)list;
+	public Delivery inputDelivery(int memberNo) {
+		Delivery de = sqlSession.selectOne("delivery.inputDelivery", memberNo);
+		return de;
 	}
 
-	public ArrayList<ClassHistory> selectEndHistory(Member member) {
-		// TODO Auto-generated method stub
-		List endList = sqlSession.selectList("nsClass.selectEndHistory",member);
-		return (ArrayList<ClassHistory>)endList;
-	}
-
+	
+	
+	
 }

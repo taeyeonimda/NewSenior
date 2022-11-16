@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	 <link href="/resources/css/board/boardWrite.css" rel="stylesheet">
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 	
 </head>
@@ -25,7 +26,6 @@
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
                         </c:if>
                         <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
@@ -49,7 +49,7 @@
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'I'}">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
+                <p class="fs-5 fw-bold text-primary">all about Senior Activity</p>
                 	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'P'}">
@@ -90,10 +90,11 @@
                 </div>
             </c:forEach>
             </div>
+ <div class="boardWriteWrap">
 	<form action="/boardWrite.do" id="boardWriteForm" method="post" enctype="multipart/form-data">
-		<table border="1">
+		<table class="boardWriteTbl table" border="1">
 			<tr>	
-				<th>카테고리</th>
+				<th style="background-color:#0F4229; color:white;">카테고리</th>
 				<c:if test="${boardType eq 'F' }">
 					<td>
 						<select name="boardCategory">
@@ -142,11 +143,11 @@
 				
 			</tr>
 			<tr>
-				<th>제목</th>
+				<th style="background-color:#0F4229; color:white;">제목</th>
 				<td colspan="3"><input type="text" name="boardTitle"></td>
 			</tr>
 			<tr>
-				<th>작성자</th>
+				<th style="background-color:#0F4229; color:white;">작성자</th>
 				<td>
 				${sessionScope.m.nickName }
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
@@ -155,21 +156,22 @@
 				</td>	
 			</tr>
 			<tr>
-				<th>첨부파일</th>
-				<td><input type="file" name="boardFile" multiple></td>
+				<th style="background-color:#0F4229; color:white;">첨부파일</th>
+				<td>
+				<input type="file" name="boardFile" multiple>
+				</td>
+				
 			</tr>
 			<tr>
-				<th>내용</th>
+				<th style="background-color:#0F4229; color:white;">내용</th>
 				<td><textarea name="boardContent" id="boardContent"></textarea></td>
 			</tr>
-			<tr>
-				<td colspan="4">
-					<input type="submit" id="boardWriteBtn" value="작성">
-				</td>
-			</tr>
-			
-		</table>
+	</table>
+				<div class="boardWriteBtnBox">
+					<input type="submit" id="boardWriteBtn" class="boardWriteBtn" value="작성">
+				</div>
 	</form>
+</div>	
 <script>
 		$("#boardContent").summernote({
 			height:400,

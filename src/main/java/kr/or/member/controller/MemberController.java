@@ -115,7 +115,8 @@ public class MemberController {
 			}
 			return "redirect:/";
 		}else {
-			return "redirect:/index.jsp?login=1";
+		
+			return "redirect:/main.do?login=1";
 		}
 	}
 	
@@ -143,6 +144,8 @@ public class MemberController {
 			m1.setKakaoLogin(m.getKakaoLogin());
 			Member member = service.selectOneMember(m1);
 			ArrayList<Delivery> list = service.selectAllDelivery(member);
+			System.out.println("마이페이지컨트롤러 세션 m"+m);
+			System.out.println("마이페이지컨트롤러 멤버"+member);
 			if (member != null) {
 				model.addAttribute("list",list);
 				model.addAttribute("member", member);
@@ -499,4 +502,16 @@ public class MemberController {
 				return "alert";
 			}
 		}
+		
+		//기본배송지 불러오기
+		@ResponseBody
+		@RequestMapping(value="/inputDelivery.do", produces = "application/json;charset=utf-8")
+		public String inputDelivery(int memberNo) {
+			Delivery de = service.inputDelivery(memberNo);
+			Gson gson = new Gson();
+			String result = gson.toJson(de);
+			
+			return result;
+		}
+		
 }

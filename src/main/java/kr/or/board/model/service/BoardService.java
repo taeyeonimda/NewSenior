@@ -51,7 +51,7 @@ public class BoardService {
 			totalPage = totalCount/numPerPage+1;
 		}
 		
-		System.out.println("totalCount : "+totalCount);
+		System.out.println("list 조회 totalCount : "+totalCount);
 		System.out.println("boardType :" +boardType);
 		int pageNaviSize = 5;
 		
@@ -235,9 +235,12 @@ public class BoardService {
 				
 				//pageNavi 시작
 				//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
-				int totalCount = dao.selectBoardCountF2(pageMap); // 바꿔주기
+				//int totalCount = dao.selectBoardCountF2(pageMap); // (정상 작동?)
 				//int totalCount = dao.selectBoardCount2(boardType);
-				System.out.println("검색 : "+totalCount);
+				//int totalCount = dao.selectBoardCount22(boardType);
+				//int totalCount = dao.selectBoardCount22(pageMap);
+				int totalCount = dao.selectBoardCount222(pageMap);
+				System.out.println("검색 totalCount : "+totalCount);
 				int totalPage = 0;
 				if(totalCount%numPerPage==0) {
 					totalPage = totalCount/numPerPage;
@@ -292,7 +295,10 @@ public class BoardService {
 				pageMap.put("reqPage", reqPage);
 				
 				
-				ArrayList<Board> list = dao.selectBoardList2(pageMap); // 바꿔주기
+				//ArrayList<Board> list = dao.selectBoardList2(pageMap);
+				// 바꿔주기
+				//ArrayList<Board> list = dao.selectBoardList22(pageMap);
+				ArrayList<Board> list = dao.selectBoardList222(pageMap);
 				pageMap.put("list", list);
 				
 				return pageMap;

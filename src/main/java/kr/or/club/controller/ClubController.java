@@ -313,4 +313,6 @@ public class ClubController {
 		String result = service.searchBlockMember(c);
 		return new Gson().toJson(result);
 	}
+	
+	//
 }

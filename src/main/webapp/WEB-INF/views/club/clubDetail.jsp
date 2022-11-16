@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>동호회 상세</title>
     <link href="/resources/css/club/club-detail.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&display=swap" rel="stylesheet">
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -103,7 +106,7 @@
 		                            </div>
                         		</div>
 	                            <pre style="font-family: sans-serif">${c.clubNotice }</pre>
-	                            <textarea rows="5" cols="82" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
+	                            <textarea rows="5" cols="90" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
                     </div>
@@ -139,9 +142,9 @@
 					    <div class="container-xxl py-5 club-container">
 			                <div class="container wow fadeInUp" data-wow-delay="0.05s">
 			                    <div class="row align-items-end club-board-div">
-			                        <div class="ml-20">
+			                        <div>
 				                        <div class="flex-space-between" style="width: 90%;">
-				                        	<div class="flex-space-between" style="width:27%;">
+				                        	<div class="flex-space-between ml-10" style="width:27%;">
 				                        		<div class="profile-box" style="background: #BDBDBD;">
 													<img class="profile" src="/resources/upload/club/person_1.jpg">
 												</div>
@@ -165,7 +168,7 @@
 			                        			</div>
 			                        		</div>
 				                        	</c:if>
-				                            <p class="mb-4">${cb.clubBoardContent }</p>
+				                            <p class="mb-4 ml-20">${cb.clubBoardContent }</p>
 			                            </div>
 			                            <div style="display: none;" class="updateBox" class="mt-5">
 				                        	<div class="updateInputBox">
@@ -864,7 +867,7 @@
 	    	success: function (list) {
 	    		for (let i=0; i<list.length; i++) {
 					const div = $("<div>");
-					div.append("<span onclick='locationClub("+list[i].clubNo+")'>"+list[i].clubName+"</span>");
+					div.append("<span onclick='locationClub("+list[i].clubNo+");'>"+list[i].clubName+"</span>");
 					$("#myClubList").append(div);
 				}
 	    		
@@ -888,10 +891,20 @@
 	})
     
 	function locationClub(clubNo) {
-		var result = confirm("이동하시겠습니까?");
-		if(result){
-			location.href = "/clubDetail.do?clubNo="+clubNo;
-		}
+		Swal.fire({
+			text: '선택한 동호회로 이동합니다',
+			imageUrl: "/resources/img/제목없음.png",
+			showCancelButton: true,
+			cancelButtonColor: '#525368',
+			confirmButtonColor: '#348E38',
+			cancelButtonText: '닫기',
+			confirmButtonText: '이동'
+		}).then((result) => {
+			//result.value == true이니까 트루일때만 실행하는거
+		  if (result.value) {
+			  location.href = "/clubDetail.do?clubNo="+clubNo;
+		  }
+		})//then끝
 	}
 	</script>
 </body>

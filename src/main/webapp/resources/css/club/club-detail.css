@@ -152,17 +152,35 @@
 .clubIntro::-webkit-scrollbar {
     width: 8px;  /* 스크롤바의 너비 */
 }
-
 .clubIntro::-webkit-scrollbar-thumb {
     height: 10%; /* 스크롤바의 길이 */
     background: #0F4229; /* 스크롤바의 색상 */
     border-radius: 10px;
 }
-
 .clubIntro::-webkit-scrollbar-track {
     background: #E8F5E9;  /*스크롤바 뒷 배경 색상*/
 }
 
+
+.clubIntro2{
+	height: 110px;
+	overflow: auto;
+  	text-overflow: ellipsis;
+ 	word-break: break-all;
+ 	word-wrap: break-word;
+ 	padding: 10px;
+}
+.clubIntro2::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+.clubIntro2::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: #464758; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+.clubIntro2::-webkit-scrollbar-track {
+    background: #eee;  /*스크롤바 뒷 배경 색상*/
+}
 
 
 /* 클럽리스트 동호회 모달 */
@@ -241,6 +259,7 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     width: 400px;
     height: 400px;
+    margin: 0 auto;
     margin-bottom: 20px;
 }
 .clubBoardImgBox{
@@ -300,6 +319,12 @@
     margin: 0 auto;
     min-height: 1200px;
 }
+#myClubList>div:hover{
+	cursor: pointer;
+}
+
+
+
 
 /* absolute */
 .right-absolute{
@@ -328,7 +353,7 @@
 
 
 
-/* 클럽 이미지 div안에 맞춰 넣는 css*/
+/* 클럽 게시판 이미지 div안에 맞춰 넣는 css*/
 .club-title{
     text-align:center;
     display:table;
@@ -344,6 +369,7 @@
     max-width: 230px;
     max-height: 120px;
 }
+
 
 
 
