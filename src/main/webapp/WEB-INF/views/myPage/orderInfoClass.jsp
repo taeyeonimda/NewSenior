@@ -107,7 +107,6 @@
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
     <!-- / Layout wrapper -->
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 
