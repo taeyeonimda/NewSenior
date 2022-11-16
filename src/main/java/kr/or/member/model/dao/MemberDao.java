@@ -141,4 +141,12 @@ public class MemberDao {
 		return result;
 	}
 
+	public Delivery inputDelivery(int memberNo) {
+		Delivery de = sqlSession.selectOne("delivery.inputDelivery", memberNo);
+		return de;
+	}
+
+	
+	
+	
 }
