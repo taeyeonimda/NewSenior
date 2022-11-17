@@ -10,6 +10,9 @@
     <title>클래스 상세</title>
 </head>
 <style>
+.yellow{
+	color: #ffc107;
+}
 .changeFont{
 	margin-left: 20px;
 }
@@ -134,7 +137,7 @@
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span><a href="#menu1" class="fw-change">커리큘럼</a></span><span><a href="#menu2" class="fw-change">강의소개</a></span><span><a href="#menu3" class="fw-change">강사소개</a></span><span><a href="#menu" class="fw-change">위치</a></span><span><a href="#menu4" class="fw-change">환불규정</a></span>
+                	<span><a href="#menu1" class="fw-change">커리큘럼</a></span><span><a href="#menu2" class="fw-change">강사소개</a></span><span><a href="#menu3" class="fw-change">강사후기</a></span><span><a href="#menu4" class="fw-change">강의장소</a></span><span><a href="#menu5" class="fw-change">환불규정</a></span>
                 </div>
             </div>
         </div>
@@ -143,8 +146,7 @@
 
 
         <!-- 강의소개 -->
-        <div class="mb-5" id="menu1"></div>
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" id="menu1">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -152,7 +154,7 @@
                         <h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
                         <pre class="mb-4 font-set fw-change">${cla.curriculum }</pre>
                     </div>
-                    <div class="product-title mt-5"  id="menu2">
+                    <div class="product-title mt-5">
                         <div class="product-img-div">
                         	<c:forEach items="${cla.fileList }" var="cf">
                         		<img class="product-img" src="/resources/upload/class/${cf.filepath }">
@@ -166,39 +168,43 @@
 
 
         <!-- 강사 소개 -->
-        <div class="mb-5" id="menu3"></div>
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl mt-5" id="menu2">
             <div class="container class-container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
-                        <p class="fs-5 fw-bold text-primary">강사소개</p>
-                        <img class="img-fluid rounded" data-wow-delay="0.1s" src="/resources/MAINbtstr/img/모델클래스 (1).jpg">
+                        <p class="fs-5 fw-bold text-primary">강사 소개</p>
                     </div>
+                </div>
+                <div>
                     <div class="col-lg-7 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
                         <h4 class="display-3 text-primary">${cla.teacherName }</h4>
-                        <pre style="width: 70%;" class="fw-change">${cla.teacherIntroduce }</pre>
+                        <pre style="width: 70%;" class="fw-change">${cla.teacherIntroduce } </pre>
                     </div>
                 </div>
             </div>
         </div>
         <!-- About End -->
-
-      	
+      
+      	<div id="menu3"></div>
       	<!-- ajax로 가져옴 -->
-      	<div class="container class-container">
-      		<p class="fs-5 fw-bold text-primary">강사후기</p>
-      		<div id="reviewBox">
-      		<div>아직 후기가 없습니다</div>
-        	</div>
+      	<div class="container-xxl mt-5 py-2">
+	      	<div class="container class-container">
+	      		<p class="fs-5 fw-bold text-primary">강사 후기</p>
+	      		<div id="reviewBox">
+	        	</div>
+	      	</div>
       	</div>
       	
-      	<div id="menu4" class="mb-5"></div>
-      	<div class="container class-container">
-      	<p class="fs-5 fw-bold text-primary">강의 장소</p>
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.85231936181!2d126.97964921507814!3d37.582095079794904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3f276c01ad9%3A0x4ecb88455e87f387!2z7Jik64m07ZWY7Jqw7Iqk!5e0!3m2!1sko!2skr!4v1668672793473!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-		</div>
+      	<div id="menu4"></div>
+      	<!-- ajax로 가져옴 -->
+      	<div class="container-xxl py-2 mt-5">
+	      	<div class="container class-container">
+	      		<p class="fs-5 fw-bold text-primary">강의 장소</p>
+	      		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.85231936181!2d126.97964921507814!3d37.582095079794904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3f276c01ad9%3A0x4ecb88455e87f387!2z7Jik64m07ZWY7Jqw7Iqk!5e0!3m2!1sko!2skr!4v1668695513092!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	      	</div>
+      	</div>
 		
-		<div id="menu5" class="mb-5"></div>
+		<div id="menu4"></div>
         <!-- 환불규정 -->
         <div class="container-xxl py-5 mt-5">
             <div class="container">
@@ -215,8 +221,9 @@
         </div>
         <!-- Features End -->
         <hr>
-
-
+        
+        
+        <div id="menu5"></div>
         <!-- 후기 -->
 		<button id="review-btn" class="btn btn-primary py-3 px-5" style="display: none;">후기작성</button>
     </div><!--page-content End-->
@@ -474,37 +481,43 @@
 				url : "/getTeacherReview.do",
 				data : { classTeacher : classTeacher },
 				success : function(list) {
-					console.log(list.length);
 					if(list.length>0){
-						reviewBox.children().remove();
+						for(let i=0; i<list.length; i++){
+							const div = $("<div>");
+							div.addClass("shadow");
+							div.addClass("reviewDiv");
+							div.addClass("mb-5");
+							const star = Number(list[i].reviewRate);
+							const starDiv = $("<div>");
+							for(let j=0; j<star.length; j++){
+								starDiv.append("<span class='material-symbols-outlined yellow'>star</span>");
+							}
+			                const profilDiv = $("<div>");
+			                profilDiv.addClass("memberBox");
+			                const profileImgDiv = $("<div>");
+			                profileImgDiv.addClass("profile-box");
+			                if(list[i].memberImg == null){
+			                	profileImgDiv.html("<img src='/resources/upload/class/iconmonstr-user-7-48.png' class='profile'>");
+			                }else{
+			                	profileImgDiv.html("<img src='/resources/upload/"+list[i].memberImg+"' class='profile'>");
+			                }
+			                const profilInfoDiv = $("<div>");
+			                profilInfoDiv.addClass("profil-info");
+			                profilInfoDiv.html(starDiv+"<div>"+list[i].reviewWriter+"</div><div>"+list[i].reviewDate+"</div>");
+			                profilDiv.append(profileImgDiv).append(profilInfoDiv);
+			                
+			                const contentDiv = $("<div>");
+			                contentDiv.html("<div class='mt-3'>"+list[i].reviewContent+"</div>");
+			                // <div><a href='/'>수정</a> / <a href='/'>삭제</a></div>
+			                div.append(profilDiv);
+			                div.append(contentDiv);
+			                reviewBox.append(div);
+			            }
+					}else{
+						reviewBox.html("<div>등록된 강사 후기가 없습니다</div>");
 					}
-					for(let i=0; i<list.length; i++){
-						const div = $("<div>");
-						div.addClass("shadow");
-						div.addClass("reviewDiv");
-						div.addClass("mb-5");
-						const star = Number(list[i].reviewRate);
-		                const profilDiv = $("<div>");
-		                profilDiv.addClass("memberBox");
-		                const profileImgDiv = $("<div>");
-		                profileImgDiv.addClass("profile-box");
-		                if(list[i].memberImg == null){
-		                	profileImgDiv.html("<img src='/resources/upload/member/기본이미지.jpg' class='profile'>");
-		                }else{
-		                	profileImgDiv.html("<img src='/resources/upload/member/"+list[i].memberImg+"' class='profile'>");
-		                }
-		                const profilInfoDiv = $("<div>");
-		                profilInfoDiv.addClass("profil-info");
-		                profilInfoDiv.html("<div>"+star+"</div><div>"+list[i].reviewWriter+"</div><div>"+list[i].reviewDate+"</div>");
-		                profilDiv.append(profileImgDiv).append(profilInfoDiv);
-		                
-		                const contentDiv = $("<div>");
-		                contentDiv.html("<div class='mt-3'>"+list[i].reviewContent+"</div>");
-		                // <div><a href='/'>수정</a> / <a href='/'>삭제</a></div>
-		                div.append(profilDiv);
-		                div.append(contentDiv);
-		                reviewBox.append(div);
-		            }
+					
+
 				}
 			})
 		}

@@ -159,7 +159,12 @@
 						</div>
 		        	</c:when>
 		        	<c:otherwise>
+		        		<c:if test="${not empty sessionScope.m.favorite }">
+		        		<div class="fs-5 fw-bold text-primary text-center mb-5">관심사에 해당하는 동호회가 없습니다<br>동호회를 생성하여 소통해보세요</div>
+		        		</c:if>
+		        		<c:if test="${empty sessionScope.m.favorite }">
 		        		<div class="fs-5 fw-bold text-primary text-center mb-5">선택된 관심사가 없습니다<br>마이페이지에서 등록하고 동호회를 추천 받으세요</div>
+		        		</c:if>
 		        	</c:otherwise>
 		        </c:choose>
 	        </c:if>

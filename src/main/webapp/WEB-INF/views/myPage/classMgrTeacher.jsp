@@ -76,9 +76,7 @@
                     <img class="card-img-top" src="resources/upload/class/${cla.filepath }" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">${cla.className }</h5>
-                      <p class="card-text">
-                    		쓸게없음 ㅇㅅㅇ;
-                      </p>
+                      <p class="card-text"></p>
                       <a href="classDetail.do?classNo=${cla.classNo }" class="btn btn-outline-primary">상세보기</a>
                     </div>
                   </div>
@@ -96,9 +94,7 @@
                     <img class="card-img-top" src="resources/upload/class/${eCla.filepath }" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">${eCla.className }</h5>
-                      <p class="card-text">
-                    		쓸게없음 ㅇㅅㅇ;
-                      </p>
+                      <p class="card-text"></p>
                       <!-- 일단 쓸지안쓸지몰라 스킵<a href="javascript:void(0)" class="btn btn-outline-primary">상세보기</a> -->
                     </div>
                   </div>

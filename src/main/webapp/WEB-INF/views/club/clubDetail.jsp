@@ -530,7 +530,6 @@
 				str += "&memberNo"+"="+memberNoArr[i];
 			}
 		}
-		alert(str);
 		location.href="/blockMember.do?"+str;
 	}
 

@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				
-				<div style="width: 60%; margin: 0 auto;" class="">
+				<div style="width: 60%; margin: 0 auto; margin-bottom: 100px;">
 					<h3 class="mb-5">신청인 정보</h3>
 					<table class="table table-borderless" style="width: 100%;">
 						<tr class="mb-5">
@@ -92,9 +92,13 @@
 						</tr>
 					</table>
 				</div>
+				<div class="mt-5 mb-5" style="text-align: center;">
+				<input type="checkbox" name="checkAgree">
+					<label for="checkAgree">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
+				</div>
 				
 				<div style="margin: 10px; border-top: 1px solid #ddd;">
-                    <button type="button" style="float: right; width:250px; height:40px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
+                    <button type="button" style="float: right; width:250px; height:40px; margin: 10px;" class="btn btn-outline-primary" disabled id="payBtn">결제하기</button>
                     <div style="display: none;">${cla.classNo }</div>
                     <div style="display: none;">${sessionScope.m.memberNo }</div>
                 </div>
@@ -133,6 +137,18 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
    	<script>
+
+   	
+   		$("input[type='checkbox']").on("click", function() {
+   			var tmpp = $(this).prop('checked'); 
+   	        // this를 사용하여 클릭한 checkbox 가 체크되도록 설정
+   	        if(tmpp){
+   	            $("#payBtn").prop("disabled",false);
+   	        }
+   	        else{
+   	        	$("#payBtn").prop("disabled",true);
+   	        }
+		})
 
 		function showPriceSet() {
 			const lastPrice = $(".lastPrice").text();

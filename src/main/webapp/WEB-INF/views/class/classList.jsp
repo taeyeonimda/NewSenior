@@ -57,10 +57,10 @@
                     <div class="portfolio-inner rounded classHover" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" style="width:408px; height:408px;" src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
-                        	<hr>-----------------------------------------------------
+                        	<hr>
                             <h3 class="display-6 text-white mb-4">${cla.className }</h3>
                             <h5 class="text-light mb-4 fw-bold">${cla.classPrice } 원</h5>
-                            <hr>------------------------------------------------------
+                            <hr>
                         </div>
                     </div>
                 </div>

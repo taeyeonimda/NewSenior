@@ -205,7 +205,7 @@
                             <div class="border-start ps-4">
                                 <div style="color:#348e38; font-size:45px; font-weight:900">${i.count }</div>
                                 <h4 class="mb-3">${cl.clubName }</h4>
-                                <p style="color:#0f4229; max-height:50px; text-overflow: ellipsis; overflow: hidden;">${cl.clubIntro }</p>
+                                <p style="color:#0f4229; display:block; max-height:50px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${cl.clubIntro }</p>
                             </div>
                         </div>
                     </c:forEach>

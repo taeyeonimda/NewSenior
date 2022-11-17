@@ -44,6 +44,7 @@ public class ClubController {
 	public String clubMemberList(Model model, Member m) {
 		ArrayList<Club> popularList = service.searchClubPopularList(m);
 		model.addAttribute("pList", popularList);
+		System.out.println("pList");
 		return "club/clubList";
 	}
 	
