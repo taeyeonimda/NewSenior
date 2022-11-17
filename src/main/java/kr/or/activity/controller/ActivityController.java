@@ -93,7 +93,6 @@ public class ActivityController {
 	public String actReviewList(Model model,int activityNo, int reqPage) {
 		ActivityReviewPageData arpd = service.actReviewList(reqPage,activityNo);
 		model.addAttribute("list",arpd.getList());
-		System.out.println("액티비티 컨트롤러 리스트 확인"+arpd.getList());
 		model.addAttribute("pageNavi",arpd.getPageNavi());
 		model.addAttribute("reqPage",arpd.getReqPage());
 		model.addAttribute("numPerPage",arpd.getNumPerPage());
