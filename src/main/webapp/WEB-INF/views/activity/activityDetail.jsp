@@ -359,7 +359,7 @@
     let reqPage;
 
 	document.addEventListener("DOMContentLoaded", function(){
-	      showSide();
+	     // showSide();
 	        
 	    	const amount = $("[name=amount]").val()
 	    	const amountPrice ='${act.activityPrice }';
@@ -547,12 +547,12 @@
 	                $("#scroll-select").addClass("scroll-select-box-fixed");
 	            }
 	        }
-	        
+	    	/*
 	        $(window).on("scroll",function(){
 	            showSide();
 		        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
 	        });
-
+*/
 	        
 
 	       
