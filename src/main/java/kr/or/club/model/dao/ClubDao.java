@@ -140,4 +140,9 @@ public class ClubDao {
 		List list = sqlSession.selectList("club.selectMainClubs");
 		return (ArrayList<Club>)list;
 	}
+
+	public ArrayList<Club> getAllMyClub(Member m) {
+		List list = sqlSession.selectList("club.getAllMyClub",m);
+		return (ArrayList<Club>)list;
+	}
 }

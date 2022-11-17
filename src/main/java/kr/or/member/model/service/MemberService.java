@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.club.model.dao.ClubDao;
+import kr.or.club.model.vo.Club;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
@@ -20,6 +22,9 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDao dao;
+	@Autowired
+	private ClubDao cDao;
+	
 	public MemberPageData getAllMembers(int reqPage) {
 		// 한페이지당 보여줄 게시물 수
 		int numPerPage = 5;
@@ -224,6 +229,16 @@ public class MemberService {
 	public NsClass selectClassName(int classNo) {
 		NsClass ns = dao.selectClassName(classNo);
 		return ns;
+	}
+
+	//마이페이지에서 내가 가입한 클럽가져오기
+	public ArrayList<Club> getAllMyClub(Member m) {
+		return cDao.searchMyClub(m);
+	}
+
+
+	public ArrayList<Club> searchClubPopularList(Member m) {
+		return cDao.searchClubPopularList(m);
 	}
 
 	

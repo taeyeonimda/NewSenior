@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.or.category.model.service.CategoryService;
 import kr.or.category.model.vo.Category;
+import kr.or.club.model.vo.Club;
 import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
@@ -73,10 +74,15 @@ public class MemberController {
 		}
 	}
 	//내동호회 가기
-	@RequestMapping(value="/myClub.do")
-	public String myClub() {
-		return "myPage/myClub";
+	@RequestMapping(value="/myClubList.do")
+	public String myClub(@SessionAttribute Member m,Model model) {
+		ArrayList<Club> myList = service.getAllMyClub(m);
+		ArrayList<Club> popularList = service.searchClubPopularList(m);
+		model.addAttribute("myList",myList);
+		model.addAttribute("pList", popularList);
+		return "myPage/myClubList";
 	}
+	
 	//나의 후기 가기(내가쓴글 수정)
 	@RequestMapping(value="/myComment.do")
 	public String myComment() {
