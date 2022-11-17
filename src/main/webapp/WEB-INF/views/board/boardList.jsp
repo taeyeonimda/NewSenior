@@ -9,7 +9,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
  <link href="/resources/css/board/boardList.css" rel="stylesheet">
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+ <style>
+
+
+</style>
 </head>
+
+
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="page-content">
@@ -301,7 +307,7 @@
 				</select>
 				<input type="text" name="searchInput" placeholder="검색어를 입력해주세요">
 				<button class="searchBtn" id="searchBtn">검색</button>
-				<span class="material-symbols-outlined"><label for="searchBtn">search</label></span>
+				<span><label for="searchBtn"><img src="/resources/img/search.png" style="width:35px; height: 35px;"></label></span>
 				
 			</form>
 		</div>

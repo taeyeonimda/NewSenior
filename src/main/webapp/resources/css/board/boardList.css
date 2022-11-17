@@ -71,8 +71,11 @@
 
 .searchForm .material-symbols-outlined{
 	vertical-align:middle;
-	font-size :35px;
+
+
 }
+
+
 .searchForm label{
 	cursor: pointer;
 }

@@ -176,7 +176,8 @@
 				</div>
 	</form>
 </div>
-
+</div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <script>
 		$("#boardContent").summernote({
 			height:400,
@@ -240,5 +241,5 @@
 
 	
 </body>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 </html>

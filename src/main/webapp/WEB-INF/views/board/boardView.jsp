@@ -11,7 +11,15 @@
  <link href="/resources/css/board/boardView.css" rel="stylesheet">
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
-	
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+</style>
 	
 	
 </style>
@@ -188,7 +196,7 @@
 		<!-- 테이블 밖으로 꺼냈음 -->
 		<div class="updateDelBox">
 			<c:if test="${not empty sessionScope.m}">
-				<c:if test="${b.nickName eq sessionScope.m.nickName || sessionScope.m.memberGrade eq 3 }">
+				<c:if test="${b.nickName eq sessionScope.m.nickName">
 					<a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="updateBtn bc44" id="updateBtn">수정</button></a>
 					<a href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="delBtn bc44" id="delBtn">삭제</button></a>
 				</c:if>
@@ -350,7 +358,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<div class="memberImg"><img src="/resources/upload/member/${b.memberImg}"></div>
+						<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">

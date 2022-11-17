@@ -3,7 +3,7 @@
 	width:100%;
 }
 .boardWriteWrap .boardWriteTbl{
-		width:70%;
+		width:90%;
 		margin:0 auto;
 		border-collapse: collapse;	
 	}
@@ -17,6 +17,7 @@
 }
 .boardWriteTbl select{
 	width:100px;
+	outline:none;
 }
 .boardWriteTbl input{
 	width:100%;
