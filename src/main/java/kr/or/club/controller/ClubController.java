@@ -255,6 +255,15 @@ public class ClubController {
 		return new Gson().toJson(cb);
 	}
 	
+	// 동호회 댓글 수정
+	@RequestMapping(value = "/updateClubComment.do")
+	public String updateClubComment(ClubBoardComment cbc) {
+		System.out.println(cbc);
+		int result = service.updateClubBoardComment(cbc);
+		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
+	}
+	
+	
 	// 동호회장 변경
 	@RequestMapping(value = "/changeClubLeader.do")
 	public String changeClubLeader(Club c) {

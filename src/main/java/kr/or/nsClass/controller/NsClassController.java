@@ -188,5 +188,5 @@ public class NsClassController {
 		return "redirect:/classDetail.do";
 	}
 	
-	
+
 }
