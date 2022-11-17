@@ -222,4 +222,15 @@
     FROM DUAL)
 	</delete>
 	
+	<select id="selectClassName" parameterType="int" resultType="cla">
+		select
+			class_no as classNo,
+			class_name as className,
+			class_teacher as classTeacher
+		from classes
+		where class_no = #{classNo}
+		
+	
+	</select>
+	
 </mapper>

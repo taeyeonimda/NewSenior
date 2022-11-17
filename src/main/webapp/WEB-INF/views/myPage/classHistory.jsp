@@ -117,7 +117,8 @@
                         <td>${ech.startDate } ~ ${ech.endDate }</td>
                         <td>
                           <div class="col-md-10">
-                            <button type="button" id="review-btn" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">후기작성</a></button>
+                            <button type="button" id="review-btn" class="btn btn-outline-warning" 
+                            style="width: 200px;" onclick="classReview(${ech.classNo});">후기작성</button>
                           </div>
                         </td>
                       </tr>
@@ -127,6 +128,9 @@
                   </table>
                 </div>
               </div>
+              <script>
+              	
+              </script>
 
 <!-- 후기 모달 -->
 <div class="rmodal-wrap">
@@ -139,7 +143,7 @@
     					<img src="/resources/upload/class/New_Year.png" class="review-img">
     				</div>
     			</div>
-    			<p class="fs-5 fw-bold text-primary mt-2">[ ${cla.className } ]를 수강하셨습니다.</p>
+    			<p class="fs-5 fw-bold text-primary mt-2 reviewClassName">[ ${cla.className } ]를 수강하셨습니다.</p>
     		</div>
     	</div>
         <div class="review-content">
@@ -161,7 +165,7 @@
                 <input type="hidden" name="reviewRate" id="star">
                 <input type="hidden" name="classTeacher" value="${cla.classTeacher }">
                 <input type="hidden" name="classNo" value="${cla.classNo }">
-                <input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
+                <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
                 <textarea name="reviewContent" id="review-textarea"></textarea>
                 <div id="modal-btn-box">
                     <button type="button" id="review-cancel" class="btn bc5">취소</button>
@@ -212,12 +216,33 @@
     <script type="text/javascript">
     /*후기*/    
      // 리뷰 script
-	    $("#review-btn").on("click", function(){
+	    
+     /*$("#review-btn").on("click", function(){
 	        $(".rmodal-wrap").css("display", "flex");
-	        $.ajax({
+	        
+	        /*$.ajax({
 	        	url: "/selectClassName.do",
+	        	data:{
+	        		classNo:
+	        	}
 	        });
-	    })
+	    })*/
+	    function classReview(number){
+     		 $(".rmodal-wrap").css("display", "flex");
+     		 
+     		 $.ajax({
+     			url:"/selectClassName.do",
+     			data:{
+     				classNo:number
+     			},
+     			success:function(data){
+     				$(".reviewClassName").text(data.className);
+     				$("[name=classTeacher]").val(data.classTeacher);
+     				$("[name=classNo]").val(data.classNo);
+     			}
+     		 });//ajax끝
+     	}
+	    
 		
 	    $("#modal-btn-box>button:first-child").on("click",function(){
 	        $(".rmodal-wrap").css("display", "none");

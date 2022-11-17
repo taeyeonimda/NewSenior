@@ -337,6 +337,7 @@ ul li.on a {
 							alert("삭제가 완료되었습니다.");
 							$(obj).parent().parent().parent().remove();
 							$(".reviewContent").show();
+							$(".reviewCount").remove();
 						}
 					});
 				}
@@ -358,12 +359,14 @@ ul li.on a {
 					reviewScore : reviewScore,
 				},
 				success : function(data){
-					
 					displayData(1, dataPerPage);
 					$("#customerReview").val('');
 					$(".input-score>span").text('0');
 					$(".star-wrap").children().css("color","");
 					$(".reviewContent").hide();
+					const reviewH6 = $("<h6>리뷰작성은<span style='color: red;'>1회만</span> 작성하실수 있습니다.</h6>");
+					reviewH6.addClass("reviewCount");
+					$(".reviewContentWrap").append(reviewH6);
 					alert("리뷰등록 완료!");
 					/*
 					var now = new Date();
