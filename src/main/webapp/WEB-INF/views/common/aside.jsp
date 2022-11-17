@@ -75,7 +75,13 @@
                 <div data-i18n="Basic">클래스관리(강사페이지)</div>
               </a>
             </li>
-            
+            <!-- 배송지 -->
+            <li class="menu-item  delivery">
+              <a href="mydelivery.do" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Basic Inputs">나의 배송지</div>
+              </a>
+            </li>
             <!-- 클래스등록 -->
             <li class="menu-item classEnroll">
               <a href="classEnroll.do" class="menu-link">
@@ -94,7 +100,13 @@
                 <div data-i18n="Basic Inputs">마이페이지</div>
               </a>
             </li>
-            
+            <!-- 배송지 -->
+            <li class="menu-item  delivery">
+              <a href="mydelivery.do" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Basic Inputs">나의 배송지</div>
+              </a>
+            </li>
             <!-- 장바구니 -->
             <li class="menu-item cart">
               <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
