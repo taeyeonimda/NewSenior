@@ -45,6 +45,8 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
+    <link href="/resources/css/class/class-detail.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -86,12 +88,6 @@
                         <td>${ch.dayDate}일</td>
                       </tr>
                     </c:forEach>
-                      <tr>
-                        <td>Spring Class</td>
-                        <td>이윤수</td>
-                        <td>2022-06-20 ~ 2022-11-18</td>
-                        <td>30일</td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -121,21 +117,12 @@
                         <td>${ech.startDate } ~ ${ech.endDate }</td>
                         <td>
                           <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">후기작성</a></button>
+                            <button type="button" id="review-btn" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">후기작성</a></button>
                           </div>
                         </td>
                       </tr>
                     </c:forEach>
-                      <tr>
-                        <td>Spring Class</td>
-                        <td>이윤수</td>
-                        <td>2022-06-20 ~ 2022-11-18</td>
-                        <td>
-                          <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning" style="width: 200px;"><a href="#" style="color: #FFAB00;">후기작성</a></button>
-                          </div>
-                        </td>
-                      </tr>
+                     
                     </tbody>
                   </table>
                 </div>
@@ -227,6 +214,9 @@
      // 리뷰 script
 	    $("#review-btn").on("click", function(){
 	        $(".rmodal-wrap").css("display", "flex");
+	        $.ajax({
+	        	url: "/selectClassName.do",
+	        });
 	    })
 		
 	    $("#modal-btn-box>button:first-child").on("click",function(){
@@ -234,6 +224,7 @@
 	        $(".comment-box>div:first-child").css("visibility", "hidden");
 	        $(".comment-box>div:last-child>span").text("는 어떠셨나요?");
 	        $("#star-box>span").css("color", "lightgrey");
+	        
 	    })
 		
 	    const starBox = $(".comment-box>div:first-child");
@@ -313,6 +304,8 @@
 				}
 			})
 		}
+	 
+	    
 	    
     </script>
   </body>
