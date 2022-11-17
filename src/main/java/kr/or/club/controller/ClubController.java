@@ -79,7 +79,7 @@ public class ClubController {
 		service.insertClubMember(m, c);
 		return "redirect:/myClubList.do?memberNo="+m.getMemberNo()+"&clubNo="+c.getClubNo();
 	}
-	
+	/*
 	@RequestMapping(value = "/myClubList.do")
 	public String myClubList(Member m, Club c, Model model) {
 		ArrayList<Club> myList = service.searchMyClub(m);
@@ -87,7 +87,7 @@ public class ClubController {
 		model.addAttribute("newClub", c.getClubNo());
 		return "club/myClubList";
 	}
-	
+	*/
 	@RequestMapping(value = "/insertClub.do")
 	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println(files);

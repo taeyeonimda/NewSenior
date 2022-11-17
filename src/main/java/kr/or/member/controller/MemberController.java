@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.or.category.model.service.CategoryService;
 import kr.or.category.model.vo.Category;
+import kr.or.club.model.vo.Club;
 import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
@@ -74,10 +75,15 @@ public class MemberController {
 		}
 	}
 	//내동호회 가기
-	@RequestMapping(value="/myClub.do")
-	public String myClub() {
-		return "myPage/myClub";
+	@RequestMapping(value="/myClubList.do")
+	public String myClub(@SessionAttribute Member m,Model model) {
+		ArrayList<Club> myList = service.getAllMyClub(m);
+		ArrayList<Club> popularList = service.searchClubPopularList(m);
+		model.addAttribute("myList",myList);
+		model.addAttribute("pList", popularList);
+		return "myPage/myClubList";
 	}
+	
 	//나의 후기 가기(내가쓴글 수정)
 	@RequestMapping(value="/myComment.do")
 	public String myComment(@SessionAttribute Member m, Model model) {
@@ -415,52 +421,52 @@ public class MemberController {
 		}
 		
 		//배송지 insert
-		@RequestMapping(value="/insertAddr.do")
-		public String insertAddr(Delivery delivery, int memberNum, @SessionAttribute Member m, Model model) {
-			delivery.setMemberNo(memberNum);
-			ArrayList<Delivery> list = service.selectAllDelivery(m);
-			if(list.size()>0) {
-				if(list.size()<5) {
-					if(delivery.getDefaultAddr().equals("y")) {
-						// 기본 배송지 값 'n'으로 다 바꾸기
-						System.out.println("딜리버리1111:"+delivery);
-						int result = service.updateAddr(delivery);
-						System.out.println("딜리버리222:"+delivery);
-						System.out.println("현주바보"+result);
-						if(result>0) {
-							//기본 배송지 'y'로 insert
-							int result2 = service.insertAddr(delivery);
-							System.out.println("박현주바보"+result2);
-							if(result2>0) {
+				@RequestMapping(value="/insertAddr.do")
+				public String insertAddr(Delivery delivery, int memberNum, @SessionAttribute Member m, Model model) {
+					delivery.setMemberNo(memberNum);
+					ArrayList<Delivery> list = service.selectAllDelivery(m);
+					if(list.size()>0) {
+						if(list.size()<5) {
+							if(delivery.getDefaultAddr().equals("y")) {
+								// 기본 배송지 값 'n'으로 다 바꾸기
+								System.out.println("딜리버리1111:"+delivery);
+								int result = service.updateAddr(delivery);
+								System.out.println("딜리버리222:"+delivery);
+								System.out.println("현주바보"+result);
+								if(result>0) {
+									//기본 배송지 'y'로 insert
+									int result2 = service.insertAddr(delivery);
+									System.out.println("박현주바보"+result2);
+									if(result2>0) {
+										return "redirect:/mydelivery.do";
+									}else {
+										return "redirecst:/";
+									}
+								}else {
+									return "redirect:/";
+								}
+							}
+							System.out.println("###"+delivery);
+							int result = service.insertAddr(delivery);
+							if(result>0) {
 								return "redirect:/mydelivery.do";
 							}else {
-								return "redirecst:/";
+								return "redirect:/";
 							}
+						}else {
+							model.addAttribute("msg", "배송지등록은 최대 5개입니다.");
+							model.addAttribute("url","/mydelivery.do");
+							return "alert";
+						}
+					}else {
+						int result = service.insertAddr(delivery);
+						if(result>0) {
+							return "redirect:/mydelivery.do";
 						}else {
 							return "redirect:/";
 						}
 					}
-					System.out.println("###"+delivery);
-					int result = service.insertAddr(delivery);
-					if(result>0) {
-						return "redirect:/mydelivery.do";
-					}else {
-						return "redirect:/";
-					}
-				}else {
-					model.addAttribute("msg", "배송지등록은 최대 5개입니다.");
-					model.addAttribute("url","/mydelivery.do");
-					return "alert";
-				}
-			}else {
-				int result = service.insertAddr(delivery);
-				if(result>0) {
-					return "redirect:/mydelivery.do";
-				}else {
-					return "redirect:/";
-				}
-			}
-		}
+				}  
 		
 		//배송지 삭제
 		@RequestMapping(value="/deleteAddr.do")

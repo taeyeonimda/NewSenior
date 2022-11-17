@@ -63,6 +63,7 @@
 			member_phone as memberPhone,
 			member_grade as memberGrade,
 			member_state as memberState,
+			member_img as memberImg,
 			favorite
 	from members
 	where member_id=#{memberId} 
@@ -208,12 +209,13 @@
 	</update>
 	
 	<update id="deleteUser" parameterType="m">
-	 update members set member_state =  to_char(sysdate,'yyyy-mm-dd') where 
+	 update members set member_state =  to_char(sysdate,'yyyy-mm-dd') 
+	 where 
 	 <if test="memberNo != 0">
 	 member_no = #{memberNo}
 	 </if>
 	 <if test="kakaoLogin != null">
-	 kakaoLogin = #{kakaoLogin}
+	 	and kakaoLogin = #{kakaoLogin}
 	 </if>
 	</update>
 	

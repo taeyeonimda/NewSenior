@@ -145,7 +145,7 @@
                             	<i class="fa fa-users text-primary"></i>
                             </div>
                             <div class="ps-3">
-                                <h4 class="loginCheck">온라인 동호회</h4>
+                                <h4>온라인 동호회</h4>
                                 <span>누구나 가입 가능한<br> 다양한 종류의 동호회가 가득!</span>
                             </div>
                         </div>
@@ -635,10 +635,6 @@
     	  $(".popup_bg00").stop().fadeIn();
           $(".popup00.personal_pop00").stop().fadeIn();
           $("body").addClass("bg_g");
-          
-		$(".loginCheck").on("click", function() {
-			$(".loginBtn").click();
-		})
     </script>
     </c:if>
     
