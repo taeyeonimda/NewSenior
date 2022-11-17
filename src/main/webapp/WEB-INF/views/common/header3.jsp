@@ -178,7 +178,7 @@
 			font-weight:500;
 			color: #9fa2a6;
 			}
-	//얇음
+			//얇음
 			@font-face {
 			    font-family: 'LeferiPoint-WhiteObliqueA';
 			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');

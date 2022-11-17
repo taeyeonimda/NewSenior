@@ -311,7 +311,6 @@
                     <div class="dropdown-menu bg-light m-0">
                         <a href="/boardList.do?reqPage=1&boardType=N" class="dropdown-item">공지사항</a>
                         <a href="boardList.do?reqPage=1&boardType=Q" class="dropdown-item">Q&A</a>
-                        <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">FAQ(없을수도)</a>
                          <a href="/classEnroll.do" class="dropdown-item">강사모집</a>
                     </div>
                 </div>

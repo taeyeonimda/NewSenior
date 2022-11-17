@@ -63,6 +63,7 @@
 			member_phone as memberPhone,
 			member_grade as memberGrade,
 			member_state as memberState,
+			member_img as memberImg,
 			favorite
 	from members
 	where member_id=#{memberId} 

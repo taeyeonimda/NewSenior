@@ -126,7 +126,7 @@ public class BoardService {
 		 //조회수
 		 int readCount = dao.updateReadCount(boardNo);
 		 
-		 //카테고리 조회
+		 //셀렉트
 		 
 			 //
 		 //조회된 결과 hashMap에 넣기 : board(file포함),
