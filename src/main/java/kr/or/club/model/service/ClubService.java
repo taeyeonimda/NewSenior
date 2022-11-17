@@ -150,5 +150,9 @@ public class ClubService {
 	public ArrayList<Club> selectMainClubs() {
 		return dao.selectMainClubs();
 	}
+	@Transactional
+	public int updateClubBoardComment(ClubBoardComment cbc) {
+		return dao.updateClubBoardComment(cbc);
+	}
 
 }

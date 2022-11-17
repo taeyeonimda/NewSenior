@@ -278,6 +278,12 @@ public class NsClassService {
 	public int insertPayClassHistory(ClassHistory clh) {
 		return dao.insertPayClassHistory(clh);
 	}
+
+	public int selectClassHistorySum(NsClass nc) {
+		int result = dao.selectClassHistorySum(nc);
+		return result;
+	}
+	
 	@Transactional
 	public int deleteClass(int classNo) {
 		int result = dao.deleteClass(classNo);

@@ -33,15 +33,15 @@
 	            </div>
 	            <div class="side-box rounded mt-5">
 	                <p class="fs-5 fw-bold text-primary">${c.clubName } </p>
-	                <div class="side-info-box text-center">
+	                <div class="side-info-box text-center clubIntro" style="min-height: 190px;">
 	                	<c:forEach items="${c.memberList }" var="cm">
 	                		<c:if test="${cm.memberNo eq c.clubLeader }">
-	                			<div><span>${cm.nickName }</span><span>(${cm.memberId })</span><span class="fw-bold text-dark"> - 동호회장</span></div>
+	                			<div class="memberNameBox"><span>${cm.nickName } </span><span> (${cm.memberId }) </span><span class="text-dark fw-bold">-동호회장</span></div>
 	                		</c:if>
 	                	</c:forEach>
 	                	<c:forEach items="${c.memberList }" var="cm">
 	                		<c:if test="${cm.memberNo ne c.clubLeader }">
-	                			<div><span>${cm.nickName }</span><span>(${cm.memberId })</span></div>
+	                			<div class="memberNameBox"> <span>${cm.nickName } </span><span> (${cm.memberId }) </span></div>
 	                		</c:if>
 	                	</c:forEach>
 	                </div>
@@ -222,7 +222,7 @@
 															<span>${cbc.clubComDate }</span>
 														</p>
 														<p class="comment-content">${cbc.clubComContent }</p>
-														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;" class="comment-textarea">ncContent</textarea>
+														<textarea name="clubComContent" rows="5" cols="95" style="display:none;" class="comment-textarea">${cbc.clubComContent }</textarea>
 														<p class="comment-link">
 															<c:if test="${cbc.clubComWriter eq sessionScope.m.memberNo}">
 															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubNo});">수정</a>
@@ -232,28 +232,29 @@
 														</p>
 													</li>
 												</ul>
+												<!-- 대댓글 달기 -->
+												<div class="inputRecommentBox">
+													<form action="/insertClubComment.do" method="post">
+														<ul>
+															<li class="arrow-box">
+																<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
+															</li>
+															<li class="text-box">
+																<input type="hidden" name="clubNo" value="${c.clubNo }">
+									                    		<input type="hidden" name="clubComRef" value="${cbc.clubComNo }">
+									                    		<input type="hidden" name="clubBoardNo"	 value="${cb.clubBoardNo }">
+									                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
+									                    		<textarea name="clubComContent" class="comment-textarea" style="width: 100%;" maxlength="205"></textarea>
+															</li>
+															<li class="btn-box">
+																<button class="btn btn-primary">등록</button>
+															</li>
+														</ul>
+													</form>
+												</div>
 			                    			</c:if>
 			                    			
-			                    			<!-- 대댓글 달기 -->
-											<div class="inputRecommentBox">
-												<form action="/insertClubComment.do" method="post">
-													<ul>
-														<li class="arrow-box">
-															<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
-														</li>
-														<li class="text-box">
-															<input type="hidden" name="clubNo" value="${c.clubNo }">
-								                    		<input type="hidden" name="clubComRef" value="${cbc.clubComNo }">
-								                    		<input type="hidden" name="clubBoardNo" value="${cb.clubBoardNo }">
-								                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
-								                    		<textarea name="clubComContent" class="comment-textarea" style="width: 100%;" maxlength="205"></textarea>
-														</li>
-														<li class="btn-box">
-															<button class="btn btn-primary">등록</button>
-														</li>
-													</ul>
-												</form>
-											</div>
+			                    			
 			                    		
 			                    		
 											<!-- 대댓글 출력 -->
@@ -274,7 +275,7 @@
 															<span>${cbrc.clubComDate }</span>
 														</p>
 														<p class="comment-content">${cbrc.clubComContent }</p>
-														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+														<textarea name="clubComContent" class="input-form" rows="5" cols="90" style="display:none;">${cbrc.clubComContent }</textarea>
 														<c:if test="${cbrc.clubComWriter eq sessionScope.m.memberNo}">
 														<p class="comment-link">
 															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbrc.clubComNo }, ${cb.clubNo});">수정</a> 
@@ -512,6 +513,8 @@
 		location.href="/blockMember.do?"+str;
 	}
 
+	
+	
 	
 	
 	
@@ -759,6 +762,7 @@
 		$(".inputRecommentBox").eq(idx).find("textarea").focus();
 	})
 	
+	
 	function modifyComment(obj, cbcNo, clubNo){
 		$(obj).parent().prev().show(); //textarea 화면에show
 		$(obj).parent().prev().prev().hide();//
@@ -793,7 +797,10 @@
 		// 숨겨놨다가 보내도 상관없음
 		// 자바 스크립트에서 a태그로 보내는 것도 가능
 		
-		const form = $("<form action='updateClubComment.do' method='post'></form>");
+		const form = $("<form>");
+		form.attr("action", "/updateClubComment.do");
+		form.attr('method', 'post');
+		
 		const clubComNoInput = $("<input type='text' name='clubComNo'>");
 		clubComNoInput.val(cbcNo);		// input의 값으로 매개변수로 받은 번호 
 		form.append(clubComNoInput);	// 인풋 태그 form태그에 append
@@ -802,9 +809,10 @@
 		clubNoInput.val(clubNo);
 		form.append(clubNoInput);
 		
-		//4. textarea
-		const ncContent = $(obj).parent().prev();
-		form.append(ncContent);
+		const textarea = $(obj).parent().prev();
+		const text = textarea.text();
+		textarea.append(text);
+		form.append(textarea);
 		
 		// body 태그에 생성한 폼 append
 		$("body").append(form);
