@@ -290,7 +290,7 @@
 					url : "/inputDelivery.do",
 					type : "get",
 					data : {
-						memberNo : $(".hiddenMemberNo").val()
+						memberNo : $("[name=memberNo]").val()
 					},success:function(data){
 						$(".basicInput").eq(0).attr("value",data.deliveryName),
 						$(".basicInput").eq(1).attr("value",data.receiverName),
