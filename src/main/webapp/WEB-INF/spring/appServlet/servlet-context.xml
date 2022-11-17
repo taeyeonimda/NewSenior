@@ -103,7 +103,7 @@
 			
 			<mapping path="/activityEnroll.do"/>
 			<mapping path="/insertActivity.do"/>
-			<mapping path=""/>
+			<mapping path="/classHistory.do"/>
 			<mapping path=""/>
 			<mapping path=""/>
 			<mapping path=""/>

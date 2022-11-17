@@ -13,6 +13,7 @@ import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
 import kr.or.nsClass.model.vo.ClassHistory;
+import kr.or.nsClass.model.vo.NsClass;
 
 @Service
 public class MemberService {
@@ -217,6 +218,12 @@ public class MemberService {
 	public ArrayList<ClassHistory> selectEndHistory(Member member) {
 		// TODO Auto-generated method stub
 		return dao.selectEndHistory(member);
+	}
+
+
+	public NsClass selectClassName(int classNo) {
+		NsClass ns = dao.selectClassName(classNo);
+		return ns;
 	}
 
 	
