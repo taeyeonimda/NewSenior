@@ -303,7 +303,6 @@ ul li.on a {
 		
 			function reviewUpdate(obj,reviewNo,productNo){
 				const reviewContent = $(obj).parent().prev().children().val();
-				console.log(reviewContent);
 				if(confirm("리뷰를 수정하시겠습니까?")){
 					$.ajax({
 						url : "/productReviewUpdate.do",
@@ -489,15 +488,11 @@ ul li.on a {
 			
 			$(document).ready(function(){
 				const price = $(".sumPrice").val();
-				console.log(price);
 				const pricecomma = price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-				console.log("돈 : "+pricecomma);
 				$(".showSumPrice").val(pricecomma);
 				
 				dataPerPage = $("#reviewListBtn").val(); 
-				console.log("dataPerPage : "+dataPerPage);
 				const productNo = $("[name=productNo1]").val();
-				console.log("productNo : "+productNo);
 				$.ajax({
 					method : "POST",
 					url : "/productReviewList.do",
@@ -506,7 +501,6 @@ ul li.on a {
 					},
 					success : function(data){
 						totalData = data.length;
-						console.log("총 데이터 : "+totalData);
 					}
 				});
 				displayData(1, dataPerPage);
@@ -514,18 +508,13 @@ ul li.on a {
 			});
 			
 			function paging(totalData, dataPerPage, pageCount, currentPage){
-				console.log("currentPage : "+currentPage);
-				console.log("데이터퍼페이지 : "+dataPerPage);
-				console.log("토탈데이터 : "+totalData);
 				var totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수
-				console.log("totalPage : "+totalPage);
 				
 				if(totalPage<pageCount){
 					pageCount = totalPage;
 				}
 				
 				let pageGroup = Math.ceil(currentPage/pageCount);
-				console.log("pageGroup : "+pageGroup);
 				let last = pageGroup * pageCount;
 				
 				if(last > totalPage){
@@ -586,7 +575,6 @@ ul li.on a {
 			function displayData(currentPage, dataPerPage) {
 			  let chartHtml = "";
 			  const productNo = $("[name=productNo1]").val();
-			  console.log("productNo1 : "+productNo);
 			  
 			//Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
 			  currentPage = Number(currentPage);
@@ -696,7 +684,6 @@ ul li.on a {
 			$("#reviewListBtn").click(function () {
 				//$(".reviewsWrap").remove();
 			    dataPerPage = $("#reviewListBtn").val();
-			    console.log("dataPerPage1 : "+dataPerPage);
 			    //전역 변수에 담긴 globalCurrent 값을 이용하여 페이지 이동없이 글 표시개수 변경 
 			    paging(totalData, dataPerPage, pageCount, reviewCurrentPage);
 			    displayData(reviewCurrentPage, dataPerPage);
@@ -765,7 +752,6 @@ ul li.on a {
 		*/
 		const pageli = $("#pagingul").children(); 
 		$(pageli).on("click",function(){
-			console.log("zzz");
 			$(this).css("background-color","black");
 		});
 		
