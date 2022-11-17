@@ -15,10 +15,10 @@
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">ACTIVITY</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="">Pages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">ACTIVITY</li>
+                    <ol class="breadcrumb justify-content-center mb-0" style="width:320px; background-color: #fff; border-radius: 30px; margin: 0 auto; padding: 10px;">
+                        <li class="breadcrumb-item" ><a href="/" style="color:#6c757d; cursor: pointer;">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#" style="color:#6c757d;  cursor: pointer;">Pages</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" style="color:#348E38;  cursor: pointer;">ACTIVITY</li>
                     </ol>
                 </nav>
             </div>

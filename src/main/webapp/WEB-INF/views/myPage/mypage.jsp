@@ -139,7 +139,7 @@
 						<div class="mb-3 row" style="flex-wrap: nowrap">
 							<span class="col-md-2 col-form-label" style="margin-right: 10px;">관심분야</span>
 							<select name="favorite" class="fv_btn"
-								style="width: 80%; border: 1px solid #ced4da;">
+								style="width: 90%; border: 1px solid #ced4da;">
 								<option class="dropdown-item" value="NO"
 									<c:if test="${member.favorite =='NO'}">selected</c:if>>선택안함</option>
 								<option class="dropdown-item" value="DG"

@@ -426,11 +426,11 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/team-1.jpg" alt="">
+                    <div class="team-item rounded" style="height: 540px;">
+                        <img class="img-fluid" src="/resources/img/강사2.jpg" alt="" height="540px;">
                         <div class="team-text">
                             <h4 class="mb-0">이은비 강사님</h4>
-                            <p class="text-primary">라떼 산책시키기 클래스</p>
+                            <p class="text-primary">강한 강아지 키우기 전문가</p>
                             <div class="team-social d-flex">
                                 <a class="btn btn-square rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
@@ -441,7 +441,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/team-2.jpg" alt="">
+                        <img class="img-fluid" src="/resources/img/강사2.jpg" alt="" height="540px;">
                         <div class="team-text">
                             <h4 class="mb-0">박현주 강사님</h4>
                             <p class="text-primary">소맥말기 액티비티</p>
@@ -455,10 +455,10 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item rounded">
-                        <img class="img-fluid" src="/resources/MAINbtstr/img/team-3.jpg" alt="">
+                        <img class="img-fluid" src="/resources/img/강사2.jpg" alt="" height="540px;">
                         <div class="team-text">
-                            <h4 class="mb-0">박혜진 강사님</h4>
-                            <p class="text-primary">포켓몬 뽑기 동호회</p>
+                            <h4 class="mb-0">김칠두 강사님</h4>
+                            <p class="text-primary">시니어 모델</p>
                             <div class="team-social d-flex">
                                 <a class="btn btn-square rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>

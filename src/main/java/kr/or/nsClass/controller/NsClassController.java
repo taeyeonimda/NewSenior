@@ -55,7 +55,7 @@ public class NsClassController {
 		model.addAttribute("cateList", cateList);
 		return "class/classList";
 	}
-
+	
 	@RequestMapping(value = "/classDetail.do")
 	public String classDetail(NsClass nc, Model model){
 		NsClass cla = service.selectOneClass(nc);

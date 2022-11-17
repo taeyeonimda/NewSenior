@@ -86,8 +86,8 @@
 }
 
 [type=checkbox] {
-	width: 20px;
-	height: 20px;
+	width: 35px;
+	height: 35px;
 }
 
 .fs {
@@ -134,7 +134,7 @@
     font-style: normal;
 }
 
-//얇음
+			//얇음
 			@font-face {
 			    font-family: 'LeferiPoint-WhiteObliqueA';
 			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');

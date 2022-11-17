@@ -61,6 +61,19 @@
 			     font-weight: normal;
 			     font-style: normal;
 			}
+			@font-face {
+		    font-family: 'LeferiPoint-WhiteObliqueA';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+			}
+			@font-face {
+			    font-family: 'ImcreSoojin';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			
 	</style>
     </style>
 </head>
@@ -88,7 +101,7 @@
         <!-- sideBar-->
         <div class="sidenav bg-light rounded p-sm-3 wow fadeIn" style="text-align:center;">
             <div class="side-box rounded mt-3" style=" font-family: 'GmarketSansMedium';">
-                <h6 class="side-title-box display-5 " style="font-family: 'PyeongChangPeace-Bold'">
+                <h6 class="side-title-box display-5 " style="font-family: 'ImcreSoojin'">
                  	${act.activityName}
                 </h6>
                 <div class="side-select-box display-5" style="font-size:2rem;" > 
@@ -117,7 +130,7 @@
                 </div>
                 <div class="side-select-box display-5 mb-2"> 
                		<input class="form-control" name = "startDate"  id="activityStartDate" 
-               		       onclick="javascript:f_datepicker(this);" placeholder="신청할 날짜를 선택해주세요."/>
+               		       onclick="javascript:f_datepicker(this);" readonly placeholder="신청할 날짜를 선택해주세요."/>
                </div>
                <div class="side-select-box display-5 mb-2"> 
                		<div style="font-size:1.5rem;"><span>총합 : </span><span id="realAmount"></span><span> 원</span></div>
@@ -139,7 +152,7 @@
         <div class="container-xxl py-5 mt-5" style=" font-family: 'GmarketSansMedium';">
             <div class="container">
 				<div class="class-row g-4">
-						<h6 class="side-title-box display-5 " style="font-family: 'PyeongChangPeace-Bold'">
+						<h6 class="side-title-box display-5 " style="font-family: 'ImcreSoojin'">
                  		${act.activityName}
                			 </h6>
 					<div class="col-xl-12 wow fadeInUp" data-wow-delay="0.1s" style= "display: flex">
@@ -207,15 +220,16 @@
     	<div class="container-xxl py-1 mt-1" id="#menu2" >
        		<div class="class-row g-5">      
 		        <h4 class="display-6 mb-4">
-		        	<pre class="mb-4" style="font-size:30px; font-weight:bold; color:#0F422;font-family: 'GmarketSansMedium';">${act.activityDetail}</pre>
+		        	<pre class="mb-4" style="font-size:28px; font-weight:bold; color:gray; font-family: 'GmarketSansMedium';">${act.activityDetail}</pre>
 		        </h4>
         	</div>    
         </div>	
+        <hr style="width: 1350px; margin: 0 auto;">
         <br><br>
         <div class="container-xxl py-1 mt-1" id="#menu2">
        		<div class="class-row g-5">      
 		        <h4 class="display-6 mb-4" style=" font-family: 'GmarketSansMedium'; color:#000;">
-		        	<pre class="mb-4" style="font-size:16px; font-weight:bold;font-family: 'GmarketSansMedium';">${act.etc}</pre>
+		        	<pre class="mb-4" style="font-size:16px; font-weight:bold; font-family: 'GmarketSansMedium';">${act.etc}</pre>
 		        </h4>
         	</div>    
         </div>	
@@ -359,7 +373,7 @@
     let reqPage;
 
 	document.addEventListener("DOMContentLoaded", function(){
-	      showSide();
+	        showSide();
 	        
 	    	const amount = $("[name=amount]").val()
 	    	const amountPrice ='${act.activityPrice }';
@@ -532,22 +546,24 @@
 	            let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
 		        let windowHeight = window.innerHeight; // 스크린 창
 	            let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x, footer제외
-	            if(position > 3500){
+	           
+	            if(position > 501){
 	                $(".sidenav").fadeOut(1);
-	            }else if(position > 250 ){ // 스크롤 위치 343보다 클 때만 보이겠다
+	            }else if(position > 0 ){ // 스크롤 위치 343보다 클 때만 보이겠다
 	                $(".sidenav").fadeIn(300);
 	                console.log("최고높이"+fullHeight);
 	            }else {
 	                $(".sidenav").fadeOut(1);
 	            }
-
+				
+				
 	            if(position > 4000 || 905 > position){
 	                $("#scroll-select").removeClass("scroll-select-box-fixed");
 	            }else if(position > 905){
 	                $("#scroll-select").addClass("scroll-select-box-fixed");
 	            }
 	        }
-	        
+	    	
 	        $(window).on("scroll",function(){
 	            showSide();
 		        // let fullHeight = document.body.scrollHeight-1000; //  margin 값은 포함 x, footer제외
@@ -612,7 +628,12 @@
         		memberNo = '${sessionScope.m.memberNo}';
         		activityNo = '${act.activityNo}'; 
         	
+		    	const startDate = $("[name=startDate]").val();
 		    	
+		    	if(startDate==null || startDate==""){
+		    		alert("시작날짜를 선택해주세요");
+		    		return false;
+		    	}
 		   	
 		    	if('${sessionScope.m}' !=null || '${sessionScope.m}' !=''){
 		    		$.ajax({

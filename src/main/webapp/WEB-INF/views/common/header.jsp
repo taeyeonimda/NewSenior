@@ -256,6 +256,12 @@
 			    font-weight: normal;
 			    font-style: normal;
 			}
+			@font-face {
+		    font-family: 'LeferiPoint-WhiteObliqueA';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+			}	
 			body *{
 			 font-family: 'GmarketSansMedium';
 			}
@@ -350,7 +356,8 @@
 				</c:when>
 				<c:otherwise>
 					<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
-					<a href="/logout.do"><img alt="로그아웃" src="/resources/img/logout.png" style="width: 40px; margin-right: 10px;"></a>
+					<a href="/logout.do">로그아웃</a>
+					<!--<a href="/logout.do"><img alt="로그아웃" src="/resources/img/logout.png" style="width: 40px; margin-right: 10px;">-->
 				</c:otherwise>
 			</c:choose>
        	 </div>

@@ -83,10 +83,9 @@
 				<input type="text" placeholder="예) 1999-10-08" name="memberBirth"
 					onkeyup="birth_keyup(this); this.value=this.value.replace(/[^-0-9]/g,'');" class="inbtn" maxlength="10"><br>
 		</form>
-		<input type="checkbox" class="checkBtn"><span class="fs">
-			개인정보 수집 및 이용 동의</span> <span style="color: red; text-decoration: underline"
-			class="detail fs">자세히보기</span> <br> <input type="submit"
-			value="회원가입" id="memberJoin" class="fs">
+		<label><input type="checkbox" class="checkBtn"><span class="fs">개인정보 수집 및 이용 동의</span></label>
+		<span style="color: red; text-decoration: underline"class="detail fs">자세히보기</span><br> 
+		<input type="submit" value="회원가입" id="memberJoin" class="fs">
 		</fieldset>
 	</div>
 </div>

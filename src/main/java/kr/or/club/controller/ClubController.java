@@ -77,17 +77,17 @@ public class ClubController {
 	@RequestMapping(value = "/joinClub.do")
 	public String insertClubMember(Member m, Club c, Model model) {
 		service.insertClubMember(m, c);
-		return "redirect:/myClubList.do?memberNo="+m.getMemberNo()+"&clubNo="+c.getClubNo();
+		return "redirect:/afterJoinClub.do?memberNo="+m.getMemberNo()+"&clubNo="+c.getClubNo();
 	}
-	/*
-	@RequestMapping(value = "/myClubList.do")
-	public String myClubList(Member m, Club c, Model model) {
+
+	@RequestMapping(value = "/afterJoinClub.do")
+	public String afterJoinClub(Member m, Club c, Model model) {
 		ArrayList<Club> myList = service.searchMyClub(m);
 		model.addAttribute("myList", myList);
 		model.addAttribute("newClub", c.getClubNo());
-		return "club/myClubList";
+		return "club/afterJoinClub";
 	}
-	*/
+
 	@RequestMapping(value = "/insertClub.do")
 	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println(files);
