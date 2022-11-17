@@ -359,6 +359,7 @@ ul li.on a {
 				},
 				success : function(data){
 					displayData(1, dataPerPage);
+					
 					$("#customerReview").val('');
 					$(".input-score>span").text('0');
 					$(".star-wrap").children().css("color","");

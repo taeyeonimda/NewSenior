@@ -25,7 +25,7 @@
             <li class="menu-item adminClassMenu">
               <a href="/adminMgrClass.do?reqPage=1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">클래스관리(관리자페이지)</div>
+                <div data-i18n="Tables">클래스관리</div>
               </a>
             </li>
             

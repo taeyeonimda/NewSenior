@@ -109,7 +109,7 @@
                            <td style="text-align:center">
                               <input type="hidden" class="hiddenMemberNo" value="${sessionScope.m.memberNo }">
                               <input class="proNo" type="hidden" value="${Cart.productNo }">
-                              <input class="cartNo" type="text" value="${Cart.cartNo }" name="cartNo" style="border: none; text-align:center;" readonly>
+                              <input class="cartNo" type="text" value="${Cart.cartNo }" name="cartNo" style="border: none; text-align:center;" readonly required>
                            </td>
                            
                            <c:choose>
@@ -193,16 +193,16 @@
                <div class="order-info shipping" style="margin-left:15%;">
                   <div class="order-box">
                            <label for="deliveryName" class="order-label" id="deliveryName" style="width:80px;">배송지이름<span class="comment"></span></label>
-                           <input type="text" id="deliveryName" class="basicInput" name="deliveryName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                           <input type="text" id="deliveryName" class="basicInput mustInput1" name="deliveryName" style="width:270px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
                        </div><br>
                        <div class="order-box">
                            <label for="deliveryName" class="order-label" style="width:80px;">수령인명</label>
-                           <input type="text"  id="deliveryName" class="basicInput " name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                           <input type="text"  id="deliveryName" class="basicInput mustInput2" name="receiverName" style="width:270px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
                        </div>
                            <br>
                        <div class="order-box">
                            <label for="deliveryPhone" class="order-label" style="width:80px;">전화번호</label>
-                           <input type="text"  id="deliveryPhone" class="basicInput" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
+                           <input type="text"  id="deliveryPhone" class="basicInput mustInput3" name="deliveryPhone" style="width:270px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
                        </div>
                            <br>
 <!-- 
@@ -213,16 +213,16 @@
  -->
                        <div class="order-box">
                            <label for="deliveryAddr" class="order-label" style="width:80px;">주소</label>
-                           <input type="text" id="deliveryAddr" class="addr1 basicInput" name="deliveryAddr" style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
+                           <input type="text" id="deliveryAddr" class="addr1 basicInput mustInput4" name="deliveryAddr" style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
                            <button type="button" class="btn btn-outline-primary" style="width:120px;height:40px;margin-bottom:30px;margin-top:10px;" id="addr-btn" onclick="searchAddr();">주소찾기</button>
                        </div>
                        <div class="order-box">
                            <label for="deliveryAddr2" class="order-label" id="detailAddress" style="width:80px;">우편번호<span class="comment"></span></label>
-                           <input type="text" id="deliveryAddr2" class="addr2 basicInput" name="zipcode" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                           <input type="text" id="deliveryAddr2" class="addr2 basicInput mustInput5" name="zipcode" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
                        </div><br>
                        <div class="order-box">
                            <label for="deliveryAddr2" class="order-label" id="detailAddress2" style="width:80px;">상세주소<span class="comment"></span></label>
-                           <input type="text" id="deliveryAddr2" class="detailAddr basicInput" name="deliveryDetail" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                           <input type="text" id="deliveryAddr2" class="detailAddr basicInput mustInput6" name="deliveryDetail" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
                        </div><br>
                        
                    </div>
@@ -389,7 +389,42 @@
          const price = $(".allSumPrice").val();
          const d = new Date();
          const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-         
+         const deliveryName = $(".mustInput1").val();
+         const receiverName = $(".mustInput2").val();
+         const receiverPhone = $(".mustInput3").val();
+         const receiverAddr = $(".mustInput4").val();
+         const postNum = $(".mustInput5").val();
+         const receiverDetailAddr = $(".mustInput6").val();
+         const status = $("#infoAgree").prop("checked");
+			
+			if(deliveryName==""){
+				alert("배송지를 입력해주세요")
+				return;
+			}
+			if(receiverName==""){
+				alert("수령인 이름을 입력해주세요")
+				return;
+			}
+			if(receiverPhone==""){
+				alert("수령인 번호를 입력해주세요")
+				return;
+			}
+			if(receiverAddr==""){
+				alert("수령주소를 입력해주세요")
+				return;
+			}
+			if(postNum==""){
+				alert("우편번호를 입력해주세요")
+				return;
+			}
+			if(receiverDetailAddr==""){
+				alert("상세주소를 입력해주세요")
+				return;
+			}
+			if(status == false){
+				alert("주문 내용 확인 및 정보 제공동의에 체크하여 주세요.")
+				return;				
+			}
          IMP.init("imp10385324");
          IMP.request_pay({
             pg: "html5_inicis",

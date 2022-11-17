@@ -198,9 +198,7 @@ const limitSelect = $("select[name=activityLimit]");
 		const files2 = document.querySelector("input[name=detailFiles]").files;
 		const etc = $("textarea[name=etc]").val();
 		
-		
-		console.log(files);
-		console.log(files2);
+	
 		var formData = new FormData();
 		formData.append('activityName',activityName);
 		if(files!=null){
@@ -226,7 +224,50 @@ const limitSelect = $("select[name=activityLimit]");
 			}
 		}
 		
-	
+		
+
+		if(activityName==""){
+			alert("액티비티명을 입력해주세요.");
+			return false;
+		}
+		if(files==""||files==null){
+			alert("파일을 등록해주세요.");
+			return false;
+		}
+		if(activityManager==""){
+			alert("액티비티 관리자를 입력해주세요.");
+			return false;
+		}
+		if(activityIntroduce==""){
+			alert("액티비티명을 소개를 입력해주세요.");
+			return false;
+		}
+		if(files2.length==0||files2.length==null){
+			alert("액티비티 상세 사진을 입력해주세요.");
+			return false;
+		}
+		if(activityDetail==""){
+			alert("액티비티명 상세 소개를 입력해주세요.");
+			return false;
+		}
+		if(activityCategory==""){
+			alert("액티비티명 카테고리를 입력해주세요.");
+			return false;
+		}
+		
+		if(activityPrice==""){
+			alert("액티비티 가격을 입력해주세요.");
+			return false;
+		}
+		if(startDate==""){
+			alert("시작날을 입력해주세요.");
+			return false;
+		}
+		if(endDate==""){
+			alert("종료날을 입력해주세요.");
+			return false;
+		}
+
 		
 		
 		$.ajax({
@@ -263,48 +304,7 @@ const limitSelect = $("select[name=activityLimit]");
 		yearSuffix: '년'
 	});
 		
-	/*	
-		if(activityName==""){
-			alert("activityName 비었음");
-			return null;
-		}
-		if(filepath==""){
-			alert("filepath 비었음");
-			return null;
-		}
-		if(activityManager==""){
-			alert("activityManager 비었음");
-			return null;
-		}
-		if(activityIntroduce==""){
-			alert("activityIntroduce 비었음");
-			return null;
-		}
-		if(activityDetail==""){
-			alert("activityDetail 비었음");
-			return null;
-		}
-		if(activityCategory==""){
-			alert("activityCategory 비었음");
-			return null;
-		}
-		if(activityLimit==""){
-			alert("activityLimit 비었음");
-			return null;
-		}
-		if(activityPrice==""){
-			alert("activityPrice 비었음");
-			return null;
-		}
-		if(startDate==""){
-			alert("startDate 비었음");
-			return null;
-		}
-		if(endDate==""){
-			alert("endDate 비었음");
-			return null;
-		}
-	*/	
+	
 		
 	
 		
@@ -312,48 +312,7 @@ const limitSelect = $("select[name=activityLimit]");
 
         <!-- / Content -->
 <!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s" style="width: 100%;">
-  <div class="container py-5">
-      <div class="row g-5">
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Our Office</h4>
-              <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-              <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-              <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-              <div class="d-flex pt-2">
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
-                  <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Services</h4>
-              <a class="btn btn-link" href="">Landscaping</a>
-              <a class="btn btn-link" href="">Pruning plants</a>
-              <a class="btn btn-link" href="">Urban Gardening</a>
-              <a class="btn btn-link" href="">Garden Maintenance</a>
-              <a class="btn btn-link" href="">Green Technology</a>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Quick Links</h4>
-              <a class="btn btn-link" href="">About Us</a>
-              <a class="btn btn-link" href="">Contact Us</a>
-              <a class="btn btn-link" href="">Our Services</a>
-              <a class="btn btn-link" href="">Terms & Condition</a>
-              <a class="btn btn-link" href="">Support</a>
-          </div>
-          <div class="col-lg-3 col-md-6">
-              <h4 class="text-white mb-4">Newsletter</h4>
-              <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-              <div class="position-relative w-100">
-                  <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                  <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 
 <!-- Footer End -->
 
