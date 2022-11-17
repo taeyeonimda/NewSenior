@@ -15,7 +15,7 @@
 }
 .boardWrap .boardListTbl .boardTitle{
 	text-align:left;
-	font-weight: 900;"
+	font-weight: 500;"
 }
 .boardWrap .boardListTbl .boardTitle span{
 	margin-left : 10px;
@@ -42,13 +42,16 @@
 }
 
 .searchWrap {
-	display:flex;
 	width:70%;
 	margin:0 auto;
+	display:flex;
 	justify-content:center;
+	align-items:center;
 	margin-top:30px;
 	font-size:16px;
-	
+}
+.searchForm{
+	position: relative;
 }
 .searchForm .searchBtn {
 		width:100px;
@@ -59,13 +62,21 @@
 		border : none;
 		line-height: 30px;
 		font-weight: 900;
-		
-		
+		display: none;
 }
 .searchForm select{
 	height:35px;
-
+	outline: none;
 }
+
+.searchForm .material-symbols-outlined{
+	vertical-align:middle;
+	font-size :35px;
+}
+.searchForm label{
+	cursor: pointer;
+}
+
 .searchForm input{
 	width:250px;
 	outline:none;

@@ -141,6 +141,7 @@ public class ClubDao {
 		return (ArrayList<Club>)list;
 	}
 
+
 	public int updateClubBoardComment(ClubBoardComment cbc) {
 		return sqlSession.update("club.updateClubBoardComment", cbc);
 	}
