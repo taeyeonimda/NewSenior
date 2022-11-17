@@ -323,49 +323,63 @@
 		
 		
 		
-    	let classLimit=0;
-    	classLimit = Number($("#classLimit").text());
+    	const classLimit = Number($("#classLimit").text());
     	
 	    function openConfirm(className, classNo, memberNo){
 	    	const amount = $("select[name=amount]").val();
-	    	
 	    	if(amount==''){
 	    		alert("인원수를 선택하세요");
 	    	}else{
-	    		alert(typeof classLimit);
 	    		$.ajax({
 	    			url : "/selectClassHistorySum.do",
 	    			data : { classNo : classNo },
+	    			type : "post",
 	    			success : function(cnt) {
+	    				// 현재 신청인원
+	    				const num = Number(cnt)+Number(amount);
+	    				const msg = "현재 가입인원은 "+cnt+"명, 총 가입할 수 있는 인원은 "+amount+"명 입니다" ; 
+	    				if(classLimit>num){
+	    					console.log("가입가능");
+	    					const price = changeP.toLocaleString("ko-KR");
+		    	    		const text = '선택된 인원은 '+amount+'명, 총 결제 금액은 '+price+'입니다        결제하시겠습니까?';
+		    	    		Swal.fire({
+		    					title: className,//제목
+		    					text: text,
+		    					imageUrl: "/resources/img/제목없음.png",
+		    					showCancelButton: true,
+		    					cancelButtonColor: '#525368',
+		    					confirmButtonColor: '#348E38',
+		    					cancelButtonText: '취소',
+		    					confirmButtonText: '신청하기'
+		    				}).then((result) => {
+		    					//result.value == true이니까 트루일때만 실행하는거
+		    				  if (result.value) {
+		    		              location.href = "/payClass.do?classNo="+classNo+"&memberNo="+memberNo+"&amount="+amount;
+		    				  }
+		    				})//then끝
+	    				}else{
+	    					console.log("가입불가");
+	    					Swal.fire({
+		    					title: "신청인원을 초과하였습니다",//제목
+		    					text: msg,
+		    					imageUrl: "/resources/img/제목없음.png",
+		    					showCancelButton: true,
+		    					cancelButtonColor: '#525368',
+		    					confirmButtonColor: '#348E38',
+		    					cancelButtonText: '취소',
+		    					confirmButtonText: '메인으로 이동'
+		    				}).then((result) => {
+		    					//result.value == true이니까 트루일때만 실행하는거
+		    				  if (result.value) {
+		    		              location.href = "/";
+		    				  }
+		    				})//then끝
+	    				}
 	    			}
-	    			//select sum(amount) from class_history where class_no =127;
-	    		})
-	    		
-	    		
-	    		console.log(changeP);
-	    		const price = changeP.toLocaleString("ko-KR");
-	    		const text = '선택된 인원은 '+amount+'명, 총 결제 금액은 '+price+'입니다        결제하시겠습니까?';
-	    		Swal.fire({
-					title: className,//제목
-					text: text,
-					imageUrl: "/resources/img/제목없음.png",
-					showCancelButton: true,
-					cancelButtonColor: '#525368',
-					confirmButtonColor: '#348E38',
-					cancelButtonText: '취소',
-					confirmButtonText: '신청하기'
-				}).then((result) => {
-					//result.value == true이니까 트루일때만 실행하는거
-				  if (result.value) {
-		              location.href = "/payClass.do?classNo="+classNo+"&memberNo="+memberNo+"&amount="+amount;
-				  }
-				})//then끝
-	    	}
-
-			
+	    	})
 		}
 
-    	
+	}
     	
     	function closeModal() {
     		$(".confirm-modal-wrap").css("display", "none");
@@ -422,9 +436,6 @@
 	    	}
 		};
 
-		
-		
-		
 		
         // 리뷰 script
 	    $("#review-btn").on("click", function(){

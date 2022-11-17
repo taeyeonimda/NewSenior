@@ -40,6 +40,21 @@
 }
 
 /* 이미지 div안에 맞춰 넣는 css*/
+.product-title{
+    text-align:center;
+    display:table;
+    border:1px solid #cecece;
+    width: 860px;
+    height: 1200px;
+}
+.product-img-div{
+	width: 400px;
+    display:table-cell;
+    vertical-align:middle;
+}
+.product-img{
+    min-width: 100%;
+}
 
 
 
@@ -297,6 +312,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+
+
 
 /* 리뷰 div */
 #reviewBox{

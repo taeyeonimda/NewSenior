@@ -329,4 +329,9 @@
     from class_history a , CLASSES b, members c
     where a.CLASS_NO = b.CLASS_NO  and  b.CLASS_TEACHER = c.member_no and a.member_no=#{memberNo} and b.class_status = 2
 	</select>
+	
+	<!-- 모집 중인 클래스의 신청 인원 -->
+	<select id="selectClassHistorySum" parameterType="cla" resultType="int">
+		select NVL(sum(amount), 0) from class_history where class_no=#{classNo }
+	</select>
 </mapper>

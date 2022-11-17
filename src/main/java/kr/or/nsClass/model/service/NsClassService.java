@@ -281,4 +281,8 @@ public class NsClassService {
 	public int insertPayClassHistory(ClassHistory clh) {
 		return dao.insertPayClassHistory(clh);
 	}
+	public int selectClassHistorySum(NsClass nc) {
+		int result = dao.selectClassHistorySum(nc);
+		return result;
+	}
 }

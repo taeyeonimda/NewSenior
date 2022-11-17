@@ -60,16 +60,13 @@ public class NsClassController {
 	public String classDetail(NsClass nc, Model model){
 		NsClass cla = service.selectOneClass(nc);
 		model.addAttribute("cla", cla);
-		System.out.println(cla);
 		return "class/classDetail";
 	}
 	
 	@RequestMapping(value="/classEnroll.do")
 	public String classEnroll(Model model) {
-		
 		ArrayList<Category> cateList = service2.withOutAll();
         model.addAttribute("cateList", cateList);     
-		
 		return "board/classEnroll";
 	}
 	
@@ -171,7 +168,6 @@ public class NsClassController {
 		NsClass cla = service.selectOneClass(c);
 		int price = Integer.parseInt(cla.getClassPrice())*clh.getAmount(); // 총 가격 계산
 		clh.setPayPrice(price);
-		System.out.println(clh);
 		model.addAttribute("clh", clh);
 		model.addAttribute("cla", cla);
 		return "myPage/orderInfoClass";
@@ -184,9 +180,13 @@ public class NsClassController {
 		nc.setClassNo(clh.getClassNo());
 		NsClass cla = service.selectOneClass(nc);
 		model.addAttribute("cla", cla);
-		System.out.println(cla);
-		return "redirect:/classDetail.do";
+		return "redirect:/";
 	}
 	
-
+	@ResponseBody
+	@RequestMapping(value = "/selectClassHistorySum.do", produces = "application/json;charset=utf-8")
+	public String selectClassHistorySum(NsClass nc) {
+		int result = service.selectClassHistorySum(nc);
+		return new Gson().toJson(result);
+	}
 }
