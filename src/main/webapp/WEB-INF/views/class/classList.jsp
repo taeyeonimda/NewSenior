@@ -16,9 +16,9 @@
             <div class="container text-center py-5">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLASS</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">클래스</li>
+                    <ol class="breadcrumb justify-content-center mb-0" style="width:150px; background-color: #fff; border-radius: 30px; margin: 0 auto; padding: 10px;">
+                        <a href="/"><li class="breadcrumb-item" >Home</li></a>/
+                       <a onclick="location.href='/classList.do?classCategory=AL&reqPage=1'" style="cursor: pointer;"><li class="breadcrumb-item active" aria-current="page">클래스</li></a>
                     </ol>
                 </nav>
             </div>
