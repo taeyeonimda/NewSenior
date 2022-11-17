@@ -159,13 +159,26 @@ public class MemberController {
 			m1.setMemberId(m.getMemberId());
 			m1.setKakaoLogin(m.getKakaoLogin());
 			Member member = service.selectOneMember(m1);
+			if (member != null) {
+				model.addAttribute("member", member);
+				return "myPage/mypage";
+			} else {
+				return "redirect:/";
+			}
+		}
+		
+		//나의 배송지 가기
+		@RequestMapping(value="/mydelivery.do")
+		public String mydelivery(Model model, @SessionAttribute Member m) {
+			Member m1 = new Member();
+			m1.setMemberId(m.getMemberId());
+			m1.setKakaoLogin(m.getKakaoLogin());
+			Member member = service.selectOneMember(m1);
 			ArrayList<Delivery> list = service.selectAllDelivery(member);
-			System.out.println("마이페이지컨트롤러 세션 m"+m);
-			System.out.println("마이페이지컨트롤러 멤버"+member);
 			if (member != null) {
 				model.addAttribute("list",list);
 				model.addAttribute("member", member);
-				return "myPage/mypage";
+				return "myPage/mydelivery";
 			} else {
 				return "redirect:/";
 			}
@@ -408,51 +421,62 @@ public class MemberController {
 		}
 		
 		//배송지 insert
-		@RequestMapping(value="/insertAddr.do")
-		public String insertAddr(Delivery delivery, int memberNum, @SessionAttribute Member m, Model model) {
-			delivery.setMemberNo(memberNum);
-			ArrayList<Delivery> list = service.selectAllDelivery(m);
-			if(list.size()<5) {
-				if(delivery.getDefaultAddr().equals("y")) {
-					// 기본 배송지 값 'n'으로 다 바꾸기
-					System.out.println("딜리버리1111:"+delivery);
-					int result = service.updateAddr(delivery);
-					System.out.println("딜리버리222:"+delivery);
-					if(result>0) {
-						//기본 배송지 'y'로 insert
-						int result2 = service.insertAddr(delivery);
-						if(result2>0) {
-							return "redirect:/mypage.do";
+				@RequestMapping(value="/insertAddr.do")
+				public String insertAddr(Delivery delivery, int memberNum, @SessionAttribute Member m, Model model) {
+					delivery.setMemberNo(memberNum);
+					ArrayList<Delivery> list = service.selectAllDelivery(m);
+					if(list.size()>0) {
+						if(list.size()<5) {
+							if(delivery.getDefaultAddr().equals("y")) {
+								// 기본 배송지 값 'n'으로 다 바꾸기
+								System.out.println("딜리버리1111:"+delivery);
+								int result = service.updateAddr(delivery);
+								System.out.println("딜리버리222:"+delivery);
+								System.out.println("현주바보"+result);
+								if(result>0) {
+									//기본 배송지 'y'로 insert
+									int result2 = service.insertAddr(delivery);
+									System.out.println("박현주바보"+result2);
+									if(result2>0) {
+										return "redirect:/mydelivery.do";
+									}else {
+										return "redirecst:/";
+									}
+								}else {
+									return "redirect:/";
+								}
+							}
+							System.out.println("###"+delivery);
+							int result = service.insertAddr(delivery);
+							if(result>0) {
+								return "redirect:/mydelivery.do";
+							}else {
+								return "redirect:/";
+							}
+						}else {
+							model.addAttribute("msg", "배송지등록은 최대 5개입니다.");
+							model.addAttribute("url","/mydelivery.do");
+							return "alert";
+						}
+					}else {
+						int result = service.insertAddr(delivery);
+						if(result>0) {
+							return "redirect:/mydelivery.do";
 						}else {
 							return "redirect:/";
 						}
-					}else {
-						return "redirect:/";
 					}
-				}
-				System.out.println(delivery);
-				int result = service.insertAddr(delivery);
-				if(result>0) {
-					return "redirect:/mypage.do";
-				}else {
-					return "redirect:/";
-				}
-			}else {
-				model.addAttribute("msg", "배송지등록은 최대 5개입니다.");
-				model.addAttribute("url","/mypage.do");
-				return "alert";
-			}
-		}
+				}  
 		
 		//배송지 삭제
 		@RequestMapping(value="/deleteAddr.do")
 		public String deleteAddr(Integer deliveryNo, Model model) {
 			int result = service.deleteAddr(deliveryNo);
 			if(result>0) {
-				return "redirect:/mypage.do";
+				return "redirect:/mydelivery.do";
 			}else {
 				model.addAttribute("msg", "배송지 삭제에 실패했습니다.");
-				model.addAttribute("url","/mypage.do");
+				model.addAttribute("url","/mydelivery.do");
 				return "alert";
 			}
 		}
@@ -481,15 +505,15 @@ public class MemberController {
 					//기본 배송지 'y'로  update
 					int result2 = service.updateOneAddr(delivery);
 					if(result2>0) {
-						return "redirect:/mypage.do";
+						return "redirect:/mydelivery.do";
 					}else {
 						model.addAttribute("msg", "배송지 수정에 실패했습니다.11");
-						model.addAttribute("url","/mypage.do");
+						model.addAttribute("url","/mydelivery.do");
 						return "alert";
 					}
 				}else {
 					model.addAttribute("msg", "배송지 수정에 실패했습니다.22");
-					model.addAttribute("url","/mypage.do");
+					model.addAttribute("url","/mydelivery.do");
 					return "alert";
 				}
 			}
@@ -498,7 +522,7 @@ public class MemberController {
 				return "redirect:/mypage.do";
 			}else {
 				model.addAttribute("msg", "배송지 수정에 실패했습니다.33");
-				model.addAttribute("url","/mypage.do");
+				model.addAttribute("url","/mydelivery.do");
 				return "alert";
 			}
 		}

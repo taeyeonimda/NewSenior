@@ -8,8 +8,6 @@
 		margin:0 auto;
 		border-collapse: collapse;
 		display:flex;
-		
-		
 	}
 .boardUpdateTbl{
 	border: 2px solid #0F4229;
@@ -18,10 +16,13 @@
 	text-align: center;
 	
 	align-items: center;
+	vertical-align: middle;
 
 }
 .boardUpdateTbl select{
 	width:100px;
+	outline:none;
+	
 }
 .boardUpdateTbl input{
 	width:100%;
@@ -37,6 +38,17 @@
 		border : none;
 		cursor:pointer;
 }
+
+.boardUpdateTbl p{
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+.boardUpdateTbl p>span{
+	cursor: pointer;
+	color:#348E38;
+}
+
 .fileDeleteBtn{
 		width : 60px;
 		height : 30px;
@@ -45,8 +57,9 @@
 		border-radius : 15px;
 		border : none;
 		cursor:pointer;
-	
+
 }
+
 
 .boardUpdateWrap .boardUpdateBtnBox{
 	width:70%;

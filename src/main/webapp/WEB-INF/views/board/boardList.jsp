@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
  <link href="/resources/css/board/boardList.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -15,7 +16,12 @@
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
+            <c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P'}">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">커뮤니티</h1>
+             </c:if>
+              <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
+              <h1 class="display-3 text-white mb-4 animated slideInDown">공지사항</h1>
+              </c:if>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
                     	<c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P'}">
@@ -26,8 +32,7 @@
                         <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></li>
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">강사모집</li>
+	                        <li class="breadcrumb-item active" aria-current="page"><a a href="/classEnroll.do">강사모집</a></li>
                         </c:if>
                         
                     </ol>
@@ -294,8 +299,10 @@
 					<option value="boardTitle">제목</option>
 					<option value="nickName">작성자</option>
 				</select>
-				<input type="text" name="searchInput">
-				<button class="searchBtn">검색</button>
+				<input type="text" name="searchInput" placeholder="검색어를 입력해주세요">
+				<button class="searchBtn" id="searchBtn">검색</button>
+				<span class="material-symbols-outlined"><label for="searchBtn">search</label></span>
+				
 			</form>
 		</div>
 			<div class="writeBtnBox">

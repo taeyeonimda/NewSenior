@@ -12,6 +12,8 @@
 }
 .boardWriteTbl th{
 	text-align: center;
+	vertical-align: middle;
+	
 }
 .boardWriteTbl select{
 	width:100px;
