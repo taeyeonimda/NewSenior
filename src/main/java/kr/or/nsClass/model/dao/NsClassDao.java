@@ -7,6 +7,9 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.google.gson.Gson;
 
 import kr.or.nsClass.model.vo.ClassHistory;
 import kr.or.nsClass.model.vo.ClassReview;
@@ -115,6 +118,10 @@ public class NsClassDao {
 	// 클래스 신청 (결제)
 	public int insertPayClassHistory(ClassHistory clh) {
 		return sqlSession.insert("nsClass.insertPayClassHistory", clh);
+	}
+
+	public int selectClassHistorySum(NsClass nc) {
+		return sqlSession.selectOne("nsClass.selectClassHistorySum", nc);
 	}
 	
 	public int deleteClass(int classNo) {

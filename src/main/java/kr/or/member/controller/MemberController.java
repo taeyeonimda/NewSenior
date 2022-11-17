@@ -392,37 +392,46 @@ public class MemberController {
 		public String insertAddr(Delivery delivery, int memberNum, @SessionAttribute Member m, Model model) {
 			delivery.setMemberNo(memberNum);
 			ArrayList<Delivery> list = service.selectAllDelivery(m);
-			if(list.size()<5) {
-				if(delivery.getDefaultAddr().equals("y")) {
-					// 기본 배송지 값 'n'으로 다 바꾸기
-					System.out.println("딜리버리1111:"+delivery);
-					int result = service.updateAddr(delivery);
-					System.out.println("딜리버리222:"+delivery);
-					System.out.println("현주바보"+result);
-					if(result>0) {
-						//기본 배송지 'y'로 insert
-						int result2 = service.insertAddr(delivery);
-						System.out.println("박현주바보"+result2);
-						if(result2>0) {
-							return "redirect:/mypage.do";
+			if(list.size()>0) {
+				if(list.size()<5) {
+					if(delivery.getDefaultAddr().equals("y")) {
+						// 기본 배송지 값 'n'으로 다 바꾸기
+						System.out.println("딜리버리1111:"+delivery);
+						int result = service.updateAddr(delivery);
+						System.out.println("딜리버리222:"+delivery);
+						System.out.println("현주바보"+result);
+						if(result>0) {
+							//기본 배송지 'y'로 insert
+							int result2 = service.insertAddr(delivery);
+							System.out.println("박현주바보"+result2);
+							if(result2>0) {
+								return "redirect:/mypage.do";
+							}else {
+								return "redirecst:/";
+							}
 						}else {
-							return "redirecst:/";
+							return "redirect:/";
 						}
+					}
+					System.out.println("###"+delivery);
+					int result = service.insertAddr(delivery);
+					if(result>0) {
+						return "redirect:/mypage.do";
 					}else {
 						return "redirect:/";
 					}
+				}else {
+					model.addAttribute("msg", "배송지등록은 최대 5개입니다.");
+					model.addAttribute("url","/mypage.do");
+					return "alert";
 				}
-				System.out.println("###"+delivery);
+			}else {
 				int result = service.insertAddr(delivery);
 				if(result>0) {
 					return "redirect:/mypage.do";
 				}else {
 					return "redirect:/";
 				}
-			}else {
-				model.addAttribute("msg", "배송지등록은 최대 5개입니다.");
-				model.addAttribute("url","/mypage.do");
-				return "alert";
 			}
 		}
 		
