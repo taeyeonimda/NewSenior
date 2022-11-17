@@ -758,14 +758,14 @@ ul li.on a {
 		function goCartAlert(){
 			const memberNo = $(".memberHiddenNo").val()
 			Swal.fire({
-				title: "장바구니에 추가되었습니다.",//제목
+				title: "",//제목
 				text: "장바구니로 이동하시겠습니까?",
 				imageUrl: "/resources/img/제목없음.png",
 				showCancelButton: true,
 				cancelButtonColor: '#525368',
 				confirmButtonColor: '#348E38',
-				cancelButtonText: '머무르기',
-				confirmButtonText: '이동'
+				cancelButtonText: '아니오',
+				confirmButtonText: '네'
 			}).then((result) => {
 				//result.value == true이니까 트루일때만 실행하는거
 			  if (result.value) {
