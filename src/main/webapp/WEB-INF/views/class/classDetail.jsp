@@ -314,7 +314,7 @@
 		       $(".scroll_move").click(function(event){         
 		               event.preventDefault();
 		               $('html, body').animate({scrollTop:$(this.hash).offset().top}, 500);
-		       }
+		       });
 		});
     
 	    function openConfirm(className, classNo, memberNo){

@@ -49,6 +49,17 @@
 <%@include file="/WEB-INF/views/common/header.jsp" %>
  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <body>
+<style>
+input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+	}
+	input[type="image"]{
+	width:400px;
+	height:350px;
+	}
+</style>
   <!-- Layout wrapper -->
   <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
       <!-- Menu -->
@@ -163,34 +174,9 @@
 								<input type="number" class="form-control" id="html5-price-input" name = "price"/>
 							</div>
 						</div>
-
-	<style>
-	input[type="number"]::-webkit-outer-spin-button,
-	input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-	}
-	input[type="image"]{
-	width:400px;
-	height:350px;
-	}
-	</style>
-
-
-
-
-
-
-
-							<a id="subBtn" onclick="changeStatus(${cla.classNo },)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
+						<a id="subBtn" onclick="changeStatus(${cla.classNo },)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
                     </div>
                   </div>
-                  <script>
-					function changeStatus(classNo){
-						classPrice= $("#html5-price-input").val();
-						location.href="/changeStatus.do?classNo="+classNo+"&classPrice="+classPrice;
-					}
-				</script>
                 </form>
                   <!-- File input -->
                </div></div></div>
@@ -248,7 +234,12 @@
 <!-- Footer End -->
 
 </body>
-
+	<script>
+		function changeStatus(classNo){
+			classPrice= $("#html5-price-input").val();
+		location.href="/changeStatus.do?classNo="+classNo+"&classPrice="+classPrice;
+		}
+	</script>
 </html>
 
 

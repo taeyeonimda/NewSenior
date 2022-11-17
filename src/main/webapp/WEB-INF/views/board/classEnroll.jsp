@@ -30,9 +30,9 @@
 
 </head>
 <body>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
 <body>
   	<%@include file="/WEB-INF/views/common/header.jsp" %>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
        	<!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/resources/img/은비5.jpg) center center no-repeat; background-size: cover;">
             <div class="container text-center py-5">
@@ -78,16 +78,16 @@
                         </div>
                       </div>
                       <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">커리큘럼</label>
+                        <label for="html5-curri-input" class="col-md-2 col-form-label">커리큘럼</label>
                         <div class="col-md-10">
-                          <textarea class="form-control" name= "curriculum"  id="html5-tel-input" ></textarea>
+                          <textarea class="form-control" name= "curriculum"  id="html5-curri-input" ></textarea>
                         </div>
                       </div>
                     
                       <div class="mb-3 row">
-                        <label for="html5-tel-input" class="col-md-2 col-form-label">클래스 상세</label>
+                        <label for="html5-claDetail-input" class="col-md-2 col-form-label">클래스 상세</label>
                         <div class="col-md-10">
-                          <input type="file" class="form-control" name="detailFiles" id="html5-tel-input" multiple/>
+                          <input type="file" class="form-control" name="detailFiles" id="html5-claDetail-input" multiple/>
                         </div>
                       </div>
 				
@@ -95,10 +95,10 @@
                         <label for="classStartDate" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
                           <input class="form-control" name = "startDate"  id="classStartDate" style="width: 200px; display: inline-block;"
-                          onclick="javascript:f_datepicker(this);" placeholder="시작일 ex) 20221024"/>
+                          onclick="javascript:f_datepicker(this);" readonly placeholder="시작일 ex) 20221024"/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
                           <input class="form-control" name ="endDate" type="tel" id="classEndDate" style="width: 200px; display: inline-block;"
-                          onclick="javascript:f_datepicker(this);" placeholder="종료일 ex) 20221024"/>
+                          onclick="javascript:f_datepicker(this);" readonly placeholder="종료일 ex) 20221024"/>
                         </div>
                       </div>
 
@@ -180,8 +180,13 @@
 				alert("클래스 이름을 작성해 주세요.");
 				return false;
 			}
-			if(files==""){
+			if(files==""||files==null){
 				alert("파일을 등록해 주세요");
+				return false;
+			}
+			
+			if(files2.length==0){
+				alert("상세파일을 등록해 주세요");
 				return false;
 			}
 			
@@ -208,7 +213,7 @@
 			}
 
 			if(classLimit ==""){
-				alert("클럽제한을 선택하세요");
+				alert("클래스제한을 선택하세요");
 				return false;
 			}
 			
