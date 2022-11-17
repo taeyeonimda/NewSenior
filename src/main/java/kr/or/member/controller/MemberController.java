@@ -28,6 +28,7 @@ import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.vo.ClassHistory;
+import kr.or.nsClass.model.vo.NsClass;
 
 @Controller
 public class MemberController {
@@ -507,6 +508,14 @@ public class MemberController {
 			String result = gson.toJson(de);
 			
 			return result;
+		}
+		
+		//마이페이지 리뷰쓸때 클래스 이름같은거 가져올때 쓰는거
+		@ResponseBody
+		@RequestMapping(value="/selectClassName.do",produces = "application/json;charset=utf-8")
+		public String selectClassName(int classNo,Model model) {
+			NsClass nc = service.selectClassName(classNo);
+			return new Gson().toJson(nc);
 		}
 		
 }
