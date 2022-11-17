@@ -15,6 +15,7 @@ import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
 import kr.or.nsClass.model.vo.ClassHistory;
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Service
@@ -231,6 +232,7 @@ public class MemberService {
 		return ns;
 	}
 
+
 	//마이페이지에서 내가 가입한 클럽가져오기
 	public ArrayList<Club> getAllMyClub(Member m) {
 		return cDao.searchMyClub(m);
@@ -239,6 +241,12 @@ public class MemberService {
 
 	public ArrayList<Club> searchClubPopularList(Member m) {
 		return cDao.searchClubPopularList(m);
+	}
+	
+	//나의 후기
+	public ArrayList<ClassReview> selectAllReview(Member member) {
+		// TODO Auto-generated method stub
+		return dao.selectAllReview(member);
 	}
 
 	
