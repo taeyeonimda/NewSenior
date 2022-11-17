@@ -104,9 +104,9 @@ ul li.on a {
 			        	        <input type="hidden" value="${p.productName }" name="buyName">
 				                <input type="hidden" value="${p.productPrice }" name="buyPrice">
 				                <input type="hidden" value="${p.productFileVO[0].filePath }" name="buyPhoto">
-				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo">
+				                <input type="hidden" value="${sessionScope.m.memberNo }" name="memberNo" class="memberHiddenNo">
 								<input type="hidden" class="changeProductAmount" value="1" name="buyAmount">
-			                	<button type="submit" onclick="return goCartAlert()">장바구니</button>
+			                	<button type="button" onclick="return goCartAlert()">장바구니</button>
 			                 	<button type="button" id="directBuy" onclick="directBuy1(${p.productNo})">바로구매</button>
 		            	</form>
 	            	</c:when>
@@ -767,32 +767,24 @@ ul li.on a {
 		});
 		
 		function goCartAlert(){
-			
+			const memberNo = $(".memberHiddenNo").val()
 			Swal.fire({
-				title: "동호회 탈퇴",//제목
-				text: "정말 탈퇴하시겠습니까?",
+				title: "장바구니에 추가되었습니다.",//제목
+				text: "장바구니로 이동하시겠습니까?",
 				imageUrl: "/resources/img/제목없음.png",
 				showCancelButton: true,
 				cancelButtonColor: '#525368',
 				confirmButtonColor: '#348E38',
-				cancelButtonText: '취소',
-				confirmButtonText: '탈퇴하기'
+				cancelButtonText: '머무르기',
+				confirmButtonText: '이동'
 			}).then((result) => {
 				//result.value == true이니까 트루일때만 실행하는거
 			  if (result.value) {
-				  location.href="/quitClub.do?clubNo="+clubNo+"&memberNo="+memberNo;
+				  $("#insertCartForm").submit();
 			  }
 			})
 			
-			if (confirm("장바구니에 추가하겠습니까?")){
-				if(confirm("장바구니로 이동하시겠습니까?")){
-					location.href="/cart.do?memberNo="
-				}else{
-					return false;
-				}
-			}else{
-				return false;
-			}
+			
 		};
 			
 		

@@ -22,7 +22,7 @@
 	</update>
 
 	<select id="selectAllDelivery" parameterType="m"  resultType="d">
-		select
+	select
 		delivery_no as deliveryNo,
 		delivery_name as deliveryName,
 		delivery_phone as deliveryPhone,
