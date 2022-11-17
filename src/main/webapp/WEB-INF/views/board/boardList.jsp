@@ -101,7 +101,7 @@
 			<th style="background-color:#0F4229; color:white;">번호</th>
 			<th style="background-color:#0F4229; color:white;">카테고리</th>
 			<th style="background-color:#0F4229; color:white;">제목</th>
-			<th style="background-color:#0F4229; color:white;">작성자</th>
+			<th style="background-color:#0F4229; color:white;">닉네임</th>
 			<th style="background-color:#0F4229; color:white;">조회수</th>
 			<th style="background-color:#0F4229; color:white;">작성일</th>
 		</tr>
@@ -165,7 +165,7 @@
 			<th style="background-color:#0F4229; color:white;">번호</th>
 			<th style="background-color:#0F4229; color:white;">카테고리</th>
 			<th style="background-color:#0F4229; color:white;">제목</th>
-			<th style="background-color:#0F4229; color:white;">작성자</th>
+			<th style="background-color:#0F4229; color:white;">닉네임</th>
 			<th style="background-color:#0F4229; color:white;">조회수</th>
 			<th style="background-color:#0F4229; color:white;">작성일</th>
 			<th style="background-color:#0F4229; color:white;">답변여부</th>
