@@ -59,7 +59,7 @@
 			  display: none;
 			  width: 45%;
 			  position: fixed;
-			  top: 51%;
+			  top: 55%;
 			  left: 50%;
 			  transform: translate(-50%, -50%);
 			  background: #fff;
@@ -73,6 +73,9 @@
 			  z-index: 99999;
 			  line-height: 1.5rem;
 			  overflow: hidden auto;
+			  /*
+			  backdrop-filter: blur(4px);
+  			-webkit-backdrop-filter: blur(4px);*/
 			  
 			}
 			.zwicon-close00{
@@ -96,7 +99,7 @@
 			  text-align: left;
 			}
 			.personal_pop00{
-			  z-index: 300;
+			  z-index: 3000000;
 			}
 			#login_header{
 			  text-align: center;
@@ -149,7 +152,10 @@
 			  border: 1px solid #348E38;
 			}
 			.bg_g{
-			  background-color: rgba(0, 0, 0, 0.238);
+			  background-color: rgba(0, 0, 0, 0.238)!important;
+			}
+			.bg-white1{
+				background-color: #fff;
 			}
 			.loginBtn_1{
 			  cursor: pointer;
@@ -236,11 +242,28 @@
 			     font-weight: normal;
 			     font-style: normal;
 			}
+			//강원교육체
+			@font-face {
+			    font-family: 'GangwonEdu_OTFBoldA';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			//웰컴
+			@font-face {
+			    font-family: 'OTWelcomeRA';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			body *{
+			 font-family: 'GmarketSansMedium';
+			}
 	</style>
          
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+    <nav class="navbar navbar-expand-lg bg-white1 navbar-light sticky-top p-0">
         <a href="/" class="navbar-brand d-flex align-items-center px-2 px-lg-3">
             <img src="/resources/MAINbtstr/img/로고1.png" width="250px">
         </a>
@@ -311,7 +334,6 @@
                     <div class="dropdown-menu bg-light m-0">
                         <a href="/boardList.do?reqPage=1&boardType=N" class="dropdown-item">공지사항</a>
                         <a href="boardList.do?reqPage=1&boardType=Q" class="dropdown-item">Q&A</a>
-                        <a href="boardList.do?reqPage=1&boardType=A" class="dropdown-item">FAQ(없을수도)</a>
                          <a href="/classEnroll.do" class="dropdown-item">강사모집</a>
                     </div>
                 </div>
@@ -327,8 +349,8 @@
 		            </div>
 				</c:when>
 				<c:otherwise>
-					<a href="/logout.do"><img alt="로그아웃" src="/resources/img/logout.png" style="width: 40px; margin-right: 10px;"></a>
 					<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
+					<a href="/logout.do"><img alt="로그아웃" src="/resources/img/logout.png" style="width: 40px; margin-right: 10px;"></a>
 				</c:otherwise>
 			</c:choose>
        	 </div>
@@ -363,11 +385,11 @@
         <div><a href="/joinFrm.do"><input value="뉴시니어스 회원가입 하러가기" class="boxSize_2 color_g_b loginBtn_1 f_c form-control" style="font-size: 1rem; text-align: center; text-decoration: none; "></a></div>
         <div class="txt_1 flex00 flex_01" style="width: 350px;">
           <div>
-            <input type="checkbox">로그인 유지
+            <a href="/searchInfoFrm.do" class="c_red txt_d1 fw_8" >아이디 찾기</a>
           </div>
         <br>
           <div>
-            <a href="/searchInfoFrm.do" class="c_red txt_d1 fw_8" >아이디/비밀번호 찾기</a>
+            <a href="/searchInfoFrm.do" class="c_red txt_d1 fw_8" >비밀번호 찾기</a>
           </div>
         </div>
         
@@ -375,7 +397,7 @@
         <!-- 카카오 로그인 -->
      
         <ul>
-			<li onclick="kakaoLogout();">
+			<li onclick="kakaoLogout();" style="display: none;">
 		      <a href="javascript:void(0)">
 		          <span>카카오 회원 탈퇴</span>
 		      </a>

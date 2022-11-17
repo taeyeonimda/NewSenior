@@ -68,6 +68,13 @@
 			</c:if>
 			
 			<c:if test="${sessionScope.m.memberGrade eq 2}">
+			<li class="menu-item  mypage">
+              <a href="mypage.do" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Basic Inputs">마이페이지</div>
+              </a>
+            </li>
+			
 			<!-- 클래스관리 -->
             <li class="menu-item classMgrTeacher">
               <a href="classMgrTeacher.do" class="menu-link">
@@ -75,7 +82,13 @@
                 <div data-i18n="Basic">클래스관리(강사페이지)</div>
               </a>
             </li>
-            
+            <!-- 배송지 -->
+            <li class="menu-item  delivery">
+              <a href="mydelivery.do" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Basic Inputs">나의 배송지</div>
+              </a>
+            </li>
             <!-- 클래스등록 -->
             <li class="menu-item classEnroll">
               <a href="classEnroll.do" class="menu-link">
@@ -94,7 +107,13 @@
                 <div data-i18n="Basic Inputs">마이페이지</div>
               </a>
             </li>
-            
+            <!-- 배송지 -->
+            <li class="menu-item  delivery">
+              <a href="mydelivery.do" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Basic Inputs">나의 배송지</div>
+              </a>
+            </li>
             <!-- 장바구니 -->
             <li class="menu-item cart">
               <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="menu-link">
@@ -114,7 +133,7 @@
           
           <!-- 내동호회 -->
           <li class="menu-item myClub ">
-            <a href="myClub.do" class="menu-link">
+            <a href="myClubList.do" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic Inputs">내동호회</div>
             </a>
@@ -187,10 +206,7 @@
             	if(chk.test(url)){
             		$(".orderHistory").addClass("active");
             	}
-            	chk = /myClub.do/g;
-            	if(chk.test(url)){
-            		$(".myClub").addClass("active");
-            	}
+         
             	chk = /classHistory.do/g;
             	if(chk.test(url)){
             		$(".classHistory").addClass("active");
@@ -203,5 +219,10 @@
             	chk = /teacherInfo.do/g;
             	if(chk.test(url)){
             		$(".teacherInfo").addClass("active");
+            	}
+            	
+            	chk = /myClubList.do/g;
+            	if(chk.test(url)){
+            		$(".myClub").addClass("active");
             	}
          </script>

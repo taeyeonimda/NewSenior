@@ -70,8 +70,8 @@
               <!-- HTML5 Inputs -->
             <form  id="insertActFrm">
               <div class="card mb-4">
-                <h5 class="card-header" style="text-align: center;">액티비티 등록하기</h5>
-                <div class="card-body">
+                <h5 class="card-header" style="text-align: center; padding: 10px; ">액티비티 등록하기</h5>
+                <div class="card-body" style="padding: 20px; ">
                   <div class="mb-3 row">
                     <label for="html5-text-input" class="col-md-2 col-form-label">액티비티명</label>
                     <div class="col-md-10">
@@ -118,11 +118,11 @@
                   <div class="mb-3 row">
                         <label for="activityStartDate" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
-                          <input class="form-control" name = "startDate"  id="activityStartDate" style="width: 200px; display: inline-block;" 
-                          onclick="javascript:f_datepicker(this);" placeholder="시작일 ex) 20221024"/>
+                          <input class="form-control" name = "startDate"  id="activityStartDate" style="width: 300px; display: inline-block;" 
+                          onclick="javascript:f_datepicker(this);" placeholder="시작일" readonly/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
-                          <input class="form-control" name ="endDate"  id="endDate" style="width: 200px; display: inline-block;" 
-                           onclick="javascript:f_datepicker(this);" placeholder="종료일 ex) 20221024"/>
+                          <input class="form-control" name ="endDate"  id="endDate" style="width: 300px; display: inline-block;" 
+                           onclick="javascript:f_datepicker(this);" placeholder="종료일" readonly/>
                         </div>
                       </div>
                   

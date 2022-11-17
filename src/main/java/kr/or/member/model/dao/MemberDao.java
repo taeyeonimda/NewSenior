@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.vo.ClassHistory;
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Repository
@@ -159,6 +160,12 @@ public class MemberDao {
 	public NsClass selectClassName(int classNo) {
 		NsClass ns = sqlSession.selectOne("member.selectClassName",classNo);
 		return ns;
+	}
+
+	public ArrayList<ClassReview> selectAllReview(Member member) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("nsClass.selectAllReview",member);
+		return (ArrayList<ClassReview>)list;
 	}
 	
 	

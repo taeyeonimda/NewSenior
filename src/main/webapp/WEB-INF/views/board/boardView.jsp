@@ -24,7 +24,12 @@
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
+               <c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P'}">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">커뮤니티</h1>
+             </c:if>
+              <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
+              <h1 class="display-3 text-white mb-4 animated slideInDown">공지사항</h1>
+              </c:if>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
                     	<c:if test="${b.boardType eq 'F' or b.boardType eq 'I' or b.boardType eq 'P'}">
@@ -35,8 +40,7 @@
                         <c:if test="${b.boardType eq 'N' or b.boardType eq 'Q' or b.boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></li>
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">강사모집</li>
+	                        <li class="breadcrumb-item active" aria-current="page"><a href="/classEnroll.do">강사모집</a></li>
                         </c:if>
                         
                     </ol>
@@ -183,10 +187,12 @@
 		</table>
 		<!-- 테이블 밖으로 꺼냈음 -->
 		<div class="updateDelBox">
-				<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
-					<button class="updateBtn bc44" id="updateBtn"><a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}">수정</a></button>
-					<button class="delBtn bc44" id="delBtn"><a href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}">삭제</a></button>
+			<c:if test="${not empty sessionScope.m}">
+				<c:if test="${b.nickName eq sessionScope.m.nickName || sessionScope.m.memberGrade eq 3 }">
+					<a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="updateBtn bc44" id="updateBtn">수정</button></a>
+					<a href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="delBtn bc44" id="delBtn">삭제</button></a>
 				</c:if>
+			</c:if>
 		</div>
 	
 	<c:if test="${b.boardType ne 'Q' and b.boardType ne 'N'}">
@@ -196,7 +202,7 @@
 			<form action="/insertComment.do" method="post">
 				<ul>
 					<li>
-						<div class="memberImg"><img src="/resources/upload/member/${b.memberImg}"></div>
+						<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
 					</li>
 					<li>
 						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
@@ -245,7 +251,7 @@
 
 					<p>
 						<c:if test="${not empty sessionScope.m }">
-							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+							<c:if test="${sessionScope.m.nickName eq bc.nickName}">
 								<a class="commUpdateTag" href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>
@@ -314,7 +320,7 @@
 								<span class="material-symbols-outlined">
 									subdirectory_arrow_right
 								</span>							
-								<div class="memberImg"><img src="/resources/upload/member/${b.memberImg}"></div>
+								<div class="memberImg"><img src="/resources/upload/member/${sessionScope.m.memberImg}"></div>
 							<li>
 								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 								<input type="hidden" name="boardRef" value="${b.boardNo}">
@@ -453,20 +459,25 @@
 			//댓글 수정클릭시 focus
 			$(".commUpdateTag").on("click",function(){
 				const idx =$(".commUpdateTag").index(this);
-				console.log("수정클릭 이벤트 동작");
+				console.log("댓글 수정클릭 이벤트 동작");
 				console.log(idx);
 				const commUpdateContent = $(".commUpdateContent");
-				commUpdateContent.eq(idx).focus();
+				console.log(commUpdateContent.length, "길이");
+				//commUpdateContent.eq(idx).focus();
+				$(".commUpdateTag").parent().prev().focus();
+				
+				//$(".commentView").eq(idx).find("textarea").focus();
 			});
 			
 			//대댓글 수정 클릭시 focus
 			//댓글 수정클릭시 focus
 			$(".reCommUpdateTag").on("click",function(){
 				const idx =$(".reCommUpdateTag").index(this);
-				console.log("수정클릭 이벤트 동작");
+				console.log("대댓글 수정클릭 이벤트 동작");
 				console.log(idx);
 				const reCommUpdateContent = $(".reCommUpdateContent");
-				reCommUpdateContent.eq(idx).focus();
+				//reCommUpdateContent.eq(idx).focus();
+				$(".reCommUpdateTag").parent().prev().focus();
 			});
 			
 			

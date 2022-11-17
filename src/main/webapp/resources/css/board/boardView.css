@@ -16,13 +16,15 @@
 		padding:5px;
 		
 	}
+
 	.boardTbl tr{
 		border-top : 1.5px solid #0F4229 ;
 		
 	}
 	.boardTbl td{
-		border :  1px solid #0F4229 ;
+		border :  1.5px solid #0F4229 ;
 		padding:5px;
+		
 	}
 	.boardTbl .boardTitle{
 		font-weight: 900;
@@ -54,6 +56,7 @@
 		border : none;
 		font-weight: 900;
 		font-size : 20px;
+		color : white;
 
 	}
 	button>a{
@@ -87,23 +90,29 @@
 		align-items : center;
 		
 	}
+
 	.inputCommentBox>form>ul>li:first-child>div{
 		margin-right:10px;
+		
 	}
 	.inputCommentBox>form>ul>li:first-child>div>img{
 		width:100px;
 		height:100px;
+		border-radius: 50px;
 	}
 
 	.inputCommentBox>form>ul>li:nth-child(2){
 		width:72%;
 		border:2.5px solid #0F4229;
+		border-radius : 20px;
 	}
 	.inputCommentBox>form>ul>li:nth-child(2)>textarea{
 		width :100%;
 		min-height:100px;
 		max-height:100px;
 		outline:none;
+		border-radius : 20px;
+		padding:10px;
 		
 	}
 		/*등록버튼 가운데 정렬*/
@@ -161,6 +170,7 @@
 	.inputRecommentBox>form>ul>li:first-child>div>img{
 		width:100px;
 		height:100px;
+		border-radius: 50px;
 	}
 	
 	.inputRecommentBox>form>ul>li:nth-child(2){
@@ -172,8 +182,9 @@
 		max-height:100px;
 		outline:none;
 		border: 2.5px solid #0F4229;
+		border-radius : 20px;
 		resize:none;
-		
+		padding:10px;
 		
 	}
 		/*등록버튼 가운데 정렬*/
@@ -215,10 +226,13 @@
 	.commentView>li:first-child>div>img{
 		width:100px;
 		height:100px;
+		border-radius: 50px;
+		
 	}
 	.commentView>li:nth-child(2){
 		width: 70%;	
 		border:2.5px solid #0F4229;	
+		border-radius : 20px;
 		
 	}
 	.commentView>li:nth-child(2)>p:first-child{
@@ -279,6 +293,7 @@
 	.reCommentView>li:first-child>div>img{
 		width:100px;
 		height:100px;
+		border-radius: 50px;
 	}
 	.reCommentView>li:first-child>span{
 		font-size:50px;
@@ -286,6 +301,7 @@
 	.reCommentView>li:nth-child(2){
 		width:64%;	/*70%*/
 		border:2.5px solid #0F4229;	
+		border-radius : 20px;
 	
 	}
 	.reCommentView>li:nth-child(2)>p:first-child{

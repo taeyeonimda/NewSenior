@@ -78,7 +78,7 @@
 					<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">프로필</label>
 							<div class="col-md-10 ">
-								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" style="width:100px; height:100px; border-radius: 50%;" class="fileImg"><br><br>
+								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" style="width:200px; height:200px; border-radius: 50%;" class="fileImg"><br><br>
 								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="imgInput" name="files" accept=".gif, .jpg, .png" onchange="readURL(this)"></span><button type="button" class="btn btn-outline-warning delImg" onclick="imgdel();">삭제</button>
 							</div>
 						</div>
@@ -174,70 +174,6 @@
 		<button type="submit" class="btn btn-outline-warning delbtn"
 						style="color: #000;">회원탈퇴</button>
 		</form>
-		</div>
-
-		<!-- File input -->
-		<div class="container-xxl flex-grow-1 container-p-y">
-			<div style="font-size: 25px;">배송지목록</div>
-			<div class="div1 deliveryBtn">
-				<button>
-					<a href="#" style="color: #fff;">배송지등록</a>
-				</button>
-			</div>
-			<div class="card">
-				<div class="table-responsive text-nowrap">
-
-					<table class="table table-borderless">
-						<thead>
-							<tr>
-								<th>배송지</th>
-								<th>주소</th>
-								<th>연락처</th>
-								<th>수정·삭제</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list }" var="d" end="0">
-								<tr class="showDeliveryDetail"
-									onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
-									<td><strong>${d.deliveryName }</strong><br>
-										${d.receiverName }<br> <span
-										style="border: 1px solid #6f42c1; background-color: #6f42c1; color: #fff">기본배송지</span>
-									</td>
-									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
-										${d.deliveryDetail }
-									</td>
-									<td style="line-height: 72px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
-										<button class="delBtn btn btn-outline-warning "  style="position: relative; top:20px;">
-											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}">삭제</a>
-										</button>
-									</td>
-								</tr>
-							</c:forEach>
-							<c:forEach items="${list }" var="d" begin="1">
-								<tr class="showDeliveryDetail" onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
-									<td><strong>${d.deliveryName }</strong><br>
-										${d.receiverName }<br></td>
-									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
-										${d.deliveryDetail }
-									</td>
-									<td style="line-height: 72px;">${d.deliveryPhone }</td>
-									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;" class="btn btn-outline-warning delbtn">수정</button>
-										<button class="delBtn2 btn btn-outline-warning delbtn" style="position: relative; top:20px;">
-											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }" >삭제</a>
-										</button></td>
-								</tr>
-							</c:forEach>
-							<c:if test="">
-								<tr>
-									<td style="text-align: center;">배송지 정보가 없습니다.</td>
-								</tr>
-							</c:if>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 	</div>
 	<!-- / Content -->

@@ -22,7 +22,12 @@
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
+                <c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P'}">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">커뮤니티</h1>
+             </c:if>
+              <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
+              <h1 class="display-3 text-white mb-4 animated slideInDown">공지사항</h1>
+              </c:if>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
                     	<c:if test="${b.boardType eq 'F' or b.boardType eq 'I' or b.boardType eq 'P'}">
@@ -33,8 +38,7 @@
                         <c:if test="${b.boardType eq 'N' or b.boardType eq 'Q' or b.boardType eq 'A'}">
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
 	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></li>
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page">강사모집</li>
+	                        <li class="breadcrumb-item active" aria-current="page"><a href="/classEnroll.do">강사모집</a></li>
                         </c:if>
                         
                     </ol>
@@ -157,7 +161,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th style="background-color:#0F4229; color:white;">작성자</th>
+				<th style="background-color:#0F4229; color:white;">닉네임</th>
 				<td>
 				${sessionScope.m.nickName }
 				<input type="hidden" name="boardType" value="${boardType}">
@@ -175,19 +179,23 @@
 			<tr>
 				<th style="background-color:#0F4229; color:white;">파일목록</th>
 				<td colspan="3">
-			<c:forEach items="${b.fileList }" var="bf">
-				<p>${bf.filename }
-				<button type="button" class="fileDeleteBtn" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button></p>
-			</c:forEach>
+					<c:forEach items="${b.fileList }" var="bf">
+						<p>
+							${bf.filename }
+							<!--<button type="button" class="fileDeleteBtn" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">삭제</button>  -->
+							<span class="material-symbols-outlined" class="fileDeleteBtn" onclick="deleteFile(this,${bf.fileNo},'${bf.filepath}');">delete</span>
+						</p>
+	
+					</c:forEach>
 			</td>
 		</tr>
 			<tr>
-				<th style="background-color:#0F4229; color:white;">내용</th>
+				<th class="boardContentTd" style="background-color:#0F4229; color:white;">내용</th>
 				<td class="boardContent"><textarea name="boardContent" id="boardContent">${b.boardContent }</textarea></td>
 			</tr>
 		</table>
 			<div class="boardUpdateBtnBox">
-					<input type="submit" id="boardUpdateBtn" class="boardUpdateBtn" value="작성">
+					<input type="submit" id="boardUpdateBtn" class="boardUpdateBtn" value="수정">
 				</div>
 	</form>
 </div>	
@@ -244,7 +252,7 @@
 			filepathInput.val(filepath);
 			filepathInput.hide();
 			//<input type="text" name="filepathList" value="filepath">
-			$("#updateFrm").append(fileNoInput).append(filepathInput);
+			$("#boardUpdateForm").append(fileNoInput).append(filepathInput);
 			
 			$(obj).parent().remove(); // 파일네임 지워줌
 			
@@ -268,6 +276,6 @@
 			});
 
 	</script>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

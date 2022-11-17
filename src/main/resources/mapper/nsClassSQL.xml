@@ -51,7 +51,6 @@
 	 
 	<select id="totalCount" resultType="int">
 		select count(*) from classes
-		where class_status in (0,1)
 	</select>
 
 	<insert id="insertClass" parameterType="cla">
@@ -338,4 +337,14 @@
 		where class_no = #{classNo}
 	</delete>
 
+	<!-- 나의 후기 가져오기 -->
+	<select id="selectAllReview" parameterType="m" resultType="crv">
+	select
+    b.class_name as className,
+    a.class_review_content as reviewContent,
+    a.review_rate as reviewRate,
+    a.review_date as reviewDate
+    from class_review a, classes b
+    where a.class_no = b.class_no and a.class_review_writer = #{memberNo}
+	</select>
 </mapper>

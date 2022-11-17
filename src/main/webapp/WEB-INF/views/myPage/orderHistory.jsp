@@ -48,10 +48,19 @@
     <link href="/resources/JSbtstr/css/style.css" rel="stylesheet">
     
 </head>
+<style>
+thead,
+tbody {
+  display: block;
+  width : 1200px;
+}
+
+tbody {
+  max-height: 400px;
+}
+</style>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
-
-  <body>
     <!-- Layout wrapper -->
     <div class="content-wrapper" style="left: 300px; flex-direction: row; ">
         <!-- Menu -->
@@ -74,7 +83,7 @@
 			  
 			  시작 날짜 : <input type="date" class="datepicker" id="startDate" value="2022-01-01" name="endDate"> <br/> <br/>
 			  종료 날짜 : <input type="date" class="datepicker" id="endDate" value="2022-12-31" name="startDate">
-			  <input type="submit" onclick="findDate(${sessionScope.m.memberNo })">
+			  <input type="submit" onclick="findDate(${sessionScope.m.memberNo })" value="조회하기">
 			
             <div class="card">
 
@@ -82,38 +91,37 @@
                 <input type="hidden" class="memberNo" value="${sessionScope.m.memberNo }">
                 
                	
-                <table class="table table-borderless">
-                    <tr>
-                      	<th style="width:10%">주문번호</th>
-                      	<th style="width:15%">주문일자</th>
-                    	<th style="width:15%">수령인</th>
-                      	<th style="width:20%">전화번호</th>
-                      	<th style="width:30%">주소</th>
-                      	<th style="width:10%">총 주문금액</th>
+                <table class="table table-borderless ">
+                	<thead>
+                    <tr style="text-align:center">
+                      	<th style="width:100px">주문번호</th>
+                      	<th style="width:150px">주문일자</th>
+                    	<th style="width:150px">수령인</th>
+                      	<th style="width:200px">전화번호</th>
+                      	<th style="width:330px">주소</th>
+                      	<th style="width:100px">총 주문금액</th>
                       	
                       <!-- 주문번호 1개당 1tr -->
                       <!-- 상세주문 끝나면 여기서는 주문번호, 일자, 총주문금액만 보여주고 -->
                       <!-- 상세주문에서 제품정보, 각각의 수량과 금액, 설명 보여주기 -->
                     </tr>
+                    </thead>
+                    <tbody id="bd">
 	                    <c:forEach items="${list }" var="Or">
 	                    	<input type="hidden" value="${d.orderDate }" name="orderDate">
-			            	<tr>
-		            			<td>${Or.orderNo }</td>
-								<td>${Or.orderDate }</td>
-			            		<td>${Or.receiverName }</td>
-			            		<td>${Or.deliveryPhone }</td>
-			            		<td>${Or.deliveryAddr }${Or.deliveryAddr2 }</td>
-								<td>${Or.orderPrice }원</td>
-<!--
-								<td onclick="goToOrderDetail(${Or.orderNo},${sessionScope.m.memberNo },${Or.orderPrice });">
-									<button type="submit"> 상세보기 </button>
-								</td>
- -->
+			            	<tr style="text-align:center">
+		            			<td style="width:100px">${Or.orderNo }</td>
+								<td style="width:150px">${Or.orderDate }</td>
+			            		<td style="width:150px">${Or.receiverName }</td>
+			            		<td style="width:200px">${Or.deliveryPhone }</td>
+			            		<td style="width:330px">${Or.deliveryAddr }${Or.deliveryAddr2 }</td>
+								<td style="width:100px">${Or.orderPrice }원</td>
 			                </tr>
 			                
-	             		</c:forEach>             		
-               	</table>
-                
+	             		</c:forEach>
+	             	</tbody>
+	             		
+           		</table>
               </div>
             </div>
 
@@ -161,10 +169,8 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
-	    function goToOrderDetail(orderNo,memberNo) {
-			location.href = "/orderDetail.do?orderNo="+orderNo+"&memberNo="+memberNo;
-		}
-		
+    	
+    	
 	    
 	    function findDate(memberNo){
 	    	const startDate = document.querySelector("#startDate").value;
@@ -175,6 +181,9 @@
 	    	console.log(endDate);	
 	    	location.href="/findDate.do?memberNo="+memberNo+"&startDate="+startDate+"&orderDate="+orderDate+"&endDate="+endDate;
 	    }
+	    
+	    
+	    
 	    
     </script>
   </body>

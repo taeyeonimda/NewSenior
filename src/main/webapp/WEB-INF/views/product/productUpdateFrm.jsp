@@ -379,8 +379,6 @@
 	function productUpdateBtn(){
 		var mainImg = $(".mainImg").text();
 		var updateImg = $(".upImg").val();
-		console.log("아아"+mainImg);
-		console.log("나나"+updateImg);
 		var category = $("#productCategory").val();
 		if((mainImg==''&&updateImg=='')){
 			 alert("메인이미지를 등록해주세요.");
@@ -428,12 +426,10 @@
 		const fileNoInput = $("<input>");
 		fileNoInput.attr("name","fileNoList");
 		fileNoInput.val(fileNo);
-		console.log(fileNo);
 		fileNoInput.hide();
 		const filepathInput = $("<input>");
 		filepathInput.attr("name","productpathList");
 		filepathInput.val(filepath);
-		console.log(filepath)
 		filepathInput.hide();
 		
 		$("#productUpdateFrm").append(fileNoInput).append(filepathInput);

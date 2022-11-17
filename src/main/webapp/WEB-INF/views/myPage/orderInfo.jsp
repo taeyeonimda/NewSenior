@@ -185,8 +185,8 @@
                         <input type="checkbox" id="order-same" class="order-agree" >
                         <label for="order-same">기본 배송지 불러오기</label>
                         <input type="hidden" class="basicDelivery" name="basicDeliveryCheck">
-                           <input type="checkbox" id="test-same" class="order-agree" >
-                        <label for="test-same">테스트용</label>
+                        
+                        
                     </div>
                <br><br>
                <div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
@@ -338,10 +338,9 @@
                url : "/inputDelivery.do",
                type : "get",
                data : {
-            	   bd : bd,
                   memberNo : $(".hiddenMemberNo").val()
                },success:function(data){
-            	               
+            	  
                   $(".basicInput").eq(0).attr("value",data.deliveryName).attr("readonly",true),
                   $(".basicInput").eq(1).attr("value",data.receiverName).attr("readonly",true),
                   $(".basicInput").eq(2).attr("value",data.deliveryPhone).attr("readonly",true),
