@@ -209,12 +209,13 @@
 	</update>
 	
 	<update id="deleteUser" parameterType="m">
-	 update members set member_state =  to_char(sysdate,'yyyy-mm-dd') where 
+	 update members set member_state =  to_char(sysdate,'yyyy-mm-dd') 
+	 where 
 	 <if test="memberNo != 0">
 	 member_no = #{memberNo}
 	 </if>
 	 <if test="kakaoLogin != null">
-	 kakaoLogin = #{kakaoLogin}
+	 	and kakaoLogin = #{kakaoLogin}
 	 </if>
 	</update>
 	
@@ -222,4 +223,16 @@
 	delete from members where member_state =(SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD')as time
     FROM DUAL)
 	</delete>
+	
+	<select id="selectClassName" parameterType="int" resultType="cla">
+		select
+			class_no as classNo,
+			class_name as className,
+			class_teacher as classTeacher
+		from classes
+		where class_no = #{classNo}
+		
+	
+	</select>
+	
 </mapper>

@@ -17,11 +17,20 @@ public class ClassHistory {
     CLASS_PAY_STATUS            CHAR(2)
 );
  * */
-	private int classHistoryNo;
-	private int payNo;
-	private int classNo;
-	private int memberNo;
-	private int amount;
-	private int payStatus;
-	private int payPrice;
+	private int classHistoryNo;  //고유번호
+	private int payNo; //
+	private int classNo; //클래스 번호*
+	private int memberNo; //*
+	private int amount; //
+	private int payStatus; //
+	private int payPrice; //
+	private String className; //클래스명*
+	private String classTeacher; //강사이름(조인써서이름불러오기)*
+	private int classStatus;//1:클래스시작 2:클래스 종료
+	private String startDate; //시작일*
+	private String endDate; //종료일*
+	private String classDate; //총 수강기간
+	private String dayDate; //남은 수강 기간
+	
+	
 }

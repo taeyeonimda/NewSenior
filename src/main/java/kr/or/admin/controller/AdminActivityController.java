@@ -143,9 +143,6 @@ public class AdminActivityController {
 	public String activityUpdate(Activity activity,MultipartFile files, 
 			MultipartFile[] detailFiles,HttpServletRequest request) throws UnsupportedEncodingException {
 		
-		System.out.println("update::::"+activity);
-		System.out.println("updateFiles:::"+files.isEmpty());
-		
 		if(!files.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/activity/");
 			MultipartFile file = files;

@@ -7,6 +7,62 @@
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
     <link href="/resources/css/activity/activityDetail.css" rel="stylesheet">
     <title>액티비티 상세페이지</title>
+    <style type="text/css">
+    //얇음
+			@font-face {
+			    font-family: 'LeferiPoint-WhiteObliqueA';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			//두껍
+			@font-face {
+			    font-family: 'GangwonEduPowerExtraBoldA';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			//물많이
+			@font-face {
+		    font-family: 'OKCHAN';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/OKCHAN.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+			}
+			
+			@font-face {
+			    font-family: 'KOHIBaeumOTF';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/KOHIBaeumOTF.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			@font-face {
+			    font-family: 'SANJUGotgam';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/SANJUGotgam.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+			}
+			@font-face {
+			    font-family: 'PyeongChangPeace-Bold';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+			    font-weight: 700;
+			    font-style: normal;
+			}
+			//얇은
+			@font-face {
+			     font-family: 'S-CoreDream-3Light';
+			     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+			     font-weight: normal;
+			     font-style: normal;
+			}
+	</style>
+    </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -14,7 +70,7 @@
 	<script src="/resources/js/activity/activity.js"></script>
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(../MAINbtstr/img/은비(5).jpg) center center no-repeat; background-size: cover;">
-            <div class="container text-center py-5">
+            <div class="container text-center py-5" >
                 <h1 class="display-3 text-white mb-4 animated slideInDown">${act.activityName }</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
@@ -31,8 +87,8 @@
 
         <!-- sideBar-->
         <div class="sidenav bg-light rounded p-sm-3 wow fadeIn" style="text-align:center;">
-            <div class="side-box rounded mt-3">
-                <h6 class="side-title-box display-5 ">
+            <div class="side-box rounded mt-3" style=" font-family: 'GmarketSansMedium';">
+                <h6 class="side-title-box display-5 " style="font-family: 'PyeongChangPeace-Bold'">
                  	${act.activityName}
                 </h6>
                 <div class="side-select-box display-5" style="font-size:2rem;" > 
@@ -80,13 +136,22 @@
         <!-- sideBar End-->
         
         <!-- class main -->
-        <div class="container-xxl py-5 mt-5">
+        <div class="container-xxl py-5 mt-5" style=" font-family: 'GmarketSansMedium';">
             <div class="container">
 				<div class="class-row g-4">
+						<h6 class="side-title-box display-5 " style="font-family: 'PyeongChangPeace-Bold'">
+                 		${act.activityName}
+               			 </h6>
 					<div class="col-xl-12 wow fadeInUp" data-wow-delay="0.1s" style= "display: flex">
 						<div class="col-xl-6 team-item rounded class-item">
-							<img style="width:800px;" class="img-fluid" src="/resources/upload/activity/${act.filepath }" alt="액티비티메인사진">
+							<img style="width:800px;" class="img-fluid" src="/resources/upload/activity/${act.filepath }" alt="액티비티메인사진"><br><br>
+							<div class="class-row g-5">      
+						        <h4 class="display-6 mb-4">
+						        	<pre class="mb-4" style="font-size:18px; color:gray;font-family: 'GmarketSansMedium';">${act.activityDetail}</pre>
+						        </h4>
+				        	</div>  
 						</div >
+						
 						<!-- 
 						<div class="col-xl-6 team-item rounded class-item" style="font-size:1.1em; ">
 						
@@ -103,7 +168,7 @@
 				</div>
 				<!-- scroll bar start -->
 				
-				<div class="scroll-select-box" id="scroll-select" style="width:1400px">
+				<div class="scroll-select-box" id="scroll-select" style="width:1400px; font-size: 1.2em;">
                 	<span><a href="#menu1">상세사진</a></span>
                 	<span><a href="#menu2">상세소개</a></span>
                 	<span><a href="#menu3">기타사항</a></span>
@@ -119,14 +184,14 @@
 
         <!-- 강의소개 -->
          
-        <div class="container-xxl py-5 mt-5" id="#menu1"  >
+        <div class="container-xxl py-5 mt-5" id="#menu1" style=" font-family: 'GmarketSansMedium';" >
             <div class="container">
                 <div class="class-row g-5 ">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" >
                         <p class="fs-5 fw-bold text-primary">담당자 : ${act.activityManagerName }님과 함께하는</p>
                         <h1 class="display-5 mb-4">액티비티 활동!</h1>
                         <c:forEach items="${act.fileList }" var="details">
-                        <p class="mb-4"><img style="width:650px; height:450px;"src="resources/upload/activity/${details.filepath }"/></p>
+                        <p class="mb-4"><img style="width:800px;"src="resources/upload/activity/${details.filepath }"/></p>
                         </c:forEach> 
                     </div>
                    
@@ -134,22 +199,23 @@
             </div>
             
         </div>
-        <hr>
+        
+        <br>
         <!-- Features End -->
 
         <!-- 강사 소개 -->
-    	<div class="container-xxl py-1 mt-1" id="#menu2">
+    	<div class="container-xxl py-1 mt-1" id="#menu2" >
        		<div class="class-row g-5">      
 		        <h4 class="display-6 mb-4">
-		        	<pre class="mb-4" style="font-size:1.2em; font-weight:bold;">${act.activityDetail}</pre>
+		        	<pre class="mb-4" style="font-size:30px; font-weight:bold; color:#0F422;font-family: 'GmarketSansMedium';">${act.activityDetail}</pre>
 		        </h4>
         	</div>    
         </div>	
-        <hr>
+        <br><br>
         <div class="container-xxl py-1 mt-1" id="#menu2">
        		<div class="class-row g-5">      
-		        <h4 class="display-6 mb-4">
-		        	<pre class="mb-4" style="font-size:1.2em; font-weight:bold;">${act.etc}</pre>
+		        <h4 class="display-6 mb-4" style=" font-family: 'GmarketSansMedium'; color:#000;">
+		        	<pre class="mb-4" style="font-size:16px; font-weight:bold;font-family: 'GmarketSansMedium';">${act.etc}</pre>
 		        </h4>
         	</div>    
         </div>	

@@ -145,7 +145,7 @@
                             	<i class="fa fa-users text-primary"></i>
                             </div>
                             <div class="ps-3">
-                                <h4 class="loginCheck">온라인 동호회</h4>
+                                <h4>온라인 동호회</h4>
                                 <span>누구나 가입 가능한<br> 다양한 종류의 동호회가 가득!</span>
                             </div>
                         </div>
@@ -195,8 +195,8 @@
                     <p class="text-primary mb-4">─────────────────────────────</p>
                     <h1 class="display-5 mb-4">이달의 <br> 인기 동호회 TOP3</h1>
                     <p class="text-primary mb-4">─────────────────────────────</p>
-                    <p class="mb-4">다양한 사람들과 다양한 활동을 즐겨보세요!</p>
-                    <a class="btn btn-primary py-3 px-4" href="">자세히보기</a>
+                    <p class="mb-4 fw-bold">다양한 사람들과 다양한 활동을 즐겨보세요!</p>
+                    <a class="btn btn-primary py-3 px-4" href="/clubList.do">동호회 바로가기</a>
                 </div>
                 <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="row g-5">
@@ -257,10 +257,10 @@
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="fs-5 fw-bold text-primary">국내부터 해외까지!!</p>
-                    <h1 class="display-5 mb-4">원하는곳 어디든!</h1>
-                    <p class="mb-4">항공/숙박/관광까지 모두 포함!<br> 처음부터 끝까지 편하게 모시겠습니다</p>
-                    <a class="btn btn-primary py-3 px-4" href="">자세히 보기</a>
+                    <p class="fs-5 fw-bold text-primary">큐레이션으로 제안하는</p>
+                    <h1 class="display-5 mb-4">내 취향을 저격하는 경험</h1>
+                    <p class="mb-4 fw-bold">로그인 하고 관심사를 등록해 보세요<br>내 취향에 맞는 다양한 경험 정보를 편하고 쉽게 볼 수 있어요</p>
+                    <a class="btn btn-primary py-3 px-4" href="/activityList.do?activityCategory=AL&reqPage=1">액티비티 바로가기</a>
                 </div>
                 <div class="col-lg-6">
                     <div class="row g-4 align-items-center">
@@ -321,8 +321,8 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-bold text-primary">NewSenior's Class</p>
-                <h1 class="display-5 mb-5">클래스 5060의 모든것</h1>
+                <p class="fs-5 fw-bold text-primary">NewSeniors</p>
+                <h1 class="display-5 mb-5">시니어를 위한 모든 것</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -334,26 +334,28 @@
                             <div class="btn-square rounded-circle mx-auto mb-3">
                                 <img class="img-fluid" src="/resources/MAINbtstr/img/icon/icon-3.png" alt="Icon">
                             </div>
-                            <h4 class="mb-3">문화·강연</h4>
-                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a><hr>
-                            <h5 class="mb-3" style="font-weight:900; color:white;">지금은 뉴 시니어 세대!</h4>
-                            <p class="mb-4" style="font-weight:900; color:white;">유명 시니어들에게 직접 듣는 인생 2막을 맞이한 그들의 이야기</p>
+                            <h4 class="mb-3">강연·체험</h4>
+                            <a class="btn btn-sm" href="/activityList.do?activityCategory=AL&reqPage=1"> <i class="fa fa-plus text-primary me-2"></i><span style="display: inline-block; width: 100%; text-align: center;">액티비티</span></a>
+                            <hr>
+                            <h5 class="mb-3 fw-bold" style="font-weight:900; color:white;">나를 위한 아낌없는 투자</h5>
+                            <p class="mb-4" style="font-weight:900; color:white;">주체적이고 적극적인 라이프를 즐기는 액티브 시니어를 위한 다양한 액티비티</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item rounded d-flex h-100">
                         <div class="service-img rounded">
-                            <img class="img-fluid" src="/resources/MAINbtstr/img/artclass2.jpg" alt="">
+                            <img class="img-fluid" src="/resources/MAINbtstr/img/클래스2.jpg" alt="">
                         </div>
                         <div class="service-text rounded p-5">
                             <div class="btn-square rounded-circle mx-auto mb-3">
                                 <img class="img-fluid" src="/resources/MAINbtstr/img/icon/icon-3.png" alt="Icon">
                             </div>
                             <h4 class="mb-3">취미·교육</h4>
-                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a><hr>
-                            <h5 class="mb-3" style="font-weight:900; color:white;">청바지! 청춘은! 바로! 지금!</h4>
-                            <p class="mb-4" style="font-weight:900; color:white;">나의 시간을 더 사랑하게 만드는 취미 클래스</p>
+                            <a class="btn btn-sm" href="/classList.do?classCategory=AL&reqPage=1"><i class="fa fa-plus text-primary me-2"></i><span style="display: inline-block; width: 100%; text-align: center;">클래스</span></a>
+                            <hr>
+                            <h5 class="mb-3 fw-bold" style="font-weight:900; color:white;">배움에는 끝이 없다</h5>
+                            <p class="mb-4" style="font-weight:900; color:white;">나의 시간을 더욱 사랑하게 만드는 다양한 취미 클래스</p>
                         </div>
                     </div>
                 </div>
@@ -367,9 +369,9 @@
                                 <img class="img-fluid" src="/resources/MAINbtstr/img/icon/icon-3.png" alt="Icon">
                             </div>
                             <h4 class="mb-3">커뮤니티</h4>
-                            <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>자세히보기</a><hr>
-                            <h5 class="mb-3" style="font-weight:900; color:white;">비슷한 성향을 가진 친구들</h4>
-                            <p class="mb-4" style="font-weight:900; color:white;">비슷한 관심사를 가진 사람들과 교류하는 온라인 동호회</p>
+                            <a class="btn btn-sm" href="/clubList.do"><i class="fa fa-plus text-primary me-2"></i><span style="display: inline-block; width: 100%; text-align: center;">동호회</span></a><hr>
+                            <h5 class="mb-3 fw-bold" style="font-weight:900; color:white;">나눌수록 커지는 즐거움</h5>
+                            <p class="mb-4" style="font-weight:900; color:white;">비슷한 관심사를 가진 사람들과 온라인으로 소통하는 온라인 동호회</p>
                         </div>
                     </div>
                 </div>
@@ -490,8 +492,8 @@
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
                     <p class="fs-5 fw-bold text-primary">interview</p>
                     <h2 class="display-5 mb-5">인생 2막을 즐기는<br> 진정한 NewSeinor!</h2>
-                    <p class="mb-4">유명 시니어들에게 직접 듣는 인생 2막을 맞이한 그들의 이야기</p>
-                    <a class="btn btn-primary py-3 px-4" href="">자세히보기</a>
+                    <p class="mb-4 fw-bold">유명 시니어들에게 직접 듣는 인생 2막을 맞이한 그들의 이야기</p>
+                    <a class="btn btn-primary py-3 px-4" href="/boardList.do?reqPage=1&boardType=I">인터뷰 보기</a>
                 </div>
                 <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="owl-carousel testimonial-carousel">
@@ -633,10 +635,6 @@
     	  $(".popup_bg00").stop().fadeIn();
           $(".popup00.personal_pop00").stop().fadeIn();
           $("body").addClass("bg_g");
-          
-		$(".loginCheck").on("click", function() {
-			$(".loginBtn").click();
-		})
     </script>
     </c:if>
     

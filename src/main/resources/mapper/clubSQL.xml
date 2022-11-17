@@ -136,6 +136,12 @@
 	<insert id="inertClubBoardCom" parameterType="cbc">
 		insert into club_board_coms values (club_com_seq.nextval, #{clubNo }, #{clubBoardNo }, #{clubComWriter }, #{clubComContent }, #{clubComRef }, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
+	
+	<!-- 클럽 게시판 댓글 수정 -->
+	<update id="updateClubBoardComment" parameterType="cbc">
+		update club_board_coms set club_com_content=#{clubComContent } where club_com_no=#{clubComNo }
+	</update>
+	
 
 	<!-- 내 카테고리에 해당하는 인기동호회 검색 -->
 	<select id="searchClubList" parameterType="m" resultType="c">
@@ -267,5 +273,9 @@
 		    club_intro as clubIntro,
 		(select count(*) from club_members m where m.club_no=c.club_no) as clubMemberCnt
 		from clubs c order by clubMemberCnt desc)r) where rnum between 1 and 3
+	</select>
+	
+	<select id="getAllMyClub" parameterType="m">
+	
 	</select>
 </mapper>

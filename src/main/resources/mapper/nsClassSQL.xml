@@ -301,4 +301,53 @@
 		insert into class_history values (class_history_seq.nextval, #{classNo }, #{memberNo }, #{amount }, 0)
 	</insert>
 	
+	<!-- 진행중인 클래스 조회 -->
+	<select id="selectAllHistory" parameterType="m" resultType="ch">
+  select 
+        b.CLASS_NO as classNo,
+        a.MEMBER_NO as memberNo,
+        c.member_name as classTeacher,
+        b.CLASS_STATUS as classStatus,
+        b.CLASS_NAME as className,
+        TO_CHAR(b.START_DATE, 'yyyy-mm-dd') as startDate,
+        TO_CHAR(b.END_DATE, 'yyyy-mm-dd')as endDate,
+    	(b.end_date - b.start_date) as dayDate
+    from class_history a , CLASSES b, members c
+    where a.CLASS_NO = b.CLASS_NO  and  b.CLASS_TEACHER = c.member_no and a.member_no=#{memberNo} and b.class_status = 1
+	</select>
+	
+	<!-- 종료된 클래스 조회 -->
+	<select id="selectEndHistory" parameterType="m" resultType="ch">
+  select 
+        b.CLASS_NO as classNo,
+        a.MEMBER_NO as memberNo,
+        c.member_name as classTeacher,
+        b.CLASS_STATUS as classStatus,
+        b.CLASS_NAME as className,
+        TO_CHAR(b.START_DATE, 'yyyy-mm-dd') as startDate,
+        TO_CHAR(b.END_DATE, 'yyyy-mm-dd')as endDate
+    from class_history a , CLASSES b, members c
+    where a.CLASS_NO = b.CLASS_NO  and  b.CLASS_TEACHER = c.member_no and a.member_no=#{memberNo} and b.class_status = 2
+	</select>
+	
+	<!-- 모집 중인 클래스의 신청 인원 -->
+	<select id="selectClassHistorySum" parameterType="cla" resultType="int">
+		select NVL(sum(amount), 0) from class_history where class_no=#{classNo }
+	</select>
+
+	<delete id="deleteClass" parameterType="int">
+		delete from classes
+		where class_no = #{classNo}
+	</delete>
+
+	<!-- 나의 후기 가져오기 -->
+	<select id="selectAllReview" parameterType="m" resultType="crv">
+	select
+    b.class_name as className,
+    a.class_review_content as reviewContent,
+    a.review_rate as reviewRate,
+    a.review_date as reviewDate
+    from class_review a, classes b
+    where a.class_no = b.class_no and a.class_review_writer = #{memberNo}
+	</select>
 </mapper>

@@ -79,7 +79,7 @@ public class ClubController {
 		service.insertClubMember(m, c);
 		return "redirect:/myClubList.do?memberNo="+m.getMemberNo()+"&clubNo="+c.getClubNo();
 	}
-	
+	/*
 	@RequestMapping(value = "/myClubList.do")
 	public String myClubList(Member m, Club c, Model model) {
 		ArrayList<Club> myList = service.searchMyClub(m);
@@ -87,7 +87,7 @@ public class ClubController {
 		model.addAttribute("newClub", c.getClubNo());
 		return "club/myClubList";
 	}
-	
+	*/
 	@RequestMapping(value = "/insertClub.do")
 	public String insertClub(Club c, MultipartFile[] files, HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println(files);
@@ -254,6 +254,15 @@ public class ClubController {
 		}
 		return new Gson().toJson(cb);
 	}
+	
+	// 동호회 댓글 수정
+	@RequestMapping(value = "/updateClubComment.do")
+	public String updateClubComment(ClubBoardComment cbc) {
+		System.out.println(cbc);
+		int result = service.updateClubBoardComment(cbc);
+		return "redirect:/clubDetail.do?clubNo="+cbc.getClubNo();
+	}
+	
 	
 	// 동호회장 변경
 	@RequestMapping(value = "/changeClubLeader.do")

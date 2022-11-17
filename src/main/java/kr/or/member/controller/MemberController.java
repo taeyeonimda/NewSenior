@@ -5,20 +5,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,10 +23,14 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.or.category.model.service.CategoryService;
 import kr.or.category.model.vo.Category;
+import kr.or.club.model.vo.Club;
 import kr.or.common.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
+import kr.or.nsClass.model.vo.ClassHistory;
+import kr.or.nsClass.model.vo.ClassReview;
+import kr.or.nsClass.model.vo.NsClass;
 
 @Controller
 public class MemberController {
@@ -54,18 +53,56 @@ public class MemberController {
 	}
 	 */
 	
+	//수강현황가기
 	@RequestMapping(value="/classHistory.do")
-	public String classHistory() {
-		return "myPage/classHistory";
+	public String classHistory(@SessionAttribute Member m, Model model) {
+		Member m1 = new Member();
+		m1.setMemberId(m.getMemberId());
+		m1.setKakaoLogin(m.getKakaoLogin());
+		Member member = service.selectOneMember(m1);
+		System.out.println("수강현황 멤버"+member);
+		ArrayList<ClassHistory> list = service.selectAllHistory(member);
+		System.out.println("수강현황 리스트"+list);
+		ArrayList<ClassHistory> endList = service.selectEndHistory(member);
+		System.out.println("수강종료 리스트"+endList);
+		if (member != null) {
+			model.addAttribute("list",list);
+			model.addAttribute("endList",endList);
+			model.addAttribute("member", member);
+			return "myPage/classHistory";
+		} else {
+			return "redirect:/";
+		}
 	}
-	@RequestMapping(value="/myClub.do")
-	public String myClub() {
-		return "myPage/myClub";
+	//내동호회 가기
+	@RequestMapping(value="/myClubList.do")
+	public String myClub(@SessionAttribute Member m,Model model) {
+		ArrayList<Club> myList = service.getAllMyClub(m);
+		ArrayList<Club> popularList = service.searchClubPopularList(m);
+		model.addAttribute("myList",myList);
+		model.addAttribute("pList", popularList);
+		return "myPage/myClubList";
 	}
+	
+	//나의 후기 가기(내가쓴글 수정)
 	@RequestMapping(value="/myComment.do")
-	public String myComment() {
-		return "myPage/myComment";
+	public String myComment(@SessionAttribute Member m, Model model) {
+		Member m1 = new Member();
+		m1.setMemberId(m.getMemberId());
+		m1.setKakaoLogin(m.getKakaoLogin());
+		Member member = service.selectOneMember(m1);
+		System.out.println("나의 후기 멤버"+member);
+		ArrayList<ClassReview> list = service.selectAllReview(member);
+		System.out.println("나의 후기 리스트"+list);
+		if (member != null) {
+			model.addAttribute("list",list);
+			model.addAttribute("member", member);
+			return "myPage/myComment";
+		} else {
+			return "redirect:/";
+		}
 	}
+	//강사정보가기
 	@RequestMapping(value="/teacherInfo.do")
 	public String teacherInfo() {
 		return "myPage/teacherInfo";
@@ -492,5 +529,15 @@ public class MemberController {
 			
 			return result;
 		}
+		
+		//마이페이지 리뷰쓸때 클래스 이름같은거 가져올때 쓰는거
+		@ResponseBody
+		@RequestMapping(value="/selectClassName.do",produces = "application/json;charset=utf-8")
+		public String selectClassName(int classNo,Model model) {
+			NsClass nc = service.selectClassName(classNo);
+			return new Gson().toJson(nc);
+		}
+		
+		
 		
 }

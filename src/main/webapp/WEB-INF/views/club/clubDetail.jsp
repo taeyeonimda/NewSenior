@@ -13,13 +13,6 @@
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<style>
-.closeSpan:hover,
-.myClubBox>div>span
-{
-	cursor: pointer;
-}
-</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
     <!-- page Content 시작-->
@@ -30,7 +23,7 @@
 	            <div class="side-box rounded mt-2">
 	                <p class="fs-5 fw-bold text-primary mt-5">내 동호회</p>
 	                <div class="side-info-box text-center">
-	                    <div class="side-info-box text-center myClubBox" id="myClubList">
+	                    <div class="side-info-box text-center" id="myClubList">
 							<!-- ajax로 가져오는 정보 -->
 	                    </div>
 	                </div>
@@ -40,15 +33,15 @@
 	            </div>
 	            <div class="side-box rounded mt-5">
 	                <p class="fs-5 fw-bold text-primary">${c.clubName } </p>
-	                <div class="side-info-box text-center clubIntro" style="overflow: auto; min-height: 180px;">
+	                <div class="side-info-box text-center clubIntro" style="min-height: 190px;">
 	                	<c:forEach items="${c.memberList }" var="cm">
 	                		<c:if test="${cm.memberNo eq c.clubLeader }">
-	                			<div><span>${cm.nickName }</span><span>(${cm.memberId })</span><span class="fw-bold text-dark"> - 동호회장</span></div>
+	                			<div class="memberNameBox"><span>${cm.nickName } </span><span> (${cm.memberId }) </span><span class="text-dark fw-bold">-동호회장</span></div>
 	                		</c:if>
 	                	</c:forEach>
 	                	<c:forEach items="${c.memberList }" var="cm">
 	                		<c:if test="${cm.memberNo ne c.clubLeader }">
-	                			<div><span>${cm.nickName }</span><span>(${cm.memberId })</span></div>
+	                			<div class="memberNameBox"> <span>${cm.nickName } </span><span> (${cm.memberId }) </span></div>
 	                		</c:if>
 	                	</c:forEach>
 	                </div>
@@ -60,7 +53,7 @@
             <div></div>
         </div>
 
-        <!-- sideBar-left 동호회 정보  -->
+        <!-- sideBar-left 동호회 정보 목록 /  채팅하기 버튼 -->
         <div class="sidenav-left bg-light rounded p-sm-5 wow fadeIn">
             <div class="side-box rounded mt-5">
                 <nav aria-label="breadcrumb animated slideInDown">
@@ -149,9 +142,9 @@
 					    <div class="container-xxl py-5 club-container">
 			                <div class="container wow fadeInUp" data-wow-delay="0.05s">
 			                    <div class="row align-items-end club-board-div">
-			                        <div class="ml-20">
+			                        <div>
 				                        <div class="flex-space-between" style="width: 90%;">
-				                        	<div class="flex-space-between" style="width:27%;">
+				                        	<div class="flex-space-between ml-10" style="width:27%;">
 				                        		<div class="profile-box" style="background: #BDBDBD;">
 													<img class="profile" src="/resources/upload/club/person_1.jpg">
 												</div>
@@ -175,7 +168,7 @@
 			                        			</div>
 			                        		</div>
 				                        	</c:if>
-				                            <p class="mb-4">${cb.clubBoardContent }</p>
+				                            <p class="mb-4 ml-20">${cb.clubBoardContent }</p>
 			                            </div>
 			                            <div style="display: none;" class="updateBox" class="mt-5">
 				                        	<div class="updateInputBox">
@@ -229,7 +222,7 @@
 															<span>${cbc.clubComDate }</span>
 														</p>
 														<p class="comment-content">${cbc.clubComContent }</p>
-														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;" class="comment-textarea">ncContent</textarea>
+														<textarea name="clubComContent" rows="5" cols="95" style="display:none;" class="comment-textarea">${cbc.clubComContent }</textarea>
 														<p class="comment-link">
 															<c:if test="${cbc.clubComWriter eq sessionScope.m.memberNo}">
 															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbc.clubComNo }, ${cb.clubNo});">수정</a>
@@ -239,28 +232,29 @@
 														</p>
 													</li>
 												</ul>
+												<!-- 대댓글 달기 -->
+												<div class="inputRecommentBox">
+													<form action="/insertClubComment.do" method="post">
+														<ul>
+															<li class="arrow-box">
+																<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
+															</li>
+															<li class="text-box">
+																<input type="hidden" name="clubNo" value="${c.clubNo }">
+									                    		<input type="hidden" name="clubComRef" value="${cbc.clubComNo }">
+									                    		<input type="hidden" name="clubBoardNo"	 value="${cb.clubBoardNo }">
+									                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
+									                    		<textarea name="clubComContent" class="comment-textarea" style="width: 100%;" maxlength="205"></textarea>
+															</li>
+															<li class="btn-box">
+																<button class="btn btn-primary">등록</button>
+															</li>
+														</ul>
+													</form>
+												</div>
 			                    			</c:if>
 			                    			
-			                    			<!-- 대댓글 달기 -->
-											<div class="inputRecommentBox">
-												<form action="/insertClubComment.do" method="post">
-													<ul>
-														<li class="arrow-box">
-															<span class="material-symbols-outlined arrow-span" style="font-size: 35px;">subdirectory_arrow_right</span>
-														</li>
-														<li class="text-box">
-															<input type="hidden" name="clubNo" value="${c.clubNo }">
-								                    		<input type="hidden" name="clubComRef" value="${cbc.clubComNo }">
-								                    		<input type="hidden" name="clubBoardNo" value="${cb.clubBoardNo }">
-								                    		<input type="hidden" name="clubComWriter" value="${sessionScope.m.memberNo }">
-								                    		<textarea name="clubComContent" class="comment-textarea" style="width: 100%;" maxlength="205"></textarea>
-														</li>
-														<li class="btn-box">
-															<button class="btn btn-primary">등록</button>
-														</li>
-													</ul>
-												</form>
-											</div>
+			                    			
 			                    		
 			                    		
 											<!-- 대댓글 출력 -->
@@ -281,7 +275,7 @@
 															<span>${cbrc.clubComDate }</span>
 														</p>
 														<p class="comment-content">${cbrc.clubComContent }</p>
-														<textarea name="ncContent" class="input-form" style="min-height:50px; display:none;">ncContent</textarea>
+														<textarea name="clubComContent" class="input-form" rows="5" cols="90" style="display:none;">${cbrc.clubComContent }</textarea>
 														<c:if test="${cbrc.clubComWriter eq sessionScope.m.memberNo}">
 														<p class="comment-link">
 															<a href="javascript:void(0)" onclick="modifyComment(this, ${cbrc.clubComNo }, ${cb.clubNo});">수정</a> 
@@ -354,8 +348,8 @@
 
 <div class="clubLeader-modal-wrap">
     <div class="clubLeader-modal bg-white">
-        <div class="clubLeaderModalTop mt-3" style="display: flex; width: 97%; justify-content: flex-end;">
-            <h3 class="text-secondary" style="margin-right: 130px;">동호회 관리</h3><span class="material-symbols-outlined fw-bold closeSpan" onclick="leaderModalClose();">close</span>
+        <div class="clubLeaderModalTop mt-5">
+            <h3 class="text-secondary">동호회 관리</h3>
         </div>
         <div class="clubLeaderModalContent">
         <c:choose>
@@ -381,19 +375,15 @@
         </c:choose>
         </div>
         <hr>
-        <div class="align-center" style="width: 60%; margin: 0 auto;">
-        <table class="table" style="margin-bottom: 0;">
-        	<tr>
-        		<th>선택</th>
-        		<th>닉네임</th>
-        		<th>아이디</th>
-        	</tr>
-        </table>
-        </div>
-        <div class="align-center clubIntro2" style="width: 60%; margin: 0 auto; height: 240px; margin-top: 0;">
+        <div class="align-center mt-5" style="width: 50%; margin: 0 auto;">
         <c:choose>
         	<c:when test="${fn:length(c.memberList) > 1 }">
-        		<table class="table" style="margin-top: 0;">
+        		<table class="table">
+		        	<tr>
+		        		<th>선택</th>
+		        		<th>닉네임</th>
+		        		<th>아이디</th>
+		        	</tr>
 					<c:forEach items="${c.memberList }" var="cm">
 					<c:if test="${cm.memberNo ne sessionScope.m.memberNo }">
 		            <tr>
@@ -404,6 +394,8 @@
 		        	</c:if>
 		            </c:forEach>
 		        </table>
+	        <p>선택한 회원을 추방하시겠습니까?</p>
+			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
         	</c:when>
         	<c:otherwise>
         		<p class="fw-bold">관리할 회원이 없습니다</p>
@@ -412,10 +404,9 @@
         	</c:otherwise>
         </c:choose>
 	    </div>
-	    <div class="mt-3">
-	    	<p>선택한 회원을 추방하시겠습니까?</p>
-			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
-	    </div>
+	    <div class="clubLeaderModalBtnBox mt-4">
+			<button class="btn btn-secondary py-2 px-4" onclick="leaderModalClose();">닫기</button>
+		</div>
     </div>
 </div>
 
@@ -525,6 +516,8 @@
 	
 	
 	
+	
+	
 	/* ----------동호회 공지사항 수정---------- */
 	// 공지사항 수정 form
 	function updateNotice(obj, clubNo) {
@@ -584,7 +577,6 @@
 	
     // 채팅모달
     function openModal() {
-		alert("안녕하세요 모달입니다");
     	$("#member-box").show();
     	$(".modal-wrap").css("display", "flex");
 	}
@@ -770,6 +762,7 @@
 		$(".inputRecommentBox").eq(idx).find("textarea").focus();
 	})
 	
+	
 	function modifyComment(obj, cbcNo, clubNo){
 		$(obj).parent().prev().show(); //textarea 화면에show
 		$(obj).parent().prev().prev().hide();//
@@ -804,7 +797,10 @@
 		// 숨겨놨다가 보내도 상관없음
 		// 자바 스크립트에서 a태그로 보내는 것도 가능
 		
-		const form = $("<form action='updateClubComment.do' method='post'></form>");
+		const form = $("<form>");
+		form.attr("action", "/updateClubComment.do");
+		form.attr('method', 'post');
+		
 		const clubComNoInput = $("<input type='text' name='clubComNo'>");
 		clubComNoInput.val(cbcNo);		// input의 값으로 매개변수로 받은 번호 
 		form.append(clubComNoInput);	// 인풋 태그 form태그에 append
@@ -813,9 +809,10 @@
 		clubNoInput.val(clubNo);
 		form.append(clubNoInput);
 		
-		//4. textarea
-		const ncContent = $(obj).parent().prev();
-		form.append(ncContent);
+		const textarea = $(obj).parent().prev();
+		const text = textarea.text();
+		textarea.append(text);
+		form.append(textarea);
 		
 		// body 태그에 생성한 폼 append
 		$("body").append(form);
@@ -878,7 +875,7 @@
 	    	success: function (list) {
 	    		for (let i=0; i<list.length; i++) {
 					const div = $("<div>");
-					div.append("<span onclick='locationClub("+list[i].clubNo+")'>"+list[i].clubName+"</span>");
+					div.append("<span onclick='locationClub("+list[i].clubNo+");'>"+list[i].clubName+"</span>");
 					$("#myClubList").append(div);
 				}
 	    		
@@ -902,10 +899,20 @@
 	})
     
 	function locationClub(clubNo) {
-		var result = confirm("이동하시겠습니까?");
-		if(result){
-			location.href = "/clubDetail.do?clubNo="+clubNo;
-		}
+		Swal.fire({
+			text: '선택한 동호회로 이동합니다',
+			imageUrl: "/resources/img/제목없음.png",
+			showCancelButton: true,
+			cancelButtonColor: '#525368',
+			confirmButtonColor: '#348E38',
+			cancelButtonText: '닫기',
+			confirmButtonText: '이동'
+		}).then((result) => {
+			//result.value == true이니까 트루일때만 실행하는거
+		  if (result.value) {
+			  location.href = "/clubDetail.do?clubNo="+clubNo;
+		  }
+		})//then끝
 	}
 	</script>
 </body>
