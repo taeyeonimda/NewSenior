@@ -101,8 +101,6 @@
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
-                    
-						           		
 	                    <tbody>
 			            	<tr class="showCartList">
 						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${p.productFileVO[0].filePath }"></td>
@@ -112,10 +110,9 @@
 						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${p.productPrice*pp }" pattern="#,###"/></td>
 								<td><input type="hidden" class="sumPrice"  value="${p.productPrice*pp }"></td>
 			            	</tr>	
-			              
-	                      	
 	                    </tbody>
 	                  </table>
+	                  <input type="hidden" name="allSumPrice" class="allSumPrice">
                 <!-- 
               	</form>
 				<form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
@@ -179,7 +176,6 @@
                   <div style="margin: 10px; border-top: 1px solid #ddd;">
                   <!-- <button type="submit">연습버튼</button> -->
                     <button type="button" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary" id="payBtn">결제하기</button>
-                    <a href="javascript:void(0)" style="float: right; width:250px; margin: 10px;" class="btn btn-outline-primary">더 담으러 가기</a>
                   </div>
               </form>
                   
@@ -224,7 +220,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     	<script>
 		
-		
+
 
 		
 		function selectAll(selectAll)  {
@@ -237,31 +233,23 @@
 			};
 		
 		
-			function sum(){
-	    		const sumPrice = $(".sumPrice");
-				let result = 0;
-				for(let i=0; i<sumPrice.length; i++){
-					result += Number(sumPrice.eq(i).val());
-				}
-				
-				
-			}
 	    	window.onload=function(){
-				sum();
+				
 				let i =0;
 				let totalPrice = $(".cartTotalPrice");
-				let sumPrice=0;
+				let sumPrice1=$(".sumPrice").val();
+				console.log("아이"+sumPrice1);
 				let numberPrice;
 				for(i; i<totalPrice.length; i++){
 					let price = totalPrice.eq(i).text();
 					numberPrice = parseInt(price);
 					let realPrice = numberPrice.toLocaleString();
 					$(".realPrice").eq(i).text(realPrice);				
-					sumPrice += numberPrice;
+					sumPrice1 += numberPrice;
 				}
-				let realPrice = sumPrice.toLocaleString();
+				let realPrice = sumPrice1.toLocaleString();
 				$(".lastPrice").text(realPrice);
-				$(".allSumPrice").val(sumPrice);
+				$(".allSumPrice").val(sumPrice1);
 				
 			}
 		
@@ -290,7 +278,7 @@
 					url : "/inputDelivery.do",
 					type : "get",
 					data : {
-						memberNo : $(".hiddenMemberNo").val()
+						memberNo : $("[name=memberNo]").val()
 					},success:function(data){
 						$(".basicInput").eq(0).attr("value",data.deliveryName),
 						$(".basicInput").eq(1).attr("value",data.receiverName),
@@ -325,10 +313,15 @@
 		}
 		
 		$("#payBtn").on("click",function(){
-			const price = $(".sumPrice").val();
+			const price = $(".allSumPrice").val();
+			console.log(price)
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			
+			const status = $("#infoAgree").prop("checked");
+			if(status == false){
+				alert("주문 내용 확인 및 정보 제공동의에 체크하여 주세요.")
+				return;				
+			}
 			IMP.init("imp10385324");
 			IMP.request_pay({
 				pg: "html5_inicis",

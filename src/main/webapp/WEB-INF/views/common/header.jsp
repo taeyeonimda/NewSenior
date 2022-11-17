@@ -327,7 +327,7 @@
 		            </div>
 				</c:when>
 				<c:otherwise>
-					<a href="/logout.do"><img alt="로그아웃" src="/resources/img/power (1).png" style="width: 40px; margin-right: 10px;"></a>
+					<a href="/logout.do"><img alt="로그아웃" src="/resources/img/logout.png" style="width: 40px; margin-right: 10px;"></a>
 					<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
 				</c:otherwise>
 			</c:choose>
