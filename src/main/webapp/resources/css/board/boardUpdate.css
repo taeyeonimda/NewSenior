@@ -7,18 +7,19 @@
 		width:70%;
 		margin:0 auto;
 		border-collapse: collapse;
-		display:flex;
+		
 	}
 .boardUpdateTbl{
 	border: 2px solid #0F4229;
 }
 .boardUpdateTbl th{
 	text-align: center;
-	
 	align-items: center;
 	vertical-align: middle;
+	border : #0F4229;
 
 }
+
 .boardUpdateTbl select{
 	width:100px;
 	outline:none;
