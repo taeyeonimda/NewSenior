@@ -78,32 +78,27 @@
                         <th>후기</th>
                         <th>평점</th>
                         <th>작성일</th>
+                        <!--  
                         <th>수정</th>
+                        -->
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Spring Class</td>
-                        <td>윤수쌤 잘생겼어요</td>
-                        <td><span style="color: #ffab00;">★</span> +4.5</td>
-                        <td>2022-10-24</td>
+                    <c:forEach items="${list }" var="crv">
+                     <tr>
+                        <td>${crv.className }</td>
+                        <td>${crv.reviewContent }</td>
+                        <td><span style="color: #ffab00;">★</span> +${crv.reviewRate }</td>
+                        <td>${crv.reviewDate }</td>
+                        <!--  
                         <td>
                           <div class="col-md-10">
                             <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">수정하기</a></button>
                           </div>
                         </td>
+                        -->
                       </tr>
-                      <tr>
-                        <td>JAVA Class</td>
-                        <td>윤수쌤 너무예뻐요</td>
-                        <td><span style="color: #ffab00;">★</span> +5.0</td>
-                        <td>2022-10-18</td>
-                        <td>
-                          <div class="col-md-10">
-                            <button type="button" class="btn btn-outline-warning"><a href="#" style="color: #FFAB00;">수정하기</a></button>
-                          </div>
-                        </td>
-                      </tr>
+                    </c:forEach>
                     </tbody>
                     
                     

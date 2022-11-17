@@ -28,6 +28,7 @@ import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.nsClass.model.vo.ClassHistory;
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Controller
@@ -79,8 +80,21 @@ public class MemberController {
 	}
 	//나의 후기 가기(내가쓴글 수정)
 	@RequestMapping(value="/myComment.do")
-	public String myComment() {
-		return "myPage/myComment";
+	public String myComment(@SessionAttribute Member m, Model model) {
+		Member m1 = new Member();
+		m1.setMemberId(m.getMemberId());
+		m1.setKakaoLogin(m.getKakaoLogin());
+		Member member = service.selectOneMember(m1);
+		System.out.println("나의 후기 멤버"+member);
+		ArrayList<ClassReview> list = service.selectAllReview(member);
+		System.out.println("나의 후기 리스트"+list);
+		if (member != null) {
+			model.addAttribute("list",list);
+			model.addAttribute("member", member);
+			return "myPage/myComment";
+		} else {
+			return "redirect:/";
+		}
 	}
 	//강사정보가기
 	@RequestMapping(value="/teacherInfo.do")
@@ -528,5 +542,7 @@ public class MemberController {
 			NsClass nc = service.selectClassName(classNo);
 			return new Gson().toJson(nc);
 		}
+		
+		
 		
 }

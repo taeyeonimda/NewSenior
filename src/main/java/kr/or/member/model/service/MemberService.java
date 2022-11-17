@@ -13,6 +13,7 @@ import kr.or.member.model.vo.Delivery;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
 import kr.or.nsClass.model.vo.ClassHistory;
+import kr.or.nsClass.model.vo.ClassReview;
 import kr.or.nsClass.model.vo.NsClass;
 
 @Service
@@ -224,6 +225,12 @@ public class MemberService {
 	public NsClass selectClassName(int classNo) {
 		NsClass ns = dao.selectClassName(classNo);
 		return ns;
+	}
+
+	//나의 후기
+	public ArrayList<ClassReview> selectAllReview(Member member) {
+		// TODO Auto-generated method stub
+		return dao.selectAllReview(member);
 	}
 
 	
