@@ -13,6 +13,11 @@
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
+<style>
+.closeSpan:hover{
+	cursor: pointer;
+}
+</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
     <!-- page Content 시작-->
@@ -106,7 +111,7 @@
 		                            </div>
                         		</div>
 	                            <pre style="font-family: sans-serif">${c.clubNotice }</pre>
-	                            <textarea rows="5" cols="90" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
+	                            <textarea rows="5" cols="68" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
                     </div>
@@ -146,7 +151,12 @@
 				                        <div class="flex-space-between" style="width: 90%;">
 				                        	<div class="flex-space-between ml-10" style="width:27%;">
 				                        		<div class="profile-box" style="background: #BDBDBD;">
-													<img class="profile" src="/resources/upload/club/person_1.jpg">
+															<c:if test="${empty cb.clubBoardContent }">
+															<img class="profile" src="/resources/upload/member/기본이미지.jpg">
+															</c:if>
+															<c:if test="${not empty cb.clubBoardContent }">
+															<img class="profile" src="/resources/upload/member/${cb.memberImg }">
+														    </c:if>
 												</div>
 												<div class="mb-4">
 													<p class="text-primary fs-5" style="margin-bottom: 0;">${cb.clubBoardWriter }</p>
@@ -213,7 +223,12 @@
 			                    				<ul class="posting-comment">
 													<li class="comment-profil-li">
 														<div class="profile-box" style="background: #BDBDBD;">
-														    <img class="profile" src="/resources/upload/club/person_1.jpg">
+															<c:if test="${empty cbc.memberImg }">
+															<img class="profile" src="/resources/upload/member/기본이미지.jpg">
+															</c:if>
+															<c:if test="${not empty cbc.memberImg }">
+															<img class="profile" src="/resources/upload/member/${cbc.memberImg }">
+														    </c:if>
 														</div>
 													</li>
 													<li class="comment-content-li">
@@ -266,7 +281,12 @@
 													</li>
 													<li class="comment-profil-li"> 
 														<div class="profile-box" style="background: #BDBDBD;">
-															<img class="profile" src="/resources/upload/club/person_1.jpg">
+															<c:if test="${empty cbrc.memberImg }">
+															<img class="profile" src="/resources/upload/member/기본이미지.jpg">
+															</c:if>
+															<c:if test="${not empty cbrc.memberImg }">
+															<img class="profile" src="/resources/upload/member/${cbrc.memberImg }">
+														    </c:if>
 														</div>
 													</li>
 													<li class="comment-content-li">
@@ -348,7 +368,8 @@
 
 <div class="clubLeader-modal-wrap">
     <div class="clubLeader-modal bg-white">
-        <div class="clubLeaderModalTop mt-5">
+    	<div style="text-align: right; width: 98%;" class="mt-2"><span class="material-symbols-outlined fw-bold closeSpan" onclick="leaderModalClose();">close</span></div>
+        <div class="clubLeaderModalTop">
             <h3 class="text-secondary">동호회 관리</h3>
         </div>
         <div class="clubLeaderModalContent">
@@ -375,15 +396,18 @@
         </c:choose>
         </div>
         <hr>
-        <div class="align-center mt-5" style="width: 50%; margin: 0 auto;">
+        <div class="align-center" style="width: 70%; margin: 0 auto;">
         <c:choose>
         	<c:when test="${fn:length(c.memberList) > 1 }">
-        		<table class="table">
+        		<table class="table" style="margin-bottom: 0;">
 		        	<tr>
 		        		<th>선택</th>
 		        		<th>닉네임</th>
 		        		<th>아이디</th>
 		        	</tr>
+		        </table>
+		        <div style="height: 240px;" class="clubIntro2">
+		        <table class="table" style="margin-top: 0;">
 					<c:forEach items="${c.memberList }" var="cm">
 					<c:if test="${cm.memberNo ne sessionScope.m.memberNo }">
 		            <tr>
@@ -394,19 +418,16 @@
 		        	</c:if>
 		            </c:forEach>
 		        </table>
-	        <p>선택한 회원을 추방하시겠습니까?</p>
-			<button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button>
+		        </div>
+		        <div class="flex-space-between mt-4"><p style="margin: 0;">선택한 회원을 추방하시겠습니까?</p><button onclick="blockMember(${c.clubNo });" class="btn btn-secondary">회원 추방</button></div>
         	</c:when>
         	<c:otherwise>
         		<p class="fw-bold">관리할 회원이 없습니다</p>
         		<p>동호회 게시판에서 <br> 우리 동호회를 홍보할 수 있습니다</p>
-        		<a href="#" class="btn btn-secondary">이동스</a>
+        		<a href="/boardList.do?reqPage=1&boardType=P" class="btn btn-secondary">이동</a>
         	</c:otherwise>
         </c:choose>
 	    </div>
-	    <div class="clubLeaderModalBtnBox mt-4">
-			<button class="btn btn-secondary py-2 px-4" onclick="leaderModalClose();">닫기</button>
-		</div>
     </div>
 </div>
 

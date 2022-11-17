@@ -7,6 +7,11 @@
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
 <title>class</title>
 </head>
+<style>
+.classHover:hover{
+	cursor: pointer;
+}
+</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	
@@ -17,8 +22,8 @@
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLASS</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0" style="width:150px; background-color: #fff; border-radius: 30px; margin: 0 auto; padding: 10px;">
-                        <a href="/"><li class="breadcrumb-item" >Home</li></a>/
-                       <a onclick="location.href='/classList.do?classCategory=AL&reqPage=1'" style="cursor: pointer;"><li class="breadcrumb-item active" aria-current="page">클래스</li></a>
+                        <a href="/"><li class="breadcrumb-item text-light" >Home</li></a>/
+                       <a onclick="location.href='/classList.do?classCategory=AL&reqPage=1'" style="cursor: pointer;"><li class="breadcrumb-item active  text-light" aria-current="page">클래스</li></a>
                     </ol>
                 </nav>
             </div>
@@ -49,13 +54,13 @@
             <div class="row g-4 portfolio-container">
             <c:forEach items="${clist }" var="cla" varStatus="i">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
+                    <div class="portfolio-inner rounded classHover" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" style="width:408px; height:408px;" src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
-                        	<h5 class="text-light mb-4 fw-bold">---------------------------------------------------------</h5>
+                        	<hr>-----------------------------------------------------
                             <h3 class="display-6 text-white mb-4">${cla.className }</h3>
                             <h5 class="text-light mb-4 fw-bold">${cla.classPrice } 원</h5>
-                            <h5 class="text-light mb-4 fw-bold">---------------------------------------------------------</h5>
+                            <hr>------------------------------------------------------
                         </div>
                     </div>
                 </div>

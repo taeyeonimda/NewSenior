@@ -187,10 +187,12 @@
 		</table>
 		<!-- 테이블 밖으로 꺼냈음 -->
 		<div class="updateDelBox">
-				<c:if test="${not empty sessionScope.m  && b.nickName eq sessionScope.m.nickName }">
+			<c:if test="${not empty sessionScope.m}">
+				<c:if test="${b.nickName eq sessionScope.m.nickName || sessionScope.m.memberGrade eq 3 }">
 					<a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="updateBtn bc44" id="updateBtn">수정</button></a>
 					<a href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="delBtn bc44" id="delBtn">삭제</button></a>
 				</c:if>
+			</c:if>
 		</div>
 	
 	<c:if test="${b.boardType ne 'Q' and b.boardType ne 'N'}">
@@ -249,7 +251,7 @@
 
 					<p>
 						<c:if test="${not empty sessionScope.m }">
-							<c:if test="${sessionScope.m.nickName eq bc.nickName }">
+							<c:if test="${sessionScope.m.nickName eq bc.nickName}">
 								<a class="commUpdateTag" href="javaScript:void(0)" onclick="modifyComment(this,${bc.boardCommNo},${b.boardNo})">수정</a>
 								<a href="javaScript:void(0)" onclick="deleteComment(this,${bc.boardCommNo},${b.boardNo})">삭제</a>
 							</c:if>

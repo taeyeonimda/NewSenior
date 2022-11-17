@@ -105,11 +105,17 @@
 	text-align: left;
 	margin: 0 auto;
 }
+
 .clubListBtnBox{
 	width: 80%;
 	margin: 0 auto;
 	text-align: right;
 	margin-bottom: 20px;
+}
+.clubListInfoBox h3{
+	overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
 </style>
@@ -141,7 +147,7 @@
 							        	<img alt="" src="/resources/upload/club/${pl.clubMainImg }">
 							        </div>
 							        <div style="word-break:break-all;" >
-							            <h3 class="card-title" style="width: 90%; margin:0 auto; text-align: center; color: #168A67;">${pl.clubName }</h3>
+							            <h5 class="card-title fw-bold mb-2" style="width: 90%; margin:0 auto; text-align: center; color: #168A67;">${pl.clubName }</h5>
 										<p class="description clubIntro" style="width: 90%;">${pl.clubIntro } </p> 
 							        </div>
 							        <div style="display: flex; justify-content: flex-end;">
