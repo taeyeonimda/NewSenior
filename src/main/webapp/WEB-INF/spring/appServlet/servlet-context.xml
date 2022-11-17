@@ -130,7 +130,7 @@
 			<mapping path="/activityUpdate.do" />
 			<mapping path="/activityDelete.do" />
 			<mapping path="/adminMgrClass.do" />
-			<mapping path="" />
+			<mapping path="/classDelete.do" />
 			<mapping path="" />
 			<mapping path="" />
 			<mapping path="" />
