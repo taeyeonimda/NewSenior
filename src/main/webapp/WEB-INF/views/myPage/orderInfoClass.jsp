@@ -69,7 +69,7 @@
 						<div class="mt-5">
 							<h5 class="mb-4">${cla.className } (${cla.startDate } ~ ${cla.endDate })</h5>
 							<p>수강 시작일 : ${cla.startDate }</p>
-							<p id="amount">수강 인원 : ${clh.amount } 인</p>
+							<p>수강 인원 : <span id="amount">${clh.amount }</span> 인</p>
 							<p>수강 장소 : 시니어 클럽 잠실점</p>
 							<p>결제할 총 금액</p>
 							<p class="lastPrice" style="display: none;">${clh.payPrice }</p>
@@ -145,13 +145,18 @@
         	showPriceSet();
         });
 
+        
 		$("#payBtn").on("click",function(){
+			let amountNum = 0;
 			const price = $(".lastPrice").text();
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			const classNo = $("#payBtn").next().text();
 			const memberNo = $("#payBtn").next().next().text();
-			const amount = $("#amount").text();
+			const amountText =$("#amount").text();
+			amountNum = Number(amountText);
+			console.log(amountText);
+			console.log(typeof amountNum);
 			IMP.init("imp10385324");
 			IMP.request_pay({
 				pg: "html5_inicis",
@@ -165,12 +170,13 @@
 				buyer_postcode : "12345"				// 구매자 우편변호
 			},function(rsp){
 				if(rsp.success){
-					alert("결제완료");
+					location.href="/insertClassHistory.do?classNo="+classNo+"&memberNo="+memberNo+"&amount="+amountNum;
 				}else{
 					alert("결제 실패");
 				}
 			});
 		});
+
 	</script>
   </body>
 </html>

@@ -47,10 +47,9 @@ public class OrderController {
 	
 	
 	@RequestMapping(value="/findDate.do")
-	public String findDate(Model model,Order o, String startDate,String orderDate, String endDate) {
-		o.setStartDate(startDate);
-		o.setOrderDate(orderDate);
-		o.setEndDate(endDate);
+	public String findDate(Model model,Order o,String startDate, String endDate) {
+		System.out.println(startDate);
+		System.out.println(endDate);
 		ArrayList<Order> list2 = service.findDate(o);
 		System.out.println(o);
 		model.addAttribute("o", o);
@@ -82,11 +81,13 @@ public class OrderController {
 //	}
 	
 	@RequestMapping(value="/goDelivery.do")
-	public String goDelivery(Delivery de,Order o) {
+	public String goDelivery(Delivery de,Order o,String basicDeliveryCheck) {
 		int result1 = service.insertOrder(o);
 		
+		System.out.println(basicDeliveryCheck);
+		if(basicDeliveryCheck=="1") {
 		int result2 = service.gogoDelivery(de);
-		
+		}
 		int result3 = service.deleteOrder(o);
 		
 		//int result4 = service.insertDetail(o);

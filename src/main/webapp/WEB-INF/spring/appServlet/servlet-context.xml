@@ -100,7 +100,7 @@
 			<mapping path="/insertActHistory.do"/>
 			<mapping path="/insertActivityReview.do"/>
 			<mapping path="/insertActivityReview.do"/>
-			
+			<mapping path="/cart.do" />
 			<mapping path="/activityEnroll.do"/>
 			<mapping path="/insertActivity.do"/>
 			<mapping path="/classHistory.do"/>

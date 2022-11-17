@@ -141,8 +141,8 @@ public class ClubDao {
 		return (ArrayList<Club>)list;
 	}
 
-	public ArrayList<Club> getAllMyClub(Member m) {
-		List list = sqlSession.selectList("club.getAllMyClub",m);
-		return (ArrayList<Club>)list;
+
+	public int updateClubBoardComment(ClubBoardComment cbc) {
+		return sqlSession.update("club.updateClubBoardComment", cbc);
 	}
 }

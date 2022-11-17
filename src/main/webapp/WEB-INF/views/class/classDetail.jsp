@@ -71,6 +71,7 @@
                 <div class="side-teacher-box text-secondary fs-5 fw-bold mb-4">
                     <span>${cla.teacherName }</span> 강사
                     <div style="display: none;" id="classTeacher">${cla.classTeacher }</div>
+                    <div style="display: none;" id="classLimit">${cla.classLimit }</div>
                 </div>
                 <div class="side-info-box">
                     <ul>
@@ -134,7 +135,7 @@
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span><a href="#menu1" class="fw-change">커리큘럼</a></span><span><a href="#menu2" class="fw-change">강사소개</a></span><span><a href="#menu3" class="fw-change">강사후기</a></span><span><a href="#menu4" class="fw-change">준비물</a></span><span><a href="#menu5" class="fw-change">환불규정</a></span>
+                	<span><a href="#menu1" class="fw-change">커리큘럼</a></span><span><a href="#menu2" class="fw-change">강사소개</a></span><span><a href="#menu3" class="fw-change">강사후기</a></span><span><a href="#menu" class="fw-change">준비물</a></span><span><a href="#menu4" class="fw-change">환불규정</a></span>
                 </div>
             </div>
         </div>
@@ -173,7 +174,7 @@
                         <img class="img-fluid rounded" data-wow-delay="0.1s" src="/resources/MAINbtstr/img/모델클래스 (1).jpg">
                     </div>
                     <div class="col-lg-7 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
-                        <h4 class="display-3 text-primary mb-0">${cla.teacherName }</h4>
+                        <h4 class="display-3 text-primary">${cla.teacherName }</h4>
                         <pre style="width: 70%;" class="fw-change">${cla.teacherIntroduce } 하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이</pre>
                     </div>
                 </div>
@@ -189,7 +190,7 @@
       	</div>
 
         <!-- 클래스 준비물 -->
-        <div class="container-xxl py-5" id="menu3">
+        <div class="container-xxl py-5">
             <div class="container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
@@ -215,9 +216,11 @@
             </div>
         </div>
         <!-- Team End -->
-
+		
+		
+		<div id="menu4"></div>
         <!-- 환불규정 -->
-        <div class="container-xxl py-5 mt-5" id="menu4">
+        <div class="container-xxl py-5 mt-5">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -314,38 +317,69 @@
 		       $(".scroll_move").click(function(event){         
 		               event.preventDefault();
 		               $('html, body').animate({scrollTop:$(this.hash).offset().top}, 500);
-		       });
+		       })
 		});
-    
+		
+		
+		
+		
+    	const classLimit = Number($("#classLimit").text());
+    	
 	    function openConfirm(className, classNo, memberNo){
 	    	const amount = $("select[name=amount]").val();
 	    	if(amount==''){
 	    		alert("인원수를 선택하세요");
 	    	}else{
-	    		console.log(changeP);
-	    		const price = changeP.toLocaleString("ko-KR");
-	    		const text = '선택된 인원은 '+amount+'명, 총 결제 금액은 '+price+'입니다        결제하시겠습니까?';
-	    		Swal.fire({
-					title: className,//제목
-					text: text,
-					imageUrl: "/resources/img/제목없음.png",
-					showCancelButton: true,
-					cancelButtonColor: '#525368',
-					confirmButtonColor: '#348E38',
-					cancelButtonText: '취소',
-					confirmButtonText: '신청하기'
-				}).then((result) => {
-					//result.value == true이니까 트루일때만 실행하는거
-				  if (result.value) {
-		              location.href = "/payClass.do?classNo="+classNo+"&memberNo="+memberNo+"&amount="+amount;
-				  }
-				})//then끝
-	    	}
-
-			
+	    		$.ajax({
+	    			url : "/selectClassHistorySum.do",
+	    			data : { classNo : classNo },
+	    			type : "post",
+	    			success : function(cnt) {
+	    				// 현재 신청인원
+	    				const num = Number(cnt)+Number(amount);
+	    				const msg = "현재 가입인원은 "+cnt+"명, 총 가입할 수 있는 인원은 "+amount+"명 입니다" ; 
+	    				if(classLimit>num){
+	    					console.log("가입가능");
+	    					const price = changeP.toLocaleString("ko-KR");
+		    	    		const text = '선택된 인원은 '+amount+'명, 총 결제 금액은 '+price+'입니다        결제하시겠습니까?';
+		    	    		Swal.fire({
+		    					title: className,//제목
+		    					text: text,
+		    					imageUrl: "/resources/img/제목없음.png",
+		    					showCancelButton: true,
+		    					cancelButtonColor: '#525368',
+		    					confirmButtonColor: '#348E38',
+		    					cancelButtonText: '취소',
+		    					confirmButtonText: '신청하기'
+		    				}).then((result) => {
+		    					//result.value == true이니까 트루일때만 실행하는거
+		    				  if (result.value) {
+		    		              location.href = "/payClass.do?classNo="+classNo+"&memberNo="+memberNo+"&amount="+amount;
+		    				  }
+		    				})//then끝
+	    				}else{
+	    					console.log("가입불가");
+	    					Swal.fire({
+		    					title: "신청인원을 초과하였습니다",//제목
+		    					text: msg,
+		    					imageUrl: "/resources/img/제목없음.png",
+		    					showCancelButton: true,
+		    					cancelButtonColor: '#525368',
+		    					confirmButtonColor: '#348E38',
+		    					cancelButtonText: '취소',
+		    					confirmButtonText: '메인으로 이동'
+		    				}).then((result) => {
+		    					//result.value == true이니까 트루일때만 실행하는거
+		    				  if (result.value) {
+		    		              location.href = "/";
+		    				  }
+		    				})//then끝
+	    				}
+	    			}
+	    	})
 		}
 
-    	
+	}
     	
     	function closeModal() {
     		$(".confirm-modal-wrap").css("display", "none");
@@ -388,10 +422,9 @@
         let selectVal=0;
         let changeP=0;
      	// side select 가격 바꾸기 css
-	    function changePrice(){
+     	function changePrice(){
      		const div = $("#priceBox");
 	    	selectVal = $("select[name=amount]").val();
-	    	console.log(typeof selectVal);
 	    	const originalPrice = $("#originalPrice").text(); // 기본값
 	    	console.log(originalPrice);
 	    	if(selectVal != ''){
@@ -402,10 +435,7 @@
 	    		div.find('span').eq(0).text(originalPrice.toLocaleString("ko-KR"));
 	    	}
 		};
-       
-        
-		
-		
+
 		
         // 리뷰 script
 	    $("#review-btn").on("click", function(){

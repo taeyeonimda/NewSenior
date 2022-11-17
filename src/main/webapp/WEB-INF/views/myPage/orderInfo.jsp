@@ -15,7 +15,7 @@
 
 <style>
 .forTr input,td{
-	text-align : center;
+   text-align : center;
 }
 
 
@@ -61,7 +61,7 @@
 </head>
 <style>
 .showCartList td{
-	line-height:70px;
+   line-height:70px;
 }
 </style>
 <body>
@@ -87,147 +87,148 @@
               <div class="card">
 
                 <div class="table-responsive text-nowrap">
-					<!-- 
-					<form id="order-form" action="/insertOrder.do?memberNo=${sessionScope.m.memberNo}" method="post" autocomplete="off">
- 					-->
-                	<form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
+               <!-- 
+               <form id="order-form" action="/insertOrder.do?memberNo=${sessionScope.m.memberNo}" method="post" autocomplete="off">
+                -->
+                   <form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
                   <table class="table table-borderless">
                     <thead>
                       <tr style="text-align: center;">
-						<th style=" width: 10%;">카트번호</th>
+                  <th style=" width: 10%;">카트번호</th>
                         <th style=" width: 25%;">이미지</th>
                         <th style=" width: 35%;">상품명</th>
- 						<th style=" width: 10%;">금액</th>
+                   <th style=" width: 10%;">금액</th>
                         <th style=" width: 10%;">수량</th>
                         <th style=" width: 10%;">총 금액</th>
                       </tr>
                     </thead>
                     
-	                    <tbody>
-	                    <c:forEach items="${list }" var="Cart">
-			            	<tr class="showCartList">
-					            <td style="text-align:center">
-						            <input type="hidden" class="hiddenMemberNo" value="${sessionScope.m.memberNo }">
-						            <input class="proNo" type="hidden" value="${Cart.productNo }">
-						            <input class="cartNo" type="text" value="${Cart.cartNo }" name="cartNo" style="border: none; text-align:center;" readonly>
-					            </td>
-					         	
-					            <c:choose>
-						           	<c:when test="${Cart.productPhoto != null}">
-						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto}"></td>
-						           	</c:when>	
-						           	<c:when test="${Cart.activityPhoto != null}">
-						           		<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/activity/${Cart.activityPhoto}"></td>
-						           	</c:when>		
-					            </c:choose>
-					         	
-					         	<c:choose>
-						           	<c:when test="${Cart.buyName != null}">
-						           		<td style="text-align:center">${Cart.buyName }</td>
-						           	</c:when>	
-						           	<c:when test="${Cart.activityName != null}">
-						           		<td style="text-align:center">${Cart.activityName }</td>
-						           	</c:when>		
-					            </c:choose>
+                       <tbody>
+                       <c:forEach items="${list }" var="Cart">
+                        <tr class="showCartList">
+                           <td style="text-align:center">
+                              <input type="hidden" class="hiddenMemberNo" value="${sessionScope.m.memberNo }">
+                              <input class="proNo" type="hidden" value="${Cart.productNo }">
+                              <input class="cartNo" type="text" value="${Cart.cartNo }" name="cartNo" style="border: none; text-align:center;" readonly>
+                           </td>
+                           
+                           <c:choose>
+                                <c:when test="${Cart.productPhoto != null}">
+                                   <td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/productImg/${Cart.productPhoto}"></td>
+                                </c:when>   
+                                <c:when test="${Cart.activityPhoto != null}">
+                                   <td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/activity/${Cart.activityPhoto}"></td>
+                                </c:when>      
+                           </c:choose>
+                           
+                           <c:choose>
+                                <c:when test="${Cart.buyName != null}">
+                                   <td style="text-align:center">${Cart.buyName }</td>
+                                </c:when>   
+                                <c:when test="${Cart.activityName != null}">
+                                   <td style="text-align:center">${Cart.activityName }</td>
+                                </c:when>      
+                           </c:choose>
 
-					            <c:choose>
-						           	<c:when test="${Cart.buyPrice != 0}">
-						           		<td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
-						           	</c:when>	
-						           	<c:when test="${Cart.activityPrice != ''}">
-						           		<td class="buyPrice" style="text-align:center">${Cart.activityPrice }</td>
-						           	</c:when>		
-					            </c:choose>
-					            
-								<td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" /></td>
-								
+                           <c:choose>
+                                <c:when test="${Cart.buyPrice != 0}">
+                                   <td class="buyPrice" style="text-align:center"><fmt:formatNumber value="${Cart.buyPrice }" pattern="#,###"/></td>
+                                </c:when>   
+                                <c:when test="${Cart.activityPrice != ''}">
+                                   <td class="buyPrice" style="text-align:center">${Cart.activityPrice }</td>
+                                </c:when>      
+                           </c:choose>
+                           
+                        <td style="text-align:center"><fmt:formatNumber value="${Cart.buyAmount }" /></td>
+                        
 
-					         
-								 	<c:if test="${Cart.buyPrice != 0}">
-								 		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.buyPrice*Cart.buyAmount }</td>
-								 		<td style="text-align:center;" class="realPrice"></td>
-								 	</c:if>
-									<c:if test="${Cart.activityPrice != ''}">
-						           		<td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
-						           		<td style="text-align:center;" class="realPrice"></td>
-						           	</c:if>	
-									<td><input type="hidden" class="sumPrice"  value="${Cart.buyPrice*Cart.buyAmount }"></td>
-								
-								<td><input type="hidden" class="cartActivityNo" value="${Cart.activityNo }"></td>	
-			            	</tr>	
-			              	
-	             		</c:forEach>
-	                    	<tr>
-		                      	<td colspan="4"></td>
-		                      	<td>결제할 총 금액</td>
-		                      	<td>
-		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p class="lastPrice"></p>
-		                      		<input type="hidden" name="allSumPrice" class="allSumPrice" >
-		                     	</td>
-	                      	</tr>
-	                      	
-	                    </tbody>
-	                  </table>
+                        
+                            <c:if test="${Cart.buyPrice != 0}">
+                               <td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.buyPrice*Cart.buyAmount }</td>
+                               <td style="text-align:center;" class="realPrice"></td>
+                            </c:if>
+                           <c:if test="${Cart.activityPrice != ''}">
+                                   <td style="text-align:center; display:none;" class="cartTotalPrice">${Cart.activityPrice*Cart.buyAmount }</td>
+                                   <td style="text-align:center;" class="realPrice"></td>
+                                </c:if>   
+                           <td><input type="hidden" class="sumPrice"  value="${Cart.buyPrice*Cart.buyAmount }"></td>
+                        
+                        <td><input type="hidden" class="cartActivityNo" value="${Cart.activityNo }"></td>   
+                        </tr>   
+                          
+                      </c:forEach>
+                          <tr>
+                               <td colspan="4"></td>
+                               <td>결제할 총 금액</td>
+                               <td>
+                                  <input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+                                  <p class="lastPrice"></p>
+                                  <input type="hidden" name="allSumPrice" class="allSumPrice" >
+                              </td>
+                            </tr>
+                            
+                       </tbody>
+                     </table>
                 <!-- 
-              	</form>
-				<form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
-				 -->
-					<div style="text-align:center; font-size:30px;"><span>주문자 정보</span></div>
-					<div class="orderInfo" style="margin-left:15%;">
-						<div><span style="margin-right:10px;">주문자명</span><input type="text" value="${sessionScope.m.memberName }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
-						<div><span style="margin-right:10px;">전화번호</span><input type="text" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
-						<div><span style="margin-right:25px;">이메일</span><input type="text"  value="${sessionScope.m.memberEmail }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div>
-						<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-					</div>
-					<br><br><br>
-					<div id="same-check" style="float:right; margin-right:10%;">
+                 </form>
+            <form id="goDeliveryTable" action="/goDelivery.do?memberNo=${sessionScope.m.memberNo}" autocomplete="off">
+             -->
+               <div style="text-align:center; font-size:30px;"><span>주문자 정보</span></div>
+               <div class="orderInfo" style="margin-left:15%;">
+                  <div><span style="margin-right:10px;">주문자명</span><input type="text" value="${sessionScope.m.memberName }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
+                  <div><span style="margin-right:10px;">전화번호</span><input type="text" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
+                  <div><span style="margin-right:25px;">이메일</span><input type="text"  value="${sessionScope.m.memberEmail }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div>
+                  <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+               </div>
+               <br><br><br>
+               <div id="same-check" style="float:right; margin-right:10%;">
                         <input type="checkbox" id="order-same" class="order-agree" >
                         <label for="order-same">기본 배송지 불러오기</label>
-                           <input type="checkbox" id="test-same" class="order-agree" >
-                        <label for="test-same">테스트용</label>
+                        <input type="hidden" class="basicDelivery" name="basicDeliveryCheck">
+                        
+                        
                     </div>
-					<br><br>
-					<div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
-					<div class="order-info shipping" style="margin-left:15%;">
-						<div class="order-box">
-	                        <label for="deliveryName" class="order-label" id="deliveryName" style="width:80px;">배송지이름<span class="comment"></span></label>
-	                        <input type="text" id="deliveryName" class="basicInput" name="deliveryName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
-	                    </div><br>
-	                    <div class="order-box">
-	                        <label for="deliveryName" class="order-label" style="width:80px;">수령인명</label>
-	                        <input type="text"  id="deliveryName" class="basicInput " name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
-	                    </div>
-	                        <br>
-	                    <div class="order-box">
-	                        <label for="deliveryPhone" class="order-label" style="width:80px;">전화번호</label>
-	                        <input type="text"  id="deliveryPhone" class="basicInput" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
-	                    </div>
-	                        <br>
+               <br><br>
+               <div style="text-align:center; font-size:30px;"><span>배송지 정보</span></div>
+               <div class="order-info shipping" style="margin-left:15%;">
+                  <div class="order-box">
+                           <label for="deliveryName" class="order-label" id="deliveryName" style="width:80px;">배송지이름<span class="comment"></span></label>
+                           <input type="text" id="deliveryName" class="basicInput" name="deliveryName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                       </div><br>
+                       <div class="order-box">
+                           <label for="deliveryName" class="order-label" style="width:80px;">수령인명</label>
+                           <input type="text"  id="deliveryName" class="basicInput " name="receiverName" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                       </div>
+                           <br>
+                       <div class="order-box">
+                           <label for="deliveryPhone" class="order-label" style="width:80px;">전화번호</label>
+                           <input type="text"  id="deliveryPhone" class="basicInput" name="deliveryPhone" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" placeholder="010-0000-0000 형식으로 입력" required>
+                       </div>
+                           <br>
 <!-- 
-	                    <div class="order-box">
-	                        <label for="deliveryEmail" class="order-label" style="width:80px;">이메일</label>
-	                        <input type="text"  id="deliveryEmail" class="basicInput" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
-	                    </div>
+                       <div class="order-box">
+                           <label for="deliveryEmail" class="order-label" style="width:80px;">이메일</label>
+                           <input type="text"  id="deliveryEmail" class="basicInput" name="deliveryEmail" value="" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                       </div>
  -->
-	                    <div class="order-box">
-	                        <label for="deliveryAddr" class="order-label" style="width:80px;">주소</label>
-	                        <input type="text" id="deliveryAddr" class="addr1 basicInput" name="deliveryAddr" style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
-	                        <button type="button" class="btn btn-outline-primary" style="width:120px;height:40px;margin-bottom:30px;margin-top:10px;" id="addr-btn" onclick="searchAddr();">주소찾기</button>
-	                    </div>
-	                    <div class="order-box">
-	                        <label for="deliveryAddr2" class="order-label" id="detailAddress" style="width:80px;">우편번호<span class="comment"></span></label>
-	                        <input type="text" id="deliveryAddr2" class="addr2 basicInput" name="zipcode" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
-	                    </div><br>
-	                    <div class="order-box">
-	                        <label for="deliveryAddr2" class="order-label" id="detailAddress2" style="width:80px;">상세주소<span class="comment"></span></label>
-	                        <input type="text" id="deliveryAddr2" class="detailAddr basicInput" name="deliveryDetail" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
-	                    </div><br>
-	                    
-                	</div>
-                	<br><br>
-                	<div class="agree" style="text-align:center;">
-                   		<input type="checkbox" id="infoAgree">
+                       <div class="order-box">
+                           <label for="deliveryAddr" class="order-label" style="width:80px;">주소</label>
+                           <input type="text" id="deliveryAddr" class="addr1 basicInput" name="deliveryAddr" style="width:400px; border:none; border-bottom : 2px solid rgb(120,181,143);" required readonly>
+                           <button type="button" class="btn btn-outline-primary" style="width:120px;height:40px;margin-bottom:30px;margin-top:10px;" id="addr-btn" onclick="searchAddr();">주소찾기</button>
+                       </div>
+                       <div class="order-box">
+                           <label for="deliveryAddr2" class="order-label" id="detailAddress" style="width:80px;">우편번호<span class="comment"></span></label>
+                           <input type="text" id="deliveryAddr2" class="addr2 basicInput" name="zipcode" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                       </div><br>
+                       <div class="order-box">
+                           <label for="deliveryAddr2" class="order-label" id="detailAddress2" style="width:80px;">상세주소<span class="comment"></span></label>
+                           <input type="text" id="deliveryAddr2" class="detailAddr basicInput" name="deliveryDetail" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);" required>
+                       </div><br>
+                       
+                   </div>
+                   <br><br>
+                   <div class="agree" style="text-align:center;">
+                         <input type="checkbox" id="infoAgree">
                         <label for="infoAgree">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
                     </div>
                     <br>                
@@ -277,162 +278,159 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    	<script>
-	
-		
-		function selectAll(selectAll)  {
-			  const checkboxes 
-			       = document.getElementsByName("productCheck");
-			  
-			  checkboxes.forEach((checkbox) => {
-			    checkbox.checked = selectAll.checked;
-			  })
-			};
-		
-		
-			function sum(){
-	    		const sumPrice = $(".sumPrice");
-				let result = 0;
-				for(let i=0; i<sumPrice.length; i++){
-					result += Number(sumPrice.eq(i).val());
-				}
-				
-				
-			}
-	    	window.onload=function(){
-				sum();
-				let i =0;
-				let totalPrice = $(".cartTotalPrice");
-				let sumPrice=0;
-				let numberPrice;
-				for(i; i<totalPrice.length; i++){
-					let price = totalPrice.eq(i).text();
-					numberPrice = parseInt(price);
-					let realPrice = numberPrice.toLocaleString();
-					$(".realPrice").eq(i).text(realPrice);				
-					sumPrice += numberPrice;
-				}
-				let realPrice = sumPrice.toLocaleString();
-				$(".lastPrice").text(realPrice);
-				$(".allSumPrice").val(sumPrice);
-				
-			}
-		
-		// 체크한것 삭제
-		$(".deleteCheck").on("click", function(){
-		    const check = $(".deleteBtn:checked");
-		    if(check.length == 0) {
-		        alert("선택된 상품이 없습니다.")
-				return;
-		    }
-			const productNoList = new Array();
-		    const userNo = check.next().val();
+       <script>
+      function selectAll(selectAll)  {
+           const checkboxes 
+                = document.getElementsByName("productCheck");
+           
+           checkboxes.forEach((checkbox) => {
+             checkbox.checked = selectAll.checked;
+           })
+         };
+      
+      
+         function sum(){
+             const sumPrice = $(".sumPrice");
+            let result = 0;
+            for(let i=0; i<sumPrice.length; i++){
+               result += Number(sumPrice.eq(i).val());
+            }
+         }
+          window.onload=function(){
+            sum();
+            let i =0;
+            let totalPrice = $(".cartTotalPrice");
+            let sumPrice=0;
+            let numberPrice;
+            for(i; i<totalPrice.length; i++){
+               let price = totalPrice.eq(i).text();
+               numberPrice = parseInt(price);
+               let realPrice = numberPrice.toLocaleString();
+               $(".realPrice").eq(i).text(realPrice);            
+               sumPrice += numberPrice;
+            }
+            let realPrice = sumPrice.toLocaleString();
+            $(".lastPrice").text(realPrice);
+            $(".allSumPrice").val(sumPrice);
+         }
+      
+      // 체크한것 삭제
+      $(".deleteCheck").on("click", function(){
+          const check = $(".deleteBtn:checked");
+          if(check.length == 0) {
+              alert("선택된 상품이 없습니다.")
+            return;
+          }
+         const productNoList = new Array();
+          const userNo = check.next().val();
 
-			for(let i=0; i<check.length; i++) {
-			    const productNo = check.eq(i).val();
-			    productNoList.push(productNo);
-			}
-			location.href="/deleteCart.do?productNo="+productNoList.join("/");
-		});
-		
-		
-		$("#order-same").on("change", function(){
-			if($(this).prop("checked")) {
-				
-				$.ajax({
-					url : "/inputDelivery.do",
-					type : "get",
-					data : {
-						memberNo : $(".hiddenMemberNo").val()
-					},success:function(data){
-						$(".basicInput").eq(0).attr("value",data.deliveryName),
-						$(".basicInput").eq(1).attr("value",data.receiverName),
-						$(".basicInput").eq(2).attr("value",data.deliveryPhone),
-						$(".basicInput").eq(3).attr("value",data.deliveryAddr),
-						$(".basicInput").eq(4).attr("value",data.zipcode),
-						$(".basicInput").eq(5).attr("value",data.deliveryDetail)
-				
-					}
-				});
-			
-			}else{
-				$(".basicInput").eq(0).attr("value","")
-				$(".basicInput").eq(1).attr("value","")
-				$(".basicInput").eq(2).attr("value","")
-				$(".basicInput").eq(3).attr("value","")
-				$(".basicInput").eq(4).attr("value","")
-				$(".basicInput").eq(5).attr("value","")
-			}
-			
-		});
+         for(let i=0; i<check.length; i++) {
+             const productNo = check.eq(i).val();
+             productNoList.push(productNo);
+         }
+         location.href="/deleteCart.do?productNo="+productNoList.join("/");
+      });
+      
+      
+      $("#order-same").on("change", function(){
+         if($(this).prop("checked")) {
+            $.ajax({
+               url : "/inputDelivery.do",
+               type : "get",
+               data : {
+                  memberNo : $(".hiddenMemberNo").val()
+               },success:function(data){
+            	  
+                  $(".basicInput").eq(0).attr("value",data.deliveryName).attr("readonly",true),
+                  $(".basicInput").eq(1).attr("value",data.receiverName).attr("readonly",true),
+                  $(".basicInput").eq(2).attr("value",data.deliveryPhone).attr("readonly",true),
+                  $(".basicInput").eq(3).attr("value",data.deliveryAddr).attr("readonly",true),
+                  $(".basicInput").eq(4).attr("value",data.zipcode).attr("readonly",true),
+                  $(".basicInput").eq(5).attr("value",data.deliveryDetail).attr("readonly",true)
+               }
+            });
+         }else{
+        	 let bd = $(".basicDelivery").val();
+        	 $(".basicDelivery").val(1);
+             console.log(bd);
+            $(".basicInput").eq(0).attr("value","").attr("readonly",false),
+            $(".basicInput").eq(1).attr("value","").attr("readonly",false),
+            $(".basicInput").eq(2).attr("value","").attr("readonly",false),
+            $(".basicInput").eq(3).attr("value","").attr("readonly",false),
+            $(".basicInput").eq(4).attr("value","").attr("readonly",false),
+            $(".basicInput").eq(5).attr("value","").attr("readonly",false)
+         }
+         
+      });
 
-		
-		function searchAddr() {
-		    new daum.Postcode({
-		        oncomplete: function(data) {
-		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-		            $(".addr1").val(data.roadAddress);
-		            $(".addr2").val(data.zonecode);
-		            
-		        }
-		    }).open();
-		}
-		
-		$("#test-same").on("click", function(){
-		
-			
-		});
-		
-		
-		
-		
-		
-		$("#payBtn").on("click",function(){
-			const price = $(".allSumPrice").val();
-			const d = new Date();
-			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			
-			IMP.init("imp10385324");
-			IMP.request_pay({
-				pg: "html5_inicis",
-				merchat_uid : "상품코드_"+date, 			// 거래 ID
-				name : "결제 테스트",			  			// 결제 이름
-				amount : price,							// 결제 금액
-				buyer_email : "wnstjr5558@naver.com",	// 구매자 이메일
-				buyer_name : "구매자",					// 구매자
-				buyer_tel : "010-1234-1234",			// 구매자 전화번호
-				buyer_addr : "서울시 영등포구 당산동",			// 구매자 주소
-				buyer_postcode : "12345"				// 구매자 우편변호
-			
-			},function(rsp){
-				if(rsp.success){
-					
-					let cartActivityNo = $(".cartActivityNo").length;
-					let cartActivity = $(".cartActivityNo");
-					let memberNo = $(".hiddenMemberNo").val();
-					if(cartActivityNo!=0){
-						for(let s=0;s<cartActivityNo;s++){
-							$.ajax({
-								url:"/insertActHistory.do",
-								data:{
-									memberNo:memberNo,
-									activityNo:cartActivity.eq(s).val()
-								}
-							});//ajax
-						}
-					}
+      
+      function searchAddr() {
+          new daum.Postcode({
+              oncomplete: function(data) {
+                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                  // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                  $(".addr1").val(data.roadAddress);
+                  $(".addr2").val(data.zonecode);
+                  
+              }
+          }).open();
+      }
+      
+      $("#test-same").on("click", function(){
+      
+         
+      });
+      
+      
+      
+      
+      
+      $("#payBtn").on("click",function(){
+         const price = $(".allSumPrice").val();
+         const d = new Date();
+         const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+         
+         IMP.init("imp10385324");
+         IMP.request_pay({
+            pg: "html5_inicis",
+            merchat_uid : "상품코드_"+date,          // 거래 ID
+            name : "결제 테스트",                    // 결제 이름
+            amount : price,                     // 결제 금액
+            buyer_email : "wnstjr5558@naver.com",   // 구매자 이메일
+            buyer_name : "구매자",               // 구매자
+            buyer_tel : "010-1234-1234",         // 구매자 전화번호
+            buyer_addr : "서울시 영등포구 당산동",         // 구매자 주소
+            buyer_postcode : "12345"            // 구매자 우편변호
+         
+         },function(rsp){
+            if(rsp.success){
+               
+               let cartActivityNo = $(".cartActivityNo").length;
+               let cartActivity = $(".cartActivityNo");
+               let memberNo = $(".hiddenMemberNo").val();
+               if(cartActivityNo!=0){
+                  for(let s=0;s<cartActivityNo;s++){
+                     $.ajax({
+                        url:"/insertActHistory.do",
+                        data:{
+                           memberNo:memberNo,
+                           activityNo:cartActivity.eq(s).val()
+                        }
+                     });//ajax
+                  }
+               }
 
-					alert("결제 성공");
-					const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
-					$("#goDeliveryTable").append(input);	
-		            $("#goDeliveryTable").submit();
-				}else{
-					console.log(rsp)
-					alert("결제 실패");
-				}
-			});
-		});
-	</script>
+               alert("결제 성공");
+               let basicDeliveryCheck = $(".basicDelivery").val();
+               console.log(basicDeliveryCheck);
+               $("#goDeliveryTable").append(basicDeliveryCheck);
+               $("#goDeliveryTable").submit();
+            }else{
+               console.log(rsp)
+               alert("결제 실패");
+            }
+         });
+      });
+   </script>
   </body>
 </html>

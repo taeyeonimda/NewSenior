@@ -238,7 +238,6 @@
 				let i =0;
 				let totalPrice = $(".cartTotalPrice");
 				let sumPrice1=$(".sumPrice").val();
-				console.log("아이"+sumPrice1);
 				let numberPrice;
 				for(i; i<totalPrice.length; i++){
 					let price = totalPrice.eq(i).text();
@@ -314,7 +313,6 @@
 		
 		$("#payBtn").on("click",function(){
 			const price = $(".allSumPrice").val();
-			console.log(price)
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			const status = $("#infoAgree").prop("checked");
