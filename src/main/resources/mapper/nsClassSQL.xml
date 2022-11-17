@@ -334,4 +334,10 @@
 	<select id="selectClassHistorySum" parameterType="cla" resultType="int">
 		select NVL(sum(amount), 0) from class_history where class_no=#{classNo }
 	</select>
+
+	<delete id="deleteClass" parameterType="int">
+		delete from classes
+		where class_no = #{classNo}
+	</delete>
+
 </mapper>

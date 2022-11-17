@@ -37,7 +37,7 @@ public class AdminClassController {
 		nsCl.setFileList(fileVo);
 		model.addAttribute("cla",nsCl);
 		//model.addAttribute("files",fileVo);
-		return "myPage/classUpdate";
+		return "admin/classUpdate";
 	}
 	
 	@RequestMapping(value="/changeStatus.do")
@@ -59,12 +59,14 @@ public class AdminClassController {
 			return "redirect:adminMgrClass.do?reqPage=1";
 		}
 	}
-	
-	//아직안씀
-	@RequestMapping(value="/classUpdate.do")
-	public String classUpdate(int classNo) {
-		int result = service.classUpdate(classNo);
-		return "A";
+	//클래스관리에서 관리자가 삭제
+	@RequestMapping(value="/classDelete.do")
+	public String deleteClass(int classNo) {
+		int result = service.deleteClass(classNo);
+		if(result>0) {
+			return "redirect:adminMgrClass.do?reqPage=1";
+		}else {
+			return "redirect:adminMgrClass.do?reqPage=1";
+		}
 	}
-	
 }

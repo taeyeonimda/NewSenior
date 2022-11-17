@@ -233,10 +233,7 @@ public class NsClassService {
 		return list;
 	}
 
-	@Transactional
-	public int classUpdate(int classNo) {
-		return dao.classUpdate(classNo);
-	}
+
 
 	public NsClass getOneClass(int classNo) {
 		return dao.getOneClass(classNo);
@@ -281,8 +278,15 @@ public class NsClassService {
 	public int insertPayClassHistory(ClassHistory clh) {
 		return dao.insertPayClassHistory(clh);
 	}
+
 	public int selectClassHistorySum(NsClass nc) {
 		int result = dao.selectClassHistorySum(nc);
+		return result;
+	}
+	
+	@Transactional
+	public int deleteClass(int classNo) {
+		int result = dao.deleteClass(classNo);
 		return result;
 	}
 }
