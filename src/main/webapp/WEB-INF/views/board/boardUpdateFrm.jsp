@@ -161,7 +161,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th style="background-color:#0F4229; color:white;">작성자</th>
+				<th style="background-color:#0F4229; color:white;">닉네임</th>
 				<td>
 				${sessionScope.m.nickName }
 				<input type="hidden" name="boardType" value="${boardType}">
