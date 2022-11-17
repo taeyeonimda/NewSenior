@@ -54,7 +54,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
-		<style>
+<style>
 .swal2-icon {
     position: relative;
     box-sizing: content-box;

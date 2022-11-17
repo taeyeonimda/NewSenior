@@ -329,4 +329,9 @@
     from class_history a , CLASSES b, members c
     where a.CLASS_NO = b.CLASS_NO  and  b.CLASS_TEACHER = c.member_no and a.member_no=#{memberNo} and b.class_status = 2
 	</select>
+	
+	<delete id="deleteClass" parameterType="int">
+		delete from classes
+		where class_no = #{classNo}
+	</delete>
 </mapper>

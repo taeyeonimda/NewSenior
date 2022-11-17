@@ -68,10 +68,7 @@ public class NsClassDao {
 		List list = sqlSession.selectList("nsClass.holdClass");
 		return (ArrayList<NsClass>)list;
 	}
-	public int classUpdate(int classNo) {
-		int result = sqlSession.update("nsClass.classUpdate",classNo);
-		return result;
-	}
+
 	
 	public NsClass getOneClass(int classNo) {
 		NsClass nsCla = sqlSession.selectOne("nsClass.getOneClass",classNo);
@@ -102,7 +99,7 @@ public class NsClassDao {
 	//클래스 등록 후 등록한 회원 GRADE변경
 	public int updateMemberGrade(int classTeacher) {
 		int result = sqlSession.update("nsClass.updateMemberGrade",classTeacher);
-		return 0;
+		return result;
 	}
 
 	// 클래스 리뷰작성
@@ -118,6 +115,11 @@ public class NsClassDao {
 	// 클래스 신청 (결제)
 	public int insertPayClassHistory(ClassHistory clh) {
 		return sqlSession.insert("nsClass.insertPayClassHistory", clh);
+	}
+	
+	public int deleteClass(int classNo) {
+		int result = sqlSession.delete("nsClass.deleteClass",classNo);
+		return result;
 	}
 
 }

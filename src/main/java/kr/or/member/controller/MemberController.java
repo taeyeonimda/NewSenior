@@ -398,19 +398,21 @@ public class MemberController {
 					System.out.println("딜리버리1111:"+delivery);
 					int result = service.updateAddr(delivery);
 					System.out.println("딜리버리222:"+delivery);
+					System.out.println("현주바보"+result);
 					if(result>0) {
 						//기본 배송지 'y'로 insert
 						int result2 = service.insertAddr(delivery);
+						System.out.println("박현주바보"+result2);
 						if(result2>0) {
 							return "redirect:/mypage.do";
 						}else {
-							return "redirect:/";
+							return "redirecst:/";
 						}
 					}else {
 						return "redirect:/";
 					}
 				}
-				System.out.println(delivery);
+				System.out.println("###"+delivery);
 				int result = service.insertAddr(delivery);
 				if(result>0) {
 					return "redirect:/mypage.do";

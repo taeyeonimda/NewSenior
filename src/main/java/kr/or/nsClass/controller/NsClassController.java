@@ -154,7 +154,7 @@ public class NsClassController {
 	@RequestMapping(value = "/insertClassReview.do")
 	public String classReview(ClassReview cr) {
 		int result = service.insertClassReview(cr);
-		return "redirect:/classDetail.do?classNo="+cr.getClassNo();
+		return "redirect:/classDetail.do?classNo="+cr.getClassNo()+"#menu3";
 	}
 	
 	@RequestMapping(value = "/getTeacherReview.do", produces = "application/json;charset=utf-8")
