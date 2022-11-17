@@ -49,6 +49,7 @@
 		                    <option value="SO">악기/노래</option>
 		                    <option value="FO">외국어</option>
 		                    <option value="CO">요리/미식</option>
+		                    <option value="NO">기타</option>
 	                	</select><br>
 					</td>
 				</tr>

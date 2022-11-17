@@ -159,7 +159,7 @@
 		    filepath as clubMainImg,
 		    club_intro as clubIntro,
 		(select count(*) from club_members m where m.club_no=c.club_no) as clubMemberCnt
-		from clubs c where club_category=(select favorite from members where member_no=26) order by clubMemberCnt desc)r)
+		from clubs c where club_category=(select favorite from members where member_no=#{memberNo }) order by clubMemberCnt desc)r)
 		where rnum between 1 and 3
 	</select>
 

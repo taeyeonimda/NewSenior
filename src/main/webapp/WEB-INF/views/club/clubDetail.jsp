@@ -111,7 +111,7 @@
 		                            </div>
                         		</div>
 	                            <pre style="font-family: sans-serif">${c.clubNotice }</pre>
-	                            <textarea rows="5" cols="90" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
+	                            <textarea rows="5" cols="68" style="display: none;" name="clubNotice" class="noticeTextarea">${c.clubNotice }</textarea>
                         	</div>
                         </div>
                     </div>

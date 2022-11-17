@@ -22,8 +22,8 @@
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLASS</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">클래스</li>
+                        <li class="breadcrumb-item text-light"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active text-light" aria-current="page">클래스</li>
                     </ol>
                 </nav>
             </div>
@@ -57,10 +57,10 @@
                     <div class="portfolio-inner rounded classHover" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" style="width:408px; height:408px;" src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
-                        	<h5 class="text-light mb-4 fw-bold">---------------------------------------------------------</h5>
+                        	<hr>
                             <h3 class="display-6 text-white mb-4">${cla.className }</h3>
                             <h5 class="text-light mb-4 fw-bold">${cla.classPrice } 원</h5>
-                            <h5 class="text-light mb-4 fw-bold">---------------------------------------------------------</h5>
+                            <hr>
                         </div>
                     </div>
                 </div>
