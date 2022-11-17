@@ -6,14 +6,17 @@
 select
 	    order_no as orderNo,
 	    order_date as orderDate,
-	    (select receiver_name from(select receiver_name from delivery_tbl where member_no=#{memberNo} order by rownum desc) where rownum =1) as receiverName,
+	    receive_name as receiverName,
+	    receive_addr as deliveryAddr,
+	    receive_addr2 as deliveryAddr2,
+	    receive_phone as deliveryPhone,
 	    order_amount as orderAmount,
 	    order_price as orderPrice,
 	    member_no as memberNo
-    from pays
+from pays
 	where member_no=#{memberNo} and 
 	<![CDATA[
-        (order_date >= to_char(#{startDate}) AND order_date < to_char(#{endDate}))
+        (order_date >= to_char(#{startDate}) AND order_date <= to_char(#{endDate}))
     ]]>
     order by 1
 </select>
