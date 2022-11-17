@@ -116,7 +116,7 @@
                 	</c:when>
                 	<c:otherwise>
                 	<div class="mb-2">
-	                	<button class="btn btn-primary py-3 px-5" type="button">로그인이 필요한 서비스입니다</button>
+	                	<button class="btn btn-primary py-3 px-5" type="button" onclick="clickLoginBtn();">로그인이 필요한 서비스입니다</button>
 	                </div>
                 	</c:otherwise>
                 </c:choose>
@@ -306,11 +306,13 @@
 		       })
 		});
 		
-		
-		
+		// 로그인버튼
+		function clickLoginBtn() {
+			$(".loginBtn").click();
+		}
+
 		
     	const classLimit = Number($("#classLimit").text());
-    	
 	    function openConfirm(className, classNo, memberNo){
 	    	const amount = $("select[name=amount]").val();
 	    	if(amount==''){
@@ -377,7 +379,7 @@
             let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
 	        let windowHeight = window.innerHeight; // 스크린 창
             let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x, footer제외
-            if(position > 3800){
+            if(position > 4000){
                 $(".sidenav").fadeOut(0);
             }else if(position > 250 ){ // 스크롤 위치 343보다 클 때만 보이겠다
                 $(".sidenav").fadeIn(300);
