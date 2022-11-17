@@ -196,7 +196,7 @@
 		<!-- 테이블 밖으로 꺼냈음 -->
 		<div class="updateDelBox">
 			<c:if test="${not empty sessionScope.m}">
-				<c:if test="${b.nickName eq sessionScope.m.nickName">
+				<c:if test="${b.nickName eq sessionScope.m.nickName}"> 
 					<a href="/boardUpdateFrm.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="updateBtn bc44" id="updateBtn">수정</button></a>
 					<a href="/boardDelete.do?boardNo=${b.boardNo}&boardType=${b.boardType}"><button class="delBtn bc44" id="delBtn">삭제</button></a>
 				</c:if>

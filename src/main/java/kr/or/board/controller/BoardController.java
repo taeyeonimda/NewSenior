@@ -116,7 +116,7 @@ public class BoardController {
 		int result = service.insertBoard(b);
 	
 		return "redirect:/boardList.do?reqPage=1&boardType="+boardType; //이건 성공
-		//return "redirect:/boardList.do?reqPage=1&boardType=F";
+	
 	}
 	
 	// 게시물 수정
@@ -256,8 +256,6 @@ public class BoardController {
 	@RequestMapping(value="/insertComment.do")
 	public String insertComment(BoardComment bc) {
 		int result = service.insertComment(bc);
-//		return "board/boardView.do?boardNo="+bc.getBoardRef();
-	
 		return "redirect:/boardView.do?boardNo="+bc.getBoardRef();
 		
 
