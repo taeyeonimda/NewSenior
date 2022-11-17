@@ -51,7 +51,6 @@
 	 
 	<select id="totalCount" resultType="int">
 		select count(*) from classes
-		where class_status in (0,1)
 	</select>
 
 	<insert id="insertClass" parameterType="cla">

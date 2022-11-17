@@ -134,7 +134,6 @@
 			<mapping path="" />
 			<mapping path="" />
 			<mapping path="" />
-			<mapping path="" />
 			
 			<beans:ref bean="AdminInterceptor" /><!-- 로그인 한사람중 관리자만 볼 수 있는 페이지 -->
 		</interceptor>

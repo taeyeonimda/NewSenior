@@ -69,111 +69,68 @@
 
 		<!-- Content -->
 
+		<!-- File input -->
 		<div class="container-xxl flex-grow-1 container-p-y">
-			<!-- HTML5 Inputs -->
-			<form action="/mypageUpdate.do"  method="post" enctype="multipart/form-data" class="upform">
-				<div class="card mb-4" /*style="width: 60%;*/">
-					<h5 class="card-header">내정보</h5>
-					<div class="card-body" style="padding-top: 20px;">
-					<div class="mb-3 row">
-							<label for="html5-text-input" class="col-md-2 col-form-label">프로필</label>
-							<div class="col-md-10 ">
-								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" style="width:200px; height:200px; border-radius: 50%;" class="fileImg"><br><br>
-								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="imgInput" name="files" accept=".gif, .jpg, .png" onchange="readURL(this)"></span><button type="button" class="btn btn-outline-warning delImg" onclick="imgdel();">삭제</button>
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
-							<div class="col-md-10">
-								<input class="form-control" type="text" id="html5-text-input"
-									value="${member.memberName }" readonly name="memberName" />
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<label for="html5-text-input" class="col-md-2 col-form-label">아이디</label>
-							<div class="col-md-10">
-								<input class="form-control" type="text" id="html5-text-input"
-									value="${member.memberId }" readonly name="memberId" />
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<label for="html5-text-input" class="col-md-2 col-form-label">닉네임</label>
-							<div class="col-md-10">
-								<input class="form-control" type="text" id="html5-text-input"
-									value="${member.nickName }" name="nickName" maxlength="6"/>
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<label for="html5-email-input" class="col-md-2 col-form-label">이메일</label>
-							<div class="col-md-10">
-								<input class="form-control" type="email" id="html5-email-input"
-									value="${member.memberEmail }" name="memberEmail" />
-							</div>
-						</div>
-						<div class="mb-3 row co_btn">
-							<label for="html5-url-input" class="col-md-2 col-form-label">비밀번호</label>
-							<div class="col-md-10">
-								<button type="button" class="btn btn-outline-warning">
-									<a href="/pwChangeFrm.do" style="color: #000;" class="co_f1">비밀번호
-										변경하기</a>
-								</button>
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<label for="html5-url-input" class="col-md-2 col-form-label">생년월일</label>
-							<div class="col-md-10">
-								<input class="form-control" type="text" id="html5-url-input"
-									value="${member.memberBirth }" name="memberBirth"
-									onkeyup="birth_keyup(this)" maxlength="10"/>
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<label for="html5-url-input" class="col-md-2 col-form-label">전화번호</label>
-							<div class="col-md-10">
-								<input class="form-control" type="tel" id="html5-url-input"
-									value="${member.memberPhone }" name="memberPhone"
-									onkeyup="phone_keyup(this)" maxlength="13" />
-							</div>
-						</div>
+			<div style="font-size: 25px;">배송지목록</div>
+			<div class="div1 deliveryBtn">
+				<button>
+					<a href="#" style="color: #fff;">배송지등록</a>
+				</button>
+			</div>
+			<div class="card">
+				<div class="table-responsive text-nowrap">
 
-						<div class="mb-3 row" style="flex-wrap: nowrap">
-							<span class="col-md-2 col-form-label" style="margin-right: 10px;">관심분야</span>
-							<select name="favorite" class="fv_btn"
-								style="width: 80%; border: 1px solid #ced4da;">
-								<option class="dropdown-item" value="NO"
-									<c:if test="${member.favorite =='NO'}">selected</c:if>>선택안함</option>
-								<option class="dropdown-item" value="DG"
-									<c:if test="${member.favorite =='DG'}">selected</c:if>>디지털</option>
-								<option class="dropdown-item" value="FU"
-									<c:if test="${member.favorite=='FU'}">selected</c:if>>주식/재테크</option>
-								<option class="dropdown-item" value="CR"
-									<c:if test="${member.favorite =='CR'}">selected</c:if>>공예</option>
-								<option class="dropdown-item" value="DE"
-									<c:if test="${member.favorite =='DE'}">selected</c:if>>디자인</option>
-								<option class="dropdown-item" value="EX"
-									<c:if test="${member.favorite=='EX'}">selected</c:if>>운동/건강</option>
-								<option class="dropdown-item" value="FS"
-									<c:if test="${member.favorite =='FS'}">selected</c:if>>패션</option>
-								<option class="dropdown-item" value="ME"
-									<c:if test="${member.favorite =='ME'}">selected</c:if>>미디어</option>
-								<option class="dropdown-item" value="SO"
-									<c:if test="${member.favorite =='SO'}">selected</c:if>>악기/노래</option>
-								<option class="dropdown-item" value="FO"
-									<c:if test="${member.favorite =='FO'}">selected</c:if>>외국어</option>
-								<option class="dropdown-item" value="CO"
-									<c:if test="${member.favorite =='CO'}">selected</c:if>>요리/제과제빵</option>
-							</select>
-
-						</div>
-					</div>
-					<button type="submit" class="btn btn-outline-warning"
-						style="float: right; color: #000;" onclick="filename();">내정보 변경하기</button>
+					<table class="table table-borderless">
+						<thead>
+							<tr>
+								<th>배송지</th>
+								<th>주소</th>
+								<th>연락처</th>
+								<th>수정·삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list }" var="d" end="0">
+								<tr class="showDeliveryDetail"
+									onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
+									<td><strong>${d.deliveryName }</strong><br>
+										${d.receiverName }<br> <span
+										style="border: 1px solid #6f42c1; background-color: #6f42c1; color: #fff">기본배송지</span>
+									</td>
+									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
+										${d.deliveryDetail }
+									</td>
+									<td style="line-height: 72px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;">수정</button>
+										<button class="delBtn btn btn-outline-warning "  style="position: relative; top:20px;">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo}">삭제</a>
+										</button>
+									</td>
+								</tr>
+							</c:forEach>
+							<c:forEach items="${list }" var="d" begin="1">
+								<tr class="showDeliveryDetail" onclick="goToDeliveryDetail(${d.deliveryNo});" id="btn-modal">
+									<td><strong>${d.deliveryName }</strong><br>
+										${d.receiverName }<br></td>
+									<td>${d.zipcode}<br> ${d.deliveryAddr }<br>
+										${d.deliveryDetail }
+									</td>
+									<td style="line-height: 72px;">${d.deliveryPhone }</td>
+									<td><button class="updateBtn delBtn btn btn-outline-warning" onclick="updateBtn(${d.deliveryNo});" style="position: relative; top:20px;" class="btn btn-outline-warning delbtn">수정</button>
+										<button class="delBtn2 btn btn-outline-warning delbtn" style="position: relative; top:20px;">
+											<a href="/deleteAddr.do?deliveryNo=${d.deliveryNo }" >삭제</a>
+										</button></td>
+								</tr>
+							</c:forEach>
+							<c:if test="">
+								<tr>
+									<td style="text-align: center;">배송지 정보가 없습니다.</td>
+								</tr>
+							</c:if>
+						</tbody>
+					</table>
 				</div>
-		</form>
-		<form action="/deleteMember.do" method="post" onsubmit="return delMember();">
-		<button type="submit" class="btn btn-outline-warning delbtn"
-						style="color: #000;">회원탈퇴</button>
-		</form>
+			</div>
 		</div>
 	</div>
 	<!-- / Content -->
