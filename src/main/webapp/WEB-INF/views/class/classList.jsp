@@ -7,6 +7,11 @@
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
 <title>class</title>
 </head>
+<style>
+.classHover:hover{
+	cursor: pointer;
+}
+</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	
@@ -49,7 +54,7 @@
             <div class="row g-4 portfolio-container">
             <c:forEach items="${clist }" var="cla" varStatus="i">
             	<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="portfolio-inner rounded" onclick="classDetail(${cla.classNo });">
+                    <div class="portfolio-inner rounded classHover" onclick="classDetail(${cla.classNo });">
                         <img class="img-fluid class-img" style="width:408px; height:408px;" src="/resources/upload/class/${cla.filepath }" alt="">
                         <div class="portfolio-text">
                         	<h5 class="text-light mb-4 fw-bold">---------------------------------------------------------</h5>

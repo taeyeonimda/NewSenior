@@ -19,5 +19,6 @@ public class ClubBoard {
 	private String clubBoardDate;
 	private String clubBoardFilepath;
 	private int memberNo;
+	private String memberImg;
 	private ArrayList<ClubBoardComment> commentList;
 }

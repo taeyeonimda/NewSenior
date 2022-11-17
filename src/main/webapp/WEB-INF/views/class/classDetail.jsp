@@ -39,7 +39,6 @@
 }
 .product-img{
     width: 824px;
-    max-height: 600px;
 }
 
 </style>
@@ -135,7 +134,7 @@
                     </div>
                 </div>
                 <div class="scroll-select-box" id="scroll-select">
-                	<span><a href="#menu1" class="fw-change">커리큘럼</a></span><span><a href="#menu2" class="fw-change">강사소개</a></span><span><a href="#menu3" class="fw-change">강사후기</a></span><span><a href="#menu" class="fw-change">준비물</a></span><span><a href="#menu4" class="fw-change">환불규정</a></span>
+                	<span><a href="#menu1" class="fw-change">커리큘럼</a></span><span><a href="#menu2" class="fw-change">강의소개</a></span><span><a href="#menu3" class="fw-change">강사소개</a></span><span><a href="#menu" class="fw-change">위치</a></span><span><a href="#menu4" class="fw-change">환불규정</a></span>
                 </div>
             </div>
         </div>
@@ -144,7 +143,8 @@
 
 
         <!-- 강의소개 -->
-        <div class="container-xxl py-5 mt-5" id="menu1">
+        <div class="mb-5" id="menu1"></div>
+        <div class="container-xxl py-5 mt-5">
             <div class="container">
                 <div class="class-row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -152,7 +152,7 @@
                         <h1 class="display-5 mb-4">WE ARE NEW SENIOR!</h1>
                         <pre class="mb-4 font-set fw-change">${cla.curriculum }</pre>
                     </div>
-                    <div class="product-title mt-5">
+                    <div class="product-title mt-5"  id="menu2">
                         <div class="product-img-div">
                         	<c:forEach items="${cla.fileList }" var="cf">
                         		<img class="product-img" src="/resources/upload/class/${cf.filepath }">
@@ -166,7 +166,8 @@
 
 
         <!-- 강사 소개 -->
-        <div class="container-xxl py-5 mt-5" id="menu2">
+        <div class="mb-5" id="menu3"></div>
+        <div class="container-xxl py-5 mt-5">
             <div class="container class-container">
                 <div class="class-row g-5 align-items-end">
                     <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -175,50 +176,29 @@
                     </div>
                     <div class="col-lg-7 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 30px;">
                         <h4 class="display-3 text-primary">${cla.teacherName }</h4>
-                        <pre style="width: 70%;" class="fw-change">${cla.teacherIntroduce } 하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이</pre>
+                        <pre style="width: 70%;" class="fw-change">${cla.teacherIntroduce }</pre>
                     </div>
                 </div>
             </div>
         </div>
         <!-- About End -->
-      
-      	<div id="menu3"></div>
+
+      	
       	<!-- ajax로 가져옴 -->
       	<div class="container class-container">
+      		<p class="fs-5 fw-bold text-primary">강사후기</p>
       		<div id="reviewBox">
+      		<div>아직 후기가 없습니다</div>
         	</div>
       	</div>
-
-        <!-- 클래스 준비물 -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="class-row g-5 align-items-end">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                        <p class="fs-5 fw-bold text-primary">클래스 준비물</p>
-                        <h1 class="display-5 mb-5"><span>1</span> 건 있어요</h1>
-                    </div>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item rounded class-item">
-                            <img class="img-fluid class-img" src="/resources/upload/productImg/키트1_1.jpg">
-                            <div class="team-text">
-                                <h4 class="mb-0">왕 밝은 미소</h4>
-                                <p class="text-primary">20000</p>
-                                <div class="team-social d-flex">
-                                    <span>장바구니 담기 > </span>
-                                    <a class="btn btn-square rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Team End -->
+      	
+      	<div id="menu4" class="mb-5"></div>
+      	<div class="container class-container">
+      	<p class="fs-5 fw-bold text-primary">강의 장소</p>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.85231936181!2d126.97964921507814!3d37.582095079794904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3f276c01ad9%3A0x4ecb88455e87f387!2z7Jik64m07ZWY7Jqw7Iqk!5e0!3m2!1sko!2skr!4v1668672793473!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		</div>
 		
-		
-		<div id="menu4"></div>
+		<div id="menu5" class="mb-5"></div>
         <!-- 환불규정 -->
         <div class="container-xxl py-5 mt-5">
             <div class="container">
@@ -235,9 +215,8 @@
         </div>
         <!-- Features End -->
         <hr>
-        
-        
-        <div id="menu5"></div>
+
+
         <!-- 후기 -->
 		<button id="review-btn" class="btn btn-primary py-3 px-5" style="display: none;">후기작성</button>
     </div><!--page-content End-->
@@ -496,6 +475,9 @@
 				data : { classTeacher : classTeacher },
 				success : function(list) {
 					console.log(list.length);
+					if(list.length>0){
+						reviewBox.children().remove();
+					}
 					for(let i=0; i<list.length; i++){
 						const div = $("<div>");
 						div.addClass("shadow");
@@ -507,9 +489,9 @@
 		                const profileImgDiv = $("<div>");
 		                profileImgDiv.addClass("profile-box");
 		                if(list[i].memberImg == null){
-		                	profileImgDiv.html("<img src='/resources/upload/class/iconmonstr-user-7-48.png' class='profile'>");
+		                	profileImgDiv.html("<img src='/resources/upload/member/기본이미지.jpg' class='profile'>");
 		                }else{
-		                	profileImgDiv.html("<img src='/resources/upload/"+list[i].memberImg+"' class='profile'>");
+		                	profileImgDiv.html("<img src='/resources/upload/member/"+list[i].memberImg+"' class='profile'>");
 		                }
 		                const profilInfoDiv = $("<div>");
 		                profilInfoDiv.addClass("profil-info");
