@@ -100,7 +100,7 @@
 			<mapping path="/insertActHistory.do"/>
 			<mapping path="/insertActivityReview.do"/>
 			<mapping path="/insertActivityReview.do"/>
-			
+			<mapping path="/cart.do" />
 			<mapping path="/activityEnroll.do"/>
 			<mapping path="/insertActivity.do"/>
 			<mapping path="/classHistory.do"/>
@@ -131,7 +131,7 @@
 			<mapping path="/activityDelete.do" />
 			<mapping path="/adminMgrClass.do" />
 			<mapping path="/classDelete.do" />
-			<mapping path="/cart.do" />
+			
 			<mapping path="" />
 			<mapping path="" />
 			<mapping path="" />
