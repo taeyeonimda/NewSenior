@@ -37,7 +37,6 @@ public class BoardService {
 		pageMap.put("list", list);
 		ArrayList<BoardCategoryVO> boardCate = dao.selectAllCategroy(boardType);
 		pageMap.put("boardCate", boardCate); //
-		System.out.println("boardCate(서비스) : "+boardCate);
 		
 		//pageNavi 시작
 		//전체 페이지 수 계산 필요 -> 전체 게시물 수 조회
@@ -51,8 +50,6 @@ public class BoardService {
 			totalPage = totalCount/numPerPage+1;
 		}
 		
-		System.out.println("list 조회 totalCount : "+totalCount);
-		System.out.println("boardType :" +boardType);
 		int pageNaviSize = 5;
 		
 		//페이지 네비게이션 시작번호 지정
@@ -114,7 +111,6 @@ public class BoardService {
 		 ArrayList<FileVO> list = dao.selectFileList(boardNo);
 		 b.setFileList(list); //board(VO)에 생성자 추가함
 		 //fileList를 b에 추가
-		 System.out.println("list 조회:"+list);
 		 
 		 //게시판2 32분
 		 //board_comm_comment(댓글) 테이블 조회
@@ -240,7 +236,6 @@ public class BoardService {
 				//int totalCount = dao.selectBoardCount22(boardType);
 				//int totalCount = dao.selectBoardCount22(pageMap);
 				int totalCount = dao.selectBoardCount222(pageMap);
-				System.out.println("검색 totalCount : "+totalCount);
 				int totalPage = 0;
 				if(totalCount%numPerPage==0) {
 					totalPage = totalCount/numPerPage;
