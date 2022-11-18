@@ -239,7 +239,7 @@
 						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 				</li>
 					<c:if test="${sessionScope.m.nickName eq bc.nickName }">
-				<li class="myComment" style="background-color:#E8F5E9;">
+				<li class="myComment" style="background-color:#E8F5E9  !impotant;">
 					</c:if>
 					<c:if test="${sessionScope.m.nickName ne bc.nickName }">
 				<li class="myComment">
@@ -285,7 +285,7 @@
 		 						
 		 					</li>
 		 				<c:if test="${sessionScope.m.nickName eq bcc.nickName }">
-							<li class="myReComment" style="background-color:#E8F5E9;">
+							<li class="myReComment" style="background-color:#E8F5E9 !impotant;">
 						</c:if>
 						<c:if test="${sessionScope.m.nickName ne bcc.nickName }">
 							<li class="myReComment">
@@ -387,7 +387,7 @@
 						<div class="memberImg"><img src="/resources/upload/member/${bc.memberImg}"></div>
 				</li>
 					<c:if test="${sessionScope.m.nickName eq bc.nickName }">
-				<li class="myComment" style="background-color:#E8F5E9;">
+				<li class="myComment" style="background-color:#E8F5E9 !impotant;">
 					</c:if>
 					<c:if test="${sessionScope.m.nickName ne bc.nickName }">
 				<li class="myComment">

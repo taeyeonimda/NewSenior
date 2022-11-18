@@ -220,7 +220,7 @@
 	</update>
 	
 	<delete id="deleteMember">
-	delete from members where member_state =(SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD')as time
+	delete from members where member_state =(SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD')as time
     FROM DUAL)
 	</delete>
 	
