@@ -20,25 +20,25 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="page-content">
         <!-- Page Header Start -->
-        <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container text-center py-5">
+        <div class="container-fluid page-header py-5 mb-3 wow fadeIn" data-wow-delay="0.1s" >
+            <div class="container text-center py-5" >
             <c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P'}">
                 <h1 class="display-3 text-white mb-4 animated slideInDown">커뮤니티</h1>
              </c:if>
               <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
-              <h1 class="display-3 text-white mb-4 animated slideInDown">공지사항</h1>
+              <h1 class="display-3 text-white mb-4 animated slideInDown">고객센터</h1>
               </c:if>
                 <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb justify-content-center mb-0">
+                    <ol class="breadcrumb justify-content-center mb-0" style="width:420px; background-color: #fff; border-radius: 30px; margin: 0 auto; padding: 10px;">
                     	<c:if test="${boardType eq 'F' or boardType eq 'I' or boardType eq 'P'}">
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></li>
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></li>
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=F"  style="color:#ffc107 !important;">자유게시판</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=I"  style="color:#0F4229 !important;">정보게시판</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=P"  style="color: #348E38 !important">동호회모집</a></li>
                         </c:if>
                         <c:if test="${boardType eq 'N' or boardType eq 'Q' or boardType eq 'A'}">
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></li>
-	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></li>
-	                        <li class="breadcrumb-item active" aria-current="page"><a a href="/classEnroll.do">강사모집</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=N" style="color:#ffc107 !important;">공지사항</a></li>
+	                        <li class="breadcrumb-item"><a href="boardList.do?reqPage=1&boardType=Q"  style="color:#0F4229 !important;">Q&A</a></li>
+	                        <li class="breadcrumb-item active" aria-current="page"><a a href="/classEnroll.do" style="color: #348E38 !important">강사모집</a></li>
                         </c:if>
                         
                     </ol>
@@ -52,25 +52,25 @@
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 
                 <c:if test="${boardType eq 'F'}">
-                <p class="fs-5 fw-bold text-primary">새로운 나를 발견하는 재미</p>
-                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F">자유게시판</a></h1>
+                <p class="fs-5 fw-bold text-primary"  style="color:#0F4229 !important;">새로운 나를 발견하는 재미</p>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=F" style="color:#ffc107 !important;">자유게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'I'}">
-                <p class="fs-5 fw-bold text-primary">all about Senior Activity</p>
-                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I">정보게시판</a></h1>
+                <p class="fs-5 fw-bold text-primary" style="color:#0F4229 !important;">all about Senior Activity</p>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=I" style="color:#0F4229 !important;">정보게시판</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'P'}">
-                <p class="fs-5 fw-bold text-primary">우리 동호회를 소개합니다</p>
-                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P">동호회모집</a></h1>
+                <p class="fs-5 fw-bold text-primary" style="color: #0F4229 !important">우리 동호회를 소개합니다</p>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=P" style="color: #348E38 !important">동호회모집</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'N'}">
-                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=N">공지사항</a></h1>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=N" style="color:#ffc107 !important;">공지사항</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'Q'}">
-                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=Q">Q&A</a></h1>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=Q" style="color:#0F4229 !important;">Q&A</a></h1>
                 </c:if>
                 <c:if test="${boardType eq 'A'}">
-                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=A">FAQ</a></h1>
+                	<h1 class="display-5 mb-5"><a href="boardList.do?reqPage=1&boardType=A" style="color: #348E38 !important">FAQ</a></h1>
                 </c:if>
             </div>
             

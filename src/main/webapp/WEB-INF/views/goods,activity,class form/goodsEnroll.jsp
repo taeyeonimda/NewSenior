@@ -89,12 +89,21 @@
                       <input class="form-control" type="text" id="html5-text-input" name="productSubName"/>
                     </div>
                   </div>
-                  
-                  <div class="mb-3 row">
-                    <label for="html5-tel-input" class="col-md-2 col-form-label">가격</label>
+                  <div class="mb-3 row" style="margin-top: 10px;">
+                    <label for="html5-text-input" class="col-md-2 col-form-label">가격</label>
                     <div class="col-md-10">
-                      <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" name="productPrice"/>
+                     <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" name="productPrice"/>
+                    </div>
+                  </div>
+                  <div class="mb-3 row" style="margin-top: 10px;">
+                    <label for="html5-text-input" class="col-md-2 col-form-label">판매 수량</label>
+                    <div class="col-md-10">
+                     <input class="form-control" type="tel" id="html5-tel-input" style="width: 200px; display: inline-block;" name="productPrice"/>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
                       <label for="html5-tel-input" class="col-md-2 col-form-label" style="text-align: right; padding-right: 10px; width:187px;">판매 수량</label>
+                    <div class="col-md-10">
                       <input class="form-control" type="tel" id="html5-tel-input" style="width: 220px; display: inline-block;" name="productQty"/>
                     </div>
                   </div>
@@ -121,7 +130,7 @@
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">카테고리 상세</label>
                       <div class="btn-group" style="width: 150px;">
-                      	<select id="productCategory" name="productCategory">
+                      	<select id="productCategory" name="productCategory" style="width: 250px; border: 1px solid #ced4da;">
                       		<option value="">카테고리 선택</option>
                       		<option value="dg">디지털</option>
                       		<option value="fu">주식/재테크</option>
@@ -140,7 +149,7 @@
                   <div class="mb-3 row">
                     <label for="html5-tel-input" class="col-md-2 col-form-label">판매상태</label>
                       <div class="btn-group" style="width: 150px;">
-                      	<select id="productStatus" name="productStatus">
+                      	<select id="productStatus" name="productStatus" style="width: 50%; border: 1px solid #ced4da;">
                       		<option value="0">판매</option>
                       		<option value="1">품절</option>
                       	</select>

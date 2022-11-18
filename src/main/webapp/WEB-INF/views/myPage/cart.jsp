@@ -82,7 +82,7 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr style="text-align: center;">
-                        <th style=" width: 10%;"><label>전체선택 </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
+                        <th style=" width: 10%;"><label> </label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
 						<th style=" width: 10%;">카트번호</th>
                         <th style=" width: 25%;">이미지</th>
                         <th style=" width: 25%;">상품명</th>

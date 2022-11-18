@@ -95,16 +95,17 @@
                         <label for="classStartDate" class="col-md-2 col-form-label">수강기간</label>
                         <div class="col-md-10">
                           <input class="form-control" name = "startDate"  id="classStartDate" style="width: 200px; display: inline-block;"
-                          onclick="javascript:f_datepicker(this);" readonly placeholder="시작일 ex) 20221024"/>
+                          onclick="javascript:f_datepicker(this);" readonly placeholder="시작일"/>
                           <pre style="display: inline-block; margin: 0; margin-bottom: -5px;">  ~  </pre>
                           <input class="form-control" name ="endDate" type="tel" id="classEndDate" style="width: 200px; display: inline-block;"
-                          onclick="javascript:f_datepicker(this);" readonly placeholder="종료일 ex) 20221024"/>
+                          onclick="javascript:f_datepicker(this);" readonly placeholder="종료일"/>
                         </div>
                       </div>
 
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label" for="category">카테고리</label>
-                        <select name="category">
+                        <select name="category favorite" class="fv_btn"
+								style="width: 30%; border: 1px solid #ced4da;  margin-left: 10px;">
                         <c:forEach items="${cateList}" var="cateList">
                          <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
                         </c:forEach>   
@@ -113,13 +114,13 @@
                       
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label" for="classLimit">모집정원</label>
-                        	<select name="classLimit">
+                        	<select name="classLimit" class="fv_btn" style="width: 30%; border: 1px solid #ced4da; margin-left: 10px;">
                         		
                         	</select>
                       </div>
                       <div class="mb-3 row">
                         <label for="products" class="col-md-2 col-form-label">준비물유무</label>
-                        <select name = "products">
+                        <select name = "products" class="fv_btn" style="width: 30%; border: 1px solid #ced4da;  margin-left: 10px;">
                         	<option value="1">O</option>
                         	<option value="0">X</option>
                         </select>

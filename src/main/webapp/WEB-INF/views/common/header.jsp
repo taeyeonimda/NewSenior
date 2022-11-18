@@ -189,6 +189,12 @@
 			font-weight:800;
 			color: #9fa2a6;
 			}
+			.hov{
+			color:#ffc107;
+			}
+			.hov:hover:{
+			color:#198754;
+			}
 			//얇음
 			@font-face {
 			    font-family: 'LeferiPoint-WhiteObliqueA';
@@ -261,7 +267,19 @@
 		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
 		    font-weight: normal;
 		    font-style: normal;
-			}	
+			}
+			@font-face {
+			    font-family: 'Tenada';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2') format('woff2');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			@font-face {
+		    font-family: 'FlowerSalt';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/FlowerSalt.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
 			body *{
 			 font-family: 'GmarketSansMedium';
 			}
@@ -280,7 +298,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
              <!-- 클래스 -->
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/classList.do?classCategory=AL&reqPage=1'">클래스</a>
+                    <a href="/classList.do?classCategory=AL&reqPage=1" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/classList.do?classCategory=AL&reqPage=1'">클래스</a>
                     <div class="dropdown-menu bg-light m-0">
                     	<a href="/classList.do?classCategory=AL&reqPage=1" class="dropdown-item">전체</a>
                         <a href="/classList.do?classCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
@@ -298,7 +316,7 @@
                 </div>
                 <!-- 액티비티 -->
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/activityList.do?activityCategory=AL&reqPage=1'">액티비티</a>
+                    <a href="/activityList.do?activityCategory=AL&reqPage=1" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="location.href='/activityList.do?activityCategory=AL&reqPage=1'">액티비티</a>
                     <div class="dropdown-menu bg-light m-0">
                     	<a href="/activityList.do?activityCategory=AL&reqPage=1" class="dropdown-item">전체</a>
                         <a href="/activityList.do?activityCategory=DG&reqPage=1" class="dropdown-item">디지털</a>
@@ -324,7 +342,7 @@
                 </c:choose>
                 
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
+                    <a href="/boardList.do?reqPage=1&boardType=F" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu bg-light m-0">
 
                      	<a href="#">${isLogin }</a>
@@ -333,10 +351,9 @@
                         <a href="boardList.do?reqPage=1&boardType=I" class="dropdown-item">정보게시판</a>
                     </div>
                 </div>
-            
                 <a href="/productList.do?reqPage=1" class="nav-item nav-link">마켓</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공지사항</a>
+                    <a href="/boardList.do?reqPage=1&boardType=N"" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">고객센터</a>
                     <div class="dropdown-menu bg-light m-0">
                         <a href="/boardList.do?reqPage=1&boardType=N" class="dropdown-item">공지사항</a>
                         <a href="boardList.do?reqPage=1&boardType=Q" class="dropdown-item">Q&A</a>
@@ -347,6 +364,7 @@
                 <a href="cart.do?memberNo=${sessionScope.m.memberNo }" class="nav-item nav-link">장바구니</a>
 
             </div>
+            <!--  
             <c:choose>
 				<c:when test="${empty sessionScope.m}">
 		            <div>
@@ -358,6 +376,24 @@
 					<a href="/mypage.do"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px; margin-right: 20px;"></a>
 					<a href="/logout.do">로그아웃</a>
 					<!--<a href="/logout.do"><img alt="로그아웃" src="/resources/img/logout.png" style="width: 40px; margin-right: 10px;">-->
+				<!--</c:otherwise>
+			</c:choose>
+            -->
+			<c:choose>
+				<c:when test="${empty sessionScope.m}">
+		            <div>
+		                <a href="javascript:void(0)" class="loginBtn hov" style="font-family: 'PyeongChangPeace-Bold';  font-size: 20px; margin-right: 20px;" >login</a><span></span>
+		                <a href="/joinFrm.do" class="hov" style="font-family: 'PyeongChangPeace-Bold';  font-size: 20px;margin-right: 13px;">join</a>
+		            </div>
+				</c:when>
+				<c:otherwise>
+					<div class="nav-item dropdown">
+                    <a href="/mypage.do" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><img alt="마이페이지" src="/resources/img/login.png" style="width: 40px;"></a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="/mypage.do" class="dropdown-item">마이페이지</a>
+                        <a href="/logout.do" class="dropdown-item">로그아웃</a>
+                    </div>
+                </div>
 				</c:otherwise>
 			</c:choose>
        	 </div>

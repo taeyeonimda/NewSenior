@@ -22,8 +22,8 @@
                 <h1 class="display-3 text-white mb-4 animated slideInDown">CLASS</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0" style="width:150px; background-color: #fff; border-radius: 30px; margin: 0 auto; padding: 10px;">
-                        <a href="/"><li class="breadcrumb-item text-light" >Home</li></a>/
-                       <a onclick="location.href='/classList.do?classCategory=AL&reqPage=1'" style="cursor: pointer;"><li class="breadcrumb-item active  text-light" aria-current="page">클래스</li></a>
+                        <a href="/"><li class="breadcrumb-item text-light home"  style="color:#ffc107 !important;">Home</li></a>/
+                       <a onclick="location.href='/classList.do?classCategory=AL&reqPage=1'" style="cursor: pointer;"><li class="breadcrumb-item active  text-light cls" aria-current="page" style="color:#0F4229 !important;">클래스</li></a>
                     </ol>
                 </nav>
             </div>
@@ -99,7 +99,8 @@
 	function classDetail(classNo) {
 		location.href = "classDetail.do?classNo="+classNo;
 	}
-		
+	
+	
 	</script>
 </body>
 </html>

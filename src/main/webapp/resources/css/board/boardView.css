@@ -12,17 +12,17 @@
 		color:white;
 	}
 	.boardTbl tr>.th1 {
-		
+		min-width: 100px; 
 		padding:5px;
 		
 	}
 
 	.boardTbl tr{
-		border-top : 1.5px solid #0F4229 ;
+		border-top : 1.5px solid #6c757d ;
 		
 	}
 	.boardTbl td{
-		border :  1.5px solid #0F4229 ;
+		border :  1.5px solid #6c757d ;
 		padding:5px;
 		
 	}
@@ -41,7 +41,11 @@
 		min-height :300px;
 		padding-top : 15px;
 	}
-
+	#boardContent>p{
+	text-align:center;
+	margin: 0 auto;
+	}
+	
 	.updateDelBox{
 		display:flex;
 		flex-direction: row;

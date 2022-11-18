@@ -101,7 +101,7 @@
         <!-- sideBar-->
         <div class="sidenav bg-light rounded p-sm-3 wow fadeIn" style="text-align:center;">
             <div class="side-box rounded mt-3" style=" font-family: 'GmarketSansMedium';">
-                <h6 class="side-title-box display-5 " style="font-family: 'ImcreSoojin'">
+                <h6 class="side-title-box display-5 " style="font-family: 'GmarketSansMedium'">
                  	${act.activityName}
                 </h6>
                 <div class="side-select-box display-5" style="font-size:2rem;" > 
@@ -152,7 +152,7 @@
         <div class="container-xxl py-5 mt-5" style=" font-family: 'GmarketSansMedium';">
             <div class="container">
 				<div class="class-row g-4">
-						<h6 class="side-title-box display-5 " style="font-family: 'ImcreSoojin'">
+						<h6 class="side-title-box display-5 " style="font-family: 'GmarketSansMedium'; font-weight: 800;">
                  		${act.activityName}
                			 </h6>
 					<div class="col-xl-12 wow fadeInUp" data-wow-delay="0.1s" style= "display: flex">

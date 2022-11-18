@@ -80,8 +80,8 @@
 			<form action="activityUpdate.do" enctype="multipart/form-data"
 				method="post">
 				<div class="card mb-4">
-					<h5 class="card-header" style="text-align: center;">액티비티 수정하기</h5>
-					<div class="card-body">
+					<h5 class="card-header" style="text-align: center;padding: 10px;">액티비티 수정하기</h5>
+					<div class="card-body" style="padding-top: 20px;">
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">액티비티명</label>
 							<div class="col-md-10">
@@ -99,7 +99,7 @@
 						<div class="mb-3 row">
 							<label for="html5-select-input" class="col-md-2 col-form-label">담당자명</label>
 							<div class="col-md-10">
-								<select name="activityManager" id="html5-select-input">
+								<select name="activityManager" id="html5-select-input" style="width: 15%; border: 1px solid #ced4da; padding: 10px;" >
 									<option value="${act.activityManager }" selected>${act.activityManagerName }</option>
 									<c:forEach items="${list }" var="admin">
 										<option value="${admin.memberNo }">${admin.memberName }</option>
@@ -153,7 +153,8 @@
 						<div class="mb-3 row">
 							<label for="html5-cate-input" class="col-md-2 col-form-label">카테고리</label>
 							<div class="btn-group" style="width: 200px;">
-								<select name="activityCategory" id="html5-cate-input">
+								<select name="activityCategory" id="html5-cate-input" 
+								style="width: 73%; border: 1px solid #ced4da;padding: 10px;">
 
 									<c:choose>
 										<c:when test="${act.activityCategory eq 'DG'}">
@@ -207,8 +208,9 @@
 
 						<div class="mb-3 row">
 							<label for="html5-limit-input" class="col-md-2 col-form-label">모집정원</label>
-							<div class="btn-group" style="width: 150px;">
-								<select id="html5-limit-input" name="activityLimit">
+							<div class="btn-group" style="width: 150px; ">
+								<select id="html5-limit-input" name="activityLimit" class="fv_btn"
+								style="width: 100%; border: 1px solid #ced4da;padding: 10px;">
 									<option value="${act.activityLimit }">${act.activityLimit }명</option>
 								</select>
 							</div>
@@ -228,44 +230,52 @@
 							</div>
 						</div>
 						<input type="hidden" value="${act.activityNo }" name="activityNo">
-						<button type="submit" class="btn btn-outline-primary"
-							id="submitBtn">수정하기</button>
+						<div style=" text-align: right; "><button type="submit" class="btn btn-outline-primary"
+							id="submitBtn" style="width: 83%;">수정하기</button></div>
 					</div>
 				</div>
 			</form>
 
 			<div class="card mb-4">
-				<div>메인이미지</div>
+				<div style="text-align: center;  font-size: 1.5em; line-height: 50px; background-color: #E8F5E9">메인이미지</div>
 				<hr>
-				<div class="imageDiv">
-					<img style="width: 400px; height: 400px;"
+				<div class="imageDiv" style="text-align: center;">
+					<img style="width: 500px; height: 500px; " 
 						src="/resources/upload/activity/${act.filepath }" />
 				</div>
 				<hr>
-				<div>상세이미지</div>
+				<div style="text-align: center; margin: 10px; font-size: 1.5em; line-height: 50px;  background-color: #E8F5E9"">상세이미지</div>
 				<hr>
 			
 			
 					
 		
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="border: 1px dotted #6c757d; margin: 5px">
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style=" margin: 5px">
   <div class="carousel-inner">
   <c:forEach items="${act.fileList }" var="details"  >
     <div class="carousel-item ">
     	<p style="text-align:center; margin-top:10px;">
-    	<input style="color:red; font-weight:bold; "class="btn btn-warning" value="삭제하기" onclick="deleteDetImages(${details.fileNo});" readonly>
+    	<input class="btn btn-outline-warning" value="삭제하기" onclick="deleteDetImages(${details.fileNo});" readonly style="width: 800px;">
+    	<!--  
     	<img onclick="deleteDetImages(${details.fileNo});" 	
     	src="/resources/upload/common/xBotton2.png"	
-    	style="cursor: pointer;" /></p>		
-      <img src="/resources/upload/activity/${details.filepath }" class="d-block" alt="..." style="width:20%; height:20%; margin:0 auto; !important">
+    	style="cursor: pointer;" />
+    	--></p>		
+      <img src="/resources/upload/activity/${details.filepath }" class="d-block" alt="..." style="width:800px; margin:0 auto; !important">
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <img alt="이전" src="/resources/img/previous.png" style="width: 60px;">
+   <!--  
+   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
+   --> 
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+  <img alt="다음" src="/resources/img/next.png" style="width: 60px;">
+   <!-- 
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
+    --> 
   </button>
    </c:forEach>
     <script>

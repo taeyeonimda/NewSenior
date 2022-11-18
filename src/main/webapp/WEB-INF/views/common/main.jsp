@@ -67,7 +67,9 @@
 	margin-top: -27px;
 	margin-left: -54px;
 }
-
+.display-1 {
+    font-size: 4rem;
+}
 
 </style>
 <body>
@@ -113,7 +115,7 @@
                                 <div class="col-lg-7">
                                 	<h4 class="text-light">시니어 라이프 스타일 큐레이션</h4>
                                     <hr>
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">NewSeniors</h1>
+                                    <h1 class="display-1 text-white mb-5 animated slideInDown" style="font-size: 4rem !important;">NewSeniors</h1>
                                 </div>
                             </div>
                         </div>
@@ -505,7 +507,7 @@
 	                            <span>김칠두</span>
                         	</div>
                         	<div class="speech-bubble">
-                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px; text-align: center;">"간절함은 모든 것을 이겨요.<br>마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요."</p>
+                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px; font-weight:600; text-align: center;">"간절함은 모든 것을 이겨요.<br>마음속에 품은 꿈이나 희망이 있다면 뭐든 도전하기를 바라요."</p>
                         	</div>
                         </div>
                         <div class="testimonial-item" style="display: flex; justify-content: space-between;">
@@ -516,7 +518,7 @@
 	                            <span>최순화</span>
                         	</div>
                         	<div class="speech-bubble">
-                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px; text-align: center;">"나를 보면서<br>'70대 노인도 하는데 나는 왜 못 해?'라는<br>생각을 하고 용기 내서 나아가길 바랍니다."</p>
+                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px;  font-weight:600; text-align: center;">"나를 보면서<br>'70대 노인도 하는데 나는 왜 못 해?'라는<br>생각을 하고 용기 내서 나아가길 바랍니다."</p>
                         	</div>
                         </div>
                         <div class="testimonial-item" style="display: flex; justify-content: space-between;">
@@ -527,7 +529,7 @@
 	                            <span>박막례</span>
                         	</div>
                         	<div class="speech-bubble">
-                        		<p style="font-family: 'Nanum Brush Script', cursive; font-size: 30px; text-align: center;">"뼈만 안 다치면 추억이다."</p>
+                        		<p style="font-family: 'Nanum Brush Script', cursive; font-weight:600; font-size: 30px; text-align: center;">"뼈만 안 다치면 추억이다."</p>
                         	</div>
                         </div>
                     </div>

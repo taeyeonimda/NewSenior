@@ -79,7 +79,7 @@
 							<label for="html5-text-input" class="col-md-2 col-form-label">프로필</label>
 							<div class="col-md-10 ">
 								<img alt="프로필" src="/resources/upload/member/${member.memberImg }" style="width:200px; height:200px; border-radius: 50%;" class="fileImg"><br><br>
-								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="imgInput" name="files" accept=".gif, .jpg, .png" onchange="readURL(this)"></span><button type="button" class="btn btn-outline-warning delImg" onclick="imgdel();">삭제</button>
+								<span class="fb"><input type="file" class="form-control bg-light border-0 memberImg" style="resize: none; width: 70%; display: inline-block;" multiple id ="imgInput" name="files" accept=".gif, .jpg, .png" onchange="readURL(this)"></span><button type="button" class="btn btn-outline-warning delImg" onclick="imgdel();" >삭제</button>
 							</div>
 						</div>
 						<div class="mb-3 row">
@@ -139,7 +139,7 @@
 						<div class="mb-3 row" style="flex-wrap: nowrap">
 							<span class="col-md-2 col-form-label" style="margin-right: 10px;">관심분야</span>
 							<select name="favorite" class="fv_btn"
-								style="width: 90%; border: 1px solid #ced4da;">
+								style="width: 13%; border: 1px solid #ced4da;">
 								<option class="dropdown-item" value="NO"
 									<c:if test="${member.favorite =='NO'}">selected</c:if>>선택안함</option>
 								<option class="dropdown-item" value="DG"
@@ -172,7 +172,7 @@
 		</form>
 		<form action="/deleteMember.do" method="post" onsubmit="return delMember();">
 		<button type="submit" class="btn btn-outline-warning delbtn"
-						style="color: #000;">회원탈퇴</button>
+						style="color: gray;">회원탈퇴</button>
 		</form>
 		</div>
 	</div>

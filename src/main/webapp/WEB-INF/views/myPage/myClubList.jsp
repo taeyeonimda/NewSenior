@@ -101,7 +101,7 @@
 					</div>
 	        	</c:when>
 	        	<c:otherwise>
-	        		<div class="fs-5 fw-bold text-primary text-center">가입한 동호회가 없습니다 동호회를 가입해보세요!</div>
+	        		<div class="fs-5 fw-bold text-primary text-center" style="margin: 20px 0;">가입한 동호회가 없습니다 동호회를 가입해보세요! <a href="/popularClubList.do?memberNo=${sessionScope.m.memberNo }"><button class="btn btn-outline-warning delbtn">동호회 가입하러 가기</button></a></div>
 	        	</c:otherwise>
 	        </c:choose>
 			</div>
