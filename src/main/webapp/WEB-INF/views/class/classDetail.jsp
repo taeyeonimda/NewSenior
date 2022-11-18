@@ -489,11 +489,6 @@
 							div.addClass("shadow");
 							div.addClass("reviewDiv");
 							div.addClass("mb-5");
-							const star = Number(list[i].reviewRate);
-							const starDiv = $("<div>");
-							for(let j=0; j<star.length; j++){
-								starDiv.append("<span class='material-symbols-outlined yellow'>star</span>");
-							}
 			                const profilDiv = $("<div>");
 			                profilDiv.addClass("memberBox");
 			                const profileImgDiv = $("<div>");
@@ -505,7 +500,7 @@
 			                }
 			                const profilInfoDiv = $("<div>");
 			                profilInfoDiv.addClass("profil-info");
-			                profilInfoDiv.html(starDiv+"<div>"+list[i].reviewWriter+"</div><div>"+list[i].reviewDate+"</div>");
+			                profilInfoDiv.html("<div class='text-primary'>"+list[i].reviewWriter+"</div><div>"+list[i].reviewDate+"</div>");
 			                profilDiv.append(profileImgDiv).append(profilInfoDiv);
 			                
 			                const contentDiv = $("<div>");
