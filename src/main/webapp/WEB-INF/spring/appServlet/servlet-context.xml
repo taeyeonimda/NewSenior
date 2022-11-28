@@ -34,8 +34,8 @@
 	<!-- DB 접속정보를 저장하는 객체 생성 -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<beans:property name="url" value="jdbc:oracle:thin:@1.220.236.74:15213:xe"/>
-		<beans:property name="username" value="NewSenior"/>
+		<beans:property name="url" value="jdbc:oracle:thin:@192.168.0.2:1521:xe"/>
+		<beans:property name="username" value="newsenior"/>
 		<beans:property name="password" value="1234"/>
 	</beans:bean>
 	<!-- JDBCTemplate 
