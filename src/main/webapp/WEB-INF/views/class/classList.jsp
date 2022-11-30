@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
-<title>class</title>
+    <link rel="icon" href="/resources/img/favicon-32x32.png">
+<title>뉴시니어스 CLASS</title>
 </head>
 <style>
 .classHover:hover{

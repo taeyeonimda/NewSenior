@@ -5,14 +5,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gardener - Gardening Website Template</title>
+    <title>뉴 시니어스</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-   
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-    
+   	<link rel="icon" href="/resources/img/favicon-32x32.png">
     <!-- googleIcon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 

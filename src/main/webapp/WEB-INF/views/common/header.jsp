@@ -9,16 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴시니어스</title>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-        <!-- Favicon -->
-		<link rel="icon" href="/resources/img/favicon-16x16.png" type="image/x-icon" sizes="16x16">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		
+  			
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
-    
+
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -465,7 +461,7 @@
     <!-- Template Javascript -->
     <script src="/resources/TGbtstr/js/mainTG.js"></script>
     <!-- 로그인 js -->
-    <script src="/resources/js/login.js"></script>
+    <script src="/resources/js/login/login.js"></script>
 
     <script type="text/javascript">
    

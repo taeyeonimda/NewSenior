@@ -7,7 +7,8 @@
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
     <!-- 구글아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>클래스 상세</title>
+    <link rel="icon" href="/resources/img/favicon-32x32.png">
+    <title>뉴시니어스</title>
 </head>
 <style>
 .yellow{

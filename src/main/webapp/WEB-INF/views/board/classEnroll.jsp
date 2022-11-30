@@ -17,7 +17,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="icon" href="/resources/img/favicon-32x32.png">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,11 +27,10 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 </head>
 <body>
-<body>
-  	<%@include file="/WEB-INF/views/common/header.jsp" %>
+  	
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--Datepicker-->
        	<!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" style="background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(/resources/img/은비5.jpg) center center no-repeat; background-size: cover;">
@@ -104,7 +103,7 @@
 
                       <div class="mb-3 row">
                         <label for="html5-tel-input" class="col-md-2 col-form-label" for="category">카테고리</label>
-                        <select name="category favorite" class="fv_btn"
+                        <select name="category" class="fv_btn" id="category"
 								style="width: 30%; border: 1px solid #ced4da;  margin-left: 10px;">
                         <c:forEach items="${cateList}" var="cateList">
                          <option value="${cateList.categoryCode }">${cateList.categoryName }</option>
@@ -126,7 +125,12 @@
                         </select>
                       
                       </div>
-                      <a id="subBtn" href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
+                      <c:if test="${sessionScope.m != null}">
+                       	<a id="subBtn" href="javascript:void(0)" style="float: right; width:150px;" class="btn btn-outline-primary">등록하기</a>
+                      </c:if>
+                     <c:if test="${sessionScope.m == null}">
+                       	<a id="subFail" href="/main.do?login=1" style="float: right; width:150px;" class="btn btn-outline-primary">로그인 후 등록이 가능합니다</a>
+                      </c:if>
                     </div>
                   </div>
                   
@@ -148,9 +152,8 @@
 	function f_datepicker(obj) {
 		 $( obj ).datepicker().datepicker("show");
 		}
-
 	
-	console.log($("input[name=teacherName]").val());
+	
 	//인원수 옵션값넣기
 	const limitSelect = $("select[name=classLimit]");
  	for(let i=1;i<=30;i++){
@@ -265,7 +268,7 @@
 				success:function(){
 					location.href="adminMgrClass.do?reqPage=1";
 				},error:function(){
-					alert("error");
+					alert("에러가 발생하였습니다. 다시 시도해주세요.");
 				}
 				
 				
@@ -290,43 +293,4 @@
 		
 	</script>
 </body>
-</html>
-
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
-
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="../assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
-
-    <!-- Page JS -->
-
-    <script src="../assets/js/form-basic-inputs.js"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
 </html>

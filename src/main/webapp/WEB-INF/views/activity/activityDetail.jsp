@@ -6,7 +6,8 @@
     <meta charset="utf-8">
     <link href="/resources/css/class/class-detail.css" rel="stylesheet">
     <link href="/resources/css/activity/activityDetail.css" rel="stylesheet">
-    <title>액티비티 상세페이지</title>
+    <link rel="icon" href="/resources/img/favicon-32x32.png">
+    <title>뉴시니어스</title>
     <style type="text/css">
     //얇음
 			@font-face {
