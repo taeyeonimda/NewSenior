@@ -294,7 +294,7 @@ public class MemberController {
 				}
 				return "0";
 			}else {
-				System.out.println("######여기2");
+				System.out.println("######여기2.5");
 				int result = service.insertKakaoMember(m);
 				System.out.println("kakao result:"+result);
 				System.out.println("######여기3");

@@ -45,6 +45,7 @@ public class ClubMemberChat extends TextWebSocketHandler{
 		sessionList.add(session);
 		// 접속중인 webSocketSession의 session 정보를 내가 가진 list로 옮겨놓음
 	}
+	
 	// 클라이언트가 웹소켓 서버로 메시지를 전송하면 수행되는 메서드
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
@@ -59,7 +60,6 @@ public class ClubMemberChat extends TextWebSocketHandler{
 		// key가 msg인 값을 추출
 		String msg = element.getAsJsonObject().get("msg").getAsString();
 		club = element.getAsJsonObject().get("club").getAsString();
-		
 		if(type.equals("enter")) {
 			memberList.put(session, msg);// 현재 내 세션과 아이디 push
 			sessionId = msg;

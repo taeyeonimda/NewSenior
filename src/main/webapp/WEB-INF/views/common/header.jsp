@@ -95,7 +95,7 @@
 			  text-align: left;
 			}
 			.personal_pop00{
-			  z-index: 3000000;
+			  z-index: 555;
 			}
 			#login_header{
 			  text-align: center;
@@ -503,7 +503,7 @@
     
     /*카카오 로그인 두번째 시도*/
     //카카오로그인
-	Kakao.init('6bc8b7d3275ee64d59901f933c4c45e5'); //발급받은 키 중 javascript키를 사용해준다.
+	Kakao.init('b0ff569a0214fc753197aa9e548e3b1d'); //발급받은 키 중 javascript키를 사용해준다.
 	console.log(Kakao.isInitialized()); // sdk초기화여부판단
 	function kakaoLogin() {
 	    Kakao.Auth.login({
@@ -517,6 +517,47 @@
 	        	  console.log(response.kakao_account.email)
 	        	  //로그인 성공 후 insert 하기
 	        	  
+	        	    $.ajax({
+	        		  url: "/kakaoLogin.do",
+	        		  type:'post',
+	        		  data:{
+	        			  kakaoLogin:response.id,
+	        			  nickName:response.properties.nickname,
+	        			  memberId:response.kakao_account.email,
+	        			  memberEmail:response.kakao_account.email
+	        			  },
+	        		 success:function(data){
+	        			 //로그인 성공
+	        			 if(data == "0"){
+	        				 
+	        				 window.location.href = "/kakao.do";
+
+	        		 		 //회원가입 성공
+	        			 }else if(data == "1"){
+	        				 
+	        				 Swal.fire({
+	        					  title: "카카오 회원가입 성공하셨습니다. 로그인 해주세요.",//제목
+	        					  confirmButtonColor: '#3085d6',
+	        					  confirmButtonText: '확인',
+	        					}).then((result) => {
+	        						//result.value == true이니까 트루일때만 실행하는거
+	        					  if (result.value) {
+	        						  window.location.href="/";
+	        					  }
+	        					})//then끝
+	        				 
+	        				 
+	        				 
+	        				 //실패
+	        			 }else if(data == "4"){
+	        				 alert("이미 탈퇴한 회원입니다.");
+	        			 }else{
+	        				 alert("실패")
+	        			 }
+	        		 }
+	        	  });
+	        	  
+	        	 /*  백업
 	        	  $.ajax({
 	        		  url: "/kakaoLogin.do",
 	        		  type:'post',
@@ -531,10 +572,10 @@
 	        			 if(data == "0"){
 	        				 alert("로그인 성공");
 	        				 window.location.href = "/kakao.do";
-	        				 //회원가입 성공
+	        		 		 //회원가입 성공
 	        			 }else if(data == "1"){
 	        				 alert("카카오 회원가입 성공하셨습니다. 로그인 해주세요");
-	        				 window.location.href = "/kakao.do";
+	        				 window.location.href = "/";
 	        				 //실패
 	        			 }else if(data == "4"){
 	        				 alert("이미 탈퇴한 회원입니다.");
@@ -542,7 +583,7 @@
 	        				 alert("실패")
 	        			 }
 	        		 }
-	        	  });
+	        	  });*/
 	        	  
 	          },
 	          fail: function (error) {
