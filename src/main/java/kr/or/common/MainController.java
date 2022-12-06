@@ -15,7 +15,7 @@ public class MainController {
 	@Autowired
 	private ClubService service;
 	
-	@RequestMapping(value = "main.do")
+	@RequestMapping(value = "/main.do")
 	public String goMain(Model model) {
 		ArrayList<Club> list = service.selectMainClubs();
 		model.addAttribute("clubList", list);
