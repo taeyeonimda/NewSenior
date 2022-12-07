@@ -356,11 +356,11 @@
 				alert("주문 내용 확인 및 정보 제공동의에 체크하여 주세요.")
 				return;				
 			}
-			IMP.init("imp10385324");
+			IMP.init("imp58081607");
 			IMP.request_pay({
 				pg: "html5_inicis",
 				merchat_uid : "상품코드_"+date, 			// 거래 ID
-				name : "결제 테스트",			  			// 결제 이름
+				name : "뉴시니어스",			  			// 결제 이름
 				amount : price,							// 결제 금액
 				buyer_email : "wnstjr5558@naver.com",	// 구매자 이메일
 				buyer_name : "구매자",					// 구매자

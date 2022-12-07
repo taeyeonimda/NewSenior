@@ -24,7 +24,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gardener - Gardening Website Template</title>
+    <title>뉴시니어스 주문</title>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -177,7 +177,7 @@
                <div class="orderInfo" style="margin-left:15%;">
                   <div><span style="margin-right:10px;">주문자명</span><input type="text" value="${sessionScope.m.memberName }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
                   <div><span style="margin-right:10px;">전화번호</span><input type="text" value="${sessionScope.m.memberPhone }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div><br>
-                  <div><span style="margin-right:25px;">이메일</span><input type="text"  value="${sessionScope.m.memberEmail }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div>
+                  <div><span style="margin-right:25px;">이메일</span><input type="text"  name="buyer_email" value="${sessionScope.m.memberEmail }" style="width:250px; border:none; border-bottom : 2px solid rgb(120,181,143);"></div>
                   <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
                </div>
                <br><br><br>
@@ -396,7 +396,12 @@
          const postNum = $(".mustInput5").val();
          const receiverDetailAddr = $(".mustInput6").val();
          const status = $("#infoAgree").prop("checked");
+		 const buyer_email = $("[name=buyer_email]").val();
 			
+		 	if(buyer_email==""){
+				alert("이메일을 입력해주세요")
+				return;
+			}
 			if(deliveryName==""){
 				alert("배송지를 입력해주세요")
 				return;
@@ -425,17 +430,17 @@
 				alert("주문 내용 확인 및 정보 제공동의에 체크하여 주세요.")
 				return;				
 			}
-         IMP.init("imp10385324");
+         IMP.init("imp58081607");
          IMP.request_pay({
             pg: "html5_inicis",
             merchat_uid : "상품코드_"+date,          // 거래 ID
-            name : "결제 테스트",                    // 결제 이름
+            name : "뉴시니어스",                    // 결제 이름
             amount : price,                     // 결제 금액
-            buyer_email : "wnstjr5558@naver.com",   // 구매자 이메일
-            buyer_name : "구매자",               // 구매자
-            buyer_tel : "010-1234-1234",         // 구매자 전화번호
-            buyer_addr : "서울시 영등포구 당산동",         // 구매자 주소
-            buyer_postcode : "12345"            // 구매자 우편변호
+            buyer_email : buyer_email,   // 구매자 이메일
+            buyer_name : receiverName,               // 구매자
+            buyer_tel : receiverPhone,         // 구매자 전화번호
+            buyer_addr : receiverAddr+receiverDetailAddr,         // 구매자 주소
+            buyer_postcode : postNum            // 구매자 우편변호
          
          },function(rsp){
             if(rsp.success){
